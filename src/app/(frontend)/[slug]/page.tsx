@@ -49,7 +49,6 @@ export async function generateStaticParams() {
 		if (slug === 'home') {
 			return {}
 		}
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		return { slug }
 	})
 }

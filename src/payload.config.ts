@@ -7,6 +7,7 @@ import { collections } from "./payload/collections";
 import { COLLECTION_SLUG_USERS } from "./payload/constants";
 import path from "path";
 import { fileURLToPath } from "url";
+import { COLLECTION_SLUG_PAGES } from "./payload/constants";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,6 +21,10 @@ export default buildConfig({
 		user: COLLECTION_SLUG_USERS,
 		importMap: {
 			baseDir: path.resolve(dirname)
+		},
+		livePreview: {
+			url: env.NEXT_PUBLIC_BETTER_AUTH_URL,
+			collections: [COLLECTION_SLUG_PAGES]
 		}
 	},
 
