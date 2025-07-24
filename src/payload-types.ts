@@ -186,8 +186,43 @@ export interface Page {
   id: string;
   slug: string;
   title: string;
+  blocks: Teams_1_Block[];
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_1_Block".
+ */
+export interface Teams_1_Block {
+  blocks: (Teams_1_Heading_Block | Teams_1_Members_Block)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_1_Heading_Block".
+ */
+export interface Teams_1_Heading_Block {
+  text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_1_heading';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_1_Members_Block".
+ */
+export interface Teams_1_Members_Block {
+  members: {
+    name: string;
+    role: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_1_members';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -320,8 +355,51 @@ export interface VerificationsSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   slug?: T;
   title?: T;
+  blocks?:
+    | T
+    | {
+        teams_1?: T | Teams_1_BlockSelect<T>;
+      };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_1_Block_select".
+ */
+export interface Teams_1_BlockSelect<T extends boolean = true> {
+  blocks?:
+    | T
+    | {
+        teams_1_heading?: T | Teams_1_Heading_BlockSelect<T>;
+        teams_1_members?: T | Teams_1_Members_BlockSelect<T>;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_1_Heading_Block_select".
+ */
+export interface Teams_1_Heading_BlockSelect<T extends boolean = true> {
+  text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_1_Members_Block_select".
+ */
+export interface Teams_1_Members_BlockSelect<T extends boolean = true> {
+  members?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

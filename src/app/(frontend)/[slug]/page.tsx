@@ -2,11 +2,18 @@ import { getPayload } from "~/payload/utils";
 import type { Page as PageType } from "~/payload-types"
 import { COLLECTION_SLUG_PAGES } from "~/payload/constants";
 import { notFound } from "next/navigation";
+import RenderBlocks from "~/components/RenderBlocks"
+import Teams_1 from "~/payload/blocks/Teams/Teams_1";
+import { BLOCK_SLUG_TEAMS_1 } from "~/payload/constants/blocks";
 
 interface PageParams {
 	params: Promise<{
 		slug?: string
 	}>
+}
+
+const blockComponents = {
+	[BLOCK_SLUG_TEAMS_1]: Teams_1
 }
 
 export default async function Page({ params: paramsPromise }: PageParams) {
@@ -31,7 +38,10 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 	}
 
 	return (
-		<div>page found: {slug}</div>
+		<div className="p-8">
+			<h1>{page.title}</h1>
+			<RenderBlocks blocks={page.blocks} blockComponents={blockComponents} />
+		</div>
 	)
 }
 
