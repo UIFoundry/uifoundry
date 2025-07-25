@@ -10,7 +10,6 @@ import { Button } from "~/ui/button"
 export default function Header_1({ menuItems }: Header_1_Block) {
 	const [menuState, setMenuState] = useState(false)
 	const [isScrolled, setIsScrolled] = useState(false)
-	console.log('render header 1')
 
 	useEffect(() => {
 		const handleScroll = () => {
