@@ -5,8 +5,8 @@ export const Teams_1_Members_Block: Block = {
 	slug: BLOCK_SLUG_TEAMS_1_MEMBERS,
 	interfaceName: "Teams_1_Members_Block",
 	labels: {
-		singular: "Teams_1 Members",
-		plural: "Teams_1 Members'",
+		singular: "Teams 1 - Members",
+		plural: "Teams 1 - Members'",
 	},
 	fields: [
 		{

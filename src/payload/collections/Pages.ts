@@ -5,6 +5,7 @@ import { blocks } from "~/payload/blocks"
 
 export const Pages: CollectionConfig = {
 	slug: COLLECTION_SLUG_PAGES,
+	lockDocuments: false,
 	admin: {
 		useAsTitle: "title",
 		livePreview: {

@@ -445,7 +445,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
-  header: Header_1_Block[];
+  header: (Header_1_Block | Header_2_Block)[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -465,6 +465,20 @@ export interface Header_1_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_2_Block".
+ */
+export interface Header_2_Block {
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -472,6 +486,7 @@ export interface HeaderSelect<T extends boolean = true> {
     | T
     | {
         header_1?: T | Header_1_BlockSelect<T>;
+        header_2?: T | Header_2_BlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -482,6 +497,21 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "Header_1_Block_select".
  */
 export interface Header_1_BlockSelect<T extends boolean = true> {
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_2_Block_select".
+ */
+export interface Header_2_BlockSelect<T extends boolean = true> {
   menuItems?:
     | T
     | {

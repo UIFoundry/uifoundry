@@ -6,8 +6,8 @@ import { Teams_1_Members_Block } from "./Members/config";
 export const Teams_1_Block: Block = {
 	slug: BLOCK_SLUG_TEAMS_1,
 	labels: {
-		singular: "Team_1",
-		plural: "Team_1"
+		singular: "Teams 1",
+		plural: "Teams 1's"
 	},
 	interfaceName: "Teams_1_Block",
 	fields: [
