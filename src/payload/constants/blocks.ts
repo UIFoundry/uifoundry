@@ -1,5 +1,8 @@
 // // Slugs Split by Component Sections
 // Teams
-export const BLOCK_SLUG_TEAMS_1 = "teams_1"
-export const BLOCK_SLUG_TEAMS_1_HEADING = "teams_1_heading"
-export const BLOCK_SLUG_TEAMS_1_MEMBERS = "teams_1_members"
+export const BLOCK_SLUG_TEAMS_1 = "teams_1" as const
+export const BLOCK_SLUG_TEAMS_1_HEADING = "teams_1_heading" as const
+export const BLOCK_SLUG_TEAMS_1_MEMBERS = "teams_1_members" as const
+
+// Headers
+export const BLOCK_SLUG_HEADER_1 = "header_1" as const

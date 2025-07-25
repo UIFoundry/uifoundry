@@ -10,6 +10,5 @@ const blockComponents = {
 }
 
 export default function Teams_1({ blocks }: Teams_1_Block) {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	return <RenderBlocks blocks={blocks} blockComponents={blockComponents} />
 }

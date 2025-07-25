@@ -5,6 +5,9 @@ import { notFound } from "next/navigation";
 import RenderBlocks from "~/components/RenderBlocks"
 import Teams_1 from "~/payload/blocks/Teams/Teams_1";
 import { BLOCK_SLUG_TEAMS_1 } from "~/payload/constants/blocks";
+import Header from "~/payload/globals/Header"
+import { GLOBAL_SLUG_HEADER } from "~/payload/constants/globals";
+import { cn } from "~/styles/utils";
 
 interface PageParams {
 	params: Promise<{
@@ -20,6 +23,9 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 	const { slug = '' } = await paramsPromise
 	const payload = await getPayload()
 
+	const header = await payload.findGlobal({
+		slug: GLOBAL_SLUG_HEADER
+	})
 	const pageRes = await payload.find({
 		collection: COLLECTION_SLUG_PAGES,
 		draft: false,
@@ -39,7 +45,8 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 
 	return (
 		<div className="p-8">
-			<h1>{page.title}</h1>
+			<Header header={header} className={cn(!page.showHeader && "hidden")} />
+			<h1 className="text-center w-full font-bold">{page.title}</h1>
 			<RenderBlocks blocks={page.blocks} blockComponents={blockComponents} />
 		</div>
 	)

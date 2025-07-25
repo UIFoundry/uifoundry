@@ -4,6 +4,7 @@ import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { buildConfig } from "payload";
 import { env } from "~/env.mjs";
 import { collections } from "./payload/collections";
+import { globals } from "./payload/globals";
 import { COLLECTION_SLUG_USERS } from "./payload/constants";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -30,6 +31,7 @@ export default buildConfig({
 
 	// Define and configure your collections in this array
 	collections: collections,
+	globals: globals,
 
 	cors: allowedOrigins,
 	csrf: allowedOrigins,

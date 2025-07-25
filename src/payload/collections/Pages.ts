@@ -29,6 +29,12 @@ export const Pages: CollectionConfig = {
 			defaultValue: "New Page"
 		},
 		{
+			name: "showHeader",
+			type: "checkbox",
+			required: true,
+			defaultValue: false
+		},
+		{
 			name: "blocks",
 			type: "blocks",
 			required: true,
