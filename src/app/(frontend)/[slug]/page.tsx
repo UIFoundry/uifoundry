@@ -3,20 +3,16 @@ import type { Page as PageType } from "~/payload-types"
 import { COLLECTION_SLUG_PAGES } from "~/payload/constants";
 import { notFound } from "next/navigation";
 import RenderBlocks from "~/components/RenderBlocks"
-import Teams_1 from "~/payload/blocks/Teams/Teams_1";
-import { BLOCK_SLUG_TEAMS_1 } from "~/payload/constants/blocks";
 import Header from "~/payload/globals/Header"
 import { GLOBAL_SLUG_HEADER } from "~/payload/constants/globals";
 import { cn } from "~/styles/utils";
+import { blockComponents } from "~/payload/blocks";
+import HeaderSpacing from "~/components/HeaderSpacing";
 
 interface PageParams {
 	params: Promise<{
 		slug?: string
 	}>
-}
-
-const blockComponents = {
-	[BLOCK_SLUG_TEAMS_1]: Teams_1
 }
 
 export default async function Page({ params: paramsPromise }: PageParams) {
@@ -46,8 +42,10 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 	return (
 		<div className="p-8">
 			<Header header={header} className={cn(!page.showHeader && "hidden")} />
-			<h1 className="text-center w-full font-bold">{page.title}</h1>
-			<RenderBlocks blocks={page.blocks} blockComponents={blockComponents} />
+			<HeaderSpacing showHeader={page.showHeader}>
+				<h1 className="text-center pt-4 w-full font-bold">{page.title}</h1>
+				<RenderBlocks blocks={page.blocks} blockComponents={blockComponents} />
+			</HeaderSpacing>
 		</div>
 	)
 }

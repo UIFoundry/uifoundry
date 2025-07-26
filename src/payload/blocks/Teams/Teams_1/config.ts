@@ -14,6 +14,10 @@ export const Teams_1_Block: Block = {
 		{
 			name: "blocks",
 			type: "blocks",
+			labels: {
+				singular: "Teams_1 - Block",
+				plural: "Teams_1 - Blocks",
+			},
 			required: true,
 			minRows: 1,
 			blocks: [

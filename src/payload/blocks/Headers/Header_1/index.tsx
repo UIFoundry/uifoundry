@@ -5,7 +5,6 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import type { Header_1_Block } from "~/payload-types"
 import { cn } from "~/styles/utils"
-import { Button } from "~/ui/button"
 
 export default function Header_1({ menuItems }: Header_1_Block) {
 	const [menuState, setMenuState] = useState(false)
@@ -25,7 +24,8 @@ export default function Header_1({ menuItems }: Header_1_Block) {
 		<header>
 			<nav
 				data-state={menuState && 'active'}
-				className="z-20 w-full px-2">
+				id="header"
+				className="fixed z-20 w-full px-2">
 				<div className={cn('mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12', isScrolled && 'bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5')}>
 					<div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
 						<div className="flex w-full justify-between lg:w-auto">
@@ -72,33 +72,6 @@ export default function Header_1({ menuItems }: Header_1_Block) {
 										</li>
 									))}
 								</ul>
-							</div>
-							<div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-								<Button
-									asChild
-									variant="outline"
-									size="sm"
-									className={cn(isScrolled && 'lg:hidden')}>
-									<Link href="#">
-										<span>Login</span>
-									</Link>
-								</Button>
-								<Button
-									asChild
-									size="sm"
-									className={cn(isScrolled && 'lg:hidden')}>
-									<Link href="#">
-										<span>Sign Up</span>
-									</Link>
-								</Button>
-								<Button
-									asChild
-									size="sm"
-									className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
-									<Link href="#">
-										<span>Get Started</span>
-									</Link>
-								</Button>
 							</div>
 						</div>
 					</div>

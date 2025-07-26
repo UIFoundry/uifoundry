@@ -38,6 +38,10 @@ export const Pages: CollectionConfig = {
 		{
 			name: "blocks",
 			type: "blocks",
+			labels: {
+				singular: "Page Content Block",
+				plural: "Page Content Blocks",
+			},
 			required: true,
 			defaultValue: [],
 			blocks: blocks

@@ -1,4 +1,11 @@
 import type { Block } from "payload";
-import { Teams_1_Block } from "./Teams";
+import { blocks as teamsBlocks, blockComponents as teamsBlockComponents } from "./Teams";
+import { blocks as featuresBlocks, blockComponents as featuresBlockComponents } from "./Features"
 
-export const blocks: Block[] = [Teams_1_Block]
+export const blocks: Block[] = teamsBlocks.concat(featuresBlocks)
+
+export const blockComponents = {
+	...teamsBlockComponents,
+	...featuresBlockComponents,
+}
+

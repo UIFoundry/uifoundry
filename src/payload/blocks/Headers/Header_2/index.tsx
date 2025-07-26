@@ -5,7 +5,6 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import type { Header_2_Block } from "~/payload-types"
 import { cn } from "~/styles/utils"
-import { Button } from "~/ui/button"
 
 export default function Header_2({ menuItems }: Header_2_Block) {
 	const [menuState, setMenuState] = useState(false)
@@ -25,7 +24,8 @@ export default function Header_2({ menuItems }: Header_2_Block) {
 		<header>
 			<nav
 				data-state={menuState && 'active'}
-				className={cn('z-20 w-full border-b transition-colors duration-150', isScrolled && 'bg-background/50 backdrop-blur-3xl')}>
+				id="header"
+				className={cn('fixed z-20 w-full border-b transition-colors duration-150', isScrolled && 'bg-background/50 backdrop-blur-3xl')}>
 				<div className="mx-auto max-w-5xl px-6 transition-all duration-300">
 					<div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
 						<div className="flex w-full items-center justify-between gap-12 lg:w-auto">
@@ -72,23 +72,6 @@ export default function Header_2({ menuItems }: Header_2_Block) {
 										</li>
 									))}
 								</ul>
-							</div>
-							<div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-								<Button
-									asChild
-									variant="outline"
-									size="sm">
-									<Link href="#">
-										<span>Login</span>
-									</Link>
-								</Button>
-								<Button
-									asChild
-									size="sm">
-									<Link href="#">
-										<span>Sign Up</span>
-									</Link>
-								</Button>
 							</div>
 						</div>
 					</div>
