@@ -9,6 +9,7 @@ import { COLLECTION_SLUG_USERS } from "./payload/constants";
 import path from "path";
 import { fileURLToPath } from "url";
 import { COLLECTION_SLUG_PAGES } from "./payload/constants";
+import { s3Storage } from "@payloadcms/storage-s3";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -54,5 +55,26 @@ export default buildConfig({
 		outputFile: path.resolve(dirname, 'payload-types.ts')
 	},
 
-	plugins: [],
+	plugins: [
+		s3Storage({
+			collections: {
+				media: {
+					signedDownloads: {
+						shouldUseSignedURL: ({ filename }) => {
+							return filename.endsWith('.mp4')
+						},
+					},
+				},
+			},
+			bucket: env.S3_BUCKET,
+			config: {
+				credentials: {
+					accessKeyId: env.S3_ACCESS_KEY_ID,
+					secretAccessKey: env.S3_SECRET_ACCESS_KEY,
+				},
+				region: env.S3_REGION,
+				// ... Other S3 configuration
+			},
+		}),
+	],
 });

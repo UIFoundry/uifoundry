@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+import { COLLECTION_SLUG_MEDIA } from "~/payload/constants";
 import { BLOCK_SLUG_TEAMS_1_MEMBERS } from "~/payload/constants/blocks";
 
 export const Teams_1_Members_Block: Block = {
@@ -31,11 +32,11 @@ export const Teams_1_Members_Block: Block = {
 					type: "text",
 					required: true,
 				},
-				// {
-				// 	name: "avatar",
-				// 	type: "text",
-				// 	required: true,
-				// },
+				{
+					name: "avatar",
+					type: "upload",
+					relationTo: COLLECTION_SLUG_MEDIA
+				},
 			]
 		}
 	]
