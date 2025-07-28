@@ -6,7 +6,7 @@
 	"scripts": {
 		"build": "payload generate:types && next build",
 		"check": "next lint && tsc --noEmit",
-		"dev": "next dev --port=3001 --turbo",
+		"dev": "NODE_OPTIONS='--inspect' next dev --port=3001 --turbo",
 		"format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
 		"format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
 		"payload:importmap": "payload generate:importmap",
@@ -75,8 +75,8 @@
 	"pnpm": {
 		"overrides": {
 			"mongodb": "6.17.0",
-			"payload": "^3.48.0",
-			"@payloadcms/ui": "^3.48.0"
+			"payload": "^3.40.0",
+			"@payloadcms/ui": "^3.40.0"
 		}
 	}
 }

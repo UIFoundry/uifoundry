@@ -3,6 +3,9 @@ import { COLLECTION_SLUG_MEDIA } from "~/payload/constants";
 
 export const Media: CollectionConfig = {
 	slug: COLLECTION_SLUG_MEDIA,
+	admin: {
+		useAsTitle: "alt"
+	},
 	access: {
 		read: () => true,
 	},

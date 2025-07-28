@@ -1,6 +1,6 @@
 import type { GlobalConfig } from "payload";
 import { GLOBAL_SLUG_HEADER } from "~/payload/constants/globals";
-import { blocks } from "~/payload/blocks/Headers"
+import { blocks } from "~/payload/blocks/Header"
 
 export const HeaderGlobal: GlobalConfig = {
 	slug: GLOBAL_SLUG_HEADER,

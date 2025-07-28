@@ -94,9 +94,11 @@ export interface Config {
   };
   globals: {
     header: Header;
+    footer: Footer;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: null;
   user: User & {
@@ -193,6 +195,7 @@ export interface Page {
   slug: string;
   title: string;
   showHeader: boolean;
+  showFooter: boolean;
   blocks: (Teams_1_Block | Features_1_Block)[];
   updatedAt: string;
   createdAt: string;
@@ -2018,6 +2021,7 @@ export interface PagesSelect<T extends boolean = true> {
   slug?: T;
   title?: T;
   showHeader?: T;
+  showFooter?: T;
   blocks?:
     | T
     | {
@@ -2174,6 +2178,65 @@ export interface Header_2_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  footer: Footer_1_Block[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_1_Block".
+ */
+export interface Footer_1_Block {
+  brandLogo?: (string | null) | Media;
+  copyright?: string | null;
+  links?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2212,6 +2275,44 @@ export interface Header_2_BlockSelect<T extends boolean = true> {
     | {
         label?: T;
         href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  footer?:
+    | T
+    | {
+        footer_1?: T | Footer_1_BlockSelect<T>;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_1_Block_select".
+ */
+export interface Footer_1_BlockSelect<T extends boolean = true> {
+  brandLogo?: T;
+  copyright?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
         id?: T;
       };
   id?: T;

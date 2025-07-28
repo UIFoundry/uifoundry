@@ -36,6 +36,12 @@ export const Pages: CollectionConfig = {
 			defaultValue: false
 		},
 		{
+			name: "showFooter",
+			type: "checkbox",
+			required: true,
+			defaultValue: false
+		},
+		{
 			name: "blocks",
 			type: "blocks",
 			labels: {

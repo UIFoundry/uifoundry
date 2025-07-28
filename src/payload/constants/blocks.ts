@@ -8,5 +8,8 @@ export const BLOCK_SLUG_TEAMS_1_MEMBERS = "teams_1_members" as const
 export const BLOCK_SLUG_HEADER_1 = "header_1" as const
 export const BLOCK_SLUG_HEADER_2 = "header_2" as const
 
+// Footers
+export const BLOCK_SLUG_FOOTER_1 = "footer_1" as const
+
 // Features
 export const BLOCK_SLUG_FEATURES_1 = "features_1" as const

@@ -2,11 +2,13 @@
 
 import { Home, Menu, X } from "lucide-react"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useState, type ComponentPropsWithRef } from "react"
 import type { Header_2_Block } from "~/payload-types"
 import { cn } from "~/styles/utils"
 
-export default function Header_2({ menuItems }: Header_2_Block) {
+export * from "./config"
+
+export default function Header_2({ menuItems, ...navProps }: Header_2_Block & ComponentPropsWithRef<"nav">) {
 	const [menuState, setMenuState] = useState(false)
 	const [isScrolled, setIsScrolled] = useState(false)
 
@@ -25,7 +27,9 @@ export default function Header_2({ menuItems }: Header_2_Block) {
 			<nav
 				data-state={menuState && 'active'}
 				id="header"
-				className={cn('fixed z-20 w-full border-b transition-colors duration-150', isScrolled && 'bg-background/50 backdrop-blur-3xl')}>
+				className={cn('fixed z-20 w-full border-b transition-colors duration-150', isScrolled && 'bg-background/50 backdrop-blur-3xl')}
+				{...navProps}
+			>
 				<div className="mx-auto max-w-5xl px-6 transition-all duration-300">
 					<div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
 						<div className="flex w-full items-center justify-between gap-12 lg:w-auto">
@@ -59,7 +63,7 @@ export default function Header_2({ menuItems }: Header_2_Block) {
 							</div>
 						</div>
 
-						<div className="bg-background absolute top-full in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
+						<div className="bg-background absolute top-[125%] in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
 							<div className="lg:hidden">
 								<ul className="space-y-6 text-base">
 									{menuItems.map((item, index) => (

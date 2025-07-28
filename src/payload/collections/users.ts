@@ -14,6 +14,7 @@ export const Users: CollectionConfig = {
 	},
 	auth: {
 		disableLocalStrategy: true,
+		useSessions: false,
 		strategies: [
 			{
 				name: 'better-auth',
