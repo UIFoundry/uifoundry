@@ -1,12 +1,12 @@
 {
-	"name": "t3-x-payloadcms",
+	"name": "markitect",
 	"version": "0.1.0",
 	"private": true,
 	"type": "module",
 	"scripts": {
 		"build": "payload generate:types && next build",
 		"check": "next lint && tsc --noEmit",
-		"dev": "NODE_OPTIONS='--inspect' next dev --port=3001 --turbo",
+		"dev": "next dev --port=3001 --turbo",
 		"format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
 		"format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
 		"payload:importmap": "payload generate:importmap",
@@ -38,7 +38,7 @@
 		"clsx": "^2.1.1",
 		"graphql": "^16.10.0",
 		"lucide-react": "^0.525.0",
-		"mongodb": "6.17.0",
+		"mongodb": "^6.18.0",
 		"next": "15.4.2-canary.9",
 		"payload": "^3.49.0",
 		"react": "^19.1.0",
@@ -73,10 +73,6 @@
 	},
 	"packageManager": "pnpm@10.11.0",
 	"pnpm": {
-		"overrides": {
-			"mongodb": "6.17.0",
-			"payload": "^3.40.0",
-			"@payloadcms/ui": "^3.40.0"
-		}
+		"overrides": {}
 	}
 }

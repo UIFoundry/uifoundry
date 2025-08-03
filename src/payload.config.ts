@@ -5,8 +5,7 @@ import { buildConfig } from "payload";
 import { env } from "~/env.mjs";
 import { collections } from "./payload/collections";
 import { globals } from "./payload/globals";
-import { COLLECTION_SLUG_MEDIA, COLLECTION_SLUG_USERS } from "./payload/constants";
-import { getCollectionMongooseConfig } from "./payload/utils";
+import { COLLECTION_SLUG_USERS } from "./payload/constants";
 import path from "path";
 import { fileURLToPath } from "url";
 import { COLLECTION_SLUG_PAGES } from "./payload/constants";
@@ -47,10 +46,6 @@ export default buildConfig({
 		url: env.DATABASE_URI || "",
 		transactionOptions: false,
 		allowIDOnCreate: true,
-		collectionsSchemaOptions: {
-			[COLLECTION_SLUG_MEDIA]: getCollectionMongooseConfig(),
-			[COLLECTION_SLUG_PAGES]: getCollectionMongooseConfig(),
-		}
 	}),
 
 	// If you want to resize images, crop, set focal point, etc.
