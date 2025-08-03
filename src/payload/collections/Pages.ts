@@ -29,14 +29,14 @@ export const Pages: CollectionConfig = {
 				if ((data.slug as string).toLowerCase() === 'home') {
 					return env.NEXT_PUBLIC_BETTER_AUTH_URL
 				}
-				return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/${data.slug}`
+				return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/${data.slug}`
 			}
 		}
 	},
 	versions: {
 		drafts: {
 			autosave: {
-				interval: 300,
+				interval: 200,
 			},
 		}
 	},
