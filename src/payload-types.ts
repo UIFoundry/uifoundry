@@ -1757,6 +1757,9 @@ export interface User {
   name: string;
   image?: string | null;
   role: 'admin' | 'user';
+  banned: boolean;
+  banReason?: string | null;
+  banExpiresIn?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1973,6 +1976,9 @@ export interface UsersSelect<T extends boolean = true> {
   name?: T;
   image?: T;
   role?: T;
+  banned?: T;
+  banReason?: T;
+  banExpiresIn?: T;
   updatedAt?: T;
   createdAt?: T;
 }

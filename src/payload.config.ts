@@ -17,6 +17,7 @@ const dirname = path.dirname(filename)
 const allowedOrigins = [env.NEXT_PUBLIC_BETTER_AUTH_URL].filter(Boolean)
 
 export default buildConfig({
+	telemetry: false,
 	// If you'd like to use Rich Text, pass your editor here
 	editor: lexicalEditor(),
 	admin: {
@@ -27,6 +28,9 @@ export default buildConfig({
 		livePreview: {
 			url: env.NEXT_PUBLIC_BETTER_AUTH_URL,
 			collections: [COLLECTION_SLUG_PAGES]
+		},
+		components: {
+			actions: ["~/payload/components/VisitSite"]
 		}
 	},
 

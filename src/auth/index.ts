@@ -10,7 +10,7 @@ import {
 	COLLECTION_SLUG_VERIFICATIONS
 } from "~/payload/constants"
 import { customSession } from "better-auth/plugins"
-import { getPayload, serializeMongoDocIDs } from "~/payload/utils"
+import { getPayload } from "~/payload/utils"
 
 const client = new MongoClient(env.DATABASE_URI)
 const db = client.db()
@@ -57,15 +57,18 @@ export const auth = betterAuth({
 				collection: COLLECTION_SLUG_USERS,
 				id: user.id
 			})
-			const serializedUser = serializeMongoDocIDs(existingUser) as Record<string, unknown>
 			return {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				user: {
-					...serializeMongoDocIDs(user),
-					role: serializedUser.role
+					...user,
+					role: existingUser.role,
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+					banned: existingUser.banned,
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+					banReason: existingUser.banReason ?? undefined,
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+					banExpiresIn: existingUser.banExpiresIn ?? undefined
 				},
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-				session: serializeMongoDocIDs(session)
+				session: session
 			}
 		})
 	]

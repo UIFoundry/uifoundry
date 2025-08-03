@@ -1,7 +1,7 @@
 "use client"
 
 import { Check, ChevronsUpDown, icons } from "lucide-react"
-import type { Option, SelectFieldClientProps } from "payload"
+import type { OptionObject, SelectFieldClientProps } from "payload"
 import { useField } from "@payloadcms/ui"
 import {
 	Command,
@@ -23,20 +23,20 @@ import { Button } from "~/ui/button"
 
 type IconName = keyof typeof icons
 
-function Icon({ icon, index, value, setValue, setOpen }: { icon: Option, index: number, value: IconName, setValue: (val: unknown, disableModifyingForm?: boolean) => void, setOpen: Dispatch<SetStateAction<boolean>> }) {
-	const SelectIcon = icons[icon.label as IconName]
+function Icon({ icon, index, value, setValue, setOpen }: { icon: OptionObject, index: number, value: IconName, setValue: (val: unknown, disableModifyingForm?: boolean) => void, setOpen: Dispatch<SetStateAction<boolean>> }) {
+	const SelectIcon = icons[icon.value as IconName]
 	return (
 		<CommandItem
-			value={icon.label}
+			value={icon.value}
 			onSelect={(currentValue) => {
 				setValue(currentValue === value ? "" : currentValue)
 				setOpen(false)
 			}}
-			key={`${index}-${icon.label}`}
+			key={`${index}-${icon.value}`}
 			className="hover:bg-neutral-300 transition-colors duration-400 cursor-pointer"
 		>
 			<SelectIcon />
-			{icon.label}
+			{icon.value}
 			<Check className={cn("ml-auto opacity-0", value === icon.label && "opacity-100")} />
 		</CommandItem>
 	)
@@ -64,14 +64,14 @@ export default function IconField({ field, path }: SelectFieldClientProps) {
 					<ChevronsUpDown className="opacity-50" />
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className="bg-neutral-600 w-full">
+			<PopoverContent className="bg-neutral-600 w-full dark:bg-neutral-200">
 				<Command value={value}>
 					<CommandInput placeholder="Search Icons..." />
 					<CommandList>
 						<CommandEmpty>No Icons Found.</CommandEmpty>
 						<CommandGroup>
 							{field.options.map((icon, index) => (
-								<Icon key={`${index}-${icon.label}`} icon={icon} index={index} value={value} setValue={setValue} setOpen={setOpen} />
+								<Icon key={`${index}-${(icon as OptionObject).value}`} icon={icon as OptionObject} index={index} value={value} setValue={setValue} setOpen={setOpen} />
 							))}
 						</CommandGroup>
 					</CommandList>
