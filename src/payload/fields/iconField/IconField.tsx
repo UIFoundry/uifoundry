@@ -64,7 +64,7 @@ export default function IconField({ field, path }: SelectFieldClientProps) {
 					<ChevronsUpDown className="opacity-50" />
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className="bg-neutral-600 w-full dark:bg-neutral-200">
+			<PopoverContent className="bg-neutral-200 w-full dark:bg-neutral-600">
 				<Command value={value}>
 					<CommandInput placeholder="Search Icons..." />
 					<CommandList>

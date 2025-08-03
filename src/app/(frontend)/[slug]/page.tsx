@@ -9,6 +9,7 @@ import { cn } from "~/styles/utils";
 import { blockComponents } from "~/payload/blocks";
 import HeaderSpacing from "~/components/HeaderSpacing";
 import Footer from "~/payload/globals/Footer";
+import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
 
 interface PageParams {
 	params: Promise<{
@@ -45,12 +46,13 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 
 	return (
 		<div className="pt-8 px-8">
+			<RefreshRouteOnSave />
 			<Header header={header} className={cn(!page.showHeader && "hidden")} />
 			<HeaderSpacing showHeader={page.showHeader}>
 				<h1 className="text-center pt-4 w-full font-bold">{page.title}</h1>
 				<RenderBlocks blocks={page.blocks} blockComponents={blockComponents} />
 			</HeaderSpacing>
-			<Footer footer={footer} className={cn(!page.showHeader && "hidden")} />
+			<Footer footer={footer} className={cn(!page.showFooter && "hidden")} />
 		</div>
 	)
 }
@@ -65,8 +67,8 @@ export async function generateStaticParams() {
 
 	const pages = pageRes?.docs
 
-	return pages.map(({ slug }) => {
-		if (slug === 'home') {
+	return pages.map(({ slug, _status }) => {
+		if (_status !== "published" || slug === 'home') {
 			return {}
 		}
 		return { slug }

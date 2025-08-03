@@ -6,6 +6,22 @@ import { blocks } from "~/payload/blocks"
 export const Pages: CollectionConfig = {
 	slug: COLLECTION_SLUG_PAGES,
 	lockDocuments: false,
+	access: {
+		read: ({ req }) => {
+			// If there is a user logged in,
+			// let them retrieve all documents
+			if (req.user) return true
+
+			// If there is no user,
+			// restrict the documents that are returned
+			// to only those where `_status` is equal to `published`
+			return {
+				_status: {
+					equals: 'published',
+				},
+			}
+		},
+	},
 	admin: {
 		useAsTitle: "title",
 		livePreview: {
@@ -15,6 +31,13 @@ export const Pages: CollectionConfig = {
 				}
 				return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/${data.slug}`
 			}
+		}
+	},
+	versions: {
+		drafts: {
+			autosave: {
+				interval: 300,
+			},
 		}
 	},
 	fields: [
