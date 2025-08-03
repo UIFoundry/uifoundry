@@ -6,7 +6,13 @@ export default function iconField(props?: Partial<SelectField>): SelectField {
 	return selectEnumField<typeof icons>({
 		object: icons,
 		name: "icon",
+		interfaceName: "IconField",
 		useKeyAsValue: true,
+		admin: {
+			components: {
+				Field: "~/payload/components/IconField"
+			},
+		},
 		...props
 	})
 

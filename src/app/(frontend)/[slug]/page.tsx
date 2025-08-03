@@ -44,6 +44,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 		return notFound()
 	}
 
+	console.log('preserialized footer: ', footer)
 	const { json } = superjson.serialize(footer)
 
 	return (
