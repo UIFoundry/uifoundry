@@ -1,6 +1,6 @@
 "use client"
 
-import { socialIcons, type SocialIcon } from "~/ui/icons/social-icons"
+import { socialIcons, type SocialIconKey } from "~/ui/icons/social-icons"
 import { Check, ChevronsUpDown } from "lucide-react"
 import type { OptionObject, SelectFieldClientProps } from "payload"
 import { useField } from "@payloadcms/ui"
@@ -12,6 +12,7 @@ import {
 	CommandItem,
 	CommandList
 } from "~/ui/command"
+import SocialIcon from "~/ui/icons/social-icon"
 
 import {
 	Popover,
@@ -23,9 +24,7 @@ import { useState, type Dispatch, type SetStateAction } from "react"
 import { Button } from "~/ui/button"
 import Image from "next/image"
 
-function SocialIcon({ icon, index, value, setValue, setOpen }: { icon: OptionObject, index: number, value: SocialIcon, setValue: (val: unknown, disableModifyingForm?: boolean) => void, setOpen: Dispatch<SetStateAction<boolean>> }) {
-	const selectIcon = socialIcons[icon.value as SocialIcon]
-
+function SocialIconKey({ icon, index, value, setValue, setOpen }: { icon: OptionObject, index: number, value: SocialIconKey, setValue: (val: unknown, disableModifyingForm?: boolean) => void, setOpen: Dispatch<SetStateAction<boolean>> }) {
 	return (
 		<CommandItem
 			value={icon.value}
@@ -36,15 +35,7 @@ function SocialIcon({ icon, index, value, setValue, setOpen }: { icon: OptionObj
 			key={`${index}-${icon.value}`}
 			className="hover:bg-neutral-300 transition-colors duration-400 cursor-pointer"
 		>
-			{typeof selectIcon.route !== "string" && Object.hasOwn(selectIcon.route, "light") &&
-				<Image src={selectIcon.route.light} alt={`${icon.value}`} width={20} height={20} className="dark:hidden" />
-			}
-			{typeof selectIcon.route !== "string" && Object.hasOwn(selectIcon.route, "dark") &&
-				<Image src={selectIcon.route.dark} alt={`${icon.value}`} width={20} height={20} className="hidden dark:block" />
-			}
-			{typeof selectIcon.route === "string" &&
-				<Image src={selectIcon.route} alt={`${icon.value}`} width={20} height={20} />
-			}
+			<SocialIcon icon={icon.value as SocialIconKey} />
 			{icon.value}
 			<Check className={cn("ml-auto opacity-0", value === icon.label && "opacity-100")} />
 		</CommandItem>
@@ -52,7 +43,7 @@ function SocialIcon({ icon, index, value, setValue, setOpen }: { icon: OptionObj
 }
 
 export default function SocialIconField({ field, path }: SelectFieldClientProps) {
-	const { value, setValue } = useField<SocialIcon>({ path })
+	const { value, setValue } = useField<SocialIconKey>({ path })
 	const [open, setOpen] = useState(false)
 	const selectIcon = socialIcons[value]
 
@@ -70,7 +61,9 @@ export default function SocialIconField({ field, path }: SelectFieldClientProps)
 						aria-expanded={open}
 						className="justify-between"
 					>
-						{selectIcon && <Image src={selectIcon.route as string} alt={`${value}`} width={20} height={20} />}
+						{selectIcon &&
+							<SocialIcon icon={value} />
+						}
 						{value
 							? value
 							: "Find Social Link..."}
@@ -84,7 +77,7 @@ export default function SocialIconField({ field, path }: SelectFieldClientProps)
 							<CommandEmpty>No Icons Found.</CommandEmpty>
 							<CommandGroup>
 								{field.options.map((socialIcon, index) => (
-									<SocialIcon key={`${index}-${(socialIcon as OptionObject).value}`} icon={socialIcon as OptionObject} index={index} value={value} setValue={setValue} setOpen={setOpen} />
+									<SocialIconKey key={`${index}-${(socialIcon as OptionObject).value}`} icon={socialIcon as OptionObject} index={index} value={value} setValue={setValue} setOpen={setOpen} />
 								))}
 							</CommandGroup>
 						</CommandList>

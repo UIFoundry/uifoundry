@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { socialIcons, type SocialIcon } from "./social-icons";
+import { socialIcons, type SocialIconKey } from "./social-icons";
 import Image from "next/image";
 
-export default function SocialIcon({ icon, href }: { icon: SocialIcon, href: string }) {
+export default function SocialIcon({ icon, href = "" }: { icon: SocialIconKey, href?: string }) {
 	const selectIcon = socialIcons[icon]
 	if (!selectIcon?.route || selectIcon.route === "") {
 		console.log('social icon not found: ', icon)
@@ -10,7 +10,15 @@ export default function SocialIcon({ icon, href }: { icon: SocialIcon, href: str
 	}
 
 	return (<Link href={href}>
-		<Image src={selectIcon.route as string} alt={`${icon}`} width={20} height={20} />
+		{typeof selectIcon.route !== "string" && Object.hasOwn(selectIcon.route, "light") &&
+			<Image src={selectIcon.route.light} alt={`${icon}`} width={20} height={20} className="dark:hidden" />
+		}
+		{typeof selectIcon.route !== "string" && Object.hasOwn(selectIcon.route, "dark") &&
+			<Image src={selectIcon.route.dark} alt={`${icon}`} width={20} height={20} className="hidden dark:block" />
+		}
+		{typeof selectIcon.route === "string" &&
+			<Image src={selectIcon.route} alt={`${icon}`} width={20} height={20} />
+		}
 	</Link>)
 
 }

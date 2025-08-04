@@ -219,4 +219,4 @@ export const socialIcons = {
 	}
 }
 
-export type SocialIcon = keyof typeof socialIcons
+export type SocialIconKey = keyof typeof socialIcons
