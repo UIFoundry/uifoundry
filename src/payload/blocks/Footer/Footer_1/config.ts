@@ -1,7 +1,7 @@
 import type { Block } from "payload"
 import { COLLECTION_SLUG_MEDIA } from "~/payload/constants"
 import { BLOCK_SLUG_FOOTER_1 } from "~/payload/constants/blocks"
-import socialIconFields from "~/payload/fields/socialIconFields"
+import socialLinksField from "~/payload/fields/socialLinksField"
 import uploadField from "~/payload/fields/uploadField"
 
 export const Footer_1_Block: Block = {
@@ -44,13 +44,7 @@ export const Footer_1_Block: Block = {
 				}
 			]
 		},
-		{
-			name: "socialLinks",
-			type: "array",
-			required: true,
-			defaultValue: [],
-			fields: socialIconFields(),
-		}
+		socialLinksField(),
 	]
 
 }

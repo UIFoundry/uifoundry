@@ -1,6 +1,7 @@
 "use client"
 
-import { Check, ChevronsUpDown, icons } from "lucide-react"
+import { socialIcons, type SocialIcon } from "~/ui/icons/social-icons"
+import { Check, ChevronsUpDown } from "lucide-react"
 import type { OptionObject, SelectFieldClientProps } from "payload"
 import { useField } from "@payloadcms/ui"
 import {
@@ -20,11 +21,11 @@ import {
 import { cn } from "~/styles/utils"
 import { useState, type Dispatch, type SetStateAction } from "react"
 import { Button } from "~/ui/button"
+import Image from "next/image"
 
-type IconName = keyof typeof icons
+function SocialIcon({ icon, index, value, setValue, setOpen }: { icon: OptionObject, index: number, value: SocialIcon, setValue: (val: unknown, disableModifyingForm?: boolean) => void, setOpen: Dispatch<SetStateAction<boolean>> }) {
+	const selectIcon = socialIcons[icon.value as SocialIcon]
 
-function Icon({ icon, index, value, setValue, setOpen }: { icon: OptionObject, index: number, value: IconName, setValue: (val: unknown, disableModifyingForm?: boolean) => void, setOpen: Dispatch<SetStateAction<boolean>> }) {
-	const SelectIcon = icons[icon.value as IconName]
 	return (
 		<CommandItem
 			value={icon.value}
@@ -35,17 +36,25 @@ function Icon({ icon, index, value, setValue, setOpen }: { icon: OptionObject, i
 			key={`${index}-${icon.value}`}
 			className="hover:bg-neutral-300 transition-colors duration-400 cursor-pointer"
 		>
-			<SelectIcon />
+			{typeof selectIcon.route !== "string" && Object.hasOwn(selectIcon.route, "light") &&
+				<Image src={selectIcon.route.light} alt={`${icon.value}`} width={20} height={20} className="dark:hidden" />
+			}
+			{typeof selectIcon.route !== "string" && Object.hasOwn(selectIcon.route, "dark") &&
+				<Image src={selectIcon.route.dark} alt={`${icon.value}`} width={20} height={20} className="hidden dark:block" />
+			}
+			{typeof selectIcon.route === "string" &&
+				<Image src={selectIcon.route} alt={`${icon.value}`} width={20} height={20} />
+			}
 			{icon.value}
 			<Check className={cn("ml-auto opacity-0", value === icon.label && "opacity-100")} />
 		</CommandItem>
 	)
 }
 
-export default function IconField({ field, path }: SelectFieldClientProps) {
-	const { value, setValue } = useField<IconName>({ path })
+export default function SocialIconField({ field, path }: SelectFieldClientProps) {
+	const { value, setValue } = useField<SocialIcon>({ path })
 	const [open, setOpen] = useState(false)
-	const SelectIcon = icons[value]
+	const selectIcon = socialIcons[value]
 
 	return (
 		<div className="">
@@ -61,10 +70,10 @@ export default function IconField({ field, path }: SelectFieldClientProps) {
 						aria-expanded={open}
 						className="justify-between"
 					>
-						{SelectIcon && <SelectIcon />}
+						{selectIcon && <Image src={selectIcon.route as string} alt={`${value}`} width={20} height={20} />}
 						{value
 							? value
-							: "Select Icon..."}
+							: "Find Social Link..."}
 						<ChevronsUpDown className="opacity-50" />
 					</Button>
 				</PopoverTrigger>
@@ -74,8 +83,8 @@ export default function IconField({ field, path }: SelectFieldClientProps) {
 						<CommandList>
 							<CommandEmpty>No Icons Found.</CommandEmpty>
 							<CommandGroup>
-								{field.options.map((icon, index) => (
-									<Icon key={`${index}-${(icon as OptionObject).value}`} icon={icon as OptionObject} index={index} value={value} setValue={setValue} setOpen={setOpen} />
+								{field.options.map((socialIcon, index) => (
+									<SocialIcon key={`${index}-${(socialIcon as OptionObject).value}`} icon={socialIcon as OptionObject} index={index} value={value} setValue={setValue} setOpen={setOpen} />
 								))}
 							</CommandGroup>
 						</CommandList>
