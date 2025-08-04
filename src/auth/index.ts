@@ -61,11 +61,8 @@ export const auth = betterAuth({
 				user: {
 					...user,
 					role: existingUser.role,
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 					banned: existingUser.banned,
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 					banReason: existingUser.banReason ?? undefined,
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 					banExpiresIn: existingUser.banExpiresIn ?? undefined
 				},
 				session: session
