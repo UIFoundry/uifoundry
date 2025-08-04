@@ -22,7 +22,6 @@ import {
 import { cn } from "~/styles/utils"
 import { useState, type Dispatch, type SetStateAction } from "react"
 import { Button } from "~/ui/button"
-import Image from "next/image"
 
 function SocialIconKey({ icon, index, value, setValue, setOpen }: { icon: OptionObject, index: number, value: SocialIconKey, setValue: (val: unknown, disableModifyingForm?: boolean) => void, setOpen: Dispatch<SetStateAction<boolean>> }) {
 	return (
