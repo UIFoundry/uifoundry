@@ -7,7 +7,6 @@ import { withPayload } from "@payloadcms/next/withPayload";
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-	nodeMiddleware: true,
 	serverExternalPackages: ["mongodb"],
 	experimental: {
 		reactCompiler: true,

@@ -5,11 +5,15 @@
 
 declare module "sst" {
   export interface Resource {
-    "MarkitectFrontend": {
+    "Frontend": {
       "type": "sst.aws.Nextjs"
       "url": string
     }
-    "markitect": {
+    "Router": {
+      "type": "sst.aws.Router"
+      "url": string
+    }
+    "uifoundry": {
       "name": string
       "type": "sst.aws.Bucket"
     }

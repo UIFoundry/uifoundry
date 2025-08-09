@@ -16,6 +16,7 @@
 		"payload:update": "pnpm update 'payload' '@payloadcms/*'",
 		"preview": "next build && next start",
 		"sso": "aws sso login --sso-session=sst",
+		"refresh": "sst refresh --stage=production",
 		"secret:set": "sst secret set --stage=production",
 		"deploy:dev": "sst deploy --stage=dev",
 		"deploy:prod": "sst deploy --stage=production",
