@@ -10,6 +10,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { COLLECTION_SLUG_PAGES } from "./payload/constants";
 import { s3Storage } from "@payloadcms/storage-s3";
+import { getEnvVar } from "./utils/sst";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -56,7 +57,7 @@ export default buildConfig({
 	// make sure to install it and pass it to the config.
 	// This is optional - if you don't need to do these things,
 	// you don't need it!
-	sharp,
+	// sharp,
 	typescript: {
 		outputFile: path.resolve(dirname, 'payload-types.ts')
 	},
@@ -72,7 +73,7 @@ export default buildConfig({
 					},
 				},
 			},
-			bucket: env.S3_BUCKET,
+			bucket: getEnvVar("S3_BUCKET"),
 			config: {
 				credentials: {
 					accessKeyId: env.S3_ACCESS_KEY_ID,
