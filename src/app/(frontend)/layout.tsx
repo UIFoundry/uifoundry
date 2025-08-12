@@ -5,6 +5,7 @@ import { Geist } from "next/font/google";
 
 import ServerProviders from "./providers.server";
 import ClientProviders from "./providers.client";
+import TailwindConfig from "~/payload/globals/TailwindConfig";
 
 export const metadata: Metadata = {
 	title: "Create T3 App",
@@ -24,6 +25,7 @@ export default function RootLayout({
 		<html lang="en" className={`${geist.variable}`}>
 			<body>
 				<ServerProviders>
+					<TailwindConfig draft={false} />
 					<ClientProviders>
 						{children}
 					</ClientProviders>

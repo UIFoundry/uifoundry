@@ -1714,10 +1714,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    tailwind: Tailwind;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    tailwind: TailwindSelect<false> | TailwindSelect<true>;
   };
   locale: null;
   user: User & {
@@ -2250,6 +2252,49 @@ export interface Footer_1_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tailwind".
+ */
+export interface Tailwind {
+  id: string;
+  radius?: number | null;
+  background?: string | null;
+  foreground?: string | null;
+  card?: string | null;
+  'card-foreground'?: string | null;
+  popover?: string | null;
+  'popover-foreground'?: string | null;
+  primary?: string | null;
+  'primary-foreground'?: string | null;
+  secondary?: string | null;
+  'secondary-foreground'?: string | null;
+  muted?: string | null;
+  'muted-foreground'?: string | null;
+  accent?: string | null;
+  'accent-foreground'?: string | null;
+  destructive?: string | null;
+  'destructive-foreground'?: string | null;
+  border?: string | null;
+  input?: string | null;
+  ring?: string | null;
+  'chart-1'?: string | null;
+  'chart-2'?: string | null;
+  'chart-3'?: string | null;
+  'chart-4'?: string | null;
+  'chart-5'?: string | null;
+  sidebar?: string | null;
+  'sidebar-foreground'?: string | null;
+  'sidebar-primary'?: string | null;
+  'sidebar-primary-foreground'?: string | null;
+  'sidebar-accent'?: string | null;
+  'sidebar-accent-foreground'?: string | null;
+  'sidebar-border'?: string | null;
+  'sidebar-ring'?: string | null;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2330,6 +2375,49 @@ export interface Footer_1_BlockSelect<T extends boolean = true> {
       };
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tailwind_select".
+ */
+export interface TailwindSelect<T extends boolean = true> {
+  radius?: T;
+  background?: T;
+  foreground?: T;
+  card?: T;
+  'card-foreground'?: T;
+  popover?: T;
+  'popover-foreground'?: T;
+  primary?: T;
+  'primary-foreground'?: T;
+  secondary?: T;
+  'secondary-foreground'?: T;
+  muted?: T;
+  'muted-foreground'?: T;
+  accent?: T;
+  'accent-foreground'?: T;
+  destructive?: T;
+  'destructive-foreground'?: T;
+  border?: T;
+  input?: T;
+  ring?: T;
+  'chart-1'?: T;
+  'chart-2'?: T;
+  'chart-3'?: T;
+  'chart-4'?: T;
+  'chart-5'?: T;
+  sidebar?: T;
+  'sidebar-foreground'?: T;
+  'sidebar-primary'?: T;
+  'sidebar-primary-foreground'?: T;
+  'sidebar-accent'?: T;
+  'sidebar-accent-foreground'?: T;
+  'sidebar-border'?: T;
+  'sidebar-ring'?: T;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

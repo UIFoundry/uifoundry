@@ -1,5 +1,5 @@
 import { getPayload } from "~/payload/utils";
-import type { Page as PageType } from "~/payload-types"
+import type { Page, Page as PageType } from "~/payload-types"
 import { COLLECTION_SLUG_PAGES } from "~/payload/constants";
 import { notFound } from "next/navigation";
 import RenderBlocks from "~/components/RenderBlocks"
@@ -40,7 +40,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 
 	const page = pageRes?.docs?.[0] as null | PageType
 
-	if (page === null) {
+	if (!page || page === null) {
 		return notFound()
 	}
 
@@ -65,7 +65,7 @@ export async function generateStaticParams() {
 		limit: 100,
 	})
 
-	const pages = pageRes?.docs
+	const pages: Page[] = pageRes?.docs
 
 	return pages.map(({ slug, _status }) => {
 		if (_status !== "published" || slug === 'home') {

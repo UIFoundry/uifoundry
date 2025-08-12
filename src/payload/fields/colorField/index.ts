@@ -1,17 +1,18 @@
 import type { TextField } from "~/payload/fields"
 
-export default function colorField(props?: Partial<TextField>): TextField {
+type ColorFieldProps = Omit<Partial<TextField>, 'hasMany' | 'type' | 'maxRows' | 'minRows'> & { description: string }
+
+export default function colorField(props?: ColorFieldProps): TextField {
 	return {
 		name: "color",
+		type: "text" as const,
 		interfaceName: "ColorField",
-		useKeyAsValue: true,
 		admin: {
 			components: {
 				Field: "~/payload/fields/colorField/ColorField"
 			},
 		},
-		...props
-	}
-
+		...props,
+	} as TextField
 }
 

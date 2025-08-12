@@ -1,5 +1,5 @@
 import { type CollectionConfig } from "payload";
-import { COLLECTION_SLUG_PAGES } from "../constants";
+import { AUTOSAVE_INTERVAL, COLLECTION_SLUG_PAGES } from "~/payload/constants";
 import { env } from "~/env.mjs";
 import { blocks } from "~/payload/blocks"
 
@@ -36,7 +36,7 @@ export const Pages: CollectionConfig = {
 	versions: {
 		drafts: {
 			autosave: {
-				interval: 200,
+				interval: AUTOSAVE_INTERVAL,
 			},
 		}
 	},
