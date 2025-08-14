@@ -15,17 +15,18 @@ export default $config({
 			}
 		};
 	},
+
 	async run() {
 		// Only import env in production to avoid NODE_ENV validation issues in dev
 		const isProd = $app.stage === "production"
 		const isDev = $app.stage === "dev"
 		const isPersonal = !isProd && !isDev
-		
+
 		// Set NODE_ENV before importing env.mjs to pass validation
 		if (isProd) {
 			process.env.NODE_ENV = "production"
 		}
-		
+
 		const env = isProd ? (await import("./src/env.mjs")).env : null
 		const bucket = new sst.aws.Bucket("uifoundry")
 		const isTest = $app.stage !== env?.NODE_ENV === "test"
@@ -101,6 +102,7 @@ export default $config({
 			}
 		});
 	},
+
 	console: {
 		autodeploy: {
 			target(event) {

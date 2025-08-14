@@ -9,7 +9,7 @@ export const TailwindConfigGlobal: GlobalConfig = {
 	label: "Tailwind Config",
 	admin: {
 		livePreview: {
-			url: `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/home`,
+			url: `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/home?draft=true`,
 		},
 	},
 	versions: {

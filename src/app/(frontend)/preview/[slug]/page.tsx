@@ -15,15 +15,18 @@ import { auth } from "~/auth";
 import { redirect } from "next/navigation";
 import { api, HydrateClient } from "~/trpc/server";
 import HomeComponent from "~/components/Home";
+import TailwindConfig from "~/payload/components/TailwindConfig"
 
 
 interface PageParams {
 	params: Promise<{
 		slug?: string
-	}>
+	}>,
+	searchParams: Promise<Record<string, string | string[]>>
 }
 
-export default async function Page({ params: paramsPromise }: PageParams) {
+export default async function Page({ params: paramsPromise, searchParams: searchParamsPromise }: PageParams) {
+	const draft = (await searchParamsPromise).draft ?? false
 	const { slug = '' } = await paramsPromise
 	const payload = await getPayload()
 	const session = await auth.api.getSession({ headers: await headers() })
@@ -64,6 +67,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 		return (
 			<HydrateClient>
 				<RefreshRouteOnSave />
+				<TailwindConfig draft={draft} />
 				<HomeComponent greeting={hello ? hello.greeting : "Loading Query..."} />
 			</HydrateClient>
 		);
@@ -76,6 +80,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 	return (
 		<div className="pt-8 px-8">
 			<RefreshRouteOnSave />
+			<TailwindConfig draft={draft} />
 			<Header header={header} className={cn(!(page?.showHeader) && "hidden")} />
 			<HeaderSpacing showHeader={page.showHeader}>
 				<h1 className="text-center pt-4 w-full font-bold">{page.title}</h1>
