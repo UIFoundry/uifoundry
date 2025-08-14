@@ -37,7 +37,7 @@ export const TAILWIND_COLORS = {
 } as const;
 export type TailwindColor = typeof TAILWIND_COLORS[keyof typeof TAILWIND_COLORS]
 
-export default async function TailwindConfig({ draft }: { draft?: boolean }) {
+export default async function TailwindConfig({ draft }: { draft?: "true" | "false" }) {
 	const payload = await getPayload();
 	const doc = await payload.findGlobal({
 		slug: GLOBAL_SLUG_TAILWIND,

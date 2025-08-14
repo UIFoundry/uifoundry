@@ -25,7 +25,7 @@ interface PageParams {
 }
 
 export default async function Page({ params: paramsPromise, searchParams: searchParamsPromise }: PageParams) {
-	const draft = (await searchParamsPromise).draft ?? false
+	const draft = (await searchParamsPromise).draft ?? "false"
 	const { slug = '' } = await paramsPromise
 	const payload = await getPayload()
 	const session = await auth.api.getSession({ headers: await headers() })
@@ -66,7 +66,7 @@ export default async function Page({ params: paramsPromise, searchParams: search
 		return (
 			<HydrateClient>
 				<RefreshRouteOnSave />
-				<TailwindConfig draft={draft} />
+				<TailwindConfig draft={draft as "true" | "false"} />
 				<HomeComponent greeting={hello ? hello.greeting : "Loading Query..."} />
 			</HydrateClient>
 		);
@@ -79,7 +79,7 @@ export default async function Page({ params: paramsPromise, searchParams: search
 	return (
 		<div className="pt-8 px-8">
 			<RefreshRouteOnSave />
-			<TailwindConfig draft={draft} />
+			<TailwindConfig draft={draft as "true" | "false"} />
 			<Header header={header} className={cn(!(page?.showHeader) && "hidden")} />
 			<HeaderSpacing showHeader={page.showHeader}>
 				<h1 className="text-center pt-4 w-full font-bold">{page.title}</h1>
