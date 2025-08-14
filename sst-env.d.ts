@@ -5,13 +5,53 @@
 
 declare module "sst" {
   export interface Resource {
+    "BETTER_AUTH_SECRET": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "DATABASE_URI": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
     "Frontend": {
       "type": "sst.aws.Nextjs"
       "url": string
     }
-    "Router": {
+    "GOOGLE_CLIENT_ID": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "GOOGLE_CLIENT_SECRET": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "GlobalRouter": {
       "type": "sst.aws.Router"
       "url": string
+    }
+    "NEXT_PUBLIC_BETTER_AUTH_URL": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "PAYLOAD_SECRET": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "S3_ACCESS_KEY_ID": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "S3_BUCKET": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "S3_REGION": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "S3_SECRET_ACCESS_KEY": {
+      "type": "sst.sst.Secret"
+      "value": string
     }
     "uifoundry": {
       "name": string

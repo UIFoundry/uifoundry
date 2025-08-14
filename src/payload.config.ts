@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 import { COLLECTION_SLUG_PAGES } from "./payload/constants";
 import { s3Storage } from "@payloadcms/storage-s3";
 import { getEnvVar } from "./utils/sst";
+// import sharp from "sharp"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
