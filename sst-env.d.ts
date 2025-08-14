@@ -25,10 +25,6 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
-    "GlobalRouter": {
-      "type": "sst.aws.Router"
-      "url": string
-    }
     "NEXT_PUBLIC_BETTER_AUTH_URL": {
       "type": "sst.sst.Secret"
       "value": string
