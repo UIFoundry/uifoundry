@@ -51,6 +51,7 @@
 		"src/env.mjs"
 	],
 	"exclude": [
-		"node_modules","sst.config.ts"
+		"node_modules",
+		"sst.config.ts"
 	]
 }

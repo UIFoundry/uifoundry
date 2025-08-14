@@ -41,7 +41,7 @@ export default async function TailwindConfig({ draft }: { draft?: "true" | "fals
 	const payload = await getPayload();
 	const doc = await payload.findGlobal({
 		slug: GLOBAL_SLUG_TAILWIND,
-		draft: Boolean(draft),
+		draft: draft === "true",
 		overrideAccess: true,
 	});
 
