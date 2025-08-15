@@ -13,15 +13,20 @@ export const Hero_1_Block: Block = {
 		{
 			type: "collapsible",
 			label: "New Update Alert",
+			admin: {
+				initCollapsed: true
+			},
 			fields: [
 				{
 					name: "alertLabel",
 					label: "Alert Label",
+					defaultValue: "Introducing Support for AI Models",
 					type: "text",
 				},
 				{
 					name: "alertLink",
 					label: "Alert Link (href)",
+					defaultValue: "/new-models",
 					type: "text",
 				}
 			]
@@ -30,11 +35,13 @@ export const Hero_1_Block: Block = {
 			name: "header",
 			label: "Header",
 			type: "text",
+			defaultValue: "Modern Solutions for Customer Engagement",
 			required: true,
 		},
 		{
 			name: "subheader",
 			label: "SubHeader",
+			defaultValue: "Highly customizable components for building modern websites and applications that look and feel the way you mean it.",
 			type: "text",
 		},
 		{
@@ -45,13 +52,15 @@ export const Hero_1_Block: Block = {
 					name: "primaryCtaLabel",
 					label: "Primary Call To Action: Label",
 					type: "text",
-					required: true
+					required: true,
+					defaultValue: "Start Building",
 				},
 				{
 					name: "primaryCtaHref",
 					label: "Primary Call To Action: Link (href)",
 					type: "text",
-					required: true
+					required: true,
+					defaultValue: "/getting-started",
 				}
 			]
 		},
@@ -63,13 +72,15 @@ export const Hero_1_Block: Block = {
 					name: "secondaryCtaLabel",
 					label: "Secondary Call To Action: Label",
 					type: "text",
-					required: true
+					required: true,
+					defaultValue: "Request a demo"
 				},
 				{
 					name: "secondaryCtaHref",
 					label: "Secondary Call To Action: Link (href)",
 					type: "text",
-					required: true
+					required: true,
+					defaultValue: "/request-demo"
 				}
 			]
 		},
