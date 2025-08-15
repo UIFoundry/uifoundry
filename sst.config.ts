@@ -25,6 +25,8 @@ export default $config({
 		// Set NODE_ENV before importing env.mjs to pass validation
 		if (isProd) {
 			process.env.NODE_ENV = "production";
+		} else if (isDev) {
+			process.env.NODE_ENV = "development";
 		}
 
 		const bucket = new sst.aws.Bucket("uifoundry");
