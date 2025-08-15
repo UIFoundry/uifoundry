@@ -93,7 +93,7 @@ export default $config({
 				},
 			],
 			environment: {
-				NODE_ENV: process.env.NODE_ENV,
+				// NODE_ENV: process.env.NODE_ENV,
 				DATABASE_URI: DATABASE_URI.value,
 				NEXT_PUBLIC_BETTER_AUTH_URL: NEXT_PUBLIC_BETTER_AUTH_URL.value,
 				BETTER_AUTH_SECRET: BETTER_AUTH_SECRET.value,
