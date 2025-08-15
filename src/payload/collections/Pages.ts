@@ -26,7 +26,7 @@ export const Pages: CollectionConfig = {
 		useAsTitle: "title",
 		livePreview: {
 			url: ({ data }) => {
-				if ((data.slug as string).toLowerCase() === 'home') {
+				if (data.slug as string === 'home') {
 					return env.NEXT_PUBLIC_BETTER_AUTH_URL
 				}
 				return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/${data.slug}`

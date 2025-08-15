@@ -49,7 +49,6 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 			<RefreshRouteOnSave />
 			<Header header={header} className={cn(!page.showHeader && "hidden")} />
 			<HeaderSpacing showHeader={page.showHeader}>
-				<h1 className="text-center pt-4 w-full font-bold">{page.title}</h1>
 				<RenderBlocks blocks={page.blocks} blockComponents={blockComponents} />
 			</HeaderSpacing>
 			<Footer footer={footer} className={cn(!page.showFooter && "hidden")} />
