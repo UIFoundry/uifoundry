@@ -47,11 +47,11 @@ export default $config({
 		const S3_ACCESS_KEY_ID = new sst.Secret("S3_ACCESS_KEY_ID");
 		const S3_SECRET_ACCESS_KEY = new sst.Secret("S3_SECRET_ACCESS_KEY");
 
-		const router = new sst.aws.Router("GlobalRouter", {
+		const routerName = isProd ? "GlobalRouter" : "DevRouter";
+		const router = new sst.aws.Router(routerName, {
 			domain: {
 				name: domain,
-				aliases: [`*.${rootDomain}`],
-				redirects: [`www.${domain}`],
+				redirects: isProd ? [`www.${domain}`] : [],
 				dns: false,
 				cert: "arn:aws:acm:us-east-1:194955053583:certificate/a8e84921-17e7-4568-8d6b-1f43a7d1e6af",
 			},
