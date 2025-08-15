@@ -25,11 +25,14 @@ export default $config({
 		// Set NODE_ENV before importing env.mjs to pass validation
 		if (isProd) {
 			process.env.NODE_ENV = "production";
+		} else if (isDev) {
+			process.env.NODE_ENV = "development";
 		}
 
 		const bucket = new sst.aws.Bucket("uifoundry");
 
-		const domain = isProd ? "uifoundry.dev" : `${$app.stage}.uifoundry.dev`;
+		const rootDomain = "uifoundry.dev";
+		const domain = isProd ? rootDomain : `${$app.stage}.${rootDomain}`;
 
 		const DATABASE_URI = new sst.Secret("DATABASE_URI");
 		const NEXT_PUBLIC_BETTER_AUTH_URL = new sst.Secret(
@@ -47,7 +50,7 @@ export default $config({
 		const router = new sst.aws.Router("GlobalRouter", {
 			domain: {
 				name: domain,
-				aliases: [`*.${domain}`],
+				aliases: [`*.${rootDomain}`],
 				redirects: [`www.${domain}`],
 				dns: false,
 				cert: "arn:aws:acm:us-east-1:194955053583:certificate/a8e84921-17e7-4568-8d6b-1f43a7d1e6af",
