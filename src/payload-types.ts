@@ -1820,7 +1820,7 @@ export interface Page {
   title: string;
   showHeader: boolean;
   showFooter: boolean;
-  blocks: (Teams_1_Block | Features_1_Block)[];
+  blocks: (Teams_1_Block | Features_1_Block | Hero_1_Block)[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1895,6 +1895,27 @@ export interface Features_1_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'features_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_1_Block".
+ */
+export interface Hero_1_Block {
+  alertLabel?: string | null;
+  alertLink?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: {
+    light?: (string | null) | Media;
+    dark?: (string | null) | Media;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_1';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2041,6 +2062,7 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         teams_1?: T | Teams_1_BlockSelect<T>;
         features_1?: T | Features_1_BlockSelect<T>;
+        hero_1?: T | Hero_1_BlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -2099,6 +2121,28 @@ export interface Features_1_BlockSelect<T extends boolean = true> {
         description?: T;
         icon?: T;
         id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_1_Block_select".
+ */
+export interface Hero_1_BlockSelect<T extends boolean = true> {
+  alertLabel?: T;
+  alertLink?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  media?:
+    | T
+    | {
+        light?: T;
+        dark?: T;
       };
   id?: T;
   blockName?: T;

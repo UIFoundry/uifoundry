@@ -11,6 +11,9 @@ const nextConfig = {
 	experimental: {
 		reactCompiler: true,
 	},
+	images: {
+		remotePatterns: [new URL(`http://localhost:3001/**`)],
+	},
 	output: "standalone",
 };
 
