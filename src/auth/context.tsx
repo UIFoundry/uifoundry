@@ -1,42 +1,49 @@
-'use client'
+"use client";
 
-import { createContext, useContext, type ReactNode } from 'react'
-import type { Session, Account, DeviceSession } from '~/auth/types'
-import type { TypedUser } from 'payload'
+import { createContext, useContext, type ReactNode } from "react";
+import type { Session, Account, DeviceSession } from "~/auth/types";
+import type { TypedUser } from "payload";
 
 type UserContextType = {
-	sessionPromise: Promise<Session | null>
-	userAccountsPromise: Promise<Account[] | null>
-	deviceSessionsPromise: Promise<DeviceSession[] | null>
-	currentUserPromise: Promise<TypedUser | null>
-}
+  sessionPromise: Promise<Session | null>;
+  userAccountsPromise: Promise<Account[] | null>;
+  deviceSessionsPromise: Promise<DeviceSession[] | null>;
+  currentUserPromise: Promise<TypedUser | null>;
+};
 
-const BetterAuthContext = createContext<UserContextType | null>(null)
+const BetterAuthContext = createContext<UserContextType | null>(null);
 
 export function useBetterAuth(): UserContextType {
-	const context = useContext(BetterAuthContext)
-	if (context === null) {
-		throw new Error('useBetterAuth must be used within a BetterAuthProvider')
-	}
-	return context
+  const context = useContext(BetterAuthContext);
+  if (context === null) {
+    throw new Error("useBetterAuth must be used within a BetterAuthProvider");
+  }
+  return context;
 }
 
 export function BetterAuthProvider({
-	children,
-	sessionPromise,
-	userAccountsPromise,
-	deviceSessionsPromise,
-	currentUserPromise
+  children,
+  sessionPromise,
+  userAccountsPromise,
+  deviceSessionsPromise,
+  currentUserPromise,
 }: {
-	children: ReactNode
-	sessionPromise: Promise<Session | null>
-	userAccountsPromise: Promise<Account[] | null>
-	deviceSessionsPromise: Promise<DeviceSession[] | null>
-	currentUserPromise: Promise<TypedUser | null>
+  children: ReactNode;
+  sessionPromise: Promise<Session | null>;
+  userAccountsPromise: Promise<Account[] | null>;
+  deviceSessionsPromise: Promise<DeviceSession[] | null>;
+  currentUserPromise: Promise<TypedUser | null>;
 }) {
-	return (
-		<BetterAuthContext.Provider value={{ sessionPromise, userAccountsPromise, deviceSessionsPromise, currentUserPromise }}>
-			{children}
-		</BetterAuthContext.Provider>
-	)
+  return (
+    <BetterAuthContext.Provider
+      value={{
+        sessionPromise,
+        userAccountsPromise,
+        deviceSessionsPromise,
+        currentUserPromise,
+      }}
+    >
+      {children}
+    </BetterAuthContext.Provider>
+  );
 }

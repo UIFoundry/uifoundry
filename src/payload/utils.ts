@@ -1,6 +1,6 @@
-import { getPayload as getPayloadBase } from 'payload';
-import config from '@payload-config';
+import { getPayload as getPayloadBase } from "payload";
+import config from "@payload-config";
 
 export function getPayload() {
-	return getPayloadBase({ config })
+  return getPayloadBase({ config });
 }
