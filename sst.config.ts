@@ -22,8 +22,8 @@ export default $config({
 		const isDev = $app.stage === "dev";
 		const isPersonal = !isProd && !isDev;
 
-		// Let Next.js handle NODE_ENV automatically
-		await import("./src/env.mjs");
+		// Skip env validation during SST builds
+		process.env.SKIP_ENV_VALIDATION = "1";
 
 		const bucket = new sst.aws.Bucket("uifoundry");
 
