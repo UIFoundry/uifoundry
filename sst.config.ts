@@ -22,6 +22,9 @@ export default $config({
 		const isDev = $app.stage === "dev";
 		const isPersonal = !isProd && !isDev;
 
+		// Let Next.js handle NODE_ENV automatically
+		await import("./src/env.mjs");
+
 		const bucket = new sst.aws.Bucket("uifoundry");
 
 		const rootDomain = "uifoundry.dev";
