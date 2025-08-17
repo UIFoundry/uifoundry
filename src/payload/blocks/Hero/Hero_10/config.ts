@@ -1,48 +1,29 @@
 import {
   BLOCK_GROUP_HERO,
-  BLOCK_SLUG_HERO_4,
+  BLOCK_SLUG_HERO_10,
 } from "~/payload/constants/blocks";
 import type { Block } from "payload";
-import mediaField from "~/payload/fields/mediaField";
 import colorField from "~/payload/fields/colorField";
 
-export const Hero_4_Block: Block = {
-  slug: BLOCK_SLUG_HERO_4,
-  labels: { singular: "Hero 4", plural: "Hero 4's" },
+export const Hero_10_Block: Block = {
+  slug: BLOCK_SLUG_HERO_10,
+  labels: { singular: "Hero 10", plural: "Hero 10's" },
   admin: { group: BLOCK_GROUP_HERO },
-  interfaceName: "Hero_4_Block",
+  interfaceName: "Hero_10_Block",
   fields: [
-    {
-      type: "collapsible",
-      label: "New Update Alert",
-      admin: { initCollapsed: true },
-      fields: [
-        {
-          name: "alertLabel",
-          label: "Alert Label",
-          defaultValue: "Dynamic Island demo",
-          type: "text",
-        },
-        {
-          name: "alertLink",
-          label: "Alert Link (href)",
-          defaultValue: "/dynamic",
-          type: "text",
-        },
-      ],
-    },
     {
       name: "header",
       label: "Header",
       type: "text",
-      defaultValue: "A more playful way to onboard",
+      defaultValue: "Vibes on tap",
       required: true,
     },
     {
       name: "subheader",
       label: "SubHeader",
       type: "text",
-      defaultValue: "Hero with an interactive island for context-aware CTAs.",
+      defaultValue:
+        "Animated GIF-filled headline inspired by Cult UI's Text Gif.",
     },
     {
       label: "Primary Call To Action",
@@ -53,14 +34,14 @@ export const Hero_4_Block: Block = {
           label: "Primary Call To Action: Label",
           type: "text",
           required: true,
-          defaultValue: "Join the beta",
+          defaultValue: "Get Started",
         },
         {
           name: "primaryCtaHref",
           label: "Primary Call To Action: Link (href)",
           type: "text",
           required: true,
-          defaultValue: "/beta",
+          defaultValue: "/getting-started",
         },
       ],
     },
@@ -73,36 +54,50 @@ export const Hero_4_Block: Block = {
           label: "Secondary Call To Action: Label",
           type: "text",
           required: true,
-          defaultValue: "See docs",
+          defaultValue: "View Components",
         },
         {
           name: "secondaryCtaHref",
           label: "Secondary Call To Action: Link (href)",
           type: "text",
           required: true,
-          defaultValue: "/docs",
+          defaultValue: "/docs/components",
         },
       ],
     },
     {
-      label: "Dynamic Island Appearance",
+      label: "Text GIF",
       type: "collapsible",
-      admin: { initCollapsed: true },
+      admin: { initCollapsed: false },
       fields: [
+        {
+          name: "gifUrl",
+          label: "GIF URL",
+          type: "text",
+          required: false,
+          defaultValue:
+            "https://media.giphy.com/media/fnglNFjBGiyAFtm6ke/giphy.gif",
+        },
+        {
+          name: "gifScale",
+          label: "GIF Scale (%)",
+          type: "number",
+          admin: { step: 5 },
+          defaultValue: 100,
+        },
         colorField({
-          name: "gradientStart",
-          label: "Gradient start",
-          description: "Left color of the island badge",
+          name: "fallbackFrom",
+          label: "Fallback From",
+          description: "Start color when GIF is missing",
           defaultValue: "#7c3aed",
         }),
         colorField({
-          name: "gradientEnd",
-          label: "Gradient end",
-          description: "Right color of the island badge",
+          name: "fallbackTo",
+          label: "Fallback To",
+          description: "End color when GIF is missing",
           defaultValue: "#06b6d4",
         }),
       ],
     },
-    mediaField(),
   ],
 };

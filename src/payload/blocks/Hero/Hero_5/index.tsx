@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "motion/react";
 import { Button } from "~/ui/button";
-import { ProgressiveBlur } from "~/ui/motion-primitives/progressive-blur";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
 import type { Media } from "~/payload-types";
+
+type Stat = { label: string; value: string; delta?: string };
 
 type CommonHeroProps = {
   header: string;
@@ -17,13 +17,11 @@ type CommonHeroProps = {
   primaryCtaHref?: string;
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
+  stats?: Stat[];
   media?: { dark?: Media | null; light?: Media | null };
 };
 
 export default function Hero_5(props: CommonHeroProps) {
-  const mediaDark = props?.media?.dark as Media | undefined;
-  const mediaLight = props?.media?.light as Media | undefined;
-
   return (
     <section className="relative overflow-hidden">
       {/* floating shapes */}
@@ -48,11 +46,11 @@ export default function Hero_5(props: CommonHeroProps) {
         />
       </div>
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-6 py-20 md:grid-cols-2 md:py-28">
-        <div>
+        <div className="text-left">
           <TextEffect
             preset="fade-in-blur"
             as="h1"
-            className="text-5xl text-balance md:text-6xl"
+            className="text-left text-5xl md:text-6xl"
           >
             {props.header}
           </TextEffect>
@@ -60,11 +58,11 @@ export default function Hero_5(props: CommonHeroProps) {
             per="line"
             preset="fade-in-blur"
             delay={0.2}
-            className="text-muted-foreground mt-6 text-lg text-balance"
+            className="text-muted-foreground mt-6 text-left text-lg"
           >
             {props.subheader ?? ""}
           </TextEffect>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-start justify-start gap-3 sm:flex-row">
             <Button asChild size="lg" className="rounded-xl">
               <Link href={props.primaryCtaHref ?? "#"}>
                 {props.primaryCtaLabel ?? "Explore"}
@@ -78,36 +76,47 @@ export default function Hero_5(props: CommonHeroProps) {
           </div>
         </div>
         <div className="relative">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98, rotate: -1 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="ring-border/50 bg-background relative overflow-hidden rounded-2xl border shadow-xl ring-1"
-          >
-            {mediaDark?.url ? (
-              <Image
-                src={mediaDark.url}
-                alt={mediaDark.alt}
-                className="hidden aspect-[4/3] w-full rounded-2xl object-cover dark:block"
-                width={1600}
-                height={1200}
-              />
-            ) : null}
-            {mediaLight?.url ? (
-              <Image
-                src={mediaLight.url}
-                alt={mediaLight.alt}
-                className="aspect-[4/3] w-full rounded-2xl object-cover dark:hidden"
-                width={1600}
-                height={1200}
-              />
-            ) : null}
-            <ProgressiveBlur
-              className="absolute inset-0"
-              direction="bottom"
-              blurLayers={10}
-            />
-          </motion.div>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+            {(props.stats ?? []).map((stat, i) => {
+              const positive =
+                typeof stat.delta === "string" &&
+                stat.delta.trim().startsWith("+");
+              const negative =
+                typeof stat.delta === "string" &&
+                stat.delta.trim().startsWith("-");
+              return (
+                <motion.div
+                  key={`${stat.label}-${i}`}
+                  initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.4, delay: i * 0.04 }}
+                  className="ring-border/50 bg-background/70 relative overflow-hidden rounded-2xl border p-4 ring-1 backdrop-blur"
+                >
+                  <div className="text-3xl font-semibold tracking-tight">
+                    {stat.value}
+                  </div>
+                  <div className="text-muted-foreground mt-1 text-xs tracking-wider uppercase">
+                    {stat.label}
+                  </div>
+                  {stat.delta ? (
+                    <div
+                      className={
+                        "mt-2 text-xs font-medium " +
+                        (positive
+                          ? "text-emerald-500"
+                          : negative
+                            ? "text-rose-500"
+                            : "text-foreground/70")
+                      }
+                    >
+                      {stat.delta}
+                    </div>
+                  ) : null}
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

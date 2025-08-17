@@ -28,3 +28,5 @@ export const BLOCK_SLUG_HERO_5 = "hero_5" as const;
 export const BLOCK_SLUG_HERO_6 = "hero_6" as const;
 export const BLOCK_SLUG_HERO_7 = "hero_7" as const;
 export const BLOCK_SLUG_HERO_8 = "hero_8" as const;
+export const BLOCK_SLUG_HERO_9 = "hero_9" as const;
+export const BLOCK_SLUG_HERO_10 = "hero_10" as const;

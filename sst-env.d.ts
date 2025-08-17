@@ -5,61 +5,61 @@
 
 declare module "sst" {
   export interface Resource {
-    "BETTER_AUTH_SECRET": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "DATABASE_URI": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "DevRouter": {
-      "type": "sst.aws.Router"
-      "url": string
-    }
-    "Frontend": {
-      "type": "sst.aws.Nextjs"
-      "url": string
-    }
-    "GOOGLE_CLIENT_ID": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "GOOGLE_CLIENT_SECRET": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "NEXT_PUBLIC_BETTER_AUTH_URL": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "PAYLOAD_SECRET": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "S3_ACCESS_KEY_ID": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "S3_BUCKET": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "S3_REGION": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "S3_SECRET_ACCESS_KEY": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "uifoundry": {
-      "name": string
-      "type": "sst.aws.Bucket"
-    }
+    BETTER_AUTH_SECRET: {
+      type: "sst.sst.Secret";
+      value: string;
+    };
+    DATABASE_URI: {
+      type: "sst.sst.Secret";
+      value: string;
+    };
+    DevRouter: {
+      type: "sst.aws.Router";
+      url: string;
+    };
+    Frontend: {
+      type: "sst.aws.Nextjs";
+      url: string;
+    };
+    GOOGLE_CLIENT_ID: {
+      type: "sst.sst.Secret";
+      value: string;
+    };
+    GOOGLE_CLIENT_SECRET: {
+      type: "sst.sst.Secret";
+      value: string;
+    };
+    NEXT_PUBLIC_BETTER_AUTH_URL: {
+      type: "sst.sst.Secret";
+      value: string;
+    };
+    PAYLOAD_SECRET: {
+      type: "sst.sst.Secret";
+      value: string;
+    };
+    S3_ACCESS_KEY_ID: {
+      type: "sst.sst.Secret";
+      value: string;
+    };
+    S3_BUCKET: {
+      type: "sst.sst.Secret";
+      value: string;
+    };
+    S3_REGION: {
+      type: "sst.sst.Secret";
+      value: string;
+    };
+    S3_SECRET_ACCESS_KEY: {
+      type: "sst.sst.Secret";
+      value: string;
+    };
+    uifoundry: {
+      name: string;
+      type: "sst.aws.Bucket";
+    };
   }
 }
 /// <reference path="sst-env.d.ts" />
 
-import "sst"
-export {}
+import "sst";
+export {};

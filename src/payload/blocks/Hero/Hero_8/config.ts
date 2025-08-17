@@ -44,6 +44,39 @@ export const Hero_8_Block: Block = {
       defaultValue: "Code-focused hero with zoom-in media.",
     },
     {
+      label: "Background Video",
+      type: "collapsible",
+      admin: { initCollapsed: false },
+      fields: [
+        {
+          name: "videoUrl",
+          label: "Video URL",
+          type: "text",
+          required: false,
+          defaultValue: "",
+        },
+        {
+          name: "variant",
+          label: "Variant",
+          type: "select",
+          options: [
+            { label: "Centered", value: "center" },
+            { label: "Left-aligned", value: "left" },
+          ],
+          defaultValue: "center",
+          required: true,
+        },
+        {
+          name: "overlayOpacity",
+          label: "Overlay Opacity",
+          type: "number",
+          admin: { step: 0.05 },
+          defaultValue: 0.4,
+          required: false,
+        },
+      ],
+    },
+    {
       label: "Primary Call To Action",
       type: "collapsible",
       fields: [

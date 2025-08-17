@@ -4,6 +4,7 @@ import {
 } from "~/payload/constants/blocks";
 import type { Block } from "payload";
 import mediaField from "~/payload/fields/mediaField";
+import colorField from "~/payload/fields/colorField";
 
 export const Hero_7_Block: Block = {
   slug: BLOCK_SLUG_HERO_7,
@@ -81,6 +82,31 @@ export const Hero_7_Block: Block = {
           required: true,
           defaultValue: "https://github.com",
         },
+      ],
+    },
+    {
+      label: "Gradient Colors",
+      type: "collapsible",
+      admin: { initCollapsed: false },
+      fields: [
+        colorField({
+          name: "gradientFrom",
+          label: "Gradient From",
+          description: "Starting color for headline gradient",
+          defaultValue: "#a78bfa", // violet-400
+        }),
+        colorField({
+          name: "gradientVia",
+          label: "Gradient Via",
+          description: "Middle color for headline gradient",
+          defaultValue: "#f0abfc", // fuchsia-400
+        }),
+        colorField({
+          name: "gradientTo",
+          label: "Gradient To",
+          description: "Ending color for headline gradient",
+          defaultValue: "#22d3ee", // cyan-400
+        }),
       ],
     },
     mediaField(),

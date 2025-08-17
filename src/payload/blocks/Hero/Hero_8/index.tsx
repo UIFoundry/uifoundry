@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "motion/react";
 import { Button } from "~/ui/button";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
@@ -14,17 +13,45 @@ type CommonHeroProps = {
   primaryCtaHref?: string;
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
+  videoUrl?: string;
+  variant?: "center" | "left";
+  overlayOpacity?: number;
   media?: { dark?: Media | null; light?: Media | null };
 };
 
 export default function Hero_8(props: CommonHeroProps) {
-  const mediaDark = props?.media?.dark as Media | undefined;
-  const mediaLight = props?.media?.light as Media | undefined;
+  const alignCenter = (props.variant ?? "center") === "center";
+  const overlay = Math.min(1, Math.max(0, props.overlayOpacity ?? 0.4));
 
   return (
-    <section className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 py-24">
-        <div className="mx-auto max-w-3xl text-center">
+    <section className="relative isolate flex min-h-[70vh] items-center overflow-hidden md:min-h-[85vh]">
+      {/* Background video */}
+      {props.videoUrl ? (
+        <video
+          className="absolute inset-0 -z-10 h-full w-full object-cover"
+          src={props.videoUrl}
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      ) : (
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-violet-600/30 to-cyan-600/30" />
+      )}
+      {/* Overlay */}
+      <div
+        className="bg-background absolute inset-0 -z-10"
+        style={{ opacity: overlay }}
+      />
+
+      <div className="mx-auto w-full max-w-7xl px-6 py-24">
+        <div
+          className={
+            alignCenter
+              ? "mx-auto max-w-3xl text-center"
+              : "max-w-2xl text-left"
+          }
+        >
           <TextEffect
             preset="fade-in-blur"
             as="h1"
@@ -35,12 +62,22 @@ export default function Hero_8(props: CommonHeroProps) {
           <TextEffect
             per="line"
             preset="fade-in-blur"
-            delay={0.2}
-            className="text-muted-foreground mt-6 text-lg text-balance"
+            delay={0.15}
+            className={
+              alignCenter
+                ? "text-muted-foreground mx-auto mt-6 max-w-prose text-lg text-balance"
+                : "text-muted-foreground mt-6 max-w-prose text-lg text-balance"
+            }
           >
             {props.subheader ?? ""}
           </TextEffect>
-          <div className="mt-8 flex items-center justify-center gap-3">
+          <div
+            className={
+              alignCenter
+                ? "mt-8 flex items-center justify-center gap-3"
+                : "mt-8 flex items-center gap-3"
+            }
+          >
             <Button asChild size="lg" className="rounded-xl">
               <Link href={props.primaryCtaHref ?? "#"}>
                 {props.primaryCtaLabel ?? "Get CLI"}
@@ -53,37 +90,16 @@ export default function Hero_8(props: CommonHeroProps) {
             </Button>
           </div>
         </div>
-        <div className="relative mx-auto mt-12 max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="ring-border/50 bg-background relative overflow-hidden rounded-2xl border shadow-2xl ring-1"
-          >
-            {mediaDark?.url ? (
-              <Image
-                src={mediaDark.url}
-                alt={mediaDark.alt}
-                className="hidden aspect-[16/9] w-full rounded-2xl object-cover dark:block"
-                width={1920}
-                height={1080}
-              />
-            ) : null}
-            {mediaLight?.url ? (
-              <Image
-                src={mediaLight.url}
-                alt={mediaLight.alt}
-                className="aspect-[16/9] w-full rounded-2xl object-cover dark:hidden"
-                width={1920}
-                height={1080}
-              />
-            ) : null}
-            {/* subtle vignette */}
-            <div className="pointer-events-none absolute inset-0 rounded-2xl [mask-image:radial-gradient(80%_80%_at_50%_50%,black,transparent)] ring-1 ring-white/10" />
-          </motion.div>
-        </div>
       </div>
+
+      {/* subtle vignette edges */}
+      <motion.div
+        aria-hidden
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2 }}
+        className="pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(80%_80%_at_50%_50%,black,transparent)]"
+      />
     </section>
   );
 }

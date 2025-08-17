@@ -12,6 +12,9 @@ type CommonHeroProps = {
   primaryCtaHref?: string;
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
+  gradientFrom?: string;
+  gradientVia?: string;
+  gradientTo?: string;
 };
 
 export default function Hero_7(props: CommonHeroProps) {
@@ -22,7 +25,10 @@ export default function Hero_7(props: CommonHeroProps) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-gradient-to-tr from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-5xl text-balance text-transparent md:text-6xl"
+          className="bg-clip-text text-5xl text-balance text-transparent md:text-6xl"
+          style={{
+            backgroundImage: `linear-gradient(45deg, ${props.gradientFrom ?? "#a78bfa"}, ${props.gradientVia ?? "#f0abfc"}, ${props.gradientTo ?? "#22d3ee"})`,
+          }}
         >
           {props.header}
         </motion.h1>

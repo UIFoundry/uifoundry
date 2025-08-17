@@ -7,6 +7,8 @@ import {
   BLOCK_SLUG_HERO_6,
   BLOCK_SLUG_HERO_7,
   BLOCK_SLUG_HERO_8,
+  BLOCK_SLUG_HERO_9,
+  BLOCK_SLUG_HERO_10,
 } from "~/payload/constants/blocks";
 import Hero_1 from "./Hero_1";
 import { Hero_1_Block } from "./Hero_1/config";
@@ -24,6 +26,10 @@ import Hero_7 from "./Hero_7";
 import { Hero_7_Block } from "./Hero_7/config";
 import Hero_8 from "./Hero_8";
 import { Hero_8_Block } from "./Hero_8/config";
+import Hero_9 from "./Hero_9";
+import { Hero_9_Block } from "./Hero_9/config";
+import Hero_10 from "./Hero_10";
+import { Hero_10_Block } from "./Hero_10/config";
 
 export const blocks = [
   Hero_1_Block,
@@ -34,6 +40,8 @@ export const blocks = [
   Hero_6_Block,
   Hero_7_Block,
   Hero_8_Block,
+  Hero_9_Block,
+  Hero_10_Block,
 ];
 
 export const blockComponents = {
@@ -45,4 +53,6 @@ export const blockComponents = {
   [BLOCK_SLUG_HERO_6]: Hero_6,
   [BLOCK_SLUG_HERO_7]: Hero_7,
   [BLOCK_SLUG_HERO_8]: Hero_8,
+  [BLOCK_SLUG_HERO_9]: Hero_9,
+  [BLOCK_SLUG_HERO_10]: Hero_10,
 };

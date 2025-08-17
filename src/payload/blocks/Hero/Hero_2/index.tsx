@@ -49,7 +49,7 @@ export default function Hero_2(props: CommonHeroProps) {
       </div>
 
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-6 py-20 md:grid-cols-2 md:py-28">
-        <div>
+        <div className="text-left">
           <AnimatedGroup preset="blur-slide" className="space-y-6">
             {props.alertLabel && props.alertLink ? (
               <Link
@@ -64,7 +64,7 @@ export default function Hero_2(props: CommonHeroProps) {
               preset="fade-in-blur"
               speedSegment={0.35}
               as="h1"
-              className="text-5xl text-balance md:text-6xl"
+              className="text-left text-5xl md:text-6xl"
             >
               {props.header}
             </TextEffect>
@@ -72,11 +72,11 @@ export default function Hero_2(props: CommonHeroProps) {
               per="line"
               preset="fade-in-blur"
               delay={0.2}
-              className="text-muted-foreground max-w-prose text-lg text-balance"
+              className="text-muted-foreground max-w-prose text-left text-lg"
             >
               {props.subheader ?? ""}
             </TextEffect>
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="flex flex-col items-start justify-start gap-3 sm:flex-row">
               <Button asChild size="lg" className="rounded-xl">
                 <Link href={props.primaryCtaHref ?? "#"}>
                   {props.primaryCtaLabel ?? "Get Started"}

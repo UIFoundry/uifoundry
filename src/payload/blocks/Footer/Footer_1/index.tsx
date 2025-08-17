@@ -4,6 +4,7 @@ import Link from "next/link";
 import { type ComponentPropsWithRef } from "react";
 import type { Footer_1_Block, Media } from "~/payload-types";
 import SocialIcon from "~/ui/icons/social-icon";
+import Image from "next/image";
 
 export * from "./config";
 
@@ -18,9 +19,9 @@ export default function Footer_1({
     <footer {...divProps}>
       <div className="mx-auto max-w-5xl px-6 py-8 md:py-16">
         <Link href="/" aria-label="go home" className="mx-auto block size-fit">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {}
           {brandLogo && (
-            <img
+            <Image
               src={(brandLogo as Media).url!}
               alt={(brandLogo as Media).alt}
               width={200}

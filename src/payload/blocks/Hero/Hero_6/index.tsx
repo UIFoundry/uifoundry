@@ -59,11 +59,17 @@ export default function Hero_6(props: CommonHeroProps) {
               </Link>
             </Button>
           </div>
+          <motion.hr
+            initial={{ opacity: 0, scaleX: 0.7 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="via-foreground/20 mx-auto mt-10 h-px w-56 border-0 bg-gradient-to-r from-transparent to-transparent"
+          />
         </div>
         <div className="relative mx-auto mt-12 max-w-5xl">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             className="ring-border/50 bg-background relative overflow-hidden rounded-2xl border shadow-lg ring-1"
           >

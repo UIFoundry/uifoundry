@@ -16,6 +16,8 @@ type CommonHeroProps = {
   primaryCtaHref?: string;
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
+  gradientStart?: string;
+  gradientEnd?: string;
   media?: { dark?: Media | null; light?: Media | null };
 };
 
@@ -47,13 +49,19 @@ export default function Hero_4(props: CommonHeroProps) {
           {/* Dynamic Island inspired CTA */}
           <div className="relative mx-auto mt-8 flex max-w-md justify-center">
             <motion.div
-              initial={{ width: 160, borderRadius: 9999, opacity: 0, y: 12 }}
-              animate={{ width: 560, opacity: 1, y: 0 }}
+              initial={{ width: 160, borderRadius: 9999, opacity: 0, y: 20 }}
+              whileInView={{ width: 560, opacity: 1, y: 0 }}
               whileHover={{ width: 640 }}
+              viewport={{ once: true, amount: 0.6 }}
               transition={{ type: "spring", duration: 1, bounce: 0.35 }}
               className="ring-border/50 bg-background/70 group relative flex items-center gap-3 overflow-hidden rounded-full border px-4 py-2 text-sm shadow-lg ring-1 backdrop-blur"
             >
-              <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-tr from-violet-500 to-cyan-500 text-[10px] font-semibold text-white">
+              <span
+                className="inline-flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold text-white"
+                style={{
+                  background: `linear-gradient(135deg, ${props.gradientStart ?? "#7c3aed"}, ${props.gradientEnd ?? "#06b6d4"})`,
+                }}
+              >
                 AI
               </span>
               <span className="text-foreground/90 truncate">
