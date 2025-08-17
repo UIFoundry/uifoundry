@@ -2,7 +2,7 @@
 
 import { cn } from "~/styles/utils";
 import { useMotionValue, animate, motion } from "motion/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useMeasure from "react-use-measure";
 
 export type InfiniteSliderProps = {
@@ -10,6 +10,7 @@ export type InfiniteSliderProps = {
   gap?: number;
   speed?: number;
   speedOnHover?: number;
+  pauseOnHover?: boolean;
   direction?: "horizontal" | "vertical";
   reverse?: boolean;
   className?: string;
@@ -20,6 +21,7 @@ export function InfiniteSlider({
   gap = 16,
   speed = 100,
   speedOnHover,
+  pauseOnHover,
   direction = "horizontal",
   reverse = false,
   className,
@@ -28,9 +30,17 @@ export function InfiniteSlider({
   const [ref, { width, height }] = useMeasure();
   const translation = useMotionValue(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const controlsRef = useRef<ReturnType<typeof animate> | null>(null);
   const [key, setKey] = useState(0);
 
   useEffect(() => {
+    // Pause support
+    if (pauseOnHover && hovered) {
+      controlsRef.current?.stop?.();
+      return;
+    }
+
     let controls;
     const size = direction === "horizontal" ? width : height;
     const contentSize = size + gap;
@@ -42,7 +52,8 @@ export function InfiniteSlider({
 
     if (isTransitioning) {
       const remainingDistance = Math.abs(translation.get() - to);
-      const transitionDuration = remainingDistance / currentSpeed;
+      const transitionDuration =
+        remainingDistance / Math.max(currentSpeed, 1e-6);
 
       controls = animate(translation, [translation.get(), to], {
         ease: "linear",
@@ -65,6 +76,7 @@ export function InfiniteSlider({
       });
     }
 
+    controlsRef.current = controls;
     return controls?.stop;
   }, [
     key,
@@ -76,20 +88,32 @@ export function InfiniteSlider({
     isTransitioning,
     direction,
     reverse,
+    pauseOnHover,
+    hovered,
   ]);
 
-  const hoverProps = speedOnHover
-    ? {
-        onHoverStart: () => {
-          setIsTransitioning(true);
-          setCurrentSpeed(speedOnHover);
-        },
-        onHoverEnd: () => {
-          setIsTransitioning(true);
-          setCurrentSpeed(speed);
-        },
+  const hoverProps = {
+    onHoverStart: () => {
+      if (pauseOnHover) {
+        setHovered(true);
       }
-    : {};
+      if (typeof speedOnHover === "number") {
+        setIsTransitioning(true);
+        setCurrentSpeed(speedOnHover);
+      }
+    },
+    onHoverEnd: () => {
+      if (pauseOnHover) {
+        // Resume motion and gracefully complete current loop
+        setHovered(false);
+        setIsTransitioning(true);
+      }
+      if (typeof speedOnHover === "number") {
+        setIsTransitioning(true);
+        setCurrentSpeed(speed);
+      }
+    },
+  };
 
   return (
     <div className={cn("overflow-hidden", className)}>

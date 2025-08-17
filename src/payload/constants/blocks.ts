@@ -21,3 +21,10 @@ export const BLOCK_SLUG_FEATURES_1 = "features_1" as const;
 // Hero
 export const BLOCK_GROUP_HERO = "Hero" as const;
 export const BLOCK_SLUG_HERO_1 = "hero_1" as const;
+export const BLOCK_SLUG_HERO_2 = "hero_2" as const;
+export const BLOCK_SLUG_HERO_3 = "hero_3" as const;
+export const BLOCK_SLUG_HERO_4 = "hero_4" as const;
+export const BLOCK_SLUG_HERO_5 = "hero_5" as const;
+export const BLOCK_SLUG_HERO_6 = "hero_6" as const;
+export const BLOCK_SLUG_HERO_7 = "hero_7" as const;
+export const BLOCK_SLUG_HERO_8 = "hero_8" as const;

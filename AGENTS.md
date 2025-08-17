@@ -69,3 +69,65 @@ UIFoundry is a custom, opionated and professionally put together payload cms tem
 4. - [ ] users can have multiple sites
 5. - [ ] form builder plugin complete with many various types of form components
 6. - [ ] Custom domains for individual sites,
+
+---
+
+## LLM notes: blocks, rendering, and motion
+
+- Block anatomy (server + client):
+  - Config (server): `src/payload/blocks/<Group>/<BlockName>/config.ts` exports a Payload `Block` (fields, labels, slug).
+  - View (client): `src/payload/blocks/<Group>/<BlockName>/index.tsx` renders the block, often with animations.
+  - Do NOT re-export the config from a client component (no `export * from "./config"` in client). Instead, in the group index import configs directly from `./X/config`.
+- Registration:
+  - Group index (e.g., `src/payload/blocks/Hero/index.ts`) must:
+    - Export `blocks: Block[]` array accumulating the group’s Block configs.
+    - Export `blockComponents` mapping `{ [slug]: Component }`.
+  - Global aggregator: `src/payload/blocks/index.tsx` merges all groups’ blocks/components and is consumed by:
+    - `src/payload/collections/Pages.ts` to allow the blocks in the `blocks` field.
+    - Render-time contexts (`src/app/(frontend)/[slug]/page.tsx`, preview) via `<RenderBlocks />`.
+- Render pipeline:
+  - `RenderBlocks` (`src/components/RenderBlocks/index.tsx`) iterates `blocks` (payload JSON) and looks up components by `blockType`. It spreads the block’s fields as props into the React component.
+  - To add extra inputs to a block, define them in the block’s `config.ts`. The component will receive them via props automatically.
+- Slugs and groups:
+  - Slugs/constants live in `src/payload/constants/blocks.ts` (e.g., `BLOCK_SLUG_HERO_1`, `BLOCK_GROUP_HERO`). Add new slugs here before referencing them in configs/components.
+- Media fields:
+  - `mediaField()` (`src/payload/fields/mediaField.ts`) returns a group with two uploads `{ light, dark }` tied to the `Media` collection.
+  - Upload defaultValues aren’t practical—leave empty by default and guard in the component (`props?.media?.light?.url`, etc.).
+- Motion primitives (client-only):
+  - Located at `src/ui/motion-primitives/`:
+    - `text-effect.tsx` – per word/char/line animated headings.
+    - `animated-group.tsx` – staggered group entrance.
+    - `infinite-slider.tsx` – marquee/slider (good for logo clouds).
+    - `progressive-blur.tsx` – layered blur masks over media.
+  - Any component using `motion/react` must start with `"use client"`.
+
+## LLM checklist: adding a new block
+
+1. Add the slug in `src/payload/constants/blocks.ts` (and group constant if new).
+2. Create `config.ts` with `slug`, `labels`, `admin.group`, `interfaceName`, and fields (provide good `defaultValue`s for text/select/checkbox).
+3. Create `index.tsx` client component (put `"use client"` at top). Use motion primitives where helpful.
+4. Register in the group index (e.g., `src/payload/blocks/Hero/index.ts`):
+   - `import { Hero_X_Block } from "./Hero_X/config";`
+   - `import Hero_X from "./Hero_X";`
+   - Add to `blocks` array and `blockComponents` map.
+5. Run `pnpm check` then `pnpm build` (generates Payload types and builds Next). Fix any client/server boundary issues.
+
+## Field patterns for hero variety
+
+- Common hero fields (mix-and-match):
+  - `kicker`/`eyebrow` (short label above headline)
+  - `header`, `subheader`
+  - Primary/secondary CTA labels + hrefs
+  - `media` (light/dark screenshot or illustration)
+  - `logos` (array: name, url/href, optional media) for logo clouds
+  - `stats` (array: label, value, delta)
+  - `featureList` (array: icon, title, desc)
+  - `codeSample` (textarea) or `videoUrl` + poster media
+  - `backgroundStyle` (select: "spotlight", "blobs", "grid", etc.) to toggle backgrounds
+
+## Common pitfalls
+
+- Don’t import a client file from server contexts. Group `index.ts` should import configs directly from `config.ts`, not through the client `index.tsx`.
+- When using `motion/react`, ensure the file is marked `"use client"`.
+- Provide safe defaults: text fields can have illustrative copy; upload fields should be optional and null-checked in components.
+- After adding a block, verify both admin (fields render) and frontend (component renders) and run `pnpm check`/`pnpm build`.
