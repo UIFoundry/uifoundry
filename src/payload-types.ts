@@ -1823,6 +1823,15 @@ export interface Page {
   blocks: (
     | Teams_1_Block
     | Features_1_Block
+    | Features_2_Block
+    | Features_3_Block
+    | Features_4_Block
+    | Features_5_Block
+    | Features_6_Block
+    | Features_7_Block
+    | Features_8_Block
+    | Features_9_Block
+    | Features_10_Block
     | Hero_1_Block
     | Hero_2_Block
     | Hero_3_Block
@@ -1911,6 +1920,176 @@ export interface Features_1_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_2_Block".
+ */
+export interface Features_2_Block {
+  header: string;
+  subheader?: string | null;
+  features: {
+    title: string;
+    description?: string | null;
+    icon?: IconField;
+    linkLabel?: string | null;
+    linkHref?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_3_Block".
+ */
+export interface Features_3_Block {
+  header: string;
+  subheader?: string | null;
+  bullets: {
+    title: string;
+    description?: string | null;
+    id?: string | null;
+  }[];
+  media?: {
+    light?: (string | null) | Media;
+    dark?: (string | null) | Media;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_4_Block".
+ */
+export interface Features_4_Block {
+  header: string;
+  subheader?: string | null;
+  items: {
+    title: string;
+    description?: string | null;
+    icon?: IconField;
+    href?: string | null;
+    colSpan?: number | null;
+    rowSpan?: number | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_5_Block".
+ */
+export interface Features_5_Block {
+  header: string;
+  subheader?: string | null;
+  steps: {
+    title: string;
+    description?: string | null;
+    icon?: IconField;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_6_Block".
+ */
+export interface Features_6_Block {
+  header: string;
+  subheader?: string | null;
+  tabs: {
+    label: string;
+    title: string;
+    description?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_7_Block".
+ */
+export interface Features_7_Block {
+  header: string;
+  subheader?: string | null;
+  items: {
+    title: string;
+    description?: string | null;
+    icon?: IconField;
+    media?: {
+      light?: (string | null) | Media;
+      dark?: (string | null) | Media;
+    };
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_7';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_8_Block".
+ */
+export interface Features_8_Block {
+  header: string;
+  subheader?: string | null;
+  logos?:
+    | {
+        name: string;
+        logo?: (string | null) | Media;
+        href?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_8';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_9_Block".
+ */
+export interface Features_9_Block {
+  header: string;
+  subheader?: string | null;
+  items: {
+    title: string;
+    content?: string | null;
+    icon?: IconField;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_9';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_10_Block".
+ */
+export interface Features_10_Block {
+  header: string;
+  subheader?: string | null;
+  scrollDirection?: ('left' | 'right') | null;
+  items?:
+    | {
+        title: string;
+        description?: string | null;
+        icon?: IconField;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_10';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "Hero_1_Block".
  */
 export interface Hero_1_Block {
@@ -1964,6 +2143,7 @@ export interface Hero_3_Block {
   primaryCtaHref: string;
   secondaryCtaLabel: string;
   secondaryCtaHref: string;
+  logosScrollDirection?: ('left' | 'right') | null;
   logos?:
     | {
         label: string;
@@ -2292,6 +2472,15 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         teams_1?: T | Teams_1_BlockSelect<T>;
         features_1?: T | Features_1_BlockSelect<T>;
+        features_2?: T | Features_2_BlockSelect<T>;
+        features_3?: T | Features_3_BlockSelect<T>;
+        features_4?: T | Features_4_BlockSelect<T>;
+        features_5?: T | Features_5_BlockSelect<T>;
+        features_6?: T | Features_6_BlockSelect<T>;
+        features_7?: T | Features_7_BlockSelect<T>;
+        features_8?: T | Features_8_BlockSelect<T>;
+        features_9?: T | Features_9_BlockSelect<T>;
+        features_10?: T | Features_10_BlockSelect<T>;
         hero_1?: T | Hero_1_BlockSelect<T>;
         hero_2?: T | Hero_2_BlockSelect<T>;
         hero_3?: T | Hero_3_BlockSelect<T>;
@@ -2366,6 +2555,185 @@ export interface Features_1_BlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_2_Block_select".
+ */
+export interface Features_2_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  features?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        icon?: T;
+        linkLabel?: T;
+        linkHref?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_3_Block_select".
+ */
+export interface Features_3_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  bullets?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  media?:
+    | T
+    | {
+        light?: T;
+        dark?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_4_Block_select".
+ */
+export interface Features_4_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        icon?: T;
+        href?: T;
+        colSpan?: T;
+        rowSpan?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_5_Block_select".
+ */
+export interface Features_5_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  steps?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_6_Block_select".
+ */
+export interface Features_6_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  tabs?:
+    | T
+    | {
+        label?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_7_Block_select".
+ */
+export interface Features_7_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        icon?: T;
+        media?:
+          | T
+          | {
+              light?: T;
+              dark?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_8_Block_select".
+ */
+export interface Features_8_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  logos?:
+    | T
+    | {
+        name?: T;
+        logo?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_9_Block_select".
+ */
+export interface Features_9_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_10_Block_select".
+ */
+export interface Features_10_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  scrollDirection?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "Hero_1_Block_select".
  */
 export interface Hero_1_BlockSelect<T extends boolean = true> {
@@ -2421,6 +2789,7 @@ export interface Hero_3_BlockSelect<T extends boolean = true> {
   primaryCtaHref?: T;
   secondaryCtaLabel?: T;
   secondaryCtaHref?: T;
+  logosScrollDirection?: T;
   logos?:
     | T
     | {

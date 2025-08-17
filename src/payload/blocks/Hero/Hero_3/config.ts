@@ -84,6 +84,16 @@ export const Hero_3_Block: Block = {
       ],
     },
     {
+      name: "logosScrollDirection",
+      label: "Logo Scroll Direction",
+      type: "select",
+      defaultValue: "left",
+      options: [
+        { label: "Left", value: "left" },
+        { label: "Right", value: "right" },
+      ],
+    },
+    {
       name: "logos",
       label: "Logo Cloud",
       labels: { singular: "Logo", plural: "Logos" },

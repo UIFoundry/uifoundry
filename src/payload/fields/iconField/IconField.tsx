@@ -32,7 +32,8 @@ function Icon({
   setValue: (val: unknown, disableModifyingForm?: boolean) => void;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
-  const SelectIcon = icons[icon.value as IconName];
+  const key = String(icon.value) as IconName;
+  const SelectIcon = icons[key];
   return (
     <CommandItem
       value={icon.value}
@@ -48,7 +49,7 @@ function Icon({
       <Check
         className={cn(
           "ml-auto opacity-0",
-          value === icon.label && "opacity-100",
+          value === String(icon.value) && "opacity-100",
         )}
       />
     </CommandItem>
@@ -88,16 +89,27 @@ export default function IconField({ field, path }: SelectFieldClientProps) {
             <CommandList>
               <CommandEmpty>No Icons Found.</CommandEmpty>
               <CommandGroup>
-                {field.options.map((icon, index) => (
-                  <Icon
-                    key={`${index}-${(icon as OptionObject).value}`}
-                    icon={icon as OptionObject}
-                    index={index}
-                    value={value}
-                    setValue={setValue}
-                    setOpen={setOpen}
-                  />
-                ))}
+                {(() => {
+                  const opts = (field.options as OptionObject[]) ?? [];
+                  const selectedIndex = opts.findIndex(
+                    (o) => o.value === value,
+                  );
+                  const selected =
+                    selectedIndex > -1 ? opts[selectedIndex] : undefined;
+                  const ordered: OptionObject[] = selected
+                    ? [selected, ...opts.filter((_, i) => i !== selectedIndex)]
+                    : opts;
+                  return ordered.map((opt, index) => (
+                    <Icon
+                      key={`${index}-${String(opt.value)}`}
+                      icon={opt}
+                      index={index}
+                      value={value}
+                      setValue={setValue}
+                      setOpen={setOpen}
+                    />
+                  ));
+                })()}
               </CommandGroup>
             </CommandList>
           </Command>

@@ -25,6 +25,7 @@ type CommonHeroProps = {
   secondaryCtaHref?: string;
   media?: { dark?: Media | null; light?: Media | null };
   logos?: LogoItem[];
+  logosScrollDirection?: "left" | "right";
 };
 
 export default function Hero_3(props: CommonHeroProps) {
@@ -108,7 +109,12 @@ export default function Hero_3(props: CommonHeroProps) {
 
         {/* logo slider */}
         <div className="mt-12">
-          <InfiniteSlider gap={48} speed={80} pauseOnHover>
+          <InfiniteSlider
+            gap={48}
+            speed={80}
+            pauseOnHover
+            reverse={props.logosScrollDirection === "right"}
+          >
             {(props.logos && props.logos.length > 0
               ? props.logos
               : [
