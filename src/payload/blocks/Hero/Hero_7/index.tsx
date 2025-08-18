@@ -4,20 +4,9 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { Button } from "~/ui/button";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
+import type { Hero_7_Block } from "~/payload-types";
 
-type CommonHeroProps = {
-  header: string;
-  subheader?: string;
-  primaryCtaLabel?: string;
-  primaryCtaHref?: string;
-  secondaryCtaLabel?: string;
-  secondaryCtaHref?: string;
-  gradientFrom?: string;
-  gradientVia?: string;
-  gradientTo?: string;
-};
-
-export default function Hero_7(props: CommonHeroProps) {
+export default function Hero_7(props: Hero_7_Block) {
   return (
     <section className="relative overflow-hidden">
       <div className="mx-auto max-w-5xl px-6 py-28 text-center">
@@ -57,7 +46,7 @@ export default function Hero_7(props: CommonHeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 0.2, y: 0 }}
           transition={{ duration: 1 }}
-          className="pointer-events-none absolute top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,theme(colors.cyan.400/.3),transparent)] blur-2xl"
+          className="pointer-events-none absolute top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--color-chart-2),transparent)] opacity-30 blur-2xl"
         />
       </div>
     </section>

@@ -1,27 +1,15 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import ThemeMedia from "~/ui/theme-media";
 import { motion } from "motion/react";
 import { Button } from "~/ui/button";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
 import { AnimatedGroup } from "~/ui/motion-primitives/animated-group";
-import type { Media } from "~/payload-types";
+import type { Hero_2_Block, Media } from "~/payload-types";
 import { cn } from "~/styles/utils";
 
-type CommonHeroProps = {
-  header: string;
-  subheader?: string;
-  alertLabel?: string;
-  alertLink?: string;
-  primaryCtaLabel?: string;
-  primaryCtaHref?: string;
-  secondaryCtaLabel?: string;
-  secondaryCtaHref?: string;
-  media?: { dark?: Media | null; light?: Media | null };
-};
-
-export default function Hero_2(props: CommonHeroProps) {
+export default function Hero_2(props: Hero_2_Block) {
   const mediaDark = props?.media?.dark as Media | undefined;
   const mediaLight = props?.media?.light as Media | undefined;
 
@@ -33,7 +21,7 @@ export default function Hero_2(props: CommonHeroProps) {
           initial={{ opacity: 0, scale: 0.8, x: -100, y: -80 }}
           animate={{ opacity: 0.6, scale: 1, x: 0, y: 0 }}
           transition={{ type: "spring", duration: 1.8, bounce: 0.25 }}
-          className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,theme(colors.violet.500/.25),transparent)] blur-2xl"
+          className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,var(--color-chart-1),transparent)] opacity-25 blur-2xl"
         />
         <motion.div
           initial={{ opacity: 0, scale: 0.8, x: 120, y: 120 }}
@@ -44,7 +32,7 @@ export default function Hero_2(props: CommonHeroProps) {
             bounce: 0.3,
             delay: 0.1,
           }}
-          className="absolute -right-24 -bottom-24 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(closest-side,theme(colors.cyan.500/.25),transparent)] blur-2xl"
+          className="absolute -right-24 -bottom-24 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(closest-side,var(--color-chart-2),transparent)] opacity-20 blur-2xl"
         />
       </div>
 
@@ -56,7 +44,7 @@ export default function Hero_2(props: CommonHeroProps) {
                 href={props.alertLink}
                 className="bg-background/60 ring-border inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs ring-1 backdrop-blur"
               >
-                <span className="inline-block h-2 w-2 rounded-full bg-violet-500" />
+                <span className="bg-primary inline-block h-2 w-2 rounded-full" />
                 <span className="text-foreground/80">{props.alertLabel}</span>
               </Link>
             ) : null}
@@ -91,7 +79,7 @@ export default function Hero_2(props: CommonHeroProps) {
           </AnimatedGroup>
         </div>
         <div className="relative">
-          <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-tr from-violet-500/10 to-cyan-500/10 blur-xl" />
+          <div className="from-chart-1/10 to-chart-2/10 absolute inset-0 -z-10 rounded-3xl bg-gradient-to-tr blur-xl" />
           <motion.div
             initial={{ rotate: -2, y: 24, opacity: 0 }}
             animate={{ rotate: 0, y: 0, opacity: 1 }}
@@ -105,24 +93,14 @@ export default function Hero_2(props: CommonHeroProps) {
               "ring-border/50 bg-background relative overflow-hidden rounded-2xl border shadow-lg ring-1",
             )}
           >
-            {mediaDark?.url ? (
-              <Image
-                src={mediaDark.url}
-                alt={mediaDark.alt}
-                className="hidden aspect-[4/3] w-full rounded-2xl object-cover dark:block"
-                width={1600}
-                height={1200}
-              />
-            ) : null}
-            {mediaLight?.url ? (
-              <Image
-                src={mediaLight.url}
-                alt={mediaLight.alt}
-                className="aspect-[4/3] w-full rounded-2xl object-cover dark:hidden"
-                width={1600}
-                height={1200}
-              />
-            ) : null}
+            <ThemeMedia
+              className="aspect-[4/3] w-full rounded-2xl object-cover"
+              darkSrc={mediaDark?.url ?? undefined}
+              lightSrc={mediaLight?.url ?? undefined}
+              alt={mediaDark?.alt ?? mediaLight?.alt ?? ""}
+              width={1600}
+              height={1200}
+            />
             {/* gradient border shine */}
             <div className="pointer-events-none absolute inset-0 rounded-2xl [mask-image:radial-gradient(80%_80%_at_50%_50%,black,transparent)] ring-1 ring-white/10 ring-inset" />
           </motion.div>

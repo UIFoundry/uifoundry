@@ -4,24 +4,9 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { Button } from "~/ui/button";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
-import type { Media } from "~/payload-types";
+import type { Hero_5_Block } from "~/payload-types";
 
-type Stat = { label: string; value: string; delta?: string };
-
-type CommonHeroProps = {
-  header: string;
-  subheader?: string;
-  alertLabel?: string;
-  alertLink?: string;
-  primaryCtaLabel?: string;
-  primaryCtaHref?: string;
-  secondaryCtaLabel?: string;
-  secondaryCtaHref?: string;
-  stats?: Stat[];
-  media?: { dark?: Media | null; light?: Media | null };
-};
-
-export default function Hero_5(props: CommonHeroProps) {
+export default function Hero_5(props: Hero_5_Block) {
   return (
     <section className="relative overflow-hidden">
       {/* floating shapes */}
@@ -30,19 +15,19 @@ export default function Hero_5(props: CommonHeroProps) {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 0.25, y: 0 }}
           transition={{ duration: 1 }}
-          className="absolute top-24 left-[5%] h-24 w-24 -rotate-12 rounded-xl bg-violet-500/30 blur-md"
+          className="bg-chart-1/30 absolute top-24 left-[5%] h-24 w-24 -rotate-12 rounded-xl blur-md"
         />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 0.2, y: 0 }}
           transition={{ duration: 1.1, delay: 0.1 }}
-          className="absolute top-10 right-[8%] h-40 w-40 rotate-6 rounded-full bg-cyan-500/30 blur-xl"
+          className="bg-chart-2/30 absolute top-10 right-[8%] h-40 w-40 rotate-6 rounded-full blur-xl"
         />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 0.15, y: 0 }}
           transition={{ duration: 1.2, delay: 0.15 }}
-          className="absolute bottom-10 left-1/4 h-52 w-52 -rotate-3 rounded-[2rem] bg-pink-500/20 blur-xl"
+          className="bg-chart-3/20 absolute bottom-10 left-1/4 h-52 w-52 -rotate-3 rounded-[2rem] blur-xl"
         />
       </div>
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-6 py-20 md:grid-cols-2 md:py-28">
@@ -104,9 +89,9 @@ export default function Hero_5(props: CommonHeroProps) {
                       className={
                         "mt-2 text-xs font-medium " +
                         (positive
-                          ? "text-emerald-500"
+                          ? "text-primary"
                           : negative
-                            ? "text-rose-500"
+                            ? "text-destructive"
                             : "text-foreground/70")
                       }
                     >

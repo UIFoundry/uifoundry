@@ -1,27 +1,13 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import ThemeMedia from "~/ui/theme-media";
 import { motion } from "motion/react";
 import { Button } from "~/ui/button";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
-import type { Media } from "~/payload-types";
+import type { Hero_4_Block, Media } from "~/payload-types";
 
-type CommonHeroProps = {
-  header: string;
-  subheader?: string;
-  alertLabel?: string;
-  alertLink?: string;
-  primaryCtaLabel?: string;
-  primaryCtaHref?: string;
-  secondaryCtaLabel?: string;
-  secondaryCtaHref?: string;
-  gradientStart?: string;
-  gradientEnd?: string;
-  media?: { dark?: Media | null; light?: Media | null };
-};
-
-export default function Hero_4(props: CommonHeroProps) {
+export default function Hero_4(props: Hero_4_Block) {
   const mediaDark = props?.media?.dark as Media | undefined;
   const mediaLight = props?.media?.light as Media | undefined;
 
@@ -57,7 +43,7 @@ export default function Hero_4(props: CommonHeroProps) {
               className="ring-border/50 bg-background/70 group relative flex items-center gap-3 overflow-hidden rounded-full border px-4 py-2 text-sm shadow-lg ring-1 backdrop-blur"
             >
               <span
-                className="inline-flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold text-white"
+                className="text-primary-foreground inline-flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold"
                 style={{
                   background: `linear-gradient(135deg, ${props.gradientStart ?? "#7c3aed"}, ${props.gradientEnd ?? "#06b6d4"})`,
                 }}
@@ -98,24 +84,14 @@ export default function Hero_4(props: CommonHeroProps) {
             transition={{ duration: 0.7, delay: 0.05 }}
             className="ring-border/50 bg-background relative overflow-hidden rounded-2xl border shadow-lg ring-1"
           >
-            {mediaDark?.url ? (
-              <Image
-                src={mediaDark.url}
-                alt={mediaDark.alt}
-                className="hidden aspect-[16/9] w-full rounded-2xl object-cover dark:block"
-                width={1920}
-                height={1080}
-              />
-            ) : null}
-            {mediaLight?.url ? (
-              <Image
-                src={mediaLight.url}
-                alt={mediaLight.alt}
-                className="aspect-[16/9] w-full rounded-2xl object-cover dark:hidden"
-                width={1920}
-                height={1080}
-              />
-            ) : null}
+            <ThemeMedia
+              darkSrc={mediaDark?.url ?? undefined}
+              lightSrc={mediaLight?.url ?? undefined}
+              alt={mediaDark?.alt ?? mediaLight?.alt ?? ""}
+              className="aspect-[16/9] w-full rounded-2xl object-cover"
+              width={1920}
+              height={1080}
+            />
           </motion.div>
         </div>
       </div>

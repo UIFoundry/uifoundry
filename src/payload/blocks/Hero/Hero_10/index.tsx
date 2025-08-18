@@ -4,21 +4,9 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { Button } from "~/ui/button";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
+import type { Hero_10_Block } from "~/payload-types";
 
-type Props = {
-  header: string;
-  subheader?: string;
-  primaryCtaLabel?: string;
-  primaryCtaHref?: string;
-  secondaryCtaLabel?: string;
-  secondaryCtaHref?: string;
-  gifUrl?: string;
-  gifScale?: number;
-  fallbackFrom?: string;
-  fallbackTo?: string;
-};
-
-export default function Hero_10(props: Props) {
+export default function Hero_10(props: Hero_10_Block) {
   const scale = Math.max(10, Math.min(400, props.gifScale ?? 100));
   const backgroundImage = props.gifUrl
     ? `url(${props.gifUrl})`
@@ -28,8 +16,8 @@ export default function Hero_10(props: Props) {
     <section className="relative overflow-hidden">
       {/* soft bg */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(60%_40%_at_50%_10%,theme(colors.violet.500/.10),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(50%_35%_at_50%_90%,theme(colors.cyan.500/.10),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(60%_40%_at_50%_10%,var(--color-chart-1),transparent_60%)] opacity-10" />
+        <div className="absolute inset-0 bg-[radial-gradient(50%_35%_at_50%_90%,var(--color-chart-2),transparent_60%)] opacity-10" />
       </div>
       <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
         <div className="mx-auto max-w-4xl text-center">

@@ -4,22 +4,9 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { Button } from "~/ui/button";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
-import type { Media } from "~/payload-types";
+import type { Hero_8_Block } from "~/payload-types";
 
-type CommonHeroProps = {
-  header: string;
-  subheader?: string;
-  primaryCtaLabel?: string;
-  primaryCtaHref?: string;
-  secondaryCtaLabel?: string;
-  secondaryCtaHref?: string;
-  videoUrl?: string;
-  variant?: "center" | "left";
-  overlayOpacity?: number;
-  media?: { dark?: Media | null; light?: Media | null };
-};
-
-export default function Hero_8(props: CommonHeroProps) {
+export default function Hero_8(props: Hero_8_Block) {
   const alignCenter = (props.variant ?? "center") === "center";
   const overlay = Math.min(1, Math.max(0, props.overlayOpacity ?? 0.4));
 

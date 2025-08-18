@@ -4,25 +4,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { Button } from "~/ui/button";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
-
-interface CodeSample {
-  label: string;
-  language?: string;
-  code: string;
-}
-
-type Props = {
-  header: string;
-  subheader?: string;
-  alertLabel?: string;
-  alertLink?: string;
-  primaryCtaLabel?: string;
-  primaryCtaHref?: string;
-  secondaryCtaLabel?: string;
-  secondaryCtaHref?: string;
-  codeSamples?: CodeSample[];
-  showLineNumbers?: boolean;
-};
+import type { Hero_9_Block } from "~/payload-types";
 
 function CodeBlock({
   code,
@@ -40,9 +22,9 @@ function CodeBlock({
     >
       <div className="bg-muted/40 border-border/50 flex items-center justify-between border-b px-3 py-2 text-xs">
         <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-rose-400" />
-          <span className="h-2 w-2 rounded-full bg-amber-400" />
-          <span className="h-2 w-2 rounded-full bg-emerald-400" />
+          <span className="bg-chart-3 h-2 w-2 rounded-full" />
+          <span className="bg-chart-4 h-2 w-2 rounded-full" />
+          <span className="bg-chart-2 h-2 w-2 rounded-full" />
         </div>
         <span className="text-muted-foreground">example.ts</span>
       </div>
@@ -73,7 +55,7 @@ function CodeBlock({
   );
 }
 
-export default function Hero_9(props: Props) {
+export default function Hero_9(props: Hero_9_Block) {
   const [tab, setTab] = useState(0);
   const samples =
     Array.isArray(props.codeSamples) && props.codeSamples.length > 0
@@ -90,7 +72,7 @@ export default function Hero_9(props: Props) {
               href={props.alertLink}
               className="bg-background/60 ring-border inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs ring-1 backdrop-blur"
             >
-              <span className="inline-block h-2 w-2 rounded-full bg-emerald-500" />
+              <span className="bg-primary inline-block h-2 w-2 rounded-full" />
               <span className="text-foreground/80">{props.alertLabel}</span>
             </Link>
           ) : null}
@@ -148,7 +130,7 @@ export default function Hero_9(props: Props) {
               >
                 <CodeBlock
                   code={active?.code ?? "// Add code samples"}
-                  showLineNumbers={props.showLineNumbers}
+                  showLineNumbers={props.showLineNumbers ?? undefined}
                 />
               </motion.div>
             </div>
