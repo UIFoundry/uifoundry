@@ -1822,6 +1822,15 @@ export interface Page {
   showFooter: boolean;
   blocks: (
     | Teams_1_Block
+    | Teams_2_Block
+    | Teams_3_Block
+    | Teams_4_Block
+    | Teams_5_Block
+    | Teams_6_Block
+    | Teams_7_Block
+    | Teams_8_Block
+    | Teams_9_Block
+    | Teams_10_Block
     | Features_1_Block
     | Features_2_Block
     | Features_3_Block
@@ -1842,6 +1851,102 @@ export interface Page {
     | Hero_8_Block
     | Hero_9_Block
     | Hero_10_Block
+    | Header_1_Block
+    | Header_2_Block
+    | Header_3_Block
+    | Header_4_Block
+    | Header_5_Block
+    | Header_6_Block
+    | Header_7_Block
+    | Header_8_Block
+    | Header_9_Block
+    | Header_10_Block
+    | Footer_1_Block
+    | Footer_2_Block
+    | Footer_3_Block
+    | Footer_4_Block
+    | Footer_5_Block
+    | Footer_6_Block
+    | Footer_7_Block
+    | Footer_8_Block
+    | Footer_9_Block
+    | Footer_10_Block
+    | Pricing_1_Block
+    | Pricing_2_Block
+    | Pricing_3_Block
+    | Pricing_4_Block
+    | Pricing_5_Block
+    | Pricing_6_Block
+    | Testimonials_1_Block
+    | Testimonials_2_Block
+    | Testimonials_3_Block
+    | Testimonials_4_Block
+    | Testimonials_5_Block
+    | Testimonials_6_Block
+    | Testimonials_7_Block
+    | Testimonials_8_Block
+    | Testimonials_9_Block
+    | Testimonials_10_Block
+    | CTA_1_Block
+    | CTA_2_Block
+    | CTA_3_Block
+    | CTA_4_Block
+    | CTA_5_Block
+    | CTA_6_Block
+    | CTA_7_Block
+    | CTA_8_Block
+    | CTA_9_Block
+    | CTA_10_Block
+    | Logos_1_Block
+    | Logos_2_Block
+    | Logos_3_Block
+    | Logos_4_Block
+    | Logos_5_Block
+    | Logos_6_Block
+    | Logos_7_Block
+    | Logos_8_Block
+    | Logos_9_Block
+    | Logos_10_Block
+    | Contact_1_Block
+    | Contact_2_Block
+    | Contact_3_Block
+    | Contact_4_Block
+    | Contact_5_Block
+    | Contact_6_Block
+    | Contact_7_Block
+    | Contact_8_Block
+    | Contact_9_Block
+    | Contact_10_Block
+    | Comparison_1_Block
+    | Comparison_2_Block
+    | Comparison_3_Block
+    | Comparison_4_Block
+    | Comparison_5_Block
+    | Comparison_6_Block
+    | Comparison_7_Block
+    | Comparison_8_Block
+    | Comparison_9_Block
+    | Comparison_10_Block
+    | Stats_1_Block
+    | Stats_2_Block
+    | Stats_3_Block
+    | Stats_4_Block
+    | Stats_5_Block
+    | Stats_6_Block
+    | Stats_7_Block
+    | Stats_8_Block
+    | Stats_9_Block
+    | Stats_10_Block
+    | FAQs_1_Block
+    | FAQs_2_Block
+    | FAQs_3_Block
+    | FAQs_4_Block
+    | FAQs_5_Block
+    | FAQs_6_Block
+    | FAQs_7_Block
+    | FAQs_8_Block
+    | FAQs_9_Block
+    | FAQs_10_Block
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1900,6 +2005,454 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_2_Block".
+ */
+export interface Teams_2_Block {
+  heading: string;
+  members: {
+    name: string;
+    role: string;
+    bio?: string | null;
+    avatar?: (string | null) | Media;
+    links: {
+      href: string;
+      icon:
+        | 'Facebook'
+        | 'Twitter'
+        | 'YouTube'
+        | 'LinkedIn'
+        | 'Telegram'
+        | 'Matrix'
+        | 'WhatsApp'
+        | 'Arc'
+        | 'Mastodon'
+        | 'Messenger'
+        | 'Infojobs'
+        | 'Skype'
+        | 'Threads'
+        | 'Instagram'
+        | 'X (formerly Twitter)'
+        | 'VK'
+        | 'Hashnode'
+        | 'Patreon'
+        | 'Peerlist'
+        | 'Pinterest'
+        | 'Reddit'
+        | 'Meta'
+        | 'TikTok'
+        | 'Carrd'
+        | 'Bluesky'
+        | 'daily.dev';
+      id?: string | null;
+    }[];
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_3_Block".
+ */
+export interface Teams_3_Block {
+  heading: string;
+  members?:
+    | {
+        name: string;
+        role: string;
+        bio?: string | null;
+        avatar?: (string | null) | Media;
+        links: {
+          href: string;
+          icon:
+            | 'Facebook'
+            | 'Twitter'
+            | 'YouTube'
+            | 'LinkedIn'
+            | 'Telegram'
+            | 'Matrix'
+            | 'WhatsApp'
+            | 'Arc'
+            | 'Mastodon'
+            | 'Messenger'
+            | 'Infojobs'
+            | 'Skype'
+            | 'Threads'
+            | 'Instagram'
+            | 'X (formerly Twitter)'
+            | 'VK'
+            | 'Hashnode'
+            | 'Patreon'
+            | 'Peerlist'
+            | 'Pinterest'
+            | 'Reddit'
+            | 'Meta'
+            | 'TikTok'
+            | 'Carrd'
+            | 'Bluesky'
+            | 'daily.dev';
+          id?: string | null;
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_4_Block".
+ */
+export interface Teams_4_Block {
+  heading: string;
+  members?:
+    | {
+        name: string;
+        role: string;
+        bio?: string | null;
+        avatar?: (string | null) | Media;
+        links: {
+          href: string;
+          icon:
+            | 'Facebook'
+            | 'Twitter'
+            | 'YouTube'
+            | 'LinkedIn'
+            | 'Telegram'
+            | 'Matrix'
+            | 'WhatsApp'
+            | 'Arc'
+            | 'Mastodon'
+            | 'Messenger'
+            | 'Infojobs'
+            | 'Skype'
+            | 'Threads'
+            | 'Instagram'
+            | 'X (formerly Twitter)'
+            | 'VK'
+            | 'Hashnode'
+            | 'Patreon'
+            | 'Peerlist'
+            | 'Pinterest'
+            | 'Reddit'
+            | 'Meta'
+            | 'TikTok'
+            | 'Carrd'
+            | 'Bluesky'
+            | 'daily.dev';
+          id?: string | null;
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_5_Block".
+ */
+export interface Teams_5_Block {
+  heading: string;
+  members?:
+    | {
+        name: string;
+        role: string;
+        bio?: string | null;
+        avatar?: (string | null) | Media;
+        links: {
+          href: string;
+          icon:
+            | 'Facebook'
+            | 'Twitter'
+            | 'YouTube'
+            | 'LinkedIn'
+            | 'Telegram'
+            | 'Matrix'
+            | 'WhatsApp'
+            | 'Arc'
+            | 'Mastodon'
+            | 'Messenger'
+            | 'Infojobs'
+            | 'Skype'
+            | 'Threads'
+            | 'Instagram'
+            | 'X (formerly Twitter)'
+            | 'VK'
+            | 'Hashnode'
+            | 'Patreon'
+            | 'Peerlist'
+            | 'Pinterest'
+            | 'Reddit'
+            | 'Meta'
+            | 'TikTok'
+            | 'Carrd'
+            | 'Bluesky'
+            | 'daily.dev';
+          id?: string | null;
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_6_Block".
+ */
+export interface Teams_6_Block {
+  heading: string;
+  members?:
+    | {
+        name: string;
+        role: string;
+        bio?: string | null;
+        avatar?: (string | null) | Media;
+        links: {
+          href: string;
+          icon:
+            | 'Facebook'
+            | 'Twitter'
+            | 'YouTube'
+            | 'LinkedIn'
+            | 'Telegram'
+            | 'Matrix'
+            | 'WhatsApp'
+            | 'Arc'
+            | 'Mastodon'
+            | 'Messenger'
+            | 'Infojobs'
+            | 'Skype'
+            | 'Threads'
+            | 'Instagram'
+            | 'X (formerly Twitter)'
+            | 'VK'
+            | 'Hashnode'
+            | 'Patreon'
+            | 'Peerlist'
+            | 'Pinterest'
+            | 'Reddit'
+            | 'Meta'
+            | 'TikTok'
+            | 'Carrd'
+            | 'Bluesky'
+            | 'daily.dev';
+          id?: string | null;
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_7_Block".
+ */
+export interface Teams_7_Block {
+  heading: string;
+  members?:
+    | {
+        name: string;
+        role: string;
+        bio?: string | null;
+        avatar?: (string | null) | Media;
+        links: {
+          href: string;
+          icon:
+            | 'Facebook'
+            | 'Twitter'
+            | 'YouTube'
+            | 'LinkedIn'
+            | 'Telegram'
+            | 'Matrix'
+            | 'WhatsApp'
+            | 'Arc'
+            | 'Mastodon'
+            | 'Messenger'
+            | 'Infojobs'
+            | 'Skype'
+            | 'Threads'
+            | 'Instagram'
+            | 'X (formerly Twitter)'
+            | 'VK'
+            | 'Hashnode'
+            | 'Patreon'
+            | 'Peerlist'
+            | 'Pinterest'
+            | 'Reddit'
+            | 'Meta'
+            | 'TikTok'
+            | 'Carrd'
+            | 'Bluesky'
+            | 'daily.dev';
+          id?: string | null;
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_7';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_8_Block".
+ */
+export interface Teams_8_Block {
+  heading: string;
+  members?:
+    | {
+        name: string;
+        role: string;
+        bio?: string | null;
+        avatar?: (string | null) | Media;
+        links: {
+          href: string;
+          icon:
+            | 'Facebook'
+            | 'Twitter'
+            | 'YouTube'
+            | 'LinkedIn'
+            | 'Telegram'
+            | 'Matrix'
+            | 'WhatsApp'
+            | 'Arc'
+            | 'Mastodon'
+            | 'Messenger'
+            | 'Infojobs'
+            | 'Skype'
+            | 'Threads'
+            | 'Instagram'
+            | 'X (formerly Twitter)'
+            | 'VK'
+            | 'Hashnode'
+            | 'Patreon'
+            | 'Peerlist'
+            | 'Pinterest'
+            | 'Reddit'
+            | 'Meta'
+            | 'TikTok'
+            | 'Carrd'
+            | 'Bluesky'
+            | 'daily.dev';
+          id?: string | null;
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_8';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_9_Block".
+ */
+export interface Teams_9_Block {
+  heading: string;
+  members?:
+    | {
+        name: string;
+        role: string;
+        bio?: string | null;
+        avatar?: (string | null) | Media;
+        links: {
+          href: string;
+          icon:
+            | 'Facebook'
+            | 'Twitter'
+            | 'YouTube'
+            | 'LinkedIn'
+            | 'Telegram'
+            | 'Matrix'
+            | 'WhatsApp'
+            | 'Arc'
+            | 'Mastodon'
+            | 'Messenger'
+            | 'Infojobs'
+            | 'Skype'
+            | 'Threads'
+            | 'Instagram'
+            | 'X (formerly Twitter)'
+            | 'VK'
+            | 'Hashnode'
+            | 'Patreon'
+            | 'Peerlist'
+            | 'Pinterest'
+            | 'Reddit'
+            | 'Meta'
+            | 'TikTok'
+            | 'Carrd'
+            | 'Bluesky'
+            | 'daily.dev';
+          id?: string | null;
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_9';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_10_Block".
+ */
+export interface Teams_10_Block {
+  heading: string;
+  members?:
+    | {
+        name: string;
+        role: string;
+        bio?: string | null;
+        avatar?: (string | null) | Media;
+        links: {
+          href: string;
+          icon:
+            | 'Facebook'
+            | 'Twitter'
+            | 'YouTube'
+            | 'LinkedIn'
+            | 'Telegram'
+            | 'Matrix'
+            | 'WhatsApp'
+            | 'Arc'
+            | 'Mastodon'
+            | 'Messenger'
+            | 'Infojobs'
+            | 'Skype'
+            | 'Threads'
+            | 'Instagram'
+            | 'X (formerly Twitter)'
+            | 'VK'
+            | 'Hashnode'
+            | 'Patreon'
+            | 'Peerlist'
+            | 'Pinterest'
+            | 'Reddit'
+            | 'Meta'
+            | 'TikTok'
+            | 'Carrd'
+            | 'Bluesky'
+            | 'daily.dev';
+          id?: string | null;
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_10';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2329,6 +2882,2355 @@ export interface Hero_10_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_1_Block".
+ */
+export interface Header_1_Block {
+  brandLabel: string;
+  brandHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_2_Block".
+ */
+export interface Header_2_Block {
+  brandLabel: string;
+  brandHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_3_Block".
+ */
+export interface Header_3_Block {
+  brandLabel: string;
+  brandHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_4_Block".
+ */
+export interface Header_4_Block {
+  brandLabel: string;
+  brandHref: string;
+  announcement?: string | null;
+  announcementHref?: string | null;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_5_Block".
+ */
+export interface Header_5_Block {
+  brandLabel: string;
+  brandHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_6_Block".
+ */
+export interface Header_6_Block {
+  brandLabel: string;
+  brandHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_7_Block".
+ */
+export interface Header_7_Block {
+  brandLabel: string;
+  brandHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_7';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_8_Block".
+ */
+export interface Header_8_Block {
+  brandLabel: string;
+  brandHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_8';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_9_Block".
+ */
+export interface Header_9_Block {
+  brandLabel: string;
+  brandHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_9';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_10_Block".
+ */
+export interface Header_10_Block {
+  brandLabel: string;
+  brandHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_10';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_1_Block".
+ */
+export interface Footer_1_Block {
+  brandLogo?: (string | null) | Media;
+  copyright?: string | null;
+  links?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_2_Block".
+ */
+export interface Footer_2_Block {
+  brandLogo?: (string | null) | Media;
+  description?: string | null;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  newsletterLabel?: string | null;
+  newsletterPlaceholder?: string | null;
+  newsletterButtonLabel?: string | null;
+  copyright?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_3_Block".
+ */
+export interface Footer_3_Block {
+  brandLogo?: (string | null) | Media;
+  description?: string | null;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  copyright?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_4_Block".
+ */
+export interface Footer_4_Block {
+  brandLogo?: (string | null) | Media;
+  description?: string | null;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  copyright?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_5_Block".
+ */
+export interface Footer_5_Block {
+  brandLogo?: (string | null) | Media;
+  description?: string | null;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  copyright?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_6_Block".
+ */
+export interface Footer_6_Block {
+  brandLogo?: (string | null) | Media;
+  description?: string | null;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  copyright?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_7_Block".
+ */
+export interface Footer_7_Block {
+  brandLogo?: (string | null) | Media;
+  description?: string | null;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  copyright?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_7';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_8_Block".
+ */
+export interface Footer_8_Block {
+  brandLogo?: (string | null) | Media;
+  description?: string | null;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  copyright?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_8';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_9_Block".
+ */
+export interface Footer_9_Block {
+  brandLogo?: (string | null) | Media;
+  description?: string | null;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  copyright?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_9';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_10_Block".
+ */
+export interface Footer_10_Block {
+  brandLogo?: (string | null) | Media;
+  description?: string | null;
+  columns?:
+    | {
+        title: string;
+        links?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  copyright?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_10';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_1_Block".
+ */
+export interface Pricing_1_Block {
+  heading: string;
+  subheading?: string | null;
+  plans: {
+    name: string;
+    price: string;
+    description?: string | null;
+    highlight: boolean;
+    features?:
+      | {
+          feature: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctaLabel?: string | null;
+    ctaHref?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pricing_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_2_Block".
+ */
+export interface Pricing_2_Block {
+  heading: string;
+  subheading?: string | null;
+  billingCycleLabel?: string | null;
+  monthlyLabel?: string | null;
+  yearlyLabel?: string | null;
+  yearlyNote?: string | null;
+  defaultCycle?: ('monthly' | 'yearly') | null;
+  plans: {
+    name: string;
+    monthly: string;
+    yearly: string;
+    features?:
+      | {
+          feature: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctaLabel?: string | null;
+    ctaHref?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pricing_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_3_Block".
+ */
+export interface Pricing_3_Block {
+  heading: string;
+  subheading?: string | null;
+  plans: {
+    name: string;
+    price: string;
+    description?: string | null;
+    highlight: boolean;
+    features?:
+      | {
+          feature: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctaLabel?: string | null;
+    ctaHref?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pricing_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_4_Block".
+ */
+export interface Pricing_4_Block {
+  heading: string;
+  subheading?: string | null;
+  billingCycleLabel?: string | null;
+  monthlyLabel?: string | null;
+  yearlyLabel?: string | null;
+  yearlyNote?: string | null;
+  defaultCycle?: ('monthly' | 'yearly') | null;
+  plans: {
+    name: string;
+    monthly: string;
+    yearly: string;
+    features?:
+      | {
+          feature: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctaLabel?: string | null;
+    ctaHref?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pricing_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_5_Block".
+ */
+export interface Pricing_5_Block {
+  heading: string;
+  subheading?: string | null;
+  plans: {
+    name: string;
+    price: string;
+    description?: string | null;
+    highlight: boolean;
+    features?:
+      | {
+          feature: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctaLabel?: string | null;
+    ctaHref?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pricing_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_6_Block".
+ */
+export interface Pricing_6_Block {
+  heading: string;
+  subheading?: string | null;
+  billingCycleLabel?: string | null;
+  monthlyLabel?: string | null;
+  yearlyLabel?: string | null;
+  yearlyNote?: string | null;
+  defaultCycle?: ('monthly' | 'yearly') | null;
+  plans: {
+    name: string;
+    monthly: string;
+    yearly: string;
+    features?:
+      | {
+          feature: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctaLabel?: string | null;
+    ctaHref?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'pricing_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_1_Block".
+ */
+export interface Testimonials_1_Block {
+  heading: string;
+  subheading?: string | null;
+  testimonials: {
+    quote: string;
+    author: string;
+    role?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_2_Block".
+ */
+export interface Testimonials_2_Block {
+  heading: string;
+  subheading?: string | null;
+  testimonials: {
+    quote: string;
+    author: string;
+    role?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_3_Block".
+ */
+export interface Testimonials_3_Block {
+  heading: string;
+  subheading?: string | null;
+  testimonials: {
+    quote: string;
+    author: string;
+    role?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_4_Block".
+ */
+export interface Testimonials_4_Block {
+  heading: string;
+  subheading?: string | null;
+  testimonials: {
+    quote: string;
+    author: string;
+    role?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_5_Block".
+ */
+export interface Testimonials_5_Block {
+  heading: string;
+  subheading?: string | null;
+  testimonials: {
+    quote: string;
+    author: string;
+    role?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_6_Block".
+ */
+export interface Testimonials_6_Block {
+  heading: string;
+  subheading?: string | null;
+  testimonials: {
+    quote: string;
+    author: string;
+    role?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_7_Block".
+ */
+export interface Testimonials_7_Block {
+  heading: string;
+  subheading?: string | null;
+  testimonials: {
+    quote: string;
+    author: string;
+    role?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_7';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_8_Block".
+ */
+export interface Testimonials_8_Block {
+  heading: string;
+  subheading?: string | null;
+  testimonials: {
+    quote: string;
+    author: string;
+    role?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_8';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_9_Block".
+ */
+export interface Testimonials_9_Block {
+  heading: string;
+  subheading?: string | null;
+  testimonials: {
+    quote: string;
+    author: string;
+    role?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_9';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_10_Block".
+ */
+export interface Testimonials_10_Block {
+  heading: string;
+  subheading?: string | null;
+  testimonials: {
+    quote: string;
+    author: string;
+    role?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_10';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_1_Block".
+ */
+export interface CTA_1_Block {
+  kicker?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaHref?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_2_Block".
+ */
+export interface CTA_2_Block {
+  kicker?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaHref?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_3_Block".
+ */
+export interface CTA_3_Block {
+  kicker?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaHref?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_4_Block".
+ */
+export interface CTA_4_Block {
+  kicker?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaHref?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_5_Block".
+ */
+export interface CTA_5_Block {
+  kicker?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaHref?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_6_Block".
+ */
+export interface CTA_6_Block {
+  kicker?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaHref?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_7_Block".
+ */
+export interface CTA_7_Block {
+  kicker?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaHref?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta_7';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_8_Block".
+ */
+export interface CTA_8_Block {
+  kicker?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaHref?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta_8';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_9_Block".
+ */
+export interface CTA_9_Block {
+  kicker?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaHref?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta_9';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_10_Block".
+ */
+export interface CTA_10_Block {
+  kicker?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel?: string | null;
+  primaryCtaHref?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaHref?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta_10';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_1_Block".
+ */
+export interface Logos_1_Block {
+  heading: string;
+  subheading?: string | null;
+  grayscale?: boolean | null;
+  logos?:
+    | {
+        label: string;
+        href?: string | null;
+        media?: {
+          light?: (string | null) | Media;
+          dark?: (string | null) | Media;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_2_Block".
+ */
+export interface Logos_2_Block {
+  heading: string;
+  subheading?: string | null;
+  logosScrollDirection?: ('left' | 'right') | null;
+  logos?:
+    | {
+        label: string;
+        href?: string | null;
+        media?: {
+          light?: (string | null) | Media;
+          dark?: (string | null) | Media;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_3_Block".
+ */
+export interface Logos_3_Block {
+  heading: string;
+  subheading?: string | null;
+  logos?:
+    | {
+        label: string;
+        href?: string | null;
+        media?: {
+          light?: (string | null) | Media;
+          dark?: (string | null) | Media;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_4_Block".
+ */
+export interface Logos_4_Block {
+  heading: string;
+  subheading?: string | null;
+  logos?:
+    | {
+        label: string;
+        href?: string | null;
+        media?: {
+          light?: (string | null) | Media;
+          dark?: (string | null) | Media;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_5_Block".
+ */
+export interface Logos_5_Block {
+  heading: string;
+  subheading?: string | null;
+  logos?:
+    | {
+        label: string;
+        href?: string | null;
+        media?: {
+          light?: (string | null) | Media;
+          dark?: (string | null) | Media;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_6_Block".
+ */
+export interface Logos_6_Block {
+  heading: string;
+  subheading?: string | null;
+  logos?:
+    | {
+        label: string;
+        href?: string | null;
+        media?: {
+          light?: (string | null) | Media;
+          dark?: (string | null) | Media;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_7_Block".
+ */
+export interface Logos_7_Block {
+  heading: string;
+  subheading?: string | null;
+  logos?:
+    | {
+        label: string;
+        href?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos_7';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_8_Block".
+ */
+export interface Logos_8_Block {
+  heading: string;
+  subheading?: string | null;
+  logos?:
+    | {
+        label: string;
+        href?: string | null;
+        media?: {
+          light?: (string | null) | Media;
+          dark?: (string | null) | Media;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos_8';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_9_Block".
+ */
+export interface Logos_9_Block {
+  heading: string;
+  subheading?: string | null;
+  logos?:
+    | {
+        label: string;
+        href?: string | null;
+        media?: {
+          light?: (string | null) | Media;
+          dark?: (string | null) | Media;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos_9';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_10_Block".
+ */
+export interface Logos_10_Block {
+  heading: string;
+  subheading?: string | null;
+  logos?:
+    | {
+        label: string;
+        href?: string | null;
+        media?: {
+          light?: (string | null) | Media;
+          dark?: (string | null) | Media;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logos_10';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_1_Block".
+ */
+export interface Contact_1_Block {
+  heading: string;
+  subheading?: string | null;
+  methods?:
+    | {
+        label: string;
+        value?: string | null;
+        href?: string | null;
+        icon?: IconField;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_2_Block".
+ */
+export interface Contact_2_Block {
+  heading: string;
+  subheading?: string | null;
+  methods?:
+    | {
+        label: string;
+        value?: string | null;
+        href?: string | null;
+        icon?: IconField;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_3_Block".
+ */
+export interface Contact_3_Block {
+  heading: string;
+  subheading?: string | null;
+  methods?:
+    | {
+        label: string;
+        value?: string | null;
+        href?: string | null;
+        icon?: IconField;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_4_Block".
+ */
+export interface Contact_4_Block {
+  heading: string;
+  subheading?: string | null;
+  methods?:
+    | {
+        label: string;
+        value?: string | null;
+        href?: string | null;
+        icon?: IconField;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_5_Block".
+ */
+export interface Contact_5_Block {
+  heading: string;
+  subheading?: string | null;
+  methods?:
+    | {
+        label: string;
+        value?: string | null;
+        href?: string | null;
+        icon?: IconField;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_6_Block".
+ */
+export interface Contact_6_Block {
+  heading: string;
+  subheading?: string | null;
+  methods?:
+    | {
+        label: string;
+        value?: string | null;
+        href?: string | null;
+        icon?: IconField;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_7_Block".
+ */
+export interface Contact_7_Block {
+  heading: string;
+  subheading?: string | null;
+  methods?:
+    | {
+        label: string;
+        value?: string | null;
+        href?: string | null;
+        icon?: IconField;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact_7';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_8_Block".
+ */
+export interface Contact_8_Block {
+  heading: string;
+  subheading?: string | null;
+  methods?:
+    | {
+        label: string;
+        value?: string | null;
+        href?: string | null;
+        icon?: IconField;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact_8';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_9_Block".
+ */
+export interface Contact_9_Block {
+  heading: string;
+  subheading?: string | null;
+  methods?:
+    | {
+        label: string;
+        value?: string | null;
+        href?: string | null;
+        icon?: IconField;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact_9';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_10_Block".
+ */
+export interface Contact_10_Block {
+  heading: string;
+  subheading?: string | null;
+  methods?:
+    | {
+        label: string;
+        value?: string | null;
+        href?: string | null;
+        icon?: IconField;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact_10';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_1_Block".
+ */
+export interface Comparison_1_Block {
+  heading: string;
+  subheading?: string | null;
+  columns: {
+    name: string;
+    accessorKey: string;
+    alignContent: 'left' | 'right' | 'center';
+    enableHiding: boolean;
+    enableGrouping: boolean;
+    enableSorting: boolean;
+    enablePinning: boolean;
+    enableResizing: boolean;
+    size?: number | null;
+    minSize?: number | null;
+    maxSize?: number | null;
+    pinDefault?: ('none' | 'left' | 'right') | null;
+    sortUndefined?: ('last' | 'first') | null;
+    sortDescFirst?: boolean | null;
+    invertSorting?: boolean | null;
+    id?: string | null;
+  }[];
+  /**
+   * Provide an array of row objects. Include 'feature' and keys matching each column accessorKey. Boolean values render colored dots.
+   */
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  footnote?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparison_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_2_Block".
+ */
+export interface Comparison_2_Block {
+  heading: string;
+  subheading?: string | null;
+  columns: {
+    name: string;
+    accessorKey: string;
+    enableHiding: boolean;
+    enableGrouping: boolean;
+    enableSorting: boolean;
+    enablePinning: boolean;
+    enableResizing: boolean;
+    id?: string | null;
+  }[];
+  /**
+   * Provide an array of row objects. Include 'feature' and keys matching each column accessorKey. Boolean values render colored dots.
+   */
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparison_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_3_Block".
+ */
+export interface Comparison_3_Block {
+  heading: string;
+  subheading?: string | null;
+  columns?:
+    | {
+        name: string;
+        accessorKey: string;
+        enableHiding: boolean;
+        enableGrouping: boolean;
+        enableSorting: boolean;
+        enablePinning: boolean;
+        enableResizing: boolean;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Provide an array of row objects. Include 'feature' and keys matching each column accessorKey. Boolean values render colored dots.
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparison_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_4_Block".
+ */
+export interface Comparison_4_Block {
+  heading: string;
+  subheading?: string | null;
+  columns?:
+    | {
+        name: string;
+        accessorKey: string;
+        enableHiding: boolean;
+        enableGrouping: boolean;
+        enableSorting: boolean;
+        enablePinning: boolean;
+        enableResizing: boolean;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Provide an array of row objects. Include 'feature' and keys matching each column accessorKey. Boolean values render colored dots.
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparison_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_5_Block".
+ */
+export interface Comparison_5_Block {
+  heading: string;
+  subheading?: string | null;
+  columns?:
+    | {
+        name: string;
+        accessorKey: string;
+        enableHiding: boolean;
+        enableGrouping: boolean;
+        enableSorting: boolean;
+        enablePinning: boolean;
+        enableResizing: boolean;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Provide an array of row objects. Include 'feature' and keys matching each column accessorKey. Boolean values render colored dots.
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparison_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_6_Block".
+ */
+export interface Comparison_6_Block {
+  heading: string;
+  subheading?: string | null;
+  columns?:
+    | {
+        name: string;
+        accessorKey: string;
+        enableHiding: boolean;
+        enableGrouping: boolean;
+        enableSorting: boolean;
+        enablePinning: boolean;
+        enableResizing: boolean;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Provide an array of row objects. Include 'feature' and keys matching each column accessorKey. Boolean values render colored dots.
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparison_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_7_Block".
+ */
+export interface Comparison_7_Block {
+  heading: string;
+  subheading?: string | null;
+  columns?:
+    | {
+        name: string;
+        accessorKey: string;
+        enableHiding: boolean;
+        enableGrouping: boolean;
+        enableSorting: boolean;
+        enablePinning: boolean;
+        enableResizing: boolean;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Provide an array of row objects. Include 'feature' and keys matching each column accessorKey. Boolean values render colored dots.
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparison_7';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_8_Block".
+ */
+export interface Comparison_8_Block {
+  heading: string;
+  subheading?: string | null;
+  columns?:
+    | {
+        name: string;
+        accessorKey: string;
+        enableHiding: boolean;
+        enableGrouping: boolean;
+        enableSorting: boolean;
+        enablePinning: boolean;
+        enableResizing: boolean;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Provide an array of row objects. Include 'feature' and keys matching each column accessorKey. Boolean values render colored dots.
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparison_8';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_9_Block".
+ */
+export interface Comparison_9_Block {
+  heading: string;
+  subheading?: string | null;
+  columns?:
+    | {
+        name: string;
+        accessorKey: string;
+        enableHiding: boolean;
+        enableGrouping: boolean;
+        enableSorting: boolean;
+        enablePinning: boolean;
+        enableResizing: boolean;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Provide an array of row objects. Include 'feature' and keys matching each column accessorKey. Boolean values render colored dots.
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparison_9';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_10_Block".
+ */
+export interface Comparison_10_Block {
+  heading: string;
+  subheading?: string | null;
+  columns?:
+    | {
+        name: string;
+        accessorKey: string;
+        enableHiding: boolean;
+        enableGrouping: boolean;
+        enableSorting: boolean;
+        enablePinning: boolean;
+        enableResizing: boolean;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Provide an array of row objects. Include 'feature' and keys matching each column accessorKey. Boolean values render colored dots.
+   */
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparison_10';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_1_Block".
+ */
+export interface Stats_1_Block {
+  heading: string;
+  subheading?: string | null;
+  stats?:
+    | {
+        label: string;
+        value: string;
+        delta?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_2_Block".
+ */
+export interface Stats_2_Block {
+  heading: string;
+  subheading?: string | null;
+  stats?:
+    | {
+        label: string;
+        value: string;
+        delta?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_3_Block".
+ */
+export interface Stats_3_Block {
+  heading: string;
+  subheading?: string | null;
+  stats?:
+    | {
+        label: string;
+        value: string;
+        delta?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_4_Block".
+ */
+export interface Stats_4_Block {
+  heading: string;
+  subheading?: string | null;
+  stats?:
+    | {
+        label: string;
+        value: string;
+        delta?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_5_Block".
+ */
+export interface Stats_5_Block {
+  heading: string;
+  subheading?: string | null;
+  stats?:
+    | {
+        label: string;
+        value: string;
+        delta?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_6_Block".
+ */
+export interface Stats_6_Block {
+  heading: string;
+  subheading?: string | null;
+  stats?:
+    | {
+        label: string;
+        value: string;
+        delta?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_7_Block".
+ */
+export interface Stats_7_Block {
+  heading: string;
+  subheading?: string | null;
+  stats?:
+    | {
+        label: string;
+        value: string;
+        delta?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_7';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_8_Block".
+ */
+export interface Stats_8_Block {
+  heading: string;
+  subheading?: string | null;
+  stats?:
+    | {
+        label: string;
+        value: string;
+        delta?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_8';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_9_Block".
+ */
+export interface Stats_9_Block {
+  heading: string;
+  subheading?: string | null;
+  stats?:
+    | {
+        label: string;
+        value: string;
+        delta?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_9';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_10_Block".
+ */
+export interface Stats_10_Block {
+  heading: string;
+  subheading?: string | null;
+  stats?:
+    | {
+        label: string;
+        value: string;
+        delta?: string | null;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_10';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_1_Block".
+ */
+export interface FAQs_1_Block {
+  heading: string;
+  subheading?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqs_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_2_Block".
+ */
+export interface FAQs_2_Block {
+  heading: string;
+  subheading?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqs_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_3_Block".
+ */
+export interface FAQs_3_Block {
+  heading: string;
+  subheading?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqs_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_4_Block".
+ */
+export interface FAQs_4_Block {
+  heading: string;
+  subheading?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqs_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_5_Block".
+ */
+export interface FAQs_5_Block {
+  heading: string;
+  subheading?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqs_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_6_Block".
+ */
+export interface FAQs_6_Block {
+  heading: string;
+  subheading?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqs_6';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_7_Block".
+ */
+export interface FAQs_7_Block {
+  heading: string;
+  subheading?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqs_7';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_8_Block".
+ */
+export interface FAQs_8_Block {
+  heading: string;
+  subheading?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqs_8';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_9_Block".
+ */
+export interface FAQs_9_Block {
+  heading: string;
+  subheading?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqs_9';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_10_Block".
+ */
+export interface FAQs_10_Block {
+  heading: string;
+  subheading?: string | null;
+  items: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqs_10';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -2471,6 +5373,15 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         teams_1?: T | Teams_1_BlockSelect<T>;
+        teams_2?: T | Teams_2_BlockSelect<T>;
+        teams_3?: T | Teams_3_BlockSelect<T>;
+        teams_4?: T | Teams_4_BlockSelect<T>;
+        teams_5?: T | Teams_5_BlockSelect<T>;
+        teams_6?: T | Teams_6_BlockSelect<T>;
+        teams_7?: T | Teams_7_BlockSelect<T>;
+        teams_8?: T | Teams_8_BlockSelect<T>;
+        teams_9?: T | Teams_9_BlockSelect<T>;
+        teams_10?: T | Teams_10_BlockSelect<T>;
         features_1?: T | Features_1_BlockSelect<T>;
         features_2?: T | Features_2_BlockSelect<T>;
         features_3?: T | Features_3_BlockSelect<T>;
@@ -2491,6 +5402,102 @@ export interface PagesSelect<T extends boolean = true> {
         hero_8?: T | Hero_8_BlockSelect<T>;
         hero_9?: T | Hero_9_BlockSelect<T>;
         hero_10?: T | Hero_10_BlockSelect<T>;
+        header_1?: T | Header_1_BlockSelect<T>;
+        header_2?: T | Header_2_BlockSelect<T>;
+        header_3?: T | Header_3_BlockSelect<T>;
+        header_4?: T | Header_4_BlockSelect<T>;
+        header_5?: T | Header_5_BlockSelect<T>;
+        header_6?: T | Header_6_BlockSelect<T>;
+        header_7?: T | Header_7_BlockSelect<T>;
+        header_8?: T | Header_8_BlockSelect<T>;
+        header_9?: T | Header_9_BlockSelect<T>;
+        header_10?: T | Header_10_BlockSelect<T>;
+        footer_1?: T | Footer_1_BlockSelect<T>;
+        footer_2?: T | Footer_2_BlockSelect<T>;
+        footer_3?: T | Footer_3_BlockSelect<T>;
+        footer_4?: T | Footer_4_BlockSelect<T>;
+        footer_5?: T | Footer_5_BlockSelect<T>;
+        footer_6?: T | Footer_6_BlockSelect<T>;
+        footer_7?: T | Footer_7_BlockSelect<T>;
+        footer_8?: T | Footer_8_BlockSelect<T>;
+        footer_9?: T | Footer_9_BlockSelect<T>;
+        footer_10?: T | Footer_10_BlockSelect<T>;
+        pricing_1?: T | Pricing_1_BlockSelect<T>;
+        pricing_2?: T | Pricing_2_BlockSelect<T>;
+        pricing_3?: T | Pricing_3_BlockSelect<T>;
+        pricing_4?: T | Pricing_4_BlockSelect<T>;
+        pricing_5?: T | Pricing_5_BlockSelect<T>;
+        pricing_6?: T | Pricing_6_BlockSelect<T>;
+        testimonials_1?: T | Testimonials_1_BlockSelect<T>;
+        testimonials_2?: T | Testimonials_2_BlockSelect<T>;
+        testimonials_3?: T | Testimonials_3_BlockSelect<T>;
+        testimonials_4?: T | Testimonials_4_BlockSelect<T>;
+        testimonials_5?: T | Testimonials_5_BlockSelect<T>;
+        testimonials_6?: T | Testimonials_6_BlockSelect<T>;
+        testimonials_7?: T | Testimonials_7_BlockSelect<T>;
+        testimonials_8?: T | Testimonials_8_BlockSelect<T>;
+        testimonials_9?: T | Testimonials_9_BlockSelect<T>;
+        testimonials_10?: T | Testimonials_10_BlockSelect<T>;
+        cta_1?: T | CTA_1_BlockSelect<T>;
+        cta_2?: T | CTA_2_BlockSelect<T>;
+        cta_3?: T | CTA_3_BlockSelect<T>;
+        cta_4?: T | CTA_4_BlockSelect<T>;
+        cta_5?: T | CTA_5_BlockSelect<T>;
+        cta_6?: T | CTA_6_BlockSelect<T>;
+        cta_7?: T | CTA_7_BlockSelect<T>;
+        cta_8?: T | CTA_8_BlockSelect<T>;
+        cta_9?: T | CTA_9_BlockSelect<T>;
+        cta_10?: T | CTA_10_BlockSelect<T>;
+        logos_1?: T | Logos_1_BlockSelect<T>;
+        logos_2?: T | Logos_2_BlockSelect<T>;
+        logos_3?: T | Logos_3_BlockSelect<T>;
+        logos_4?: T | Logos_4_BlockSelect<T>;
+        logos_5?: T | Logos_5_BlockSelect<T>;
+        logos_6?: T | Logos_6_BlockSelect<T>;
+        logos_7?: T | Logos_7_BlockSelect<T>;
+        logos_8?: T | Logos_8_BlockSelect<T>;
+        logos_9?: T | Logos_9_BlockSelect<T>;
+        logos_10?: T | Logos_10_BlockSelect<T>;
+        contact_1?: T | Contact_1_BlockSelect<T>;
+        contact_2?: T | Contact_2_BlockSelect<T>;
+        contact_3?: T | Contact_3_BlockSelect<T>;
+        contact_4?: T | Contact_4_BlockSelect<T>;
+        contact_5?: T | Contact_5_BlockSelect<T>;
+        contact_6?: T | Contact_6_BlockSelect<T>;
+        contact_7?: T | Contact_7_BlockSelect<T>;
+        contact_8?: T | Contact_8_BlockSelect<T>;
+        contact_9?: T | Contact_9_BlockSelect<T>;
+        contact_10?: T | Contact_10_BlockSelect<T>;
+        comparison_1?: T | Comparison_1_BlockSelect<T>;
+        comparison_2?: T | Comparison_2_BlockSelect<T>;
+        comparison_3?: T | Comparison_3_BlockSelect<T>;
+        comparison_4?: T | Comparison_4_BlockSelect<T>;
+        comparison_5?: T | Comparison_5_BlockSelect<T>;
+        comparison_6?: T | Comparison_6_BlockSelect<T>;
+        comparison_7?: T | Comparison_7_BlockSelect<T>;
+        comparison_8?: T | Comparison_8_BlockSelect<T>;
+        comparison_9?: T | Comparison_9_BlockSelect<T>;
+        comparison_10?: T | Comparison_10_BlockSelect<T>;
+        stats_1?: T | Stats_1_BlockSelect<T>;
+        stats_2?: T | Stats_2_BlockSelect<T>;
+        stats_3?: T | Stats_3_BlockSelect<T>;
+        stats_4?: T | Stats_4_BlockSelect<T>;
+        stats_5?: T | Stats_5_BlockSelect<T>;
+        stats_6?: T | Stats_6_BlockSelect<T>;
+        stats_7?: T | Stats_7_BlockSelect<T>;
+        stats_8?: T | Stats_8_BlockSelect<T>;
+        stats_9?: T | Stats_9_BlockSelect<T>;
+        stats_10?: T | Stats_10_BlockSelect<T>;
+        faqs_1?: T | FAQs_1_BlockSelect<T>;
+        faqs_2?: T | FAQs_2_BlockSelect<T>;
+        faqs_3?: T | FAQs_3_BlockSelect<T>;
+        faqs_4?: T | FAQs_4_BlockSelect<T>;
+        faqs_5?: T | FAQs_5_BlockSelect<T>;
+        faqs_6?: T | FAQs_6_BlockSelect<T>;
+        faqs_7?: T | FAQs_7_BlockSelect<T>;
+        faqs_8?: T | FAQs_8_BlockSelect<T>;
+        faqs_9?: T | FAQs_9_BlockSelect<T>;
+        faqs_10?: T | FAQs_10_BlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -2530,6 +5537,231 @@ export interface Teams_1_Members_BlockSelect<T extends boolean = true> {
         name?: T;
         role?: T;
         avatar?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_2_Block_select".
+ */
+export interface Teams_2_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        avatar?: T;
+        links?:
+          | T
+          | {
+              href?: T;
+              icon?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_3_Block_select".
+ */
+export interface Teams_3_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        avatar?: T;
+        links?:
+          | T
+          | {
+              href?: T;
+              icon?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_4_Block_select".
+ */
+export interface Teams_4_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        avatar?: T;
+        links?:
+          | T
+          | {
+              href?: T;
+              icon?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_5_Block_select".
+ */
+export interface Teams_5_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        avatar?: T;
+        links?:
+          | T
+          | {
+              href?: T;
+              icon?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_6_Block_select".
+ */
+export interface Teams_6_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        avatar?: T;
+        links?:
+          | T
+          | {
+              href?: T;
+              icon?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_7_Block_select".
+ */
+export interface Teams_7_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        avatar?: T;
+        links?:
+          | T
+          | {
+              href?: T;
+              icon?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_8_Block_select".
+ */
+export interface Teams_8_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        avatar?: T;
+        links?:
+          | T
+          | {
+              href?: T;
+              icon?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_9_Block_select".
+ */
+export interface Teams_9_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        avatar?: T;
+        links?:
+          | T
+          | {
+              href?: T;
+              icon?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_10_Block_select".
+ */
+export interface Teams_10_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        avatar?: T;
+        links?:
+          | T
+          | {
+              href?: T;
+              icon?: T;
+              id?: T;
+            };
         id?: T;
       };
   id?: T;
@@ -2983,6 +6215,2003 @@ export interface Hero_10_BlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_1_Block_select".
+ */
+export interface Header_1_BlockSelect<T extends boolean = true> {
+  brandLabel?: T;
+  brandHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_2_Block_select".
+ */
+export interface Header_2_BlockSelect<T extends boolean = true> {
+  brandLabel?: T;
+  brandHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_3_Block_select".
+ */
+export interface Header_3_BlockSelect<T extends boolean = true> {
+  brandLabel?: T;
+  brandHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_4_Block_select".
+ */
+export interface Header_4_BlockSelect<T extends boolean = true> {
+  brandLabel?: T;
+  brandHref?: T;
+  announcement?: T;
+  announcementHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_5_Block_select".
+ */
+export interface Header_5_BlockSelect<T extends boolean = true> {
+  brandLabel?: T;
+  brandHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_6_Block_select".
+ */
+export interface Header_6_BlockSelect<T extends boolean = true> {
+  brandLabel?: T;
+  brandHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_7_Block_select".
+ */
+export interface Header_7_BlockSelect<T extends boolean = true> {
+  brandLabel?: T;
+  brandHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_8_Block_select".
+ */
+export interface Header_8_BlockSelect<T extends boolean = true> {
+  brandLabel?: T;
+  brandHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_9_Block_select".
+ */
+export interface Header_9_BlockSelect<T extends boolean = true> {
+  brandLabel?: T;
+  brandHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_10_Block_select".
+ */
+export interface Header_10_BlockSelect<T extends boolean = true> {
+  brandLabel?: T;
+  brandHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_1_Block_select".
+ */
+export interface Footer_1_BlockSelect<T extends boolean = true> {
+  brandLogo?: T;
+  copyright?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_2_Block_select".
+ */
+export interface Footer_2_BlockSelect<T extends boolean = true> {
+  brandLogo?: T;
+  description?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  newsletterLabel?: T;
+  newsletterPlaceholder?: T;
+  newsletterButtonLabel?: T;
+  copyright?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_3_Block_select".
+ */
+export interface Footer_3_BlockSelect<T extends boolean = true> {
+  brandLogo?: T;
+  description?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  copyright?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_4_Block_select".
+ */
+export interface Footer_4_BlockSelect<T extends boolean = true> {
+  brandLogo?: T;
+  description?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  copyright?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_5_Block_select".
+ */
+export interface Footer_5_BlockSelect<T extends boolean = true> {
+  brandLogo?: T;
+  description?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  copyright?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_6_Block_select".
+ */
+export interface Footer_6_BlockSelect<T extends boolean = true> {
+  brandLogo?: T;
+  description?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  copyright?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_7_Block_select".
+ */
+export interface Footer_7_BlockSelect<T extends boolean = true> {
+  brandLogo?: T;
+  description?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  copyright?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_8_Block_select".
+ */
+export interface Footer_8_BlockSelect<T extends boolean = true> {
+  brandLogo?: T;
+  description?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  copyright?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_9_Block_select".
+ */
+export interface Footer_9_BlockSelect<T extends boolean = true> {
+  brandLogo?: T;
+  description?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  copyright?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_10_Block_select".
+ */
+export interface Footer_10_BlockSelect<T extends boolean = true> {
+  brandLogo?: T;
+  description?: T;
+  columns?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  copyright?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_1_Block_select".
+ */
+export interface Pricing_1_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  plans?:
+    | T
+    | {
+        name?: T;
+        price?: T;
+        description?: T;
+        highlight?: T;
+        features?:
+          | T
+          | {
+              feature?: T;
+              id?: T;
+            };
+        ctaLabel?: T;
+        ctaHref?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_2_Block_select".
+ */
+export interface Pricing_2_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  billingCycleLabel?: T;
+  monthlyLabel?: T;
+  yearlyLabel?: T;
+  yearlyNote?: T;
+  defaultCycle?: T;
+  plans?:
+    | T
+    | {
+        name?: T;
+        monthly?: T;
+        yearly?: T;
+        features?:
+          | T
+          | {
+              feature?: T;
+              id?: T;
+            };
+        ctaLabel?: T;
+        ctaHref?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_3_Block_select".
+ */
+export interface Pricing_3_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  plans?:
+    | T
+    | {
+        name?: T;
+        price?: T;
+        description?: T;
+        highlight?: T;
+        features?:
+          | T
+          | {
+              feature?: T;
+              id?: T;
+            };
+        ctaLabel?: T;
+        ctaHref?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_4_Block_select".
+ */
+export interface Pricing_4_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  billingCycleLabel?: T;
+  monthlyLabel?: T;
+  yearlyLabel?: T;
+  yearlyNote?: T;
+  defaultCycle?: T;
+  plans?:
+    | T
+    | {
+        name?: T;
+        monthly?: T;
+        yearly?: T;
+        features?:
+          | T
+          | {
+              feature?: T;
+              id?: T;
+            };
+        ctaLabel?: T;
+        ctaHref?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_5_Block_select".
+ */
+export interface Pricing_5_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  plans?:
+    | T
+    | {
+        name?: T;
+        price?: T;
+        description?: T;
+        highlight?: T;
+        features?:
+          | T
+          | {
+              feature?: T;
+              id?: T;
+            };
+        ctaLabel?: T;
+        ctaHref?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Pricing_6_Block_select".
+ */
+export interface Pricing_6_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  billingCycleLabel?: T;
+  monthlyLabel?: T;
+  yearlyLabel?: T;
+  yearlyNote?: T;
+  defaultCycle?: T;
+  plans?:
+    | T
+    | {
+        name?: T;
+        monthly?: T;
+        yearly?: T;
+        features?:
+          | T
+          | {
+              feature?: T;
+              id?: T;
+            };
+        ctaLabel?: T;
+        ctaHref?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_1_Block_select".
+ */
+export interface Testimonials_1_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_2_Block_select".
+ */
+export interface Testimonials_2_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_3_Block_select".
+ */
+export interface Testimonials_3_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_4_Block_select".
+ */
+export interface Testimonials_4_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_5_Block_select".
+ */
+export interface Testimonials_5_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_6_Block_select".
+ */
+export interface Testimonials_6_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_7_Block_select".
+ */
+export interface Testimonials_7_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_8_Block_select".
+ */
+export interface Testimonials_8_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_9_Block_select".
+ */
+export interface Testimonials_9_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_10_Block_select".
+ */
+export interface Testimonials_10_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_1_Block_select".
+ */
+export interface CTA_1_BlockSelect<T extends boolean = true> {
+  kicker?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_2_Block_select".
+ */
+export interface CTA_2_BlockSelect<T extends boolean = true> {
+  kicker?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_3_Block_select".
+ */
+export interface CTA_3_BlockSelect<T extends boolean = true> {
+  kicker?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_4_Block_select".
+ */
+export interface CTA_4_BlockSelect<T extends boolean = true> {
+  kicker?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_5_Block_select".
+ */
+export interface CTA_5_BlockSelect<T extends boolean = true> {
+  kicker?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_6_Block_select".
+ */
+export interface CTA_6_BlockSelect<T extends boolean = true> {
+  kicker?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_7_Block_select".
+ */
+export interface CTA_7_BlockSelect<T extends boolean = true> {
+  kicker?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_8_Block_select".
+ */
+export interface CTA_8_BlockSelect<T extends boolean = true> {
+  kicker?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_9_Block_select".
+ */
+export interface CTA_9_BlockSelect<T extends boolean = true> {
+  kicker?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTA_10_Block_select".
+ */
+export interface CTA_10_BlockSelect<T extends boolean = true> {
+  kicker?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_1_Block_select".
+ */
+export interface Logos_1_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  grayscale?: T;
+  logos?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        media?:
+          | T
+          | {
+              light?: T;
+              dark?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_2_Block_select".
+ */
+export interface Logos_2_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  logosScrollDirection?: T;
+  logos?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        media?:
+          | T
+          | {
+              light?: T;
+              dark?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_3_Block_select".
+ */
+export interface Logos_3_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  logos?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        media?:
+          | T
+          | {
+              light?: T;
+              dark?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_4_Block_select".
+ */
+export interface Logos_4_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  logos?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        media?:
+          | T
+          | {
+              light?: T;
+              dark?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_5_Block_select".
+ */
+export interface Logos_5_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  logos?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        media?:
+          | T
+          | {
+              light?: T;
+              dark?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_6_Block_select".
+ */
+export interface Logos_6_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  logos?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        media?:
+          | T
+          | {
+              light?: T;
+              dark?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_7_Block_select".
+ */
+export interface Logos_7_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  logos?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_8_Block_select".
+ */
+export interface Logos_8_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  logos?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        media?:
+          | T
+          | {
+              light?: T;
+              dark?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_9_Block_select".
+ */
+export interface Logos_9_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  logos?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        media?:
+          | T
+          | {
+              light?: T;
+              dark?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Logos_10_Block_select".
+ */
+export interface Logos_10_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  logos?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        media?:
+          | T
+          | {
+              light?: T;
+              dark?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_1_Block_select".
+ */
+export interface Contact_1_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  methods?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_2_Block_select".
+ */
+export interface Contact_2_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  methods?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_3_Block_select".
+ */
+export interface Contact_3_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  methods?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_4_Block_select".
+ */
+export interface Contact_4_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  methods?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_5_Block_select".
+ */
+export interface Contact_5_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  methods?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_6_Block_select".
+ */
+export interface Contact_6_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  methods?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_7_Block_select".
+ */
+export interface Contact_7_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  methods?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_8_Block_select".
+ */
+export interface Contact_8_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  methods?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_9_Block_select".
+ */
+export interface Contact_9_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  methods?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Contact_10_Block_select".
+ */
+export interface Contact_10_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  methods?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_1_Block_select".
+ */
+export interface Comparison_1_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  columns?:
+    | T
+    | {
+        name?: T;
+        accessorKey?: T;
+        alignContent?: T;
+        enableHiding?: T;
+        enableGrouping?: T;
+        enableSorting?: T;
+        enablePinning?: T;
+        enableResizing?: T;
+        size?: T;
+        minSize?: T;
+        maxSize?: T;
+        pinDefault?: T;
+        sortUndefined?: T;
+        sortDescFirst?: T;
+        invertSorting?: T;
+        id?: T;
+      };
+  data?: T;
+  footnote?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_2_Block_select".
+ */
+export interface Comparison_2_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  columns?:
+    | T
+    | {
+        name?: T;
+        accessorKey?: T;
+        enableHiding?: T;
+        enableGrouping?: T;
+        enableSorting?: T;
+        enablePinning?: T;
+        enableResizing?: T;
+        id?: T;
+      };
+  data?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_3_Block_select".
+ */
+export interface Comparison_3_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  columns?:
+    | T
+    | {
+        name?: T;
+        accessorKey?: T;
+        enableHiding?: T;
+        enableGrouping?: T;
+        enableSorting?: T;
+        enablePinning?: T;
+        enableResizing?: T;
+        id?: T;
+      };
+  data?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_4_Block_select".
+ */
+export interface Comparison_4_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  columns?:
+    | T
+    | {
+        name?: T;
+        accessorKey?: T;
+        enableHiding?: T;
+        enableGrouping?: T;
+        enableSorting?: T;
+        enablePinning?: T;
+        enableResizing?: T;
+        id?: T;
+      };
+  data?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_5_Block_select".
+ */
+export interface Comparison_5_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  columns?:
+    | T
+    | {
+        name?: T;
+        accessorKey?: T;
+        enableHiding?: T;
+        enableGrouping?: T;
+        enableSorting?: T;
+        enablePinning?: T;
+        enableResizing?: T;
+        id?: T;
+      };
+  data?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_6_Block_select".
+ */
+export interface Comparison_6_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  columns?:
+    | T
+    | {
+        name?: T;
+        accessorKey?: T;
+        enableHiding?: T;
+        enableGrouping?: T;
+        enableSorting?: T;
+        enablePinning?: T;
+        enableResizing?: T;
+        id?: T;
+      };
+  data?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_7_Block_select".
+ */
+export interface Comparison_7_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  columns?:
+    | T
+    | {
+        name?: T;
+        accessorKey?: T;
+        enableHiding?: T;
+        enableGrouping?: T;
+        enableSorting?: T;
+        enablePinning?: T;
+        enableResizing?: T;
+        id?: T;
+      };
+  data?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_8_Block_select".
+ */
+export interface Comparison_8_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  columns?:
+    | T
+    | {
+        name?: T;
+        accessorKey?: T;
+        enableHiding?: T;
+        enableGrouping?: T;
+        enableSorting?: T;
+        enablePinning?: T;
+        enableResizing?: T;
+        id?: T;
+      };
+  data?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_9_Block_select".
+ */
+export interface Comparison_9_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  columns?:
+    | T
+    | {
+        name?: T;
+        accessorKey?: T;
+        enableHiding?: T;
+        enableGrouping?: T;
+        enableSorting?: T;
+        enablePinning?: T;
+        enableResizing?: T;
+        id?: T;
+      };
+  data?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Comparison_10_Block_select".
+ */
+export interface Comparison_10_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  columns?:
+    | T
+    | {
+        name?: T;
+        accessorKey?: T;
+        enableHiding?: T;
+        enableGrouping?: T;
+        enableSorting?: T;
+        enablePinning?: T;
+        enableResizing?: T;
+        id?: T;
+      };
+  data?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_1_Block_select".
+ */
+export interface Stats_1_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        delta?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_2_Block_select".
+ */
+export interface Stats_2_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        delta?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_3_Block_select".
+ */
+export interface Stats_3_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        delta?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_4_Block_select".
+ */
+export interface Stats_4_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        delta?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_5_Block_select".
+ */
+export interface Stats_5_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        delta?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_6_Block_select".
+ */
+export interface Stats_6_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        delta?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_7_Block_select".
+ */
+export interface Stats_7_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        delta?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_8_Block_select".
+ */
+export interface Stats_8_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        delta?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_9_Block_select".
+ */
+export interface Stats_9_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        delta?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_10_Block_select".
+ */
+export interface Stats_10_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        delta?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_1_Block_select".
+ */
+export interface FAQs_1_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_2_Block_select".
+ */
+export interface FAQs_2_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_3_Block_select".
+ */
+export interface FAQs_3_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_4_Block_select".
+ */
+export interface FAQs_4_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_5_Block_select".
+ */
+export interface FAQs_5_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_6_Block_select".
+ */
+export interface FAQs_6_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_7_Block_select".
+ */
+export interface FAQs_7_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_8_Block_select".
+ */
+export interface FAQs_8_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_9_Block_select".
+ */
+export interface FAQs_9_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQs_10_Block_select".
+ */
+export interface FAQs_10_BlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
@@ -3037,37 +8266,20 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
-  header: (Header_1_Block | Header_2_Block)[];
+  header: (
+    | Header_1_Block
+    | Header_2_Block
+    | Header_3_Block
+    | Header_4_Block
+    | Header_5_Block
+    | Header_6_Block
+    | Header_7_Block
+    | Header_8_Block
+    | Header_9_Block
+    | Header_10_Block
+  )[];
   updatedAt?: string | null;
   createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Header_1_Block".
- */
-export interface Header_1_Block {
-  menuItems: {
-    label: string;
-    href: string;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'header_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Header_2_Block".
- */
-export interface Header_2_Block {
-  menuItems: {
-    label: string;
-    href: string;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'header_2';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3075,58 +8287,20 @@ export interface Header_2_Block {
  */
 export interface Footer {
   id: string;
-  footer: Footer_1_Block[];
+  footer: (
+    | Footer_1_Block
+    | Footer_2_Block
+    | Footer_3_Block
+    | Footer_4_Block
+    | Footer_5_Block
+    | Footer_6_Block
+    | Footer_7_Block
+    | Footer_8_Block
+    | Footer_9_Block
+    | Footer_10_Block
+  )[];
   updatedAt?: string | null;
   createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Footer_1_Block".
- */
-export interface Footer_1_Block {
-  brandLogo?: (string | null) | Media;
-  copyright?: string | null;
-  links?:
-    | {
-        label: string;
-        href: string;
-        id?: string | null;
-      }[]
-    | null;
-  socialLinks: {
-    href: string;
-    icon:
-      | 'Facebook'
-      | 'Twitter'
-      | 'YouTube'
-      | 'LinkedIn'
-      | 'Telegram'
-      | 'Matrix'
-      | 'WhatsApp'
-      | 'Arc'
-      | 'Mastodon'
-      | 'Messenger'
-      | 'Infojobs'
-      | 'Skype'
-      | 'Threads'
-      | 'Instagram'
-      | 'X (formerly Twitter)'
-      | 'VK'
-      | 'Hashnode'
-      | 'Patreon'
-      | 'Peerlist'
-      | 'Pinterest'
-      | 'Reddit'
-      | 'Meta'
-      | 'TikTok'
-      | 'Carrd'
-      | 'Bluesky'
-      | 'daily.dev';
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'footer_1';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3181,40 +8355,18 @@ export interface HeaderSelect<T extends boolean = true> {
     | {
         header_1?: T | Header_1_BlockSelect<T>;
         header_2?: T | Header_2_BlockSelect<T>;
+        header_3?: T | Header_3_BlockSelect<T>;
+        header_4?: T | Header_4_BlockSelect<T>;
+        header_5?: T | Header_5_BlockSelect<T>;
+        header_6?: T | Header_6_BlockSelect<T>;
+        header_7?: T | Header_7_BlockSelect<T>;
+        header_8?: T | Header_8_BlockSelect<T>;
+        header_9?: T | Header_9_BlockSelect<T>;
+        header_10?: T | Header_10_BlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Header_1_Block_select".
- */
-export interface Header_1_BlockSelect<T extends boolean = true> {
-  menuItems?:
-    | T
-    | {
-        label?: T;
-        href?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Header_2_Block_select".
- */
-export interface Header_2_BlockSelect<T extends boolean = true> {
-  menuItems?:
-    | T
-    | {
-        label?: T;
-        href?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3225,34 +8377,19 @@ export interface FooterSelect<T extends boolean = true> {
     | T
     | {
         footer_1?: T | Footer_1_BlockSelect<T>;
+        footer_2?: T | Footer_2_BlockSelect<T>;
+        footer_3?: T | Footer_3_BlockSelect<T>;
+        footer_4?: T | Footer_4_BlockSelect<T>;
+        footer_5?: T | Footer_5_BlockSelect<T>;
+        footer_6?: T | Footer_6_BlockSelect<T>;
+        footer_7?: T | Footer_7_BlockSelect<T>;
+        footer_8?: T | Footer_8_BlockSelect<T>;
+        footer_9?: T | Footer_9_BlockSelect<T>;
+        footer_10?: T | Footer_10_BlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Footer_1_Block_select".
- */
-export interface Footer_1_BlockSelect<T extends boolean = true> {
-  brandLogo?: T;
-  copyright?: T;
-  links?:
-    | T
-    | {
-        label?: T;
-        href?: T;
-        id?: T;
-      };
-  socialLinks?:
-    | T
-    | {
-        href?: T;
-        icon?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
