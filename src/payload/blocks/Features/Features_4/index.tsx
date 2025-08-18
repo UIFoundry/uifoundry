@@ -2,34 +2,20 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Icon } from "~/ui/icon";
+import type { Features_4_Block } from "~/payload-types";
 
-type IconName = Parameters<typeof Icon>[0]["icon"];
-
-export default function Features_4({
-  header,
-  subheader,
-  items,
-}: {
-  header: string;
-  subheader?: string;
-  items?: {
-    title?: string;
-    description?: string;
-    icon?: string;
-    href?: string;
-    colSpan?: number;
-    rowSpan?: number;
-  }[];
-}) {
+export default function Features_4(props: Features_4_Block) {
   return (
     <section className="py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl text-left">
-          <h2 className="text-4xl font-semibold md:text-5xl">{header}</h2>
-          <p className="text-muted-foreground mt-4 text-lg">{subheader}</p>
+          <h2 className="text-4xl font-semibold md:text-5xl">{props.header}</h2>
+          <p className="text-muted-foreground mt-4 text-lg">
+            {props.subheader}
+          </p>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-6">
-          {items?.map((item, i) => {
+          {props.items?.map((item, i) => {
             const c = Math.min(2, Math.max(1, item.colSpan ?? 1));
             const r = Math.min(2, Math.max(1, item.rowSpan ?? 1));
             return (
@@ -44,7 +30,7 @@ export default function Features_4({
               >
                 {item.icon ? (
                   <div className="bg-muted/60 mb-3 inline-flex size-9 items-center justify-center rounded-lg">
-                    <Icon icon={(item.icon ?? "Activity") as IconName} />
+                    <Icon icon={item.icon ?? "Activity"} />
                   </div>
                 ) : null}
                 <div className="text-lg font-medium">{item.title}</div>

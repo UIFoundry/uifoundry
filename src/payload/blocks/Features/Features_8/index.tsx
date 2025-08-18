@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import type { Media } from "~/payload-types";
+import type { Features_8_Block, Media } from "~/payload-types";
 
 function isMedia(x: unknown): x is Media {
   return (
@@ -11,24 +11,18 @@ function isMedia(x: unknown): x is Media {
   );
 }
 
-export default function Features_8({
-  header,
-  subheader,
-  logos,
-}: {
-  header: string;
-  subheader?: string;
-  logos?: { name?: string; href?: string; logo?: Media | string | number }[];
-}) {
+export default function Features_8(props: Features_8_Block) {
   return (
     <section className="py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-left">
-          <h2 className="text-4xl font-semibold md:text-5xl">{header}</h2>
-          <p className="text-muted-foreground mt-4 text-lg">{subheader}</p>
+          <h2 className="text-4xl font-semibold md:text-5xl">{props.header}</h2>
+          <p className="text-muted-foreground mt-4 text-lg">
+            {props.subheader}
+          </p>
         </div>
         <div className="mt-10 grid grid-cols-2 items-center gap-6 sm:grid-cols-3 md:grid-cols-6">
-          {logos?.map((l, i) => {
+          {props.logos?.map((l, i) => {
             const raw = l.logo;
             const url = isMedia(raw) ? raw.url : undefined;
             const img = url ? (
