@@ -32,6 +32,7 @@ export const Pages: CollectionConfig = {
 				return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/${data.slug}`;
 			},
 		},
+		defaultColumns: ["title", "slug", "_status", "blocks", "updatedAt"],
 		components: {
 			edit: {
 				beforeDocumentControls: ["~/payload/components/RefreshPreview"],
