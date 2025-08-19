@@ -1,132 +1,169 @@
 "use client";
+
 import React from "react";
 import Link from "next/link";
-import ThemeMedia from "~/ui/theme-media";
-import { motion } from "motion/react";
 import { Button } from "~/ui/button";
+import ThemeMedia from "~/ui/theme-media";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
-import { InfiniteSlider } from "~/ui/motion-primitives/infinite-slider";
-import type { Hero_3_Block, Media } from "~/payload-types";
+import { AnimatedGroup } from "~/ui/motion-primitives/animated-group";
+import type { Hero_3_Block } from "~/payload-types";
 
 export default function Hero_3(props: Hero_3_Block) {
-  const mediaDark = props?.media?.dark as Media | undefined;
-  const mediaLight = props?.media?.light as Media | undefined;
-
   return (
-    <section className="relative overflow-hidden">
-      {/* spotlight bg */}
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,var(--color-chart-1),transparent_60%)] opacity-20" />
-      </div>
-      <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-3xl text-center">
-          {props.alertLabel && props.alertLink ? (
-            <Link
-              href={props.alertLink}
-              className="bg-background/60 ring-border inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs ring-1 backdrop-blur"
+    <section className="overflow-hidden py-16 md:py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Left Content */}
+          <AnimatedGroup
+            className="space-y-8"
+            variants={{
+              container: {
+                visible: {
+                  transition: {
+                    staggerChildren: 0.2,
+                  },
+                },
+              },
+              item: {
+                hidden: {
+                  opacity: 0,
+                  x: -20,
+                },
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  transition: {
+                    duration: 0.6,
+                    ease: "easeOut",
+                  },
+                },
+              },
+            }}
+          >
+            {/* Header */}
+            <TextEffect
+              preset="fade-in-blur"
+              speedSegment={0.3}
+              as="h1"
+              className="text-4xl font-bold tracking-tight lg:text-6xl"
             >
-              <span className="bg-primary inline-block h-2 w-2 rounded-full" />
-              <span className="text-foreground/80">{props.alertLabel}</span>
-            </Link>
-          ) : null}
-          <TextEffect
-            preset="fade-in-blur"
-            as="h1"
-            className="mt-6 text-5xl text-balance md:text-6xl"
-          >
-            {props.header}
-          </TextEffect>
-          <TextEffect
-            per="line"
-            preset="fade-in-blur"
-            delay={0.2}
-            className="text-muted-foreground mt-6 text-lg text-balance"
-          >
-            {props.subheader ?? ""}
-          </TextEffect>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button asChild size="lg" className="rounded-xl">
-              <Link href={props.primaryCtaHref ?? "#"}>
-                {props.primaryCtaLabel ?? "Try it free"}
-              </Link>
-            </Button>
-            <Button asChild variant="ghost" size="lg" className="rounded-xl">
-              <Link href={props.secondaryCtaHref ?? "#"}>
-                {props.secondaryCtaLabel ?? "Docs"}
-              </Link>
-            </Button>
-          </div>
-        </div>
+              {props.header}
+            </TextEffect>
 
-        {/* media framed */}
-        <div className="relative mx-auto mt-12 max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="ring-border/50 bg-background relative overflow-hidden rounded-2xl border shadow-lg ring-1"
-          >
-            <ThemeMedia
-              className="aspect-[16/9] w-full rounded-2xl object-cover"
-              darkSrc={mediaDark?.url ?? undefined}
-              lightSrc={mediaLight?.url ?? undefined}
-              alt={mediaDark?.alt ?? mediaLight?.alt ?? ""}
-              width={1920}
-              height={1080}
-            />
-          </motion.div>
-        </div>
+            {/* Subheader */}
+            {props.subheader && (
+              <TextEffect
+                per="line"
+                preset="fade-in-blur"
+                speedSegment={0.3}
+                delay={0.2}
+                as="p"
+                className="text-muted-foreground text-xl lg:text-2xl"
+              >
+                {props.subheader}
+              </TextEffect>
+            )}
 
-        {/* logo slider */}
-        <div className="mt-12">
-          <InfiniteSlider
-            gap={48}
-            speed={80}
-            pauseOnHover
-            reverse={props.logosScrollDirection === "right"}
-          >
-            {(props.logos && props.logos.length > 0
-              ? props.logos
-              : [
-                  { label: "Nvidia", href: "#" },
-                  { label: "Column", href: "#" },
-                  { label: "GitHub", href: "#" },
-                  { label: "Nike", href: "#" },
-                  { label: "Lemon Squeezy", href: "#" },
-                  { label: "Laravel", href: "#" },
-                  { label: "Lilly", href: "#" },
-                  { label: "OpenAI", href: "#" },
-                ]
-            ).map((item, idx) => {
-              const light = item.media?.light as Media | undefined;
-              const dark = item.media?.dark as Media | undefined;
-              const pill = (
-                <div className="text-muted-foreground/70 bg-background/50 ring-border flex h-12 min-w-40 items-center justify-center rounded-full border px-5 text-sm whitespace-nowrap ring-1 backdrop-blur">
-                  {dark?.url || light?.url ? (
-                    <ThemeMedia
-                      darkSrc={dark?.url ?? undefined}
-                      lightSrc={light?.url ?? undefined}
-                      alt={dark?.alt ?? light?.alt ?? item.label}
-                      width={96}
-                      height={32}
-                      className="h-6 w-auto"
-                    />
-                  ) : (
-                    <>{item.label}</>
-                  )}
-                </div>
-              );
-              return item.href ? (
-                <Link key={idx} href={item.href} className="contents">
-                  {pill}
+            {/* Features List */}
+            {props.features && props.features.length > 0 && (
+              <div className="space-y-3">
+                {props.features.map(
+                  (feature: { text: string }, index: number) => (
+                    <div key={index} className="flex items-center space-x-3">
+                      <span className="text-primary text-lg font-medium">
+                        {feature.text}
+                      </span>
+                    </div>
+                  ),
+                )}
+              </div>
+            )}
+
+            {/* CTAs */}
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <Button asChild size="lg" className="px-8 py-4 text-lg">
+                <Link href={props.primaryCtaHref ?? "#"}>
+                  {props.primaryCtaLabel}
                 </Link>
-              ) : (
-                <div key={idx} className="contents">
-                  {pill}
-                </div>
-              );
-            })}
-          </InfiniteSlider>
+              </Button>
+
+              {props.secondaryCtaLabel && (
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="px-8 py-4 text-lg"
+                >
+                  <Link href={props.secondaryCtaHref ?? "#"}>
+                    {props.secondaryCtaLabel}
+                  </Link>
+                </Button>
+              )}
+            </div>
+          </AnimatedGroup>
+
+          {/* Right Image */}
+          <AnimatedGroup
+            variants={{
+              container: {
+                visible: {
+                  transition: {
+                    delayChildren: 0.4,
+                  },
+                },
+              },
+              item: {
+                hidden: {
+                  opacity: 0,
+                  x: 20,
+                },
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  transition: {
+                    duration: 0.6,
+                    ease: "easeOut",
+                  },
+                },
+              },
+            }}
+          >
+            <div className="relative">
+              <div className="from-primary/20 to-primary/10 absolute -inset-4 rounded-3xl bg-gradient-to-r blur-2xl" />
+              <div className="bg-background relative overflow-hidden rounded-2xl border shadow-2xl">
+                <ThemeMedia
+                  className="aspect-[4/3] h-auto w-full object-cover"
+                  lightSrc={
+                    typeof props.media?.light === "object" && props.media.light
+                      ? props.media.light.url
+                      : undefined
+                  }
+                  darkSrc={
+                    typeof props.media?.dark === "object" && props.media.dark
+                      ? props.media.dark.url
+                      : undefined
+                  }
+                  alt={
+                    (typeof props.media?.dark === "object" &&
+                    props.media.dark &&
+                    "alt" in props.media.dark &&
+                    typeof props.media.dark.alt === "string"
+                      ? props.media.dark.alt
+                      : undefined) ??
+                    (typeof props.media?.light === "object" &&
+                    props.media.light &&
+                    "alt" in props.media.light &&
+                    typeof props.media.light.alt === "string"
+                      ? props.media.light.alt
+                      : undefined) ??
+                    "Hero Image"
+                  }
+                  width={800}
+                  height={600}
+                />
+              </div>
+            </div>
+          </AnimatedGroup>
         </div>
       </div>
     </section>

@@ -6,96 +6,51 @@ import {
   getCoreRowModel,
   flexRender,
   type ColumnDef,
+  type Row,
 } from "@tanstack/react-table";
+import type { Comparison_2_Block } from "~/payload-types";
 
-export default function Comparison_2({
-  heading,
-  subheading,
-  columns,
-  data,
-}: {
-  heading: string;
-  subheading?: string | null;
-  columns: {
-    name: string;
-    accessorKey: string;
-    enableHiding?: boolean;
-    enableGrouping?: boolean;
-    enableSorting?: boolean;
-    enablePinning?: boolean;
-    enableResizing?: boolean;
-  }[];
-  data?: unknown;
-}) {
-  type ColumnOpts = {
-    name: string;
-    accessorKey: string;
-    enableHiding?: boolean;
-    enableGrouping?: boolean;
-    enableSorting?: boolean;
-    enablePinning?: boolean;
-    enableResizing?: boolean;
-  };
-  type Row = { feature: string } & Record<
-    string,
-    boolean | string | number | null | undefined
-  >;
+export default function Comparison_2(props: Comparison_2_Block) {
+  type TableRow = Row<typeof props.data>;
 
-  const cols = useMemo<ColumnOpts[]>(
-    () =>
-      Array.isArray(columns) && columns.length >= 2
-        ? columns
-        : [
-            { name: "Starter", accessorKey: "starter" },
-            { name: "Business", accessorKey: "business" },
-          ],
-    [columns],
-  );
-
-  const dataRows = useMemo<Row[]>(() => {
-    if (Array.isArray(data)) {
-      return data.filter((r): r is Row => !!r && typeof r === "object");
+  const dataRows = useMemo<TableRow[]>(() => {
+    if (Array.isArray(props.data)) {
+      return props.data.filter(
+        (r): r is TableRow => !!r && typeof r === "object",
+      );
     }
     return [];
-  }, [data]);
+  }, [props.data]);
 
-  const columnDefs = useMemo<ColumnDef<Row>[]>(() => {
-    const defs: ColumnDef<Row>[] = [
-      { accessorKey: "feature", header: "Feature" },
-    ];
-    cols.forEach((c) => {
-      defs.push({
-        accessorKey: c.accessorKey || c.name,
-        header: c.name,
-        enableHiding: Boolean(c.enableHiding),
-        enablePinning: Boolean(c.enablePinning),
-        enableSorting: Boolean(c.enableSorting),
-        enableResizing: Boolean(c.enableResizing),
-        enableGrouping: Boolean(c.enableGrouping),
-        cell: (ctx) => {
-          const v = ctx.getValue();
-          if (typeof v === "boolean") {
-            return (
-              <span
-                className={
-                  v
-                    ? "bg-primary inline-block size-2 rounded-full"
-                    : "bg-muted inline-block size-2 rounded-full"
-                }
-              />
-            );
-          }
-          if (v === null || v === undefined || v === "") return null;
-          return typeof v === "string" || typeof v === "number" ? (
-            <span>{v}</span>
-          ) : null;
-        },
-      });
-    });
-    return defs;
-  }, [cols]);
+  const columnDefs: ColumnDef<TableRow>[] = props.columns.map((c) => ({
+    accessorKey: c.accessorKey || c.name,
+    header: c.name,
+    enableHiding: Boolean(c.enableHiding),
+    enablePinning: Boolean(c.enablePinning),
+    enableSorting: Boolean(c.enableSorting),
+    enableResizing: Boolean(c.enableResizing),
+    enableGrouping: Boolean(c.enableGrouping),
+    cell: (ctx) => {
+      const v = ctx.getValue();
+      if (typeof v === "boolean") {
+        return (
+          <span
+            className={
+              v
+                ? "bg-primary inline-block size-2 rounded-full"
+                : "bg-muted inline-block size-2 rounded-full"
+            }
+          />
+        );
+      }
+      if (v === null || v === undefined || v === "") return null;
+      return typeof v === "string" || typeof v === "number" ? (
+        <span>{v}</span>
+      ) : null;
+    },
+  }));
 
-  const table = useReactTable<Row>({
+  const table = useReactTable<TableRow>({
     data: dataRows,
     columns: columnDefs,
     getCoreRowModel: getCoreRowModel(),
@@ -105,9 +60,13 @@ export default function Comparison_2({
     <section className="py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-left">
-          <h2 className="text-4xl font-semibold md:text-5xl">{heading}</h2>
-          {subheading ? (
-            <p className="text-muted-foreground mt-3 text-lg">{subheading}</p>
+          <h2 className="text-4xl font-semibold md:text-5xl">
+            {props.heading}
+          </h2>
+          {props.subheading ? (
+            <p className="text-muted-foreground mt-3 text-lg">
+              {props.subheading}
+            </p>
           ) : null}
         </div>
         <div className="ring-border/50 mt-8 overflow-x-auto rounded-xl border ring-1">

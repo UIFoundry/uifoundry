@@ -6,12 +6,13 @@ import { useEffect, useState, type ComponentPropsWithRef } from "react";
 import type { Header_2_Block } from "~/payload-types";
 import { cn } from "~/styles/utils";
 
-export * from "./config";
-
-export default function Header_2({
-  menuItems,
-  ...navProps
-}: Header_2_Block & ComponentPropsWithRef<"nav">) {
+export default function Header_2(
+  props: (Header_2_Block & {
+    brandLabel?: string | null;
+    brandHref?: string | null;
+  }) &
+    ComponentPropsWithRef<"nav">,
+) {
   const [menuState, setMenuState] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -34,17 +35,18 @@ export default function Header_2({
           "fixed z-20 w-full border-b transition-colors duration-150",
           isScrolled && "bg-background/50 backdrop-blur-3xl",
         )}
-        {...navProps}
+        {...props}
       >
         <div className="mx-auto max-w-5xl px-6 transition-all duration-300">
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             <div className="flex w-full items-center justify-between gap-12 lg:w-auto">
               <Link
-                href="/"
-                aria-label="home"
+                href={props.brandHref ?? "/"}
+                aria-label={props.brandLabel ?? "Home"}
                 className="flex items-center space-x-2"
               >
                 <Home />
+                <span className="sr-only">{props.brandLabel ?? "Home"}</span>
               </Link>
 
               <button
@@ -58,7 +60,7 @@ export default function Header_2({
 
               <div className="hidden lg:block">
                 <ul className="flex gap-8 text-sm">
-                  {menuItems.map((item, index) => (
+                  {props.menuItems.map((item, index) => (
                     <li key={index}>
                       <Link
                         href={item.href}
@@ -75,7 +77,7 @@ export default function Header_2({
             <div className="bg-background absolute top-[125%] mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none lg:in-data-[state=active]:flex dark:shadow-none dark:lg:bg-transparent">
               <div className="lg:hidden">
                 <ul className="space-y-6 text-base">
-                  {menuItems.map((item, index) => (
+                  {props.menuItems.map((item, index) => (
                     <li key={index}>
                       <Link
                         href={item.href}

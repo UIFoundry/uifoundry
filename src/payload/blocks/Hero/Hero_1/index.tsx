@@ -2,13 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "~/ui/button";
-import Image from "next/image";
+import ThemeMedia from "~/ui/theme-media";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
 import { AnimatedGroup } from "~/ui/motion-primitives/animated-group";
-import type { Hero_1_Block, Media } from "~/payload-types";
+import type { Hero_1_Block } from "~/payload-types";
 import { cn } from "~/styles/utils";
-
-export * from "./config";
 
 const transitionVariants = {
   item: {
@@ -90,12 +88,12 @@ export default function HeroSection(props: Hero_1_Block) {
               >
                 <Link
                   href="#link"
-                  className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
+                  className="hover:bg-background dark:hover:border-t-border bg-muted group dark:border-t-border mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md transition-colors duration-300"
                 >
                   <span className="text-foreground text-sm">
                     Introducing Support for AI Models
                   </span>
-                  <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
+                  <span className="bg-border block h-4 w-px"></span>
 
                   <div className="bg-background group-hover:bg-muted size-6 overflow-hidden rounded-full duration-500">
                     <div className="flex w-12 -translate-x-1/2 duration-500 ease-in-out group-hover:translate-x-0">
@@ -193,26 +191,37 @@ export default function HeroSection(props: Hero_1_Block) {
                 className="to-background absolute inset-0 z-10 bg-linear-to-b from-transparent from-35%"
               />
               <div className="ring-background bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg ring-1 inset-shadow-2xs shadow-zinc-950/15 dark:inset-shadow-white/20">
-                {props?.media?.dark && (
-                  <Image
-                    className={cn(
-                      "bg-background relative hidden aspect-15/8 rounded-2xl dark:block",
-                    )}
-                    src={(props.media.dark as Media).url!}
-                    alt={(props.media.dark as Media).alt}
-                    width="2700"
-                    height="1440"
-                  />
-                )}
-                {props?.media?.light && (
-                  <Image
-                    className="border-border/25 relative z-2 aspect-15/8 rounded-2xl border dark:hidden"
-                    src={(props.media.light as Media).url!}
-                    alt={(props.media.light as Media).alt}
-                    width="2700"
-                    height="1440"
-                  />
-                )}
+                <ThemeMedia
+                  className="border-border/25 relative z-2 aspect-15/8 rounded-2xl border"
+                  lightSrc={
+                    typeof props.media?.light === "object" &&
+                    props.media?.light &&
+                    "url" in props.media.light
+                      ? (props.media.light.url ?? undefined)
+                      : undefined
+                  }
+                  darkSrc={
+                    typeof props.media?.dark === "object" &&
+                    props.media?.dark &&
+                    "url" in props.media.dark
+                      ? (props.media.dark.url ?? undefined)
+                      : undefined
+                  }
+                  alt={
+                    (typeof props.media?.dark === "object" &&
+                    props.media?.dark &&
+                    "alt" in props.media.dark
+                      ? props.media.dark.alt
+                      : undefined) ??
+                    (typeof props.media?.light === "object" &&
+                    props.media?.light &&
+                    "alt" in props.media.light
+                      ? props.media.light.alt
+                      : "")
+                  }
+                  width={2700}
+                  height={1440}
+                />
               </div>
             </div>
           </AnimatedGroup>

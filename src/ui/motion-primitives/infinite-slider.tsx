@@ -2,16 +2,18 @@
 
 import { cn } from "~/styles/utils";
 import { useMotionValue, animate, motion } from "motion/react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import useMeasure from "react-use-measure";
 
 export type InfiniteSliderProps = {
   children: React.ReactNode;
   gap?: number;
-  speed?: number;
-  speedOnHover?: number;
+  speed?: number; // pixels per second
   pauseOnHover?: boolean;
+  // orientation (alias both for compatibility)
+  axis?: "horizontal" | "vertical";
   direction?: "horizontal" | "vertical";
+  // direction of travel
   reverse?: boolean;
   className?: string;
 };
@@ -20,111 +22,66 @@ export function InfiniteSlider({
   children,
   gap = 16,
   speed = 100,
-  speedOnHover,
   pauseOnHover,
-  direction = "horizontal",
+  axis,
+  direction,
   reverse = false,
   className,
 }: InfiniteSliderProps) {
-  const [currentSpeed, setCurrentSpeed] = useState(speed);
   const [ref, { width, height }] = useMeasure();
   const translation = useMotionValue(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const controlsRef = useRef<ReturnType<typeof animate> | null>(null);
-  const [key, setKey] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const orientation = axis ?? direction ?? "horizontal";
 
   useEffect(() => {
-    // Pause support
-    if (pauseOnHover && hovered) {
-      controlsRef.current?.stop?.();
-      return;
+    const totalSize = orientation === "horizontal" ? width : height; // size of two copies + one gap
+    if (!totalSize) return;
+
+    const singleSize = Math.max(1, (totalSize - gap) / 2); // size of one copy
+    const distance = singleSize + gap; // distance to move per loop
+    const from = reverse ? -distance : 0;
+    const to = reverse ? 0 : -distance;
+
+    // Ensure we start within bounds to avoid jumps
+    const current = translation.get();
+    if (current < Math.min(from, to) || current > Math.max(from, to)) {
+      translation.set(from);
     }
 
-    let controls;
-    const size = direction === "horizontal" ? width : height;
-    const contentSize = size + gap;
-    const from = reverse ? -contentSize / 2 : 0;
-    const to = reverse ? 0 : -contentSize / 2;
+    const duration = Math.max(0.001, Math.abs(to - from) / speed);
 
-    const distanceToTravel = Math.abs(to - from);
-    const duration = distanceToTravel / currentSpeed;
+    const controls = animate(translation, [from, to], {
+      ease: "linear",
+      duration,
+      repeat: Infinity,
+      repeatType: "loop",
+      repeatDelay: 0,
+      onRepeat: () => translation.set(from),
+    });
 
-    if (isTransitioning) {
-      const remainingDistance = Math.abs(translation.get() - to);
-      const transitionDuration =
-        remainingDistance / Math.max(currentSpeed, 1e-6);
+    if (paused) controls.stop();
 
-      controls = animate(translation, [translation.get(), to], {
-        ease: "linear",
-        duration: transitionDuration,
-        onComplete: () => {
-          setIsTransitioning(false);
-          setKey((prevKey) => prevKey + 1);
-        },
-      });
-    } else {
-      controls = animate(translation, [from, to], {
-        ease: "linear",
-        duration: duration,
-        repeat: Infinity,
-        repeatType: "loop",
-        repeatDelay: 0,
-        onRepeat: () => {
-          translation.set(from);
-        },
-      });
-    }
+    return () => controls.stop();
+  }, [orientation, reverse, gap, speed, width, height, paused, translation]);
 
-    controlsRef.current = controls;
-    return controls?.stop;
-  }, [
-    key,
-    translation,
-    currentSpeed,
-    width,
-    height,
-    gap,
-    isTransitioning,
-    direction,
-    reverse,
-    pauseOnHover,
-    hovered,
-  ]);
-
-  const hoverProps = {
-    onHoverStart: () => {
-      if (pauseOnHover) {
-        setHovered(true);
+  const hoverProps = pauseOnHover
+    ? {
+        onHoverStart: () => setPaused(true),
+        onHoverEnd: () => setPaused(false),
       }
-      if (typeof speedOnHover === "number") {
-        setIsTransitioning(true);
-        setCurrentSpeed(speedOnHover);
-      }
-    },
-    onHoverEnd: () => {
-      if (pauseOnHover) {
-        // Resume motion and gracefully complete current loop
-        setHovered(false);
-        setIsTransitioning(true);
-      }
-      if (typeof speedOnHover === "number") {
-        setIsTransitioning(true);
-        setCurrentSpeed(speed);
-      }
-    },
-  };
+    : {};
 
   return (
     <div className={cn("overflow-hidden", className)}>
       <motion.div
         className="flex w-max"
         style={{
-          ...(direction === "horizontal"
+          ...(orientation === "horizontal"
             ? { x: translation }
             : { y: translation }),
           gap: `${gap}px`,
-          flexDirection: direction === "horizontal" ? "row" : "column",
+          flexDirection: orientation === "horizontal" ? "row" : "column",
         }}
         ref={ref}
         {...hoverProps}

@@ -13,7 +13,7 @@ export default function RefreshPreview() {
       type="button"
       aria-label="Refresh Live Preview"
       aria-description="Refresh Live Preview"
-      className="cursor-pointer transition-colors duration-300 hover:stroke-neutral-500"
+      className="hover:stroke-muted-foreground cursor-pointer transition-colors duration-300"
       onClick={handleClick}
     />
   );

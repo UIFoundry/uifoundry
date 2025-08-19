@@ -7,8 +7,6 @@ import {
   BLOCK_SLUG_TEAMS_1_MEMBERS,
 } from "~/payload/constants/blocks";
 
-export * from "./config";
-
 const blockComponents = {
   [BLOCK_SLUG_TEAMS_1_HEADING]: Teams_1_Heading,
   [BLOCK_SLUG_TEAMS_1_MEMBERS]: Teams_1_Members,

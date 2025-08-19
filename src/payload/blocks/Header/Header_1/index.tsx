@@ -6,12 +6,9 @@ import { useEffect, useState, type ComponentPropsWithRef } from "react";
 import type { Header_1_Block } from "~/payload-types";
 import { cn } from "~/styles/utils";
 
-export * from "./config";
-
-export default function Header_1({
-  menuItems,
-  ...navProps
-}: Header_1_Block & ComponentPropsWithRef<"nav">) {
+export default function Header_1(
+  props: Header_1_Block & ComponentPropsWithRef<"nav">,
+) {
   const [menuState, setMenuState] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -31,7 +28,7 @@ export default function Header_1({
         data-state={menuState && "active"}
         id="header"
         className="fixed z-20 w-full px-2"
-        {...navProps}
+        {...props}
       >
         <div
           className={cn(
@@ -43,11 +40,12 @@ export default function Header_1({
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             <div className="flex w-full justify-between lg:w-auto">
               <Link
-                href="/"
-                aria-label="home"
+                href={props.brandHref ?? "/"}
+                aria-label={props.brandLabel ?? "Home"}
                 className="flex items-center space-x-2"
               >
                 <Home />
+                <span className="sr-only">{props.brandLabel ?? "Home"}</span>
               </Link>
 
               <button
@@ -62,7 +60,7 @@ export default function Header_1({
 
             <div className="absolute inset-0 m-auto hidden size-fit lg:block">
               <ul className="flex gap-8 text-sm">
-                {menuItems.map((item, index) => (
+                {props.menuItems.map((item, index) => (
                   <li key={index}>
                     <Link
                       href={item.href}
@@ -78,7 +76,7 @@ export default function Header_1({
             <div className="bg-background absolute top-[125%] mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none lg:in-data-[state=active]:flex dark:shadow-none dark:lg:bg-transparent">
               <div className="lg:hidden">
                 <ul className="space-y-6 text-base">
-                  {menuItems.map((item, index) => (
+                  {props.menuItems.map((item, index) => (
                     <li key={index}>
                       <Link
                         href={item.href}

@@ -169,3 +169,23 @@ export const BLOCK_SLUG_LOGOS_7 = "logos_7" as const;
 export const BLOCK_SLUG_LOGOS_8 = "logos_8" as const;
 export const BLOCK_SLUG_LOGOS_9 = "logos_9" as const;
 export const BLOCK_SLUG_LOGOS_10 = "logos_10" as const;
+
+// Value Proposition
+export const BLOCK_GROUP_VALUE_PROPOSITION = "Value Proposition" as const;
+export const BLOCK_SLUG_VALUE_PROPOSITION_1 = "value_proposition_1" as const;
+export const BLOCK_SLUG_VALUE_PROPOSITION_2 = "value_proposition_2" as const;
+export const BLOCK_SLUG_VALUE_PROPOSITION_3 = "value_proposition_3" as const;
+export const BLOCK_SLUG_VALUE_PROPOSITION_4 = "value_proposition_4" as const;
+export const BLOCK_SLUG_VALUE_PROPOSITION_5 = "value_proposition_5" as const;
+export const BLOCK_SLUG_VALUE_PROPOSITION_6 = "value_proposition_6" as const;
+export const BLOCK_SLUG_VALUE_PROPOSITION_7 = "value_proposition_7" as const;
+export const BLOCK_SLUG_VALUE_PROPOSITION_8 = "value_proposition_8" as const;
+
+// How It Works
+export const BLOCK_GROUP_HOW_IT_WORKS = "How It Works" as const;
+export const BLOCK_SLUG_HOW_IT_WORKS_1 = "how_it_works_1" as const;
+export const BLOCK_SLUG_HOW_IT_WORKS_2 = "how_it_works_2" as const;
+export const BLOCK_SLUG_HOW_IT_WORKS_3 = "how_it_works_3" as const;
+export const BLOCK_SLUG_HOW_IT_WORKS_4 = "how_it_works_4" as const;
+export const BLOCK_SLUG_HOW_IT_WORKS_5 = "how_it_works_5" as const;
+export const BLOCK_SLUG_HOW_IT_WORKS_6 = "how_it_works_6" as const;

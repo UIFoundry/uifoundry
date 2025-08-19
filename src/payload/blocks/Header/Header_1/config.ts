@@ -16,6 +16,20 @@ export const Header_1_Block: Block = {
   },
   fields: [
     {
+      name: "brandLabel",
+      label: "Brand Label",
+      type: "text",
+      required: true,
+      defaultValue: "Home",
+    },
+    {
+      name: "brandHref",
+      label: "Brand Href",
+      type: "text",
+      required: true,
+      defaultValue: "/",
+    },
+    {
       name: "menuItems",
       labels: {
         singular: "Menu Item",
@@ -23,12 +37,18 @@ export const Header_1_Block: Block = {
       },
       type: "array",
       required: true,
+      defaultValue: [
+        { label: "Features", href: "#features" },
+        { label: "Pricing", href: "#pricing" },
+        { label: "Contact", href: "#contact" },
+      ],
       fields: [
         {
           name: "label",
           label: "Label",
           type: "text",
           required: true,
+          defaultValue: "Item",
         },
         {
           name: "href",
@@ -38,6 +58,7 @@ export const Header_1_Block: Block = {
           admin: {
             placeholder: "/features | #features",
           },
+          defaultValue: "#",
         },
       ],
     },

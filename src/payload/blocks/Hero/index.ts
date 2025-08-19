@@ -1,3 +1,4 @@
+import type { Block } from "payload";
 import {
   BLOCK_SLUG_HERO_1,
   BLOCK_SLUG_HERO_2,
@@ -31,7 +32,7 @@ import { Hero_9_Block } from "./Hero_9/config";
 import Hero_10 from "./Hero_10";
 import { Hero_10_Block } from "./Hero_10/config";
 
-export const blocks = [
+export const blocks: Block[] = [
   Hero_1_Block,
   Hero_2_Block,
   Hero_3_Block,

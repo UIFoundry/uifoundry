@@ -131,3 +131,28 @@ UIFoundry is a custom, opionated and professionally put together payload cms tem
 - When using `motion/react`, ensure the file is marked `"use client"`.
 - Provide safe defaults: text fields can have illustrative copy; upload fields should be optional and null-checked in components.
 - After adding a block, verify both admin (fields render) and frontend (component renders) and run `pnpm check`/`pnpm build`.
+
+## QA checklist for blocks
+
+- Responsiveness: use Tailwind responsive modifiers (sm/md/lg/xl) for layout, spacing, and typography; avoid fixed widths.
+- Dark mode parity: rely on semantic tokens (text-muted-foreground, bg-background, border, ring-border) and add `dark:` variants where needed; avoid hard-coded colors.
+- Colors: never use raw palette classes (e.g., bg-emerald-500, text-red-500, bg-neutral-200). Prefer theme tokens that map to TailwindConfig Global:
+  - Primary actions/highlights: `bg-primary`, `text-primary`, `text-primary-foreground`
+  - Muted/accent surfaces: `bg-muted`, `text-muted-foreground`, `bg-accent`, `text-accent-foreground`
+  - Borders and rings: `border`, `ring-border`
+  - Destructive/error: `text-destructive`, `bg-destructive`
+  - Categorical accents: `bg-chart-1..5`, `from-chart-1`, `to-chart-2`, etc.
+  - Radial/linear arbitrary backgrounds should use CSS vars, e.g. `bg-[radial-gradient(...,var(--color-chart-1),transparent)]`.
+- Config-driven UI: every visible label/copy/href/icon comes from `config.ts` fields; guard optional fields at render; provide sensible `defaultValue`s for text/select/checkbox; uploads remain optional and null-checked.
+
+## Reusing views across variants
+
+- To share UI across variants, re-export only the UI: in a variant’s `index.tsx`, you may write `export { default } from "../X_1";`.
+- Never re-export the config from client files. In the group `index.ts`, always import Block configs from `./X/config` and import the component from `./X`.
+
+## Build validation
+
+- After edits, run:
+  - `pnpm check`
+  - `pnpm format:write`
+- Fix any client/server boundary or type errors before merging.

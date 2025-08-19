@@ -7,82 +7,76 @@ import mediaField from "~/payload/fields/mediaField";
 
 export const Hero_2_Block: Block = {
   slug: BLOCK_SLUG_HERO_2,
-  labels: { singular: "Hero 2", plural: "Hero 2's" },
-  admin: { group: BLOCK_GROUP_HERO },
+  labels: {
+    singular: "Hero 2 - Video Background",
+    plural: "Hero 2's",
+  },
+  admin: {
+    group: BLOCK_GROUP_HERO,
+  },
   interfaceName: "Hero_2_Block",
   fields: [
     {
-      type: "collapsible",
-      label: "New Update Alert",
-      admin: { initCollapsed: true },
-      fields: [
-        {
-          name: "alertLabel",
-          label: "Alert Label",
-          defaultValue: "Now with smart workflows",
-          type: "text",
-        },
-        {
-          name: "alertLink",
-          label: "Alert Link (href)",
-          defaultValue: "/changelog",
-          type: "text",
-        },
-      ],
+      name: "eyebrow",
+      label: "Eyebrow Text",
+      type: "text",
+      defaultValue: "New Release",
     },
     {
       name: "header",
       label: "Header",
       type: "text",
-      defaultValue: "Build beautiful experiences, faster",
+      defaultValue: "Revolutionary AI-Powered Platform",
       required: true,
     },
     {
       name: "subheader",
       label: "SubHeader",
+      defaultValue:
+        "Transform your business with cutting-edge artificial intelligence technology that delivers real results.",
       type: "text",
-      defaultValue: "Animated hero with gradient blobs and split media.",
     },
     {
-      label: "Primary Call To Action",
-      type: "collapsible",
-      fields: [
-        {
-          name: "primaryCtaLabel",
-          label: "Primary Call To Action: Label",
-          type: "text",
-          required: true,
-          defaultValue: "Get Started",
-        },
-        {
-          name: "primaryCtaHref",
-          label: "Primary Call To Action: Link (href)",
-          type: "text",
-          required: true,
-          defaultValue: "/getting-started",
-        },
-      ],
+      name: "primaryCtaLabel",
+      label: "Primary CTA Label",
+      type: "text",
+      required: true,
+      defaultValue: "Get Started Free",
     },
     {
-      label: "Secondary Call To Action",
-      type: "collapsible",
-      fields: [
-        {
-          name: "secondaryCtaLabel",
-          label: "Secondary Call To Action: Label",
-          type: "text",
-          required: true,
-          defaultValue: "Book a demo",
-        },
-        {
-          name: "secondaryCtaHref",
-          label: "Secondary Call To Action: Link (href)",
-          type: "text",
-          required: true,
-          defaultValue: "/contact",
-        },
-      ],
+      name: "primaryCtaHref",
+      label: "Primary CTA Link",
+      type: "text",
+      required: true,
+      defaultValue: "/signup",
     },
-    mediaField(),
+    {
+      name: "secondaryCtaLabel",
+      label: "Secondary CTA Label",
+      type: "text",
+      defaultValue: "Watch Demo",
+    },
+    {
+      name: "secondaryCtaHref",
+      label: "Secondary CTA Link",
+      type: "text",
+      defaultValue: "/demo",
+    },
+    {
+      name: "videoUrl",
+      label: "Background Video URL",
+      type: "text",
+      defaultValue: "https://example.com/hero-video.mp4",
+    },
+    mediaField({
+      name: "fallbackImage",
+      label: "Fallback Image",
+    }),
+    {
+      name: "enableOverlay",
+      label: "Enable Dark Overlay",
+      type: "checkbox",
+      defaultValue: true,
+    },
   ],
 };

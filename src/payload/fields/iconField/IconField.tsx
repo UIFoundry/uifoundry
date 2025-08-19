@@ -42,7 +42,7 @@ function Icon({
         setOpen(false);
       }}
       key={`${index}-${icon.value}`}
-      className="cursor-pointer transition-colors duration-400 hover:bg-neutral-300"
+      className="hover:bg-muted cursor-pointer transition-colors duration-400"
     >
       <SelectIcon />
       {icon.value}
@@ -65,7 +65,7 @@ export default function IconField({ field, path }: SelectFieldClientProps) {
     <div className="">
       <label>
         {field.label as string}
-        {field.required ? <span className="pl-1 text-red-500">*</span> : ""}
+        {field.required ? <span className="text-destructive pl-1">*</span> : ""}
       </label>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild className="mt-2 w-full cursor-pointer">
@@ -80,7 +80,7 @@ export default function IconField({ field, path }: SelectFieldClientProps) {
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[var(--radix-popover-trigger-width)] bg-neutral-200 dark:bg-neutral-600">
+        <PopoverContent className="bg-popover w-[var(--radix-popover-trigger-width)]">
           <Command value={value}>
             <CommandInput
               placeholder="Search Icons..."

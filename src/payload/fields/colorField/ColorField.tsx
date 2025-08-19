@@ -22,7 +22,11 @@ export default function ColorField({
           <span style={{ color: value }}>
             {(field?.label as string)?.toUpperCase()}
           </span>
-          {field.required ? <span className="pl-1 text-red-500">*</span> : ""}
+          {field.required ? (
+            <span className="text-destructive pl-1">*</span>
+          ) : (
+            ""
+          )}
           {field?.description ? (
             <p className="text-muted-foreground mt-1 text-xs">
               {field.description}

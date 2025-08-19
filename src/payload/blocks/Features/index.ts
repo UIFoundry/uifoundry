@@ -11,7 +11,8 @@ import {
   BLOCK_SLUG_FEATURES_9,
   BLOCK_SLUG_FEATURES_10,
 } from "~/payload/constants/blocks";
-import Features_1, { Features_1_Block } from "./Features_1";
+import Features_1 from "./Features_1";
+import { Features_1_Block } from "./Features_1/config";
 import Features_2 from "./Features_2";
 import { Features_2_Block } from "./Features_2/config";
 import Features_3 from "./Features_3";
