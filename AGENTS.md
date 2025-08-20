@@ -69,3 +69,7 @@ UIFoundry is a custom, opionated and professionally put together payload cms tem
 4. - [ ] users can have multiple sites
 5. - [ ] form builder plugin complete with many various types of form components
 6. - [ ] Custom domains for individual sites,
+
+## LLM Protocol
+
+- To achieve the best context when bug finding, use git to find the latest changed files, then narrow your initial search to those files to see what may be the root cause

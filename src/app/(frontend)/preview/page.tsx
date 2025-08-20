@@ -32,7 +32,7 @@ export default async function Page({
 	searchParams: searchParamsPromise,
 }: PageParams) {
 	const useTailwindDraftConfig = (await searchParamsPromise).draft ?? "false";
-	const { slug = "" } = await paramsPromise;
+	const { slug = "home" } = await paramsPromise;
 	const payload = await getPayload();
 	const session = await auth.api.getSession({ headers: await headers() });
 
@@ -64,10 +64,6 @@ export default async function Page({
 
 	const page = pageRes?.docs?.[0] as null | PageType;
 
-	if (pageRes.docs.length === 0 || page === null) {
-		return notFound();
-	}
-
 	if (!page) {
 		const hello = await api.post.hello({ text: "from tRPC" });
 
@@ -80,6 +76,11 @@ export default async function Page({
 				<HomeComponent greeting={hello ? hello.greeting : "Loading Query..."} />
 			</HydrateClient>
 		);
+	}
+
+	if (page === null) {
+		console.log("page is null: ", pageRes);
+		return notFound();
 	}
 
 	return (

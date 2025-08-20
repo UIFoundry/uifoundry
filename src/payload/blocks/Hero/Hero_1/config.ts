@@ -3,7 +3,9 @@ import {
 	BLOCK_SLUG_HERO_1,
 } from "~/payload/constants/blocks";
 import type { Block } from "payload";
-import mediaField from "~/payload/fields/mediaField";
+import mediaField from "~/payload/fields/mediaField/config";
+import headerField from "../fields/header";
+import subHeaderField from "../fields/subheader";
 
 export const Hero_1_Block: Block = {
 	slug: BLOCK_SLUG_HERO_1,
@@ -37,20 +39,8 @@ export const Hero_1_Block: Block = {
 				},
 			],
 		},
-		{
-			name: "header",
-			label: "Header",
-			type: "text",
-			defaultValue: "Modern Solutions for Customer Engagement",
-			required: true,
-		},
-		{
-			name: "subheader",
-			label: "SubHeader",
-			defaultValue:
-				"Highly customizable components for building modern websites and applications that look and feel the way you mean it.",
-			type: "text",
-		},
+		headerField(),
+		subHeaderField(),
 		{
 			label: "Primary Call To Action",
 			type: "collapsible",
