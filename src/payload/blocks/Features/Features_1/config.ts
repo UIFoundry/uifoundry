@@ -1,13 +1,19 @@
 import type { Block } from "payload";
-import { BLOCK_SLUG_FEATURES_1 } from "~/payload/constants/blocks";
-import iconField from "~/payload/fields/iconField";
+import {
+	BLOCK_GROUP_FEATURES,
+	BLOCK_SLUG_FEATURES_1,
+} from "~/payload/constants/blocks";
+import iconField from "~/payload/fields/iconField/config";
 
 export const Features_1_Block: Block = {
 	slug: BLOCK_SLUG_FEATURES_1,
 	interfaceName: "Features_1_Block",
 	labels: {
 		singular: "Features 1",
-		plural: "Features 1's"
+		plural: "Features 1's",
+	},
+	admin: {
+		group: BLOCK_GROUP_FEATURES,
 	},
 	fields: [
 		{
@@ -37,8 +43,8 @@ export const Features_1_Block: Block = {
 					required: true,
 					defaultValue: "New Feature",
 					admin: {
-						placeholder: "New Feature"
-					}
+						placeholder: "New Feature",
+					},
 				},
 				{
 					name: "description",
@@ -48,7 +54,7 @@ export const Features_1_Block: Block = {
 					defaultValue: "",
 				},
 				iconField(),
-			]
-		}
-	]
-}
+			],
+		},
+	],
+};

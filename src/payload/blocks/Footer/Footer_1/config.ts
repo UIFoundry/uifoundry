@@ -1,15 +1,21 @@
-import type { Block } from "payload"
-import { COLLECTION_SLUG_MEDIA } from "~/payload/constants"
-import { BLOCK_SLUG_FOOTER_1 } from "~/payload/constants/blocks"
-import socialLinksField from "~/payload/fields/socialLinksField"
-import uploadField from "~/payload/fields/uploadField"
+import type { Block } from "payload";
+import { COLLECTION_SLUG_MEDIA } from "~/payload/constants";
+import {
+	BLOCK_GROUP_FOOTERS,
+	BLOCK_SLUG_FOOTER_1,
+} from "~/payload/constants/blocks";
+import socialLinksField from "~/payload/fields/socialLinksField/config";
+import uploadField from "~/payload/fields/uploadField/config";
 
 export const Footer_1_Block: Block = {
 	slug: BLOCK_SLUG_FOOTER_1,
 	interfaceName: "Footer_1_Block",
 	labels: {
 		singular: "Footer 1",
-		plural: "Footer 1's"
+		plural: "Footer 1's",
+	},
+	admin: {
+		group: BLOCK_GROUP_FOOTERS,
 	},
 	fields: [
 		uploadField({
@@ -40,11 +46,10 @@ export const Footer_1_Block: Block = {
 					name: "href",
 					type: "text",
 					label: "Link (Href)",
-					required: true
-				}
-			]
+					required: true,
+				},
+			],
 		},
 		socialLinksField(),
-	]
-
-}
+	],
+};

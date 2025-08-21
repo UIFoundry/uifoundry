@@ -13,6 +13,10 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
+    "DevRouter": {
+      "type": "sst.aws.Router"
+      "url": string
+    }
     "Frontend": {
       "type": "sst.aws.Nextjs"
       "url": string

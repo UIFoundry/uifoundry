@@ -1,19 +1,25 @@
-import type { Block } from "payload"
-import { BLOCK_SLUG_HEADER_2 } from "~/payload/constants/blocks"
+import type { Block } from "payload";
+import {
+	BLOCK_GROUP_HEADERS,
+	BLOCK_SLUG_HEADER_2,
+} from "~/payload/constants/blocks";
 
 export const Header_2_Block: Block = {
 	slug: BLOCK_SLUG_HEADER_2,
 	interfaceName: "Header_2_Block",
 	labels: {
 		singular: "Header 2",
-		plural: "Header 2's"
+		plural: "Header 2's",
+	},
+	admin: {
+		group: BLOCK_GROUP_HEADERS,
 	},
 	fields: [
 		{
 			name: "menuItems",
 			labels: {
 				singular: "Menu Item",
-				plural: "Menu Items"
+				plural: "Menu Items",
 			},
 			type: "array",
 			required: true,
@@ -30,11 +36,10 @@ export const Header_2_Block: Block = {
 					type: "text",
 					required: true,
 					admin: {
-						placeholder: "/features | #features"
+						placeholder: "/features | #features",
 					},
-				}
-			]
-		}
-	]
-
-}
+				},
+			],
+		},
+	],
+};

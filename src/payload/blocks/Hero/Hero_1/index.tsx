@@ -2,11 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "~/ui/button";
-import Image from "next/image";
 import { TextEffect } from "~/ui/motion-primitives/text-effect";
 import { AnimatedGroup } from "~/ui/motion-primitives/animated-group";
-import type { Hero_1_Block, Media } from "~/payload-types";
+import type { Hero_1_Block } from "~/payload-types";
 import { cn } from "~/styles/utils";
+import MediaField from "~/payload/fields/mediaField";
 
 export * from "./config";
 
@@ -173,140 +173,39 @@ export default function HeroSection(props: Hero_1_Block) {
 						</div>
 					</div>
 
-					<AnimatedGroup
-						// @ts-expect-error mismatch anim group type
-						variants={{
-							container: {
-								visible: {
-									transition: {
-										staggerChildren: 0.05,
-										delayChildren: 0.75,
+					{(Boolean(props.media?.light) || Boolean(props.media?.dark)) && (
+						<AnimatedGroup
+							// @ts-expect-error mismatch anim group type
+							variants={{
+								container: {
+									visible: {
+										transition: {
+											staggerChildren: 0.05,
+											delayChildren: 0.75,
+										},
 									},
 								},
-							},
-							...transitionVariants,
-						}}
-					>
-						<div className="relative mt-8 -mr-56 overflow-hidden px-2 sm:mt-12 sm:mr-0 md:mt-20">
-							<div
-								aria-hidden
-								className="to-background absolute inset-0 z-10 bg-linear-to-b from-transparent from-35%"
-							/>
-							<div className="ring-background bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg ring-1 inset-shadow-2xs shadow-zinc-950/15 dark:inset-shadow-white/20">
-								{props?.media?.dark && (
-									<Image
-										className={cn(
-											"bg-background relative hidden aspect-15/8 rounded-2xl dark:block",
-										)}
-										src={(props.media.dark as Media).url!}
-										alt={(props.media.dark as Media).alt}
+								...transitionVariants,
+							}}
+						>
+							<div className="relative mt-8 -mr-56 overflow-hidden px-2 sm:mt-12 sm:mr-0 md:mt-20">
+								<div
+									aria-hidden
+									className="to-background absolute inset-0 z-10 bg-linear-to-b from-transparent from-35%"
+								/>
+								<div className="ring-background bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg ring-1 inset-shadow-2xs shadow-zinc-950/15 dark:inset-shadow-white/20">
+									<MediaField
+										media={props.media!}
 										width="2700"
 										height="1440"
+										className="border-border/25 relative z-2 aspect-15/8 rounded-2xl border"
 									/>
-								)}
-								{props?.media?.light && (
-									<Image
-										className="border-border/25 relative z-2 aspect-15/8 rounded-2xl border dark:hidden"
-										src={(props.media.light as Media).url!}
-										alt={(props.media.light as Media).alt}
-										width="2700"
-										height="1440"
-									/>
-								)}
+								</div>
 							</div>
-						</div>
-					</AnimatedGroup>
+						</AnimatedGroup>
+					)}
 				</div>
 			</section>
-			{/* <section className="bg-background pb-16 pt-16 md:pb-32"> */}
-			{/*     <div className="group relative m-auto max-w-5xl px-6"> */}
-			{/*         <div className="absolute inset-0 z-10 flex scale-95 items-center justify-center opacity-0 duration-500 group-hover:scale-100 group-hover:opacity-100"> */}
-			{/*             <Link */}
-			{/*                 href="/" */}
-			{/*                 className="block text-sm duration-150 hover:opacity-75"> */}
-			{/*                 <span> Meet Our Customers</span> */}
-			{/**/}
-			{/*                 <ChevronRight className="ml-1 inline-block size-3" /> */}
-			{/*             </Link> */}
-			{/*         </div> */}
-			{/*         <div className="group-hover:blur-xs mx-auto mt-12 grid max-w-2xl grid-cols-4 gap-x-12 gap-y-8 transition-all duration-500 group-hover:opacity-50 sm:gap-x-16 sm:gap-y-14"> */}
-			{/*             <div className="flex"> */}
-			{/*                 <img */}
-			{/*                     className="mx-auto h-5 w-fit dark:invert" */}
-			{/*                     src="https://html.tailus.io/blocks/customers/nvidia.svg" */}
-			{/*                     alt="Nvidia Logo" */}
-			{/*                     height="20" */}
-			{/*                     width="auto" */}
-			{/*                 /> */}
-			{/*             </div> */}
-			{/**/}
-			{/*             <div className="flex"> */}
-			{/*                 <img */}
-			{/*                     className="mx-auto h-4 w-fit dark:invert" */}
-			{/*                     src="https://html.tailus.io/blocks/customers/column.svg" */}
-			{/*                     alt="Column Logo" */}
-			{/*                     height="16" */}
-			{/*                     width="auto" */}
-			{/*                 /> */}
-			{/*             </div> */}
-			{/*             <div className="flex"> */}
-			{/*                 <img */}
-			{/*                     className="mx-auto h-4 w-fit dark:invert" */}
-			{/*                     src="https://html.tailus.io/blocks/customers/github.svg" */}
-			{/*                     alt="GitHub Logo" */}
-			{/*                     height="16" */}
-			{/*                     width="auto" */}
-			{/*                 /> */}
-			{/*             </div> */}
-			{/*             <div className="flex"> */}
-			{/*                 <img */}
-			{/*                     className="mx-auto h-5 w-fit dark:invert" */}
-			{/*                     src="https://html.tailus.io/blocks/customers/nike.svg" */}
-			{/*                     alt="Nike Logo" */}
-			{/*                     height="20" */}
-			{/*                     width="auto" */}
-			{/*                 /> */}
-			{/*             </div> */}
-			{/*             <div className="flex"> */}
-			{/*                 <img */}
-			{/*                     className="mx-auto h-5 w-fit dark:invert" */}
-			{/*                     src="https://html.tailus.io/blocks/customers/lemonsqueezy.svg" */}
-			{/*                     alt="Lemon Squeezy Logo" */}
-			{/*                     height="20" */}
-			{/*                     width="auto" */}
-			{/*                 /> */}
-			{/*             </div> */}
-			{/*             <div className="flex"> */}
-			{/*                 <img */}
-			{/*                     className="mx-auto h-4 w-fit dark:invert" */}
-			{/*                     src="https://html.tailus.io/blocks/customers/laravel.svg" */}
-			{/*                     alt="Laravel Logo" */}
-			{/*                     height="16" */}
-			{/*                     width="auto" */}
-			{/*                 /> */}
-			{/*             </div> */}
-			{/*             <div className="flex"> */}
-			{/*                 <img */}
-			{/*                     className="mx-auto h-7 w-fit dark:invert" */}
-			{/*                     src="https://html.tailus.io/blocks/customers/lilly.svg" */}
-			{/*                     alt="Lilly Logo" */}
-			{/*                     height="28" */}
-			{/*                     width="auto" */}
-			{/*                 /> */}
-			{/*             </div> */}
-			{/**/}
-			{/*             <div className="flex"> */}
-			{/*                 <img */}
-			{/*                     className="mx-auto h-6 w-fit dark:invert" */}
-			{/*                     src="https://html.tailus.io/blocks/customers/openai.svg" */}
-			{/*                     alt="OpenAI Logo" */}
-			{/*                     height="24" */}
-			{/*                     width="auto" */}
-			{/*                 /> */}
-			{/*             </div> */}
-			{/*         </div> */}
-			{/*     </div> */}
-			{/* </section> */}
 		</div>
 	);
 }

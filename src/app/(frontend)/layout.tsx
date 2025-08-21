@@ -3,8 +3,8 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
-import ServerProviders from "./providers.server";
-import ClientProviders from "./providers.client";
+import ServerProviders from "~/components/ServerProviders";
+import ClientProviders from "~/components/ClientProviders";
 import TailwindConfig from "~/payload/globals/TailwindConfig";
 
 export const metadata: Metadata = {
@@ -26,9 +26,7 @@ export default function RootLayout({
 			<body>
 				<ServerProviders>
 					<TailwindConfig />
-					<ClientProviders>
-						{children}
-					</ClientProviders>
+					<ClientProviders>{children}</ClientProviders>
 				</ServerProviders>
 			</body>
 		</html>
