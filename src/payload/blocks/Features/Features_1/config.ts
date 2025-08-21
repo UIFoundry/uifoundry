@@ -3,7 +3,7 @@ import {
 	BLOCK_GROUP_FEATURES,
 	BLOCK_SLUG_FEATURES_1,
 } from "~/payload/constants/blocks";
-import iconField from "~/payload/fields/iconField";
+import iconField from "~/payload/fields/iconField/config";
 
 export const Features_1_Block: Block = {
 	slug: BLOCK_SLUG_FEATURES_1,

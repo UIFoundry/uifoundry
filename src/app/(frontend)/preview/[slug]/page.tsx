@@ -31,7 +31,7 @@ export default async function Page({
 	params: paramsPromise,
 	searchParams: searchParamsPromise,
 }: PageParams) {
-	const draft = (await searchParamsPromise).draft ?? "false";
+	const useTailwindDraftConfig = (await searchParamsPromise).draft ?? "false";
 	const { slug = "" } = await paramsPromise;
 	const payload = await getPayload();
 	const session = await auth.api.getSession({ headers: await headers() });
@@ -64,6 +64,10 @@ export default async function Page({
 
 	const page = pageRes?.docs?.[0] as null | PageType;
 
+	if (pageRes.docs.length === 0 || page === null) {
+		return notFound();
+	}
+
 	if (!page) {
 		const hello = await api.post.hello({ text: "from tRPC" });
 
@@ -72,20 +76,16 @@ export default async function Page({
 		return (
 			<HydrateClient>
 				<RefreshRouteOnSave />
-				<TailwindConfig draft={draft as "true" | "false"} />
+				<TailwindConfig draft={useTailwindDraftConfig as "true" | "false"} />
 				<HomeComponent greeting={hello ? hello.greeting : "Loading Query..."} />
 			</HydrateClient>
 		);
 	}
 
-	if (page === null) {
-		return notFound();
-	}
-
 	return (
 		<div className="px-8 pt-8">
 			<RefreshRouteOnSave />
-			<TailwindConfig draft={draft as "true" | "false"} />
+			<TailwindConfig draft={useTailwindDraftConfig as "true" | "false"} />
 			<Header header={header} className={cn(!page?.showHeader && "hidden")} />
 			<HeaderSpacing showHeader={page.showHeader}>
 				<RenderBlocks blocks={page.blocks} blockComponents={blockComponents} />

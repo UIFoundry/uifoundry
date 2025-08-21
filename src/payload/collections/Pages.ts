@@ -27,11 +27,12 @@ export const Pages: CollectionConfig = {
 		livePreview: {
 			url: ({ data }) => {
 				if ((data.slug as string) === "home") {
-					return env.NEXT_PUBLIC_BETTER_AUTH_URL;
+					return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview`;
 				}
 				return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/${data.slug}`;
 			},
 		},
+		defaultColumns: ["title", "slug", "_status", "blocks", "updatedAt"],
 		components: {
 			edit: {
 				beforeDocumentControls: ["~/payload/components/RefreshPreview"],
