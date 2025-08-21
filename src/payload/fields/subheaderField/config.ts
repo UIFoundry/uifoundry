@@ -1,6 +1,6 @@
 import type { TextField } from "~/payload/fields";
 
-export default function subHeaderField(props?: Partial<TextField>): TextField {
+export default function subheaderField(props?: Partial<TextField>): TextField {
 	return {
 		name: props?.name ?? "subheader",
 		label: props?.label ?? "SubHeader",

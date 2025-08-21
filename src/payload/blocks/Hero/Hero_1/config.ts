@@ -4,8 +4,8 @@ import {
 } from "~/payload/constants/blocks";
 import type { Block } from "payload";
 import mediaField from "~/payload/fields/mediaField/config";
-import headerField from "../fields/header";
-import subHeaderField from "../fields/subheader";
+import headerField from "~/payload/fields/headerField/config";
+import subHeaderField from "~/payload/fields/subheaderField/config";
 
 export const Hero_1_Block: Block = {
 	slug: BLOCK_SLUG_HERO_1,

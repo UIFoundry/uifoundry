@@ -22,5 +22,6 @@ export default function callToActionPair(
 				defaultValue: props?.defaultHref ?? "",
 			},
 		],
+		...props,
 	};
 }

@@ -3,10 +3,10 @@ import {
 	BLOCK_SLUG_HERO_2,
 } from "~/payload/constants/blocks";
 import type { Block } from "payload";
-import headerField from "../fields/header";
-import subHeaderField from "../fields/subheader";
-import callToActionPair from "../fields/callToActionPair";
+import headerField from "~/payload/fields/headerField/config";
+import subHeaderField from "~/payload/fields/subheaderField/config";
 import mediaField from "~/payload/fields/mediaField/config";
+import callToActionPair from "~/payload/fields/callToActionPairField/config";
 
 export const Hero_2_Block: Block = {
 	slug: BLOCK_SLUG_HERO_2,

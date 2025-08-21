@@ -17,6 +17,7 @@ export const BLOCK_SLUG_FOOTER_1 = "footer_1" as const;
 // Features
 export const BLOCK_GROUP_FEATURES = "Features" as const;
 export const BLOCK_SLUG_FEATURES_1 = "features_1" as const;
+export const BLOCK_SLUG_FEATURES_2 = "features_2" as const;
 
 // Hero
 export const BLOCK_GROUP_HERO = "Hero" as const;
