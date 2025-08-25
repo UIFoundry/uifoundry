@@ -70,6 +70,183 @@ UIFoundry is a custom, opionated and professionally put together payload cms tem
 5. - [ ] form builder plugin complete with many various types of form components
 6. - [ ] Custom domains for individual sites,
 
+## MCP Server Capabilities
+
+### Browser Automation
+
+- Use browser MCP server to test code changes via HMR at `localhost:3001`
+- Verify frontend changes by navigating to affected routes
+- Capture screenshots for visual verification when needed
+- Test user flows (auth, form submissions, block interactions)
+
+### Context7 Documentation
+
+- Always use Context7 to fetch official documentation for core dependencies
+- Reference docs before implementing features or debugging issues
+- Prioritize official sources over community content for accuracy
+
+### Sequential Thinking
+
+- Use structured thinking for complex, multi-step problems
+- Leave thought summaries in PRs for future reference
+- Essential for design decisions with trade-offs
+
+### Web Research
+
+- Fetch content from official sources and community discussions
+- Follow troubleshooting resource priorities (see below)
+- Never paste secrets or tokens in requests
+
+## Development Environment
+
+### Server Management
+
+- **Dev Server**: Always runs on `localhost:3001`
+- **API Endpoints**: Available at `localhost:3001/api`
+- **Auto-start Protocol**: If `localhost:3001` is down, offer to run `pnpm dev` with confirmation
+- **Readiness Check**: Poll server until responsive before proceeding
+
+### Environment Setup
+
+- Load `.env.local` before coding
+- Confirm all required ports are available
+- Check for running services that might conflict
+
+## Documentation Strategy
+
+Use Context7 to fetch official docs in this priority order:
+
+- **PayloadCMS**: Official docs → GitHub examples → API reference
+- **Next.js**: Use sparingly with small token limits (500-2000) and specific topics due to large doc size
+- **SST**: Official docs → GitHub discussions → AWS service docs
+- **Better Auth**: Official docs → GitHub issues
+- **Shadcn**: Official docs → component source
+- **TRPC**: Official docs → GitHub examples
+- **MongoDB**: Official docs → Atlas documentation
+
+**Context7 Usage Notes**:
+
+- Specify token limits to control response size (default: 10,000)
+- Use specific topics to focus searches (e.g., "routing", "authentication")
+- For Next.js queries, use 500-2000 tokens with targeted topics to avoid overwhelming responses
+- Always reference current docs before implementation or troubleshooting
+
+## Sequential Thinking Guidelines
+
+Use the sequential thinking tool for:
+
+### Design Work with Trade-offs
+
+- Data model changes affecting multiple collections
+- Multi-environment configuration decisions
+- Auth/ACL rule architecture
+- Block vs collection architecture decisions
+
+### Multi-step Bug Resolution
+
+1. **Reproduce** → gather symptoms & steps
+2. **Hypothesize** → generate potential causes
+3. **Experiment** → create targeted test plan
+4. **Results** → analyze findings
+5. **Fix** → implement solution
+6. **Verify** → test fix comprehensively
+
+### Block Architecture Decisions
+
+- Recursive blocks vs collections trade-offs
+- SSR/ISR performance implications
+- CMS-to-site data propagation patterns
+- Component reusability considerations
+
+### Performance Investigations
+
+- **Measure** → establish baseline metrics
+- **Attribute** → identify bottleneck sources
+- **Optimize** → implement targeted improvements
+- **Re-measure** → validate performance gains
+
+## Troubleshooting Resources
+
+### Primary Sources (Check First)
+
+**Payload CMS**:
+
+- GitHub Issues & Discussions
+- Payload Discord community snippets
+- Official examples repository
+- PayloadCMS docs troubleshooting section
+
+**Next.js**:
+
+- GitHub Issues & Discussions
+- vercel/next.js RFC documents
+- Next.js release notes & migration guides
+- Vercel deployment docs
+
+**SST/AWS**:
+
+- SST GitHub Issues & Discussions
+- AWS documentation & re:Post
+- Service-specific limits (CloudFront, ALB, KVStore)
+- SST Discord community
+
+**Other Dependencies**:
+
+- Tailwind: Official docs → GitHub issues
+- Better Auth: Official docs → GitHub discussions
+- TRPC: Official docs → GitHub examples
+- MongoDB: Atlas docs → community forums
+
+### Community Sources (Secondary)
+
+- Stack Overflow (verified answers)
+- Framework Discord servers (paste final solutions with links)
+- Reddit communities (r/nextjs, r/webdev)
+
+### Restrictions
+
+- ❌ Avoid low-credibility blogs without verification
+- ❌ Never use code from unknown gists without thorough review
+- ❌ Never paste secrets, tokens, or sensitive data in requests
+- ❌ Avoid outdated tutorials (check publication dates)
+
+## Agent Workflow Checklists
+
+### Before Coding
+
+- [ ] Confirm environment ports and services
+- [ ] Load `.env.local` and verify environment variables
+- [ ] Use Context7 to open relevant documentation
+- [ ] Check if dev server is running on port 3001
+- [ ] Review recent git changes for context
+
+### While Coding
+
+- [ ] Use sequential thinking for non-trivial tasks
+- [ ] Test changes via browser automation at localhost:3001
+- [ ] Verify HMR updates are working correctly
+- [ ] Follow code style conventions (run `pnpm run check`)
+- [ ] Document complex decisions in code comments
+
+### After Implementation
+
+- [ ] Run `pnpm run check` to verify lint and types
+- [ ] Test affected routes in browser
+- [ ] Verify PayloadCMS admin panel integration
+- [ ] Leave thought summary in PR description
+- [ ] Confirm no secrets or sensitive data committed
+
+### Deployment Readiness
+
+- [ ] Build passes: `pnpm build`
+- [ ] Types generate correctly
+- [ ] No console errors in browser
+- [ ] Admin panel functionality verified
+- [ ] Environment variables documented
+
 ## LLM Protocol
 
 - To achieve the best context when bug finding, use git to find the latest changed files, then narrow your initial search to those files to see what may be the root cause
+- Always use MCP server capabilities to enhance development workflow
+- Prioritize official documentation over community sources
+- Use structured thinking for complex problems and document reasoning
