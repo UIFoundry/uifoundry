@@ -1,6 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="./.sst/platform/config.d.ts" />
 
+import { execSync } from "child_process";
+
 export default $config({
   app(input) {
     return {
@@ -19,8 +21,6 @@ export default $config({
   async run() {
     // Only import env in production to avoid NODE_ENV validation issues in dev
     const isProd = $app.stage === "production";
-    const isDev = $app.stage === "dev";
-    const isPersonal = !isProd && !isDev;
 
     // Skip env validation during SST builds
     process.env.SKIP_ENV_VALIDATION = "1";
@@ -97,6 +97,11 @@ export default $config({
         S3_REGION: S3_REGION.value,
         S3_ACCESS_KEY_ID: S3_ACCESS_KEY_ID.value,
         S3_SECRET_ACCESS_KEY: S3_SECRET_ACCESS_KEY.value,
+        // Commit SHA for deployment verification - injected by CI/CD or local git
+        COMMIT_SHA:
+          process.env.COMMIT_SHA ||
+          execSync("git rev-parse HEAD", { encoding: "utf8" }).trim(),
+        BUILD_TIME: new Date().toISOString(),
       },
     });
   },
@@ -111,6 +116,27 @@ export default $config({
           if (event.branch === "dev") {
             return { stage: "dev" };
           }
+        }
+      },
+      async workflow({ $, event }) {
+        // Install dependencies
+        await $`npm i -g pnpm`;
+        await $`pnpm i`;
+
+        // Set commit SHA environment variable for deployment verification
+        process.env.COMMIT_SHA = event.commit?.id || "unknown";
+
+        // Deploy or remove based on action
+        if (event.action === "removed") {
+          await $`pnpm sst remove`;
+        } else {
+          // Run unit tests before deployment
+          console.log("🧪 Running unit tests...");
+          await $`pnpm vitest run`;
+
+          // Deploy only if tests pass
+          console.log("✅ Tests passed! Deploying...");
+          await $`pnpm sst deploy`;
         }
       },
     },

@@ -1,0 +1,139 @@
+name: Test After SST Deploy
+
+on:
+  push:
+    branches: [master, dev]
+
+jobs:
+  test-deployment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "pnpm"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run unit tests
+        run: pnpm vitest run
+        env:
+          SKIP_ENV_VALIDATION: "true"
+
+      - name: Determine deployment URL
+        id: deployment-url
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/master" ]; then
+            # Production deployment
+            DEPLOYMENT_URL="https://uifoundry.dev"
+          elif [ "${{ github.ref }}" == "refs/heads/dev" ]; then
+            # Dev deployment
+            DEPLOYMENT_URL="https://dev.uifoundry.dev"
+          else
+            # Personal stage deployment
+            BRANCH_NAME=$(echo "${{ github.ref }}" | sed 's/refs\/heads\///')
+            DEPLOYMENT_URL="https://${BRANCH_NAME}.uifoundry.dev"
+          fi
+
+          echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+          echo "🚀 Deployment URL: $DEPLOYMENT_URL"
+
+      - name: Wait for correct deployment version
+        run: |
+          DEPLOYMENT_URL="${{ steps.deployment-url.outputs.deployment_url }}"
+          EXPECTED_SHA="${{ github.sha }}"
+          MAX_ATTEMPTS=40  # 20 minutes total (40 attempts * 30 seconds)
+          ATTEMPT=1
+
+          echo "⏳ Waiting for deployment with commit: $EXPECTED_SHA"
+          echo "🔗 Checking deployment at: $DEPLOYMENT_URL"
+
+          while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+            echo "📍 Attempt $ATTEMPT/$MAX_ATTEMPTS..."
+            
+            # First check if the deployment is responding
+            if curl -s --head --fail "$DEPLOYMENT_URL" > /dev/null 2>&1; then
+              echo "✅ Deployment URL is responding"
+              
+              # Check the version endpoint to get commit SHA
+              VERSION_RESPONSE=$(curl -s "$DEPLOYMENT_URL/api/version" 2>/dev/null || echo '{}')
+              DEPLOYED_SHA=$(echo "$VERSION_RESPONSE" | jq -r '.commitSha // "unknown"' 2>/dev/null || echo "unknown")
+              
+              echo "🔍 Expected SHA: $EXPECTED_SHA"
+              echo "🔍 Deployed SHA:  $DEPLOYED_SHA"
+              
+              # Check if we have the correct version deployed
+              if [ "$DEPLOYED_SHA" = "$EXPECTED_SHA" ]; then
+                echo "🎉 Correct deployment version found!"
+                echo "📋 Deployment info:"
+                echo "$VERSION_RESPONSE" | jq . 2>/dev/null || echo "$VERSION_RESPONSE"
+                break
+              elif [ "$DEPLOYED_SHA" = "unknown" ]; then
+                echo "⚠️  Could not determine deployed version (API may not be ready)"
+              else
+                echo "⏳ Deployed version ($DEPLOYED_SHA) doesn't match expected ($EXPECTED_SHA)"
+              fi
+            else
+              echo "⏳ Deployment URL not responding yet..."
+            fi
+            
+            if [ $ATTEMPT -eq $MAX_ATTEMPTS ]; then
+              echo "❌ Correct deployment version not found after $MAX_ATTEMPTS attempts"
+              echo "🔍 Final deployed SHA: $DEPLOYED_SHA"
+              exit 1
+            fi
+            
+            echo "⏰ Waiting 30 seconds before next attempt..."
+            sleep 30
+            ATTEMPT=$((ATTEMPT + 1))
+          done
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
+
+      - name: Run Playwright tests
+        env:
+          NEXT_PUBLIC_BETTER_AUTH_URL: ${{ steps.deployment-url.outputs.deployment_url }}
+        run: pnpm exec playwright test
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-${{ github.run_id }}
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-results-${{ github.run_id }}
+          path: test-results/
+          retention-days: 30
+
+      - name: Output test results
+        if: always()
+        run: |
+          echo "## 🎭 Playwright Test Results"
+          echo "**Deployment URL:** ${{ steps.deployment-url.outputs.deployment_url }}"
+          echo "**Branch:** ${{ github.ref_name }}"
+          echo "**Workflow:** https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ **All tests passed!**"
+          else
+            echo "❌ **Some tests failed.** Check the workflow run for details."
+          fi
