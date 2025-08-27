@@ -23,8 +23,8 @@
 		"secret:set": "sst secret set",
 		"secret:set:dev": "sst secret set --stage=dev",
 		"secret:set:prod": "sst secret set --stage=production",
-		"deploy:dev": "sst deploy --stage=dev",
-		"deploy:prod": "sst deploy --stage=production",
+		"deploy:dev": "pnpm vitest && sst deploy --stage=dev",
+		"deploy:prod": "pnpm vitest && sst deploy --stage=production",
 		"start": "next start",
 		"typecheck": "tsc --noEmit"
 	},

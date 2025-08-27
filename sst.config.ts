@@ -130,6 +130,12 @@ export default $config({
         if (event.action === "removed") {
           await $`pnpm sst remove`;
         } else {
+          // Run unit tests before deployment
+          console.log("🧪 Running unit tests...");
+          await $`pnpm vitest run`;
+
+          // Deploy only if tests pass
+          console.log("✅ Tests passed! Deploying...");
           await $`pnpm sst deploy`;
         }
       },

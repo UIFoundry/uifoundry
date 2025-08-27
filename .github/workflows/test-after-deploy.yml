@@ -27,6 +27,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Run unit tests
+        run: pnpm vitest run
+        env:
+          SKIP_ENV_VALIDATION: "true"
+
       - name: Determine deployment URL
         id: deployment-url
         run: |

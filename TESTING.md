@@ -19,7 +19,20 @@ Based on your SST configuration:
 
 ## Workflows
 
-### Automatic Testing (`test-after-deploy.yml`)
+### Unit Tests (`unit-tests.yml`)
+
+Triggers on:
+
+- Push to `master` or `dev` branches
+- Pull requests to `master` or `dev`
+
+**Process:**
+
+1. Runs Vitest unit tests
+2. Uploads test results and coverage
+3. Provides fast feedback on code changes
+
+### Automatic E2E Testing (`test-after-deploy.yml`)
 
 Triggers automatically on:
 
@@ -27,10 +40,11 @@ Triggers automatically on:
 
 **Process:**
 
-1. Detects deployment URL based on branch
-2. Waits up to 20 minutes for correct deployment version (using commit SHA verification)
-3. Runs Playwright tests against live deployment with verified version
-4. Uploads test artifacts
+1. Runs unit tests first
+2. Detects deployment URL based on branch
+3. Waits up to 20 minutes for correct deployment version (using commit SHA verification)
+4. Runs Playwright E2E tests against live deployment with verified version
+5. Uploads test artifacts
 
 ### Manual Testing (`manual-test.yml`)
 
@@ -44,6 +58,21 @@ For debugging and ad-hoc testing:
 
 ## Local Testing
 
+### Unit Tests
+
+```bash
+# Run unit tests
+pnpm vitest
+
+# Run unit tests in watch mode
+pnpm vitest --watch
+
+# Run unit tests once
+pnpm vitest run
+```
+
+### E2E Tests
+
 ```bash
 # Test against local dev server
 pnpm dev
@@ -56,7 +85,23 @@ NEXT_PUBLIC_BETTER_AUTH_URL=https://dev.uifoundry.dev pnpm exec playwright test
 pnpm exec playwright test --project=chromium
 ```
 
+## SST Autodeploy Integration
+
+The SST Console autodeploy workflow now includes:
+
+1. **Unit tests run first** - deployment fails if tests fail
+2. **Commit SHA injection** - enables deployment verification
+3. **E2E tests after deployment** - comprehensive testing pipeline
+
 ## Test Configuration
+
+### Unit Tests
+
+- **Config**: `vitest.config.ts`
+- **Setup**: `src/test/setup.ts`
+- **Tests**: `src/**/*.{test,spec}.ts`
+
+### E2E Tests
 
 - **Config**: `playwright.config.ts`
 - **Test environment**: `tests/test-env.ts`
