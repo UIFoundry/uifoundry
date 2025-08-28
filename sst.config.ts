@@ -73,6 +73,7 @@ export default $config({
 				runtime: "nodejs22.x",
 				timeout: "60 seconds",
 			},
+			warm: isProd ? 1 : 0,
 			permissions: [
 				{
 					actions: ["cloudfront:ListConnectionFunctions"],
