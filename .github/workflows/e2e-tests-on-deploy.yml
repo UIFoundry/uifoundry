@@ -60,10 +60,13 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
 
+      - name: test directory list
+        run: ls
+
       - name: Run Playwright tests
         env:
           NEXT_PUBLIC_BETTER_AUTH_URL: ${{ steps.deployment-url.outputs.deployment_url }}
-        run: pnpm exec playwright test
+        run: pnpm test
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4

@@ -1,5 +1,4 @@
 import { defineConfig, devices } from "@playwright/test";
-import { testEnv } from "tests/test-env";
 
 /**
  * Read environment variables from file.
@@ -7,7 +6,6 @@ import { testEnv } from "tests/test-env";
  */
 
 // Load environment variables
-Object.assign(process.env, testEnv);
 process.env.SKIP_ENV_VALIDATION = "true";
 
 /**
@@ -28,9 +26,7 @@ export default defineConfig({
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
-		baseURL:
-			process.env.NEXT_PUBLIC_BETTER_AUTH_URL ??
-			testEnv.NEXT_PUBLIC_BETTER_AUTH_URL,
+		baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL ?? "http://localhost:3001",
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: "on-first-retry",
