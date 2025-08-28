@@ -73,6 +73,7 @@ export default $config({
 				runtime: "nodejs22.x",
 				timeout: "60 seconds",
 			},
+			warm: isProd ? 1 : 0,
 			permissions: [
 				{
 					actions: ["cloudfront:ListConnectionFunctions"],
@@ -182,7 +183,7 @@ export default $config({
 							await $`yum install -y gh`;
 							// Resolve workflow id from default branch to avoid 404s
 							const wfIdText =
-								await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh api repos/${owner}/${repo}/actions/workflows --jq '.workflows[] | select(.path == ".github/workflows/e2e-tests-on-deploy.yml") | .id'`.text();
+								await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh api repos/${owner}/${repo}/actions/workflows --jq '.workflows[] | select(.path == ".github/workflows/e2e-tests.yml") | .id'`.text();
 							const workflowId = wfIdText.trim();
 							if (!workflowId) {
 								console.warn(

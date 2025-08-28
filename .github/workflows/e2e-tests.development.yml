@@ -1,0 +1,98 @@
+name: E2E Tests (Post-Deploy) - Dev
+
+on:
+  repository_dispatch:
+    types: [deployment_complete]
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Stage name (production/dev/branch)"
+        required: true
+        type: string
+      commit:
+        description: "Commit SHA"
+        required: true
+        type: string
+      branch:
+        description: "Branch name"
+        required: true
+        type: string
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10 # Much shorter since no waiting needed
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Determine deployment URL
+        id: deployment-url
+        run: |
+          STAGE="${{ github.event.client_payload.stage }}"
+          if [ -z "$STAGE" ]; then STAGE="${{ github.event.inputs.stage }}"; fi
+          if [ "$STAGE" == "production" ]; then
+            DEPLOYMENT_URL="https://uifoundry.dev"
+          else
+            DEPLOYMENT_URL="https://${STAGE}.uifoundry.dev"
+          fi
+          echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+          echo "🚀 Testing deployment at: $DEPLOYMENT_URL"
+          echo "📋 Deployment info:"
+          echo "  Stage: $STAGE"
+          echo "  Commit: ${{ github.event.client_payload.commit || github.event.inputs.commit }}"
+          echo "  Branch: ${{ github.event.client_payload.branch || github.event.inputs.branch }}"
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
+
+      - name: Run Playwright tests
+        env:
+          NEXT_PUBLIC_BETTER_AUTH_URL: ${{ steps.deployment-url.outputs.deployment_url }}
+        run: pnpm test
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-${{ github.run_id }}
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-results-${{ github.run_id }}
+          path: test-results/
+          retention-days: 30
+
+      - name: Output test results
+        if: always()
+        run: |
+          echo "## 🎭 E2E Test Results"
+          echo "**Deployment URL:** ${{ steps.deployment-url.outputs.deployment_url }}"
+          echo "**Stage:** ${{ github.event.client_payload.stage || github.event.inputs.stage }}"
+          echo "**Commit:** ${{ github.event.client_payload.commit || github.event.inputs.commit }}"
+          echo "**Branch:** ${{ github.event.client_payload.branch || github.event.inputs.branch }}"
+          echo "**Workflow:** https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ **All E2E tests passed!**"
+          else
+            echo "❌ **Some E2E tests failed.** Check the workflow run for details."
+          fi
