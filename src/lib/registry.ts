@@ -16,10 +16,10 @@ export interface RegistryTailwindConfig {
 export interface RegistryComponent {
   name: string;
   type:
-    | "components:block"
-    | "components:component"
-    | "components:example"
-    | "components:ui";
+    | "registry:block"
+    | "registry:component"
+    | "registry:example"
+    | "registry:ui";
   dependencies?: string[];
   devDependencies?: string[];
   registryDependencies?: string[];

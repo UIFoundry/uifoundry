@@ -1,6 +1,6 @@
 {
   "name": "gallery-1",
-  "type": "components:component",
+  "type": "registry:component",
   "description": "Gallery block variant 1",
   "category": "gallery",
   "tags": ["gallery", "uifoundry", "block"],

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-1",
+  "type": "registry:component",
+  "description": "Footer block variant 1",
+  "dependencies": [
+    "react",
+    "next/link",
+    "next/image"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/components/footer-1/footer-1.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport Image from \"next/image\";\nimport Link from \"next/link\";\nimport SocialIcon from \"~/ui/icons/social-icon\";\n\ninterface FooterLink {\n  label?: string;\n  href?: string;\n}\ninterface SocialLink {\n  icon: any;\n  href?: string;\n}\ninterface BrandLogo {\n  url?: string;\n  alt?: string;\n}\n\ninterface ComponentProps extends React.ComponentPropsWithoutRef<\"div\"> {\n  brandLogo?: BrandLogo;\n  links?: FooterLink[];\n  socialLinks?: SocialLink[];\n  copyright?: string;\n}\n\nexport default function Footer_1({\n  brandLogo,\n  links = [],\n  socialLinks = [],\n  copyright,\n  ...divProps\n}: ComponentProps) {\n  return (\n    <footer {...divProps}>\n      <div className=\"mx-auto max-w-5xl px-6 py-8 md:py-16\">\n        <Link href=\"/\" aria-label=\"go home\" className=\"mx-auto block size-fit\">\n          {brandLogo?.url && (\n            <Image\n              src={brandLogo.url}\n              alt={brandLogo.alt ?? \"brand\"}\n              width={200}\n              height={150}\n            />\n          )}\n        </Link>\n\n        <div className=\"flex flex-wrap justify-center gap-6 text-sm\">\n          {links.map((link, index) => (\n            <Link\n              key={index}\n              href={link.href ?? \"#\"}\n              className=\"text-muted-foreground hover:text-primary block duration-150\"\n            >\n              <span>{link.label}</span>\n            </Link>\n          ))}\n        </div>\n        <div className=\"my-8 flex flex-wrap justify-center gap-6 text-sm\">\n          {socialLinks.map((icon, index) => (\n            <SocialIcon\n              icon={icon.icon}\n              href={icon.href ?? \"#\"}\n              key={`${index}`}\n            />\n          ))}\n        </div>\n        <span className=\"text-muted-foreground block text-center text-sm\">\n          © {new Date().getFullYear()} {copyright}\n        </span>\n      </div>\n    </footer>\n  );\n}\n",
+      "target": "components/footer-1.tsx"
+    },
+    {
+      "path": "registry/components/footer-1/meta.json",
+      "type": "registry:component",
+      "content": "{\n  \"name\": \"footer-1\",\n  \"type\": \"components:component\",\n  \"description\": \"Footer block variant 1 from UIFoundry\",\n  \"files\": [\n    {\n      \"name\": \"footer-1.tsx\",\n      \"content\": \"\\\"use client\\\";\\n\\nimport Image from \\\"next/image\\\";\\nimport Link from \\\"next/link\\\";\\nimport { type ComponentPropsWithRef } from \\\"react\\\";\\n\\nimport {  } from \\\"@/components/ui/icons/social-icon\\\";\\n\\nexport default function Footer_1({\\n\\tbrandLogo,\\n\\tlinks,\\n\\tsocialLinks,\\n\\tcopyright,\\n\\t...divProps\\n}: ComponentProps & ComponentPropsWithRef<\\\"div\\\">) {\\n\\treturn (\\n\\t\\t<footer {...divProps}>\\n\\t\\t\\t<div className=\\\"mx-auto max-w-5xl px-6 py-8 md:py-16\\\">\\n\\t\\t\\t\\t<Link href=\\\"/\\\" aria-label=\\\"go home\\\" className=\\\"mx-auto block size-fit\\\">\\n\\t\\t\\t\\t\\t{ }\\n\\t\\t\\t\\t\\t{brandLogo && (\\n\\t\\t\\t\\t\\t\\t<Image\\n\\t\\t\\t\\t\\t\\t\\tsrc={(brandLogo as Media).url!}\\n\\t\\t\\t\\t\\t\\t\\talt={(brandLogo as Media).alt}\\n\\t\\t\\t\\t\\t\\t\\twidth={200}\\n\\t\\t\\t\\t\\t\\t\\theight={150}\\n\\t\\t\\t\\t\\t\\t/>\\n\\t\\t\\t\\t\\t)}\\n\\t\\t\\t\\t</Link>\\n\\n\\t\\t\\t\\t<div className=\\\"flex flex-wrap justify-center gap-6 text-sm\\\">\\n\\t\\t\\t\\t\\t{(links ?? []).map((link, index) => (\\n\\t\\t\\t\\t\\t\\t<Link\\n\\t\\t\\t\\t\\t\\t\\tkey={index}\\n\\t\\t\\t\\t\\t\\t\\thref={link.href}\\n\\t\\t\\t\\t\\t\\t\\tclassName=\\\"text-muted-foreground hover:text-primary block duration-150\\\"\\n\\t\\t\\t\\t\\t\\t>\\n\\t\\t\\t\\t\\t\\t\\t<span>{link.label}</span>\\n\\t\\t\\t\\t\\t\\t</Link>\\n\\t\\t\\t\\t\\t))}\\n\\t\\t\\t\\t</div>\\n\\t\\t\\t\\t<div className=\\\"my-8 flex flex-wrap justify-center gap-6 text-sm\\\">\\n\\t\\t\\t\\t\\t{socialLinks.map((icon, index) => (\\n\\t\\t\\t\\t\\t\\t<SocialIcon icon={icon.icon} href={icon.href} key={`${index}`} />\\n\\t\\t\\t\\t\\t))}\\n\\t\\t\\t\\t</div>\\n\\t\\t\\t\\t<span className=\\\"text-muted-foreground block text-center text-sm\\\">\\n\\t\\t\\t\\t\\t{\\\" \\\"}\\n\\t\\t\\t\\t\\t© {new Date().getFullYear()} {copyright}\\n\\t\\t\\t\\t</span>\\n\\t\\t\\t</div>\\n\\t\\t</footer>\\n\\t);\\n}\"\n    }\n  ],\n  \"dependencies\": [\n    \"next/image\",\n    \"next/link\",\n    \"react\"\n  ],\n  \"registryDependencies\": [\n    \"icons/social-icon\"\n  ],\n  \"category\": \"footer\",\n  \"tags\": [\n    \"footer\",\n    \"uifoundry\",\n    \"block\"\n  ]\n}",
+      "target": "meta.json"
+    }
+  ]
+}

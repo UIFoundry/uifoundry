@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { REGISTRY_ENDPOINTS } from "~/lib/registry-constants";
+import { headers } from "next/headers";
+import { getRegistryComponent } from "~/lib/registry-utils";
 import type { RegistryComponent } from "~/lib/registry";
 import { CodeBlock } from "../CodeBlock";
 
@@ -20,13 +21,16 @@ export default async function ComponentPage({
 }) {
   const { component } = await params;
 
-  const res = await fetch(REGISTRY_ENDPOINTS.component(component), {
-    cache: "no-store",
-  });
-  if (!res.ok) return notFound();
-  const data = (await res.json()) as RegistryComponent;
+  const data = (await getRegistryComponent(
+    component,
+  )) as RegistryComponent | null;
+  if (!data) return notFound();
 
-  const cmd = `npx shadcn add --registry ${REGISTRY_ENDPOINTS.index.replace("/index.json", "")} ${data.name}`;
+  const hs = await headers();
+  const protocol = hs.get("x-forwarded-proto") ?? "http";
+  const host = hs.get("x-forwarded-host") ?? hs.get("host") ?? "localhost:3001";
+  const baseUrl = `${protocol}://${host}`;
+  const cmd = `npx shadcn@latest add ${baseUrl}/r/${data.name}.json`;
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">

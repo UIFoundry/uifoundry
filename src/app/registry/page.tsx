@@ -1,32 +1,24 @@
 import Link from "next/link";
-import {
-  REGISTRY_ENDPOINTS,
-  REGISTRY_CATEGORIES,
-} from "~/lib/registry-constants";
-import type { RegistryComponentsResponse } from "~/lib/registry";
+import { REGISTRY_CATEGORIES } from "~/lib/registry-constants";
+import { getRegistryComponents } from "~/lib/registry-utils";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "UIFoundry Registry" };
 
-async function getComponents(params: { q?: string; category?: string }) {
-  const url = new URL(REGISTRY_ENDPOINTS.components, "http://localhost");
-  if (params.category) url.searchParams.set("category", params.category);
-  const res = await fetch(url.toString().replace("http://localhost", ""), {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok)
-    return { components: [], total: 0 } as RegistryComponentsResponse;
-  return (await res.json()) as RegistryComponentsResponse;
+async function getComponentsDirect(params: { q?: string; category?: string }) {
+  const components = await getRegistryComponents({ category: params.category });
+  return { components, total: components.length } as const;
 }
 
 export default async function RegistryPage({
   searchParams,
 }: {
-  searchParams?: { q?: string; category?: string };
+  searchParams: Promise<{ q?: string; category?: string }>;
 }) {
-  const q = searchParams?.q?.toLowerCase().trim() ?? "";
-  const category = searchParams?.category ?? "";
-  const data = await getComponents({ category });
+  const sp = await searchParams;
+  const q = sp?.q?.toLowerCase().trim() ?? "";
+  const category = sp?.category ?? "";
+  const data = await getComponentsDirect({ category });
   const filtered = data.components.filter((c) =>
     q
       ? c.name.toLowerCase().includes(q) ||

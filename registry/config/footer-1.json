@@ -1,6 +1,6 @@
 {
   "name": "footer-1",
-  "type": "components:component",
+  "type": "registry:component",
   "description": "Footer block variant 1",
   "category": "footer",
   "tags": ["footer", "uifoundry", "block"],

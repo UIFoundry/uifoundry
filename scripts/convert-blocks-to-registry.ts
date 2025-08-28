@@ -163,7 +163,7 @@ class BlockToRegistryConverter {
 
       const registryComponent: ValidatedComponentMetadata = {
         name: registryName,
-        type: "components:component",
+        type: "registry:component",
         description: `${block.blockType} block variant ${block.variant.split("_")[1]} from UIFoundry`,
         files: [
           {

@@ -1,6 +1,6 @@
 {
   "name": "faq-1",
-  "type": "components:component",
+  "type": "registry:component",
   "description": "FAQ block variant 1",
   "category": "faq",
   "tags": ["faq", "uifoundry", "block"],

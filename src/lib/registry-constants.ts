@@ -1,8 +1,8 @@
 export const REGISTRY_COMPONENT_TYPES = [
-  "components:block",
-  "components:component",
-  "components:example",
-  "components:ui",
+  "registry:block",
+  "registry:component",
+  "registry:example",
+  "registry:ui",
 ] as const;
 
 export const REGISTRY_CATEGORIES = [

@@ -13,6 +13,12 @@ Implemented the foundational infrastructure for UIFoundry's custom shadcn compon
 - Error handling and proper HTTP headers for API responses
 - Required dependencies (@shadcn/ui, react-syntax-highlighter) installed and configured
 
+## Updates (3.6 & 4)
+
+- Validated component import paths for ~ alias; updated validator to accept ~ and utils/ui paths
+- Implemented web interface under /registry (list, detail, syntax highlighting, install command)
+- Live previews blocked pending full conversion and typing of components (3.3–3.5)
+
 ## Context
 
 Implement a custom shadcn component registry for UIFoundry that allows developers to install premium components via `npx shadcn add --registry https://uifoundry.com/registry component-name`. The registry will serve component metadata, files, and dependencies through API endpoints while providing a web interface for component discovery and previews.

@@ -1,6 +1,6 @@
 {
   "name": "pricing-1",
-  "type": "components:component",
+  "type": "registry:component",
   "description": "Pricing block variant 1",
   "category": "pricing",
   "tags": ["pricing", "uifoundry", "block"],

@@ -1,6 +1,6 @@
 {
   "name": "stats-1",
-  "type": "components:component",
+  "type": "registry:component",
   "description": "Stats block variant 1",
   "category": "stats",
   "tags": ["stats", "uifoundry", "block"],
