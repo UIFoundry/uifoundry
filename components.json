@@ -19,6 +19,6 @@
 	},
 	"iconLibrary": "lucide",
 	"registries": {
-		"@uifoundry": "https://uifoundry.dev/r/{name}.json"
+		"@uifoundry": "http://localhost:3001/r/{name}.json"
 	}
 }
