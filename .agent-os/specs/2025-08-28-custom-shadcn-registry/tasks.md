@@ -18,11 +18,11 @@
   - [x] 2.6 Add Tailwind config injection for component-specific styles
 
 - [ ] 3. Convert Existing UIFoundry Blocks to Registry Components
-  - [ ] 3.1 Analyze existing payload blocks structure and dependencies
-  - [ ] 3.2 Create conversion scripts for Hero block variants
-  - [ ] 3.3 Convert Features, CTA, and FAQ blocks to registry format
-  - [ ] 3.4 Convert remaining blocks (Pricing, Teams, Stats, Gallery, etc.)
-  - [ ] 3.5 Generate proper TypeScript interfaces for all converted components
+  - [x] 3.1 Analyze existing payload blocks structure and dependencies
+  - [x] 3.2 Create conversion scripts for Hero block variants
+  - [x] 3.3 Convert Features, CTA, and FAQ blocks to registry format
+  - [x] 3.4 Convert remaining blocks (Pricing, Teams, Stats, Gallery, etc.)
+  - [x] 3.5 Generate proper TypeScript interfaces for all converted components
   - [x] 3.6 Validate component dependencies and import paths
 
 - [ ] 4. Build Web Interface for Component Discovery

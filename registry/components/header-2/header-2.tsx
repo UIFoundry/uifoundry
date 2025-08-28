@@ -3,8 +3,11 @@
 import { Home, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState, type ComponentPropsWithRef } from "react";
-
 import { cn } from "~/styles/utils";
+
+interface ComponentProps {
+  menuItems: Array<{ label?: string; href?: string }>;
+}
 
 export default function Header_2({
   menuItems,
@@ -14,14 +17,10 @@ export default function Header_2({
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header>
@@ -47,7 +46,7 @@ export default function Header_2({
 
               <button
                 onClick={() => setMenuState(!menuState)}
-                aria-label={menuState == true ? "Close Menu" : "Open Menu"}
+                aria-label={menuState ? "Close Menu" : "Open Menu"}
                 className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
               >
                 <Menu className="m-auto size-6 duration-200 in-data-[state=active]:scale-0 in-data-[state=active]:rotate-180 in-data-[state=active]:opacity-0" />
@@ -59,7 +58,7 @@ export default function Header_2({
                   {menuItems.map((item, index) => (
                     <li key={index}>
                       <Link
-                        href={item.href}
+                        href={item.href ?? "#"}
                         className="text-muted-foreground hover:text-accent-foreground block duration-150"
                       >
                         <span>{item.label}</span>
@@ -76,7 +75,7 @@ export default function Header_2({
                   {menuItems.map((item, index) => (
                     <li key={index}>
                       <Link
-                        href={item.href}
+                        href={item.href ?? "#"}
                         className="text-muted-foreground hover:text-accent-foreground block duration-150"
                       >
                         <span>{item.label}</span>

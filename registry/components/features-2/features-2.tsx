@@ -1,4 +1,11 @@
+import React from "react";
 import { Icon } from "~/ui/icon";
+
+interface ComponentProps {
+  header?: string;
+  subheader?: string;
+  features?: Array<{ icon?: string; header?: string; description?: string }>;
+}
 
 export default function Features(props: ComponentProps) {
   return (

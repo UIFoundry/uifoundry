@@ -1,23 +1,4 @@
 import React from "react";
-
-interface ComponentProps {
-  header?: string;
-  subheader?: string;
-  alertLabel?: string;
-  alertLink?: string;
-  media?: {
-    light?: { url: string; alt: string };
-    dark?: { url: string; alt: string };
-  };
-  actions?: Array<{ label?: string; href?: string }>;
-  features?: Array<{ title?: string; description?: string; icon?: string }>;
-  faqs?: Array<{ question?: string; answer?: string }>;
-  members?: Array<{ name?: string; role?: string; bio?: string }>;
-  stats?: Array<{ label?: string; value?: string }>;
-  testimonials?: Array<{ content?: string; author?: string; role?: string }>;
-  [key: string]: any;
-}
-
 import Link from "next/link";
 import { Button } from "~/ui/button";
 import {
@@ -28,30 +9,38 @@ import {
   CardTitle,
 } from "~/ui/card";
 import { Check } from "lucide-react";
-
-import type { ComponentPropsWithRef } from "react";
 import { cn } from "~/styles/utils";
+
+interface TierFeature {
+  text?: string;
+}
+interface Tier {
+  label?: string;
+  description?: string;
+  pricing: { value: number; annual?: boolean; monthly?: boolean };
+  callToAction?: string;
+  features?: TierFeature[];
+}
+
+interface ComponentProps {
+  header?: string;
+  subheader?: string;
+  tiers?: Tier[];
+  focusIndex?: number;
+  focusLabel?: string;
+}
 
 function PricingTier({
   tier,
   index,
-  focusedTier = {
-    index: -1,
-    label: "Popular",
-  },
+  focusedTier = { index: -1, label: "Popular" },
   ...divProps
 }: {
-  tier: NonNullable<Pricing_1_Block["tiers"]>[number];
+  tier: Tier;
   index: number;
-  focusedTier?: {
-    index: number;
-    label: string;
-  };
-} & ComponentPropsWithRef<"div">) {
+  focusedTier?: { index: number; label: string };
+} & React.ComponentPropsWithoutRef<"div">) {
   if (!tier) return null;
-
-  const annualPricing = tier.pricing.annual;
-  const monthlyPricing = tier.pricing.monthly;
   const isFocused = focusedTier.index === index;
 
   return (
@@ -66,12 +55,10 @@ function PricingTier({
       </span>
       <CardHeader>
         <CardTitle className="font-medium">{tier.label}</CardTitle>
-
         <span className="my-3 block text-2xl font-semibold">
           ${tier.pricing.value}
-          {annualPricing ? " / yr" : monthlyPricing ? " / mo" : ""}
+          {tier.pricing.annual ? " / yr" : tier.pricing.monthly ? " / mo" : ""}
         </span>
-
         {tier.description && (
           <CardDescription className="text-sm">
             {tier.description}
@@ -82,17 +69,16 @@ function PricingTier({
           variant={!isFocused ? "outline" : undefined}
           className="mt-4 w-full"
         >
-          <Link href="">{tier.callToAction ?? "Get Started"}</Link>
+          <Link href="#">{tier.callToAction ?? "Get Started"}</Link>
         </Button>
       </CardHeader>
 
       <CardContent className="space-y-4">
         <hr className="border-dashed" />
-
         <ul className="list-outside space-y-3 text-sm">
-          {(tier.features ?? []).map((feature, index) => (
+          {(tier.features ?? []).map((feature, idx) => (
             <li
-              key={`Pricing_1_Block-tier-${tier.label}-feature-${index}`}
+              key={`pricing-tier-${index}-feature-${idx}`}
               className="flex items-center gap-2"
             >
               <Check className="size-3" />

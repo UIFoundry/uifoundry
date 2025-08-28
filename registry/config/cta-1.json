@@ -1,0 +1,10 @@
+{
+  "name": "cta-1",
+  "type": "components:component",
+  "description": "CTA block variant 1",
+  "category": "cta",
+  "tags": ["cta", "uifoundry", "block"],
+  "dependencies": ["react", "next/link"],
+  "registryDependencies": ["button"],
+  "files": [{ "name": "cta-1.tsx", "target": "components/cta-1.tsx" }]
+}

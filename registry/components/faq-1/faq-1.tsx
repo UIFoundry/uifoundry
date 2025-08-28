@@ -46,7 +46,7 @@ export default function FAQsFour(props: ComponentProps) {
             collapsible
             className="bg-muted dark:bg-muted/50 w-full rounded-2xl p-1"
           >
-            {(props.faq ?? []).map((faq, index) => (
+            {(props.faqs ?? []).map((faq, index) => (
               <div className="group" key={`FAQ_!_Block-questions-${index}`}>
                 <AccordionItem
                   value={`${index}`}

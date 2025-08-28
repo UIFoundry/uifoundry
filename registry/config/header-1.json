@@ -1,0 +1,9 @@
+{
+  "name": "header-1",
+  "type": "components:component",
+  "description": "Header block variant 1",
+  "category": "header",
+  "tags": ["header", "uifoundry", "block"],
+  "dependencies": ["react", "next/link", "lucide-react"],
+  "files": [{ "name": "header-1.tsx", "target": "components/header-1.tsx" }]
+}

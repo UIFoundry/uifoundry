@@ -1,0 +1,9 @@
+{
+  "name": "footer-1",
+  "type": "components:component",
+  "description": "Footer block variant 1",
+  "category": "footer",
+  "tags": ["footer", "uifoundry", "block"],
+  "dependencies": ["react", "next/link", "next/image"],
+  "files": [{ "name": "footer-1.tsx", "target": "components/footer-1.tsx" }]
+}
