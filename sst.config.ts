@@ -152,21 +152,21 @@ export default $config({
 
 						console.log("🎉 Deployment complete! Triggering E2E tests...");
 
-						let stage = "local";
-						if (event.type === "branch") {
-							switch (event.branch) {
-								case "master":
-									stage = "production";
-									break;
-								case "dev":
-									stage = "dev";
-									break;
-								default:
-									stage = event.branch;
-							}
-						}
 						// Trigger GitHub Action via GitHub CLI after successful deployment
 						try {
+							let stage = "local";
+							if (event.type === "branch") {
+								switch (event.branch) {
+									case "master":
+										stage = "production";
+										break;
+									case "dev":
+										stage = "dev";
+										break;
+									default:
+										stage = event.branch;
+								}
+							}
 							const branchRef =
 								event.type === "branch"
 									? event.branch
@@ -175,6 +175,7 @@ export default $config({
 										: "dev";
 							const owner = "ianyimi";
 							const repo = "uifoundry";
+
 							// Ensure gh CLI is available
 							await $`curl -sSL -o /tmp/gh.tar.gz https://github.com/cli/cli/releases/download/v2.55.0/gh_2.55.0_linux_amd64.tar.gz`;
 							await $`tar -C /tmp -xzf /tmp/gh.tar.gz`;
@@ -185,9 +186,11 @@ export default $config({
 							const runsJson =
 								await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh run list --workflow e2e-tests-on-deploy.yml --branch ${branchRef} --limit 1 --json databaseId`.text();
 							let runId = "";
+
 							try {
 								runId = JSON.parse(runsJson)?.[0]?.databaseId?.toString() ?? "";
 							} catch { }
+
 							if (runId) {
 								console.log(
 									`✅ E2E tests triggered: https://github.com/${owner}/${repo}/actions/runs/${runId}`,
