@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-1",
+  "type": "registry:component",
+  "description": "Stats block variant 1",
+  "dependencies": [
+    "react"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/components/stats-1/meta.json",
+      "type": "registry:component",
+      "content": "{\n  \"name\": \"stats-1\",\n  \"type\": \"components:component\",\n  \"description\": \"Stats block variant 1 from UIFoundry\",\n  \"files\": [\n    {\n      \"name\": \"stats-1.tsx\",\n      \"content\": \"import React from \\\"react\\\";\\n\\ninterface ComponentProps {\\n  header?: string;\\n  subheader?: string;\\n  alertLabel?: string;\\n  alertLink?: string;\\n  media?: {\\n    light?: { url: string; alt: string };\\n    dark?: { url: string; alt: string };\\n  };\\n  actions?: Array<{ label?: string; href?: string }>;\\n  features?: Array<{ title?: string; description?: string; icon?: string }>;\\n  faqs?: Array<{ question?: string; answer?: string }>;\\n  members?: Array<{ name?: string; role?: string; bio?: string }>;\\n  stats?: Array<{ label?: string; value?: string }>;\\n  testimonials?: Array<{ content?: string; author?: string; role?: string }>;\\n  [key: string]: any;\\n}\\n\\n\"\n    }\n  ],\n  \"dependencies\": [],\n  \"registryDependencies\": [],\n  \"category\": \"stats\",\n  \"tags\": [\n    \"stats\",\n    \"uifoundry\",\n    \"block\"\n  ]\n}",
+      "target": "meta.json"
+    },
+    {
+      "path": "registry/components/stats-1/stats-1.tsx",
+      "type": "registry:component",
+      "content": "import React from \"react\";\n\ninterface StatItem {\n  label?: string;\n  value?: string;\n  description?: string;\n}\ninterface ComponentProps {\n  header?: string;\n  subheader?: string;\n  stats?: StatItem[];\n}\n\nexport default function Stats_1({\n  header,\n  subheader,\n  stats = [],\n}: ComponentProps) {\n  return (\n    <section className=\"py-16 md:py-32\">\n      <div className=\"mx-auto max-w-6xl px-6\">\n        <div className=\"mx-auto max-w-2xl space-y-6 text-center\">\n          <h2 className=\"text-4xl font-semibold text-balance lg:text-5xl\">\n            {header}\n          </h2>\n          <p>{subheader}</p>\n        </div>\n        <div className=\"mt-10 grid grid-cols-2 gap-6 md:grid-cols-4\">\n          {stats.map((s, i) => (\n            <div\n              key={`stat-${i}`}\n              className=\"rounded-xl border p-6 text-center\"\n            >\n              <div className=\"text-2xl font-semibold\">{s.value}</div>\n              <div className=\"text-muted-foreground text-sm\">{s.label}</div>\n              {s.description && (\n                <div className=\"mt-2 text-xs\">{s.description}</div>\n              )}\n            </div>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n",
+      "target": "components/stats-1.tsx"
+    }
+  ]
+}

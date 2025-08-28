@@ -1,6 +1,6 @@
 {
   "name": "teams-1",
-  "type": "components:component",
+  "type": "registry:component",
   "description": "Team block variant 1",
   "category": "team",
   "tags": ["team", "uifoundry", "block"],

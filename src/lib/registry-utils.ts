@@ -23,7 +23,7 @@ export async function getRegistryIndex(): Promise<RegistryIndex> {
         // Create index entry (without files and docs)
         index.push({
           name: componentName,
-          type: (config as any).type || "components:block",
+          type: (config as any).type || "registry:component",
           dependencies: (config as any).dependencies || [],
           devDependencies: (config as any).devDependencies || [],
           registryDependencies: (config as any).registryDependencies || [],
@@ -64,7 +64,7 @@ export async function getRegistryComponent(
     // Build component object
     const component: RegistryComponent = {
       name,
-      type: (config as any).type || "components:block",
+      type: (config as any).type || "registry:component",
       files,
       dependencies: (config as any).dependencies || [],
       devDependencies: (config as any).devDependencies || [],
@@ -107,7 +107,7 @@ export async function getRegistryComponents(filters?: {
         // Create metadata entry
         const component: RegistryComponentMetadata = {
           name: componentName,
-          type: (config as any).type || "components:block",
+          type: (config as any).type || "registry:component",
           files,
           dependencies: (config as any).dependencies || [],
           devDependencies: (config as any).devDependencies || [],
@@ -152,6 +152,45 @@ export async function getRegistryComponents(filters?: {
   } catch (error) {
     console.error("Error loading registry components:", error);
     return [];
+  }
+}
+
+export async function getRegistryItemJson(name: string): Promise<any | null> {
+  try {
+    const exists = await registryFileManager.componentExists(name);
+    if (!exists) return null;
+
+    const config = (await registryFileManager.loadComponentConfig(name)) as any;
+    const files = await registryFileManager.getComponentFiles(name);
+
+    const filesWithMetadata = files.map((f) => ({
+      path: `registry/components/${name}/${f.name}`,
+      type: f.name.endsWith(".css") ? "registry:file" : "registry:component",
+      content: f.content,
+      // Provide an explicit target to ensure proper placement
+      target: f.name.endsWith(".css")
+        ? `~/styles/${f.name}`
+        : `~/components/${f.name}`,
+    }));
+
+    return {
+      $schema: "https://ui.shadcn.com/schema/registry-item.json",
+      name,
+      type: config.type || "registry:component",
+      title: config.title,
+      description: config.description,
+      dependencies: config.dependencies || [],
+      devDependencies: config.devDependencies || [],
+      registryDependencies: config.registryDependencies || [],
+      cssVars: config.cssVars,
+      files: filesWithMetadata,
+      // Pass through meta properties commonly used by UIs
+      categories: config.categories,
+      meta: config.meta,
+    };
+  } catch (error) {
+    console.error(`Error building registry item for ${name}:`, error);
+    return null;
   }
 }
 

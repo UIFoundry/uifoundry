@@ -3,34 +3,28 @@ import { NextResponse } from "next/server";
 import { getRegistryItemJson } from "~/lib/registry-utils";
 
 interface RouteParams {
-  params: Promise<{ component: string }>;
+  params: Promise<{ name: string }>;
 }
 
 export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
-    const { component } = await params;
-    // Support "name.json" paths by stripping the .json suffix
-    const normalized = component.replace(/\.json$/i, "");
-    const item = await getRegistryItemJson(normalized);
+    const { name } = await params;
+    const normalized = name.replace(/\.json$/i, "");
 
+    const item = await getRegistryItemJson(normalized);
     if (!item) {
       return NextResponse.json(
-        {
-          error: "Component not found",
-          component,
-        },
+        { error: "Registry item not found", name: normalized },
         { status: 404 },
       );
     }
 
-    // Set proper headers for shadcn CLI compatibility
     const response = NextResponse.json(item);
     response.headers.set("Cache-Control", "public, max-age=300, s-maxage=300");
     response.headers.set("Content-Type", "application/json");
-
     return response;
   } catch (error) {
-    console.error("Error in component endpoint:", error);
+    console.error("Error in registry item endpoint:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

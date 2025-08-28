@@ -1,6 +1,6 @@
 {
   "name": "cta-1",
-  "type": "components:component",
+  "type": "registry:component",
   "description": "CTA block variant 1",
   "category": "cta",
   "tags": ["cta", "uifoundry", "block"],

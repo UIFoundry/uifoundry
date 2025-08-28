@@ -1,6 +1,6 @@
 {
   "name": "header-2",
-  "type": "components:component",
+  "type": "registry:component",
   "description": "Header block variant 2",
   "category": "header",
   "tags": ["header", "uifoundry", "block"],

@@ -26,10 +26,10 @@ export const RegistryComponentSchema = z.object({
     .min(1)
     .regex(/^[a-z0-9-]+$/),
   type: z.enum([
-    "components:block",
-    "components:component",
-    "components:example",
-    "components:ui",
+    "registry:block",
+    "registry:component",
+    "registry:example",
+    "registry:ui",
   ]),
   dependencies: z.array(z.string()).optional(),
   devDependencies: z.array(z.string()).optional(),
@@ -80,10 +80,10 @@ export const RegistryComponentMetadataSchema = RegistryComponentSchema.extend({
 export const ComponentConfigSchema = z.object({
   name: z.string().min(1),
   type: z.enum([
-    "components:block",
-    "components:component",
-    "components:example",
-    "components:ui",
+    "registry:block",
+    "registry:component",
+    "registry:example",
+    "registry:ui",
   ]),
   description: z.string().optional(),
   category: z
