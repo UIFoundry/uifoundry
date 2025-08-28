@@ -16,7 +16,8 @@
 			"files": [
 				{
 					"path": "registry/ui/utils.ts",
-					"type": "registry:ui"
+					"type": "registry:lib",
+					"target": "src/styles/utils.ts"
 				}
 			]
 		},
@@ -34,7 +35,7 @@
 				{
 					"path": "registry/ui/motion-primitives/animated-group.tsx",
 					"type": "registry:ui",
-					"target": "~/ui/motion-primitives/animated-group.tsx"
+					"target": "ui/motion-primitives/animated-group.tsx"
 				}
 			]
 		},
@@ -103,12 +104,12 @@
 				{
 					"path": "registry/fields/media/index.tsx",
 					"type": "registry:component",
-					"target": "~/payload/fields/mediaField/index.tsx"
+					"target": "~/payload/fields/media/index.tsx"
 				},
 				{
 					"path": "registry/fields/media/config.ts",
 					"type": "registry:file",
-					"target": "~/payload/fields/mediaField/config.ts"
+					"target": "~/payload/fields/media/config.ts"
 				}
 			]
 		},
