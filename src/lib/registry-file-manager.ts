@@ -111,6 +111,7 @@ export class RegistryFileManager {
    * Load component configuration file
    */
   async loadComponentConfig(componentName: string): Promise<unknown> {
+    // Try primary config file first, then fall back to the component's meta.json
     try {
       const configPath = join(
         this.registryPath,
@@ -119,9 +120,42 @@ export class RegistryFileManager {
       );
       const content = await readFile(configPath, "utf-8");
       return JSON.parse(content);
-    } catch (error) {
+    } catch (primaryError) {
+      // If the config file is missing, attempt to read meta.json inside the component folder
+      const isNotFound =
+        typeof primaryError === "object" &&
+        primaryError !== null &&
+        "code" in (primaryError as any) &&
+        (primaryError as any).code === "ENOENT";
+
+      if (isNotFound) {
+        try {
+          const metaPath = join(
+            this.registryPath,
+            "components",
+            componentName,
+            "meta.json",
+          );
+          const metaContent = await readFile(metaPath, "utf-8");
+          const meta = JSON.parse(metaContent);
+          // Normalize type naming to our expected namespace
+          if (!meta.type || typeof meta.type !== "string") {
+            meta.type = "registry:component";
+          } else if (meta.type.startsWith("components:")) {
+            meta.type = "registry:component";
+          }
+          return meta;
+        } catch (metaError) {
+          // Only throw a combined error if meta.json is also unavailable or unreadable
+          throw new Error(
+            `Failed to load component config for ${componentName}: ${primaryError}; meta fallback failed: ${metaError}`,
+          );
+        }
+      }
+
+      // For errors other than file-not-found, rethrow with context
       throw new Error(
-        `Failed to load component config for ${componentName}: ${error}`,
+        `Failed to load component config for ${componentName}: ${primaryError}`,
       );
     }
   }
