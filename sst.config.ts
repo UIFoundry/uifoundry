@@ -186,7 +186,7 @@ export default $config({
 							const workflowId = wfIdText.trim();
 							if (!workflowId) {
 								console.warn(
-									"⚠️  Workflow not found on default branch: .github/workflows/e2e-tests-on-deploy.yml. Ensure it is committed to the default branch.",
+									"⚠️  Workflow not found on default branch: .github/workflows/e2e-tests.yml. Ensure it is committed to the default branch.",
 								);
 							} else {
 								// Trigger workflow_dispatch with inputs via GH API
