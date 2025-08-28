@@ -56,7 +56,7 @@
 				{
 					"path": "registry/ui/motion-primitives/text-effect.tsx",
 					"type": "registry:ui",
-					"target": "~/ui/motion-primitives/animated-group.tsx"
+					"target": "ui/motion-primitives/animated-group.tsx"
 				}
 			]
 		},
@@ -72,7 +72,7 @@
 				{
 					"path": "registry/fields/index.d.ts",
 					"type": "registry:lib",
-					"target": "~/payload/fields/index.d.ts"
+					"target": "src/payload/fields/index.d.ts"
 				}
 			]
 		},
@@ -86,7 +86,7 @@
 				{
 					"path": "registry/fields/upload/config.ts",
 					"type": "registry:file",
-					"target": "~/payload/fields/upload/config"
+					"target": "src/payload/fields/upload/config"
 				}
 			]
 		},
@@ -104,12 +104,12 @@
 				{
 					"path": "registry/fields/media/index.tsx",
 					"type": "registry:component",
-					"target": "~/payload/fields/media/index.tsx"
+					"target": "src/payload/fields/media/index.tsx"
 				},
 				{
 					"path": "registry/fields/media/config.ts",
 					"type": "registry:file",
-					"target": "~/payload/fields/media/config.ts"
+					"target": "src/payload/fields/media/config.ts"
 				}
 			]
 		},
@@ -135,22 +135,22 @@
 				{
 					"path": "registry/blocks/marketing/hero/hero-1/index.tsx",
 					"type": "registry:component",
-					"target": "~/payload/blocks/marketing/Hero/Hero_1/index.tsx"
+					"target": "src/payload/blocks/marketing/Hero/Hero_1/index.tsx"
 				},
 				{
 					"path": "registry/blocks/marketing/hero/hero-1/config.ts",
 					"type": "registry:file",
-					"target": "~/payload/blocks/marketing/Hero/Hero_1/config.ts"
+					"target": "src/payload/blocks/marketing/Hero/Hero_1/config.ts"
 				},
 				{
 					"path": "registry/fields/media/config.ts",
 					"type": "registry:file",
-					"target": "~/payload/fields/header/config.ts"
+					"target": "src/payload/fields/header/config.ts"
 				},
 				{
 					"path": "registry/fields/subheader/config.ts",
 					"type": "registry:file",
-					"target": "~/payload/fields/subheader/config.ts"
+					"target": "src/payload/fields/subheader/config.ts"
 				}
 			]
 		}
