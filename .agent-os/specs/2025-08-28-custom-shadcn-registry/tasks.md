@@ -9,13 +9,13 @@
   - [x] 1.4 Create TypeScript interfaces for registry component definitions
   - [x] 1.5 Implement basic registry index endpoint `/api/registry/index.json`
 
-- [ ] 2. Component Definition System and File Management
-  - [ ] 2.1 Create component metadata schema with validation
-  - [ ] 2.2 Implement file content management system for component storage
-  - [ ] 2.3 Build dependency resolution system for npm and registry dependencies
-  - [ ] 2.4 Create component definition generator from existing payload blocks
-  - [ ] 2.5 Implement individual component endpoint `/api/registry/[component].json`
-  - [ ] 2.6 Add Tailwind config injection for component-specific styles
+- [x] 2. Component Definition System and File Management
+  - [x] 2.1 Create component metadata schema with validation
+  - [x] 2.2 Implement file content management system for component storage
+  - [x] 2.3 Build dependency resolution system for npm and registry dependencies
+  - [x] 2.4 Create component definition generator from existing payload blocks
+  - [x] 2.5 Implement individual component endpoint `/api/registry/[component].json`
+  - [x] 2.6 Add Tailwind config injection for component-specific styles
 
 - [ ] 3. Convert Existing UIFoundry Blocks to Registry Components
   - [ ] 3.1 Analyze existing payload blocks structure and dependencies
