@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "upload-field",
+  "type": "registry:file",
+  "title": "Upload Field",
+  "description": "Payload Upload Field for media collection-related fields",
+  "files": [
+    {
+      "path": "registry/fields/upload/config.ts",
+      "content": "import type { UploadField } from \"~/payload/fields\";\nimport type { PickRequired } from \"@/registry/types\";\nimport { COLLECTION_SLUG_MEDIA } from \"@/registry/constants\";\n\ntype RequiredFields = PickRequired<UploadField, \"name\">;\n\nexport default function uploadField({\n\t...restConfig\n}: RequiredFields): UploadField {\n\treturn {\n\t\ttype: \"upload\",\n\t\trelationTo: COLLECTION_SLUG_MEDIA,\n\t\t...restConfig,\n\t} as UploadField;\n}\n",
+      "type": "registry:file",
+      "target": "~/payload/fields/upload/config"
+    }
+  ]
+}

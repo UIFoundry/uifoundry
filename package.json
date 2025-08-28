@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "payload generate:types && next build",
+		"registry:build": "shadcn build",
 		"check": "next lint && tsc --noEmit",
 		"dev": "next dev --port=3001 --turbo",
 		"format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
@@ -69,6 +70,7 @@
 		"react-syntax-highlighter": "^15.6.6",
 		"react-use-measure": "^2.1.7",
 		"server-only": "^0.0.1",
+		"shadcn": "2.9.3-canary.0",
 		"sharp": "^0.34.1",
 		"sst": "3.17.10",
 		"superjson": "^2.2.1",

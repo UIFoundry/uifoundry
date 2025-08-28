@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Button } from "~/ui/button";
-import { TextEffect } from "~/ui/motion-primitives/text-effect";
-import { AnimatedGroup } from "~/ui/motion-primitives/animated-group";
+import { Button } from "@/registry/ui/button";
+import { TextEffect } from "@/registry/ui/motion-primitives/text-effect";
+import { AnimatedGroup } from "@/registry/ui/motion-primitives/animated-group";
 import type { Hero_1_Block } from "~/payload-types";
-import { cn } from "~/styles/utils";
-import MediaField from "~/payload/fields/mediaField";
+import { cn } from "@/registry/ui/utils";
+import MediaField from "@/registry/fields/media/index";
 
 export * from "./config";
 
