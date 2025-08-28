@@ -152,6 +152,17 @@ export default $config({
 
 						console.log("🎉 Deployment complete! Triggering E2E tests...");
 
+						let stage = "local";
+						if (event.type === "branch") {
+							switch (event.branch) {
+								case "master":
+									stage = "production";
+									break;
+								case "dev":
+									stage = "dev";
+									break;
+							}
+						}
 						// Trigger GitHub Action via repository dispatch after successful deployment
 						try {
 							const branch =
@@ -164,7 +175,7 @@ export default $config({
 								-H "Authorization: token ${process.env.GITHUB_TOKEN}" \
 								-H "Accept: application/vnd.github.v3+json" \
 								https://api.github.com/repos/ianyimi/uifoundry/dispatches \
-								-d '{"event_type":"deployment_complete","client_payload":{"stage":"${$app.stage}","commit":"${event.commit?.id || "unknown"}","branch":"${branch}"}}'`;
+								-d '{"event_type":"deployment_complete","client_payload":{"stage":"${stage}","commit":"${event.commit?.id || "unknown"}","branch":"${branch}"}}'`;
 							console.log("✅ E2E tests triggered successfully!");
 						} catch (triggerError) {
 							console.warn("⚠️  Failed to trigger E2E tests:", triggerError);
