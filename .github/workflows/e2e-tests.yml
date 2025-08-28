@@ -31,7 +31,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: "pnpm"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
@@ -39,7 +38,7 @@ jobs:
           version: 8
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Determine deployment URL
         id: deployment-url
@@ -64,7 +63,7 @@ jobs:
       - name: Run Playwright tests
         env:
           NEXT_PUBLIC_BETTER_AUTH_URL: ${{ steps.deployment-url.outputs.deployment_url }}
-        run: pnpm exec playwright test
+        run: pnpm test
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
