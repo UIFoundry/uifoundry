@@ -1,0 +1,157 @@
+{
+	"$schema": "https://ui.shadcn.com/schema/registry.json",
+	"name": "uifoundry",
+	"homepage": "https://uifoundry.dev",
+	"items": [
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Tailwind Style Utils",
+			"name": "style-utils",
+			"description": "Tailwind lib/utils file with cn function definition",
+			"type": "registry:lib",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/ui/utils.ts",
+					"type": "registry:ui"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Animated Group",
+			"name": "animated-group",
+			"type": "registry:ui",
+			"description": "Animated Group UI Component, animates in the react components passed as children to this component",
+			"dependencies": [
+				"react",
+				"motion"
+			],
+			"files": [
+				{
+					"path": "registry/ui/motion-primitives/animated-group.tsx",
+					"type": "registry:ui",
+					"target": "~/ui/motion-primitives/animated-group.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Text Effect",
+			"name": "text-effect",
+			"type": "registry:ui",
+			"description": "Text Effect UI Component, animates in the react components passed as children. This is for text animation",
+			"dependencies": [
+				"react",
+				"motion"
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/ui/motion-primitives/text-effect.tsx",
+					"type": "registry:ui",
+					"target": "~/ui/motion-primitives/animated-group.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Payload Field Types",
+			"name": "field-types",
+			"type": "registry:lib",
+			"dependencies": [
+				"payload@^3.0.0"
+			],
+			"files": [
+				{
+					"path": "registry/fields/index.d.ts",
+					"type": "registry:lib",
+					"target": "~/payload/fields/index.d.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Upload Field",
+			"name": "upload-field",
+			"description": "Payload Upload Field for media collection-related fields",
+			"type": "registry:file",
+			"files": [
+				{
+					"path": "registry/fields/upload/config.ts",
+					"type": "registry:file",
+					"target": "~/payload/fields/upload/config"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Media Field",
+			"name": "media-field",
+			"type": "registry:block",
+			"description": "Light & Dark Media Field",
+			"dependencies": [
+				"react",
+				"next"
+			],
+			"files": [
+				{
+					"path": "registry/fields/media/index.tsx",
+					"type": "registry:component",
+					"target": "~/payload/fields/mediaField/index.tsx"
+				},
+				{
+					"path": "registry/fields/media/config.ts",
+					"type": "registry:file",
+					"target": "~/payload/fields/mediaField/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Hero 1",
+			"name": "hero-1",
+			"type": "registry:block",
+			"description": "Hero Block Variant 1",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/animated-group",
+				"@uifoundry/text-effect",
+				"@uifoundry/media-field",
+				"@uifoundry/style-utils"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/blocks/marketing/hero/hero-1/index.tsx",
+					"type": "registry:component",
+					"target": "~/payload/blocks/marketing/Hero/Hero_1/index.tsx"
+				},
+				{
+					"path": "registry/blocks/marketing/hero/hero-1/config.ts",
+					"type": "registry:file",
+					"target": "~/payload/blocks/marketing/Hero/Hero_1/config.ts"
+				},
+				{
+					"path": "registry/fields/media/config.ts",
+					"type": "registry:file",
+					"target": "~/payload/fields/header/config.ts"
+				},
+				{
+					"path": "registry/fields/subheader/config.ts",
+					"type": "registry:file",
+					"target": "~/payload/fields/subheader/config.ts"
+				}
+			]
+		}
+	]
+}
