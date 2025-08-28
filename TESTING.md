@@ -32,18 +32,18 @@ Triggers on:
 2. Uploads test results and coverage
 3. Provides fast feedback on code changes
 
-### Automatic E2E Testing (`test-after-deploy.yml`)
+### Automatic E2E Testing (`e2e-tests-on-deploy.yml`)
 
-Triggers automatically on:
+Triggers via repository dispatch:
 
-- Push to `master` or `dev` branches
+- **After successful SST Console deployment completes**
 
 **Process:**
 
-1. Runs unit tests first
-2. Detects deployment URL based on branch
-3. Waits up to 20 minutes for fresh deployment (build time newer than workflow start)
-4. Runs Playwright E2E tests against live deployment
+1. **SST Console** runs unit tests and deploys
+2. **SST Console** triggers GitHub Action via repository dispatch
+3. **GitHub Action** runs immediately (no waiting needed!)
+4. Runs Playwright E2E tests against confirmed fresh deployment
 5. Uploads test artifacts
 
 ### Manual Testing (`manual-test.yml`)
@@ -118,22 +118,27 @@ Test runs generate:
 
 ## Deployment Verification
 
-The workflow uses **build time verification** to ensure tests run against the fresh deployment:
+The workflow uses **event-driven testing** to ensure tests run against the fresh deployment:
 
-1. **GitHub Action** records its start time
-2. **SST Console** autodeploys the app with new build time
-3. **GitHub Action** polls `/api/version` until build time is newer than workflow start
-4. **Tests run** only against the confirmed fresh deployment
+1. **SST Console** autodeploys the app and runs unit tests
+2. **After successful deployment**, SST triggers GitHub repository dispatch
+3. **GitHub Action** starts immediately with deployment metadata
+4. **Tests run** against the confirmed fresh deployment (no waiting needed!)
 
 ## Troubleshooting
 
-### Tests timeout waiting for deployment
+### E2E tests not triggering after deployment
 
-- Check SST Console for deployment status
-- Verify `/api/version` endpoint is accessible
-- Verify domain SSL certificates are valid
-- Check if build time comparison is working correctly
-- Increase timeout in workflow if needed (currently 20 minutes)
+- Check if `GITHUB_TOKEN` environment variable is set in SST Console
+- Verify the GitHub token has `repo` permissions
+- Check SST Console deployment logs for repository dispatch call
+- Ensure the repository name is correct in SST config: `ianyimi/uifoundry`
+
+### Tests fail immediately
+
+- Check deployment URL accessibility manually
+- Verify SSL certificates are working
+- Check if the deployed application is functioning correctly
 
 ### Tests fail on specific environment
 
