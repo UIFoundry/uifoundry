@@ -115,8 +115,11 @@ export default $config({
 			},
 			runner: {
 				engine: "codebuild",
-				compute: "small",
+				compute: "medium",
 				timeout: "20 minutes",
+				cache: {
+					paths: ["node_modules", ".next/cache"],
+				},
 			},
 			async workflow({ $, event }) {
 				try {
