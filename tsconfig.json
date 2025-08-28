@@ -42,5 +42,5 @@
     "next.config.mjs",
     "src/env.mjs"
   ],
-  "exclude": ["node_modules", "sst.config.ts", "sst.workflow.ts"]
+  "exclude": ["node_modules", "sst.config.ts", "sst.workflow.ts", "registry"]
 }

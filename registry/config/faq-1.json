@@ -1,0 +1,10 @@
+{
+  "name": "faq-1",
+  "type": "components:component",
+  "description": "FAQ block variant 1",
+  "category": "faq",
+  "tags": ["faq", "uifoundry", "block"],
+  "dependencies": ["react", "next/link"],
+  "registryDependencies": ["accordion"],
+  "files": [{ "name": "faq-1.tsx", "target": "components/faq-1.tsx" }]
+}

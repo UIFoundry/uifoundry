@@ -1,7 +1,12 @@
-import type { ComponentPropsWithRef } from "react";
-
+import React, { type ComponentPropsWithRef } from "react";
 import { Card, CardHeader, CardContent } from "~/ui/card";
 import { Icon } from "~/ui/icon";
+
+interface ComponentProps {
+  header?: string;
+  subheader?: string;
+  features: Array<{ title?: string; description?: string; icon?: string }>;
+}
 
 export default function Features_1({
   header,
@@ -26,10 +31,8 @@ export default function Features_1({
                     <Icon icon={feature.icon} />
                   </CardDecorator>
                 )}
-
                 <h3 className="mt-6 font-medium">{feature.title}</h3>
               </CardHeader>
-
               <CardContent>
                 <p className="text-sm">{feature.description}</p>
               </CardContent>

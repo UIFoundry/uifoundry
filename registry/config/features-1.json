@@ -1,0 +1,10 @@
+{
+  "name": "features-1",
+  "type": "components:component",
+  "description": "Features block variant 1",
+  "category": "features",
+  "tags": ["features", "uifoundry", "block"],
+  "dependencies": ["react"],
+  "registryDependencies": ["card", "icon"],
+  "files": [{ "name": "features-1.tsx", "target": "components/features-1.tsx" }]
+}

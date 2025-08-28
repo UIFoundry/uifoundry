@@ -1,0 +1,9 @@
+{
+  "name": "teams-1",
+  "type": "components:component",
+  "description": "Team block variant 1",
+  "category": "team",
+  "tags": ["team", "uifoundry", "block"],
+  "dependencies": ["react", "next/image"],
+  "files": [{ "name": "teams-1.tsx", "target": "components/teams-1.tsx" }]
+}

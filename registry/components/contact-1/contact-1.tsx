@@ -3,18 +3,31 @@ import React from "react";
 interface ComponentProps {
   header?: string;
   subheader?: string;
-  alertLabel?: string;
-  alertLink?: string;
-  media?: {
-    light?: { url: string; alt: string };
-    dark?: { url: string; alt: string };
-  };
-  actions?: Array<{ label?: string; href?: string }>;
-  features?: Array<{ title?: string; description?: string; icon?: string }>;
-  faqs?: Array<{ question?: string; answer?: string }>;
-  members?: Array<{ name?: string; role?: string; bio?: string }>;
-  stats?: Array<{ label?: string; value?: string }>;
-  testimonials?: Array<{ content?: string; author?: string; role?: string }>;
-  [key: string]: any;
+  email?: string;
+  phone?: string;
+  address?: string;
 }
 
+export default function Contact_1({
+  header,
+  subheader,
+  email,
+  phone,
+  address,
+}: ComponentProps) {
+  return (
+    <section className="py-16 md:py-32">
+      <div className="mx-auto max-w-3xl px-6 text-center">
+        <h2 className="text-4xl font-semibold text-balance lg:text-5xl">
+          {header}
+        </h2>
+        <p className="text-muted-foreground mt-3">{subheader}</p>
+        <div className="mt-8 space-y-2">
+          {email && <p className="text-sm">Email: {email}</p>}
+          {phone && <p className="text-sm">Phone: {phone}</p>}
+          {address && <p className="text-sm">Address: {address}</p>}
+        </div>
+      </div>
+    </section>
+  );
+}
