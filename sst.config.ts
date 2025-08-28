@@ -19,8 +19,6 @@ export default $config({
   async run() {
     // Only import env in production to avoid NODE_ENV validation issues in dev
     const isProd = $app.stage === "production";
-    const isDev = $app.stage === "dev";
-    const isPersonal = !isProd && !isDev;
 
     // Skip env validation during SST builds
     process.env.SKIP_ENV_VALIDATION = "1";
@@ -97,6 +95,8 @@ export default $config({
         S3_REGION: S3_REGION.value,
         S3_ACCESS_KEY_ID: S3_ACCESS_KEY_ID.value,
         S3_SECRET_ACCESS_KEY: S3_SECRET_ACCESS_KEY.value,
+        // Build time for deployment verification
+        BUILD_TIME: new Date().toISOString(),
       },
     });
   },
@@ -111,6 +111,112 @@ export default $config({
           if (event.branch === "dev") {
             return { stage: "dev" };
           }
+        }
+      },
+      runner: {
+        engine: "codebuild",
+        compute: "large", // Increased from medium for more memory (15GB)
+        timeout: "30 minutes", // Increased timeout
+        cache: {
+          paths: ["node_modules", ".next/cache"],
+        },
+      },
+      async workflow({ $, event }) {
+        try {
+          console.log("🚀 Starting SST deployment workflow...");
+
+          // Install global dependencies including Bun (required for SST workflow execution)
+          console.log("📦 Installing global dependencies...");
+          await $`npm i -g pnpm`;
+
+          // Install project dependencies
+          console.log("📦 Installing project dependencies...");
+          await $`pnpm i`;
+
+          // Set build time environment variable for deployment verification
+          process.env.BUILD_TIME = new Date().toISOString();
+
+          // Increase Node.js memory for build process to handle Next.js 15 + PayloadCMS
+          process.env.NODE_OPTIONS = "--max-old-space-size=4096";
+
+          if (event.action === "removed") {
+            console.log("🗑️ Removing deployment...");
+            await $`pnpm sst remove`;
+          } else {
+            // Run unit tests before deployment
+            console.log("🧪 Running unit tests...");
+            await $`pnpm vitest run`;
+
+            console.log("✅ Tests passed! Deploying...");
+            await $`pnpm sst deploy`;
+
+            console.log("🎉 Deployment complete! Triggering E2E tests...");
+
+            // Trigger GitHub Action via GitHub CLI after successful deployment
+            try {
+              let stage = "local";
+              if (event.type === "branch") {
+                switch (event.branch) {
+                  case "master":
+                    stage = "production";
+                    break;
+                  case "dev":
+                    stage = "dev";
+                    break;
+                  default:
+                    stage = event.branch;
+                }
+              }
+              const branchRef =
+                event.type === "branch"
+                  ? event.branch
+                  : event.type === "pull_request"
+                    ? event.head
+                    : "dev";
+              const owner = "ianyimi";
+              const repo = "uifoundry";
+
+              // Ensure gh CLI is available (Amazon Linux via yum)
+              await $`yum install -y yum-utils`;
+              await $`yum-config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo`;
+              await $`yum install -y gh`;
+              // Resolve workflow id from default branch to avoid 404s
+              const wfIdText =
+                await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh api repos/${owner}/${repo}/actions/workflows --jq '.workflows[] | select(.path == ".github/workflows/e2e-tests-on-deploy.yml") | .id'`.text();
+              const workflowId = wfIdText.trim();
+              if (!workflowId) {
+                console.warn(
+                  "⚠️  Workflow not found on default branch: .github/workflows/e2e-tests-on-deploy.yml. Ensure it is committed to the default branch.",
+                );
+              } else {
+                // Trigger workflow_dispatch with inputs via GH API
+                await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh api --method POST repos/${owner}/${repo}/actions/workflows/${workflowId}/dispatches -f ref=${branchRef} -f inputs[stage]=${stage} -f inputs[commit]=${event.commit?.id ?? "unknown"} -f inputs[branch]=${branchRef}`;
+                // Fetch the latest workflow_dispatch run id for this branch
+                const runsJson =
+                  await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh run list --branch ${branchRef} --event workflow_dispatch --limit 1 --json databaseId`.text();
+                let runId = "";
+                try {
+                  runId =
+                    JSON.parse(runsJson)?.[0]?.databaseId?.toString() ?? "";
+                } catch {}
+                if (runId) {
+                  console.log(
+                    `✅ E2E tests triggered: https://github.com/${owner}/${repo}/actions/runs/${runId}`,
+                  );
+                } else {
+                  console.log(
+                    `✅ E2E tests triggered. View runs: https://github.com/${owner}/${repo}/actions/workflows/e2e-tests-on-deploy.yml`,
+                  );
+                }
+              }
+            } catch (triggerError) {
+              console.warn("⚠️  Failed to trigger E2E tests:", triggerError);
+              // Don't fail the deployment if GitHub trigger fails
+            }
+          }
+        } catch (error) {
+          console.error("❌ Workflow failed:", error);
+          throw error; // Let SST handle the exit
         }
       },
     },

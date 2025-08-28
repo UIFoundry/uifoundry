@@ -1,0 +1,156 @@
+name: Test After SST Deploy
+
+on:
+  push:
+    branches: [master, dev]
+
+jobs:
+  test-deployment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Record workflow start time
+        id: workflow-start
+        run: |
+          WORKFLOW_START_TIME=$(date -u +%s)
+          echo "workflow_start_time=$WORKFLOW_START_TIME" >> $GITHUB_OUTPUT
+          echo "⏰ Workflow started at: $(date -u) (timestamp: $WORKFLOW_START_TIME)"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run unit tests
+        run: pnpm vitest run
+        env:
+          SKIP_ENV_VALIDATION: "true"
+
+      - name: Determine deployment URL
+        id: deployment-url
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/master" ]; then
+            # Production deployment
+            DEPLOYMENT_URL="https://uifoundry.dev"
+          elif [ "${{ github.ref }}" == "refs/heads/dev" ]; then
+            # Dev deployment
+            DEPLOYMENT_URL="https://dev.uifoundry.dev"
+          else
+            # Personal stage deployment
+            BRANCH_NAME=$(echo "${{ github.ref }}" | sed 's/refs\/heads\///')
+            DEPLOYMENT_URL="https://${BRANCH_NAME}.uifoundry.dev"
+          fi
+
+          echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
+          echo "🚀 Deployment URL: $DEPLOYMENT_URL"
+
+      - name: Wait for new deployment to complete
+        run: |
+          DEPLOYMENT_URL="${{ steps.deployment-url.outputs.deployment_url }}"
+          WORKFLOW_START_TIME="${{ steps.workflow-start.outputs.workflow_start_time }}"
+          MAX_ATTEMPTS=40  # 20 minutes total (40 attempts * 30 seconds)
+          ATTEMPT=1
+
+          echo "⏳ Waiting for fresh deployment to complete..."
+          echo "🔗 Checking deployment at: $DEPLOYMENT_URL"
+          echo "📅 Workflow started at: $(date -u -d @$WORKFLOW_START_TIME) (timestamp: $WORKFLOW_START_TIME)"
+
+          while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+            echo "📍 Attempt $ATTEMPT/$MAX_ATTEMPTS..."
+            
+            # Check if the deployment is responding
+            if curl -s --head --fail "$DEPLOYMENT_URL" > /dev/null 2>&1; then
+              echo "✅ Deployment URL is responding"
+              
+              # Get build time from the deployed version
+              VERSION_RESPONSE=$(curl -s "$DEPLOYMENT_URL/api/version" 2>/dev/null || echo '{}')
+              BUILD_TIME_STR=$(echo "$VERSION_RESPONSE" | jq -r '.buildTime // "unknown"' 2>/dev/null || echo "unknown")
+              
+              if [ "$BUILD_TIME_STR" != "unknown" ]; then
+                # Convert ISO 8601 build time to Unix timestamp for comparison (Linux compatible)
+                BUILD_TIME=$(date -d "$BUILD_TIME_STR" +%s 2>/dev/null || echo "0")
+                
+                echo "🔍 Workflow started: $(date -u)"
+                echo "🔍 Deployed build:   $BUILD_TIME_STR"
+                
+                # Check if the deployed build is newer than when this workflow started
+                if [ "$BUILD_TIME" -gt "$WORKFLOW_START_TIME" ]; then
+                  echo "🎉 Fresh deployment confirmed! Build is newer than workflow start."
+                  echo "📋 Deployment info:"
+                  echo "$VERSION_RESPONSE" | jq . 2>/dev/null || echo "$VERSION_RESPONSE"
+                  break
+                else
+                  echo "⏳ Deployment is older than workflow start - waiting for fresh build..."
+                  TIME_DIFF=$((WORKFLOW_START_TIME - BUILD_TIME))
+                  echo "   (Deployed build is ${TIME_DIFF} seconds older than workflow)"
+                fi
+              else
+                echo "⚠️  Could not get build time from API..."
+              fi
+            else
+              echo "⏳ Deployment URL not responding yet..."
+            fi
+            
+            if [ $ATTEMPT -eq $MAX_ATTEMPTS ]; then
+              echo "❌ Fresh deployment not detected after $MAX_ATTEMPTS attempts"
+              echo "ℹ️  This might mean:"
+              echo "   - SST deployment is taking longer than expected"
+              echo "   - There was an issue with the deployment"
+              echo "   - The API is not working correctly"
+              exit 1
+            fi
+            
+            echo "⏰ Waiting 30 seconds before next attempt..."
+            sleep 30
+            ATTEMPT=$((ATTEMPT + 1))
+          done
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps
+
+      - name: Run Playwright tests
+        env:
+          NEXT_PUBLIC_BETTER_AUTH_URL: ${{ steps.deployment-url.outputs.deployment_url }}
+        run: pnpm exec playwright test
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-${{ github.run_id }}
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-results-${{ github.run_id }}
+          path: test-results/
+          retention-days: 30
+
+      - name: Output test results
+        if: always()
+        run: |
+          echo "## 🎭 Playwright Test Results"
+          echo "**Deployment URL:** ${{ steps.deployment-url.outputs.deployment_url }}"
+          echo "**Branch:** ${{ github.ref_name }}"
+          echo "**Workflow:** https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "✅ **All tests passed!**"
+          else
+            echo "❌ **Some tests failed.** Check the workflow run for details."
+          fi
