@@ -1,0 +1,24 @@
+{
+  "name": "features-1",
+  "type": "components:component",
+  "description": "Features block variant 1 from UIFoundry",
+  "files": [
+    {
+      "name": "features-1.tsx",
+      "content": "import type { ComponentPropsWithRef } from \"react\";\n\nimport { Card, CardHeader, CardContent } from \"@/components/ui/card\";\nimport { Icon } from \"@/components/ui/icon\";\n\nexport default function Features_1({\n  header,\n  subheader,\n  features,\n}: ComponentProps) {\n  return (\n    <section className=\"bg-zinc-50 py-16 md:py-32 dark:bg-transparent\">\n      <div className=\"@container mx-auto max-w-5xl px-6\">\n        <div className=\"text-center\">\n          <h2 className=\"text-4xl font-semibold text-balance lg:text-5xl\">\n            {header}\n          </h2>\n          <p className=\"mt-4\">{subheader}</p>\n        </div>\n        <Card className=\"mx-auto mt-8 grid max-w-sm divide-y overflow-hidden shadow-zinc-950/5 *:text-center md:mt-16 @min-4xl:max-w-full @min-4xl:grid-cols-3 @min-4xl:divide-x @min-4xl:divide-y-0\">\n          {features.map((feature, index) => (\n            <div className=\"group shadow-zinc-950/5\" key={`feature-${index}`}>\n              <CardHeader className=\"pb-3\">\n                {feature.icon && (\n                  <CardDecorator>\n                    <Icon icon={feature.icon} />\n                  </CardDecorator>\n                )}\n\n                <h3 className=\"mt-6 font-medium\">{feature.title}</h3>\n              </CardHeader>\n\n              <CardContent>\n                <p className=\"text-sm\">{feature.description}</p>\n              </CardContent>\n            </div>\n          ))}\n        </Card>\n      </div>\n    </section>\n  );\n}\n\nfunction CardDecorator({\n  children,\n  ...divProps\n}: ComponentPropsWithRef<\"div\">) {\n  return (\n    <div\n      className=\"relative mx-auto size-36 duration-200 [--color-border:color-mix(in_oklab,var(--color-zinc-950)10%,transparent)] group-hover:[--color-border:color-mix(in_oklab,var(--color-zinc-950)20%,transparent)] dark:[--color-border:color-mix(in_oklab,var(--color-white)15%,transparent)] dark:group-hover:bg-white/5 dark:group-hover:[--color-border:color-mix(in_oklab,var(--color-white)20%,transparent)]\"\n      {...divProps}\n    >\n      <div\n        aria-hidden\n        className=\"absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px]\"\n      />\n      <div\n        aria-hidden\n        className=\"to-background absolute inset-0 bg-radial from-transparent to-75%\"\n      />\n      <div className=\"bg-background absolute inset-0 m-auto flex size-12 items-center justify-center border-t border-l\">\n        {children}\n      </div>\n    </div>\n  );\n}"
+    }
+  ],
+  "dependencies": [
+    "react"
+  ],
+  "registryDependencies": [
+    "card",
+    "icon"
+  ],
+  "category": "features",
+  "tags": [
+    "features",
+    "uifoundry",
+    "block"
+  ]
+}

@@ -23,15 +23,16 @@
   - [ ] 3.3 Convert Features, CTA, and FAQ blocks to registry format
   - [ ] 3.4 Convert remaining blocks (Pricing, Teams, Stats, Gallery, etc.)
   - [ ] 3.5 Generate proper TypeScript interfaces for all converted components
-  - [ ] 3.6 Validate component dependencies and import paths
+  - [x] 3.6 Validate component dependencies and import paths
 
 - [ ] 4. Build Web Interface for Component Discovery
-  - [ ] 4.1 Create Next.js pages under `/app/registry/` route structure
-  - [ ] 4.2 Build component listing page with search and filtering
+  - [x] 4.1 Create Next.js pages under `/app/registry/` route structure
+  - [x] 4.2 Build component listing page with search and filtering
   - [ ] 4.3 Implement individual component preview pages with live examples
-  - [ ] 4.4 Add syntax highlighting for component source code display
-  - [ ] 4.5 Create installation instructions and CLI command generation
-  - [ ] 4.6 Implement responsive design and proper SEO optimization
+        ⚠️ Blocking issue: Many registry components are not yet converted or typed; live rendering is unsafe until tasks 3.3–3.5 complete for all components.
+  - [x] 4.4 Add syntax highlighting for component source code display
+  - [x] 4.5 Create installation instructions and CLI command generation
+  - [x] 4.6 Implement responsive design and proper SEO optimization
 
 - [ ] 5. CLI Integration and Registry Compatibility Testing
   - [ ] 5.1 Test component installation via `npx shadcn add --registry` command

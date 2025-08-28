@@ -1,0 +1,19 @@
+{
+  "name": "hero-2",
+  "type": "components:component",
+  "description": "Hero block variant 2 from UIFoundry",
+  "files": [
+    {
+      "name": "hero-2.tsx",
+      "content": "export default function Hero_2(props: ComponentProps) {\n\treturn (\n\t\t<div className=\"grid h-[75vh] w-full grid-cols-2 bg-red-50 p-4\">\n\t\t\t<div className=\"flex h-full flex-col items-start justify-center gap-2 bg-blue-200/30\">\n\t\t\t\t<h1 className=\"clamp-[text,4xl,6xl]\">{props.header}</h1>\n\t\t\t\t<p className=\"clamp-[text,md,xl]\">{props.subheader}</p>\n\t\t\t</div>\n\t\t\t<div className=\"col-start-2 flex items-center justify-center\">\n\t\t\t\timage goes here\n\t\t\t</div>\n\t\t</div>\n\t);\n}"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "category": "hero",
+  "tags": [
+    "hero",
+    "uifoundry",
+    "block"
+  ]
+}

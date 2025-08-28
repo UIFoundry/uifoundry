@@ -1,0 +1,19 @@
+{
+  "name": "gallery-1",
+  "type": "components:component",
+  "description": "Gallery block variant 1 from UIFoundry",
+  "files": [
+    {
+      "name": "gallery-1.tsx",
+      "content": "import React from \"react\";\n\ninterface ComponentProps {\n  header?: string;\n  subheader?: string;\n  alertLabel?: string;\n  alertLink?: string;\n  media?: {\n    light?: { url: string; alt: string };\n    dark?: { url: string; alt: string };\n  };\n  actions?: Array<{ label?: string; href?: string }>;\n  features?: Array<{ title?: string; description?: string; icon?: string }>;\n  faqs?: Array<{ question?: string; answer?: string }>;\n  members?: Array<{ name?: string; role?: string; bio?: string }>;\n  stats?: Array<{ label?: string; value?: string }>;\n  testimonials?: Array<{ content?: string; author?: string; role?: string }>;\n  [key: string]: any;\n}\n\n"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "category": "gallery",
+  "tags": [
+    "gallery",
+    "uifoundry",
+    "block"
+  ]
+}

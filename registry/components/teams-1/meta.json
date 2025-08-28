@@ -1,0 +1,19 @@
+{
+  "name": "teams-1",
+  "type": "components:component",
+  "description": "Teams block variant 1 from UIFoundry",
+  "files": [
+    {
+      "name": "teams-1.tsx",
+      "content": "import React from \"react\";\n\ninterface ComponentProps {\n  header?: string;\n  subheader?: string;\n  alertLabel?: string;\n  alertLink?: string;\n  media?: {\n    light?: { url: string; alt: string };\n    dark?: { url: string; alt: string };\n  };\n  actions?: Array<{ label?: string; href?: string }>;\n  features?: Array<{ title?: string; description?: string; icon?: string }>;\n  faqs?: Array<{ question?: string; answer?: string }>;\n  members?: Array<{ name?: string; role?: string; bio?: string }>;\n  stats?: Array<{ label?: string; value?: string }>;\n  testimonials?: Array<{ content?: string; author?: string; role?: string }>;\n  [key: string]: any;\n}\n\nimport {\n  BLOCK_SLUG_TEAMS_1_HEADING,\n  BLOCK_SLUG_TEAMS_1_MEMBERS,\n} from \"~/payload/constants/blocks\";\n\nconst blockComponents = {\n  [BLOCK_SLUG_TEAMS_1_HEADING]: Teams_1_Heading,\n  [BLOCK_SLUG_TEAMS_1_MEMBERS]: Teams_1_Members,\n};\n\nexport default function Teams_1({ blocks }: ComponentProps) {\n  return <RenderBlocks blocks={blocks} blockComponents={blockComponents} />;\n}"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "category": "team",
+  "tags": [
+    "teams",
+    "uifoundry",
+    "block"
+  ]
+}
