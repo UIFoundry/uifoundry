@@ -3,6 +3,20 @@ name: E2E Tests (Post-Deploy)
 on:
   repository_dispatch:
     types: [deployment_complete]
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Stage name (production/dev/branch)"
+        required: true
+        type: string
+      commit:
+        description: "Commit SHA"
+        required: true
+        type: string
+      branch:
+        description: "Branch name"
+        required: true
+        type: string
 
 jobs:
   e2e-tests:
@@ -31,6 +45,7 @@ jobs:
         id: deployment-url
         run: |
           STAGE="${{ github.event.client_payload.stage }}"
+          if [ -z "$STAGE" ]; then STAGE="${{ github.event.inputs.stage }}"; fi
           if [ "$STAGE" == "production" ]; then
             DEPLOYMENT_URL="https://uifoundry.dev"
           else
@@ -40,8 +55,8 @@ jobs:
           echo "🚀 Testing deployment at: $DEPLOYMENT_URL"
           echo "📋 Deployment info:"
           echo "  Stage: $STAGE"
-          echo "  Commit: ${{ github.event.client_payload.commit }}"
-          echo "  Branch: ${{ github.event.client_payload.branch }}"
+          echo "  Commit: ${{ github.event.client_payload.commit || github.event.inputs.commit }}"
+          echo "  Branch: ${{ github.event.client_payload.branch || github.event.inputs.branch }}"
 
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
@@ -72,9 +87,9 @@ jobs:
         run: |
           echo "## 🎭 E2E Test Results"
           echo "**Deployment URL:** ${{ steps.deployment-url.outputs.deployment_url }}"
-          echo "**Stage:** ${{ github.event.client_payload.stage }}"
-          echo "**Commit:** ${{ github.event.client_payload.commit }}"
-          echo "**Branch:** ${{ github.event.client_payload.branch }}"
+          echo "**Stage:** ${{ github.event.client_payload.stage || github.event.inputs.stage }}"
+          echo "**Commit:** ${{ github.event.client_payload.commit || github.event.inputs.commit }}"
+          echo "**Branch:** ${{ github.event.client_payload.branch || github.event.inputs.branch }}"
           echo "**Workflow:** https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
           if [ "${{ job.status }}" == "success" ]; then

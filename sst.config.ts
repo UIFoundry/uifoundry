@@ -150,46 +150,47 @@ export default $config({
             console.log("✅ Tests passed! Deploying...");
             await $`pnpm sst deploy`;
 
-            console.log("🎉 Deployment complete! Triggering E2E tests...");
+						console.log("🎉 Deployment complete! Triggering E2E tests...");
+						
+						let stage = "local";
+						if (event.type === "branch") {
+							switch (event.branch) {
+								case "master":
+									stage = "production";
+									break;
+								case "dev":
+									stage = "dev";
+									break;
+								default:
+									stage = event.branch;
+							}
+						}
+						// Trigger GitHub Action via GitHub CLI after successful deployment
+						try {
+							const branchRef = event.type === "branch" ? event.branch : (event.type === "pull_request" ? event.head : "dev");
+							const owner = "ianyimi";
+							const repo = "uifoundry";
+							// Ensure gh CLI is available
+							await $`curl -sSL -o /tmp/gh.tar.gz https://github.com/cli/cli/releases/download/v2.55.0/gh_2.55.0_linux_amd64.tar.gz`;
+							await $`tar -C /tmp -xzf /tmp/gh.tar.gz`;
+							await $`cp /tmp/gh_2.55.0_linux_amd64/bin/gh /usr/local/bin/gh`;
+							// Trigger workflow_dispatch with inputs
+							await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh workflow run e2e-tests-on-deploy.yml -r ${branchRef} -f stage=${stage} -f commit=${event.commit?.id ?? "unknown"} -f branch=${branchRef}`;
+							// Fetch the latest run id for this workflow and branch
+							const runsJson = await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh run list --workflow e2e-tests-on-deploy.yml --branch ${branchRef} --limit 1 --json databaseId`.text();
+							let runId = "";
+							try { runId = JSON.parse(runsJson)?.[0]?.databaseId?.toString() ?? ""; } catch {}
+							if (runId) {
+								console.log(`✅ E2E tests triggered: https://github.com/${owner}/${repo}/actions/runs/${runId}`);
+							} else {
+								console.log(`✅ E2E tests triggered. View runs: https://github.com/${owner}/${repo}/actions/workflows/e2e-tests-on-deploy.yml`);
+							}
+						} catch (triggerError) {
+							console.warn("⚠️  Failed to trigger E2E tests:", triggerError);
+							// Don't fail the deployment if GitHub trigger fails
+						}
+            }
 
-            let stage = "local";
-            if (event.type === "branch") {
-              switch (event.branch) {
-                case "master":
-                  stage = "production";
-                  break;
-                case "dev":
-                  stage = "dev";
-                  break;
-              }
-            }
-            // Trigger GitHub Action via repository dispatch after successful deployment
-            try {
-              const branch =
-                event.type === "branch"
-                  ? event.branch
-                  : event.type === "pull_request"
-                    ? event.head
-                    : "unknown";
-              const owner = "ianyimi";
-              const repo = "uifoundry";
-              const payload = JSON.stringify({
-                event_type: "deployment_complete",
-                client_payload: {
-                  stage,
-                  commit: event.commit?.id ?? "unknown",
-                  branch,
-                },
-              });
-              await $`curl -s -o /dev/null -w "%{http_code}" -X POST -H ${"Authorization: token " + (process.env.GITHUB_TOKEN ?? "")} -H "Accept: application/vnd.github+json" -H "Content-Type: application/json" --data ${payload} https://api.github.com/repos/${owner}/${repo}/dispatches`;
-              console.log("✅ E2E tests triggered successfully!");
-              console.log(
-                `🔗 Open E2E test runs: https://github.com/${owner}/${repo}/actions/workflows/e2e-tests-on-deploy.yml`,
-              );
-            } catch (triggerError) {
-              console.warn("⚠️  Failed to trigger E2E tests:", triggerError);
-              // Don't fail the deployment if GitHub trigger fails
-            }
           }
         } catch (error) {
           console.error("❌ Workflow failed:", error);
