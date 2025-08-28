@@ -10,6 +10,13 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      - name: Record workflow start time
+        id: workflow-start
+        run: |
+          WORKFLOW_START_TIME=$(date -u +%s)
+          echo "workflow_start_time=$WORKFLOW_START_TIME" >> $GITHUB_OUTPUT
+          echo "⏰ Workflow started at: $(date -u) (timestamp: $WORKFLOW_START_TIME)"
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -52,13 +59,13 @@ jobs:
       - name: Wait for new deployment to complete
         run: |
           DEPLOYMENT_URL="${{ steps.deployment-url.outputs.deployment_url }}"
-          WORKFLOW_START_TIME=$(date -u +%s)
+          WORKFLOW_START_TIME="${{ steps.workflow-start.outputs.workflow_start_time }}"
           MAX_ATTEMPTS=40  # 20 minutes total (40 attempts * 30 seconds)
           ATTEMPT=1
 
           echo "⏳ Waiting for fresh deployment to complete..."
           echo "🔗 Checking deployment at: $DEPLOYMENT_URL"
-          echo "📅 Workflow started at: $(date -u)"
+          echo "📅 Workflow started at: $(date -u -d @$WORKFLOW_START_TIME) (timestamp: $WORKFLOW_START_TIME)"
 
           while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
             echo "📍 Attempt $ATTEMPT/$MAX_ATTEMPTS..."

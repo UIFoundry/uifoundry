@@ -78,6 +78,7 @@
 		"@types/react": "^19.0.0",
 		"@types/react-dom": "^19.0.0",
 		"babel-plugin-react-compiler": "19.1.0-rc.1",
+		"bun": "^1.2.21",
 		"eslint": "^9.23.0",
 		"eslint-config-next": "^15.2.3",
 		"eslint-plugin-react-hooks": "^5.2.0",
