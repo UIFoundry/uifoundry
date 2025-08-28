@@ -17,7 +17,6 @@ export default defineConfig(({ mode }) => {
         SKIP_ENV_VALIDATION: "true", // Skip env validation in tests
         // Mock SST environment variables for testing
         SST_STAGE: "test",
-        COMMIT_SHA: "test-commit-sha",
         BUILD_TIME: new Date().toISOString(),
       },
       environment: "node",

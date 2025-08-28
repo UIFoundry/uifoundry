@@ -42,8 +42,8 @@ Triggers automatically on:
 
 1. Runs unit tests first
 2. Detects deployment URL based on branch
-3. Waits up to 20 minutes for correct deployment version (using commit SHA verification)
-4. Runs Playwright E2E tests against live deployment with verified version
+3. Waits up to 20 minutes for fresh deployment (build time newer than workflow start)
+4. Runs Playwright E2E tests against live deployment
 5. Uploads test artifacts
 
 ### Manual Testing (`manual-test.yml`)
@@ -118,12 +118,12 @@ Test runs generate:
 
 ## Deployment Verification
 
-The workflow uses **commit SHA verification** to ensure tests run against the correct deployment:
+The workflow uses **build time verification** to ensure tests run against the fresh deployment:
 
-1. **SST deployment** injects `COMMIT_SHA` environment variable
-2. **API endpoint** `/api/version` exposes deployment info
-3. **GitHub Action** polls this endpoint until commit SHAs match
-4. **Tests run** only after correct version is confirmed deployed
+1. **GitHub Action** records its start time
+2. **SST Console** autodeploys the app with new build time
+3. **GitHub Action** polls `/api/version` until build time is newer than workflow start
+4. **Tests run** only against the confirmed fresh deployment
 
 ## Troubleshooting
 
@@ -131,8 +131,8 @@ The workflow uses **commit SHA verification** to ensure tests run against the co
 
 - Check SST Console for deployment status
 - Verify `/api/version` endpoint is accessible
-- Check if commit SHA is being injected correctly
 - Verify domain SSL certificates are valid
+- Check if build time comparison is working correctly
 - Increase timeout in workflow if needed (currently 20 minutes)
 
 ### Tests fail on specific environment

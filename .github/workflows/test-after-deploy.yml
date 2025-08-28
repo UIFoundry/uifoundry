@@ -49,48 +49,59 @@ jobs:
           echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
           echo "🚀 Deployment URL: $DEPLOYMENT_URL"
 
-      - name: Wait for correct deployment version
+      - name: Wait for new deployment to complete
         run: |
           DEPLOYMENT_URL="${{ steps.deployment-url.outputs.deployment_url }}"
-          EXPECTED_SHA="${{ github.sha }}"
+          WORKFLOW_START_TIME=$(date -u +%s)
           MAX_ATTEMPTS=40  # 20 minutes total (40 attempts * 30 seconds)
           ATTEMPT=1
 
-          echo "⏳ Waiting for deployment with commit: $EXPECTED_SHA"
+          echo "⏳ Waiting for fresh deployment to complete..."
           echo "🔗 Checking deployment at: $DEPLOYMENT_URL"
+          echo "📅 Workflow started at: $(date -u)"
 
           while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
             echo "📍 Attempt $ATTEMPT/$MAX_ATTEMPTS..."
             
-            # First check if the deployment is responding
+            # Check if the deployment is responding
             if curl -s --head --fail "$DEPLOYMENT_URL" > /dev/null 2>&1; then
               echo "✅ Deployment URL is responding"
               
-              # Check the version endpoint to get commit SHA
+              # Get build time from the deployed version
               VERSION_RESPONSE=$(curl -s "$DEPLOYMENT_URL/api/version" 2>/dev/null || echo '{}')
-              DEPLOYED_SHA=$(echo "$VERSION_RESPONSE" | jq -r '.commitSha // "unknown"' 2>/dev/null || echo "unknown")
+              BUILD_TIME_STR=$(echo "$VERSION_RESPONSE" | jq -r '.buildTime // "unknown"' 2>/dev/null || echo "unknown")
               
-              echo "🔍 Expected SHA: $EXPECTED_SHA"
-              echo "🔍 Deployed SHA:  $DEPLOYED_SHA"
-              
-              # Check if we have the correct version deployed
-              if [ "$DEPLOYED_SHA" = "$EXPECTED_SHA" ]; then
-                echo "🎉 Correct deployment version found!"
-                echo "📋 Deployment info:"
-                echo "$VERSION_RESPONSE" | jq . 2>/dev/null || echo "$VERSION_RESPONSE"
-                break
-              elif [ "$DEPLOYED_SHA" = "unknown" ]; then
-                echo "⚠️  Could not determine deployed version (API may not be ready)"
+              if [ "$BUILD_TIME_STR" != "unknown" ]; then
+                # Convert ISO 8601 build time to Unix timestamp for comparison (Linux compatible)
+                BUILD_TIME=$(date -d "$BUILD_TIME_STR" +%s 2>/dev/null || echo "0")
+                
+                echo "🔍 Workflow started: $(date -u)"
+                echo "🔍 Deployed build:   $BUILD_TIME_STR"
+                
+                # Check if the deployed build is newer than when this workflow started
+                if [ "$BUILD_TIME" -gt "$WORKFLOW_START_TIME" ]; then
+                  echo "🎉 Fresh deployment confirmed! Build is newer than workflow start."
+                  echo "📋 Deployment info:"
+                  echo "$VERSION_RESPONSE" | jq . 2>/dev/null || echo "$VERSION_RESPONSE"
+                  break
+                else
+                  echo "⏳ Deployment is older than workflow start - waiting for fresh build..."
+                  TIME_DIFF=$((WORKFLOW_START_TIME - BUILD_TIME))
+                  echo "   (Deployed build is ${TIME_DIFF} seconds older than workflow)"
+                fi
               else
-                echo "⏳ Deployed version ($DEPLOYED_SHA) doesn't match expected ($EXPECTED_SHA)"
+                echo "⚠️  Could not get build time from API..."
               fi
             else
               echo "⏳ Deployment URL not responding yet..."
             fi
             
             if [ $ATTEMPT -eq $MAX_ATTEMPTS ]; then
-              echo "❌ Correct deployment version not found after $MAX_ATTEMPTS attempts"
-              echo "🔍 Final deployed SHA: $DEPLOYED_SHA"
+              echo "❌ Fresh deployment not detected after $MAX_ATTEMPTS attempts"
+              echo "ℹ️  This might mean:"
+              echo "   - SST deployment is taking longer than expected"
+              echo "   - There was an issue with the deployment"
+              echo "   - The API is not working correctly"
               exit 1
             fi
             
