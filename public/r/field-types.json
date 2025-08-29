@@ -4,7 +4,7 @@
   "type": "registry:lib",
   "title": "Payload Field Types",
   "dependencies": [
-    "payload@^3.0.0"
+    "payload@^3.49.1"
   ],
   "files": [
     {
