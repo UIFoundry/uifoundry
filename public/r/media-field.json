@@ -3,7 +3,7 @@
   "name": "media-field",
   "type": "registry:block",
   "title": "Media Field",
-  "description": "PayloadCMS double Media Field (supports light & dark image variants)",
+  "description": "PayloadCMS double upload field (supports light & dark image variants)",
   "dependencies": [
     "react",
     "next"
