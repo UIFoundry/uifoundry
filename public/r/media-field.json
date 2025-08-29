@@ -3,10 +3,14 @@
   "name": "media-field",
   "type": "registry:block",
   "title": "Media Field",
-  "description": "Light & Dark Media Field",
+  "description": "PayloadCMS double Media Field (supports light & dark image variants)",
   "dependencies": [
     "react",
     "next"
+  ],
+  "registryDependencies": [
+    "@uifoundry/field-types",
+    "@uifoundry/upload-field"
   ],
   "files": [
     {
@@ -17,8 +21,8 @@
     },
     {
       "path": "registry/payload/fields/media/config.ts",
-      "content": "import type { GroupField } from \"@/registry/payload/fields\";\nimport uploadField from \"@/registry/payload/fields/upload/config\";\n\nexport default function mediaField(props?: Partial<GroupField>): GroupField {\n\treturn {\n\t\tname: \"media\",\n\t\ttype: \"group\",\n\t\tinterfaceName: \"MediaField\",\n\t\tfields: [uploadField({ name: \"light\" }), uploadField({ name: \"dark\" })],\n\t\t...props,\n\t} as GroupField;\n}\n",
-      "type": "registry:file",
+      "content": "import type { GroupField } from \"@/registry/payload/fields/index.d.ts\";\nimport uploadField from \"@/registry/payload/fields/upload/config\";\n\nexport default function mediaField(props?: Partial<GroupField>): GroupField {\n\treturn {\n\t\tname: \"media\",\n\t\ttype: \"group\",\n\t\tinterfaceName: \"MediaField\",\n\t\tfields: [uploadField({ name: \"light\" }), uploadField({ name: \"dark\" })],\n\t\t...props,\n\t} as GroupField;\n}\n",
+      "type": "registry:component",
       "target": "src/payload/fields/media/config.ts"
     }
   ]
