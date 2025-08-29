@@ -161,7 +161,7 @@
 			"title": "Media Field",
 			"name": "media-field",
 			"type": "registry:block",
-			"description": "PayloadCMS double Media Field (supports light & dark image variants)",
+			"description": "PayloadCMS double upload field (supports light & dark image variants)",
 			"dependencies": [
 				"react",
 				"next"
@@ -181,6 +181,36 @@
 					"type": "registry:component",
 					"target": "src/payload/fields/media/config.ts"
 				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"name": "color-field",
+			"title": "Color Field",
+			"type": "registry:block",
+			"description": "PayloadCMS custom admin panel color input with a color picker component. Returns the color as a string",
+			"files": [
+				{
+					"path": "registry/payload/fields/color/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/color/config.ts"
+				},
+				{
+					"path": "registry/payload/fields/color/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/fields/color/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"button",
+				"popover",
+				"@uifoundry/field-types"
+			],
+			"dependencies": [
+				"payload@^3.49.1",
+				"@uiw/react-color-sketch",
+				"react",
+				"@payloadcms/ui@^3.49.1"
 			]
 		},
 		{
