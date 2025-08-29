@@ -1,6 +1,6 @@
-import type { UploadField } from "@/registry/payload/fields/index.d.ts";
-import type { PickRequired } from "@/registry/types.d.ts";
-import { COLLECTION_SLUG_MEDIA } from "@/registry/payload/constants/collections";
+import type { PickRequired } from "~/types";
+import type { UploadField } from "@/registry/default/lib/fields";
+import { COLLECTION_SLUG_MEDIA } from "@/registry/default/lib/constants/collections";
 
 type RequiredFields = PickRequired<UploadField, "name">;
 
