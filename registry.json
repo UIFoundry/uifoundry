@@ -70,7 +70,7 @@
 			],
 			"files": [
 				{
-					"path": "registry/fields/index.d.ts",
+					"path": "registry/payload/fields/index.d.ts",
 					"type": "registry:lib",
 					"target": "src/payload/fields/index.d.ts"
 				}
@@ -84,7 +84,7 @@
 			"type": "registry:file",
 			"files": [
 				{
-					"path": "registry/fields/upload/config.ts",
+					"path": "registry/payload/fields/upload/config.ts",
 					"type": "registry:file",
 					"target": "src/payload/fields/upload/config"
 				}
@@ -102,12 +102,12 @@
 			],
 			"files": [
 				{
-					"path": "registry/fields/media/index.tsx",
+					"path": "registry/payload/fields/media/index.tsx",
 					"type": "registry:component",
 					"target": "src/payload/fields/media/index.tsx"
 				},
 				{
-					"path": "registry/fields/media/config.ts",
+					"path": "registry/payload/fields/media/config.ts",
 					"type": "registry:file",
 					"target": "src/payload/fields/media/config.ts"
 				}
@@ -133,22 +133,22 @@
 			],
 			"files": [
 				{
-					"path": "registry/blocks/marketing/hero/hero-1/index.tsx",
+					"path": "registry/payload/blocks/marketing/hero/hero-1/index.tsx",
 					"type": "registry:component",
 					"target": "src/payload/blocks/marketing/Hero/Hero_1/index.tsx"
 				},
 				{
-					"path": "registry/blocks/marketing/hero/hero-1/config.ts",
+					"path": "registry/payload/blocks/marketing/hero/hero-1/config.ts",
 					"type": "registry:file",
 					"target": "src/payload/blocks/marketing/Hero/Hero_1/config.ts"
 				},
 				{
-					"path": "registry/fields/media/config.ts",
+					"path": "registry/payload/fields/media/config.ts",
 					"type": "registry:file",
 					"target": "src/payload/fields/header/config.ts"
 				},
 				{
-					"path": "registry/fields/subheader/config.ts",
+					"path": "registry/payload/fields/subheader/config.ts",
 					"type": "registry:file",
 					"target": "src/payload/fields/subheader/config.ts"
 				}

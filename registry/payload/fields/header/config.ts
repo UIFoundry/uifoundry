@@ -1,4 +1,4 @@
-import type { TextField } from "@/registry/fields";
+import type { TextField } from "@/registry/payload/fields";
 
 export default function headerField(props?: Partial<TextField>): TextField {
 	return {

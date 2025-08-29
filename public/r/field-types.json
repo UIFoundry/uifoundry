@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "registry/fields/index.d.ts",
+      "path": "registry/payload/fields/index.d.ts",
       "content": "import type { Field } from \"payload\";\n\nexport type TextField = Extract<Field, { type: \"text\" }>;\nexport type ArrayField = Extract<Field, { type: \"array\" }>;\nexport type DateField = Extract<Field, { type: \"date\" }>;\nexport type SelectField = Extract<Field, { type: \"select\" }>;\nexport type UploadField = Extract<Field, { type: \"upload\" }>;\n\nexport type CollapsibleField = Extract<Field, { type: \"collapsible\" }>;\nexport type GroupField = Extract<Field, { type: \"group\" }>;\n",
       "type": "registry:lib",
       "target": "src/payload/fields/index.d.ts"
