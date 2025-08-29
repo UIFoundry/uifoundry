@@ -14,7 +14,7 @@
   "files": [
     {
       "path": "registry/payload/fields/upload/config.ts",
-      "content": "import type { UploadField } from \"@/registry/payload/fields/index.d.ts\";\nimport type { PickRequired } from \"@/registry/types.d.ts\";\nimport { COLLECTION_SLUG_MEDIA } from \"@/registry/payload/constants/collections\";\n\ntype RequiredFields = PickRequired<UploadField, \"name\">;\n\nexport default function uploadField({\n\t...restConfig\n}: RequiredFields): UploadField {\n\treturn {\n\t\ttype: \"upload\",\n\t\trelationTo: COLLECTION_SLUG_MEDIA,\n\t\t...restConfig,\n\t} as UploadField;\n}\n",
+      "content": "import type { PickRequired } from \"~/types\";\nimport type { UploadField } from \"@/registry/default/lib/fields\";\nimport { COLLECTION_SLUG_MEDIA } from \"@/registry/default/lib/constants/collections\";\n\ntype RequiredFields = PickRequired<UploadField, \"name\">;\n\nexport default function uploadField({\n\t...restConfig\n}: RequiredFields): UploadField {\n\treturn {\n\t\ttype: \"upload\",\n\t\trelationTo: COLLECTION_SLUG_MEDIA,\n\t\t...restConfig,\n\t} as UploadField;\n}\n",
       "type": "registry:component",
       "target": "src/payload/fields/upload/config.ts"
     }

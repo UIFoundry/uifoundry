@@ -21,7 +21,7 @@
     },
     {
       "path": "registry/payload/fields/media/config.ts",
-      "content": "import type { GroupField } from \"@/registry/payload/fields/index.d.ts\";\nimport uploadField from \"@/registry/payload/fields/upload/config\";\n\nexport default function mediaField(props?: Partial<GroupField>): GroupField {\n\treturn {\n\t\tname: \"media\",\n\t\ttype: \"group\",\n\t\tinterfaceName: \"MediaField\",\n\t\tfields: [uploadField({ name: \"light\" }), uploadField({ name: \"dark\" })],\n\t\t...props,\n\t} as GroupField;\n}\n",
+      "content": "import type { GroupField } from \"@/registry/default/lib/fields/index.d.ts\";\nimport uploadField from \"@/registry/default/lib/fields/upload/config\";\n\nexport default function mediaField(props?: Partial<GroupField>): GroupField {\n\treturn {\n\t\tname: \"media\",\n\t\ttype: \"group\",\n\t\tinterfaceName: \"MediaField\",\n\t\tfields: [uploadField({ name: \"light\" }), uploadField({ name: \"dark\" })],\n\t\t...props,\n\t} as GroupField;\n}\n",
       "type": "registry:component",
       "target": "src/payload/fields/media/config.ts"
     }
