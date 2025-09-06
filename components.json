@@ -15,7 +15,8 @@
 		"utils": "~/styles/utils",
 		"ui": "~/ui",
 		"lib": "~/payload",
-		"hooks": "~/hooks"
+		"hooks": "~/hooks",
+		"payload": "~/payload"
 	},
 	"iconLibrary": "lucide",
 	"registries": {
