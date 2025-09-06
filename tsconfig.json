@@ -32,17 +32,11 @@
 		/* Path Aliases */
 		"baseUrl": ".",
 		"paths": {
-			"@payload-config": [
-				"./src/payload.config.ts"
-			],
-			"@/registry/*": [
-				"./registry/*"
-			],
 			"~/*": [
 				"./src/*"
 			],
-			"@/*": [
-				"./src/*"
+			"@payload-config": [
+				"./src/payload.config.ts"
 			]
 		}
 	},
