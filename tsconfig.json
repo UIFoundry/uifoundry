@@ -37,6 +37,9 @@
 			],
 			"@payload-config": [
 				"./src/payload.config.ts"
+			],
+			"@tweakcn/*": [
+				"./src/features/tweakcn/*"
 			]
 		}
 	},

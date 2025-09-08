@@ -1689,6 +1689,7 @@ export interface Config {
     verifications: Verification;
     pages: Page;
     media: Media;
+    themes: Theme;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -1701,6 +1702,7 @@ export interface Config {
     verifications: VerificationsSelect<false> | VerificationsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    themes: ThemesSelect<false> | ThemesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -2038,6 +2040,115 @@ export interface Pricing_1_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "themes".
+ */
+export interface Theme {
+  id: string;
+  name: string;
+  type?: ('user' | 'template') | null;
+  author?: (string | null) | User;
+  styles: {
+    light?: {
+      background?: string;
+      foreground?: string;
+      card?: string;
+      'card-foreground'?: string;
+      popover?: string;
+      'popover-foreground'?: string;
+      primary?: string;
+      'primary-foreground'?: string;
+      secondary?: string;
+      'secondary-foreground'?: string;
+      muted?: string;
+      'muted-foreground'?: string;
+      accent?: string;
+      'accent-foreground'?: string;
+      destructive?: string;
+      'destructive-foreground'?: string;
+      border?: string;
+      input?: string;
+      ring?: string;
+      'chart-1'?: string;
+      'chart-2'?: string;
+      'chart-3'?: string;
+      'chart-4'?: string;
+      'chart-5'?: string;
+      sidebar?: string;
+      'sidebar-foreground'?: string;
+      'sidebar-primary'?: string;
+      'sidebar-primary-foreground'?: string;
+      'sidebar-accent'?: string;
+      'sidebar-accent-foreground'?: string;
+      'sidebar-border'?: string;
+      'sidebar-ring'?: string;
+      'font-sans'?: string;
+      'font-serif'?: string;
+      'font-mono'?: string;
+      radius?: string;
+      'shadow-color'?: string;
+      'shadow-opacity'?: string;
+      'shadow-blur'?: string;
+      'shadow-spread'?: string;
+      'shadow-offset-x'?: string;
+      'shadow-offset-y'?: string;
+      'letter-spacing'?: string;
+      spacing?: string;
+      [k: string]: unknown;
+    };
+    dark?: {
+      background?: string;
+      foreground?: string;
+      card?: string;
+      'card-foreground'?: string;
+      popover?: string;
+      'popover-foreground'?: string;
+      primary?: string;
+      'primary-foreground'?: string;
+      secondary?: string;
+      'secondary-foreground'?: string;
+      muted?: string;
+      'muted-foreground'?: string;
+      accent?: string;
+      'accent-foreground'?: string;
+      destructive?: string;
+      'destructive-foreground'?: string;
+      border?: string;
+      input?: string;
+      ring?: string;
+      'chart-1'?: string;
+      'chart-2'?: string;
+      'chart-3'?: string;
+      'chart-4'?: string;
+      'chart-5'?: string;
+      sidebar?: string;
+      'sidebar-foreground'?: string;
+      'sidebar-primary'?: string;
+      'sidebar-primary-foreground'?: string;
+      'sidebar-accent'?: string;
+      'sidebar-accent-foreground'?: string;
+      'sidebar-border'?: string;
+      'sidebar-ring'?: string;
+      'font-sans'?: string;
+      'font-serif'?: string;
+      'font-mono'?: string;
+      radius?: string;
+      'shadow-color'?: string;
+      'shadow-opacity'?: string;
+      'shadow-blur'?: string;
+      'shadow-spread'?: string;
+      'shadow-offset-x'?: string;
+      'shadow-offset-y'?: string;
+      'letter-spacing'?: string;
+      spacing?: string;
+      [k: string]: unknown;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -2066,6 +2177,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'themes';
+        value: string | Theme;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -2396,6 +2511,18 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "themes_select".
+ */
+export interface ThemesSelect<T extends boolean = true> {
+  name?: T;
+  type?: T;
+  author?: T;
+  styles?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

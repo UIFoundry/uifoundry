@@ -31,6 +31,8 @@
 	},
 	"dependencies": {
 		"@daveyplate/better-auth-ui": "^2.0.14",
+		"@legendapp/state": "3.0.0-beta.32",
+		"@ngard/tiny-isequal": "^1.1.0",
 		"@payloadcms/db-mongodb": "^3.49.1",
 		"@payloadcms/graphql": "^3.49.1",
 		"@payloadcms/live-preview-react": "^3.49.1",
@@ -42,7 +44,9 @@
 		"@radix-ui/react-avatar": "^1.1.10",
 		"@radix-ui/react-dialog": "^1.1.14",
 		"@radix-ui/react-popover": "^1.1.14",
+		"@radix-ui/react-scroll-area": "^1.2.10",
 		"@radix-ui/react-select": "^2.2.5",
+		"@radix-ui/react-separator": "^1.1.7",
 		"@radix-ui/react-slot": "^1.2.3",
 		"@shadcn/ui": "^0.0.4",
 		"@t3-oss/env-nextjs": "^0.12.0",
