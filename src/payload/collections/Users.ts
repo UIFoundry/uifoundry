@@ -84,9 +84,8 @@ export const Users: CollectionConfig = {
 			name: "image",
 			type: "text",
 		},
-		selectEnumField({
+		selectEnumField(USER_ROLES, {
 			name: "role",
-			object: USER_ROLES,
 			required: true,
 			defaultValue: USER_ROLES.user,
 		}),

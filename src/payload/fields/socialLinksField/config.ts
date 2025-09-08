@@ -20,8 +20,7 @@ export default function socialLinksField(props?: Partial<ArrayField>): Field {
 					width: "50%",
 				},
 			},
-			selectEnumField<typeof socialIcons>({
-				object: socialIcons,
+			selectEnumField<typeof socialIcons>(socialIcons, {
 				name: "icon",
 				required: true,
 				useKeyAsValue: true,
