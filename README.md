@@ -1,204 +1,196 @@
-# Create T3 App
+# UIFoundry
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Opinionated Payload CMS + Next.js template for building and hosting marketing sites. It ships with Shadcn UI components, Better Auth, tRPC, MongoDB, and SST. The end‑goal is a self‑hostable kit and, later, a hosted SaaS with a UIFoundry component/block registry.
 
-## Setup
+## Quickstart
 
 ### Prerequisites
 
-- Node.js (18.x or later)
-- pnpm (or npm/yarn)
-- MongoDB database (either MongoDB Atlas or local Docker instance)
-- Google Cloud Platform account (for OAuth authentication)
+- Node.js 18+ (20+ recommended)
+- pnpm
+- MongoDB (Atlas or local)
 
-### 1. Clone and Install Dependencies
+### 1) Install
 
 ```bash
-git clone <your-repo-url>
-cd t3-x-payloadcms
 pnpm install
 ```
 
-### 2. Environment Variables
-
-Copy the example environment file:
+### 2) Configure environment
 
 ```bash
-cp .env.example .env
-```
-
-### 3. Setup Google OAuth
-
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select an existing one
-3. Enable the Google+ API:
-   - Navigate to "APIs & Services" → "Library"
-   - Search for "Google+ API" and enable it
-4. Configure OAuth consent screen:
-   - Go to "APIs & Services" → "OAuth consent screen"
-   - Choose "External" user type
-   - Fill in required fields (App name, User support email, Developer contact)
-5. Create OAuth 2.0 credentials:
-   - Go to "APIs & Services" → "Credentials"
-   - Click "Create Credentials" → "OAuth 2.0 Client IDs"
-   - Choose "Web application"
-   - Set application name (e.g., "T3 Payload CMS App")
-   - **Add authorized redirect URIs**:
-     - For development: `http://localhost:3000/api/auth/callback/google`
-     - For production: `https://yourdomain.com/api/auth/callback/google`
-6. **Copy your credentials**:
-   - **Client ID**: Copy this value for `GOOGLE_CLIENT_ID`
-   - **Client Secret**: Copy this value for `GOOGLE_CLIENT_SECRET`
-   - Save these credentials securely
-
-### 4. Setup MongoDB
-
-#### Option A: MongoDB Atlas (Recommended)
-
-1. Go to [MongoDB Atlas](https://www.mongodb.com/atlas)
-2. Create a free account and cluster
-3. Create a database user with read/write permissions
-4. Whitelist your IP address (or use 0.0.0.0/0 for development)
-5. Get your connection string from the "Connect" button
-
-#### Option B: Local Docker Instance
-
-```bash
-docker run --name mongodb -d -p 27017:27017 mongo:latest
-```
-
-Your connection string will be: `mongodb://localhost:27017/your-database-name`
-
-### 5. Configure Environment Variables
-
-Update your `.env` file with the following variables:
-
-```env
-# Database
-DATABASE_URI="mongodb://localhost:27017/your-database-name"
-# or for Atlas: "mongodb+srv://username:password@cluster.mongodb.net/database-name"
-
-# NextAuth
-NEXTAUTH_SECRET="your-nextauth-secret"
-NEXTAUTH_URL="http://localhost:3000"
-
-# Google OAuth (from Google Cloud Console - step 3.6)
-GOOGLE_CLIENT_ID="your-google-client-id"
-GOOGLE_CLIENT_SECRET="your-google-client-secret"
-
-# Payload CMS
-PAYLOAD_SECRET="your-payload-secret"
-```
-
-Generate secrets using:
-```bash
+cp .env.example .env.local
+# generate secrets
 openssl rand -hex 32
 ```
 
-### 6. Start Development Server
+Set the following (see .env.example for full list):
+
+- DATABASE_URI
+- BETTER_AUTH_SECRET
+- NEXT_PUBLIC_BETTER_AUTH_URL (e.g. http://localhost:3001)
+- PAYLOAD_SECRET
+- GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET (if using Google sign‑in)
+
+### 3) Run
 
 ```bash
 pnpm dev
 ```
 
-Your app will be available at `http://localhost:3000`
+- App: http://localhost:3001
+- Payload Admin: http://localhost:3001/admin
 
-- Frontend: `http://localhost:3000`
-- Payload Admin: `http://localhost:3000/admin`
+## Scripts
 
-## Shopify Integration (Optional)
+- pnpm dev — Start dev server on port 3001
+- pnpm build — Build (generates Payload types, then Next build)
+- pnpm check — Lint + TypeScript typecheck
+- pnpm lint, pnpm lint:fix — ESLint
+- pnpm typecheck — TypeScript only
 
-To enable ecommerce functionality, you'll need to configure Shopify and obtain the required environment variables.
+## Tech stack
 
-### 1. Create Shopify Store
+- Next.js (App Router)
+- Payload CMS
+- Better Auth (with email/password and Google provider)
+- tRPC
+- MongoDB
+- SST (infrastructure)
+- Shadcn UI + Tailwind CSS
 
-If you don't have a Shopify store:
-1. Go to [Shopify](https://www.shopify.com/) and create a new store
-2. Complete the basic store setup
+## Project structure (high‑level)
 
-### 2. Setup Custom App for API Access
+- src/app — Next.js routes (frontend + payload admin app)
+- src/payload — Payload config: blocks, collections, globals, components, styles
+- src/components — Non‑payload React components
+- src/auth — Better Auth config and client
+- src/server, src/trpc — tRPC routers and clients
+- src/ui — Shadcn UI registry components
 
-1. In your Shopify admin, go to **Settings** → **Apps and sales channels**
-2. Click **"Develop apps"** → **"Create an app"**
-3. Name your app (e.g., "T3 Payload CMS Integration")
-4. **Configure Admin API access**:
-   - Click **"Configure Admin API scopes"**
-   - Enable these scopes:
-     - `read_products` - Read product data
-     - `read_orders` - Read order data
-     - `read_customers` - Read customer data
-     - `write_orders` - Create orders
-     - `read_inventory` - Read inventory levels
-5. **Install the app** to your store
-6. **Copy Admin API credentials**:
-   - **Admin API access token**: Copy for `SHOPIFY_ACCESS_TOKEN`
-   - **API key**: Copy for `SHOPIFY_API_KEY`
-   - **API secret**: Copy for `SHOPIFY_API_SECRET`
+## Roadmap
 
-### 3. Setup Storefront API Access
+A living, stage‑based plan (no version numbers). Docs‑first: document every block as it's built with Fumadocs.
 
-1. In your Shopify admin, go to **Settings** → **Apps and sales channels**
-2. Scroll down to **"Storefront API access"**
-3. Click **"Create private app"** or **"Manage private apps"**
-4. Create/edit a private app with:
-   - **Private app name**: "T3 Storefront Access"
-   - **Storefront API access scopes**:
-     - `unauthenticated_read_product_listings`
-     - `unauthenticated_read_product_inventory`
-     - `unauthenticated_write_checkouts`
-     - `unauthenticated_read_checkouts`
-5. **Save** and copy the **Storefront access token** for `SHOPIFY_STOREFRONT_ACCESS_TOKEN`
+Legend: [x] done · [ ] planned · (MVP) minimum viable for the stage
 
-### 4. Get Shop Domain
+### Completed (summary)
 
-Your shop domain is your Shopify store URL:
-- Format: `your-store-name.myshopify.com`
-- Example: `my-awesome-store.myshopify.com`
-- Copy this for `SHOPIFY_SHOP_DOMAIN`
+Stage 0 — Initial Release (completed items so far)
 
-### 5. Update Environment Variables
+- [x] Next.js App Router + PayloadCMS integration (SSR/ISR friendly)
+- [x] Shadcn UI registry and base components (`src/ui/*`)
+- [x] Better Auth sign‑in/out + session wiring (`src/auth/*`)
+- [x] TRPC server/client scaffolding (`src/server/*`, `src/trpc/*`)
+- [x] SST config scaffold + local deploy story (`sst.config.ts`)
+- [x] Styled Payload Admin (`src/payload/styles.css`)
+- [x] Example site pages + preview flow (`src/app/(frontend)/*`)
 
-Add the following to your `.env` file:
+### Stage 0 — Initial Release (Docs + Registry + Blocks)
 
-```env
-# Shopify Configuration
-SHOPIFY_SHOP_DOMAIN="your-store-name.myshopify.com"
-SHOPIFY_STOREFRONT_ACCESS_TOKEN="your-storefront-access-token"
-SHOPIFY_API_KEY="your-api-key"
-SHOPIFY_API_SECRET="your-api-secret"
-SHOPIFY_ACCESS_TOKEN="your-admin-api-access-token"
-```
+Goal: a working, self‑hostable Next.js + Payload starter with a UIFoundry registry and docs added as components/blocks ship.
 
-### What This Enables
+**Scope (MVP)**
 
-With these credentials configured, your application can:
-- Read product data from your Shopify store
-- Create and manage orders
-- Access customer information
-- Fetch real-time data on each request
-- Use Shopify's admin interface for product and inventory management
+- [x] Next.js App Router + PayloadCMS integration (SSR/ISR friendly)
+- [x] Shadcn UI registry and base components (`src/ui/*`)
+- [x] Better Auth sign‑in/out + session wiring (`src/auth/*`)
+- [x] TRPC server/client scaffolding (`src/server/*`, `src/trpc/*`)
+- [x] SST config scaffold + local deploy story (`sst.config.ts`)
+- [x] Styled Payload Admin (`src/payload/styles.css`)
+- [x] Example site pages + preview flow (`src/app/(frontend)/*`)
+- [ ] UIFoundry Registry scaffold (structure + add/update generator)
+- [ ] Marketing blocks initial set (target 5 per type; stretch 7)
+- [ ] Fumadocs scaffold inside repo and docs for each shipped block/component
+- [ ] Block metadata: tags (array of strings) and optional default-content templates (for Stage 2 agents)
+- [ ] Quickstart docs in README (install, dev, build, deploy)
 
-## What's next? How do I make an app with this?
+**Marketing blocks checklist (target 5 of each)**
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- [ ] Hero (0/5)
+- [ ] Header (0/5)
+- [ ] Footer (0/5)
+- [ ] Features (0/5)
+- [ ] Pricing (0/5)
+- [ ] Testimonials (0/5)
+- [ ] FAQ (0/5)
+- [ ] CTA (0/5)
+- [ ] Gallery (0/5)
+- [ ] Stats (0/5)
+- [ ] Teams (0/5)
+- [ ] Newsletter (0/5)
+- [ ] About (0/5)
+- [ ] Contact (0/5)
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+**Exit criteria**
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Payload CMS](https://payloadcms.com/docs/getting-started/what-is-payload)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- `pnpm build` passes and generates Payload types
+- New project boots locally; admin loads; content edits render on the sample site
+- UIFoundry Registry can add/update blocks; each shipped block has a doc page
+- README quickstart lets a new user go 0→1 without external help
 
-## Learn More
+### Stage 1 — Theming + Multi‑site + RBAC (combined)
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+Goal: unify theme import, multi‑tenancy, and access control. (Multi‑site appears before RBAC.)
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+**Scope (MVP)**
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- [ ] "Import Theme" UI in Payload Tailwind Config global (`src/payload/globals/TailwindConfig/*`): paste JSON and file upload → preview → Apply
+- [ ] JSON schema adapter: map external theme JSON → `--token` CSS variables used by UIFoundry
+- [ ] One‑click apply writes to Tailwind Config global fields and injects `<style>` via existing component
+- [ ] Export current theme as JSON
+- [ ] (Optional) CLI: `uifoundry theme import theme.json`
+- [ ] Data model + guards to isolate content by `Site` (`src/payload/collections/Sites.ts`, related collections)
+- [ ] Link users↔sites, choose active site context in admin
+- [ ] Roles & permissions (Owner, Admin, Editor, Viewer) enforced in Payload access rules
+- [ ] Role‑aware UI affordances in admin where applicable
 
-## How do I deploy this?
+### Stage 2 — Custom domains + LLM site builders (combined)
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Goal: production‑ready hosting and AI‑assisted full‑site creation.
+
+**Custom domains**
+
+- [ ] Domain mapping model (domain↔site)
+- [ ] SST infrastructure for DNS/SSL (CloudFront/ALB + Route53 or documented alternative)
+- [ ] Domain verification and status surfaced in admin
+
+**LLM site builders (full sites)**
+
+- [ ] Accept brief → plan sitemap (home, features, pricing, about, contact, etc.)
+- [ ] Select blocks by tags; map sitemap sections to compatible blocks
+- [ ] Populate Payload DB: create Site + Pages with block arrays and reasonable field inputs based on each block's config/defaults
+- [ ] One‑off generation: allow generating a single page/section using tags
+- [ ] Guardrails: dry‑run preview, diff, and approval before writing; rollback path
+
+**Exit criteria**
+
+- From a brief, generate a full site (sitemap → pages → blocks) and review/publish it
+- Custom domain attached with valid SSL; misconfigurations are detectable
+
+### Stage 3 — Form builder plugin (MVP)
+
+- [ ] Form schema builder (fields, validation, layout) and renderer block
+- [ ] Submissions stored; basic spam protection; optional email/webhook
+
+### Backlog / Ideas (not scheduled)
+
+- Theme marketplace / presets
+- Analytics integration (privacy‑friendly by default)
+- Import/export starters
+- Webhooks and integrations library
+- Performance budget + Lighthouse CI
+
+### Release strategy for the UIFoundry registry
+
+Semantic Versioning is recommended once the registry stabilizes. Use Conventional Commits and semantic‑release to automate GitHub releases and changelogs. Defer npm publishing until the registry becomes a package or keep it repo‑driven.
+
+## Docs
+
+Docs are added as components/blocks ship (docs‑first). See the roadmap for the current docs stage and links once Fumadocs is scaffolded.
+
+## Contributing
+
+- Use Conventional Commits (feat, fix, chore, docs). This helps future release automation.
+- Run pnpm run check before pushing.
+- Update the roadmap section in this README as features are completed or plans change.
