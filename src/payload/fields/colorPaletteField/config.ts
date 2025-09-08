@@ -6,8 +6,7 @@ export default function colorPaletteField({
 	name = "color",
 	...fieldProps
 }: SelectField): SelectField {
-	return selectEnumField<typeof THEME_COLORS>({
-		object: THEME_COLORS,
+	return selectEnumField<typeof THEME_COLORS>(THEME_COLORS, {
 		name,
 		...fieldProps,
 	});
