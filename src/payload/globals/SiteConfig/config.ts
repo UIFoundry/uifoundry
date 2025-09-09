@@ -1,6 +1,6 @@
 import type { GlobalConfig } from "payload";
 import { GLOBAL_SLUG_SITE_CONFIG } from "~/payload/constants/globals";
-import { COLLECTION_SLUG_THEMES } from "~/payload/constants";
+import { AUTOSAVE_INTERVAL, COLLECTION_SLUG_THEMES } from "~/payload/constants";
 import { env } from "~/env.mjs";
 
 export const SiteConfigGlobal: GlobalConfig = {
@@ -11,17 +11,27 @@ export const SiteConfigGlobal: GlobalConfig = {
 			url: `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/home?draft=true`,
 		},
 	},
+	versions: {
+		drafts: {
+			autosave: {
+				interval: AUTOSAVE_INTERVAL,
+			},
+		},
+	},
 	fields: [
 		{
 			name: "activeTheme",
+			label: "Active Site Theme",
 			type: "relationship",
 			relationTo: COLLECTION_SLUG_THEMES,
-			label: "Active Site Theme",
 			required: true,
+		},
+		{
+			name: "importTheme",
+			type: "ui",
 			admin: {
-				description: "Select the theme to apply across your entire site",
 				components: {
-					Field: "~/payload/globals/SiteConfig/admin/ActiveThemeField",
+					Field: "~/payload/globals/SiteConfig/admin/ImportThemeTrigger",
 				},
 			},
 		},

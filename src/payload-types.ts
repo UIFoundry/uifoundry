@@ -2049,103 +2049,15 @@ export interface Theme {
   name: string;
   type?: ('user' | 'template') | null;
   author?: (string | null) | User;
-  styles: {
-    light?: {
-      background?: string;
-      foreground?: string;
-      card?: string;
-      'card-foreground'?: string;
-      popover?: string;
-      'popover-foreground'?: string;
-      primary?: string;
-      'primary-foreground'?: string;
-      secondary?: string;
-      'secondary-foreground'?: string;
-      muted?: string;
-      'muted-foreground'?: string;
-      accent?: string;
-      'accent-foreground'?: string;
-      destructive?: string;
-      'destructive-foreground'?: string;
-      border?: string;
-      input?: string;
-      ring?: string;
-      'chart-1'?: string;
-      'chart-2'?: string;
-      'chart-3'?: string;
-      'chart-4'?: string;
-      'chart-5'?: string;
-      sidebar?: string;
-      'sidebar-foreground'?: string;
-      'sidebar-primary'?: string;
-      'sidebar-primary-foreground'?: string;
-      'sidebar-accent'?: string;
-      'sidebar-accent-foreground'?: string;
-      'sidebar-border'?: string;
-      'sidebar-ring'?: string;
-      'font-sans'?: string;
-      'font-serif'?: string;
-      'font-mono'?: string;
-      radius?: string;
-      'shadow-color'?: string;
-      'shadow-opacity'?: string;
-      'shadow-blur'?: string;
-      'shadow-spread'?: string;
-      'shadow-offset-x'?: string;
-      'shadow-offset-y'?: string;
-      'letter-spacing'?: string;
-      spacing?: string;
-      [k: string]: unknown;
-    };
-    dark?: {
-      background?: string;
-      foreground?: string;
-      card?: string;
-      'card-foreground'?: string;
-      popover?: string;
-      'popover-foreground'?: string;
-      primary?: string;
-      'primary-foreground'?: string;
-      secondary?: string;
-      'secondary-foreground'?: string;
-      muted?: string;
-      'muted-foreground'?: string;
-      accent?: string;
-      'accent-foreground'?: string;
-      destructive?: string;
-      'destructive-foreground'?: string;
-      border?: string;
-      input?: string;
-      ring?: string;
-      'chart-1'?: string;
-      'chart-2'?: string;
-      'chart-3'?: string;
-      'chart-4'?: string;
-      'chart-5'?: string;
-      sidebar?: string;
-      'sidebar-foreground'?: string;
-      'sidebar-primary'?: string;
-      'sidebar-primary-foreground'?: string;
-      'sidebar-accent'?: string;
-      'sidebar-accent-foreground'?: string;
-      'sidebar-border'?: string;
-      'sidebar-ring'?: string;
-      'font-sans'?: string;
-      'font-serif'?: string;
-      'font-mono'?: string;
-      radius?: string;
-      'shadow-color'?: string;
-      'shadow-opacity'?: string;
-      'shadow-blur'?: string;
-      'shadow-spread'?: string;
-      'shadow-offset-x'?: string;
-      'shadow-offset-y'?: string;
-      'letter-spacing'?: string;
-      spacing?: string;
-      [k: string]: unknown;
-    };
-    [k: string]: unknown;
-  };
+  styles:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2704,10 +2616,8 @@ export interface Tailwind {
  */
 export interface SiteConfig {
   id: string;
-  /**
-   * Select the theme to apply across your entire site
-   */
   activeTheme: string | Theme;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2843,6 +2753,7 @@ export interface TailwindSelect<T extends boolean = true> {
  */
 export interface SiteConfigSelect<T extends boolean = true> {
   activeTheme?: T;
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

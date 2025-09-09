@@ -8,28 +8,29 @@ import React from "react";
 
 import { importMap } from "./admin/importMap.js";
 import "~/payload/styles.css";
+import { TRPCReactProvider } from "~/trpc/react";
 
 type Args = {
-  children: React.ReactNode;
+	children: React.ReactNode;
 };
 
 const serverFunction: ServerFunctionClient = async function (args) {
-  "use server";
-  return handleServerFunctions({
-    ...args,
-    config,
-    importMap,
-  });
+	"use server";
+	return handleServerFunctions({
+		...args,
+		config,
+		importMap,
+	});
 };
 
 const Layout = ({ children }: Args) => (
-  <RootLayout
-    config={config}
-    importMap={importMap}
-    serverFunction={serverFunction}
-  >
-    {children}
-  </RootLayout>
+	<RootLayout
+		config={config}
+		importMap={importMap}
+		serverFunction={serverFunction}
+	>
+		<TRPCReactProvider>{children}</TRPCReactProvider>
+	</RootLayout>
 );
 
 export default Layout;

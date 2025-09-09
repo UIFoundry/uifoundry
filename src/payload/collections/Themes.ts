@@ -1,11 +1,10 @@
-import { env } from "~/env.mjs";
 import type { CollectionConfig } from "payload";
 import {
 	COLLECTION_SLUG_THEMES,
 	COLLECTION_SLUG_USERS,
 } from "~/payload/constants";
 import selectEnumField from "~/payload/fields/selectEnumField/config";
-import { THEME_TYPES, jsonSchema } from "~/payload/constants/themes";
+import { THEME_TYPES } from "~/payload/constants/themes";
 
 export const Themes: CollectionConfig = {
 	slug: COLLECTION_SLUG_THEMES,
@@ -32,14 +31,6 @@ export const Themes: CollectionConfig = {
 			name: "styles",
 			type: "json",
 			required: true,
-			jsonSchema: {
-				uri: `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/themes/schema.json`,
-				fileMatch: [`${env.NEXT_PUBLIC_BETTER_AUTH_URL}/themes/schema.json`],
-				schema: {
-					type: "object",
-					properties: jsonSchema,
-				},
-			},
 		},
 	],
 };

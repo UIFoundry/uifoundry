@@ -14,11 +14,6 @@ This is the technical specification for the spec detailed in @.agent-os/specs/20
 
 ### Custom Admin Components Development
 
-- **ActiveThemeField.tsx**: Custom field component for activeTheme relationship
-  - Render input showing currently applied theme name (if available)
-  - Implement custom search input with paginated results from Themes collection
-  - Enable theme selection based on user's search query
-  - Handle theme switching with immediate live preview updates
 - **ThemeImportField.tsx**: Custom collapsible field component for theme import
   - Handle CSS paste functionality with textarea input
   - Process theme parsing and validation in real-time
