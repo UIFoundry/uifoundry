@@ -1,8 +1,5 @@
 import { getPayload } from "~/payload/utils";
-import {
-	GLOBAL_SLUG_SITE_CONFIG,
-	GLOBAL_SLUG_TAILWIND,
-} from "~/payload/constants/globals";
+import { GLOBAL_SLUG_SITE_CONFIG } from "~/payload/constants/globals";
 import type { Theme } from "~/payload-types";
 import type { ThemeStyles } from "../SiteConfig/admin/theme";
 

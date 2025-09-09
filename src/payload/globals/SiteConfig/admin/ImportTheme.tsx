@@ -19,7 +19,7 @@ export default function ImportThemePopover({ path }: { path: string }) {
 			themeCss: "",
 			setThemeOnImport: true,
 		},
-		onSubmit: async ({ value: data }) => {
+		onSubmit: async ({ value: data, formApi }) => {
 			if (data.themeCss.length === 0) {
 				console.log("no theme given");
 				return;
@@ -34,6 +34,7 @@ export default function ImportThemePopover({ path }: { path: string }) {
 			if (!res) return;
 			if (data.setThemeOnImport) {
 				setValue(res.id);
+				formApi.reset();
 			}
 		},
 	});
