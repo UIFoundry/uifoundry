@@ -8,6 +8,7 @@ This directory contains all the components that are available through the UIFoun
 - `lib/` - Utility functions and helpers
 - `hooks/` - Custom React hooks
 - `config/` - Configuration files and component metadata
+- `payload/` - PayloadCMS specific components, collections, globals, blocks, fields, etc
 
 ## Usage
 
