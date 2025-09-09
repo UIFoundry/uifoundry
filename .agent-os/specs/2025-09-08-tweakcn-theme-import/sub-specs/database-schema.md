@@ -4,68 +4,158 @@ This is the database schema implementation for the spec detailed in @.agent-os/s
 
 ## Changes
 
-### TailwindConfig Global Extensions
+### Create New SiteConfig Global
 
-Add new fields to the existing TailwindConfig global to support theme import functionality:
+**NEW GLOBAL**: Create SiteConfig global at `~/payload/globals/SiteConfig/config.ts` for theme management while preserving existing Themes collection.
 
 ```typescript
-// Add to TailwindConfig global fields array
-{
-  label: "Theme Import",
-  type: "collapsible",
+// ~/payload/globals/SiteConfig/config.ts
+export const SiteConfigGlobal: GlobalConfig = {
+  slug: "site-config",
+  label: "Site Configuration",
   admin: {
-    initCollapsed: true,
+    livePreview: {
+      url: `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/home?draft=true`,
+    },
+  },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: AUTOSAVE_INTERVAL,
+      },
+    },
   },
   fields: [
     {
-      name: "importThemeCSS",
-      type: "textarea",
-      label: "Import Theme CSS",
+      name: "activeTheme",
+      type: "relationship",
+      relationTo: COLLECTION_SLUG_THEMES,
+      label: "Active Site Theme",
+      required: true,
       admin: {
-        placeholder: "Paste your tweakcn theme CSS here...",
-        description: "Paste CSS from tweakcn.com to import custom theme colors",
+        description: "Select the theme to apply across your entire site",
+        components: {
+          Field: "~/payload/globals/SiteConfig/components/ActiveThemeField",
+        },
       },
     },
     {
-      name: "themeImportHistory",
-      type: "group",
-      label: "Import History",
+      label: "Theme Import",
+      type: "collapsible",
+      admin: {
+        initCollapsed: true,
+        components: {
+          Field: "~/payload/globals/SiteConfig/components/ThemeImportField",
+        },
+      },
       fields: [
         {
-          name: "lastImportedAt",
-          type: "date",
-          label: "Last Import Date",
-        },
-        {
-          name: "importSource",
-          type: "text",
-          label: "Import Source",
-          defaultValue: "tweakcn",
-        },
-        {
-          name: "originalThemeBackup",
-          type: "json",
-          label: "Original Theme Backup",
+          name: "importThemeCSS",
+          type: "textarea",
+          label: "Import Theme CSS",
           admin: {
-            description: "Backup of theme colors before last import",
+            placeholder: "Paste your tweakcn theme CSS here...",
+            description:
+              "Paste CSS from tweakcn.com to import and activate a new theme",
+          },
+        },
+        {
+          name: "importedThemeName",
+          type: "text",
+          label: "Theme Name",
+          admin: {
+            placeholder: "My Custom Theme",
+            description:
+              "Name for the imported theme (optional - will auto-generate if empty)",
           },
         },
       ],
     },
   ],
-}
+};
 ```
+
+### Custom Admin Components Structure
+
+The SiteConfig folder will include custom admin components:
+
+```
+~/payload/globals/SiteConfig/
+├── config.ts                    # SiteConfig global configuration
+├── components/
+│   ├── ActiveThemeField.tsx     # Custom activeTheme field component
+│   └── ThemeImportField.tsx     # Custom theme import functionality
+└── utils/
+    ├── themeParser.ts           # CSS parsing utilities
+    └── themeValidator.ts        # Theme validation functions
+```
+
+**ActiveThemeField.tsx**: Custom field that renders:
+
+- Input showing currently applied theme name (if available)
+- Custom search input below with paginated results from Themes collection
+- Theme selection based on user's search query
+
+**ThemeImportField.tsx**: Custom component handling:
+
+- CSS paste functionality
+- Theme parsing and validation
+- Automatic theme creation and activation
+
+### Themes Collection (No Changes)
+
+The existing Themes collection remains unchanged and continues to serve as the theme storage mechanism:
+
+- **name**: Theme identification
+- **type**: user vs template (from THEME_TYPES)
+- **author**: relationship to users
+- **styles**: JSON with complete theme schema (light/dark modes, all CSS variables)
+
+### TailwindConfig Global (No Changes)
+
+The existing TailwindConfig global will remain unchanged. The new SiteConfig global will handle theme management independently without affecting the current TailwindConfig structure.
 
 ## Rationale
 
-- **No new collections needed** - Extends existing TailwindConfig global structure
-- **Leverages PayloadCMS versioning** - Built-in rollback capabilities through versions
-- **Minimal data impact** - Adds only essential fields for import functionality
-- **Backward compatibility** - New fields are optional and don't affect existing sites
-- **Import tracking** - Stores metadata for debugging and rollback without complex relationships
+- **Clean separation of concerns** - Themes collection for storage, SiteConfig global for selection and management
+- **Preserves existing architecture** - No changes needed to current Themes collection structure
+- **Multiple theme support** - Users can have many themes but only one active at a time
+- **Future-ready architecture** - Easy migration path when Sites collection is implemented
+- **Leverages PayloadCMS versioning** - Built-in rollback capabilities for theme selection changes
+- **User-friendly interface** - Simple dropdown to switch between themes
+- **Scalable design** - Supports unlimited themes in collection with efficient active theme resolution
 
 ## Migration Strategy
 
-- **Zero-downtime deployment** - New fields are optional with sensible defaults
-- **Existing data preserved** - No modifications to current TailwindConfig data
-- **Gradual adoption** - Feature available immediately without requiring data migration
+### Phase 1: Create SiteConfig Global Structure
+
+- **Create SiteConfig folder** - Set up `~/payload/globals/SiteConfig/` directory structure
+- **Implement config.ts** - Create SiteConfig global configuration with custom admin components
+- **Build custom components** - Develop ActiveThemeField and ThemeImportField admin components
+- **Create utility functions** - Implement CSS parsing and theme validation utilities
+
+### Phase 2: Create Default Theme (Optional)
+
+- **Extract existing theme data** - Convert current TailwindConfig colorField values to Themes collection JSON format
+- **Create default theme record** - Generate "Default UIFoundry Theme" in Themes collection with extracted data
+- **Set as active theme** - Initialize SiteConfig global with default theme as activeTheme
+
+### Phase 3: Deploy SiteConfig Global
+
+- **Register global** - Add SiteConfig global to PayloadCMS globals index
+- **Deploy admin interface** - Make SiteConfig available in PayloadCMS admin panel
+- **Test custom components** - Verify ActiveThemeField search and ThemeImportField functionality work correctly
+
+### Phase 4: Update Theme Resolution System
+
+- **Create theme utilities** - Implement `getActiveTheme()` and `getActiveThemeStyles()` functions
+- **Update CSS injection** - Modify existing style injection system to use active theme resolution instead of TailwindConfig
+- **Test live preview** - Verify theme switching works with existing live preview system
+
+### Phase 5: Validation & Testing
+
+- **Component compatibility** - Ensure all existing blocks render correctly with new theme system
+- **Theme import testing** - Verify CSS parsing creates valid Theme records and activates them
+- **Performance testing** - Confirm theme resolution doesn't impact site performance
+
+**Note**: TailwindConfig global remains unchanged throughout this process. The new system runs alongside existing theme infrastructure without breaking changes.

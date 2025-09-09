@@ -5,7 +5,7 @@
 
 ## Overview
 
-Implement the ability to import custom shadcn/ui themes generated from tweakcn.com into UIFoundry sites by pasting CSS theme code directly into the admin interface. This feature will allow developers and users to customize their site appearance using professionally designed themes while maintaining compatibility with the existing block system.
+Implement the ability to import custom shadcn/ui themes generated from tweakcn.com into UIFoundry sites by creating a new SiteConfig global that manages theme selection and import functionality. This feature leverages the existing Themes collection for theme storage while providing a clean interface for users to import, manage, and activate themes across their site.
 
 ## User Stories
 
@@ -13,21 +13,22 @@ Implement the ability to import custom shadcn/ui themes generated from tweakcn.c
 
 As a UIFoundry user, I want to import custom themes from tweakcn, so that I can quickly apply professional color schemes to my site without manually configuring each color variable.
 
-Users can paste tweakcn-generated CSS theme code directly into a textarea field in the PayloadCMS admin panel, which will parse the CSS variables using regex patterns and automatically populate the corresponding shadcn/ui color fields in the existing TailwindConfig global. The system validates the parsed theme data for compatibility and provides immediate visual preview before applying changes, ensuring seamless integration with all existing blocks and components.
+Users can paste tweakcn-generated CSS theme code directly into the new SiteConfig global, which will parse the CSS variables using regex patterns and automatically create a new Theme record in the existing Themes collection. The newly created theme is automatically set as the active site theme, providing immediate visual changes through the live preview system. Users can then switch between multiple themes via a simple dropdown interface in the SiteConfig global.
 
 ### Theme Management and Rollback
 
 As a site administrator, I want to manage and revert theme changes, so that I can safely experiment with different themes without losing my original configuration.
 
-The system stores the original theme configuration as a backup and tracks import history, allowing users to preview imported themes, apply them with confidence, and roll back to previous configurations if needed. All theme changes are versioned through PayloadCMS's built-in versioning system.
+The system allows users to maintain multiple themes in the Themes collection while only one theme is active at a time through the SiteConfig global. Users can easily switch between themes, import new themes, and manage their theme library. All theme data is stored in the existing Themes collection structure, and theme selection is versioned through PayloadCMS's built-in versioning system.
 
 ## Spec Scope
 
-1. **CSS Theme Import** - Import tweakcn theme CSS code via textarea in PayloadCMS admin interface
-2. **CSS Parsing & Validation** - Parse CSS variables using regex and validate against shadcn/ui color schema
-3. **Live Preview Integration** - Extend existing TailwindConfig live preview to show imported theme
-4. **Color Mapping** - Map parsed CSS variables to existing TailwindConfig color fields
-5. **Import History Tracking** - Store import metadata and backup original configurations
+1. **SiteConfig Global Creation** - Create new SiteConfig global with activeTheme relationship to Themes collection
+2. **CSS Theme Import** - Import tweakcn theme CSS code via textarea in SiteConfig global interface
+3. **CSS Parsing & Theme Creation** - Parse CSS variables using regex and create new Theme records automatically
+4. **Active Theme Management** - Single active theme selection with dropdown interface for easy switching
+5. **Light/Dark Mode Support** - Handle both light and dark theme variants from tweakcn in Theme records
+6. **Theme Library Management** - Allow multiple themes to exist in collection with single active theme
 
 ## Out of Scope
 
@@ -35,10 +36,12 @@ The system stores the original theme configuration as a backup and tracks import
 - Per-page or per-block theme overrides
 - Theme marketplace or sharing features
 - Custom theme creation tools within UIFoundry
-- Migration of themes between different UIFoundry sites
+- Multi-site theme management (future Sites collection will handle this)
+- Modifications to the existing Themes collection structure
 
 ## Expected Deliverable
 
-1. Users can successfully paste tweakcn CSS theme code into the PayloadCMS admin panel and see immediate visual changes reflected in the live preview
-2. All existing blocks and components render correctly with imported themes without visual or functional issues
-3. Theme import process includes validation, preview, and rollback capabilities accessible through the TailwindConfig global interface
+1. Users can successfully paste tweakcn CSS theme code into the SiteConfig global and see immediate visual changes reflected in the live preview
+2. All existing blocks and components render correctly with imported and activated themes without visual or functional issues
+3. Users can switch between multiple themes via dropdown selection in SiteConfig global with immediate visual feedback
+4. Theme import process creates new Theme records automatically and sets them as the active theme
