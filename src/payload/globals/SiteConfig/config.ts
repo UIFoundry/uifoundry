@@ -21,7 +21,7 @@ export const SiteConfigGlobal: GlobalConfig = {
 			admin: {
 				description: "Select the theme to apply across your entire site",
 				components: {
-					Field: "~/payload/globals/SiteConfig/admin/ActiveThemeField.tsx",
+					Field: "~/payload/globals/SiteConfig/admin/ActiveThemeField",
 				},
 			},
 		},

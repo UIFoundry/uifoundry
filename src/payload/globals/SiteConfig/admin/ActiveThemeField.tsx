@@ -1,3 +1,5 @@
+"use client";
+
 import type { RelationshipFieldClientProps } from "payload";
 import { useField } from "@payloadcms/ui";
 
