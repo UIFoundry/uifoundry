@@ -14,8 +14,12 @@
 		"components": "~/components",
 		"utils": "~/styles/utils",
 		"ui": "~/ui",
-		"lib": "~/lib",
-		"hooks": "~/hooks"
+		"lib": "~/payload",
+		"hooks": "~/hooks",
+		"payload": "~/payload"
 	},
-	"iconLibrary": "lucide"
+	"iconLibrary": "lucide",
+	"registries": {
+		"@uifoundry": "http://localhost:3001/r/{name}.json"
+	}
 }

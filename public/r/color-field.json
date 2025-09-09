@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "color-field",
+  "type": "registry:block",
+  "title": "Color Field",
+  "description": "PayloadCMS custom admin panel color input with a color picker component. Returns the color as a string",
+  "dependencies": [
+    "payload@^3.49.1",
+    "@uiw/react-color-sketch",
+    "react",
+    "@payloadcms/ui@^3.49.1"
+  ],
+  "registryDependencies": [
+    "button",
+    "popover",
+    "@uifoundry/field-types"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/fields/color/config.ts",
+      "content": "import type { TextField } from \"@/registry/default/lib/fields\";\n\ntype ColorFieldProps = Omit<\n\tPartial<TextField>,\n\t\"hasMany\" | \"type\" | \"maxRows\" | \"minRows\"\n> & { description: string };\n\nexport default function colorField(props?: ColorFieldProps): TextField {\n\treturn {\n\t\tname: \"color\",\n\t\ttype: \"text\" as const,\n\t\tinterfaceName: \"ColorField\",\n\t\tadmin: {\n\t\t\tcomponents: {\n\t\t\t\tField: \"~/payload/fields/color\",\n\t\t\t},\n\t\t},\n\t\t...props,\n\t} as TextField;\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/fields/color/config.ts"
+    },
+    {
+      "path": "registry/payload/fields/color/index.tsx",
+      "content": "\"use client\";\n\nimport type { TextFieldClientProps } from \"payload\";\nimport { useField } from \"@payloadcms/ui\";\nimport Sketch from \"@uiw/react-color-sketch\";\nimport {\n\tPopover,\n\tPopoverTrigger,\n\tPopoverContent,\n} from \"@/registry/default/ui/popover\";\nimport { Button } from \"@/registry/default/ui/button\";\nimport { useState } from \"react\";\nimport type { TextField } from \"@/registry/default/lib/fields\";\n\nexport default function ColorField({\n\tfield,\n\tpath,\n}: { field: { description?: string } & TextField } & TextFieldClientProps) {\n\tconst { value, setValue } = useField<string>({ path });\n\tconst [open, setOpen] = useState(false);\n\tconst current = typeof value === \"string\" && value ? value : \"#000000\";\n\treturn (\n\t\t<div>\n\t\t\t<div className=\"flex items-center justify-between gap-4\">\n\t\t\t\t<label>\n\t\t\t\t\t<span style={{ color: value }}>\n\t\t\t\t\t\t{(field?.label as string)?.toUpperCase()}\n\t\t\t\t\t</span>\n\t\t\t\t\t{field.required ? <span className=\"pl-1 text-red-500\">*</span> : \"\"}\n\t\t\t\t\t{field?.description ? (\n\t\t\t\t\t\t<p className=\"text-muted-foreground mt-1 text-xs\">\n\t\t\t\t\t\t\t{field.description}\n\t\t\t\t\t\t</p>\n\t\t\t\t\t) : null}\n\t\t\t\t</label>\n\t\t\t\t<Popover open={open} onOpenChange={setOpen}>\n\t\t\t\t\t<PopoverTrigger asChild className=\"mt-2 w-sm cursor-pointer\">\n\t\t\t\t\t\t<Button\n\t\t\t\t\t\t\tvariant=\"outline\"\n\t\t\t\t\t\t\trole=\"combobox\"\n\t\t\t\t\t\t\taria-expanded={open}\n\t\t\t\t\t\t\tclassName=\"justify-between\"\n\t\t\t\t\t\t\tstyle={{ background: value }}\n\t\t\t\t\t\t>\n\t\t\t\t\t\t\t{value}\n\t\t\t\t\t\t</Button>\n\t\t\t\t\t</PopoverTrigger>\n\t\t\t\t\t<PopoverContent className=\"border-none\">\n\t\t\t\t\t\t<Sketch\n\t\t\t\t\t\t\tcolor={current}\n\t\t\t\t\t\t\tonChange={(color) => {\n\t\t\t\t\t\t\t\tsetValue(color.hex);\n\t\t\t\t\t\t\t}}\n\t\t\t\t\t\t/>\n\t\t\t\t\t</PopoverContent>\n\t\t\t\t</Popover>\n\t\t\t</div>\n\t\t\t<hr />\n\t\t</div>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/fields/color/index.tsx"
+    }
+  ]
+}

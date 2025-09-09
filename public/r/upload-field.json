@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "upload-field",
+  "type": "registry:component",
+  "title": "Upload Field",
+  "description": "PayloadCMS singular Media Field",
+  "dependencies": [
+    "react",
+    "next"
+  ],
+  "registryDependencies": [
+    "@uifoundry/field-types"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/fields/upload/config.ts",
+      "content": "import type { PickRequired } from \"~/types\";\nimport type { UploadField } from \"@/registry/default/lib/fields\";\nimport { COLLECTION_SLUG_MEDIA } from \"@/registry/default/lib/constants/collections\";\n\ntype RequiredFields = PickRequired<UploadField, \"name\">;\n\nexport default function uploadField({\n\t...restConfig\n}: RequiredFields): UploadField {\n\treturn {\n\t\ttype: \"upload\",\n\t\trelationTo: COLLECTION_SLUG_MEDIA,\n\t\t...restConfig,\n\t} as UploadField;\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/fields/upload/config.ts"
+    }
+  ]
+}
