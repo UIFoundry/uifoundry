@@ -104,6 +104,11 @@ Goal: a working, self‑hostable Next.js + Payload starter with a UIFoundry regi
 - [ ] Fumadocs scaffold inside repo and docs for each shipped block/component
 - [ ] Block metadata: tags (array of strings) and optional default-content templates (for Stage 2 agents)
 - [ ] Quickstart docs in README (install, dev, build, deploy)
+- [ ] "Import Theme" UI in Payload Tailwind Config global (`src/payload/globals/TailwindConfig/*`): paste JSON and file upload → preview → Apply
+- [ ] JSON schema adapter: map external theme JSON → `--token` CSS variables used by UIFoundry
+- [ ] One‑click apply writes to Tailwind Config global fields and injects `<style>` via existing component
+- [ ] Export current theme as JSON
+- [ ] (Optional) CLI: `uifoundry theme import theme.json`
 
 **Marketing blocks checklist (target 5 of each)**
 
@@ -131,15 +136,10 @@ Goal: a working, self‑hostable Next.js + Payload starter with a UIFoundry regi
 
 ### Stage 1 — Theming + Multi‑site + RBAC (combined)
 
-Goal: unify theme import, multi‑tenancy, and access control. (Multi‑site appears before RBAC.)
+Goal: multi‑tenancy, and access control. (Multi‑site appears before RBAC.)
 
 **Scope (MVP)**
 
-- [ ] "Import Theme" UI in Payload Tailwind Config global (`src/payload/globals/TailwindConfig/*`): paste JSON and file upload → preview → Apply
-- [ ] JSON schema adapter: map external theme JSON → `--token` CSS variables used by UIFoundry
-- [ ] One‑click apply writes to Tailwind Config global fields and injects `<style>` via existing component
-- [ ] Export current theme as JSON
-- [ ] (Optional) CLI: `uifoundry theme import theme.json`
 - [ ] Data model + guards to isolate content by `Site` (`src/payload/collections/Sites.ts`, related collections)
 - [ ] Link users↔sites, choose active site context in admin
 - [ ] Roles & permissions (Owner, Admin, Editor, Viewer) enforced in Payload access rules
