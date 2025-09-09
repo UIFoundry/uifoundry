@@ -15,7 +15,7 @@ import Footer from "~/payload/globals/Footer";
 import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
 import { api, HydrateClient } from "~/trpc/server";
 import HomeComponent from "~/components/Home";
-import TailwindConfig from "~/payload/globals/TailwindConfig";
+import TailwindConfig from "~/payload/globals/SiteConfig";
 
 interface PageParams {
 	searchParams: Promise<Record<string, string | string[]>>;

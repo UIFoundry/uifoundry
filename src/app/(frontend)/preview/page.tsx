@@ -18,7 +18,7 @@ import { auth } from "~/auth";
 import { redirect } from "next/navigation";
 import { api, HydrateClient } from "~/trpc/server";
 import HomeComponent from "~/components/Home";
-import TailwindConfig from "~/payload/globals/TailwindConfig";
+import TailwindConfig from "~/payload/globals/SiteConfig";
 
 interface PageParams {
 	params: Promise<{

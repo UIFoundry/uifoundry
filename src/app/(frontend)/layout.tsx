@@ -5,7 +5,7 @@ import { Geist } from "next/font/google";
 
 import ServerProviders from "~/components/ServerProviders";
 import ClientProviders from "~/components/ClientProviders";
-import TailwindConfig from "~/payload/globals/TailwindConfig";
+import TailwindConfig from "~/payload/globals/SiteConfig";
 
 export const metadata: Metadata = {
 	title: "UIFoundry",
