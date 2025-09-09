@@ -1689,6 +1689,7 @@ export interface Config {
     verifications: Verification;
     pages: Page;
     media: Media;
+    themes: Theme;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -1701,6 +1702,7 @@ export interface Config {
     verifications: VerificationsSelect<false> | VerificationsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    themes: ThemesSelect<false> | ThemesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -1711,12 +1713,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
-    tailwind: Tailwind;
+    'site-config': SiteConfig;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
-    tailwind: TailwindSelect<false> | TailwindSelect<true>;
+    'site-config': SiteConfigSelect<false> | SiteConfigSelect<true>;
   };
   locale: null;
   user: User & {
@@ -2038,6 +2040,27 @@ export interface Pricing_1_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "themes".
+ */
+export interface Theme {
+  id: string;
+  name: string;
+  type?: ('user' | 'template') | null;
+  author?: (string | null) | User;
+  styles:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -2066,6 +2089,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'themes';
+        value: string | Theme;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -2399,6 +2426,18 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "themes_select".
+ */
+export interface ThemesSelect<T extends boolean = true> {
+  name?: T;
+  type?: T;
+  author?: T;
+  styles?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -2528,43 +2567,11 @@ export interface Footer_1_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tailwind".
+ * via the `definition` "site-config".
  */
-export interface Tailwind {
+export interface SiteConfig {
   id: string;
-  radius?: number | null;
-  background?: string | null;
-  foreground?: string | null;
-  card?: string | null;
-  'card-foreground'?: string | null;
-  popover?: string | null;
-  'popover-foreground'?: string | null;
-  primary?: string | null;
-  'primary-foreground'?: string | null;
-  secondary?: string | null;
-  'secondary-foreground'?: string | null;
-  muted?: string | null;
-  'muted-foreground'?: string | null;
-  accent?: string | null;
-  'accent-foreground'?: string | null;
-  destructive?: string | null;
-  'destructive-foreground'?: string | null;
-  border?: string | null;
-  input?: string | null;
-  ring?: string | null;
-  'chart-1'?: string | null;
-  'chart-2'?: string | null;
-  'chart-3'?: string | null;
-  'chart-4'?: string | null;
-  'chart-5'?: string | null;
-  sidebar?: string | null;
-  'sidebar-foreground'?: string | null;
-  'sidebar-primary'?: string | null;
-  'sidebar-primary-foreground'?: string | null;
-  'sidebar-accent'?: string | null;
-  'sidebar-accent-foreground'?: string | null;
-  'sidebar-border'?: string | null;
-  'sidebar-ring'?: string | null;
+  activeTheme: string | Theme;
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -2654,42 +2661,10 @@ export interface Footer_1_BlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tailwind_select".
+ * via the `definition` "site-config_select".
  */
-export interface TailwindSelect<T extends boolean = true> {
-  radius?: T;
-  background?: T;
-  foreground?: T;
-  card?: T;
-  'card-foreground'?: T;
-  popover?: T;
-  'popover-foreground'?: T;
-  primary?: T;
-  'primary-foreground'?: T;
-  secondary?: T;
-  'secondary-foreground'?: T;
-  muted?: T;
-  'muted-foreground'?: T;
-  accent?: T;
-  'accent-foreground'?: T;
-  destructive?: T;
-  'destructive-foreground'?: T;
-  border?: T;
-  input?: T;
-  ring?: T;
-  'chart-1'?: T;
-  'chart-2'?: T;
-  'chart-3'?: T;
-  'chart-4'?: T;
-  'chart-5'?: T;
-  sidebar?: T;
-  'sidebar-foreground'?: T;
-  'sidebar-primary'?: T;
-  'sidebar-primary-foreground'?: T;
-  'sidebar-accent'?: T;
-  'sidebar-accent-foreground'?: T;
-  'sidebar-border'?: T;
-  'sidebar-ring'?: T;
+export interface SiteConfigSelect<T extends boolean = true> {
+  activeTheme?: T;
   _status?: T;
   updatedAt?: T;
   createdAt?: T;
