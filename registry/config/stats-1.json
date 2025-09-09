@@ -1,9 +1,0 @@
-{
-  "name": "stats-1",
-  "type": "registry:component",
-  "description": "Stats block variant 1",
-  "category": "stats",
-  "tags": ["stats", "uifoundry", "block"],
-  "dependencies": ["react"],
-  "files": [{ "name": "stats-1.tsx", "target": "components/stats-1.tsx" }]
-}

@@ -1,9 +1,0 @@
-{
-  "name": "hero-1",
-  "type": "registry:component",
-  "description": "Hero block variant 1",
-  "category": "hero",
-  "tags": ["hero", "uifoundry", "block"],
-  "dependencies": ["react", "next/link", "lucide-react"],
-  "files": [{ "name": "hero-1.tsx", "target": "components/hero-1.tsx" }]
-}
