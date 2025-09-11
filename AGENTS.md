@@ -61,14 +61,34 @@ UIFoundry is a custom, opionated and professionally put together payload cms tem
     ui/: shadcn ui code for custom registry components
     utils/: sst utils
 
-## Planned Features
+## Project Roadmap
 
-1. - [ ] Interactive Docs that explain each block, how they work, the props, and what not [Fumadocs](https://fumadocs.dev/docs/ui)
-2. - [ ] Role Based Access Control (I have built this feature before for a different project, will be transferring it over)
-3. - [ ] LLM agent site builders (once the payload ui blocks are built and several sites can be created. LLM agents can be setup and offered as a paid feature for the SaaS business)
-4. - [ ] users can have multiple sites
-5. - [ ] form builder plugin complete with many various types of form components
-6. - [ ] Custom domains for individual sites,
+**The authoritative project roadmap is maintained in the [README.md](./README.md#roadmap) file** and serves as the public showcase of development progress.
+
+### Roadmap Management for Agents:
+
+**ALWAYS use README.md as your primary roadmap reference:**
+
+- Check current phase objectives and priorities in [README.md#roadmap](./README.md#roadmap)
+- Update progress by marking completed items `[x]` in the README roadmap
+- Update block counts in marketing blocks checklist (e.g., "Hero (2/5+)" when adding variants)
+- Keep `.agent-os/product/roadmap.md` in sync if making structural changes
+
+### Current Focus Areas:
+
+- **Phase 0**: Completing marketing blocks (5+ variants each) with registry distribution and documentation
+- **Phase 1**: Multi-site architecture and role-based access control
+- **Phase 2**: Custom domains, LLM site builders, and subscription management
+- **Phase 3**: Advanced form builder with dynamic creation capabilities
+
+### Why README Roadmap is Primary:
+
+- Public showcase for potential customers and contributors
+- Single source of truth that prevents documentation drift
+- Professional presentation of project status and progress
+- Immediate visibility of what's being built and completed
+
+**When implementing features, always verify alignment with current README roadmap phase objectives.**
 
 ## MCP Server Capabilities
 
@@ -244,9 +264,20 @@ Use the sequential thinking tool for:
 - [ ] Admin panel functionality verified
 - [ ] Environment variables documented
 
+## Roadmap Updates Protocol
+
+When completing tasks or implementing features:
+
+1. **Mark Progress in README**: Update the README.md roadmap by changing `[ ]` to `[x]` for completed items
+2. **Update Block Counts**: Increment counts in marketing blocks checklist (e.g., "Hero (2/5+)")
+3. **Document in Commits**: Reference roadmap progress in commit messages using conventional commits
+4. **Sync Agent-OS**: Keep `.agent-os/product/roadmap.md` aligned with README if making structural changes
+5. **Verify Alignment**: Always check current phase objectives before starting new work
+
 ## LLM Protocol
 
 - To achieve the best context when bug finding, use git to find the latest changed files, then narrow your initial search to those files to see what may be the root cause
 - Always use MCP server capabilities to enhance development workflow
 - Prioritize official documentation over community sources
 - Use structured thinking for complex problems and document reasoning
+- **Update README roadmap progress** when completing features or tasks
