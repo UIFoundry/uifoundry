@@ -4,6 +4,9 @@
  */
 import "./src/env.mjs";
 import { withPayload } from "@payloadcms/next/withPayload";
+import { createMDX } from "fumadocs-mdx/next";
+
+const withMDX = createMDX();
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
@@ -17,4 +20,4 @@ const nextConfig = {
 	output: "standalone",
 };
 
-export default withPayload(nextConfig);
+export default withPayload(withMDX(nextConfig));
