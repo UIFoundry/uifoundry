@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "media-field",
+  "type": "registry:block",
+  "title": "Media Field",
+  "description": "PayloadCMS double upload field (supports light & dark image variants)",
+  "dependencies": [
+    "react",
+    "next"
+  ],
+  "registryDependencies": [
+    "@uifoundry/field-types",
+    "@uifoundry/upload-field"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/fields/media/index.tsx",
+      "content": "import type { Media, MediaField as MediaFieldProps } from \"~/payload-types\";\nimport Image from \"next/image\";\nimport { cn } from \"@registry/ui/utils\";\nimport type { ComponentPropsWithoutRef } from \"react\";\n\nexport default function MediaField({\n\tmedia,\n\tclassName,\n\t...imageProps\n}: { media: MediaFieldProps } & ComponentPropsWithoutRef<\"img\">) {\n\treturn (\n\t\t<div>\n\t\t\t{media.dark && (\n\t\t\t\t<Image\n\t\t\t\t\tclassName={cn(Boolean(media.light) && \"hidden dark:block\", className)}\n\t\t\t\t\t// @ts-expect-error mismatch image url types from payload\n\t\t\t\t\tsrc={(media.dark as Media).url!}\n\t\t\t\t\talt={(media.dark as Media).alt}\n\t\t\t\t\t{...imageProps}\n\t\t\t\t/>\n\t\t\t)}\n\t\t\t{media.light && (\n\t\t\t\t<Image\n\t\t\t\t\tclassName={cn(Boolean(media.dark) && \"dark:hidden\", className)}\n\t\t\t\t\t// @ts-expect-error mismatch image url types from payload\n\t\t\t\t\tsrc={(media.light as Media).url!}\n\t\t\t\t\talt={(media.light as Media).alt}\n\t\t\t\t\t{...imageProps}\n\t\t\t\t/>\n\t\t\t)}\n\t\t</div>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/fields/media/index.tsx"
+    },
+    {
+      "path": "registry/payload/fields/media/config.ts",
+      "content": "import type { GroupField } from \"@/registry/default/lib/fields/index.d.ts\";\nimport uploadField from \"@/registry/default/lib/fields/upload/config\";\n\nexport default function mediaField(props?: Partial<GroupField>): GroupField {\n\treturn {\n\t\tname: \"media\",\n\t\ttype: \"group\",\n\t\tinterfaceName: \"MediaField\",\n\t\tfields: [uploadField({ name: \"light\" }), uploadField({ name: \"dark\" })],\n\t\t...props,\n\t} as GroupField;\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/fields/media/config.ts"
+    }
+  ]
+}

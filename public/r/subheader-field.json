@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "subheader-field",
+  "type": "registry:component",
+  "title": "SubHeader Field",
+  "description": "Text Field for SubHeader elements",
+  "dependencies": [
+    "react",
+    "next"
+  ],
+  "registryDependencies": [
+    "@uifoundry/field-types"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/fields/subheader/config.ts",
+      "content": "import type { TextField } from \"@/registry/default/lib/fields\";\n\nexport default function subheaderField(props?: Partial<TextField>): TextField {\n\treturn {\n\t\tname: props?.name ?? \"subheader\",\n\t\tlabel: props?.label ?? \"SubHeader\",\n\t\tdefaultValue:\n\t\t\tprops?.defaultValue ??\n\t\t\t\"Highly customizable components for building modern websites and applications that look and feel the way you mean it.\",\n\t\trequired: props?.required ?? false,\n\t\t...props,\n\t\ttype: \"text\",\n\t} as TextField;\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/fields/subheader/config.ts"
+    }
+  ]
+}

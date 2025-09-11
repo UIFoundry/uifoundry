@@ -53,6 +53,7 @@
 	"exclude": [
 		"node_modules",
 		"sst.config.ts",
-		"sst.workflow.ts"
+		"sst.workflow.ts",
+		"registry"
 	]
 }

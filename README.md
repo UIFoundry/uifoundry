@@ -76,7 +76,7 @@ Legend: [x] done · [ ] planned · (MVP) minimum viable for the stage
 
 ### Completed (summary)
 
-Stage 0 — Initial Release (completed items so far)
+Stage 0 — Initial Setup (completed items so far)
 
 - [x] Next.js App Router + PayloadCMS integration (SSR/ISR friendly)
 - [x] Shadcn UI registry and base components (`src/ui/*`)
@@ -99,18 +99,17 @@ Goal: a working, self‑hostable Next.js + Payload starter with a UIFoundry regi
 - [x] SST config scaffold + local deploy story (`sst.config.ts`)
 - [x] Styled Payload Admin (`src/payload/styles.css`)
 - [x] Example site pages + preview flow (`src/app/(frontend)/*`)
-- [ ] UIFoundry Registry scaffold (structure + add/update generator)
+- [x] UIFoundry Registry scaffold (structure + add/update generator)
+- [x] Fumadocs scaffold inside repo
+- [x] "Import Theme" UI in Payload Tailwind Config global (`src/payload/globals/TailwindConfig/*`): paste JSON and file upload → preview → Apply
+- [x] One‑click apply writes to Tailwind Config global fields and injects `<style>` via existing component
 - [ ] Marketing blocks initial set (target 5 per type; stretch 7)
-- [ ] Fumadocs scaffold inside repo and docs for each shipped block/component
+- [ ] Documentation for each shipped block/component
 - [ ] Block metadata: tags (array of strings) and optional default-content templates (for Stage 2 agents)
 - [ ] Quickstart docs in README (install, dev, build, deploy)
-- [ ] "Import Theme" UI in Payload Tailwind Config global (`src/payload/globals/TailwindConfig/*`): paste JSON and file upload → preview → Apply
-- [ ] JSON schema adapter: map external theme JSON → `--token` CSS variables used by UIFoundry
-- [ ] One‑click apply writes to Tailwind Config global fields and injects `<style>` via existing component
 - [ ] Export current theme as JSON
-- [ ] (Optional) CLI: `uifoundry theme import theme.json`
 
-**Marketing blocks checklist (target 5 of each)**
+**Marketing blocks checklist (MVP - target 5 of each)**
 
 - [ ] Hero (0/5)
 - [ ] Header (0/5)

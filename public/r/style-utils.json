@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "style-utils",
+  "type": "registry:lib",
+  "title": "Tailwind Style Utils",
+  "description": "Tailwind lib/utils file with cn function definition",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/utils.ts",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\nexport function cn(...inputs: ClassValue[]) {\n\treturn twMerge(clsx(inputs));\n}\n\nexport const THEME_COLORS = {\n\tbackground: \"background\",\n\tforeground: \"foreground\",\n\tcard: \"card\",\n\tcardForeground: \"card-foreground\",\n\tpopover: \"popover\",\n\tpopoverForeground: \"popover-foreground\",\n\tprimary: \"primary\",\n\tprimaryForeground: \"primary-foreground\",\n\tsecondary: \"secondary\",\n\tsecondaryForeground: \"secondary-foreground\",\n\tmuted: \"muted\",\n\tmutedForeground: \"muted-foreground\",\n\taccent: \"accent\",\n\taccentForeground: \"accent-foreground\",\n\tdestructive: \"destructive\",\n\tdestructiveForeground: \"destructive-foreground\",\n\tborder: \"border\",\n\tinput: \"input\",\n\tring: \"ring\",\n\tchart1: \"chart-1\",\n\tchart2: \"chart-2\",\n\tchart3: \"chart-3\",\n\tchart4: \"chart-4\",\n\tchart5: \"chart-5\",\n\tsidebar: \"sidebar\",\n\tsidebarForeground: \"sidebar-foreground\",\n\tsidebarPrimary: \"sidebar-primary\",\n\tsidebarPrimaryForeground: \"sidebar-primary-foreground\",\n\tsidebarAccent: \"sidebar-accent\",\n\tsidebarAccentForeground: \"sidebar-accent-foreground\",\n\tsidebarBorder: \"sidebar-border\",\n\tsidebarRing: \"sidebar-ring\",\n} as const;\n",
+      "type": "registry:lib",
+      "target": "src/styles/utils.ts"
+    }
+  ]
+}
