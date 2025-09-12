@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "header-blocks",
+  "type": "registry:block",
+  "title": "Header Blocks",
+  "description": "PayloadCMS Header Blocks",
+  "registryDependencies": [
+    "@uifoundry/header-1",
+    "@uifoundry/header-2"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/header/index.ts",
+      "content": "import type { Block } from \"payload\";\nimport Header_1 from \"./Header_1\";\nimport Header_2 from \"./Header_2\";\nimport { Header_1_Block } from \"./Header_1/config\";\nimport { Header_2_Block } from \"./Header_2/config\";\nimport {\n\tBLOCK_SLUG_HEADER_1,\n\tBLOCK_SLUG_HEADER_2,\n} from \"@/registry/default/lib/constants/blocks\";\n\nexport const blocks: Block[] = [Header_1_Block, Header_2_Block];\n\nexport const blockComponents = {\n\t[BLOCK_SLUG_HEADER_1]: Header_1,\n\t[BLOCK_SLUG_HEADER_2]: Header_2,\n};\n",
+      "type": "registry:file",
+      "target": "src/payload/blocks/Header/index.ts"
+    }
+  ]
+}

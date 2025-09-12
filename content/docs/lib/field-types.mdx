@@ -1,0 +1,86 @@
+---
+title: "Field Types"
+description: "TypeScript definitions for PayloadCMS field types"
+category: "lib"
+---
+
+## Preview
+
+```typescript
+import type { TextField, UploadField, ArrayField } from "~/payload/fields";
+
+// Use specific field types in your configurations
+const nameField: TextField = {
+  name: "name",
+  type: "text",
+  required: true,
+};
+
+const logoField: UploadField = {
+  name: "logo",
+  type: "upload",
+  relationTo: "media",
+};
+```
+
+## Props
+
+The Field Types library exports the following TypeScript type definitions:
+
+<TypeTable
+  type={{
+    TextField: {
+      description: "Type definition for PayloadCMS text fields",
+      type: "Extract<Field, { type: 'text' }>",
+      required: true,
+    },
+    ArrayField: {
+      description: "Type definition for PayloadCMS array fields",
+      type: "Extract<Field, { type: 'array' }>",
+      required: true,
+    },
+    DateField: {
+      description: "Type definition for PayloadCMS date fields",
+      type: "Extract<Field, { type: 'date' }>",
+      required: true,
+    },
+    SelectField: {
+      description: "Type definition for PayloadCMS select fields",
+      type: "Extract<Field, { type: 'select' }>",
+      required: true,
+    },
+    UploadField: {
+      description: "Type definition for PayloadCMS upload fields",
+      type: "Extract<Field, { type: 'upload' }>",
+      required: true,
+    },
+    CollapsibleField: {
+      description: "Type definition for PayloadCMS collapsible fields",
+      type: "Extract<Field, { type: 'collapsible' }>",
+      required: true,
+    },
+    GroupField: {
+      description: "Type definition for PayloadCMS group fields",
+      type: "Extract<Field, { type: 'group' }>",
+      required: true,
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/field-types
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component has no registry dependencies - it's a foundational type definition library.
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework

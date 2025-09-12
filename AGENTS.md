@@ -1,5 +1,179 @@
 # Agent Guidelines for UIFoundry
 
+## Agent Documentation System
+
+When you hear "agent docs" or "agents docs", this refers to **both** this AGENTS.md file AND the entire `.agent-os/` directory structure. The `.agent-os/` directory contains task-specific documentation that agents should reference and update based on their current work.
+
+### .agent-os Directory Structure
+
+```
+.agent-os/
+├── instructions/           # Task-specific procedures
+│   ├── core/              # Core workflow instructions
+│   │   ├── analyze-product.md        # Product analysis procedures
+│   │   ├── component-documentation-checklist.md
+│   │   ├── create-spec.md            # Feature specification creation
+│   │   ├── execute-tasks.md          # Task execution protocols
+│   │   ├── maintain-documentation-system.md
+│   │   └── update-component-docs.md
+│   └── meta/              # Meta-procedures (pre/post flight)
+│       ├── pre-flight.md
+│       └── post-flight.md
+├── product/               # Product knowledge base
+│   ├── mission.md         # Product vision and goals
+│   ├── roadmap.md         # Development roadmap
+│   └── tech-stack.md      # Technical architecture
+├── specs/                 # Feature specifications
+│   └── [date-feature]/    # Individual feature specs with tasks
+├── standards/             # Code and documentation standards
+│   ├── code-style/        # Language-specific style guides
+│   ├── best-practices.md  # Development best practices
+│   ├── documentation-template.md
+│   └── registry-mapping.md
+├── recaps/               # Development session summaries
+└── README.md            # .agent-os system overview
+```
+
+### Agent Documentation Protocols
+
+#### When Starting a Task
+
+1. **Check Relevant .agent-os Sections**: Based on your task type, reference the appropriate documentation:
+   - **Product Analysis**: Read `.agent-os/product/` and `.agent-os/instructions/core/analyze-product.md`
+   - **Component Development**: Read `.agent-os/standards/documentation-template.md` and `.agent-os/instructions/core/maintain-documentation-system.md`
+   - **Feature Specifications**: Read `.agent-os/instructions/core/create-spec.md`
+   - **Code Style Questions**: Read `.agent-os/standards/code-style/` and `.agent-os/standards/best-practices.md`
+
+2. **Follow Established Patterns**: Use existing specs in `.agent-os/specs/` as templates for similar work
+
+3. **Check Current Roadmap**: Always verify alignment with `.agent-os/product/roadmap.md` before starting new features
+
+#### When Learning Something New
+
+**Agents MUST update the relevant .agent-os documentation when they discover:**
+
+- **New project patterns or conventions** → Update `.agent-os/standards/best-practices.md`
+- **Component documentation insights** → Update `.agent-os/standards/documentation-template.md` or `.agent-os/standards/registry-mapping.md`
+- **Technical architecture details** → Update `.agent-os/product/tech-stack.md`
+- **Development workflow improvements** → Update relevant files in `.agent-os/instructions/core/`
+- **Roadmap progress or changes** → Update `.agent-os/product/roadmap.md`
+
+#### Documentation Update Protocol
+
+When updating .agent-os documentation:
+
+1. **Read First**: Always read the existing file before making changes
+2. **Follow Format**: Maintain the existing structure and format patterns
+3. **Be Specific**: Add concrete examples and specific guidance
+4. **Reference Context**: Include relevant file paths, command examples, or code snippets
+5. **Update Cross-References**: If you change one file, check for references in other files
+
+#### Task-Specific Documentation Guide
+
+| Task Type                   | Primary .agent-os References                                                                                                 |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Component Creation**      | `instructions/core/maintain-documentation-system.md`, `standards/documentation-template.md`, `standards/registry-mapping.md` |
+| **Feature Development**     | `instructions/core/create-spec.md`, `product/roadmap.md`, `standards/best-practices.md`                                      |
+| **Code Review/Refactoring** | `standards/code-style/`, `standards/best-practices.md`, `standards/payload-architecture.md`                                  |
+| **Documentation Updates**   | `instructions/core/component-documentation-checklist.md`, `standards/documentation-template.md`                              |
+| **Product Planning**        | `instructions/core/analyze-product.md`, `product/mission.md`, `product/roadmap.md`                                           |
+| **Registry Work**           | `standards/registry-mapping.md`, `instructions/core/maintain-documentation-system.md`                                        |
+
+### Self-Maintaining Documentation System
+
+The .agent-os directory is designed to be **self-maintaining**. Each agent contributes to the collective knowledge base by:
+
+- **Following established patterns** documented in the system
+- **Updating documentation** when discovering new information
+- **Creating specs** for new features that future agents can reference
+- **Maintaining consistency** across all documentation
+
+**Remember**: This documentation system serves as the "institutional memory" for UIFoundry. When you learn something valuable about the project, capture it in the appropriate .agent-os file so future agents don't have to rediscover it.
+
+## Existing Implementation Analysis
+
+**CRITICAL**: Before implementing any new feature, agents MUST analyze existing similar implementations in the codebase. This ensures consistency, leverages proven patterns, and prevents reinventing solutions.
+
+### Implementation Discovery Process
+
+1. **Search for Similar Features**: Use Grep and Glob tools to find existing implementations
+   - Search for similar component types (blocks, fields, globals)
+   - Look for similar functionality patterns (auth, validation, data fetching)
+   - Find comparable UI patterns and interactions
+
+2. **Analyze Existing Patterns**: Study how current implementations work
+   - **Code Structure**: How are files organized and components structured?
+   - **Import Patterns**: What libraries and utilities are being used?
+   - **Configuration**: How are PayloadCMS configs structured?
+   - **Styling**: What Tailwind patterns and custom styles are used?
+   - **TypeScript**: What type patterns and interfaces are established?
+
+3. **Identify Reusable Components**: Look for existing utilities and components
+   - Check `src/payload/fields/` for reusable field configurations
+   - Review `src/payload/blocks/` for similar block patterns
+   - Examine `src/components/` for reusable React components
+   - Study `src/utils/` for utility functions
+   - Review `registry/` for distribution-ready components
+
+### Specific Search Strategies
+
+#### For PayloadCMS Components
+
+```bash
+# Find similar block types
+grep -r "blockType:" src/payload/blocks/
+
+# Find field configurations
+grep -r "type: 'text'" src/payload/fields/
+
+# Find collection patterns
+grep -r "collections:" src/payload/
+```
+
+#### For React Components
+
+```bash
+# Find component patterns
+find src/components -name "*.tsx" | head -10
+
+# Find similar prop interfaces
+grep -r "interface.*Props" src/
+
+# Find styling patterns
+grep -r "className.*" src/components/
+```
+
+#### For Registry Components
+
+```bash
+# Find registry implementations
+find registry/ -name "*.tsx" -o -name "config.ts"
+
+# Find component export patterns
+grep -r "export.*config" registry/
+```
+
+### Pattern Documentation Requirements
+
+When analyzing existing implementations, document your findings:
+
+1. **In Code Comments**: Reference similar implementations you found
+
+   ```typescript
+   // Following pattern from ~/payload/blocks/Hero/Hero_1/config.ts
+   // Similar to ~/components/ui/Button.tsx implementation
+   ```
+
+2. **In .agent-os Documentation**: Update relevant standards files
+   - Add discovered patterns to `.agent-os/standards/best-practices.md`
+   - Document component patterns in `.agent-os/standards/documentation-template.md`
+
+3. **In Implementation Notes**: Explain why you chose specific patterns
+   - Reference the existing implementation that guided your approach
+   - Note any modifications made and why they were necessary
+
+---
+
 ## Build/Lint/Test Commands
 
 - `pnpm build` - Build the app (runs payload generate:types then next build)
@@ -10,7 +184,10 @@
 - `pnpm check` - Run both lint and typecheck
 - `pnpm format:check` - Check prettier formatting
 - `pnpm format:write` - Fix prettier formatting
-- No test framework configured
+- `pnpm vitest` - Run Vitest unit tests
+- `pnpm test` - Run Playwright e2e tests
+- `pnpm test:report` - Show Playwright test report
+- `pnpm registry:build` - Build custom shadcn registry components
 
 ## Project & Purpose
 
@@ -40,6 +217,60 @@ UIFoundry is a custom, opionated and professionally put together payload cms tem
 - File naming: Use kebab-case for directories, PascalCase for React components
 - Always run `pnpm run check` before committing changes
 
+## Following Conventions Through Implementation Analysis
+
+When making changes to files, **first understand the file's code conventions by examining similar existing implementations**. Mimic code style, use existing libraries and utilities, and follow existing patterns.
+
+### Implementation Analysis Protocol
+
+1. **NEVER assume that a given library is available**, even if it is well known. Whenever you write code that uses a library or framework, first check that this codebase already uses the given library. Look at neighboring files, or check the package.json.
+
+2. **When creating a new component**, first look at existing components to see how they're written:
+   - Use Grep to find similar components: `grep -r "export.*function" src/components/`
+   - Study their framework choice, naming conventions, typing, and other conventions
+   - Look at their import patterns and dependencies
+   - Examine their file structure and organization
+
+3. **When editing existing code**, first look at the code's surrounding context:
+   - Examine imports to understand the code's choice of frameworks and libraries
+   - Study neighboring functions and components for patterns
+   - Review similar implementations elsewhere in the codebase
+   - Make changes that are consistent with the existing approach
+
+4. **For PayloadCMS components**, analyze existing patterns:
+   - Study `src/payload/blocks/` for block patterns
+   - Review `src/payload/fields/` for field configurations
+   - Examine `src/payload/globals/` for global configurations
+   - Check `registry/payload/` for distribution patterns
+
+5. **Security and best practices**: Always follow security best practices. Never introduce code that exposes or logs secrets and keys. Never commit secrets or keys to the repository.
+
+### Practical Example Workflow
+
+Before implementing a new Hero block variant:
+
+```bash
+# 1. Find existing Hero implementations
+find src/payload/blocks -name "*hero*" -o -name "*Hero*"
+
+# 2. Study their structure
+ls -la src/payload/blocks/Hero/
+
+# 3. Examine configuration patterns
+cat src/payload/blocks/Hero/Hero_1/config.ts
+
+# 4. Look at component implementation
+cat src/payload/blocks/Hero/Hero_1/index.tsx
+
+# 5. Check registry distribution
+find registry/payload/blocks -name "*hero*"
+
+# 6. Review documentation patterns
+find content/docs -name "*hero*"
+```
+
+Then implement your new variant following the same patterns, file structure, naming conventions, and export patterns you discovered.
+
 ## Project Structure
 
 - src: frontend source code
@@ -56,19 +287,59 @@ UIFoundry is a custom, opionated and professionally put together payload cms tem
     - styles.css: all payload cms admin panel global tailwind styles
     - utils.ts: payload cms getPayload function
   - server/: TRPC api routes
-    styles/: global tailwind styles and utils
-    trpc/: trpc clients
-    ui/: shadcn ui code for custom registry components
-    utils/: sst utils
+  - styles/: global tailwind styles and utils
+  - trpc/: trpc clients
+  - ui/: shadcn ui code for custom registry components
+  - utils/: sst utils
+- content: documentation content (Fumadocs)
+  - docs/: all component documentation in MDX format
+    - blocks/: block component documentation
+    - fields/: field component documentation
+    - globals/: global component documentation
+    - lib/: utility library documentation
+    - ui/: ui component documentation
+    - guides/: developer guides and tutorials
+    - meta.json: navigation structure for docs sidebar
+- registry: custom shadcn registry for UIFoundry components
+  - components/: reusable React components for registry
+  - payload/: PayloadCMS specific registry components
+    - blocks/: block configs and components for distribution
+    - fields/: field configs and components for distribution
+    - globals/: global configs and components for distribution
+  - ui/: UI components with motion primitives
+  - config/: registry configuration files
+- tests: test files and setup
+  - unit tests: Vitest configuration and test files
+  - e2e tests: Playwright configuration and test files
 
-## Planned Features
+## Project Roadmap
 
-1. - [ ] Interactive Docs that explain each block, how they work, the props, and what not [Fumadocs](https://fumadocs.dev/docs/ui)
-2. - [ ] Role Based Access Control (I have built this feature before for a different project, will be transferring it over)
-3. - [ ] LLM agent site builders (once the payload ui blocks are built and several sites can be created. LLM agents can be setup and offered as a paid feature for the SaaS business)
-4. - [ ] users can have multiple sites
-5. - [ ] form builder plugin complete with many various types of form components
-6. - [ ] Custom domains for individual sites,
+**The authoritative project roadmap is maintained in the [README.md](./README.md#roadmap) file** and serves as the public showcase of development progress.
+
+### Roadmap Management for Agents:
+
+**ALWAYS use README.md as your primary roadmap reference:**
+
+- Check current phase objectives and priorities in [README.md#roadmap](./README.md#roadmap)
+- Update progress by marking completed items `[x]` in the README roadmap
+- Update block counts in marketing blocks checklist (e.g., "Hero (2/5+)" when adding variants)
+- Keep `.agent-os/product/roadmap.md` in sync if making structural changes
+
+### Current Focus Areas:
+
+- **Phase 0**: Completing marketing blocks (5+ variants each) with registry distribution and documentation
+- **Phase 1**: Multi-site architecture and role-based access control
+- **Phase 2**: Custom domains, LLM site builders, and subscription management
+- **Phase 3**: Advanced form builder with dynamic creation capabilities
+
+### Why README Roadmap is Primary:
+
+- Public showcase for potential customers and contributors
+- Single source of truth that prevents documentation drift
+- Professional presentation of project status and progress
+- Immediate visibility of what's being built and completed
+
+**When implementing features, always verify alignment with current README roadmap phase objectives.**
 
 ## MCP Server Capabilities
 
@@ -78,24 +349,28 @@ UIFoundry is a custom, opionated and professionally put together payload cms tem
 - Verify frontend changes by navigating to affected routes
 - Capture screenshots for visual verification when needed
 - Test user flows (auth, form submissions, block interactions)
+- Test documentation site functionality at `localhost:3001/docs`
 
 ### Context7 Documentation
 
 - Always use Context7 to fetch official documentation for core dependencies
 - Reference docs before implementing features or debugging issues
 - Prioritize official sources over community content for accuracy
+- Use for researching Fumadocs configuration and MDX best practices
 
 ### Sequential Thinking
 
 - Use structured thinking for complex, multi-step problems
 - Leave thought summaries in PRs for future reference
 - Essential for design decisions with trade-offs
+- Critical for registry component architecture decisions
 
 ### Web Research
 
 - Fetch content from official sources and community discussions
 - Follow troubleshooting resource priorities (see below)
 - Never paste secrets or tokens in requests
+- Research component documentation standards and best practices
 
 ## Development Environment
 
@@ -114,6 +389,8 @@ UIFoundry is a custom, opionated and professionally put together payload cms tem
 
 ## Documentation Strategy
 
+### Official Documentation Priority
+
 Use Context7 to fetch official docs in this priority order:
 
 - **PayloadCMS**: Official docs → GitHub examples → API reference
@@ -123,11 +400,25 @@ Use Context7 to fetch official docs in this priority order:
 - **Shadcn**: Official docs → component source
 - **TRPC**: Official docs → GitHub examples
 - **MongoDB**: Official docs → Atlas documentation
+- **Fumadocs**: Official docs → GitHub examples → configuration guides
+- **Vitest**: Official docs → testing guides → configuration examples
+- **Playwright**: Official docs → testing examples → browser automation guides
+
+### Component Documentation Standards
+
+When creating or updating component documentation:
+
+- Use MDX format with proper frontmatter
+- Include live examples with code snippets
+- Document all props and configuration options
+- Provide usage examples and best practices
+- Update corresponding meta.json files for navigation
+- Follow existing documentation structure and style
 
 **Context7 Usage Notes**:
 
 - Specify token limits to control response size (default: 10,000)
-- Use specific topics to focus searches (e.g., "routing", "authentication")
+- Use specific topics to focus searches (e.g., "routing", "authentication", "MDX")
 - For Next.js queries, use 500-2000 tokens with targeted topics to avoid overwhelming responses
 - Always reference current docs before implementation or troubleshooting
 
@@ -157,6 +448,15 @@ Use the sequential thinking tool for:
 - SSR/ISR performance implications
 - CMS-to-site data propagation patterns
 - Component reusability considerations
+- Registry component distribution strategies
+- Documentation structure and organization
+
+### Registry Component Decisions
+
+- Component abstraction levels and reusability
+- Distribution packaging and dependency management
+- Version compatibility across Payload/Next.js versions
+- Documentation generation and maintenance strategies
 
 ### Performance Investigations
 
@@ -214,6 +514,13 @@ Use the sequential thinking tool for:
 
 ### Before Coding
 
+- [ ] **Check .agent-os Documentation**: Read relevant sections based on task type
+- [ ] **Verify Roadmap Alignment**: Check `.agent-os/product/roadmap.md` for current priorities
+- [ ] **Reference Existing Patterns**: Check `.agent-os/specs/` for similar work templates
+- [ ] **Analyze Similar Implementations**: Use Grep/Glob to find existing similar features in codebase
+- [ ] **Study Existing Code Patterns**: Examine file structure, imports, and conventions of similar components
+- [ ] **Identify Reusable Components**: Check existing fields, blocks, utilities, and components for reuse
+- [ ] **Document Pattern Analysis**: Note which existing implementations guided your approach
 - [ ] Confirm environment ports and services
 - [ ] Load `.env.local` and verify environment variables
 - [ ] Use Context7 to open relevant documentation
@@ -230,23 +537,233 @@ Use the sequential thinking tool for:
 
 ### After Implementation
 
+- [ ] **Update .agent-os Documentation**: Add any new discoveries to relevant .agent-os files
+- [ ] **Update Roadmap Progress**: Mark completed items in both `.agent-os/product/roadmap.md` and `README.md`
+- [ ] **Create Specification**: Document new features in `.agent-os/specs/` if applicable
 - [ ] Run `pnpm run check` to verify lint and types
+- [ ] Run tests: `pnpm vitest` for unit tests, `pnpm test` for e2e
 - [ ] Test affected routes in browser
 - [ ] Verify PayloadCMS admin panel integration
+- [ ] Update component documentation if applicable
+- [ ] Build registry components: `pnpm registry:build`
 - [ ] Leave thought summary in PR description
 - [ ] Confirm no secrets or sensitive data committed
 
 ### Deployment Readiness
 
 - [ ] Build passes: `pnpm build`
+- [ ] Registry build passes: `pnpm registry:build`
+- [ ] All tests pass: `pnpm vitest && pnpm test`
 - [ ] Types generate correctly
 - [ ] No console errors in browser
 - [ ] Admin panel functionality verified
+- [ ] Documentation site renders correctly
 - [ ] Environment variables documented
 
+### Documentation Updates
+
+- [ ] Component documentation created/updated in `content/docs/`
+- [ ] Meta.json files updated for navigation
+- [ ] Code examples tested and validated
+- [ ] Registry components documented with usage examples
+- [ ] Documentation builds successfully
+
+## Roadmap Updates Protocol
+
+When completing tasks or implementing features:
+
+1. **Mark Progress in README**: Update the README.md roadmap by changing `[ ]` to `[x]` for completed items
+2. **Update Block Counts**: Increment counts in marketing blocks checklist (e.g., "Hero (2/5+)")
+3. **Document in Commits**: Reference roadmap progress in commit messages using conventional commits
+4. **Sync Agent-OS**: Keep `.agent-os/product/roadmap.md` aligned with README if making structural changes
+5. **Verify Alignment**: Always check current phase objectives before starting new work
+
+## Component Development Workflow
+
+### Creating New Components
+
+1. **Analyze Similar Components**: Use Grep/Glob to find existing similar components in the codebase
+2. **Study Implementation Patterns**: Examine file structure, imports, configuration patterns, and conventions
+3. **Identify Reusable Elements**: Check for existing fields, utilities, or components that can be reused
+4. **Implement Component**: Create component in `src/payload/blocks/`, `src/payload/fields/`, or `src/payload/globals/` following discovered patterns
+5. **Add to Registry**: Create registry version in `registry/payload/[type]/[component]/` using same structure
+6. **Create Documentation**: Add MDX file to `content/docs/[type]/[component].mdx` following existing documentation patterns
+7. **Update Navigation**: Add component to appropriate `meta.json` file
+8. **Test Installation**: Verify component installs via `shadcn add [registry-url]/[component]`
+9. **Update Roadmap**: Mark progress in README.md roadmap
+10. **Document Patterns**: Add any new patterns discovered to `.agent-os/standards/best-practices.md`
+
+### Registry Component Standards
+
+- Each component must have both `config.ts` (PayloadCMS config) and `index.tsx` (React component)
+- Follow existing naming conventions and file structure
+- Include proper TypeScript types and exports
+- Document all configuration options and usage patterns
+- Test component isolation and reusability
+
+### Documentation Standards
+
+- Use clear, descriptive titles and descriptions
+- Include code examples with syntax highlighting
+- Document all configuration options and props
+- Provide usage examples and best practices
+- Include screenshots or visual examples when helpful
+- Keep MDX files organized and properly formatted
+
 ## LLM Protocol
+
+### Core Development Workflow
 
 - To achieve the best context when bug finding, use git to find the latest changed files, then narrow your initial search to those files to see what may be the root cause
 - Always use MCP server capabilities to enhance development workflow
 - Prioritize official documentation over community sources
 - Use structured thinking for complex problems and document reasoning
+- **Update README roadmap progress** when completing features or tasks
+- **Maintain documentation quality** by updating component docs alongside code changes
+- **Test registry components** before distribution using `pnpm registry:build`
+- **Verify documentation builds** when updating MDX files or meta.json navigation
+
+### .agent-os Integration Workflow
+
+#### Before Starting Any Task
+
+1. **Read Relevant .agent-os Documentation**: Check task-specific sections based on your work type
+2. **Verify Current Context**: Always check `.agent-os/product/roadmap.md` for current priorities
+3. **Follow Established Patterns**: Use existing `.agent-os/specs/` as templates for similar work
+4. **Reference Standards**: Check `.agent-os/standards/` for code style and architecture guidance
+5. **Analyze Similar Implementations**: Use Grep/Glob tools to find and study existing similar features
+6. **Document Implementation Patterns**: Note which existing implementations guide your approach
+
+#### During Task Execution
+
+1. **Document Discoveries**: When you learn something new about the project, immediately update the relevant `.agent-os/` file
+2. **Create Specifications**: For new features, create proper specs in `.agent-os/specs/[date-feature]/`
+3. **Follow Checklists**: Use `.agent-os/instructions/core/` checklists to ensure completeness
+4. **Maintain Cross-References**: Keep documentation interconnected and up-to-date
+
+#### After Task Completion
+
+1. **Update Progress**: Mark completed items in `.agent-os/product/roadmap.md` AND `README.md`
+2. **Create Recaps**: Document lessons learned in `.agent-os/recaps/` for future agents
+3. **Update Standards**: If you discovered better practices, update `.agent-os/standards/`
+4. **Verify Documentation**: Ensure all changes are reflected across both code and .agent-os docs
+
+### Knowledge Management Protocol
+
+**The .agent-os directory is the project's institutional memory.** Treat it as seriously as you would the source code:
+
+- **Read before writing** - always check existing documentation first
+- **Update immediately** - don't let knowledge gaps persist for future agents
+- **Cross-reference consistently** - link related concepts across different files
+- **Maintain quality** - follow the same standards for .agent-os docs as for component documentation
+
+**Remember**: Every piece of information you discover about UIFoundry should be captured in the appropriate .agent-os file. Future agents depend on this knowledge base to work effectively.
+
+## Task-Specific .agent-os Usage Guide
+
+### When Creating New Components
+
+**Required Reading**:
+
+- `.agent-os/instructions/core/maintain-documentation-system.md` (CRITICAL - read first)
+- `.agent-os/standards/documentation-template.md`
+- `.agent-os/standards/registry-mapping.md`
+
+**Required Updates**:
+
+- Add component to registry mappings
+- Create component documentation following 5-section template
+- Update navigation files (meta.json)
+
+### When Implementing New Features
+
+**Required Reading**:
+
+- `.agent-os/instructions/core/create-spec.md`
+- `.agent-os/product/roadmap.md`
+- `.agent-os/standards/best-practices.md`
+
+**Required Updates**:
+
+- Create feature specification in `.agent-os/specs/[date-feature]/`
+- Update roadmap progress in both `.agent-os/product/roadmap.md` and `README.md`
+- Document any new patterns in `.agent-os/standards/`
+
+### When Debugging or Refactoring
+
+**Required Reading**:
+
+- `.agent-os/standards/code-style/`
+- `.agent-os/standards/payload-architecture.md`
+- Recent `.agent-os/recaps/` for context
+
+**Required Updates**:
+
+- Document discovered patterns or anti-patterns in `.agent-os/standards/best-practices.md`
+- Create recap in `.agent-os/recaps/` if significant insights were gained
+
+### When Working on Documentation
+
+**Required Reading**:
+
+- `.agent-os/instructions/core/component-documentation-checklist.md`
+- `.agent-os/standards/documentation-template.md`
+
+**Required Updates**:
+
+- Update `.agent-os/standards/registry-mapping.md` with new components
+- Update meta.json navigation files
+- Ensure cross-references between related documentation
+
+### When Planning or Analyzing
+
+**Required Reading**:
+
+- `.agent-os/instructions/core/analyze-product.md`
+- `.agent-os/product/mission.md`
+- `.agent-os/product/roadmap.md`
+
+**Required Updates**:
+
+- Update `.agent-os/product/tech-stack.md` with new technical insights
+- Update `.agent-os/product/roadmap.md` with progress or plan changes
+- Create new specs in `.agent-os/specs/` for planned features
+
+### Agent Knowledge Sharing Protocol
+
+When you learn something valuable:
+
+1. **Identify the Category**: Is this a code pattern, architectural insight, process improvement, or project knowledge?
+2. **Find the Right File**: Use the task-specific guide above to identify which .agent-os file should be updated
+3. **Read Before Writing**: Always read the existing content to understand the format and avoid duplication
+4. **Add Specific Details**: Include file paths, command examples, code snippets, and concrete examples
+5. **Cross-Reference**: Link to related concepts in other .agent-os files when relevant
+6. **Verify Accuracy**: Ensure your additions are factual and tested
+
+This creates a continuous learning loop where each agent contributes to the collective intelligence of the system.
+
+## Testing Strategy
+
+### Unit Testing (Vitest)
+
+- Test utility functions and business logic
+- Test PayloadCMS field configurations and validations
+- Test component props and state management
+- Run tests with `pnpm vitest` before commits
+
+### End-to-End Testing (Playwright)
+
+- Test complete user flows through the application
+- Test PayloadCMS admin panel interactions
+- Test frontend component interactions and navigation
+- Test documentation site functionality
+- Run tests with `pnpm test` before deployments
+
+### Manual Testing Checklist
+
+- [ ] PayloadCMS admin panel loads and functions correctly
+- [ ] Frontend components render and interact properly
+- [ ] Documentation site navigation works
+- [ ] Registry components install via shadcn CLI
+- [ ] No console errors in browser dev tools
+- [ ] Mobile responsiveness verified

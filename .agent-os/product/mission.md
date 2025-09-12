@@ -73,6 +73,7 @@ Unlike traditional CMSs or no-code builders, we integrate AI-powered site genera
 ### Core Features
 
 - **Comprehensive Block Library:** 15+ production-ready blocks (Hero, Features, CTA, FAQ, Pricing, etc.) with TypeScript configs
+- **Component Registry System:** Custom shadcn-compatible registry hosting PayloadCMS components for easy distribution
 - **Professional Deployment:** Automated AWS deployment with SST, CloudFront CDN, and multi-environment support
 - **Type-Safe Development:** Full TypeScript integration from PayloadCMS schemas to React components via TRPC
 - **Performance Optimization:** Next.js 15, Image optimization, and Core Web Vitals optimization built-in
@@ -89,7 +90,9 @@ Unlike traditional CMSs or no-code builders, we integrate AI-powered site genera
 - **Modern Tech Stack:** Next.js 15, PayloadCMS 3.49, Better Auth, Tailwind CSS 4.0
 - **Developer Tools:** ESLint, TypeScript strict mode, automated type generation
 - **Testing Framework:** Playwright for E2E testing with automated CI/CD integration
-- **Documentation:** Interactive docs with Fumadocs for block usage and customization
+- **Interactive Documentation:** Fumadocs integration with live examples and API documentation
+- **Component Registry:** Custom shadcn registry for easy installation of PayloadCMS components
+- **Registry Distribution:** Components installable via `npx shadcn add --registry` command
 
 ### SaaS Platform Features (Planned)
 

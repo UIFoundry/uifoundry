@@ -1,0 +1,84 @@
+---
+title: "Color Field"
+description: "PayloadCMS custom admin panel color input with interactive color picker"
+category: "fields"
+---
+
+## Preview
+
+```typescript
+import colorField from "~/payload/fields/color/config";
+
+// Usage in PayloadCMS block/collection config
+const themeColor = colorField({
+  name: "primaryColor",
+  label: "Primary Color",
+  description: "Choose the primary brand color",
+  required: true,
+});
+```
+
+## Props
+
+The colorField function accepts the following configuration options:
+
+<TypeTable
+  type={{
+    name: {
+      description: "Field name for the color field",
+      type: "string",
+      default: "color",
+    },
+    label: {
+      description: "Display label in PayloadCMS admin",
+      type: "string",
+    },
+    description: {
+      description: "Help text describing the color field purpose",
+      type: "string",
+      required: true,
+    },
+    required: {
+      description: "Whether the field is required",
+      type: "boolean",
+      default: "false",
+    },
+    admin: {
+      description: "Admin-specific configuration options",
+      type: "AdminConfig",
+    },
+    access: {
+      description: "Access control configuration",
+      type: "AccessConfig",
+    },
+    hooks: {
+      description: "Field-level hooks",
+      type: "FieldHooks",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/color-field
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Button](/docs/ui/button) - Customizable button component with variants
+- [Popover](/docs/ui/popover) - Floating UI popover component
+- [Field Types](/docs/lib/field-types) - TypeScript definitions for PayloadCMS fields
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+- [@uiw/react-color-sketch](https://github.com/uiwjs/react-color) - React color picker component
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [@payloadcms/ui](https://github.com/payloadcms/payload/tree/main/packages/ui) - PayloadCMS admin UI components

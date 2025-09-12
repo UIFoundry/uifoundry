@@ -1,0 +1,61 @@
+---
+title: "Button"
+description: "Customizable button component with multiple variants and sizes"
+category: "ui"
+---
+
+## Preview
+
+```tsx
+<Button>Default Button</Button>
+<Button variant="outline">Outline Button</Button>
+<Button variant="ghost">Ghost Button</Button>
+```
+
+## Props
+
+The Button component accepts the following props:
+
+<TypeTable
+  type={{
+    variant: {
+      description: "Visual style variant",
+      type: "'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'",
+      default: "default",
+    },
+    size: {
+      description: "Button size",
+      type: "'default' | 'sm' | 'lg' | 'icon'",
+      default: "default",
+    },
+    asChild: {
+      description: "Render as a different element type",
+      type: "boolean",
+      default: "false",
+    },
+    children: {
+      description: "Button content",
+      type: "ReactNode",
+      required: true,
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add button
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component has no registry dependencies.
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [@radix-ui/react-slot](https://github.com/radix-ui/primitives) - Radix UI primitives

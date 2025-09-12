@@ -1,0 +1,89 @@
+---
+title: "Text Effect"
+description: "Text animation effects with staggered reveals by character, word, or line"
+category: "ui"
+---
+
+## Preview
+
+```tsx
+<TextEffect preset="fade-in-blur" per="word">
+  Beautiful text animations with smooth reveals
+</TextEffect>
+```
+
+## Props
+
+The TextEffect component accepts the following props:
+
+<TypeTable
+  type={{
+    children: {
+      description: "Text content to animate",
+      type: "string",
+      required: true,
+    },
+    preset: {
+      description: "Animation preset to apply",
+      type: "'blur' | 'fade-in-blur' | 'scale' | 'fade' | 'slide'",
+      default: "fade",
+    },
+    per: {
+      description: "Animation unit - animate by character, word, or line",
+      type: "'word' | 'char' | 'line'",
+      default: "word",
+    },
+    variants: {
+      description: "Custom Framer Motion variants for container and items",
+      type: "{ container?: Variants; item?: Variants; }",
+    },
+    className: {
+      description: "CSS classes for the container element",
+      type: "string",
+    },
+    as: {
+      description: "HTML element type for the container",
+      type: "keyof React.JSX.IntrinsicElements",
+      default: "p",
+    },
+    delay: {
+      description: "Delay before animation starts (in seconds)",
+      type: "number",
+      default: "0",
+    },
+    trigger: {
+      description: "Controls when animation should trigger",
+      type: "boolean",
+      default: "true",
+    },
+    onAnimationComplete: {
+      description: "Callback fired when animation completes",
+      type: "() => void",
+    },
+    onAnimationStart: {
+      description: "Callback fired when animation starts",
+      type: "() => void",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/text-effect
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Style Utils](/docs/lib/style-utils) - Tailwind utility functions including `cn()` class merger
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Framer Motion](https://github.com/framer/motion) - Production-ready motion library for React
