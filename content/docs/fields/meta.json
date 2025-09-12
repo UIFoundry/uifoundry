@@ -1,4 +1,10 @@
 {
-  "title": "Fields",
-  "pages": []
+	"title": "Fields",
+	"pages": [
+		"color-field",
+		"header-field",
+		"subheader-field",
+		"media-field",
+		"upload-field"
+	]
 }

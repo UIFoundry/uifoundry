@@ -1,0 +1,71 @@
+---
+title: "Animated Group"
+description: "Motion primitive for animating groups of elements with staggered effects"
+category: "ui"
+---
+
+## Preview
+
+```tsx
+<AnimatedGroup preset="fade" className="space-y-4">
+  <div className="bg-primary/10 rounded p-4">Item 1</div>
+  <div className="bg-primary/10 rounded p-4">Item 2</div>
+  <div className="bg-primary/10 rounded p-4">Item 3</div>
+</AnimatedGroup>
+```
+
+## Props
+
+The AnimatedGroup component accepts the following props:
+
+<TypeTable
+  type={{
+    children: {
+      description: "React elements to animate",
+      type: "React.ReactNode",
+      required: true,
+    },
+    preset: {
+      description: "Animation preset to apply to children",
+      type: "'fade' | 'slide' | 'scale' | 'blur' | 'blur-slide' | 'zoom' | 'flip' | 'bounce' | 'rotate' | 'swing'",
+      default: "fade",
+    },
+    variants: {
+      description: "Custom Framer Motion variants for container and items",
+      type: "{ container?: Variants; item?: Variants; }",
+    },
+    className: {
+      description: "CSS classes for the container element",
+      type: "string",
+    },
+    as: {
+      description: "HTML element type for the container",
+      type: "React.ElementType",
+      default: "div",
+    },
+    asChild: {
+      description: "HTML element type for child wrappers",
+      type: "React.ElementType",
+      default: "div",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn add --registry https://uifoundry.com/r animated-group
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component has no registry dependencies.
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Framer Motion](https://github.com/framer/motion) - Production-ready motion library for React

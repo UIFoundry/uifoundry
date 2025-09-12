@@ -1,0 +1,58 @@
+---
+title: "Header Global"
+description: "PayloadCMS global configuration for site-wide header management"
+category: "globals"
+---
+
+## Preview
+
+```typescript
+import { HeaderGlobal } from "~/payload/globals/Header/config"
+import Header from "~/payload/globals/Header"
+
+// Usage in PayloadCMS configuration
+const headerGlobal = HeaderGlobal
+
+// Usage in React component
+<Header header={global.header} />
+```
+
+## Props
+
+The Header Global provides the following configuration:
+
+<TypeTable
+  type={{
+    header: {
+      description: "PayloadCMS global header data",
+      type: "Header",
+      required: true,
+    },
+    className: {
+      description: "CSS classes for the header container",
+      type: "string",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn add --registry https://uifoundry.com/r header-global
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Style Utils](/docs/lib/style-utils) - Tailwind utility functions including `cn()` class merger
+- [Header Blocks](/docs/blocks/header-blocks) - Collection of PayloadCMS header block configurations and components
+- [Render Blocks](/docs/ui/renderblocks) - Component for rendering PayloadCMS blocks dynamically with proper typing
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces

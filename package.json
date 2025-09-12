@@ -76,6 +76,7 @@
 		"react-use-measure": "^2.1.7",
 		"server-only": "^0.0.1",
 		"sharp": "^0.34.1",
+		"source-map-support": "^0.5.21",
 		"sst": "3.17.10",
 		"superjson": "^2.2.1",
 		"tailwind-merge": "^3.3.1",

@@ -1,0 +1,74 @@
+---
+title: "Upload Field"
+description: "PayloadCMS upload field configuration for media collection relationships"
+category: "fields"
+---
+
+## Preview
+
+```typescript
+import uploadField from "~/payload/fields/upload/config";
+
+// Usage in PayloadCMS block/collection config
+const mediaField = uploadField({
+  name: "image",
+  label: "Hero Image",
+  required: false,
+});
+```
+
+## Props
+
+The uploadField function accepts the following configuration options:
+
+<TypeTable
+  type={{
+    name: {
+      description: "Field name for the upload field",
+      type: "string",
+      required: true,
+    },
+    label: {
+      description: "Display label in PayloadCMS admin",
+      type: "string",
+    },
+    required: {
+      description: "Whether the field is required",
+      type: "boolean",
+      default: "false",
+    },
+    admin: {
+      description: "Admin-specific configuration options",
+      type: "AdminConfig",
+    },
+    access: {
+      description: "Access control configuration",
+      type: "AccessConfig",
+    },
+    hooks: {
+      description: "Field-level hooks",
+      type: "FieldHooks",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn add --registry https://uifoundry.com/r upload-field
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Field Types](/docs/lib/field-types) - TypeScript definitions for PayloadCMS fields
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production

@@ -1,4 +1,10 @@
 {
   "title": "UI",
-  "pages": []
+  "pages": [
+    "animated-group",
+    "button",
+    "popover",
+    "renderblocks",
+    "text-effect"
+  ]
 }

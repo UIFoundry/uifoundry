@@ -1,0 +1,5 @@
+{
+  "title": "Library",
+  "description": "Utility functions and type definitions for UIFoundry components",
+  "pages": ["field-types", "style-utils"]
+}

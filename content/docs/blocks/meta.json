@@ -1,6 +1,4 @@
 {
-	"title": "Blocks",
-	"pages": [
-		"hero"
-	]
+  "title": "Blocks",
+  "pages": ["hero", "header", "header-blocks"]
 }

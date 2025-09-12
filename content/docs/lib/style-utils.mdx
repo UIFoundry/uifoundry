@@ -1,0 +1,60 @@
+---
+title: "Style Utils"
+description: "Tailwind utility functions including cn() class merger and theme color constants"
+category: "lib"
+---
+
+## Preview
+
+```typescript
+import { cn, THEME_COLORS } from "~/styles/utils";
+
+// Merge classes conditionally
+const className = cn("px-4 py-2", {
+  "bg-primary": isPrimary,
+  "bg-secondary": !isPrimary,
+});
+
+// Access theme colors
+const bgColor = THEME_COLORS.primary;
+```
+
+## Props
+
+The Style Utils library exports the following functions and constants:
+
+<TypeTable
+  type={{
+    cn: {
+      description:
+        "Utility function to merge Tailwind classes with conflict resolution",
+      type: "(...inputs: ClassValue[]) => string",
+      required: true,
+    },
+    THEME_COLORS: {
+      description:
+        "Object containing all available theme color keys for consistent theming",
+      type: "Record<string, string>",
+      required: true,
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn add --registry https://uifoundry.com/r style-utils
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component has no registry dependencies - it's a foundational utility.
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [clsx](https://github.com/lukeed/clsx) - Utility for constructing className strings conditionally
+- [tailwind-merge](https://github.com/dcastil/tailwind-merge) - Merge Tailwind CSS classes without style conflicts

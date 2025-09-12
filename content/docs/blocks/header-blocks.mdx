@@ -1,0 +1,58 @@
+---
+title: "Header Blocks"
+description: "Collection of PayloadCMS header block configurations and components"
+category: "blocks"
+---
+
+## Preview
+
+```typescript
+import { blocks, blockComponents } from "~/payload/blocks/Header"
+
+// Usage in PayloadCMS configuration
+const headerBlocks = blocks // [Header_1_Block, Header_2_Block]
+
+// Usage with RenderBlocks
+<RenderBlocks
+  blocks={page.headers}
+  blockComponents={blockComponents}
+/>
+```
+
+## Props
+
+The Header Blocks export provides the following:
+
+<TypeTable
+  type={{
+    blocks: {
+      description: "Array of PayloadCMS block configurations",
+      type: "Block[]",
+      required: true,
+    },
+    blockComponents: {
+      description: "Object mapping block slugs to React components",
+      type: "Record<string, React.ComponentType>",
+      required: true,
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn add --registry https://uifoundry.com/r header-blocks
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Header 1](/docs/blocks/header-1) - Responsive navigation header with animated mobile menu and scroll effects
+- [Header 2](/docs/blocks/header-2) - Full-width navigation header with border and backdrop blur effects
+
+## Dependencies
+
+This component has no direct NPM dependencies - dependencies are inherited from the individual header components.
