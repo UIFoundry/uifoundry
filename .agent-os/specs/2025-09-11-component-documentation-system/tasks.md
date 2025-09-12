@@ -11,11 +11,13 @@
   - [ ] 1.6 Verify infrastructure setup with sample Hero_1 documentation page
 
 - [ ] 2. Document All Block Components
-  - [ ] 2.1 Create MDX documentation for all Hero block variants (Hero_1, Hero_2)
-  - [ ] 2.2 Create MDX documentation for Header block variants (Header_1, Header_2)
-  - [ ] 2.3 Create MDX documentation for remaining 12 block types (Features, CTA, Testimonials, FAQ, Pricing, About, Stats, Newsletter, Footer, Contact, Gallery, Teams)
-  - [ ] 2.4 Ensure each block page includes AutoTypeTable, live preview, registry installation, and admin links
-  - [ ] 2.5 Verify all block components render correctly with default values
+  - [ ] 2.1 Create and validate standardized MDX template using Hero_1 as prototype
+  - [ ] 2.2 Template requirements: Live component with extracted defaults, AutoTypeTable for props, registry installation commands, admin panel links
+  - [ ] 2.3 Register all block components in mdx-components.tsx with pre-computed default values
+  - [ ] 2.4 Apply validated template to all Hero block variants (Hero_1, Hero_2)
+  - [ ] 2.5 Apply template to Header block variants (Header_1, Header_2)
+  - [ ] 2.6 Apply template to remaining 12 block types (Features, CTA, Testimonials, FAQ, Pricing, About, Stats, Newsletter, Footer, Contact, Gallery, Teams)
+  - [ ] 2.7 Verify all block components render correctly with default values in documentation
 
 - [ ] 3. Document PayloadCMS Fields and Globals
   - [ ] 3.1 Create MDX documentation for all 17 field types (header, subheader, description, title, media, upload, color, colorPalette, icon, socialLinks, callToActionPair, selectEnum, etc.)

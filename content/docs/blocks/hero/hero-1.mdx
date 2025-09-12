@@ -1,0 +1,72 @@
+---
+title: "Hero 1"
+description: "Primary hero block with alert, text animation, and call-to-action buttons"
+category: "blocks"
+---
+
+## Live Preview
+
+<Hero_1 />
+
+## Props Interface
+
+The Hero_1 block accepts the following props from PayloadCMS:
+
+| Prop                | Type     | Default                                    | Description                               |
+| ------------------- | -------- | ------------------------------------------ | ----------------------------------------- |
+| `alertLabel`        | `string` | "Introducing Support for AI Models"        | Text for the optional alert banner        |
+| `alertLink`         | `string` | "/new-models"                              | URL for the alert banner link             |
+| `header`            | `string` | "Modern Solutions for Customer Engagement" | Main heading text with animation          |
+| `subheader`         | `string` | "Highly customizable components..."        | Supporting description text               |
+| `primaryCtaLabel`   | `string` | "Start Building"                           | Primary button text                       |
+| `primaryCtaHref`    | `string` | "/getting-started"                         | Primary button URL                        |
+| `secondaryCtaLabel` | `string` | "Request a demo"                           | Secondary button text                     |
+| `secondaryCtaHref`  | `string` | "/request-demo"                            | Secondary button URL                      |
+| `media`             | `object` | `undefined`                                | Optional media field for hero image/video |
+
+## Default Values
+
+When created in PayloadCMS, Hero_1 comes with these default values:
+
+- Alert Label: "Introducing Support for AI Models"
+- Alert Link: "/new-models"
+- Header: "Modern Solutions for Customer Engagement"
+- Subheader: "Highly customizable components for building modern websites and applications that look and feel the way you mean it."
+- Primary CTA: "Start Building" → "/getting-started"
+- Secondary CTA: "Request a demo" → "/request-demo"
+
+## Registry Installation
+
+```bash
+npx shadcn add --registry https://uifoundry.com/r hero-1
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## PayloadCMS Configuration
+
+In your PayloadCMS admin panel, you can customize all aspects of the Hero_1 block:
+
+- **New Update Alert section**: Toggle alert visibility and customize message
+- **Header Field**: Main title with rich text support
+- **Subheader Field**: Supporting description
+- **Call-to-Action sections**: Configure both primary and secondary buttons
+- **Media Field**: Add hero images or videos
+
+[View live customization in admin panel →](/admin/blocks/hero-1)
+
+## Usage in Blocks
+
+Add Hero_1 to any PayloadCMS page through the blocks field. The component automatically handles:
+
+- Motion animations with staggered text effects
+- Responsive design for all screen sizes
+- Dark/light theme support
+- Accessible button and link interactions
+
+## Related Components
+
+- [Hero 2](/docs/blocks/hero-2) - Alternative hero layout
+- [Header Field](/docs/fields/header-field) - Reusable header configuration
+- [Media Field](/docs/fields/media-field) - Media upload field
+- [CTA Pair Field](/docs/fields/call-to-action-pair-field) - Button configuration
