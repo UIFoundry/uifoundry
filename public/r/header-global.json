@@ -21,7 +21,7 @@
     },
     {
       "path": "registry/payload/globals/header/index.tsx",
-      "content": "import type { Header } from \"~/payload-types\";\nimport RenderBlocks from \"@/registry/default/components/RenderBlocks\";\nimport type { ComponentPropsWithRef } from \"react\";\nimport { cn } from \"@/registry/ui/utils\";\nimport { blockComponents } from \"@/registry/default/lib/blocks/Header\";\n\nexport * from \"./config\";\n\nexport default function Header({\n\theader,\n\tclassName,\n\t...divProps\n}: { header: Header } & ComponentPropsWithRef<\"div\">) {\n\treturn (\n\t\t<RenderBlocks\n\t\t\tblocks={header.header}\n\t\t\tblockComponents={blockComponents}\n\t\t\tclassName={cn(\"w-full\", className)}\n\t\t\t{...divProps}\n\t\t/>\n\t);\n}\n",
+      "content": "import type { Header } from \"~/payload-types\";\nimport RenderBlocks from \"@/registry/default/components/RenderBlocks\";\nimport type { ComponentPropsWithRef } from \"react\";\nimport { cn } from \"@/registry/default/utils\";\nimport { blockComponents } from \"@/registry/default/lib/blocks/Header\";\n\nexport * from \"./config\";\n\nexport default function Header({\n\theader,\n\tclassName,\n\t...divProps\n}: { header: Header } & ComponentPropsWithRef<\"div\">) {\n\treturn (\n\t\t<RenderBlocks\n\t\t\tblocks={header.header}\n\t\t\tblockComponents={blockComponents}\n\t\t\tclassName={cn(\"w-full\", className)}\n\t\t\t{...divProps}\n\t\t/>\n\t);\n}\n",
       "type": "registry:component",
       "target": "src/payload/globals/Header/index.tsx"
     }

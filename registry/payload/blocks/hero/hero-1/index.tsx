@@ -4,7 +4,7 @@ import { Button } from "@/registry/ui/button";
 import { TextEffect } from "@/registry/ui/motion-primitives/text-effect";
 import { AnimatedGroup } from "@/registry/ui/motion-primitives/animated-group";
 import type { Hero_1_Block } from "~/payload-types";
-import { cn } from "@/registry/ui/utils";
+import { cn } from "@/registry/default/utils";
 import MediaField from "@/registry/payload/fields/media/index";
 
 export * from "./config";

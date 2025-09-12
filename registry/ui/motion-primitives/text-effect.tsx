@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/registry/ui/utils";
+import { cn } from "@/registry/default/utils";
 import {
 	AnimatePresence,
 	motion,
