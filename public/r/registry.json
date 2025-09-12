@@ -264,6 +264,9 @@
 					"target": "src/payload/blocks/Header/Header_1/index.tsx"
 				}
 			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
 			"dependencies": [
 				"payload",
 				"react",
@@ -288,6 +291,9 @@
 					"type": "registry:component",
 					"target": "src/payload/blocks/Header/Header_2/index.tsx"
 				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
 			],
 			"dependencies": [
 				"payload",

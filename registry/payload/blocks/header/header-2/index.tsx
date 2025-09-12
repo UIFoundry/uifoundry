@@ -4,7 +4,7 @@ import { Home, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState, type ComponentPropsWithRef } from "react";
 import type { Header_2_Block } from "~/payload-types";
-import { cn } from "@/registry/default/ui/utils";
+import { cn } from "@/registry/default/utils";
 
 export * from "./config";
 
