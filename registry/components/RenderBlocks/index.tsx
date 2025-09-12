@@ -24,7 +24,7 @@ const RenderBlocks: React.FC<RenderBlocksContext> = (props) => {
 	if (blocks.length && hasBlocks) {
 		return (
 			blocks
-				// @ts-expect-error hidden field applies to all form input blocks
+				// @ts-expect-error check if block has custom 'hidden' field
 				.filter((b) => !Boolean(b?.hidden))
 				.map((block, index) => {
 					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -38,10 +38,12 @@ const RenderBlocks: React.FC<RenderBlocksContext> = (props) => {
 						if (Block) {
 							return (
 								<Block
+									// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 									id={blockName}
 									params={params}
 									searchParams={searchParams}
 									user={user}
+									// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 									key={blockKey ?? index}
 									block={block}
 									index={index}
