@@ -235,15 +235,128 @@
 			],
 			"files": [
 				{
-					"path": "registry/payload/blocks/marketing/hero/hero-1/index.tsx",
+					"path": "registry/payload/blocks/hero/hero-1/index.tsx",
 					"type": "registry:component",
 					"target": "src/payload/blocks/Hero/Hero_1/index.tsx"
 				},
 				{
-					"path": "registry/payload/blocks/marketing/hero/hero-1/config.ts",
+					"path": "registry/payload/blocks/hero/hero-1/config.ts",
 					"type": "registry:component",
 					"target": "src/payload/blocks/Hero/Hero_1/config.ts"
 				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header 1",
+			"name": "header-1",
+			"type": "registry:block",
+			"description": "Header 1 Block",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/header-1/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/Header_1/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header/header-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/Header_1/index.tsx"
+				}
+			],
+			"dependencies": [
+				"payload",
+				"react",
+				"next",
+				"lucide-react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header 2",
+			"name": "header-2",
+			"type": "registry:block",
+			"description": "Header 2 Block",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/header-2/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/Header_2/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header/header-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/Header_2/index.tsx"
+				}
+			],
+			"dependencies": [
+				"payload",
+				"next",
+				"react",
+				"lucide-react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header Blocks",
+			"name": "header-blocks",
+			"type": "registry:block",
+			"description": "PayloadCMS Header Blocks",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/index.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/index.ts"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/header-1",
+				"@uifoundry/header-2"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Render Blocks",
+			"name": "renderblocks",
+			"type": "registry:component",
+			"description": "Custom component to render PayloadCMS Blocks",
+			"files": [
+				{
+					"path": "registry/components/RenderBlocks/index.tsx",
+					"type": "registry:component",
+					"target": "src/components/RenderBlocks/index.tsx"
+				}
+			],
+			"dependencies": [
+				"payload",
+				"react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header Global",
+			"name": "header-global",
+			"type": "registry:block",
+			"description": "PayloadCMS Global Header",
+			"files": [
+				{
+					"path": "registry/payload/globals/header/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/globals/Header/config.ts"
+				},
+				{
+					"path": "registry/payload/globals/header/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/globals/Header/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/header-blocks",
+				"@uifoundry/renderblocks"
+			],
+			"dependencies": [
+				"react"
 			]
 		}
 	]

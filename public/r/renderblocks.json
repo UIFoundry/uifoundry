@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "renderblocks",
+  "type": "registry:component",
+  "title": "Render Blocks",
+  "description": "Custom component to render PayloadCMS Blocks",
+  "dependencies": [
+    "payload",
+    "react"
+  ],
+  "files": [
+    {
+      "path": "registry/components/RenderBlocks/index.tsx",
+      "content": "/* eslint-disable @typescript-eslint/no-unsafe-assignment */\nimport type { User as PayloadUser } from \"~/payload-types\";\nimport React, { type ComponentPropsWithRef, type ElementType } from \"react\";\nimport { type Block } from \"payload\";\n\ntype Params = Promise<{ slug: string }>;\ntype PageParams = Partial<Awaited<Params>>;\ntype SearchParams = Promise<Record<string, string | string[] | undefined>>;\ntype PageSearchParams = Partial<Awaited<SearchParams>>;\n\nexport interface RenderBlocksContext extends ComponentPropsWithRef<\"div\"> {\n\tblocks: Block[] | unknown[];\n\tblockComponents: Record<string, ElementType>;\n\tuser?: PayloadUser | null;\n\tparams?: PageParams;\n\tsearchParams?: PageSearchParams;\n}\n\nconst RenderBlocks: React.FC<RenderBlocksContext> = (props) => {\n\tconst { blocks, blockComponents, params, searchParams, user, ...divProps } =\n\t\tprops;\n\tconst hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0;\n\n\tif (blocks.length && hasBlocks) {\n\t\treturn (\n\t\t\tblocks\n\t\t\t\t// @ts-expect-error hidden field applies to all form input blocks\n\t\t\t\t.filter((b) => !Boolean(b?.hidden))\n\t\t\t\t.map((block, index) => {\n\t\t\t\t\t// eslint-disable-next-line @typescript-eslint/ban-ts-comment\n\t\t\t\t\t// @ts-expect-error\n\t\t\t\t\tconst { blockName, blockType, key: blockKey } = block;\n\n\t\t\t\t\tif (blockType && blockType in blockComponents) {\n\t\t\t\t\t\t// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access\n\t\t\t\t\t\tconst Block = blockComponents[blockType];\n\n\t\t\t\t\t\tif (Block) {\n\t\t\t\t\t\t\treturn (\n\t\t\t\t\t\t\t\t<Block\n\t\t\t\t\t\t\t\t\tid={blockName}\n\t\t\t\t\t\t\t\t\tparams={params}\n\t\t\t\t\t\t\t\t\tsearchParams={searchParams}\n\t\t\t\t\t\t\t\t\tuser={user}\n\t\t\t\t\t\t\t\t\tkey={blockKey ?? index}\n\t\t\t\t\t\t\t\t\tblock={block}\n\t\t\t\t\t\t\t\t\tindex={index}\n\t\t\t\t\t\t\t\t\t{...(block as Block)}\n\t\t\t\t\t\t\t\t\t{...divProps}\n\t\t\t\t\t\t\t\t/>\n\t\t\t\t\t\t\t);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\treturn null;\n\t\t\t\t})\n\t\t);\n\t}\n\n\treturn null;\n};\n\nexport default RenderBlocks;\n",
+      "type": "registry:component",
+      "target": "src/components/RenderBlocks/index.tsx"
+    }
+  ]
+}
