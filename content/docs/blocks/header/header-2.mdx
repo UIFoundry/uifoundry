@@ -15,9 +15,25 @@ The Header_2 block accepts the following props from PayloadCMS:
 <TypeTable
   type={{
     menuItems: {
-      description: "Array of navigation menu items",
       type: "Array<{label: string, href: string}>",
       required: true,
+      description: (
+        <div>
+          <p className="pl-4">
+            An Array of <b>Nav Items:</b>
+          </p>
+          <TypeTable
+            type={{
+              label: { type: "string", description: "Label", required: true },
+              href: {
+                type: "string",
+                description: "Target Url",
+                required: true,
+              },
+            }}
+          />
+        </div>
+      ),
     },
   }}
 />
@@ -25,7 +41,7 @@ The Header_2 block accepts the following props from PayloadCMS:
 ## Installation
 
 ```bash
-npx shadcn add --registry https://uifoundry.com/r header-2
+npx shadcn@latest add @uifoundry/header-2
 ```
 
 If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.

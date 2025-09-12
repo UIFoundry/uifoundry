@@ -9,9 +9,10 @@ import { cn } from "~/styles/utils";
 export * from "./config";
 
 export default function Header_1({
+	preview = false,
 	menuItems,
 	...navProps
-}: Header_1_Block & ComponentPropsWithRef<"nav">) {
+}: { preview?: boolean } & Header_1_Block & ComponentPropsWithRef<"nav">) {
 	const [menuState, setMenuState] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 
@@ -30,7 +31,7 @@ export default function Header_1({
 			<nav
 				data-state={menuState && "active"}
 				id="header"
-				className="fixed z-20 w-full px-2"
+				className={cn("fixed z-20 w-full px-2", preview && "relative")}
 				{...navProps}
 			>
 				<div

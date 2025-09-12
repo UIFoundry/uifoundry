@@ -9,9 +9,10 @@ import { cn } from "~/styles/utils";
 export * from "./config";
 
 export default function Header_2({
+	preview = false,
 	menuItems,
 	...navProps
-}: Header_2_Block & ComponentPropsWithRef<"nav">) {
+}: { preview?: boolean } & Header_2_Block & ComponentPropsWithRef<"nav">) {
 	const [menuState, setMenuState] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 
@@ -33,6 +34,7 @@ export default function Header_2({
 				className={cn(
 					"fixed z-20 w-full border-b transition-colors duration-150",
 					isScrolled && "bg-background/50 backdrop-blur-3xl",
+					preview && "relative",
 				)}
 				{...navProps}
 			>

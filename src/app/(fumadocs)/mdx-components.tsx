@@ -6,10 +6,10 @@ import { TypeTable, type TypeNode } from "fumadocs-ui/components/type-table";
 import { extractBlockDefaults } from "~/utils/extractBlockDefaults";
 
 import type {
-  Hero_1_Block as Hero_1_BlockType,
-  Hero_2_Block as Hero_2_BlockType,
-  Header_1_Block as Header_1_BlockType,
-  Header_2_Block as Header_2_BlockType,
+	Hero_1_Block as Hero_1_BlockType,
+	Hero_2_Block as Hero_2_BlockType,
+	Header_1_Block as Header_1_BlockType,
+	Header_2_Block as Header_2_BlockType,
 } from "~/payload-types";
 
 // Import block components
@@ -32,38 +32,38 @@ const header1Defaults = extractBlockDefaults(Header_1_Block);
 const header2Defaults = extractBlockDefaults(Header_2_Block);
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
-  return {
-    ...defaultMdxComponents,
-    // AutoTypeTable component
-    AutoTypeTable: (props: AutoTypeTableProps) => (
-      <AutoTypeTable {...props} generator={generator} />
-    ),
-    TypeTable: ({ type }: { type: Record<string, TypeNode> }) => (
-      <TypeTable type={type} />
-    ),
-    // Block components with default values
-    Hero_1: (props: Hero_1_BlockType) => (
-      <Hero_1 {...hero1Defaults} {...props} />
-    ),
-    Hero_2: (props: Hero_2_BlockType) => (
-      <Hero_2 {...hero2Defaults} {...props} />
-    ),
-    Header_1: (props: Partial<Header_1_BlockType> = {}) => {
-      const combinedProps = {
-        ...header1Defaults,
-        ...props,
-      } as Header_1_BlockType;
-      const { id, ...otherProps } = combinedProps;
-      return <Header_1 {...otherProps} id={id ?? undefined} />;
-    },
-    Header_2: (props: Partial<Header_2_BlockType> = {}) => {
-      const combinedProps = {
-        ...header2Defaults,
-        ...props,
-      } as Header_2_BlockType;
-      const { id, ...otherProps } = combinedProps;
-      return <Header_2 {...otherProps} id={id ?? undefined} />;
-    },
-    ...components,
-  };
+	return {
+		...defaultMdxComponents,
+		// AutoTypeTable component
+		AutoTypeTable: (props: AutoTypeTableProps) => (
+			<AutoTypeTable {...props} generator={generator} />
+		),
+		TypeTable: ({ type }: { type: Record<string, TypeNode> }) => (
+			<TypeTable type={type} />
+		),
+		// Block components with default values
+		Hero_1: (props: Hero_1_BlockType) => (
+			<Hero_1 {...hero1Defaults} {...props} />
+		),
+		Hero_2: (props: Hero_2_BlockType) => (
+			<Hero_2 {...hero2Defaults} {...props} />
+		),
+		Header_1: (props: Partial<Header_1_BlockType> = {}) => {
+			const combinedProps = {
+				...header1Defaults,
+				...props,
+			} as Header_1_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <Header_1 {...otherProps} id={id ?? undefined} preview />;
+		},
+		Header_2: (props: Partial<Header_2_BlockType> = {}) => {
+			const combinedProps = {
+				...header2Defaults,
+				...props,
+			} as Header_2_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <Header_2 {...otherProps} id={id ?? undefined} preview />;
+		},
+		...components,
+	};
 }
