@@ -15,25 +15,28 @@ The Header_2 block accepts the following props from PayloadCMS:
 <TypeTable
   type={{
     menuItems: {
-      type: "Array<{label: string, href: string}>",
+      type: "Array<NavItem>",
       required: true,
-      description: (
-        <div>
-          <p className="pl-4">
-            An Array of <b>Nav Items:</b>
-          </p>
-          <TypeTable
-            type={{
-              label: { type: "string", description: "Label", required: true },
-              href: {
-                type: "string",
-                description: "Target Url",
-                required: true,
-              },
-            }}
-          />
-        </div>
-      ),
+      description: "An array of navigation items (see NavItem structure below)",
+    },
+  }}
+/>
+
+### NavItem
+
+Each navigation item in the `menuItems` array has the following structure:
+
+<TypeTable
+  type={{
+    label: {
+      type: "string",
+      description: "Display text for the navigation item",
+      required: true,
+    },
+    href: {
+      type: "string",
+      description: "Target URL for the navigation link",
+      required: true,
     },
   }}
 />
