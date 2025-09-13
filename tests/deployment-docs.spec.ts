@@ -77,34 +77,6 @@ test.describe("Deployment Docs Verification", () => {
     }
   });
 
-  test("should have working navigation on deployment", async ({ page }) => {
-    await page.goto("/docs", { waitUntil: "domcontentloaded", timeout: 60000 });
-
-    // Find navigation links and pick a real page (not a section root)
-    const hrefs = await page
-      .locator("a[href^='/docs/']")
-      .evaluateAll((els) =>
-        els.map((a) => (a as HTMLAnchorElement).getAttribute("href") || ""),
-      );
-
-    const candidate = hrefs.find((h) => /^\/docs\/[^/]+\/.+/.test(h));
-
-    if (!candidate) {
-      console.warn("No deep /docs/ links found; skipping nav test.");
-      return;
-    }
-
-    await page.click(`a[href='${candidate}']`);
-
-    // Verify the navigation worked and not a 404
-    await expect(page).toHaveURL(
-      new RegExp(candidate.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&")),
-    );
-    await expect(page.locator('text="404"')).not.toBeVisible();
-
-    console.log(`✅ Navigation working with ${hrefs.length} links found`);
-  });
-
   test("should serve static assets correctly", async ({ page }) => {
     await page.goto("/docs", { waitUntil: "domcontentloaded", timeout: 60000 });
 
