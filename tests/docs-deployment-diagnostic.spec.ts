@@ -1,6 +1,13 @@
 import { test } from "@playwright/test";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BETTER_AUTH_URL ?? "";
+const IS_DEPLOYED =
+  BASE_URL &&
+  !BASE_URL.includes("localhost") &&
+  !BASE_URL.includes("127.0.0.1");
+
 test.describe("Docs Deployment Diagnostic", () => {
+  test.skip(!IS_DEPLOYED, "Runs only against deployed baseURL");
   test.beforeEach(async () => {
     test.setTimeout(60000);
   });

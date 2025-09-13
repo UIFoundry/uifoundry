@@ -60,7 +60,7 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
 
-      - name: Run Playwright tests
+      - name: Run Playwright tests (all projects)
         env:
           NEXT_PUBLIC_BETTER_AUTH_URL: ${{ steps.deployment-url.outputs.deployment_url }}
         run: pnpm test

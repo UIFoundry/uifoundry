@@ -56,54 +56,6 @@ function discoverDocsPages(): Array<{ url: string; title: string }> {
 const allDocsPages = discoverDocsPages();
 
 test.describe("Documentation Pages", () => {
-  test.beforeAll(async ({ browser }) => {
-    // Global server health check before running any tests
-    const context = await browser.newContext();
-    const page = await context.newPage();
-
-    let serverHealthy = false;
-    let attempts = 0;
-    const maxAttempts = 5;
-
-    console.log("Checking server health before running docs tests...");
-
-    while (!serverHealthy && attempts < maxAttempts) {
-      try {
-        await page.goto("/docs", { waitUntil: "networkidle", timeout: 30000 });
-
-        // Check for redirect loops or error pages
-        const currentUrl = page.url();
-        if (
-          currentUrl.includes("chrome-error://") ||
-          currentUrl.includes("about:blank")
-        ) {
-          throw new Error(
-            `Server unhealthy - redirected to error page: ${currentUrl}`,
-          );
-        }
-
-        // Basic health check
-        await expect(page.locator("body")).toBeVisible();
-        serverHealthy = true;
-        console.log("✅ Server health check passed");
-      } catch (error) {
-        attempts++;
-        if (attempts >= maxAttempts) {
-          throw new Error(
-            `❌ Server health check failed after ${maxAttempts} attempts. Ensure the configured baseURL is reachable. Last error: ${error instanceof Error ? error.message : String(error)}`,
-          );
-        }
-        console.log(
-          `⚠️ Server health check failed, attempt ${attempts}/${maxAttempts}, retrying in 5s...`,
-        );
-        await page.waitForTimeout(5000);
-      }
-    }
-
-    await page.close();
-    await context.close();
-  });
-
   test.beforeEach(async () => {
     // Set longer timeout for docs pages that might have heavy components
     test.setTimeout(30000);
@@ -111,51 +63,13 @@ test.describe("Documentation Pages", () => {
 
   test("should have docs pages available", () => {
     expect(allDocsPages.length).toBeGreaterThan(0);
-    console.log(`Found ${allDocsPages.length} docs pages to test`);
   });
 
   test("docs index should load", async ({ page }) => {
-    // Add server health check with retries
-    let serverReady = false;
-    let attempts = 0;
-    const maxAttempts = 3;
-
-    while (!serverReady && attempts < maxAttempts) {
-      try {
-        await page.goto("/docs", { waitUntil: "networkidle", timeout: 30000 });
-
-        // Check for redirect loops or error pages
-        const currentUrl = page.url();
-        if (
-          currentUrl.includes("chrome-error://") ||
-          currentUrl.includes("about:blank")
-        ) {
-          throw new Error(
-            `Navigation failed - redirected to error page: ${currentUrl}`,
-          );
-        }
-
-        serverReady = true;
-      } catch (error) {
-        attempts++;
-        if (attempts >= maxAttempts) {
-          throw new Error(
-            `Server failed to respond after ${maxAttempts} attempts. Last error: ${error instanceof Error ? error.message : String(error)}`,
-          );
-        }
-        console.log(
-          `Server not ready, attempt ${attempts}/${maxAttempts}, retrying in 3s...`,
-        );
-        await page.waitForTimeout(3000);
-      }
-    }
+    await page.goto("/docs", { waitUntil: "networkidle", timeout: 30000 });
 
     await expect(page).toHaveTitle(/UIFoundry/);
-
-    // Should either show docs index or redirect to first page
     await expect(page.locator("body")).toBeVisible();
-
-    // Check that we're not on a 404 page
     await expect(page.locator('text="404"')).not.toBeVisible();
     await expect(page.locator('text="Page not found"')).not.toBeVisible();
   });
@@ -163,58 +77,18 @@ test.describe("Documentation Pages", () => {
   // Test all individual docs pages
   for (const docPage of allDocsPages) {
     test(`should load docs page: ${docPage.url}`, async ({ page }) => {
-      // Add retry logic for individual pages too
-      let pageLoaded = false;
-      let attempts = 0;
-      const maxAttempts = 2;
+      await page.goto(docPage.url, {
+        waitUntil: "networkidle",
+        timeout: 30000,
+      });
 
-      while (!pageLoaded && attempts < maxAttempts) {
-        try {
-          await page.goto(docPage.url, {
-            waitUntil: "networkidle",
-            timeout: 30000,
-          });
-
-          // Check for redirect loops or error pages
-          const currentUrl = page.url();
-          if (
-            currentUrl.includes("chrome-error://") ||
-            currentUrl.includes("about:blank")
-          ) {
-            throw new Error(
-              `Navigation failed - redirected to error page: ${currentUrl}`,
-            );
-          }
-
-          pageLoaded = true;
-        } catch (error) {
-          attempts++;
-          if (attempts >= maxAttempts) {
-            throw new Error(
-              `Failed to load ${docPage.url} after ${maxAttempts} attempts. Last error: ${error instanceof Error ? error.message : String(error)}`,
-            );
-          }
-          console.log(
-            `Failed to load ${docPage.url}, attempt ${attempts}/${maxAttempts}, retrying...`,
-          );
-          await page.waitForTimeout(2000);
-        }
-      }
-
-      // Check that page loads without 404 or error
       await expect(page.locator('text="404"')).not.toBeVisible();
       await expect(page.locator('text="Page not found"')).not.toBeVisible();
       await expect(
         page.locator('text="Internal Server Error"'),
       ).not.toBeVisible();
-
-      // Check that page has a title (any h1 is fine)
       await expect(page.locator("h1").first()).toBeVisible();
-
-      // Check that main content area exists
       await expect(page.locator("main")).toBeVisible();
-
-      // Check that page has some content (body should not be empty)
       await expect(page.locator("body")).toBeVisible();
     });
   }
