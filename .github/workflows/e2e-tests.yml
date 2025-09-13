@@ -21,7 +21,7 @@ on:
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 10 # Much shorter since no waiting needed
+    timeout-minutes: 25 # Increased for 104 tests with 10 workers
 
     steps:
       - name: Checkout code
@@ -63,7 +63,7 @@ jobs:
       - name: Run Playwright tests
         env:
           NEXT_PUBLIC_BETTER_AUTH_URL: ${{ steps.deployment-url.outputs.deployment_url }}
-        run: pnpm test
+        run: pnpm test --workers=10 --reporter=github
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
