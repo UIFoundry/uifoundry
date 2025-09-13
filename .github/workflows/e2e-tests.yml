@@ -63,7 +63,7 @@ jobs:
       - name: Run Playwright tests
         env:
           NEXT_PUBLIC_BETTER_AUTH_URL: ${{ steps.deployment-url.outputs.deployment_url }}
-        run: pnpm test --workers=10 --reporter=github
+        run: pnpm test
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
