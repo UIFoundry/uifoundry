@@ -92,50 +92,6 @@ test.describe("Documentation Pages", () => {
       await expect(page.locator("body")).toBeVisible();
     });
   }
-
-  test.skip("docs navigation should work", async ({ page }) => {
-    await page.goto("/docs");
-
-    // Wait for navigation to load
-    await page.waitForLoadState("networkidle");
-
-    // Find and click on first navigation link
-    const navLinks = page.locator("a[href^='/docs/']:visible");
-    const firstLink = navLinks.first();
-
-    if ((await firstLink.count()) > 0) {
-      const href = await firstLink.getAttribute("href");
-      await firstLink.click();
-
-      // Verify navigation worked
-      await page.waitForURL(href!);
-      await expect(page.locator('text="404"')).not.toBeVisible();
-    }
-  });
-
-  test.skip("docs search functionality should work", async ({ page }) => {
-    await page.goto("/docs");
-
-    // Look for search input/button
-    const searchInput = page.locator(
-      'input[type="search"], input[placeholder*="search" i]',
-    );
-    const searchButton = page.locator(
-      'button[aria-label*="search" i]:visible, button:has-text("Search"):visible',
-    );
-
-    if ((await searchInput.count()) > 0) {
-      await searchInput.fill("header");
-      // Wait for search results or suggestions
-      await page.waitForTimeout(1000);
-    } else if ((await searchButton.count()) > 0) {
-      await searchButton.first().click();
-      // Test search modal/overlay opens
-      await expect(
-        page.locator('[role="dialog"], .search-modal, [data-testid="search"]'),
-      ).toBeVisible();
-    }
-  });
 });
 
 // Export the docs pages for use in other tests
