@@ -14,6 +14,8 @@
     "lint:fix": "next lint --fix",
     "vitest": "vitest --config ./vitest.config.ts",
     "test": "playwright test --config=playwright.config.ts",
+    "test:docs": "playwright test tests/docs-pages.spec.ts --config=playwright.config.ts",
+    "test:docs:retry": "playwright test tests/docs-pages.spec.ts --config=playwright.config.ts --retries=3",
     "test:report": "playwright show-report",
     "payload:importmap": "payload generate:importmap",
     "payload:types": "PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types",

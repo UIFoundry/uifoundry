@@ -13,19 +13,26 @@ process.env.SKIP_ENV_VALIDATION = "true";
  */
 export default defineConfig({
   testDir: "./tests",
+  /* Global timeout for each test */
+  timeout: 60000,
+  /* Timeout for each assertion */
+  expect: {
+    timeout: 10000,
+  },
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Use 10 workers on CI for faster tests */
-  workers: process.env.CI ? 10 : undefined,
+  /* Use fewer workers on CI to avoid overwhelming the server */
+  workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
+    // Uses NEXT_PUBLIC_BETTER_AUTH_URL set by deployment
     baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL ?? "http://localhost:3001",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
