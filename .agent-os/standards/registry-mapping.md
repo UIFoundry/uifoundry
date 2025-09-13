@@ -1,0 +1,86 @@
+# Registry Component Documentation Mapping
+
+⚠️ **CRITICAL FOR AGENTS**: This file MUST be updated whenever you add new components to the registry.
+
+## Auto-Update Protocol for New Components
+
+When adding new registry components, you MUST update this file with:
+
+1. **Registry Dependencies**: Add new `@uifoundry/*` components to the mapping below
+2. **NPM Dependencies**: Add new packages to the GitHub link mapping
+3. **Component Descriptions**: Add standardized descriptions for consistency
+4. **Path Patterns**: Follow `/docs/[category]/[component-name]` convention
+
+**Failure to update this file will break auto-generated documentation for future components.**
+
+---
+
+## Registry Dependency to Documentation Path Mapping
+
+### UIFoundry Custom Components (@uifoundry/\*)
+
+- `@uifoundry/style-utils` → `/docs/lib/style-utils`
+- `@uifoundry/animated-group` → `/docs/ui/animated-group`
+- `@uifoundry/text-effect` → `/docs/ui/text-effect`
+- `@uifoundry/field-types` → `/docs/lib/field-types`
+- `@uifoundry/upload-field` → `/docs/fields/upload-field`
+- `@uifoundry/header-field` → `/docs/fields/header-field`
+- `@uifoundry/subheader-field` → `/docs/fields/subheader-field`
+- `@uifoundry/media-field` → `/docs/fields/media-field`
+- `@uifoundry/color-field` → `/docs/fields/color-field`
+- `@uifoundry/header-1` → `/docs/blocks/header-1`
+- `@uifoundry/header-2` → `/docs/blocks/header-2`
+- `@uifoundry/header-blocks` → `/docs/blocks/header-blocks`
+- `@uifoundry/renderblocks` → `/docs/ui/renderblocks`
+- `@uifoundry/header-global` → `/docs/globals/header-global`
+
+### ShadCN Components (no @uifoundry prefix)
+
+- `button` → `/docs/ui/button`
+- `popover` → `/docs/ui/popover`
+- `input` → `/docs/ui/input`
+- `label` → `/docs/ui/label`
+- `select` → `/docs/ui/select`
+- `textarea` → `/docs/ui/textarea`
+
+## NPM Dependency to GitHub Link Mapping
+
+**⚠️ AGENTS: Add new NPM packages here when they appear in registry.json dependencies**
+
+### Common Dependencies
+
+- `react` → `https://github.com/facebook/react`
+- `next` → `https://github.com/vercel/next.js`
+- `lucide-react` → `https://github.com/lucide-icons/lucide/tree/main/packages/lucide-react`
+- `payload` → `https://github.com/payloadcms/payload`
+- `motion` → `https://github.com/framer/motion`
+- `clsx` → `https://github.com/lukeed/clsx`
+- `tailwind-merge` → `https://github.com/dcastil/tailwind-merge`
+- `@payloadcms/ui` → `https://github.com/payloadcms/payload/tree/main/packages/ui`
+- `@uiw/react-color-sketch` → `https://github.com/uiwjs/react-color`
+
+## Component Descriptions
+
+**⚠️ AGENTS: Add descriptions for new components to maintain consistency**
+
+### UIFoundry Components
+
+- `@uifoundry/style-utils`: Tailwind utility functions including `cn()` class merger
+- `@uifoundry/animated-group`: Motion primitive for animating groups of elements
+- `@uifoundry/text-effect`: Text animation effects with staggered reveals
+- `@uifoundry/field-types`: TypeScript definitions for PayloadCMS fields
+- `@uifoundry/upload-field`: PayloadCMS media upload field configuration
+- `@uifoundry/header-field`: PayloadCMS text field for headers
+- `@uifoundry/subheader-field`: PayloadCMS text field for subheaders
+- `@uifoundry/media-field`: PayloadCMS dual upload field (light/dark variants)
+- `@uifoundry/color-field`: PayloadCMS color picker field with custom admin UI
+- `@uifoundry/renderblocks`: Component for rendering PayloadCMS blocks
+
+### ShadCN Components
+
+- `button`: Customizable button component with variants
+- `popover`: Floating UI popover component
+- `input`: Styled input field component
+- `label`: Form label component
+- `select`: Dropdown selection component
+- `textarea`: Multi-line text input component

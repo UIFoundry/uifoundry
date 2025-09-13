@@ -1,0 +1,64 @@
+---
+title: Registry Setup
+description: Configure your components.json to use UIFoundry components with the shadcn CLI
+---
+
+# Registry Setup
+
+To use UIFoundry components with the shadcn CLI, you need to configure your `components.json` file to include the UIFoundry registry.
+
+## Configuration
+
+Add the UIFoundry registry to your `components.json` file's `registries` section:
+
+```json title="components.json"
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/styles/globals.css",
+    "baseColor": "stone",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "~/components",
+    "utils": "~/styles/utils",
+    "ui": "~/ui",
+    "lib": "~/payload",
+    "hooks": "~/hooks",
+    "payload": "~/payload"
+  },
+  "iconLibrary": "lucide",
+  "registries": {
+    "@uifoundry": "https://uifoundry.dev/r/{name}.json"
+  }
+}
+```
+
+## Key Configuration
+
+The important part is adding the `registries` section with the UIFoundry registry:
+
+```json
+"registries": {
+  "@uifoundry": "http://localhost:3001/r/{name}.json"
+}
+```
+
+## Usage
+
+Once configured, you can install UIFoundry components using the shadcn CLI:
+
+```bash
+npx shadcn@latest add @uifoundry/hero-1
+npx shadcn@latest add @uifoundry/header-global
+npx shadcn@latest add @uifoundry/color-field
+```
+
+## Next Steps
+
+After setting up your registry, you can start installing and using UIFoundry components in your project. Check out the individual component documentation for usage examples and configuration options.

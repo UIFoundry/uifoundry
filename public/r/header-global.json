@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "header-global",
+  "type": "registry:block",
+  "title": "Header Global",
+  "description": "PayloadCMS Global Header",
+  "dependencies": [
+    "react"
+  ],
+  "registryDependencies": [
+    "@uifoundry/style-utils",
+    "@uifoundry/header-blocks",
+    "@uifoundry/renderblocks"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/globals/header/config.ts",
+      "content": "import type { GlobalConfig } from \"payload\";\nimport { GLOBAL_SLUG_HEADER } from \"@/registry/default/lib/constants/globals\";\nimport { blocks } from \"@/registry/default/lib/blocks/Header\";\n\nexport const HeaderGlobal: GlobalConfig = {\n\tslug: GLOBAL_SLUG_HEADER,\n\tfields: [\n\t\t{\n\t\t\tname: \"header\",\n\t\t\ttype: \"blocks\",\n\t\t\trequired: true,\n\t\t\tmaxRows: 1,\n\t\t\tminRows: 1,\n\t\t\tblocks: blocks,\n\t\t},\n\t],\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/globals/Header/config.ts"
+    },
+    {
+      "path": "registry/payload/globals/header/index.tsx",
+      "content": "import type { Header } from \"~/payload-types\";\nimport RenderBlocks from \"@/registry/default/components/RenderBlocks\";\nimport type { ComponentPropsWithRef } from \"react\";\nimport { cn } from \"@/registry/default/utils\";\nimport { blockComponents } from \"@/registry/default/lib/blocks/Header\";\n\nexport * from \"./config\";\n\nexport default function Header({\n\theader,\n\tclassName,\n\t...divProps\n}: { header: Header } & ComponentPropsWithRef<\"div\">) {\n\treturn (\n\t\t<RenderBlocks\n\t\t\tblocks={header.header}\n\t\t\tblockComponents={blockComponents}\n\t\t\tclassName={cn(\"w-full\", className)}\n\t\t\t{...divProps}\n\t\t/>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/globals/Header/index.tsx"
+    }
+  ]
+}

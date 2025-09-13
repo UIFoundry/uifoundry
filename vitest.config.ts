@@ -1,16 +1,11 @@
 import { defineConfig } from "vitest/config";
 import { loadEnv } from "vite";
-import path from "path";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
-    resolve: {
-      alias: {
-        "~": path.resolve(__dirname, "./src"),
-      },
-    },
     test: {
       env: {
         ...env,
@@ -31,5 +26,6 @@ export default defineConfig(({ mode }) => {
       ],
       setupFiles: ["./src/test/setup.ts"],
     },
+    plugins: [tsconfigPaths()],
   };
 });

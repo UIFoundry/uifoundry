@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "header-1",
+  "type": "registry:block",
+  "title": "Header 1",
+  "description": "Header 1 Block",
+  "dependencies": [
+    "payload",
+    "react",
+    "next",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@uifoundry/style-utils"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/header/header-1/config.ts",
+      "content": "import type { Block } from \"payload\";\nimport {\n\tBLOCK_GROUP_HEADERS,\n\tBLOCK_SLUG_HEADER_1,\n} from \"@/registry/default/lib/constants/blocks\";\n\nexport const Header_1_Block: Block = {\n\tslug: BLOCK_SLUG_HEADER_1,\n\tinterfaceName: \"Header_1_Block\",\n\tlabels: {\n\t\tsingular: \"Header 1\",\n\t\tplural: \"Header 1's\",\n\t},\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_HEADERS,\n\t},\n\tfields: [\n\t\t{\n\t\t\tname: \"menuItems\",\n\t\t\tlabels: {\n\t\t\t\tsingular: \"Menu Item\",\n\t\t\t\tplural: \"Menu Items\",\n\t\t\t},\n\t\t\ttype: \"array\",\n\t\t\trequired: true,\n\t\t\tfields: [\n\t\t\t\t{\n\t\t\t\t\tname: \"label\",\n\t\t\t\t\tlabel: \"Label\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\trequired: true,\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: \"href\",\n\t\t\t\t\tlabel: \"Href\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\trequired: true,\n\t\t\t\t\tadmin: {\n\t\t\t\t\t\tplaceholder: \"/features | #features\",\n\t\t\t\t\t},\n\t\t\t\t},\n\t\t\t],\n\t\t},\n\t],\n};\n",
+      "type": "registry:file",
+      "target": "src/payload/blocks/Header/Header_1/config.ts"
+    },
+    {
+      "path": "registry/payload/blocks/header/header-1/index.tsx",
+      "content": "\"use client\";\n\nimport { Home, Menu, X } from \"lucide-react\";\nimport Link from \"next/link\";\nimport { useEffect, useState, type ComponentPropsWithRef } from \"react\";\nimport type { Header_1_Block } from \"~/payload-types\";\nimport { cn } from \"@/registry/default/utils\";\n\nexport * from \"./config\";\n\nexport default function Header_1({\n\tmenuItems,\n\t...navProps\n}: Header_1_Block & ComponentPropsWithRef<\"nav\">) {\n\tconst [menuState, setMenuState] = useState(false);\n\tconst [isScrolled, setIsScrolled] = useState(false);\n\n\tuseEffect(() => {\n\t\tconst handleScroll = () => {\n\t\t\tsetIsScrolled(window.scrollY > 50);\n\t\t};\n\t\twindow.addEventListener(\"scroll\", handleScroll);\n\t\treturn () => {\n\t\t\twindow.removeEventListener(\"scroll\", handleScroll);\n\t\t};\n\t});\n\n\treturn (\n\t\t<header>\n\t\t\t<nav\n\t\t\t\tdata-state={menuState && \"active\"}\n\t\t\t\tid=\"header\"\n\t\t\t\tclassName=\"fixed z-20 w-full px-2\"\n\t\t\t\t{...navProps}\n\t\t\t>\n\t\t\t\t<div\n\t\t\t\t\tclassName={cn(\n\t\t\t\t\t\t\"mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12\",\n\t\t\t\t\t\tisScrolled &&\n\t\t\t\t\t\t\"bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5\",\n\t\t\t\t\t)}\n\t\t\t\t>\n\t\t\t\t\t<div className=\"relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4\">\n\t\t\t\t\t\t<div className=\"flex w-full justify-between lg:w-auto\">\n\t\t\t\t\t\t\t<Link\n\t\t\t\t\t\t\t\thref=\"/\"\n\t\t\t\t\t\t\t\taria-label=\"home\"\n\t\t\t\t\t\t\t\tclassName=\"flex items-center space-x-2\"\n\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t<Home />\n\t\t\t\t\t\t\t</Link>\n\n\t\t\t\t\t\t\t<button\n\t\t\t\t\t\t\t\tonClick={() => setMenuState(!menuState)}\n\t\t\t\t\t\t\t\taria-label={menuState == true ? \"Close Menu\" : \"Open Menu\"}\n\t\t\t\t\t\t\t\tclassName=\"relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden\"\n\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t<Menu className=\"m-auto size-6 duration-200 in-data-[state=active]:scale-0 in-data-[state=active]:rotate-180 in-data-[state=active]:opacity-0\" />\n\t\t\t\t\t\t\t\t<X className=\"absolute inset-0 m-auto size-6 scale-0 -rotate-180 opacity-0 duration-200 in-data-[state=active]:scale-100 in-data-[state=active]:rotate-0 in-data-[state=active]:opacity-100\" />\n\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div className=\"absolute inset-0 m-auto hidden size-fit lg:block\">\n\t\t\t\t\t\t\t<ul className=\"flex gap-8 text-sm\">\n\t\t\t\t\t\t\t\t{menuItems.map((item, index) => (\n\t\t\t\t\t\t\t\t\t<li key={index}>\n\t\t\t\t\t\t\t\t\t\t<Link\n\t\t\t\t\t\t\t\t\t\t\thref={item.href}\n\t\t\t\t\t\t\t\t\t\t\tclassName=\"text-muted-foreground hover:text-accent-foreground block duration-150\"\n\t\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\t\t<span>{item.label}</span>\n\t\t\t\t\t\t\t\t\t\t</Link>\n\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t))}\n\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div className=\"bg-background absolute top-[125%] z-10 mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none lg:in-data-[state=active]:flex dark:shadow-none dark:lg:bg-transparent\">\n\t\t\t\t\t\t\t<div className=\"lg:hidden\">\n\t\t\t\t\t\t\t\t<ul className=\"space-y-6 text-base\">\n\t\t\t\t\t\t\t\t\t{menuItems.map((item, index) => (\n\t\t\t\t\t\t\t\t\t\t<li key={index}>\n\t\t\t\t\t\t\t\t\t\t\t<Link\n\t\t\t\t\t\t\t\t\t\t\t\thref={item.href}\n\t\t\t\t\t\t\t\t\t\t\t\tclassName=\"text-muted-foreground hover:text-accent-foreground block duration-150\"\n\t\t\t\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t\t\t\t<span>{item.label}</span>\n\t\t\t\t\t\t\t\t\t\t\t</Link>\n\t\t\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t\t\t))}\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</nav>\n\t\t</header>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Header/Header_1/index.tsx"
+    }
+  ]
+}

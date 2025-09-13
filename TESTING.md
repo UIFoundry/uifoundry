@@ -85,6 +85,36 @@ NEXT_PUBLIC_BETTER_AUTH_URL=https://dev.uifoundry.dev pnpm exec playwright test
 pnpm exec playwright test --project=chromium
 ```
 
+### Documentation Tests
+
+Tests all documentation pages automatically:
+
+```bash
+# Run docs tests specifically (recommended)
+pnpm test:docs
+
+# Run docs tests with automatic retries (for CI)
+pnpm test:docs:retry
+
+# Test docs against local server (ensure pnpm dev is running)
+pnpm dev
+pnpm test:docs
+```
+
+**What the docs tests verify:**
+
+- All MDX files in `content/docs/` are discoverable
+- Each docs page loads without 404 errors
+- Pages have proper HTML structure (h1, main content)
+- No server errors or redirect loops
+
+**If docs tests fail:**
+
+1. Ensure dev server is running: `pnpm dev`
+2. Check server logs for errors
+3. Verify no redirect loops on homepage
+4. Test individual pages manually in browser
+
 ## SST Autodeploy Integration
 
 The SST Console autodeploy workflow now includes:

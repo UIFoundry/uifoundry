@@ -1,0 +1,80 @@
+---
+title: "Header Field"
+description: "PayloadCMS text field configuration for header elements with sensible defaults"
+category: "fields"
+---
+
+## Preview
+
+```typescript
+import headerField from "~/payload/fields/header/config";
+
+// Usage in PayloadCMS block/collection config
+const mainHeading = headerField({
+  name: "title",
+  label: "Page Title",
+  required: true,
+});
+```
+
+## Props
+
+The headerField function accepts the following configuration options:
+
+<TypeTable
+  type={{
+    name: {
+      description: "Field name for the header field",
+      type: "string",
+      default: "header",
+    },
+    label: {
+      description: "Display label in PayloadCMS admin",
+      type: "string",
+      default: "Header",
+    },
+    defaultValue: {
+      description: "Default text value for the field",
+      type: "string",
+      default: "Modern Solutions for Customer Engagement",
+    },
+    required: {
+      description: "Whether the field is required",
+      type: "boolean",
+      default: "true",
+    },
+    admin: {
+      description: "Admin-specific configuration options",
+      type: "AdminConfig",
+    },
+    access: {
+      description: "Access control configuration",
+      type: "AccessConfig",
+    },
+    hooks: {
+      description: "Field-level hooks",
+      type: "FieldHooks",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/header-field
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Field Types](/docs/lib/field-types) - TypeScript definitions for PayloadCMS fields
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production

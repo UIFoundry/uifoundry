@@ -1,0 +1,59 @@
+---
+title: "Popover"
+description: "Floating UI popover component for displaying contextual content"
+category: "ui"
+---
+
+## Preview
+
+```tsx
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline">Open Popover</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <p>Place content for the popover here.</p>
+  </PopoverContent>
+</Popover>
+```
+
+## Props
+
+The Popover component accepts the following props:
+
+<TypeTable
+  type={{
+    open: {
+      description: "Controls the open state of the popover",
+      type: "boolean",
+    },
+    onOpenChange: {
+      description: "Callback fired when the open state changes",
+      type: "(open: boolean) => void",
+    },
+    children: {
+      description: "Popover trigger and content elements",
+      type: "ReactNode",
+      required: true,
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add popover
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component has no registry dependencies.
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [@radix-ui/react-popover](https://github.com/radix-ui/primitives) - Radix UI popover primitives

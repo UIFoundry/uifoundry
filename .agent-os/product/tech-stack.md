@@ -21,6 +21,13 @@
 - **API Layer:** TRPC 11.0.0 for type-safe client-server communication
 - **Authentication:** Better Auth 1.3.2 with Google OAuth integration
 
+## Documentation & Registry
+
+- **Documentation Platform:** Fumadocs for interactive component and block documentation
+- **Component Registry:** Custom shadcn registry for PayloadCMS components and blocks
+- **Registry Distribution:** Components installable via `npx shadcn add --registry` command
+- **Block Documentation:** Interactive examples and customization guides per component
+
 ## Development Tools
 
 - **Package Manager:** pnpm 10.11.0
@@ -49,6 +56,13 @@
 - **Build Tool:** Next.js built-in bundler with Turbopack
 - **Environment Management:** SST secrets and environment variables
 - **Monitoring:** AWS CloudWatch with SST console integration
+
+## Component Distribution
+
+- **Registry Structure:** PayloadCMS blocks, fields, and UI components organized by category
+- **Registry Schema:** Follows shadcn registry specification with custom extensions
+- **Component Types:** Blocks (Hero, Features, etc.), Fields (Color, Upload, etc.), UI Components
+- **Distribution Method:** Public registry hosted at registry URL for external projects
 
 ## Code Repository
 
