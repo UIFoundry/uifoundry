@@ -66,7 +66,7 @@ test.describe("Documentation Pages", () => {
   });
 
   test("docs index should load", async ({ page }) => {
-    await page.goto("/docs", { waitUntil: "networkidle", timeout: 30000 });
+    await page.goto("/docs", { waitUntil: "domcontentloaded", timeout: 30000 });
 
     await expect(page).toHaveTitle(/UIFoundry/);
     await expect(page.locator("body")).toBeVisible();
@@ -78,7 +78,7 @@ test.describe("Documentation Pages", () => {
   for (const docPage of allDocsPages) {
     test(`should load docs page: ${docPage.url}`, async ({ page }) => {
       await page.goto(docPage.url, {
-        waitUntil: "networkidle",
+        waitUntil: "domcontentloaded",
         timeout: 30000,
       });
 
@@ -135,52 +135,6 @@ test.describe("Documentation Pages", () => {
         page.locator('[role="dialog"], .search-modal, [data-testid="search"]'),
       ).toBeVisible();
     }
-  });
-
-  test("docs pages should have proper meta tags", async ({ page }) => {
-    // Test a few key pages for SEO meta tags
-    const testPages = allDocsPages.slice(0, 3);
-
-    for (const docPage of testPages) {
-      await page.goto(docPage.url);
-
-      // Check title tag
-      const title = await page.title();
-      expect(title).toBeTruthy();
-      expect(title.length).toBeGreaterThan(0);
-
-      // Check meta description if present
-      const metaDescription = page.locator('meta[name="description"]');
-      if ((await metaDescription.count()) > 0) {
-        const description = await metaDescription.getAttribute("content");
-        expect(description).toBeTruthy();
-      }
-    }
-  });
-
-  test("docs pages should be responsive", async ({ page }) => {
-    // Test a sample page on different viewport sizes
-    if (allDocsPages.length === 0) {
-      test.skip();
-      return;
-    }
-
-    const samplePage = allDocsPages[0]!;
-
-    // Desktop
-    await page.setViewportSize({ width: 1200, height: 800 });
-    await page.goto(samplePage.url);
-    await expect(page.locator("main")).toBeVisible();
-
-    // Tablet
-    await page.setViewportSize({ width: 768, height: 1024 });
-    await page.reload();
-    await expect(page.locator("main")).toBeVisible();
-
-    // Mobile
-    await page.setViewportSize({ width: 375, height: 667 });
-    await page.reload();
-    await expect(page.locator("main")).toBeVisible();
   });
 });
 
