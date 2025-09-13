@@ -2,11 +2,8 @@ import { test, expect } from "@playwright/test";
 
 test.describe("Docs Middleware Fix", () => {
   test("docs routes should bypass auth middleware", async ({ page }) => {
-    const baseUrl =
-      process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3001";
-
     // Test that docs index loads without auth - prevents regression of the specific issue we fixed
-    const docsResponse = await page.goto(`${baseUrl}/docs`);
+    const docsResponse = await page.goto("/docs");
     expect(docsResponse?.status()).toBeLessThan(400);
 
     // Verify we're not redirected to homepage (the core issue we fixed)

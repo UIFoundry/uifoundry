@@ -7,11 +7,7 @@ test.describe("Deployment Docs Verification", () => {
   });
 
   test("should access deployment docs index", async ({ page }) => {
-    // This test will run against the deployed URL
-    const baseUrl =
-      process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3001";
-
-    await page.goto(`${baseUrl}/docs`);
+    await page.goto("/docs");
 
     // Wait for content to load
     await page.waitForLoadState("networkidle");
@@ -30,13 +26,10 @@ test.describe("Deployment Docs Verification", () => {
     // Check that docs content is present
     await expect(page.locator("body")).toBeVisible();
 
-    console.log(`✅ Successfully accessed docs at: ${baseUrl}/docs`);
+    console.log(`✅ Successfully accessed docs`);
   });
 
   test("should access specific docs pages on deployment", async ({ page }) => {
-    const baseUrl =
-      process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3001";
-
     // Test a few key docs pages that should definitely exist
     const testPages = [
       "/docs/blocks/header/header-1",
@@ -46,9 +39,9 @@ test.describe("Deployment Docs Verification", () => {
     ];
 
     for (const pagePath of testPages) {
-      console.log(`Testing page: ${baseUrl}${pagePath}`);
+      console.log(`Testing page: ${pagePath}`);
 
-      const response = await page.goto(`${baseUrl}${pagePath}`);
+      const response = await page.goto(pagePath);
 
       // Check HTTP status
       expect(response?.status()).toBeLessThan(400);
@@ -68,10 +61,7 @@ test.describe("Deployment Docs Verification", () => {
   });
 
   test("should have working navigation on deployment", async ({ page }) => {
-    const baseUrl =
-      process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3001";
-
-    await page.goto(`${baseUrl}/docs`);
+    await page.goto("/docs");
     await page.waitForLoadState("networkidle");
 
     // Look for navigation elements
@@ -105,10 +95,7 @@ test.describe("Deployment Docs Verification", () => {
   });
 
   test("should serve static assets correctly", async ({ page }) => {
-    const baseUrl =
-      process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3001";
-
-    await page.goto(`${baseUrl}/docs`);
+    await page.goto("/docs");
     await page.waitForLoadState("networkidle");
 
     // Check that CSS is loading

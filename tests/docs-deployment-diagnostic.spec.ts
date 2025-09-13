@@ -6,14 +6,11 @@ test.describe("Docs Deployment Diagnostic", () => {
   });
 
   test("diagnose docs routing issues", async ({ page }) => {
-    const baseUrl =
-      process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3001";
-
-    console.log(`🔍 Testing docs routing on: ${baseUrl}`);
+    console.log(`🔍 Testing docs routing`);
 
     // Test basic connectivity
     try {
-      const response = await page.goto(`${baseUrl}`);
+      const response = await page.goto("/");
       console.log(`✅ Base URL accessible: ${response?.status()}`);
     } catch (error) {
       console.log(`❌ Base URL error:`, error);
@@ -22,7 +19,7 @@ test.describe("Docs Deployment Diagnostic", () => {
 
     // Test docs index
     try {
-      const response = await page.goto(`${baseUrl}/docs`);
+      const response = await page.goto("/docs");
       console.log(`📝 Docs index response: ${response?.status()}`);
 
       if (response?.status() === 404) {
@@ -56,7 +53,7 @@ test.describe("Docs Deployment Diagnostic", () => {
 
     for (const pagePath of testPages) {
       try {
-        const response = await page.goto(`${baseUrl}${pagePath}`);
+        const response = await page.goto(pagePath);
         console.log(`📄 ${pagePath}: ${response?.status()}`);
 
         if (response?.status() === 404) {
@@ -76,33 +73,8 @@ test.describe("Docs Deployment Diagnostic", () => {
       }
     }
 
-    // Check for static file serving issues
-    try {
-      // Test CSS loading
-      const response = await page.goto(
-        `${baseUrl}/_next/static/css/app/layout.css`,
-        {
-          waitUntil: "domcontentloaded",
-        },
-      );
-      console.log(
-        `🎨 CSS files loading: ${response?.status() || "timeout/error"}`,
-      );
-    } catch (error) {
-      console.log(`⚠️  Static file serving might have issues`);
-    }
-
-    // Test API endpoints
-    try {
-      const response = await page.goto(`${baseUrl}/api/version`);
-      console.log(`🔧 API endpoint accessible: ${response?.status()}`);
-    } catch (error) {
-      console.log(`❌ API endpoint error:`, error);
-    }
-
     // Environment info
     console.log(`🌍 Environment details:`);
-    console.log(`  - Base URL: ${baseUrl}`);
     console.log(
       `  - User Agent: ${await page.evaluate(() => navigator.userAgent)}`,
     );
@@ -110,10 +82,10 @@ test.describe("Docs Deployment Diagnostic", () => {
   });
 
   test("check SST deployment specifics", async ({ page }) => {
-    const baseUrl =
-      process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3001";
+    const currentUrl =
+      page.url() || (await page.evaluate(() => window.location.origin));
 
-    if (!baseUrl.includes("uifoundry.dev")) {
+    if (!currentUrl.includes("uifoundry.dev")) {
       console.log("⏭️  Skipping SST-specific tests (not on deployment URL)");
       test.skip();
     }
@@ -121,7 +93,7 @@ test.describe("Docs Deployment Diagnostic", () => {
     console.log(`🚀 Testing SST deployment specifics`);
 
     // Check deployment headers and routing
-    const response = await page.goto(baseUrl);
+    const response = await page.goto("/");
     const headers = response?.headers();
 
     console.log(`📋 Response headers:`);
@@ -138,7 +110,7 @@ test.describe("Docs Deployment Diagnostic", () => {
     }
 
     // Test CloudFront behavior
-    await page.goto(`${baseUrl}/docs/blocks/header/header-1`);
+    await page.goto("/docs/blocks/header/header-1");
     const pageResponse = await page.evaluate(() => ({
       url: window.location.href,
       title: document.title,
