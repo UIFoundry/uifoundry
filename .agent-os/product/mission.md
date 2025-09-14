@@ -100,3 +100,47 @@ Unlike traditional CMSs or no-code builders, we integrate AI-powered site genera
 - **LLM Site Generation:** AI-powered website creation from natural language prompts
 - **Custom Domain Support:** Professional domain management with SSL certificates
 - **Form Builder:** Dynamic form creation with advanced validation and integrations
+
+## Business Model Strategy
+
+### Registry-First Developer Monetization
+
+**Core Strategy:** Leverage the component registry as the primary value delivery mechanism for developers, making template exports optional rather than essential.
+
+**Free Tier (Developer Acquisition):**
+
+- Empty UIFoundry template repository (basic Next.js + PayloadCMS setup)
+- Access to free components via `shadcn add [registry-url]/component-name`
+- Full field hook optimizations (headerField, etc.) included
+- Documentation and setup guides
+
+**Paid Tier (Developer Monetization):**
+
+- Premium components accessible via authenticated registry
+- Advanced blocks with enhanced functionality and design
+- Ongoing access to new premium components as they're developed
+- Priority support and documentation
+
+**Template Export (Optional Premium Feature):**
+
+- Convenience feature for paid users to export their current site configuration
+- Generates single-site repository with selected components
+- Lower priority than registry development
+- Implementation timeline: After registry monetization is established
+
+### Advantages of Registry-First Approach
+
+1. **Continuous Value Delivery:** Developers receive new components as they're built
+2. **Lower Barrier to Entry:** Free template gets developers started immediately
+3. **Scalable Revenue:** Component-level pricing vs one-time template sales
+4. **Simplified Implementation:** No complex export transformation required
+5. **Community Building:** Free tier brings developers into the ecosystem
+6. **Better Retention:** Ongoing component access creates long-term relationships
+
+### Implementation Priority
+
+**Phase 1:** Focus on SaaS development for non-technical users while building comprehensive component registry
+**Phase 2:** Launch free template repository with tiered registry access
+**Phase 3:** Add template export as premium convenience feature (optional)
+
+This approach allows maximum focus on core product development while creating multiple revenue streams through both SaaS subscriptions and developer component sales.
