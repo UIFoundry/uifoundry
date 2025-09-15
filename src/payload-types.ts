@@ -2474,7 +2474,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
-  header: (Header_1_Block | Header_2_Block)[];
+  header: (Header_1_Block | Header_2_Block | CustomHeaderBlock)[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2505,6 +2505,92 @@ export interface Header_2_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'header_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CustomHeaderBlock".
+ */
+export interface CustomHeaderBlock {
+  items?: (HeaderMenuItemsBlock | HeaderMenuButtonBlock | HeaderBrandLogoBlock)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_custom';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeaderMenuItemsBlock".
+ */
+export interface HeaderMenuItemsBlock {
+  alignment?: ('left' | 'right' | 'center') | null;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_menu_items';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeaderMenuButtonBlock".
+ */
+export interface HeaderMenuButtonBlock {
+  alignment?: ('left' | 'right' | 'center') | null;
+  label: string;
+  href?: string | null;
+  targetBlank: boolean;
+  auth?: {
+    provider?:
+      | (
+          | 'apple'
+          | 'atlassian'
+          | 'cognito'
+          | 'discord'
+          | 'dropbox'
+          | 'facebook'
+          | 'figma'
+          | 'github'
+          | 'gitlab'
+          | 'google'
+          | 'huggingface'
+          | 'kakao'
+          | 'kick'
+          | 'line'
+          | 'linear'
+          | 'linkedin'
+          | 'microsoft'
+          | 'naver'
+          | 'notion'
+          | 'paypal'
+          | 'reddit'
+          | 'roblox'
+          | 'salesforce'
+          | 'slack'
+          | 'spotify'
+          | 'tiktok'
+          | 'twitch'
+          | 'twitter'
+          | 'vk'
+          | 'zoom'
+        )
+      | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_menu_button';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeaderBrandLogoBlock".
+ */
+export interface HeaderBrandLogoBlock {
+  alignment?: ('left' | 'right' | 'center') | null;
+  href: string;
+  media?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_brand_logo';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2586,6 +2672,7 @@ export interface HeaderSelect<T extends boolean = true> {
     | {
         header_1?: T | Header_1_BlockSelect<T>;
         header_2?: T | Header_2_BlockSelect<T>;
+        header_custom?: T | CustomHeaderBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -2618,6 +2705,65 @@ export interface Header_2_BlockSelect<T extends boolean = true> {
         href?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CustomHeaderBlock_select".
+ */
+export interface CustomHeaderBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        header_menu_items?: T | HeaderMenuItemsBlockSelect<T>;
+        header_menu_button?: T | HeaderMenuButtonBlockSelect<T>;
+        header_brand_logo?: T | HeaderBrandLogoBlockSelect<T>;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeaderMenuItemsBlock_select".
+ */
+export interface HeaderMenuItemsBlockSelect<T extends boolean = true> {
+  alignment?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeaderMenuButtonBlock_select".
+ */
+export interface HeaderMenuButtonBlockSelect<T extends boolean = true> {
+  alignment?: T;
+  label?: T;
+  href?: T;
+  targetBlank?: T;
+  auth?:
+    | T
+    | {
+        provider?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeaderBrandLogoBlock_select".
+ */
+export interface HeaderBrandLogoBlockSelect<T extends boolean = true> {
+  alignment?: T;
+  href?: T;
+  media?: T;
   id?: T;
   blockName?: T;
 }
