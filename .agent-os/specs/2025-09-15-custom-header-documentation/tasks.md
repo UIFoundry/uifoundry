@@ -1,0 +1,103 @@
+# Spec Tasks
+
+## Tasks
+
+- [ ] 1. Create Custom Header Block Documentation
+  - [ ] 1.1 Analyze src/payload/blocks/Header/CustomHeader/ implementation and config.ts
+  - [ ] 1.2 Create content/docs/blocks/custom-header.mdx following 5-section template:
+    - [ ] 1.2.1 Preview section: `<CustomHeaderBlock />` with default props
+    - [ ] 1.2.2 Props section: TypeTable from PayloadCMS configuration fields
+    - [ ] 1.2.3 Installation section: `npx shadcn add --registry https://uifoundry.com/r custom-header`
+    - [ ] 1.2.4 Registry Dependencies section: Auto-generate from public/r/custom-header.json registryDependencies
+    - [ ] 1.2.5 Dependencies section: Auto-generate from public/r/custom-header.json dependencies with GitHub links
+  - [ ] 1.3 Document three-column layout system (left, center, right positioning) in props description
+  - [ ] 1.4 Document scroll-based styling effects (backdrop blur, borders) in component description
+  - [ ] 1.5 Include frontmatter with title: "Custom Header", description, category: "blocks"
+  - [ ] 1.6 Add mobile menu toggle functionality examples in preview/usage
+  - [ ] 1.7 Register CustomHeaderBlock in src/app/(fumadocs)/mdx-components.tsx:
+    - [ ] 1.7.1 Import CustomHeaderBlock component and config
+    - [ ] 1.7.2 Import CustomHeaderBlock type from ~/payload-types
+    - [ ] 1.7.3 Extract default values using extractBlockDefaults()
+    - [ ] 1.7.4 Add to getMDXComponents() with proper props and preview handling
+  - [ ] 1.8 Update content/docs/blocks/meta.json to include custom-header navigation entry
+  - [ ] 1.9 Verify documentation renders correctly by testing localhost:3001/docs/blocks/custom-header
+
+- [ ] 2. Create Header Sub-Component Documentation
+  - [ ] 2.1 Analyze src/payload/blocks/Header/HeaderBrandLogo/, HeaderMenuButton/, HeaderMenuItems/ implementations
+  - [ ] 2.2 Create content/docs/blocks/header-brand-logo.mdx following 5-section template:
+    - [ ] 2.2.1 Preview: `<HeaderBrandLogoBlock />`, Props: TypeTable from config.ts
+    - [ ] 2.2.2 Installation: `npx shadcn add --registry https://uifoundry.com/r header-brand-logo`
+    - [ ] 2.2.3 Registry Dependencies & Dependencies from public/r/header-brand-logo.json
+    - [ ] 2.2.4 Frontmatter: title: "Header Brand Logo", category: "blocks"
+  - [ ] 2.3 Create content/docs/blocks/header-menu-button.mdx following 5-section template:
+    - [ ] 2.3.1 Preview: `<HeaderMenuButtonBlock />`, Props: TypeTable from config.ts
+    - [ ] 2.3.2 Installation: `npx shadcn add --registry https://uifoundry.com/r header-menu-button`
+    - [ ] 2.3.3 Registry Dependencies & Dependencies from public/r/header-menu-button.json
+    - [ ] 2.3.4 Frontmatter: title: "Header Menu Button", category: "blocks"
+  - [ ] 2.4 Create content/docs/blocks/header-menu-items.mdx following 5-section template:
+    - [ ] 2.4.1 Preview: `<HeaderMenuItemsBlock />`, Props: TypeTable from config.ts
+    - [ ] 2.4.2 Installation: `npx shadcn add --registry https://uifoundry.com/r header-menu-items`
+    - [ ] 2.4.3 Registry Dependencies & Dependencies from public/r/header-menu-items.json
+    - [ ] 2.4.4 Frontmatter: title: "Header Menu Items", category: "blocks"
+  - [ ] 2.5 Register all three sub-components in src/app/(fumadocs)/mdx-components.tsx:
+    - [ ] 2.5.1 Import HeaderBrandLogoBlock, HeaderMenuButtonBlock, HeaderMenuItemsBlock
+    - [ ] 2.5.2 Import their respective configs and types from ~/payload-types
+    - [ ] 2.5.3 Extract default values for each using extractBlockDefaults()
+    - [ ] 2.5.4 Add all three to getMDXComponents() with proper props handling
+  - [ ] 2.6 Document nested block usage patterns in each component's description
+  - [ ] 2.7 Update content/docs/blocks/meta.json to include all three sub-component navigation entries
+  - [ ] 2.8 Verify all sub-component docs render at localhost:3001/docs/blocks/[component-name]
+  - [ ] 2.9 Cross-reference components in Registry Dependencies sections where they work together
+
+- [ ] 3. Create UserAvatar Component Documentation
+  - [ ] 3.1 Analyze src/components/UserAvatar.tsx implementation and Better Auth integration
+  - [ ] 3.2 Create content/docs/ui/user-avatar.mdx following 5-section template:
+    - [ ] 3.2.1 Preview: `<UserAvatar />` showing default behavior with session context
+    - [ ] 3.2.2 Props: TypeTable with showUsername, className, and other component props
+    - [ ] 3.2.3 Installation: `npx shadcn add --registry https://uifoundry.com/r user-avatar`
+    - [ ] 3.2.4 Registry Dependencies: Auto-generate from public/r/user-avatar.json (avatar, etc.)
+    - [ ] 3.2.5 Dependencies: Better Auth, React dependencies with GitHub links
+  - [ ] 3.3 Document Better Auth session integration in component description and usage examples
+  - [ ] 3.4 Include frontmatter: title: "User Avatar", description: "User profile avatar with Better Auth integration", category: "ui"
+  - [ ] 3.5 Show examples: profile image display, initials fallback using getInitials() utility
+  - [ ] 3.6 Register UserAvatar in src/app/(fumadocs)/mdx-components.tsx:
+    - [ ] 3.6.1 Import UserAvatar component from ~/components/UserAvatar
+    - [ ] 3.6.2 Add simple registration in getMDXComponents() for UI component
+    - [ ] 3.6.3 Test component renders in MDX with mock session data
+  - [ ] 3.7 Document accessibility features: alt text, focus states, semantic markup
+  - [ ] 3.8 Update content/docs/ui/meta.json to include user-avatar navigation entry
+  - [ ] 3.9 Verify documentation renders at localhost:3001/docs/ui/user-avatar
+
+- [ ] 4. Create Utility Function Documentation
+  - [ ] 4.1 Analyze src/utils/index.ts getInitials() function implementation
+  - [ ] 4.2 Create content/docs/lib/get-initials.mdx following 5-section template:
+    - [ ] 4.2.1 Preview: Code example showing getInitials("John Doe") → "JD"
+    - [ ] 4.2.2 Props: Function signature, parameters (name: string), return type (string)
+    - [ ] 4.2.3 Installation: `npx shadcn add --registry https://uifoundry.com/r get-initials`
+    - [ ] 4.2.4 Registry Dependencies: None (standalone utility function)
+    - [ ] 4.2.5 Dependencies: No external dependencies (pure JavaScript function)
+  - [ ] 4.3 Include frontmatter: title: "getInitials", description: "Extract initials from full names", category: "lib"
+  - [ ] 4.4 Document function parameters, return values, and edge cases (empty strings, single names)
+  - [ ] 4.5 Show integration example with UserAvatar component in usage section
+  - [ ] 4.6 Include TypeScript interface: `function getInitials(name: string): string`
+  - [ ] 4.7 Update content/docs/lib/meta.json to include get-initials navigation entry
+  - [ ] 4.8 Note: getInitials is a utility function and doesn't need MDX component registration
+  - [ ] 4.9 Verify documentation renders at localhost:3001/docs/lib/get-initials
+
+- [ ] 5. Update Registry Mapping and Finalize Documentation System
+  - [ ] 5.1 Update .agent-os/standards/registry-mapping.md with new dependency mappings:
+    - [ ] 5.1.1 Add @uifoundry/custom-header → /docs/blocks/custom-header
+    - [ ] 5.1.2 Add @uifoundry/header-brand-logo → /docs/blocks/header-brand-logo
+    - [ ] 5.1.3 Add @uifoundry/header-menu-button → /docs/blocks/header-menu-button
+    - [ ] 5.1.4 Add @uifoundry/header-menu-items → /docs/blocks/header-menu-items
+    - [ ] 5.1.5 Add @uifoundry/user-avatar → /docs/ui/user-avatar
+    - [ ] 5.1.6 Add @uifoundry/get-initials → /docs/lib/get-initials
+  - [ ] 5.2 Update .agent-os/instructions/core/component-documentation-checklist.md Common Dependencies:
+    - [ ] 5.2.1 Add new registry dependencies with standardized descriptions
+    - [ ] 5.2.2 Add any new NPM dependencies discovered during analysis
+  - [ ] 5.3 Verify all navigation meta.json files were updated in previous tasks
+  - [ ] 5.4 Run pnpm build to ensure documentation site builds without errors
+  - [ ] 5.5 Test all documentation pages at localhost:3001/docs/[category]/[component-name]
+  - [ ] 5.6 Verify cross-references and internal links work between related components
+  - [ ] 5.7 Check registry installation commands work: test npx shadcn add --registry commands
+  - [ ] 5.8 Confirm TypeTable components render properly with PayloadCMS configuration data

@@ -14,6 +14,7 @@
 - [ ] Live component render with `<ComponentName />`
 - [ ] Shows default values/behavior
 - [ ] Loads without props
+- [ ] Component registered in `src/app/(fumadocs)/mdx-components.tsx` for MDX rendering
 
 ### ✅ 2. Props
 
@@ -67,6 +68,31 @@
 
 - Path: `/docs/globals/[component-name].mdx`
 - Examples: header-global, footer-global
+
+## MDX Component Registration
+
+**MANDATORY FOR ALL NEW COMPONENTS**: Register components in `src/app/(fumadocs)/mdx-components.tsx` for preview rendering.
+
+### PayloadCMS Block Components
+
+- [ ] Import component and config file
+- [ ] Import TypeScript type from `~/payload-types`
+- [ ] Extract default values using `extractBlockDefaults()`
+- [ ] Register in `getMDXComponents()` with proper props handling
+- [ ] Include `preview` prop and `id` handling for documentation context
+
+### UI Components
+
+- [ ] Import component from `~/components/` or `~/ui/`
+- [ ] Register in `getMDXComponents()` with props passthrough
+- [ ] Test component renders in MDX documentation files
+
+### Verification Steps
+
+- [ ] Component renders without errors in documentation
+- [ ] Default values display correctly in preview
+- [ ] Props can be overridden in MDX files for examples
+- [ ] TypeScript types work correctly with component registration
 
 ## Quality Checklist
 
