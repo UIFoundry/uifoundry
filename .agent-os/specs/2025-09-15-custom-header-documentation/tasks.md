@@ -2,52 +2,43 @@
 
 ## Tasks
 
-- [ ] 1. Create Custom Header Block Documentation
-  - [ ] 1.1 Analyze src/payload/blocks/Header/CustomHeader/ implementation and config.ts
-  - [ ] 1.2 Create content/docs/blocks/custom-header.mdx following 5-section template:
-    - [ ] 1.2.1 Preview section: `<CustomHeaderBlock />` with default props
-    - [ ] 1.2.2 Props section: TypeTable from PayloadCMS configuration fields
-    - [ ] 1.2.3 Installation section: `npx shadcn add --registry https://uifoundry.com/r custom-header`
-    - [ ] 1.2.4 Registry Dependencies section: Auto-generate from public/r/custom-header.json registryDependencies
-    - [ ] 1.2.5 Dependencies section: Auto-generate from public/r/custom-header.json dependencies with GitHub links
-  - [ ] 1.3 Document three-column layout system (left, center, right positioning) in props description
-  - [ ] 1.4 Document scroll-based styling effects (backdrop blur, borders) in component description
-  - [ ] 1.5 Include frontmatter with title: "Custom Header", description, category: "blocks"
-  - [ ] 1.6 Add mobile menu toggle functionality examples in preview/usage
-  - [ ] 1.7 Register CustomHeaderBlock in src/app/(fumadocs)/mdx-components.tsx:
-    - [ ] 1.7.1 Import CustomHeaderBlock component and config
-    - [ ] 1.7.2 Import CustomHeaderBlock type from ~/payload-types
-    - [ ] 1.7.3 Extract default values using extractBlockDefaults()
-    - [ ] 1.7.4 Add to getMDXComponents() with proper props and preview handling
-  - [ ] 1.8 Update content/docs/blocks/meta.json to include custom-header navigation entry
-  - [ ] 1.9 Verify documentation renders correctly by testing localhost:3001/docs/blocks/custom-header
+- [x] 1. Create Custom Header Documentation Structure (Reorganized as Folder)
+  - [x] 1.1 Analyze src/payload/blocks/Header/CustomHeader/ implementation and config.ts
+  - [x] 1.2 Create content/docs/blocks/custom-header/ folder structure for organizing sub-components
+  - [x] 1.3 Register CustomHeaderBlock in src/app/(fumadocs)/mdx-components.tsx:
+    - [x] 1.3.1 Import CustomHeaderBlock component and config
+    - [x] 1.3.2 Import CustomHeaderBlock type from ~/payload-types
+    - [x] 1.3.3 Extract default values using extractBlockDefaults()
+    - [x] 1.3.4 Add to getMDXComponents() with proper props and preview handling
+  - [x] 1.4 Update content/docs/blocks/meta.json to include custom-header as folder navigation entry
+  - [x] 1.5 Create content/docs/blocks/custom-header/meta.json for sub-component navigation
 
-- [ ] 2. Create Header Sub-Component Documentation
-  - [ ] 2.1 Analyze src/payload/blocks/Header/HeaderBrandLogo/, HeaderMenuButton/, HeaderMenuItems/ implementations
-  - [ ] 2.2 Create content/docs/blocks/header-brand-logo.mdx following 5-section template:
-    - [ ] 2.2.1 Preview: `<HeaderBrandLogoBlock />`, Props: TypeTable from config.ts
-    - [ ] 2.2.2 Installation: `npx shadcn add --registry https://uifoundry.com/r header-brand-logo`
-    - [ ] 2.2.3 Registry Dependencies & Dependencies from public/r/header-brand-logo.json
-    - [ ] 2.2.4 Frontmatter: title: "Header Brand Logo", category: "blocks"
-  - [ ] 2.3 Create content/docs/blocks/header-menu-button.mdx following 5-section template:
-    - [ ] 2.3.1 Preview: `<HeaderMenuButtonBlock />`, Props: TypeTable from config.ts
-    - [ ] 2.3.2 Installation: `npx shadcn add --registry https://uifoundry.com/r header-menu-button`
-    - [ ] 2.3.3 Registry Dependencies & Dependencies from public/r/header-menu-button.json
-    - [ ] 2.3.4 Frontmatter: title: "Header Menu Button", category: "blocks"
-  - [ ] 2.4 Create content/docs/blocks/header-menu-items.mdx following 5-section template:
-    - [ ] 2.4.1 Preview: `<HeaderMenuItemsBlock />`, Props: TypeTable from config.ts
-    - [ ] 2.4.2 Installation: `npx shadcn add --registry https://uifoundry.com/r header-menu-items`
-    - [ ] 2.4.3 Registry Dependencies & Dependencies from public/r/header-menu-items.json
-    - [ ] 2.4.4 Frontmatter: title: "Header Menu Items", category: "blocks"
-  - [ ] 2.5 Register all three sub-components in src/app/(fumadocs)/mdx-components.tsx:
-    - [ ] 2.5.1 Import HeaderBrandLogoBlock, HeaderMenuButtonBlock, HeaderMenuItemsBlock
-    - [ ] 2.5.2 Import their respective configs and types from ~/payload-types
-    - [ ] 2.5.3 Extract default values for each using extractBlockDefaults()
-    - [ ] 2.5.4 Add all three to getMDXComponents() with proper props handling
-  - [ ] 2.6 Document nested block usage patterns in each component's description
-  - [ ] 2.7 Update content/docs/blocks/meta.json to include all three sub-component navigation entries
-  - [ ] 2.8 Verify all sub-component docs render at localhost:3001/docs/blocks/[component-name]
-  - [ ] 2.9 Cross-reference components in Registry Dependencies sections where they work together
+- [x] 2. Create Header Sub-Component Documentation (Organized in Custom Header Folder)
+  - [x] 2.1 Analyze src/payload/blocks/Header/HeaderBrandLogo/, HeaderMenuButton/, HeaderMenuItems/ implementations
+  - [x] 2.2 Create content/docs/blocks/custom-header/brand-logo.mdx following 5-section template:
+    - [x] 2.2.1 Preview: `<HeaderBrandLogoBlock />`, Props: TypeTable from config.ts
+    - [x] 2.2.2 Installation: `npx shadcn add --registry https://uifoundry.com/r header-brand-logo`
+    - [x] 2.2.3 Registry Dependencies & Dependencies sections with proper links
+    - [x] 2.2.4 Frontmatter: title: "Brand Logo", category: "blocks"
+  - [x] 2.3 Create content/docs/blocks/custom-header/menu-button.mdx following 5-section template:
+    - [x] 2.3.1 Preview: `<HeaderMenuButtonBlock />`, Props: TypeTable from config.ts
+    - [x] 2.3.2 Installation: `npx shadcn add --registry https://uifoundry.com/r header-menu-button`
+    - [x] 2.3.3 Registry Dependencies & Dependencies sections with proper links
+    - [x] 2.3.4 Frontmatter: title: "Menu Button", category: "blocks"
+  - [x] 2.4 Create content/docs/blocks/custom-header/menu-items.mdx following 5-section template:
+    - [x] 2.4.1 Preview: `<HeaderMenuItemsBlock />`, Props: TypeTable from config.ts
+    - [x] 2.4.2 Installation: `npx shadcn add --registry https://uifoundry.com/r header-menu-items`
+    - [x] 2.4.3 Registry Dependencies & Dependencies sections with proper links
+    - [x] 2.4.4 Frontmatter: title: "Menu Items", category: "blocks"
+  - [x] 2.5 Register all three sub-components in src/app/(fumadocs)/mdx-components.tsx:
+    - [x] 2.5.1 Import HeaderBrandLogoBlock, HeaderMenuButtonBlock, HeaderMenuItemsBlock
+    - [x] 2.5.2 Import their respective configs and types from ~/payload-types
+    - [x] 2.5.3 Extract default values for each using extractBlockDefaults()
+    - [x] 2.5.4 Add all three to getMDXComponents() with proper props handling and isMobile=false
+  - [x] 2.6 Document nested block usage patterns in each component's description
+  - [x] 2.7 Organize documentation in custom-header folder with proper meta.json navigation
+  - [x] 2.8 Verify all sub-component docs render at localhost:3001/docs/blocks/custom-header/[component-name]
+  - [x] 2.9 Cross-reference components in Registry Dependencies sections where they work together
 
 - [ ] 3. Create UserAvatar Component Documentation
   - [ ] 3.1 Analyze src/components/UserAvatar.tsx implementation and Better Auth integration

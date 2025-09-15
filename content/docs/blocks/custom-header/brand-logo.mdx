@@ -1,0 +1,112 @@
+---
+title: "Brand Logo"
+description: "Brand logo component for headers with configurable links and media upload"
+category: "blocks"
+---
+
+## Preview
+
+<HeaderBrandLogoBlock />
+
+## Props
+
+The Header Brand Logo accepts the following props from PayloadCMS:
+
+<TypeTable
+  type={{
+    alignment: {
+      type: "select",
+      description:
+        "Alignment position within the header layout (left, center, right)",
+      default: "left",
+    },
+    href: {
+      type: "text",
+      description: "Target link URL for the logo click action",
+      default: "/home",
+      required: true,
+    },
+    media: {
+      type: "upload",
+      description: "Logo image file upload",
+      required: true,
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn add --registry https://uifoundry.com/r header-brand-logo
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Features
+
+### Media Upload Integration
+
+- Supports PayloadCMS media collection uploads
+- Automatic image optimization via Next.js Image component
+- Alt text support for accessibility
+- Responsive image handling
+
+### Flexible Positioning
+
+- **Left Alignment**: Traditional logo positioning
+- **Center Alignment**: Centered branding
+- **Right Alignment**: Alternative logo placement
+
+### Link Configuration
+
+- Configurable target URL via `href` prop
+- Default link to `/home`
+- Next.js Link component for optimized navigation
+- Cursor pointer styling for clear interaction
+
+### Mobile Responsiveness
+
+- Hidden on mobile when `isMobile={true}` prop is set
+- Integrates with Custom Header's mobile menu system
+- Responsive image sizing
+
+## Usage in Custom Header
+
+This component is designed to work as a nested block within the Custom Header:
+
+```tsx
+// Used within Custom Header's three-column layout
+<RenderBlocks
+  blocks={(items ?? []).filter((i) => i.alignment === "left")}
+  blockComponents={blockComponents}
+/>
+```
+
+The alignment prop determines which column the logo appears in:
+
+- `alignment="left"` - Left column (most common)
+- `alignment="center"` - Center column
+- `alignment="right"` - Right column
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Upload Field](/docs/fields/upload-field) - PayloadCMS media upload field configuration
+- [Select Enum Field](/docs/fields/select-enum-field) - Alignment selection field
+- [Style Utils](/docs/lib/style-utils) - Tailwind utility functions including cn() class merger
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [react](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [next](https://github.com/vercel/next.js) - React framework with optimized Image component
+- [payload@^3.49.1](https://github.com/payloadcms/payload) - Headless CMS and application framework
+
+## Accessibility
+
+- **Image Alt Text**: Uses media.alt field for screen reader support
+- **Link Navigation**: Proper Link component with href for keyboard navigation
+- **Focus States**: Inherits focus styling from Link component
+- **Semantic Structure**: Uses proper Link wrapper for logo images

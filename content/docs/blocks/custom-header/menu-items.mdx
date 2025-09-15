@@ -1,0 +1,170 @@
+---
+title: "Menu Items"
+description: "Navigation menu items component with responsive mobile support"
+category: "blocks"
+---
+
+## Preview
+
+<HeaderMenuItemsBlock />
+
+## Props
+
+The Header Menu Items accepts the following props from PayloadCMS:
+
+<TypeTable
+  type={{
+    alignment: {
+      type: "select",
+      description:
+        "Alignment position within the header layout (left, center, right)",
+      default: "center",
+    },
+    menuItems: {
+      type: "array",
+      description: "Array of navigation menu items",
+      required: true,
+      default:
+        "[{label: 'Home', href: '/'}, {label: 'Products', href: '/products'}, ...]",
+      fields: {
+        label: {
+          type: "text",
+          description: "Display text for the menu item",
+          required: true,
+        },
+        href: {
+          type: "text",
+          description:
+            "Target URL or anchor link (e.g., '/features' or '#features')",
+          required: true,
+        },
+      },
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn add --registry https://uifoundry.com/r header-menu-items
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Features
+
+### Responsive Navigation
+
+- **Desktop Display**: Horizontal menu with gap spacing
+- **Mobile Display**: Vertical menu for mobile overlay
+- **Conditional Rendering**: Shows/hides based on `isMobile` prop
+- **Flexible Layouts**: Adapts to different screen sizes
+
+### Menu Item Configuration
+
+- **Dynamic Items**: Configurable array of navigation links
+- **Custom Labels**: User-defined text for each menu item
+- **Flexible Hrefs**: Support for both routes (`/about`) and anchors (`#contact`)
+- **Default Menu**: Includes Home, Products, Services, Contact links
+
+### Styling and Interactions
+
+- **Hover Effects**: Color transitions on menu item hover
+- **Typography**: Consistent text sizing and spacing
+- **Color Scheme**: Uses theme-aware muted foreground colors
+- **Smooth Transitions**: 300ms duration animations
+
+### Responsive Behavior
+
+#### Desktop Mode (`isMobile={false}`)
+
+- Hidden by default on mobile (`hidden lg:block`)
+- Horizontal flex layout with 8px gaps
+- Small text size for clean appearance
+
+#### Mobile Mode (`isMobile={true}`)
+
+- Visible on all screen sizes (`block`)
+- Vertical flex layout with 4px gaps
+- Center-aligned text for mobile overlay
+
+## Usage in Custom Header
+
+This component integrates with the Custom Header's layout system:
+
+### Standard Navigation (Desktop)
+
+```tsx
+<RenderBlocks
+  blocks={(items ?? []).filter((i) => i.alignment === "center")}
+  blockComponents={blockComponents}
+/>
+```
+
+### Mobile Menu (Mobile Overlay)
+
+```tsx
+<RenderBlocks
+  isMobile={true}
+  blocks={(items ?? []).filter(
+    (i) => i.blockType === BLOCK_SLUG_HEADER_MENU_ITEMS,
+  )}
+  blockComponents={blockComponents}
+/>
+```
+
+## Default Menu Configuration
+
+The component comes with sensible defaults:
+
+```json
+[
+  { "label": "Home", "href": "/" },
+  { "label": "Products", "href": "/products" },
+  { "label": "Services", "href": "/services" },
+  { "label": "Contact", "href": "/contact" }
+]
+```
+
+## Menu Item Examples
+
+### Page Navigation
+
+```json
+{ "label": "About", "href": "/about" }
+```
+
+### Anchor Links
+
+```json
+{ "label": "Features", "href": "#features" }
+```
+
+### External Links
+
+```json
+{ "label": "Documentation", "href": "https://docs.example.com" }
+```
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Select Enum Field](/docs/fields/select-enum-field) - Alignment selection field
+- [Style Utils](/docs/lib/style-utils) - Tailwind utility functions including cn() class merger
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [react](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [next](https://github.com/vercel/next.js) - React framework with Link component
+- [payload@^3.49.1](https://github.com/payloadcms/payload) - Headless CMS and application framework
+
+## Accessibility
+
+- **Semantic Navigation**: Uses proper `<ul>` and `<li>` structure
+- **Link Navigation**: Next.js Link components for optimized routing
+- **Keyboard Support**: Full keyboard navigation support
+- **Focus Indicators**: Visible focus states on menu items
+- **Screen Reader**: Semantic list structure for assistive technology
