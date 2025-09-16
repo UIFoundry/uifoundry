@@ -62,17 +62,36 @@
 		},
 		{
 			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "User Avatar",
+			"name": "user-avatar",
+			"type": "registry:component",
+			"files": [
+				{
+					"path": "registry/components/UserAvatar.tsx",
+					"type": "registry:component",
+					"target": "src/components/UserAvatar.tsx"
+				}
+			],
+			"registryDependencies": [
+				"avatar"
+			],
+			"dependencies": [
+				"react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
 			"title": "Payload Field Types",
 			"name": "field-types",
 			"type": "registry:lib",
 			"dependencies": [
-				"payload@^3.49.1"
+				"payload"
 			],
 			"files": [
 				{
-					"path": "registry/payload/fields/index.d.ts",
+					"path": "registry/payload/fields/index.ts",
 					"type": "registry:lib",
-					"target": "src/payload/fields/index.d.ts"
+					"target": "src/payload/fields/index.ts"
 				}
 			]
 		},
@@ -207,10 +226,10 @@
 				"@uifoundry/field-types"
 			],
 			"dependencies": [
-				"payload@^3.49.1",
+				"payload",
 				"@uiw/react-color-sketch",
 				"react",
-				"@payloadcms/ui@^3.49.1"
+				"@payloadcms/ui"
 			]
 		},
 		{
@@ -243,6 +262,35 @@
 					"path": "registry/payload/blocks/hero/hero-1/config.ts",
 					"type": "registry:component",
 					"target": "src/payload/blocks/Hero/Hero_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Hero 2",
+			"name": "hero-2",
+			"type": "registry:block",
+			"description": "Hero Block Variant 2",
+			"registryDependencies": [
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/media-field",
+				"@uifoundry/cta-pair-field"
+			],
+			"dependencies": [
+				"react",
+				"next"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/hero/hero-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/hero/hero-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_2/config.ts"
 				}
 			]
 		},
@@ -336,6 +384,149 @@
 			"dependencies": [
 				"payload",
 				"react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header Brand Logo",
+			"name": "header-brand-logo",
+			"type": "registry:block",
+			"description": "Customizable brand logo component for headers",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header-brand-logo/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/BrandLogo/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header-brand-logo/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/BrandLogo/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/select-enum-field",
+				"@uifoundry/upload-field"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header Menu Button",
+			"name": "header-menu-button",
+			"type": "registry:block",
+			"description": "Customizable button component for headers with authentication and navigation support",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header-menu-button/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/MenuButton/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header-menu-button/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/MenuButton/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/select-enum-field",
+				"@uifoundry/user-avatar"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header Menu Items",
+			"name": "header-menu-items",
+			"type": "registry:block",
+			"description": "Customizable navigation menu items component for headers",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header-menu-items/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/MenuItems/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header-menu-items/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/MenuItems/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/select-enum-field"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Custom Header",
+			"name": "custom-header",
+			"type": "registry:block",
+			"description": "Fully customizable header component with nested blocks for brand logo, menu items, and buttons",
+			"files": [
+				{
+					"path": "registry/payload/blocks/custom-header/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/custom-header/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/custom-header/blocks.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/blocks.ts"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/renderblocks",
+				"@uifoundry/header-brand-logo",
+				"@uifoundry/header-menu-button",
+				"@uifoundry/header-menu-items"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Select Enum Field",
+			"name": "select-enum-field",
+			"type": "registry:component",
+			"description": "PayloadCMS select field that generates options from TypeScript enums",
+			"files": [
+				{
+					"path": "registry/payload/fields/selectEnum/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/selectEnumField/config.ts"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types"
+			],
+			"dependencies": [
+				"payload"
 			]
 		},
 		{

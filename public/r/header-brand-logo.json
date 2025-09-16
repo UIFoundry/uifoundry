@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "header-brand-logo",
+  "type": "registry:block",
+  "title": "Header Brand Logo",
+  "description": "Customizable brand logo component for headers",
+  "dependencies": [
+    "react",
+    "next",
+    "payload"
+  ],
+  "registryDependencies": [
+    "@uifoundry/style-utils",
+    "@uifoundry/select-enum-field",
+    "@uifoundry/upload-field"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/header-brand-logo/config.ts",
+      "content": "import type { Block } from \"payload\";\nimport {\n  BLOCK_GROUP_HEADERS,\n  BLOCK_SLUG_HEADER_BRAND_LOGO,\n} from \"@/registry/default/lib/constants/blocks\";\nimport { FLEX_ALIGNMENT } from \"@/registry/default/lib/constants\";\nimport selectEnumField from \"@/registry/default/lib/fields/select-enum-field/config\";\nimport uploadField from \"@/registry/default/lib/fields/upload-field/config\";\n\nexport const HeaderBrandLogoBlock: Block = {\n  slug: BLOCK_SLUG_HEADER_BRAND_LOGO,\n  interfaceName: \"HeaderBrandLogoBlock\",\n  labels: {\n    singular: \"Brand Logo\",\n    plural: \"Brand Logos\",\n  },\n  admin: {\n    group: BLOCK_GROUP_HEADERS,\n  },\n  fields: [\n    selectEnumField(FLEX_ALIGNMENT, {\n      name: \"alignment\",\n      defaultValue: FLEX_ALIGNMENT.left,\n    }),\n    {\n      name: \"href\",\n      label: \"Target Link (href)\",\n      type: \"text\",\n      required: true,\n      defaultValue: \"/home\",\n    },\n    uploadField({\n      name: \"media\",\n    }),\n  ],\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Header/CustomHeader/BrandLogo/config.ts"
+    },
+    {
+      "path": "registry/payload/blocks/header-brand-logo/index.tsx",
+      "content": "import Link from \"next/link\";\nimport Image from \"next/image\";\nimport { cn } from \"@/registry/default/utils\";\n\n// Registry components use generic types instead of generated types\ninterface HeaderBrandLogoBlock {\n  href: string;\n  media?: {\n    url: string;\n    alt: string;\n  };\n  alignment?: string;\n}\n\ninterface Media {\n  url: string;\n  alt: string;\n}\n\nexport * from \"./config\";\n\nexport default function HeaderBrandLogo({\n  isMobile = false,\n  href = \"\",\n  media,\n}: { isMobile: boolean } & HeaderBrandLogoBlock) {\n  if (!media) return <></>;\n  return (\n    <Link\n      href={href}\n      className={cn(\"cursor-pointer\", isMobile === true && \"hidden\")}\n    >\n      {media ? (\n        <Image src={(media as Media).url!} fill alt={(media as Media).alt} />\n      ) : (\n        \"\"\n      )}\n    </Link>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Header/CustomHeader/BrandLogo/index.tsx"
+    }
+  ]
+}

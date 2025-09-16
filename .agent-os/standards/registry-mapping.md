@@ -28,6 +28,8 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/subheader-field` → `/docs/fields/subheader-field`
 - `@uifoundry/media-field` → `/docs/fields/media-field`
 - `@uifoundry/color-field` → `/docs/fields/color-field`
+- `@uifoundry/hero-1` → `/docs/blocks/hero-1`
+- `@uifoundry/hero-2` → `/docs/blocks/hero-2`
 - `@uifoundry/header-1` → `/docs/blocks/header-1`
 - `@uifoundry/header-2` → `/docs/blocks/header-2`
 - `@uifoundry/header-blocks` → `/docs/blocks/header-blocks`
@@ -74,6 +76,8 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/subheader-field`: PayloadCMS text field for subheaders
 - `@uifoundry/media-field`: PayloadCMS dual upload field (light/dark variants)
 - `@uifoundry/color-field`: PayloadCMS color picker field with custom admin UI
+- `@uifoundry/hero-1`: Hero section block with animated text effects and CTAs
+- `@uifoundry/hero-2`: Alternative hero section layout with split design
 - `@uifoundry/renderblocks`: Component for rendering PayloadCMS blocks
 
 ### ShadCN Components

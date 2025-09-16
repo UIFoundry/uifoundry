@@ -2,7 +2,7 @@ import {
 	Avatar,
 	AvatarImage,
 	AvatarFallback,
-} from "~/ui/avatar";
+} from "@/registry/default/ui/avatar";
 import { getInitials } from "~/utils";
 import type { User } from "~/payload-types";
 import { useSession } from "~/auth/client";

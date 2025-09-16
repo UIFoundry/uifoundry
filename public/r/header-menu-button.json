@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "header-menu-button",
+  "type": "registry:block",
+  "title": "Header Menu Button",
+  "description": "Customizable button component for headers with authentication and navigation support",
+  "dependencies": [
+    "react",
+    "next",
+    "payload"
+  ],
+  "registryDependencies": [
+    "@uifoundry/style-utils",
+    "@uifoundry/select-enum-field",
+    "@uifoundry/user-avatar"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/header-menu-button/config.ts",
+      "content": "import type { Block } from \"payload\";\nimport {\n\tBLOCK_GROUP_HEADERS,\n\tBLOCK_SLUG_HEADER_MENU_BUTTON,\n} from \"@/registry/default/lib/constants/blocks\";\nimport {\n\tFLEX_ALIGNMENT,\n\tAUTH_PROVIDERS,\n} from \"@/registry/default/lib/constants\";\nimport selectEnumField from \"@/registry/default/lib/fields/selectEnumField/config\";\n\nexport const HeaderMenuButtonBlock: Block = {\n\tslug: BLOCK_SLUG_HEADER_MENU_BUTTON,\n\tinterfaceName: \"HeaderMenuButtonBlock\",\n\tlabels: {\n\t\tsingular: \"Menu Button\",\n\t\tplural: \"Menu Buttons\",\n\t},\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_HEADERS,\n\t},\n\tfields: [\n\t\tselectEnumField(FLEX_ALIGNMENT, {\n\t\t\tname: \"alignment\",\n\t\t\tlabel: \"Header Alignment\",\n\t\t\tdefaultValue: FLEX_ALIGNMENT.left,\n\t\t}),\n\t\t{\n\t\t\tname: \"label\",\n\t\t\tlabel: \"Label\",\n\t\t\ttype: \"text\",\n\t\t\trequired: true,\n\t\t\tdefaultValue: \"Sign In\",\n\t\t},\n\t\t{\n\t\t\tname: \"href\",\n\t\t\tlabel: \"Target Link (href)\",\n\t\t\ttype: \"text\",\n\t\t},\n\t\t{\n\t\t\tname: \"targetBlank\",\n\t\t\tlabel: \"Open Link in new Tab\",\n\t\t\ttype: \"checkbox\",\n\t\t\trequired: true,\n\t\t\tdefaultValue: false,\n\t\t},\n\t\t{\n\t\t\tname: \"auth\",\n\t\t\tlabel: \"Auth\",\n\t\t\ttype: \"group\",\n\t\t\tfields: [\n\t\t\t\tselectEnumField(AUTH_PROVIDERS, {\n\t\t\t\t\tname: \"provider\",\n\t\t\t\t\tdefaultValue: AUTH_PROVIDERS.google,\n\t\t\t\t}),\n\t\t\t],\n\t\t},\n\t],\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Header/CustomHeader/MenuButton/config.ts"
+    },
+    {
+      "path": "registry/payload/blocks/header-menu-button/index.tsx",
+      "content": "\"use client\";\n\nimport Link from \"next/link\";\nimport type { HeaderMenuButtonBlock } from \"~/payload-types\";\nimport { signIn, useSession } from \"~/auth/client\";\nimport { Button } from \"@/registry/default/ui/button\";\nimport { cn } from \"@/registry/deafult/utils\";\nimport UserAvatar from \"@/registry/default/components/UserAvatar\";\n\nexport default function MenuButton({\n\tisMobile = false,\n\tlabel,\n\thref = \"\",\n\ttargetBlank,\n\talignment,\n\tauth,\n}: { isMobile: boolean } & HeaderMenuButtonBlock) {\n\tconst { data: session } = useSession();\n\tif (auth) {\n\t\tif (!session?.user) {\n\t\t\treturn (\n\t\t\t\t<div\n\t\t\t\t\tclassName={cn(\n\t\t\t\t\t\talignment === \"left\"\n\t\t\t\t\t\t\t? \"self-start\"\n\t\t\t\t\t\t\t: alignment === \"right\"\n\t\t\t\t\t\t\t\t? \"self-end\"\n\t\t\t\t\t\t\t\t: \"self-center\",\n\t\t\t\t\t\tisMobile === true && \"hidden\",\n\t\t\t\t\t)}\n\t\t\t\t>\n\t\t\t\t\t<Button\n\t\t\t\t\t\tclassName=\"cursor-pointer\"\n\t\t\t\t\t\tonClick={() => {\n\t\t\t\t\t\t\tif (auth.provider) {\n\t\t\t\t\t\t\t\treturn signIn.social({ provider: auth.provider });\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}}\n\t\t\t\t\t>\n\t\t\t\t\t\t{label}\n\t\t\t\t\t</Button>\n\t\t\t\t</div>\n\t\t\t);\n\t\t}\n\n\t\treturn (\n\t\t\t<div className=\"flex\">\n\t\t\t\t<UserAvatar />\n\t\t\t</div>\n\t\t);\n\t}\n\n\treturn (\n\t\t<div\n\t\t\tclassName={cn(\n\t\t\t\talignment === \"left\"\n\t\t\t\t\t? \"self-start\"\n\t\t\t\t\t: alignment === \"right\"\n\t\t\t\t\t\t? \"self-end\"\n\t\t\t\t\t\t: \"self-center\",\n\t\t\t\tisMobile === true && \"hidden\",\n\t\t\t)}\n\t\t>\n\t\t\t<Link\n\t\t\t\ttarget={targetBlank ? \"_blank\" : \"_self\"}\n\t\t\t\thref={href ?? \"/home\"}\n\t\t\t\tclassName=\"cursor-pointer\"\n\t\t\t>\n\t\t\t\t{label}\n\t\t\t</Link>\n\t\t</div>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Header/CustomHeader/MenuButton/index.tsx"
+    }
+  ]
+}

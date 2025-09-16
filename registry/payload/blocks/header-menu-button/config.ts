@@ -2,12 +2,12 @@ import type { Block } from "payload";
 import {
 	BLOCK_GROUP_HEADERS,
 	BLOCK_SLUG_HEADER_MENU_BUTTON,
-} from "~/payload/constants/blocks";
+} from "@/registry/default/lib/constants/blocks";
 import {
 	FLEX_ALIGNMENT,
 	AUTH_PROVIDERS,
-} from "~/payload/constants";
-import selectEnumField from "~/payload/fields/selectEnumField/config";
+} from "@/registry/default/lib/constants";
+import selectEnumField from "@/registry/default/lib/fields/selectEnumField/config";
 
 export const HeaderMenuButtonBlock: Block = {
 	slug: BLOCK_SLUG_HEADER_MENU_BUTTON,
