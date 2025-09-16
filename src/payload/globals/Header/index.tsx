@@ -2,7 +2,7 @@ import type { Header } from "~/payload-types";
 import RenderBlocks from "~/components/RenderBlocks";
 import type { ComponentPropsWithRef } from "react";
 import { cn } from "~/styles/utils";
-import { blockComponents } from "~/payload/blocks/Header";
+import { blockComponents } from "~/payload/blocks/Header/config";
 
 export * from "./config";
 

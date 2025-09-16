@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hero-2",
+  "type": "registry:block",
+  "title": "Hero 2",
+  "description": "Hero Block Variant 2",
+  "dependencies": [
+    "react",
+    "next"
+  ],
+  "registryDependencies": [
+    "@uifoundry/header-field",
+    "@uifoundry/subheader-field",
+    "@uifoundry/media-field",
+    "@uifoundry/cta-pair-field"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/hero/hero-2/index.tsx",
+      "content": "import type { Hero_2_Block } from \"~/payload-types\";\n\nexport * from \"./config\";\n\nexport default function Hero_2(props: Hero_2_Block) {\n  return (\n    <div className=\"grid h-[75vh] w-full grid-cols-2 bg-red-50 p-4\">\n      <div className=\"flex h-full flex-col items-start justify-center gap-2 bg-blue-200/30\">\n        <h1 className=\"clamp-[text,4xl,6xl]\">{props.header}</h1>\n        <p className=\"clamp-[text,md,xl]\">{props.subheader}</p>\n      </div>\n      <div className=\"col-start-2 flex items-center justify-center\">\n        image goes here\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Hero/Hero_2/index.tsx"
+    },
+    {
+      "path": "registry/payload/blocks/hero/hero-2/config.ts",
+      "content": "import {\n  BLOCK_GROUP_HERO,\n  BLOCK_SLUG_HERO_2,\n} from \"@/registry/default/lib/constants/blocks\";\nimport type { Block } from \"payload\";\nimport headerField from \"@/registry/default/lib/fields/header/config\";\nimport subHeaderField from \"@/registry/default/lib/fields/subheader/config\";\nimport mediaField from \"@/registry/default/lib/fields/media/config\";\nimport callToActionPair from \"@/registry/default/lib/fields/cta-pair/config\";\n\nexport const Hero_2_Block: Block = {\n  slug: BLOCK_SLUG_HERO_2,\n  labels: {\n    singular: \"Hero 2\",\n    plural: \"Hero 2's\",\n  },\n  admin: {\n    group: BLOCK_GROUP_HERO,\n  },\n  interfaceName: \"Hero_2_Block\",\n  fields: [\n    headerField(),\n    subHeaderField(),\n    mediaField({ name: \"background\", label: \"Background Media\" }),\n    callToActionPair(),\n  ],\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Hero/Hero_2/config.ts"
+    }
+  ]
+}

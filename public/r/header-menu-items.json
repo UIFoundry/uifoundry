@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "header-menu-items",
+  "type": "registry:block",
+  "title": "Header Menu Items",
+  "description": "Customizable navigation menu items component for headers",
+  "dependencies": [
+    "react",
+    "next",
+    "payload"
+  ],
+  "registryDependencies": [
+    "@uifoundry/style-utils",
+    "@uifoundry/select-enum-field"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/header-menu-items/config.ts",
+      "content": "import type { Block } from \"payload\";\nimport {\n\tBLOCK_GROUP_HEADERS,\n\tBLOCK_SLUG_HEADER_MENU_ITEMS,\n} from \"@/registry/default/lib/constants/blocks\";\nimport { FLEX_ALIGNMENT } from \"@/registry/default/lib/constants\";\nimport selectEnumField from \"@/registry/default/lib/fields/selectEnumField/config\";\n\nexport const HeaderMenuItemsBlock: Block = {\n\tslug: BLOCK_SLUG_HEADER_MENU_ITEMS,\n\tinterfaceName: \"HeaderMenuItemsBlock\",\n\tlabels: {\n\t\tsingular: \"Menu Items\",\n\t\tplural: \"Menu Items'\",\n\t},\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_HEADERS,\n\t},\n\tfields: [\n\t\tselectEnumField(FLEX_ALIGNMENT, {\n\t\t\tname: \"alignment\",\n\t\t\tlabel: \"Header Alignment\",\n\t\t\tdefaultValue: FLEX_ALIGNMENT.center,\n\t\t}),\n\t\t{\n\t\t\tname: \"menuItems\",\n\t\t\tlabels: {\n\t\t\t\tsingular: \"Menu Item\",\n\t\t\t\tplural: \"Menu Items\",\n\t\t\t},\n\t\t\ttype: \"array\",\n\t\t\trequired: true,\n\t\t\tdefaultValue: [\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Home\",\n\t\t\t\t\thref: \"/\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Products\",\n\t\t\t\t\thref: \"/products\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Services\",\n\t\t\t\t\thref: \"/services\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Contact\",\n\t\t\t\t\thref: \"/contact\",\n\t\t\t\t},\n\t\t\t],\n\t\t\tfields: [\n\t\t\t\t{\n\t\t\t\t\tname: \"label\",\n\t\t\t\t\tlabel: \"Label\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\trequired: true,\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: \"href\",\n\t\t\t\t\tlabel: \"Href\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\trequired: true,\n\t\t\t\t\tadmin: {\n\t\t\t\t\t\tplaceholder: \"/features | #features\",\n\t\t\t\t\t},\n\t\t\t\t},\n\t\t\t],\n\t\t},\n\t],\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Header/CustomHeader/MenuItems/config.ts"
+    },
+    {
+      "path": "registry/payload/blocks/header-menu-items/index.tsx",
+      "content": "import Link from \"next/link\";\nimport type { HeaderMenuItemsBlock } from \"~/payload-types\";\nimport { cn } from \"@/registry/default/utils\";\n\nexport default function MenuItems({\n\tisMobile = false,\n\tmenuItems,\n}: { isMobile: boolean } & HeaderMenuItemsBlock) {\n\treturn (\n\t\t<div className={cn(\"hidden lg:block\", isMobile === true && \"block\")}>\n\t\t\t<ul\n\t\t\t\tclassName={cn(\n\t\t\t\t\t\"flex gap-8 text-sm\",\n\t\t\t\t\tisMobile === true && \"flex-col gap-4 text-center\",\n\t\t\t\t)}\n\t\t\t>\n\t\t\t\t{menuItems.map((item, index) => (\n\t\t\t\t\t<li key={index}>\n\t\t\t\t\t\t<Link\n\t\t\t\t\t\t\thref={item.href}\n\t\t\t\t\t\t\tclassName=\"text-muted-foreground hover:text-primary block duration-300\"\n\t\t\t\t\t\t>\n\t\t\t\t\t\t\t<span>{item.label}</span>\n\t\t\t\t\t\t</Link>\n\t\t\t\t\t</li>\n\t\t\t\t))}\n\t\t\t</ul>\n\t\t</div>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Header/CustomHeader/MenuItems/index.tsx"
+    }
+  ]
+}

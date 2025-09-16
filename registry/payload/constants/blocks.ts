@@ -7,8 +7,12 @@ export const BLOCK_SLUG_TEAMS_1_MEMBERS = "teams_1_members" as const;
 
 // Headers
 export const BLOCK_GROUP_HEADERS = "Headers" as const;
+export const BLOCK_SLUG_CUSTOM_HEADER = "header_custom" as const;
 export const BLOCK_SLUG_HEADER_1 = "header_1" as const;
 export const BLOCK_SLUG_HEADER_2 = "header_2" as const;
+export const BLOCK_SLUG_HEADER_MENU_ITEMS = "header_menu_items" as const;
+export const BLOCK_SLUG_HEADER_MENU_BUTTON = "header_menu_button" as const;
+export const BLOCK_SLUG_HEADER_BRAND_LOGO = "header_brand_logo" as const;
 
 // Footers
 export const BLOCK_GROUP_FOOTERS = "Footers" as const;

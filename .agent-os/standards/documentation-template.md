@@ -68,6 +68,54 @@ All UIFoundry registry components should follow this standardized documentation 
 - Use kebab-case for file names
 - Match registry item names exactly
 
+## MDX Component Registration
+
+**CRITICAL**: For components to render in documentation previews, they must be registered in `src/app/(fumadocs)/mdx-components.tsx`:
+
+### Registration Steps
+
+1. **Import component and config**:
+
+   ```tsx
+   import ComponentName from "~/payload/blocks/Category/ComponentName";
+   import { ComponentName_Block } from "~/payload/blocks/Category/ComponentName/config";
+   ```
+
+2. **Import TypeScript type**:
+
+   ```tsx
+   import type { ComponentName_Block as ComponentNameBlockType } from "~/payload-types";
+   ```
+
+3. **Extract default values**:
+
+   ```tsx
+   const componentNameDefaults = extractBlockDefaults(ComponentName_Block);
+   ```
+
+4. **Register in getMDXComponents**:
+   ```tsx
+   ComponentName: (props: Partial<ComponentNameBlockType> = {}) => {
+     const combinedProps = {
+       ...componentNameDefaults,
+       ...props,
+     } as ComponentNameBlockType;
+     const { id, ...otherProps } = combinedProps;
+     return <ComponentName {...otherProps} id={id ?? undefined} preview />;
+   },
+   ```
+
+### UI Component Registration
+
+For UI components (non-PayloadCMS), simpler registration:
+
+```tsx
+import { ComponentName } from "~/components/ComponentName";
+
+// In getMDXComponents:
+ComponentName: (props) => <ComponentName {...props} />,
+```
+
 ## Frontmatter Template
 
 ```yaml

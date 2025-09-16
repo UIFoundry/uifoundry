@@ -22,6 +22,29 @@ This serves as the public showcase of development progress and should be the pri
 - **Phase 1**: Multi-site architecture and role-based access control
 - **Phase 2**: Custom domains, LLM site builders, and subscription management
 - **Phase 3**: Advanced form builder with dynamic creation capabilities
+- **Backlog**: Registry-first developer monetization (see Business Model Strategy below)
+
+### Business Model Strategy
+
+**Registry-First Developer Monetization:**
+
+- **Free Tier**: Empty template repo + free components via registry
+- **Paid Tier**: Premium components via authenticated registry access
+- **Template Export**: Optional convenience feature (low priority)
+
+**Strategic Benefits:**
+
+- Continuous value delivery as new components are built
+- Lower barrier to entry with free template
+- Scalable revenue through component subscriptions
+- Simplified implementation vs complex export systems
+- Community building through free tier
+
+**Implementation Timeline:**
+
+- Current: Build SaaS + comprehensive registry
+- Phase 1: Launch free template + tiered registry
+- Phase 2+: Optional template export for premium users
 
 ### Why README.md is Primary:
 

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "user-avatar",
+  "type": "registry:component",
+  "title": "User Avatar",
+  "dependencies": [
+    "react"
+  ],
+  "registryDependencies": [
+    "avatar"
+  ],
+  "files": [
+    {
+      "path": "registry/components/UserAvatar.tsx",
+      "content": "import {\n\tAvatar,\n\tAvatarImage,\n\tAvatarFallback,\n} from \"@/registry/default/ui/avatar\";\nimport { getInitials } from \"~/utils\";\nimport type { User } from \"~/payload-types\";\nimport { useSession } from \"~/auth/client\";\n\nexport default function UserAvatar({\n\tuser,\n\tshowUsername = false,\n}: {\n\tuser?: User;\n\tshowUsername?: boolean;\n}) {\n\tconst { data: session } = useSession();\n\n\tconst currentUser = user ?? session?.user;\n\n\tif (!currentUser) return <></>;\n\n\tif (showUsername) {\n\t\treturn (\n\t\t\t<div className=\"grid place-items-center\">\n\t\t\t\t<Avatar>\n\t\t\t\t\t<AvatarImage\n\t\t\t\t\t\tsrc={currentUser.image ?? undefined}\n\t\t\t\t\t\talt=\"Profile image\"\n\t\t\t\t\t/>\n\t\t\t\t\t<AvatarFallback>\n\t\t\t\t\t\t{getInitials(currentUser.name, 2).toUpperCase()}\n\t\t\t\t\t</AvatarFallback>\n\t\t\t\t</Avatar>\n\t\t\t\t<p>{currentUser.name}</p>\n\t\t\t</div>\n\t\t);\n\t}\n\n\treturn (\n\t\t<Avatar>\n\t\t\t<AvatarImage src={currentUser.image ?? undefined} alt=\"Profile image\" />\n\t\t\t<AvatarFallback>\n\t\t\t\t{getInitials(currentUser.name, 2).toUpperCase()}\n\t\t\t</AvatarFallback>\n\t\t</Avatar>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/components/UserAvatar.tsx"
+    }
+  ]
+}

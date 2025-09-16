@@ -174,6 +174,18 @@ Goal: production‑ready hosting and AI‑assisted full‑site creation.
 
 ### Backlog / Ideas (not scheduled)
 
+**Template Export (developer self-hosting)**
+
+- [ ] Template repository generator (creates blank single-site repo)
+- [ ] Site configuration transformation (multi-site → single-site payload.config.ts)
+- [ ] GitHub integration for automated template repo creation
+- [ ] Template includes all field hook optimizations (headerField, etc.)
+- [ ] Full shadcn registry compatibility (devs can add any payload components)
+- [ ] Site content export as seed data or default configuration
+- [ ] Template repo documentation and setup instructions
+
+**Other Ideas**
+
 - Theme marketplace / presets
 - Analytics integration (privacy‑friendly by default)
 - Import/export starters
