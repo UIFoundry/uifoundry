@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { User as PayloadUser } from "~/payload-types";
 import React, { type ComponentPropsWithRef, type ElementType } from "react";
 import { type Block } from "payload";
@@ -14,11 +13,19 @@ export interface RenderBlocksContext extends ComponentPropsWithRef<"div"> {
 	user?: PayloadUser | null;
 	params?: PageParams;
 	searchParams?: PageSearchParams;
+	isMobile?: boolean;
 }
 
 const RenderBlocks: React.FC<RenderBlocksContext> = (props) => {
-	const { blocks, blockComponents, params, searchParams, user, ...divProps } =
-		props;
+	const {
+		blocks,
+		blockComponents,
+		params,
+		searchParams,
+		user,
+		isMobile = false,
+		...divProps
+	} = props;
 	const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0;
 
 	if (blocks.length && hasBlocks) {
@@ -47,6 +54,7 @@ const RenderBlocks: React.FC<RenderBlocksContext> = (props) => {
 									key={blockKey ?? index}
 									block={block}
 									index={index}
+									isMobile={isMobile}
 									{...(block as Block)}
 									{...divProps}
 								/>

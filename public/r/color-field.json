@@ -5,10 +5,10 @@
   "title": "Color Field",
   "description": "PayloadCMS custom admin panel color input with a color picker component. Returns the color as a string",
   "dependencies": [
-    "payload@^3.49.1",
+    "payload",
     "@uiw/react-color-sketch",
     "react",
-    "@payloadcms/ui@^3.49.1"
+    "@payloadcms/ui"
   ],
   "registryDependencies": [
     "button",

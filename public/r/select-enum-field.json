@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "select-enum-field",
+  "type": "registry:component",
+  "title": "Select Enum Field",
+  "description": "PayloadCMS select field that generates options from TypeScript enums",
+  "dependencies": [
+    "payload"
+  ],
+  "registryDependencies": [
+    "@uifoundry/field-types"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/fields/selectEnum/config.ts",
+      "content": "import type { Option, OptionObject } from \"payload\";\nimport type { SelectField } from \"@/registry/default/lib/fields\";\nimport type { PickRequired } from \"~/types\";\n\ntype RequiredFields = PickRequired<SelectField, \"name\">;\ninterface SelectEnumFieldProps extends RequiredFields {\n\tuseKeyAsValue?: boolean;\n}\n\nexport default function selectEnumField<T extends Record<string, unknown>>(\n\tobject: T,\n\t{ useKeyAsValue = false, ...restConfig }: SelectEnumFieldProps,\n): SelectField {\n\t// @ts-expect-error mismatched hasMany type for some reason, unsure why. select field specific error here\n\treturn {\n\t\ttype: \"select\",\n\t\toptions: Object.entries(object).map(\n\t\t\t([key, value]) =>\n\t\t\t\t({ value: useKeyAsValue ? key : value, label: key }) as OptionObject,\n\t\t) as Option[],\n\t\thasMany: false,\n\t\t...restConfig,\n\t};\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/fields/selectEnumField/config.ts"
+    }
+  ]
+}

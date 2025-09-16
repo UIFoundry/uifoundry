@@ -73,3 +73,18 @@ When adding third-party dependencies:
   - Clear documentation
 - Get User permission before installing any third party dependencies
   </conditional-block>
+
+## Specification Creation
+
+### Agent Documentation Links
+
+All specifications must include relevant agent documentation links to ensure implementation consistency:
+
+- **Main Spec**: Include "Relevant Agent Documentation" section with context-appropriate links
+- **Technical Spec**: Include "Implementation Guidelines" section with standards and architecture docs
+- **Context-Based Linking**: Dynamically include relevant docs based on spec type:
+  - Component specs: documentation-template.md, registry-mapping.md
+  - PayloadCMS specs: payload-architecture.md, component-documentation-checklist.md
+  - Frontend specs: code-style guides, best-practices.md
+
+This ensures agents have immediate access to established patterns and standards when implementing specifications.

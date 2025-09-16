@@ -84,7 +84,7 @@ export default async function Page({
 	}
 
 	return (
-		<div className="px-8 pt-8">
+		<div>
 			<RefreshRouteOnSave />
 			<TailwindConfig draft={useTailwindDraftConfig as "true" | "false"} />
 			<Header header={header} className={cn(!page?.showHeader && "hidden")} />

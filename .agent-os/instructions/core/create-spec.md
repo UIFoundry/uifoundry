@@ -13,7 +13,7 @@ encoding: UTF-8
 Generate detailed feature specifications aligned with product roadmap and mission.
 
 <pre_flight_check>
-  EXECUTE: @.agent-os/instructions/meta/pre-flight.md
+EXECUTE: @.agent-os/instructions/meta/pre-flight.md
 </pre_flight_check>
 
 <process_flow>
@@ -25,21 +25,16 @@ Generate detailed feature specifications aligned with product roadmap and missio
 Use the context-fetcher subagent to identify spec initiation method by either finding the next uncompleted roadmap item when user asks "what's next?" or accepting a specific spec idea from the user.
 
 <option_a_flow>
-  <trigger_phrases>
-    - "what's next?"
-  </trigger_phrases>
-  <actions>
-    1. CHECK @.agent-os/product/roadmap.md
-    2. FIND next uncompleted item
-    3. SUGGEST item to user
-    4. WAIT for approval
-  </actions>
+<trigger_phrases> - "what's next?"
+</trigger_phrases>
+<actions> 1. CHECK @.agent-os/product/roadmap.md 2. FIND next uncompleted item 3. SUGGEST item to user 4. WAIT for approval
+</actions>
 </option_a_flow>
 
 <option_b_flow>
-  <trigger>user describes specific spec idea</trigger>
-  <accept>any format, length, or detail level</accept>
-  <proceed>to context gathering</proceed>
+<trigger>user describes specific spec idea</trigger>
+<accept>any format, length, or detail level</accept>
+<proceed>to context gathering</proceed>
 </option_b_flow>
 
 </step>
@@ -51,19 +46,17 @@ Use the context-fetcher subagent to identify spec initiation method by either fi
 Use the context-fetcher subagent to read @.agent-os/product/mission-lite.md and @.agent-os/product/tech-stack.md only if not already in context to ensure minimal context for spec alignment.
 
 <conditional_logic>
-  IF both mission-lite.md AND tech-stack.md already read in current context:
-    SKIP this entire step
-    PROCEED to step 3
-  ELSE:
-    READ only files not already in context:
-      - mission-lite.md (if not in context)
-      - tech-stack.md (if not in context)
-    CONTINUE with context analysis
+IF both mission-lite.md AND tech-stack.md already read in current context:
+SKIP this entire step
+PROCEED to step 3
+ELSE:
+READ only files not already in context: - mission-lite.md (if not in context) - tech-stack.md (if not in context)
+CONTINUE with context analysis
 </conditional_logic>
 
 <context_analysis>
-  <mission_lite>core product purpose and value</mission_lite>
-  <tech_stack>technical requirements</tech_stack>
+<mission_lite>core product purpose and value</mission_lite>
+<tech_stack>technical requirements</tech_stack>
 </context_analysis>
 
 </step>
@@ -75,23 +68,18 @@ Use the context-fetcher subagent to read @.agent-os/product/mission-lite.md and 
 Use the context-fetcher subagent to clarify scope boundaries and technical considerations by asking numbered questions as needed to ensure clear requirements before proceeding.
 
 <clarification_areas>
-  <scope>
-    - in_scope: what is included
-    - out_of_scope: what is excluded (optional)
-  </scope>
-  <technical>
-    - functionality specifics
-    - UI/UX requirements
-    - integration points
-  </technical>
+<scope> - in_scope: what is included
+</scope>
+<technical> - functionality specifics - UI/UX requirements - integration points
+</technical>
 </clarification_areas>
 
 <decision_tree>
-  IF clarification_needed:
-    ASK numbered_questions
-    WAIT for_user_response
-  ELSE:
-    PROCEED to_date_determination
+IF clarification_needed:
+ASK numbered_questions
+WAIT for_user_response
+ELSE:
+PROCEED to_date_determination
 </decision_tree>
 
 </step>
@@ -103,7 +91,7 @@ Use the context-fetcher subagent to clarify scope boundaries and technical consi
 Use the date-checker subagent to determine the current date in YYYY-MM-DD format for folder naming. The subagent will output today's date which will be used in subsequent steps.
 
 <subagent_output>
-  The date-checker subagent will provide the current date in YYYY-MM-DD format at the end of its response. Store this date for use in folder naming in step 5.
+The date-checker subagent will provide the current date in YYYY-MM-DD format at the end of its response. Store this date for use in folder naming in step 5.
 </subagent_output>
 
 </step>
@@ -117,20 +105,18 @@ Use the file-creator subagent to create directory: .agent-os/specs/YYYY-MM-DD-sp
 Use kebab-case for spec name. Maximum 5 words in name.
 
 <folder_naming>
-  <format>YYYY-MM-DD-spec-name</format>
-  <date>use stored date from step 4</date>
-  <name_constraints>
-    - max_words: 5
-    - style: kebab-case
-    - descriptive: true
-  </name_constraints>
+<format>YYYY-MM-DD-spec-name</format>
+<date>use stored date from step 4</date>
+<name_constraints> - max_words: 5 - style: kebab-case - descriptive: true
+</name_constraints>
 </folder_naming>
 
 <example_names>
-  - 2025-03-15-password-reset-flow
-  - 2025-03-16-user-profile-dashboard
-  - 2025-03-17-api-rate-limiting
-</example_names>
+
+- 2025-03-15-password-reset-flow
+- 2025-03-16-user-profile-dashboard
+- 2025-03-17-api-rate-limiting
+  </example_names>
 
 </step>
 
@@ -141,26 +127,61 @@ Use kebab-case for spec name. Maximum 5 words in name.
 Use the file-creator subagent to create the file: .agent-os/specs/YYYY-MM-DD-spec-name/spec.md using this template:
 
 <file_template>
+
   <header>
     # Spec Requirements Document
 
     > Spec: [SPEC_NAME]
     > Created: [CURRENT_DATE]
+
   </header>
   <required_sections>
+    - Relevant Agent Documentation (NEW)
     - Overview
     - User Stories
     - Spec Scope
-    - Out of Scope
     - Expected Deliverable
   </required_sections>
 </file_template>
+
+<section name="agent_documentation">
+  <template>
+    ## Relevant Agent Documentation
+
+    For implementing this spec, refer to these agent docs:
+
+    [CONTEXT_BASED_AGENT_DOCS_LINKS]
+
+  </template>
+  <constraints>
+    - dynamically include relevant docs based on spec type
+    - always include core documentation standards
+    - link to specific implementation guides
+  </constraints>
+  <common_docs>
+    - @.agent-os/standards/best-practices.md
+    - @.agent-os/standards/code-style.md
+  </common_docs>
+  <conditional_docs>
+    IF spec_involves_components:
+      - @.agent-os/instructions/core/maintain-documentation-system.md
+      - @.agent-os/standards/documentation-template.md
+      - @.agent-os/standards/registry-mapping.md
+    IF spec_involves_payload_blocks:
+      - @.agent-os/standards/payload-architecture.md
+      - @.agent-os/instructions/core/component-documentation-checklist.md
+    IF spec_involves_documentation:
+      - @.agent-os/instructions/core/update-component-docs.md
+      - @.agent-os/standards/documentation-template.md
+  </conditional_docs>
+</section>
 
 <section name="overview">
   <template>
     ## Overview
 
     [1-2_SENTENCE_GOAL_AND_OBJECTIVE]
+
   </template>
   <constraints>
     - length: 1-2 sentences
@@ -180,6 +201,7 @@ Use the file-creator subagent to create the file: .agent-os/specs/YYYY-MM-DD-spe
     As a [USER_TYPE], I want to [ACTION], so that [BENEFIT].
 
     [DETAILED_WORKFLOW_DESCRIPTION]
+
   </template>
   <constraints>
     - count: 1-3 stories
@@ -194,6 +216,7 @@ Use the file-creator subagent to create the file: .agent-os/specs/YYYY-MM-DD-spe
 
     1. **[FEATURE_NAME]** - [ONE_SENTENCE_DESCRIPTION]
     2. **[FEATURE_NAME]** - [ONE_SENTENCE_DESCRIPTION]
+
   </template>
   <constraints>
     - count: 1-5 features
@@ -202,22 +225,13 @@ Use the file-creator subagent to create the file: .agent-os/specs/YYYY-MM-DD-spe
   </constraints>
 </section>
 
-<section name="out_of_scope">
-  <template>
-    ## Out of Scope
-
-    - [EXCLUDED_FUNCTIONALITY_1]
-    - [EXCLUDED_FUNCTIONALITY_2]
-  </template>
-  <purpose>explicitly exclude functionalities</purpose>
-</section>
-
 <section name="expected_deliverable">
   <template>
     ## Expected Deliverable
 
     1. [TESTABLE_OUTCOME_1]
     2. [TESTABLE_OUTCOME_2]
+
   </template>
   <constraints>
     - count: 1-3 expectations
@@ -234,21 +248,19 @@ Use the file-creator subagent to create the file: .agent-os/specs/YYYY-MM-DD-spe
 Use the file-creator subagent to create the file: .agent-os/specs/YYYY-MM-DD-spec-name/spec-lite.md for the purpose of establishing a condensed spec for efficient AI context usage.
 
 <file_template>
+
   <header>
     # Spec Summary (Lite)
   </header>
 </file_template>
 
 <content_structure>
-  <spec_summary>
-    - source: Step 6 spec.md overview section
-    - length: 1-3 sentences
-    - content: core goal and objective of the feature
-  </spec_summary>
+<spec_summary> - source: Step 6 spec.md overview section - length: 1-3 sentences - content: core goal and objective of the feature
+</spec_summary>
 </content_structure>
 
 <content_template>
-  [1-3_SENTENCES_SUMMARIZING_SPEC_GOAL_AND_OBJECTIVE]
+[1-3_SENTENCES_SUMMARIZING_SPEC_GOAL_AND_OBJECTIVE]
 </content_template>
 
 <example>
@@ -264,46 +276,59 @@ Use the file-creator subagent to create the file: .agent-os/specs/YYYY-MM-DD-spe
 Use the file-creator subagent to create the file: sub-specs/technical-spec.md using this template:
 
 <file_template>
+
   <header>
     # Technical Specification
 
     This is the technical specification for the spec detailed in @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
+
+    ## Implementation Guidelines
+
+    Follow these agent documentation standards:
+
+    [TECHNICAL_AGENT_DOCS_LINKS]
+
   </header>
 </file_template>
 
 <spec_sections>
-  <technical_requirements>
-    - functionality details
-    - UI/UX specifications
-    - integration requirements
-    - performance criteria
-  </technical_requirements>
-  <external_dependencies_conditional>
-    - only include if new dependencies needed
-    - new libraries/packages
-    - justification for each
-    - version requirements
-  </external_dependencies_conditional>
+<technical_requirements> - functionality details - UI/UX specifications - integration requirements - performance criteria
+</technical_requirements>
+<external_dependencies_conditional> - only include if new dependencies needed - new libraries/packages - justification for each - version requirements
+</external_dependencies_conditional>
 </spec_sections>
 
+<technical_agent_docs>
+<always_include> - @.agent-os/standards/code-style.md - @.agent-os/standards/best-practices.md
+</always_include>
+<conditional_include>
+IF involves_payload_components: - @.agent-os/standards/payload-architecture.md
+IF involves_documentation: - @.agent-os/standards/documentation-template.md
+IF involves_registry: - @.agent-os/standards/registry-mapping.md
+IF involves_frontend_components: - @.agent-os/standards/code-style/javascript-style.md - @.agent-os/standards/code-style/css-style.md
+</conditional_include>
+</technical_agent_docs>
+
 <example_template>
-  ## Technical Requirements
 
-  - [SPECIFIC_TECHNICAL_REQUIREMENT]
-  - [SPECIFIC_TECHNICAL_REQUIREMENT]
+## Technical Requirements
 
-  ## External Dependencies (Conditional)
+- [SPECIFIC_TECHNICAL_REQUIREMENT]
+- [SPECIFIC_TECHNICAL_REQUIREMENT]
 
-  [ONLY_IF_NEW_DEPENDENCIES_NEEDED]
-  - **[LIBRARY_NAME]** - [PURPOSE]
-  - **Justification:** [REASON_FOR_INCLUSION]
-</example_template>
+## External Dependencies (Conditional)
+
+[ONLY_IF_NEW_DEPENDENCIES_NEEDED]
+
+- **[LIBRARY_NAME]** - [PURPOSE]
+- **Justification:** [REASON_FOR_INCLUSION]
+  </example_template>
 
 <conditional_logic>
-  IF spec_requires_new_external_dependencies:
-    INCLUDE "External Dependencies" section
-  ELSE:
-    OMIT section entirely
+IF spec_requires_new_external_dependencies:
+INCLUDE "External Dependencies" section
+ELSE:
+OMIT section entirely
 </conditional_logic>
 
 </step>
@@ -315,37 +340,29 @@ Use the file-creator subagent to create the file: sub-specs/technical-spec.md us
 Use the file-creator subagent to create the file: sub-specs/database-schema.md ONLY IF database changes needed for this task.
 
 <decision_tree>
-  IF spec_requires_database_changes:
-    CREATE sub-specs/database-schema.md
-  ELSE:
-    SKIP this_step
+IF spec_requires_database_changes:
+CREATE sub-specs/database-schema.md
+ELSE:
+SKIP this_step
 </decision_tree>
 
 <file_template>
+
   <header>
     # Database Schema
 
     This is the database schema implementation for the spec detailed in @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
+
   </header>
 </file_template>
 
 <schema_sections>
-  <changes>
-    - new tables
-    - new columns
-    - modifications
-    - migrations
-  </changes>
-  <specifications>
-    - exact SQL or migration syntax
-    - indexes and constraints
-    - foreign key relationships
-  </specifications>
-  <rationale>
-    - reason for each change
-    - performance considerations
-    - data integrity rules
-  </rationale>
+<changes> - new tables - new columns - modifications - migrations
+</changes>
+<specifications> - exact SQL or migration syntax - indexes and constraints - foreign key relationships
+</specifications>
+<rationale> - reason for each change - performance considerations - data integrity rules
+</rationale>
 </schema_sections>
 
 </step>
@@ -357,47 +374,41 @@ Use the file-creator subagent to create the file: sub-specs/database-schema.md O
 Use the file-creator subagent to create file: sub-specs/api-spec.md ONLY IF API changes needed.
 
 <decision_tree>
-  IF spec_requires_api_changes:
-    CREATE sub-specs/api-spec.md
-  ELSE:
-    SKIP this_step
+IF spec_requires_api_changes:
+CREATE sub-specs/api-spec.md
+ELSE:
+SKIP this_step
 </decision_tree>
 
 <file_template>
+
   <header>
     # API Specification
 
     This is the API specification for the spec detailed in @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
+
   </header>
 </file_template>
 
 <api_sections>
-  <routes>
-    - HTTP method
-    - endpoint path
-    - parameters
-    - response format
-  </routes>
-  <controllers>
-    - action names
-    - business logic
-    - error handling
-  </controllers>
-  <purpose>
-    - endpoint rationale
-    - integration with features
-  </purpose>
+<routes> - HTTP method - endpoint path - parameters - response format
+</routes>
+<controllers> - action names - business logic - error handling
+</controllers>
+<purpose> - endpoint rationale - integration with features
+</purpose>
 </api_sections>
 
 <endpoint_template>
-  ## Endpoints
 
-  ### [HTTP_METHOD] [ENDPOINT_PATH]
+## Endpoints
 
-  **Purpose:** [DESCRIPTION]
-  **Parameters:** [LIST]
-  **Response:** [FORMAT]
-  **Errors:** [POSSIBLE_ERRORS]
+### [HTTP_METHOD] [ENDPOINT_PATH]
+
+**Purpose:** [DESCRIPTION]
+**Parameters:** [LIST]
+**Response:** [FORMAT]
+**Errors:** [POSSIBLE_ERRORS]
 </endpoint_template>
 
 </step>
@@ -409,16 +420,16 @@ Use the file-creator subagent to create file: sub-specs/api-spec.md ONLY IF API 
 Request user review of spec.md and all sub-specs files, waiting for approval or revision requests.
 
 <review_request>
-  I've created the spec documentation:
+I've created the spec documentation:
 
-  - Spec Requirements: @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
-  - Spec Summary: @.agent-os/specs/YYYY-MM-DD-spec-name/spec-lite.md
-  - Technical Spec: @.agent-os/specs/YYYY-MM-DD-spec-name/sub-specs/technical-spec.md
+- Spec Requirements: @.agent-os/specs/YYYY-MM-DD-spec-name/spec.md
+- Spec Summary: @.agent-os/specs/YYYY-MM-DD-spec-name/spec-lite.md
+- Technical Spec: @.agent-os/specs/YYYY-MM-DD-spec-name/sub-specs/technical-spec.md
   [LIST_OTHER_CREATED_SPECS]
 
-  Please review and let me know if any changes are needed.
+Please review and let me know if any changes are needed.
 
-  When you're ready, run the /create-tasks command to have me build the tasks checklist from this spec.
+When you're ready, run the /create-tasks command to have me build the tasks checklist from this spec.
 </review_request>
 
 </step>
@@ -426,5 +437,5 @@ Request user review of spec.md and all sub-specs files, waiting for approval or 
 </process_flow>
 
 <post_flight_check>
-  EXECUTE: @.agent-os/instructions/meta/post-flight.md
+EXECUTE: @.agent-os/instructions/meta/post-flight.md
 </post_flight_check>

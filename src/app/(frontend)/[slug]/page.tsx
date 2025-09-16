@@ -47,7 +47,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 	}
 
 	return (
-		<div className="px-8 pt-8">
+		<div>
 			<RefreshRouteOnSave />
 			<Header header={header} className={cn(!page.showHeader && "hidden")} />
 			<HeaderSpacing showHeader={page.showHeader}>
