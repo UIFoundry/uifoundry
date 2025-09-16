@@ -13,7 +13,7 @@ export interface RenderBlocksContext extends ComponentPropsWithRef<"div"> {
 	user?: PayloadUser | null;
 	params?: PageParams;
 	searchParams?: PageSearchParams;
-	isMobile?: boolean;
+	mobileView?: boolean;
 }
 
 const RenderBlocks: React.FC<RenderBlocksContext> = (props) => {
@@ -23,7 +23,7 @@ const RenderBlocks: React.FC<RenderBlocksContext> = (props) => {
 		params,
 		searchParams,
 		user,
-		isMobile = false,
+		mobileView = false,
 		...divProps
 	} = props;
 	const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0;
@@ -54,7 +54,7 @@ const RenderBlocks: React.FC<RenderBlocksContext> = (props) => {
 									key={blockKey ?? index}
 									block={block}
 									index={index}
-									isMobile={isMobile}
+									isMobile={mobileView}
 									{...(block as Block)}
 									{...divProps}
 								/>

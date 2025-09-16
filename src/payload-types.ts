@@ -1828,6 +1828,7 @@ export interface Page {
     | CTA_1_Block
     | FAQ_1_Block
     | Pricing_1_Block
+    | ComingSoon_1_Block
   )[];
   updatedAt: string;
   createdAt: string;
@@ -2040,6 +2041,56 @@ export interface Pricing_1_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ComingSoon_1_Block".
+ */
+export interface ComingSoon_1_Block {
+  header: string;
+  subheader?: string | null;
+  /**
+   * The date when your project will launch
+   */
+  launchDate: string;
+  showEmailSignup?: boolean | null;
+  emailPlaceholder?: string | null;
+  emailButtonText?: string | null;
+  showSocialLinks?: boolean | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'coming_soon_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "themes".
  */
 export interface Theme {
@@ -2214,6 +2265,7 @@ export interface PagesSelect<T extends boolean = true> {
         cta_1?: T | CTA_1_BlockSelect<T>;
         faq_1?: T | FAQ_1_BlockSelect<T>;
         pricing_1?: T | Pricing_1_BlockSelect<T>;
+        coming_soon_1?: T | ComingSoon_1_BlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -2401,6 +2453,28 @@ export interface Pricing_1_BlockSelect<T extends boolean = true> {
               text?: T;
               id?: T;
             };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ComingSoon_1_Block_select".
+ */
+export interface ComingSoon_1_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  launchDate?: T;
+  showEmailSignup?: T;
+  emailPlaceholder?: T;
+  emailButtonText?: T;
+  showSocialLinks?: T;
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
         id?: T;
       };
   id?: T;

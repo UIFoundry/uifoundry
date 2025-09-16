@@ -80,7 +80,7 @@ export default function Header({
 						<div className="bg-background absolute top-[125%] z-10 mb-6 hidden size-fit w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none lg:in-data-[state=active]:flex dark:shadow-none dark:lg:bg-transparent">
 							<div className="lg:hidden">
 								<RenderBlocks
-									isMobile={true}
+									mobileView={true}
 									blocks={
 										(items ?? []).filter(
 											(i) => i.blockType === BLOCK_SLUG_HEADER_MENU_ITEMS,

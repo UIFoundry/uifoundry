@@ -531,6 +531,50 @@
 		},
 		{
 			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Social Icons",
+			"name": "social-icons",
+			"type": "registry:file",
+			"files": [
+				{
+					"path": "registry/ui/icons/social-icons.ts",
+					"type": "registry:file",
+					"target": "src/ui/icons/social-icons.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Social Links Field",
+			"name": "social-links-field",
+			"type": "registry:block",
+			"files": [
+				{
+					"path": "registry/payload/fields/socialLinks/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/fields/socialLinks/config.ts"
+				},
+				{
+					"path": "registry/payload/fields/socialLinks/admin/SocialLinksField.tsx",
+					"type": "registry:component",
+					"target": "src/payload/fields/socialLinks/admin/SocialLinksField.tsx"
+				},
+				{
+					"path": "registry/payload/fields/socialLinks/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/fields/socialLinks/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/social-icons",
+				"@uifoundry/style-utils"
+			],
+			"dependencies": [
+				"react",
+				"payload"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
 			"title": "Header Global",
 			"name": "header-global",
 			"type": "registry:block",
@@ -554,6 +598,54 @@
 			],
 			"dependencies": [
 				"react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Block Constants",
+			"name": "block-constants",
+			"type": "registry:file",
+			"files": [
+				{
+					"path": "registry/payload/constants/blocks.ts",
+					"type": "registry:file",
+					"target": "src/payload/constants/blocks.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Coming Soon 1",
+			"name": "coming-soon-1",
+			"type": "registry:block",
+			"description": "Coming Soon Block with countdown timer, email signup, and social links",
+			"registryDependencies": [
+				"button",
+				"input",
+				"@uifoundry/animated-group",
+				"@uifoundry/text-effect",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/style-utils",
+				"@uifoundry/social-links-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/coming-soon/coming-soon-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/ComingSoon/ComingSoon_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/coming-soon/coming-soon-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/ComingSoon/ComingSoon_1/config.ts"
+				}
 			]
 		}
 	]

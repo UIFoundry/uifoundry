@@ -1,7 +1,9 @@
 import { socialIcons } from "~/ui/icons/social-icons";
-import type { ArrayField } from "~/payload/fields";
 import selectEnumField from "~/payload/fields/selectEnumField/config";
+import type { ArrayField } from "~/payload/fields";
 import type { Field } from "payload";
+
+export type SocialIconKey = keyof typeof socialIcons;
 
 export default function socialLinksField(props?: Partial<ArrayField>): Field {
 	return {
@@ -20,17 +22,19 @@ export default function socialLinksField(props?: Partial<ArrayField>): Field {
 					width: "50%",
 				},
 			},
-			selectEnumField<typeof socialIcons>(socialIcons, {
-				name: "icon",
+			{
+				...selectEnumField(socialIcons, {
+					name: "icon",
+					useKeyAsValue: true,
+				}),
 				required: true,
-				useKeyAsValue: true,
 				admin: {
 					width: "50%",
 					components: {
-						Field: "~/payload/fields/socialLinksField",
+						Field: "~/payload/fields/socialLinks/admin/SocialLinksField",
 					},
 				},
-			}),
+			},
 		],
 		...props,
 	};

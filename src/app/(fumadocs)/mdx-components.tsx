@@ -10,6 +10,7 @@ import type {
 	Hero_2_Block as Hero_2_BlockType,
 	Header_1_Block as Header_1_BlockType,
 	Header_2_Block as Header_2_BlockType,
+	ComingSoon_1_Block as ComingSoon_1_BlockType,
 } from "~/payload-types";
 
 // Import block components
@@ -21,6 +22,8 @@ import { Hero_1_Block } from "~/payload/blocks/Hero/Hero_1/config";
 import { Hero_2_Block } from "~/payload/blocks/Hero/Hero_2/config";
 import { Header_1_Block } from "~/payload/blocks/Header/Header_1/config";
 import { Header_2_Block } from "~/payload/blocks/Header/Header_2/config";
+import ComingSoon_1 from "~/payload/blocks/ComingSoon/ComingSoon_1";
+import { ComingSoon_1_Block } from "~/payload/blocks/ComingSoon/ComingSoon_1/config";
 
 // Create TypeScript generator for AutoTypeTable
 const generator = createGenerator();
@@ -30,6 +33,7 @@ const hero1Defaults = extractBlockDefaults(Hero_1_Block);
 const hero2Defaults = extractBlockDefaults(Hero_2_Block);
 const header1Defaults = extractBlockDefaults(Header_1_Block);
 const header2Defaults = extractBlockDefaults(Header_2_Block);
+const comingSoon1Defaults = extractBlockDefaults(ComingSoon_1_Block);
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
 	return {
@@ -63,6 +67,13 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 			} as Header_2_BlockType;
 			const { id, ...otherProps } = combinedProps;
 			return <Header_2 {...otherProps} id={id ?? undefined} preview />;
+		},
+		ComingSoon1: (props: Partial<ComingSoon_1_BlockType>) => {
+			const combinedProps = {
+				...comingSoon1Defaults,
+				...props,
+			} as ComingSoon_1_BlockType;
+			return <ComingSoon_1 {...combinedProps} />;
 		},
 		...components,
 	};
