@@ -1,0 +1,148 @@
+---
+title: "Social Links Field"
+description: "PayloadCMS custom admin panel field for managing social media links with icon selection"
+category: "fields"
+---
+
+## Preview
+
+```typescript
+import socialLinksField from "~/payload/fields/socialLinksField/config";
+
+// Usage in PayloadCMS block/collection config
+const socialMedia = socialLinksField({
+  name: "socialLinks",
+  label: "Social Media Links",
+  required: false,
+});
+```
+
+## Props
+
+The socialLinksField function accepts the following configuration options:
+
+<TypeTable
+  type={{
+    name: {
+      description: "Field name for the social links array",
+      type: "string",
+      default: "socialLinks",
+    },
+    label: {
+      description: "Display label in PayloadCMS admin",
+      type: "string",
+    },
+    required: {
+      description: "Whether the field is required",
+      type: "boolean",
+      default: "true",
+    },
+    defaultValue: {
+      description: "Default value for the social links array",
+      type: "array",
+      default: "[]",
+    },
+    admin: {
+      description: "Admin-specific configuration options",
+      type: "AdminConfig",
+    },
+    access: {
+      description: "Access control configuration",
+      type: "AccessConfig",
+    },
+    hooks: {
+      description: "Field-level hooks",
+      type: "FieldHooks",
+    },
+  }}
+/>
+
+## Field Structure
+
+Each social link entry contains:
+
+- **href** (text, required): The URL for the social media profile
+- **icon** (select, required): The social media platform icon to display
+
+Supported social media platforms include: Facebook, Twitter, YouTube, LinkedIn, Telegram, Matrix, WhatsApp, Arc, Mastodon, Messenger, Instagram, X (formerly Twitter), TikTok, Reddit, and many more.
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/social-links-field
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Select Enum Field](/docs/fields/select-enum-field) - Customizable enum select field component
+- [Field Types](/docs/lib/field-types) - TypeScript definitions for PayloadCMS fields
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [@payloadcms/ui](https://github.com/payloadcms/payload/tree/main/packages/ui) - PayloadCMS admin UI components
+- [lucide-react](https://github.com/lucide-icons/lucide) - Beautiful & consistent icon toolkit
+
+## Usage Examples
+
+### Basic Usage
+
+```typescript
+import socialLinksField from "~/payload/fields/socialLinksField/config";
+
+const ExampleBlock = {
+  slug: "example-block",
+  fields: [socialLinksField()],
+};
+```
+
+### Custom Configuration
+
+```typescript
+import socialLinksField from "~/payload/fields/socialLinksField/config";
+
+const CustomSocialLinks = socialLinksField({
+  name: "companyLinks",
+  label: "Company Social Media",
+  required: false,
+  admin: {
+    description: "Add links to your company's social media profiles",
+  },
+});
+```
+
+### In Frontend Components
+
+```tsx
+import type { SocialIconKey } from "~/payload/fields/socialLinksField/config";
+
+interface SocialLink {
+  href: string;
+  icon: SocialIconKey;
+}
+
+function SocialLinksComponent({ socialLinks }: { socialLinks: SocialLink[] }) {
+  return (
+    <div className="flex space-x-4">
+      {socialLinks.map((link, index) => (
+        <a
+          key={index}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="transition-opacity hover:opacity-75"
+        >
+          <SocialIcon icon={link.icon} />
+        </a>
+      ))}
+    </div>
+  );
+}
+```

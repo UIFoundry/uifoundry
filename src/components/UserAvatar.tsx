@@ -1,8 +1,4 @@
-import {
-	Avatar,
-	AvatarImage,
-	AvatarFallback,
-} from "~/ui/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "~/ui/avatar";
 import { getInitials } from "~/utils";
 import type { User } from "~/payload-types";
 import { useSession } from "~/auth/client";

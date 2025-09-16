@@ -66,3 +66,7 @@ export const BLOCK_SLUG_STATS_1 = "stats_1" as const;
 // Gallery
 export const BLOCK_GROUP_GALLERY = "Gallery" as const;
 export const BLOCK_SLUG_GALLERY_1 = "gallery_1" as const;
+
+// Coming Soon
+export const BLOCK_GROUP_COMING_SOON = "Coming Soon" as const;
+export const BLOCK_SLUG_COMING_SOON_1 = "coming_soon_1" as const;

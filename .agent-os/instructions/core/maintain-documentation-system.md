@@ -2,6 +2,85 @@
 
 ⚠️ **ESSENTIAL AGENT RESPONSIBILITY**: This documentation system requires active maintenance to prevent drift and ensure accuracy.
 
+## UIFoundry Development Workflow
+
+**CRITICAL**: Follow this exact workflow for all component development to maintain registry integrity.
+
+### Registry Import Patterns
+
+When copying source components to registry, use these **exact import patterns**:
+
+**Source Pattern** → **Registry Pattern**
+
+- `~/payload/fields/selectEnumField/config` → `@/registry/default/lib/fields/selectEnumField/config`
+- `~/ui/components/button` → `@/registry/default/ui/button`
+- `~/payload/constants/blocks` → `@/registry/default/lib/constants/blocks`
+
+**Important Notes:**
+
+- The `@/registry/default/lib/` paths don't need to physically exist in the registry
+- The shadcn CLI automatically transforms these paths based on the user's components.json configuration
+- This allows the registry to remain organized while providing flexible installation paths
+- **Never reorganize or move existing registry files** - this disrupts component ordering
+
+### Standard Development Process
+
+#### 1. Build & Test in Source (`src/`)
+
+- Develop components in the main source directory (`src/payload/blocks/`, `src/payload/fields/`, etc.)
+- Test functionality thoroughly in the main application
+- Ensure component works exactly as intended before proceeding
+
+#### 2. Copy to Registry (`registry/`)
+
+- Copy working source code to appropriate registry location
+- Update all imports to use registry-compatible paths
+- Replace internal dependencies with registry dependencies where available
+- Update relative imports to work within registry structure
+
+#### 3. Update Registry Integration
+
+- Add component to `registry.json` if needed
+- Update registry imports and exports
+- Ensure all registry dependencies are properly referenced
+- Test that component can be pulled via shadcn CLI without breaking
+
+#### 4. Test Registry Installation
+
+```bash
+# Test installation from custom registry
+npx shadcn@latest add [registry-url]/[component-name]
+```
+
+- Verify component installs correctly
+- Check that all dependencies resolve properly
+- Ensure no import errors or missing dependencies
+
+#### 5. Create/Update Documentation
+
+- Follow the 5-section template in `.agent-os/standards/documentation-template.md`
+- Update meta.json files for navigation
+- Include proper usage examples and registry installation commands
+- Document all dependencies and configuration options
+
+#### 6. Validate Complete Integration
+
+- Registry component works independently
+- Documentation is complete and accurate
+- Installation via CLI is successful
+- No broken links or missing dependencies
+
+### Registry Import Patterns
+
+When copying to registry, update imports following these patterns:
+
+**Source Pattern** → **Registry Pattern**
+
+- `~/payload/fields/selectEnum` → `../selectEnum/config`
+- `~/ui/icons/social-icons` → `@/ui/icons/social-icons` (if available in registry)
+- Internal utilities → Registry-compatible equivalents
+- PayloadCMS types → Standard Payload types
+
 ## Auto-Update Protocol for Registry Changes
 
 ### When Adding New Components

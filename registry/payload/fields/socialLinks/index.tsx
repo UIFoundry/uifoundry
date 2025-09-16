@@ -1,7 +1,10 @@
 import Link from "next/link";
-import { socialIcons, type SocialIconKey } from "./social-icons";
+import {
+	socialIcons,
+	type SocialIconKey,
+} from "@/registry/default/ui/icons/social-icons";
 import Image, { type ImageProps } from "next/image";
-import { cn } from "~/styles/utils";
+import { cn } from "@/registry/default/utils";
 
 export default function SocialIcon({
 	icon,
