@@ -1,32 +1,105 @@
 {
-	"$schema": "https://opencode.ai/config.json",
-	"agent": {
-		"build": {
-			"mode": "primary",
-			"model": "anthropic/claude-sonnet-4-20250514",
-			"tools": {
-				"write": true,
-				"edit": true,
-				"bash": true
-			}
-		},
-		"plan": {
-			"mode": "primary",
-			"model": "anthropic/claude-haiku-4-20250514",
-			"tools": {
-				"write": false,
-				"edit": false,
-				"bash": false
-			}
-		},
-		"code-reviewer": {
-			"description": "Reviews code for best practices and potential issues",
-			"mode": "subagent",
-			"model": "anthropic/claude-sonnet-4-20250514",
-			"tools": {
-				"write": false,
-				"edit": false
-			}
-		}
-	}
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "build": {
+      "mode": "primary",
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "plan": {
+      "mode": "primary",
+      "model": "anthropic/claude-haiku-4-20250514",
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      }
+    },
+    "code-reviewer": {
+      "description": "Reviews code for best practices and potential issues",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "tools": {
+        "write": false,
+        "edit": false
+      }
+    },
+    "registry-porter": {
+      "description": "Moves components from src/ to registry/ with proper imports and dependencies",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "temperature": 0.2,
+      "tools": {
+        "write": true,
+        "edit": true,
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "bash": true,
+        "playwright_*": true
+      }
+    },
+    "docs-writer": {
+      "description": "Creates and maintains component documentation following UIFoundry standards",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "temperature": 0.3,
+      "tools": {
+        "write": true,
+        "edit": true,
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "bash": false
+      }
+    },
+    "source-helper": {
+      "description": "Helps with source code development, debugging, and implementation in src/",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "temperature": 0.1,
+      "tools": {
+        "write": true,
+        "edit": true,
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "bash": true,
+        "playwright_*": true
+      }
+    },
+    "spec-planner": {
+      "description": "Creates detailed feature specifications and breaks down work into tasks",
+      "mode": "subagent",
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "temperature": 0.3,
+      "tools": {
+        "write": true,
+        "edit": true,
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "bash": false
+      }
+    },
+    "task-coordinator": {
+      "description": "Orchestrates execution and delegates tasks to specialist agents",
+      "mode": "primary",
+      "model": "anthropic/claude-sonnet-4-20250514",
+      "temperature": 0.2,
+      "tools": {
+        "read": true,
+        "grep": true,
+        "glob": true,
+        "write": true,
+        "edit": true,
+        "bash": false,
+        "task": true
+      }
+    }
+  }
 }

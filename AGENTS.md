@@ -4,6 +4,18 @@
 
 When you hear "agent docs" or "agents docs", this refers to **both** this AGENTS.md file AND the entire `.agent-os/` directory structure. The `.agent-os/` directory contains task-specific documentation that agents should reference and update based on their current work.
 
+## OpenCode Agent Integration
+
+UIFoundry uses specialized OpenCode agents for automated component development. See **`.agent-os/instructions/core/opencode-agent-workflow.md`** for complete usage instructions.
+
+**Quick Reference**:
+
+- **`Tab → task-coordinator`** + **`/create-spec`** + **`/execute-tasks`** = Full automated pipeline
+- **`@spec-planner`** = Create detailed specifications
+- **`@source-helper`** = Source code development + browser testing
+- **`@registry-porter`** = Registry migration + CLI/browser validation
+- **`@docs-writer`** = Documentation creation + system updates
+
 ### .agent-os Directory Structure
 
 ```
