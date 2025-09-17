@@ -42,18 +42,17 @@ export default function Header({
 					)}
 				>
 					<div className="relative flex flex-wrap items-center justify-between gap-6 px-4 py-3 lg:gap-0 lg:py-4">
-						<div className="flex justify-between lg:w-auto">
-							<button
-								onClick={() => setMenuState(!menuState)}
-								aria-label={menuState == true ? "Close Menu" : "Open Menu"}
-								className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
-							>
-								<Menu className="m-auto size-6 duration-200 in-data-[state=active]:scale-0 in-data-[state=active]:rotate-180 in-data-[state=active]:opacity-0" />
-								<X className="absolute inset-0 m-auto size-6 scale-0 -rotate-180 opacity-0 duration-200 in-data-[state=active]:scale-100 in-data-[state=active]:rotate-0 in-data-[state=active]:opacity-100" />
-							</button>
-						</div>
-
 						<div className="flex w-full items-center justify-between">
+							<div className="flex justify-between lg:hidden lg:w-auto">
+								<button
+									onClick={() => setMenuState(!menuState)}
+									aria-label={menuState == true ? "Close Menu" : "Open Menu"}
+									className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
+								>
+									<Menu className="m-auto size-6 duration-200 in-data-[state=active]:scale-0 in-data-[state=active]:rotate-180 in-data-[state=active]:opacity-0" />
+									<X className="absolute inset-0 m-auto size-6 scale-0 -rotate-180 opacity-0 duration-200 in-data-[state=active]:scale-100 in-data-[state=active]:rotate-0 in-data-[state=active]:opacity-100" />
+								</button>
+							</div>
 							<div className="relative flex items-center">
 								<RenderBlocks
 									blocks={(items ?? []).filter((i) => i.alignment === "left")}
@@ -65,7 +64,7 @@ export default function Header({
 								<RenderBlocks
 									blocks={(items ?? []).filter((i) => i.alignment === "center")}
 									blockComponents={blockComponents}
-									className={cn("w-full")}
+									className={cn("w-full bg-green-200/50")}
 								/>
 							</div>
 							<div className="relative flex items-center">
