@@ -3,8 +3,8 @@ import {
 	BLOCK_SLUG_HERO_2,
 } from "~/payload/constants/blocks";
 import type { Block } from "payload";
-import headerField from "~/payload/fields/headerField/config";
-import subHeaderField from "~/payload/fields/subheaderField/config";
+import headerField from "~/payload/fields/header/config";
+import subHeaderField from "~/payload/fields/subheader/config";
 import mediaField from "~/payload/fields/mediaField/config";
 import callToActionPair from "~/payload/fields/callToActionPairField/config";
 

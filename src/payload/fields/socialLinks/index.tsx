@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { socialIcons, type SocialIconKey } from "./social-icons";
+import {
+	socialIcons,
+	type SocialIconKey,
+} from "~/ui/icons/social-icons";
 import Image, { type ImageProps } from "next/image";
 import { cn } from "~/styles/utils";
 

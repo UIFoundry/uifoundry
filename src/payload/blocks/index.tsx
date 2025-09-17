@@ -47,6 +47,10 @@ import {
   blocks as galleryBlocks,
   blockComponents as galleryBlockComponents,
 } from "./Gallery";
+import {
+  blocks as comingSoonBlocks,
+  blockComponents as comingSoonBlockComponents,
+} from "./ComingSoon";
 
 export const blocks: Block[] = teamsBlocks
   .concat(featuresBlocks)
@@ -59,7 +63,8 @@ export const blocks: Block[] = teamsBlocks
   .concat(contactBlocks)
   .concat(newsletterBlocks)
   .concat(statsBlocks)
-  .concat(galleryBlocks);
+  .concat(galleryBlocks)
+  .concat(comingSoonBlocks);
 
 export const blockComponents = {
   ...teamsBlockComponents,
@@ -74,4 +79,5 @@ export const blockComponents = {
   ...newsletterBlockComponents,
   ...statsBlockComponents,
   ...galleryBlockComponents,
+  ...comingSoonBlockComponents,
 };

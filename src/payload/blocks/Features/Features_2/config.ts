@@ -4,9 +4,9 @@ import {
 	BLOCK_SLUG_FEATURES_2,
 } from "~/payload/constants/blocks";
 import descriptionField from "~/payload/fields/descriptionField/config";
-import headerField from "~/payload/fields/headerField/config";
+import headerField from "~/payload/fields/header/config";
 import iconField from "~/payload/fields/iconField/config";
-import subHeaderField from "~/payload/fields/subheaderField/config";
+import subHeaderField from "~/payload/fields/subheader/config";
 
 export const Features_2_Block: Block = {
 	slug: BLOCK_SLUG_FEATURES_2,

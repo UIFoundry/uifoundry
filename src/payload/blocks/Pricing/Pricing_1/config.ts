@@ -4,8 +4,8 @@ import {
 	BLOCK_SLUG_PRICING_1,
 } from "~/payload/constants/blocks";
 import descriptionField from "~/payload/fields/descriptionField/config";
-import headerField from "~/payload/fields/headerField/config";
-import subHeaderField from "~/payload/fields/subheaderField/config";
+import headerField from "~/payload/fields/header/config";
+import subHeaderField from "~/payload/fields/subheader/config";
 
 export const Pricing_1_Block: Block = {
 	slug: BLOCK_SLUG_PRICING_1,

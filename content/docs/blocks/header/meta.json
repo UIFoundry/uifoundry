@@ -1,6 +1,7 @@
 {
 	"title": "Header",
 	"pages": [
+		"header-blocks",
 		"header-1",
 		"header-2"
 	]

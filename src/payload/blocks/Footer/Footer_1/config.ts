@@ -4,7 +4,7 @@ import {
 	BLOCK_GROUP_FOOTERS,
 	BLOCK_SLUG_FOOTER_1,
 } from "~/payload/constants/blocks";
-import socialLinksField from "~/payload/fields/socialLinksField/config";
+import socialLinksField from "~/payload/fields/socialLinks/config";
 import uploadField from "~/payload/fields/uploadField/config";
 
 export const Footer_1_Block: Block = {

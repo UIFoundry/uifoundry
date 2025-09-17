@@ -6,7 +6,6 @@ export default function callToActionPair(
 	return {
 		name: props?.name ?? "actions",
 		type: "array",
-		minRows: 1,
 		maxRows: 2,
 		fields: [
 			{

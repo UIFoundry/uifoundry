@@ -1,7 +1,7 @@
 import type { Block } from "payload";
 import { BLOCK_GROUP_FAQ, BLOCK_SLUG_FAQ_1 } from "~/payload/constants/blocks";
-import headerField from "~/payload/fields/headerField/config";
-import subheaderField from "~/payload/fields/subheaderField/config";
+import headerField from "~/payload/fields/header/config";
+import subheaderField from "~/payload/fields/subheader/config";
 
 export const FAQ_1_Block: Block = {
 	slug: BLOCK_SLUG_FAQ_1,
