@@ -6,15 +6,15 @@ import { cn } from "~/styles/utils";
 export * from "./config";
 
 export default function MenuButton({
-	isMobile = false,
+	mobileView = false,
 	href = "",
 	media,
-}: { isMobile: boolean } & HeaderBrandLogoBlock) {
+}: { mobileView?: boolean } & HeaderBrandLogoBlock) {
 	if (!media) return <></>;
 	return (
 		<Link
 			href={href}
-			className={cn("cursor-pointer", isMobile === true && "hidden")}
+			className={cn("cursor-pointer", mobileView === true && "hidden")}
 		>
 			{media ? (
 				<Image src={(media as Media).url!} fill alt={(media as Media).alt} />

@@ -1,10 +1,8 @@
 import type { CollectionConfig } from "payload";
-import {
-	COLLECTION_SLUG_THEMES,
-	COLLECTION_SLUG_USERS,
-} from "~/payload/constants";
+import { COLLECTION_SLUG_THEMES } from "~/payload/constants";
 import selectEnumField from "~/payload/fields/selectEnumField/config";
 import { THEME_TYPES } from "~/payload/constants/themes";
+import userField from "../fields/user/config";
 
 export const Themes: CollectionConfig = {
 	slug: COLLECTION_SLUG_THEMES,
@@ -22,11 +20,10 @@ export const Themes: CollectionConfig = {
 			name: "type",
 			defaultValue: THEME_TYPES.user,
 		}),
-		{
-			name: "author",
-			type: "relationship",
-			relationTo: COLLECTION_SLUG_USERS,
-		},
+		userField({
+			name: "owner",
+			label: "Owner",
+		}),
 		{
 			name: "styles",
 			type: "json",

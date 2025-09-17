@@ -1,8 +1,8 @@
 import { type AuthStrategyResult, type CollectionConfig } from "payload";
 import { COLLECTION_SLUG_USERS } from "~/payload/constants";
 import selectEnumField from "~/payload/fields/selectEnumField/config";
-import { USER_ROLES } from "~/auth/config";
 import { auth } from "~/auth";
+import { USER_ROLES } from "~/auth/permissions";
 
 export const Users: CollectionConfig = {
 	slug: COLLECTION_SLUG_USERS,
@@ -87,6 +87,7 @@ export const Users: CollectionConfig = {
 		selectEnumField(USER_ROLES, {
 			name: "role",
 			required: true,
+			// hasMany: true,
 			defaultValue: USER_ROLES.user,
 		}),
 		{

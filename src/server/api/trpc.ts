@@ -7,7 +7,6 @@
  * need to use are documented accordingly near the end.
  */
 import { initTRPC } from "@trpc/server";
-import { headers as fetchHeaders } from "next/headers";
 import { redirect } from "next/navigation";
 import superjson from "superjson";
 import { ZodError } from "zod";
@@ -27,10 +26,12 @@ import { getPayload } from "~/payload/utils";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
+	const session = await auth.api.getSession({ headers: opts.headers });
 	const payload = await getPayload();
 	return {
 		...opts,
 		payload,
+		session,
 	};
 };
 
@@ -108,10 +109,8 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  */
 export const publicProcedure = t.procedure.use(timingMiddleware);
 
-const authMiddleware = t.middleware(async ({ next }) => {
-	const headers = await fetchHeaders();
-	const session = await auth.api.getSession({ headers });
-	if (!session?.user) return redirect("/auth/sign-in");
+const authMiddleware = t.middleware(async ({ next, ctx }) => {
+	if (!ctx.session?.user) return redirect("/auth/sign-in");
 	return await next();
 });
 

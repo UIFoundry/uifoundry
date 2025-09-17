@@ -23,6 +23,7 @@ export const themesRouter = createTRPCRouter({
 					collection: COLLECTION_SLUG_THEMES,
 					data: {
 						name: input.name,
+						owner: ctx.session!.user.id,
 						styles: {
 							light: {
 								...defaultLightThemeStyles,

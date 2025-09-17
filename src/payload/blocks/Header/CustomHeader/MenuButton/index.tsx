@@ -8,13 +8,13 @@ import { cn } from "~/styles/utils";
 import UserAvatar from "~/components/UserAvatar";
 
 export default function MenuButton({
-	isMobile = false,
+	mobileView = false,
 	label,
 	href = "",
 	targetBlank,
 	alignment,
 	auth,
-}: { isMobile: boolean } & HeaderMenuButtonBlock) {
+}: { mobileView?: boolean } & HeaderMenuButtonBlock) {
 	const { data: session } = useSession();
 	if (auth) {
 		if (!session?.user) {
@@ -26,7 +26,7 @@ export default function MenuButton({
 							: alignment === "right"
 								? "self-end"
 								: "self-center",
-						isMobile === true && "hidden",
+						mobileView === true && "hidden",
 					)}
 				>
 					<Button
@@ -58,7 +58,7 @@ export default function MenuButton({
 					: alignment === "right"
 						? "self-end"
 						: "self-center",
-				isMobile === true && "hidden",
+				mobileView === true && "hidden",
 			)}
 		>
 			<Link
