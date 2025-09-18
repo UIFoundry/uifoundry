@@ -54,7 +54,7 @@ const RenderBlocks: React.FC<RenderBlocksContext> = (props) => {
 									key={blockKey ?? index}
 									block={block}
 									index={index}
-									isMobile={mobileView}
+									mobileView={mobileView}
 									{...(block as Block)}
 									{...divProps}
 								/>

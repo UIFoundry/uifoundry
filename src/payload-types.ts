@@ -1690,6 +1690,7 @@ export interface Config {
     pages: Page;
     media: Media;
     themes: Theme;
+    sites: Site;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -1703,6 +1704,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     themes: ThemesSelect<false> | ThemesSelect<true>;
+    sites: SitesSelect<false> | SitesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -1757,7 +1759,7 @@ export interface User {
   emailVerified: boolean;
   name: string;
   image?: string | null;
-  role: 'admin' | 'user';
+  role: 'user' | 'admin';
   banned: boolean;
   banReason?: string | null;
   banExpiresIn?: number | null;
@@ -1817,6 +1819,7 @@ export interface Page {
   id: string;
   slug: string;
   title: string;
+  owner: string | User;
   showHeader: boolean;
   showFooter: boolean;
   blocks: (
@@ -2097,7 +2100,7 @@ export interface Theme {
   id: string;
   name: string;
   type?: ('user' | 'template') | null;
-  author?: (string | null) | User;
+  owner: string | User;
   styles:
     | {
         [k: string]: unknown;
@@ -2107,6 +2110,18 @@ export interface Theme {
     | number
     | boolean
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sites".
+ */
+export interface Site {
+  id: string;
+  title: string;
+  owner: string | User;
+  pages?: (string | Page)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2144,6 +2159,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'themes';
         value: string | Theme;
+      } | null)
+    | ({
+        relationTo: 'sites';
+        value: string | Site;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -2252,6 +2271,7 @@ export interface VerificationsSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   slug?: T;
   title?: T;
+  owner?: T;
   showHeader?: T;
   showFooter?: T;
   blocks?:
@@ -2505,8 +2525,19 @@ export interface MediaSelect<T extends boolean = true> {
 export interface ThemesSelect<T extends boolean = true> {
   name?: T;
   type?: T;
-  author?: T;
+  owner?: T;
   styles?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sites_select".
+ */
+export interface SitesSelect<T extends boolean = true> {
+  title?: T;
+  owner?: T;
+  pages?: T;
   updatedAt?: T;
   createdAt?: T;
 }

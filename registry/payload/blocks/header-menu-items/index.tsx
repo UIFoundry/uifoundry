@@ -3,15 +3,15 @@ import type { HeaderMenuItemsBlock } from "~/payload-types";
 import { cn } from "@/registry/default/utils";
 
 export default function MenuItems({
-	isMobile = false,
+	mobileView = false,
 	menuItems,
-}: { isMobile: boolean } & HeaderMenuItemsBlock) {
+}: { mobileView?: boolean } & HeaderMenuItemsBlock) {
 	return (
-		<div className={cn("hidden lg:block", isMobile === true && "block")}>
+		<div className={cn("hidden lg:block", mobileView === true && "block")}>
 			<ul
 				className={cn(
 					"flex gap-8 text-sm",
-					isMobile === true && "flex-col gap-4 text-center",
+					mobileView === true && "flex-col gap-4 text-center",
 				)}
 			>
 				{menuItems.map((item, index) => (
