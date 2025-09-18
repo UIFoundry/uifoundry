@@ -2,6 +2,7 @@ import { type CollectionConfig } from "payload";
 import { AUTOSAVE_INTERVAL, COLLECTION_SLUG_PAGES } from "~/payload/constants";
 import { env } from "~/env.mjs";
 import { blocks } from "~/payload/blocks";
+import userField from "~/payload/fields/user/config";
 
 export const Pages: CollectionConfig = {
 	slug: COLLECTION_SLUG_PAGES,
@@ -59,16 +60,26 @@ export const Pages: CollectionConfig = {
 			defaultValue: "New Page",
 		},
 		{
-			name: "showHeader",
-			type: "checkbox",
-			required: true,
-			defaultValue: false,
-		},
-		{
-			name: "showFooter",
-			type: "checkbox",
-			required: true,
-			defaultValue: false,
+			label: "Page Details",
+			type: "collapsible",
+			fields: [
+				userField({
+					name: "owner",
+					label: "Owner",
+				}),
+				{
+					name: "showHeader",
+					type: "checkbox",
+					required: true,
+					defaultValue: false,
+				},
+				{
+					name: "showFooter",
+					type: "checkbox",
+					required: true,
+					defaultValue: false,
+				},
+			],
 		},
 		{
 			name: "blocks",

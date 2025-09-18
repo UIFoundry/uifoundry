@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { hasPermission } from "~/auth/permissions";
 import { COLLECTION_SLUG_THEMES } from "~/payload/constants";
 import { themeStylePropsSchema } from "~/payload/globals/SiteConfig/admin/theme";
 import {
@@ -7,6 +8,7 @@ import {
 } from "~/payload/globals/SiteConfig/admin/themeConfig";
 
 import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
+import { err, ok } from "~/server/dal";
 
 export const themesRouter = createTRPCRouter({
 	create: privateProcedure
@@ -19,10 +21,20 @@ export const themesRouter = createTRPCRouter({
 		)
 		.mutation(async ({ input, ctx }) => {
 			try {
+				if (
+					!hasPermission({
+						user: ctx.user,
+						resource: COLLECTION_SLUG_THEMES,
+						action: "create",
+					})
+				) {
+					return err({ type: "no-access" });
+				}
 				const newTheme = await ctx.payload.create({
 					collection: COLLECTION_SLUG_THEMES,
 					data: {
 						name: input.name,
+						owner: ctx.user.id,
 						styles: {
 							light: {
 								...defaultLightThemeStyles,
@@ -36,12 +48,12 @@ export const themesRouter = createTRPCRouter({
 					},
 				});
 				if (!newTheme) {
-					throw new Error("unable to create new theme");
+					return err({ type: "payload" });
 				}
-				return newTheme;
-			} catch (err) {
-				console.error("error creating theme caught", err);
-				return;
+				return ok(newTheme);
+			} catch (error) {
+				console.error("error creating theme caught", error);
+				return err();
 			}
 		}),
 });

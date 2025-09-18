@@ -31,9 +31,9 @@ export default function ImportThemePopover({ path }: { path: string }) {
 				light: theme.lightColors,
 				dark: theme.darkColors,
 			});
-			if (!res) return;
+			if (!res.success) return;
 			if (data.setThemeOnImport) {
-				setValue(res.id);
+				setValue(res.data.id);
 				formApi.reset();
 			}
 		},
