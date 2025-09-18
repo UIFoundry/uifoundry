@@ -1,4 +1,10 @@
 import type { Site, Page, User, Theme } from "~/payload-types";
+import {
+	COLLECTION_SLUG_PAGES,
+	COLLECTION_SLUG_SITES,
+	COLLECTION_SLUG_THEMES,
+	COLLECTION_SLUG_USERS,
+} from "~/payload/constants";
 
 export const USER_ROLES = {
 	user: "user",
@@ -15,10 +21,10 @@ export const AUTH_ACTIONS = {
 export type AuthAction = (typeof AUTH_ACTIONS)[keyof typeof AUTH_ACTIONS];
 
 export const RESOURCES = {
-	users: "users",
-	themes: "themes",
-	sites: "sites",
-	pages: "pages",
+	users: COLLECTION_SLUG_USERS,
+	themes: COLLECTION_SLUG_THEMES,
+	sites: COLLECTION_SLUG_SITES,
+	pages: COLLECTION_SLUG_PAGES,
 } as const;
 export type Resource = (typeof RESOURCES)[keyof typeof RESOURCES];
 
@@ -65,25 +71,25 @@ export type RolesWithPermissions = Record<
 
 const ROLES = {
 	[USER_ROLES.admin]: {
-		users: {
+		[COLLECTION_SLUG_USERS]: {
 			create: true,
 			read: true,
 			update: true,
 			delete: true,
 		},
-		themes: {
+		[COLLECTION_SLUG_THEMES]: {
 			create: true,
 			read: true,
 			update: true,
 			delete: true,
 		},
-		sites: {
+		[COLLECTION_SLUG_SITES]: {
 			create: true,
 			read: true,
 			update: true,
 			delete: true,
 		},
-		pages: {
+		[COLLECTION_SLUG_PAGES]: {
 			create: true,
 			read: true,
 			update: true,
@@ -91,74 +97,74 @@ const ROLES = {
 		},
 	},
 	[USER_ROLES.user]: {
-		users: {
+		[COLLECTION_SLUG_USERS]: {
 			create: false,
 			read: ({ user, data }) => user.id === data.id,
 			update: ({ user, data }) => user.id === data.id,
 			delete: ({ user, data }) => user.id === data.id,
 		},
-		themes: {
+		[COLLECTION_SLUG_THEMES]: {
 			create: true,
-			read: ({ user, data }) => {
-				if (typeof data.owner === "string") {
-					return data.owner === user.id;
+			read: ({ user, data: theme }) => {
+				if (typeof theme.owner === "string") {
+					return theme.owner === user.id;
 				}
-				return data.owner?.id === user.id;
+				return theme.owner?.id === user.id;
 			},
-			update: ({ user, data }) => {
-				if (typeof data.owner === "string") {
-					return data.owner === user.id;
+			update: ({ user, data: theme }) => {
+				if (typeof theme.owner === "string") {
+					return theme.owner === user.id;
 				}
-				return data.owner?.id === user.id;
+				return theme.owner?.id === user.id;
 			},
-			delete: ({ user, data }) => {
-				if (typeof data.owner === "string") {
-					return data.owner === user.id;
+			delete: ({ user, data: theme }) => {
+				if (typeof theme.owner === "string") {
+					return theme.owner === user.id;
 				}
-				return data.owner?.id === user.id;
+				return theme.owner?.id === user.id;
 			},
 		},
-		sites: {
+		[COLLECTION_SLUG_SITES]: {
 			// todo: implement max number of sites here for public users on free tier
 			create: true,
-			read: ({ user, data }) => {
-				if (typeof data.owner === "string") {
-					return data.owner === user.id;
+			read: ({ user, data: site }) => {
+				if (typeof site.owner === "string") {
+					return site.owner === user.id;
 				}
-				return data.owner?.id === user.id;
+				return site.owner?.id === user.id;
 			},
-			update: ({ user, data }) => {
-				if (typeof data.owner === "string") {
-					return data.owner === user.id;
+			update: ({ user, data: site }) => {
+				if (typeof site.owner === "string") {
+					return site.owner === user.id;
 				}
-				return data.owner?.id === user.id;
+				return site.owner?.id === user.id;
 			},
-			delete: ({ user, data }) => {
-				if (typeof data.owner === "string") {
-					return data.owner === user.id;
+			delete: ({ user, data: site }) => {
+				if (typeof site.owner === "string") {
+					return site.owner === user.id;
 				}
-				return data.owner?.id === user.id;
+				return site.owner?.id === user.id;
 			},
 		},
-		pages: {
+		[COLLECTION_SLUG_PAGES]: {
 			create: false,
-			read: ({ user, data }) => {
-				if (typeof data.owner === "string") {
-					return data.owner === user.id;
+			read: ({ user, data: page }) => {
+				if (typeof page.owner === "string") {
+					return page.owner === user.id;
 				}
-				return data.owner?.id === user.id;
+				return page.owner?.id === user.id;
 			},
-			update: ({ user, data }) => {
-				if (typeof data.owner === "string") {
-					return data.owner === user.id;
+			update: ({ user, data: page }) => {
+				if (typeof page.owner === "string") {
+					return page.owner === user.id;
 				}
-				return data.owner?.id === user.id;
+				return page.owner?.id === user.id;
 			},
-			delete: ({ user, data }) => {
-				if (typeof data.owner === "string") {
-					return data.owner === user.id;
+			delete: ({ user, data: page }) => {
+				if (typeof page.owner === "string") {
+					return page.owner === user.id;
 				}
-				return data.owner?.id === user.id;
+				return page.owner?.id === user.id;
 			},
 		},
 	},

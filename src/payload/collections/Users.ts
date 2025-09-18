@@ -87,7 +87,6 @@ export const Users: CollectionConfig = {
 		selectEnumField(USER_ROLES, {
 			name: "role",
 			required: true,
-			// hasMany: true,
 			defaultValue: USER_ROLES.user,
 		}),
 		{

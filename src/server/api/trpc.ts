@@ -11,6 +11,7 @@ import { redirect } from "next/navigation";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { auth } from "~/auth";
+import type { User } from "~/payload-types";
 import { getPayload } from "~/payload/utils";
 
 /**
@@ -27,11 +28,19 @@ import { getPayload } from "~/payload/utils";
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
 	const session = await auth.api.getSession({ headers: opts.headers });
+	const user: User | null = session?.user
+		? {
+			...session.user,
+			createdAt: session.user.createdAt.toISOString(),
+			updatedAt: session.user.updatedAt.toISOString(),
+		}
+		: null;
 	const payload = await getPayload();
 	return {
 		...opts,
 		payload,
-		session,
+		session: session?.session ?? null,
+		user,
 	};
 };
 
@@ -110,8 +119,15 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
 export const publicProcedure = t.procedure.use(timingMiddleware);
 
 const authMiddleware = t.middleware(async ({ next, ctx }) => {
-	if (!ctx.session?.user) return redirect("/auth/sign-in");
-	return await next();
+	if (ctx.session === null || ctx.user === null)
+		return redirect("/auth/sign-in");
+	return await next({
+		ctx: {
+			...ctx,
+			session: ctx.session,
+			user: ctx.user,
+		},
+	});
 });
 
 export const privateProcedure = t.procedure.use(authMiddleware);

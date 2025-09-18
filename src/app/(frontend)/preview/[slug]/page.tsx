@@ -77,7 +77,9 @@ export default async function Page({
 			<HydrateClient>
 				<RefreshRouteOnSave />
 				<TailwindConfig draft={useTailwindDraftConfig as "true" | "false"} />
-				<HomeComponent greeting={hello ? hello.greeting : "Loading Query..."} />
+				<HomeComponent
+					greeting={hello.success ? hello.data.greeting : "Loading Query..."}
+				/>
 			</HydrateClient>
 		);
 	}
