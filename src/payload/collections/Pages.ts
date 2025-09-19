@@ -1,5 +1,9 @@
 import { type CollectionConfig } from "payload";
-import { AUTOSAVE_INTERVAL, COLLECTION_SLUG_PAGES } from "~/payload/constants";
+import {
+	AUTOSAVE_INTERVAL,
+	COLLECTION_SLUG_PAGES,
+	COLLECTION_SLUG_SITES,
+} from "~/payload/constants";
 import { env } from "~/env.mjs";
 import { blocks } from "~/payload/blocks";
 import userField from "~/payload/fields/user/config";
@@ -48,6 +52,12 @@ export const Pages: CollectionConfig = {
 		},
 	},
 	fields: [
+		{
+			name: "site",
+			type: "relationship",
+			relationTo: COLLECTION_SLUG_SITES,
+			required: true,
+		},
 		{
 			name: "slug",
 			type: "text",

@@ -1,9 +1,10 @@
-import type { Site, Page, User, Theme } from "~/payload-types";
+import type { Site, Page, User, Theme, Media } from "~/payload-types";
 import {
 	COLLECTION_SLUG_PAGES,
 	COLLECTION_SLUG_SITES,
 	COLLECTION_SLUG_THEMES,
 	COLLECTION_SLUG_USERS,
+	COLLECTION_SLUG_MEDIA,
 } from "~/payload/constants";
 
 export const USER_ROLES = {
@@ -22,6 +23,7 @@ export type AuthAction = (typeof AUTH_ACTIONS)[keyof typeof AUTH_ACTIONS];
 
 export const RESOURCES = {
 	users: COLLECTION_SLUG_USERS,
+	media: COLLECTION_SLUG_MEDIA,
 	themes: COLLECTION_SLUG_THEMES,
 	sites: COLLECTION_SLUG_SITES,
 	pages: COLLECTION_SLUG_PAGES,
@@ -29,19 +31,23 @@ export const RESOURCES = {
 export type Resource = (typeof RESOURCES)[keyof typeof RESOURCES];
 
 export type Permissions = {
-	users: {
+	[COLLECTION_SLUG_USERS]: {
 		dataType: User;
 		action: AuthAction;
 	};
-	themes: {
+	[COLLECTION_SLUG_MEDIA]: {
+		dataType: Media;
+		action: AuthAction;
+	};
+	[COLLECTION_SLUG_THEMES]: {
 		dataType: Theme;
 		action: AuthAction;
 	};
-	sites: {
+	[COLLECTION_SLUG_SITES]: {
 		dataType: Site;
 		action: AuthAction;
 	};
-	pages: {
+	[COLLECTION_SLUG_PAGES]: {
 		dataType: Page;
 		action: AuthAction;
 	};
@@ -77,6 +83,12 @@ const ROLES = {
 			update: true,
 			delete: true,
 		},
+		[COLLECTION_SLUG_MEDIA]: {
+			create: true,
+			read: true,
+			update: true,
+			delete: true,
+		},
 		[COLLECTION_SLUG_THEMES]: {
 			create: true,
 			read: true,
@@ -102,6 +114,12 @@ const ROLES = {
 			read: ({ user, data }) => user.id === data.id,
 			update: ({ user, data }) => user.id === data.id,
 			delete: ({ user, data }) => user.id === data.id,
+		},
+		[COLLECTION_SLUG_MEDIA]: {
+			create: true,
+			read: ({ user, data: media }) => user.id === media.id,
+			update: ({ user, data: media }) => user.id === media.id,
+			delete: ({ user, data: media }) => user.id === media.id,
 		},
 		[COLLECTION_SLUG_THEMES]: {
 			create: true,
@@ -176,11 +194,11 @@ export function hasPermission<Resource extends keyof Permissions>({
 	action,
 	data,
 }: {
-	user: User;
+	user?: User | null;
 	resource: Resource;
 	action: Permissions[Resource]["action"];
 	data?: Permissions[Resource]["dataType"];
-}) {
+}): boolean {
 	if (!user?.role) return false;
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
