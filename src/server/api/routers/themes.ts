@@ -35,6 +35,7 @@ export const themesRouter = createTRPCRouter({
 					data: {
 						name: input.name,
 						owner: ctx.user.id,
+						private: false,
 						styles: {
 							light: {
 								...defaultLightThemeStyles,
