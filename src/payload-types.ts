@@ -1817,6 +1817,7 @@ export interface Verification {
  */
 export interface Page {
   id: string;
+  site: string | Site;
   slug: string;
   title: string;
   owner: string | User;
@@ -1836,6 +1837,18 @@ export interface Page {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sites".
+ */
+export interface Site {
+  id: string;
+  title: string;
+  owner: string | User;
+  pages?: (string | Page)[] | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2110,18 +2123,7 @@ export interface Theme {
     | number
     | boolean
     | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sites".
- */
-export interface Site {
-  id: string;
-  title: string;
-  owner: string | User;
-  pages?: (string | Page)[] | null;
+  private: boolean;
   updatedAt: string;
   createdAt: string;
 }
@@ -2269,6 +2271,7 @@ export interface VerificationsSelect<T extends boolean = true> {
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
+  site?: T;
   slug?: T;
   title?: T;
   owner?: T;
@@ -2527,6 +2530,7 @@ export interface ThemesSelect<T extends boolean = true> {
   type?: T;
   owner?: T;
   styles?: T;
+  private?: T;
   updatedAt?: T;
   createdAt?: T;
 }

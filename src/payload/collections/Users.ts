@@ -1,8 +1,13 @@
-import { type AuthStrategyResult, type CollectionConfig } from "payload";
+import {
+	type AccessArgs,
+	type AuthStrategyResult,
+	type CollectionConfig,
+} from "payload";
 import { COLLECTION_SLUG_USERS } from "~/payload/constants";
 import selectEnumField from "~/payload/fields/selectEnumField/config";
 import { auth } from "~/auth";
-import { USER_ROLES } from "~/auth/permissions";
+import { USER_ROLES, hasPermission } from "~/auth/permissions";
+import type { User } from "~/payload-types";
 
 export const Users: CollectionConfig = {
 	slug: COLLECTION_SLUG_USERS,
@@ -10,6 +15,39 @@ export const Users: CollectionConfig = {
 		hidden: () => false,
 		useAsTitle: "name",
 		defaultColumns: ["id", "name", "email", "role", "image"],
+	},
+	access: {
+		create: ({ req: { user } }: AccessArgs<User>) => {
+			return hasPermission({
+				user,
+				resource: COLLECTION_SLUG_USERS,
+				action: "create",
+			});
+		},
+		read: ({ req: { user }, data }: AccessArgs<User>) => {
+			return hasPermission({
+				user,
+				resource: COLLECTION_SLUG_USERS,
+				action: "read",
+				data,
+			});
+		},
+		update: ({ req: { user }, data }: AccessArgs<User>) => {
+			return hasPermission({
+				user,
+				resource: COLLECTION_SLUG_USERS,
+				action: "update",
+				data,
+			});
+		},
+		delete: ({ req: { user }, data }: AccessArgs<User>) => {
+			return hasPermission({
+				user,
+				resource: COLLECTION_SLUG_USERS,
+				action: "delete",
+				data,
+			});
+		},
 	},
 	auth: {
 		disableLocalStrategy: true,
