@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import type { HeaderMenuButtonBlock } from "~/payload-types";
-import { signIn, useSession } from "~/auth/client";
-import { Button } from "@/registry/default/ui/button";
+import { useSession } from "~/auth/client";
 import { cn } from "@/registry/deafult/utils";
 import UserAvatar from "@/registry/default/components/UserAvatar";
 
@@ -29,16 +28,9 @@ export default function MenuButton({
 						mobileView === true && "hidden",
 					)}
 				>
-					<Button
-						className="cursor-pointer"
-						onClick={() => {
-							if (auth.provider) {
-								return signIn.social({ provider: auth.provider });
-							}
-						}}
-					>
+					<Link href="/auth/sign-in" className="cursor-pointer">
 						{label}
-					</Button>
+					</Link>
 				</div>
 			);
 		}

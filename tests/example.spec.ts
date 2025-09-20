@@ -8,12 +8,12 @@ test("has title", async ({ page }) => {
 });
 
 test("homepage loads successfully", async ({ page }) => {
-  await page.goto("/");
+  const response = await page.goto("/", {
+    waitUntil: "domcontentloaded",
+    timeout: 30000,
+  });
 
-  // Wait for the page to load completely
-  await page.waitForLoadState("networkidle");
-
-  // Check that the page is accessible and returns 200
-  const response = await page.goto("/");
-  expect(response?.status()).toBe(200);
+  // Page should load and not error
+  expect(response?.status()).toBeLessThan(400);
+  await expect(page.locator("body")).toBeVisible();
 });

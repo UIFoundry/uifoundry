@@ -19,14 +19,18 @@ const geist = Geist({
 });
 
 export default function RootLayout({
+	auth,
 	children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{ auth: React.ReactNode; children: React.ReactNode }>) {
 	return (
 		<html lang="en" className={`${geist.variable}`} title="UIFoundry">
 			<body>
 				<ServerProviders>
 					<TailwindConfig />
-					<ClientProviders>{children}</ClientProviders>
+					<ClientProviders>
+						{children}
+						{auth}
+					</ClientProviders>
 				</ServerProviders>
 			</body>
 		</html>
