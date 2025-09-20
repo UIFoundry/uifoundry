@@ -201,15 +201,13 @@ export function hasPermission<Resource extends keyof Permissions>({
 }): boolean {
 	if (!user?.role) return false;
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	const permission = // @ts-expect-error permission types are valid here
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		(ROLES as RolesWithPermissions)[user.role](resource)?.[action];
+	const permission = (ROLES as RolesWithPermissions)[user.role][resource]?.[
+		action
+	];
 
 	if (permission === null) return false;
 
 	if (typeof permission === "boolean") return permission;
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
 	return data != null && permission({ user, data });
 }
