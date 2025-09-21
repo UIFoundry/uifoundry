@@ -205,7 +205,7 @@ export function hasPermission<Resource extends keyof Permissions>({
 		action
 	];
 
-	if (permission === null) return false;
+	if (!permission) return false;
 
 	if (typeof permission === "boolean") return permission;
 
