@@ -217,7 +217,7 @@ export default function HeroSection(props: Hero_1_Block) {
 								});
 							}}
 							size={30}
-							className="hover:stroke-primary mx-auto mt-30 cursor-pointer transition-colors duration-300"
+							className="hover:stroke-primary absolute bottom-30 left-1/2 -translate-x-1/2 cursor-pointer transition-colors duration-300"
 						/>
 					)}
 				</div>
