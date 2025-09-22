@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { Button } from "@/registry/ui/button";
 import { TextEffect } from "@/registry/ui/motion-primitives/text-effect";
 import { AnimatedGroup } from "@/registry/ui/motion-primitives/animated-group";
@@ -217,7 +217,7 @@ export default function HeroSection(props: Hero_1_Block) {
 								});
 							}}
 							size={30}
-							className="hover:stroke-primary mx-auto mt-30 cursor-pointer transition-colors duration-300"
+							className="hover:stroke-primary absolute bottom-30 left-1/2 -translate-x-1/2 cursor-pointer transition-colors duration-300"
 						/>
 					)}
 				</div>
