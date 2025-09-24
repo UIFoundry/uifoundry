@@ -13,13 +13,9 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
-    "DevRouter": {
-      "type": "sst.aws.Router"
-      "url": string
-    }
-    "Frontend": {
-      "type": "sst.aws.Nextjs"
-      "url": string
+    "DOMAIN_CERT_ARN": {
+      "type": "sst.sst.Secret"
+      "value": string
     }
     "GOOGLE_CLIENT_ID": {
       "type": "sst.sst.Secret"
@@ -53,7 +49,7 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
-    "uifoundry": {
+    "bucket-uifoundry-media": {
       "name": string
       "type": "sst.aws.Bucket"
     }
