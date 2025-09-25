@@ -1,8 +1,20 @@
+import { Button } from "~/ui/button";
+import { LogOut, LogIn } from "lucide-react";
+import Link from "next/link";
 import { headers } from "next/headers";
 import { auth } from "~/auth";
-import SignInClient from "./client";
 
 export default async function SignInButton() {
-  const session = await auth.api.getSession({ headers: await headers() });
-  return <SignInClient session={session} />;
+	const session = await auth.api.getSession({ headers: await headers() });
+	return (
+		<Link href="/auth/sign-in">
+			<Button
+				className="cursor-pointer justify-between gap-2"
+				variant="default"
+			>
+				{!session?.session ? <LogOut size={20} /> : <LogIn size={20} />}
+				<span>{session?.session ? "Sign Out" : "Sign In"}</span>
+			</Button>
+		</Link>
+	);
 }
