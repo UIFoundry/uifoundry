@@ -17,6 +17,10 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
+    "Frontend": {
+      "type": "sst.aws.Nextjs"
+      "url": string
+    }
     "GOOGLE_CLIENT_ID": {
       "type": "sst.sst.Secret"
       "value": string
@@ -24,6 +28,10 @@ declare module "sst" {
     "GOOGLE_CLIENT_SECRET": {
       "type": "sst.sst.Secret"
       "value": string
+    }
+    "GlobalRouter": {
+      "type": "sst.aws.Router"
+      "url": string
     }
     "NEXT_PUBLIC_BETTER_AUTH_URL": {
       "type": "sst.sst.Secret"

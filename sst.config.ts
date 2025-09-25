@@ -43,15 +43,13 @@ export default $config({
 		const S3_ACCESS_KEY_ID = new sst.Secret("S3_ACCESS_KEY_ID");
 		const S3_SECRET_ACCESS_KEY = new sst.Secret("S3_SECRET_ACCESS_KEY");
 		const DOMAIN_CERT_ARN = new sst.Secret("DOMAIN_CERT_ARN");
-		console.log("domain arn value: ", DOMAIN_CERT_ARN.value);
-		console.log("better auth url", NEXT_PUBLIC_BETTER_AUTH_URL.value);
 
-		const router = new sst.aws.Router("Router", {
+		const router = new sst.aws.Router("GlobalRouter", {
 			domain: {
 				name: domain,
 				redirects: isProd ? [`www.${domain}`] : [],
 				dns: false,
-				cert: "arn:aws:acm:us-east-1:241592945031:certificate/7a013909-92d0-4d21-a564-f8312906a6c2",
+				cert: DOMAIN_CERT_ARN.value,
 			},
 		});
 

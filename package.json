@@ -26,8 +26,10 @@
 		"secret:set": "sst secret set",
 		"secret:set:dev": "sst secret set --stage dev",
 		"secret:set:prod": "sst secret set --stage production",
-		"deploy:dev": "pnpm vitest && sst deploy --stage dev",
-		"deploy:prod": "NODE_ENV=production pnpm vitest && sst deploy --stage production",
+		"secret:list:dev": "sst secret list --stage dev",
+		"secret:list:prod": "sst secret list --stage production",
+		"deploy:dev": "NODE_ENV=development AWS_PROFILE=uifoundry-dev pnpm vitest && sst deploy --stage dev",
+		"deploy:prod": "NODE_ENV=production AWS_PROFILE=uifoundry-production pnpm vitest && sst deploy --stage production",
 		"start": "next start",
 		"typecheck": "tsc --noEmit"
 	},
@@ -79,7 +81,7 @@
 		"server-only": "^0.0.1",
 		"sharp": "^0.34.1",
 		"source-map-support": "^0.5.21",
-		"sst": "3.17.10",
+		"sst": "3.17.14",
 		"superjson": "^2.2.1",
 		"tailwind-merge": "^3.3.1",
 		"zod": "^4.0.5"
