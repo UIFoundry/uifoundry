@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 import { COLLECTION_SLUG_PAGES } from "./payload/constants";
 import { s3Storage } from "@payloadcms/storage-s3";
 import { getEnvVar } from "./utils/sst";
+import { seedDatabase } from "~/payload/seed";
 // import sharp from "sharp"
 
 const filename = fileURLToPath(import.meta.url);
@@ -34,6 +35,7 @@ export default buildConfig({
 			actions: ["~/payload/components/VisitSite"],
 		},
 	},
+	onInit: seedDatabase,
 
 	// Define and configure your collections in this array
 	collections: collections,
