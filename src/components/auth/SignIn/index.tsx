@@ -7,7 +7,7 @@ import { auth } from "~/auth";
 export default async function SignInButton() {
 	const session = await auth.api.getSession({ headers: await headers() });
 	return (
-		<Link href="/auth/sign-in">
+		<Link href={session?.session ? "/auth/sign-out" : "/auth/sign-in"}>
 			<Button
 				className="cursor-pointer justify-between gap-2"
 				variant="default"

@@ -1,4 +1,7 @@
-import { type CollectionConfig } from "payload";
+import {
+	type CollectionBeforeOperationHook,
+	type CollectionConfig,
+} from "payload";
 import {
 	AUTOSAVE_INTERVAL,
 	COLLECTION_SLUG_PAGES,
@@ -7,6 +10,23 @@ import {
 import { env } from "~/env.mjs";
 import { blocks } from "~/payload/blocks";
 import userField from "~/payload/fields/user/config";
+
+const onCreate: CollectionBeforeOperationHook = ({
+	args,
+	collection,
+	context,
+	operation,
+}) => {
+	if (operation === "create" && collection.slug === COLLECTION_SLUG_PAGES) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+		const { req, ...safeArgs } = args;
+		console.log("window.location.href: ", req.pathname);
+		if (window.location.href.includes("/admin/collections/sites/")) {
+			console.log("creating site page from site collection page");
+		}
+		console.log("creating a page, ", safeArgs, context);
+	}
+};
 
 export const Pages: CollectionConfig = {
 	slug: COLLECTION_SLUG_PAGES,
@@ -26,6 +46,9 @@ export const Pages: CollectionConfig = {
 				},
 			};
 		},
+	},
+	hooks: {
+		beforeOperation: [onCreate],
 	},
 	admin: {
 		useAsTitle: "title",

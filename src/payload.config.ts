@@ -4,7 +4,7 @@ import { buildConfig } from "payload";
 import { env } from "~/env.mjs";
 import { collections } from "./payload/collections";
 import { globals } from "./payload/globals";
-import { COLLECTION_SLUG_USERS } from "./payload/constants";
+import { allowedOrigins, COLLECTION_SLUG_USERS } from "./payload/constants";
 import path from "path";
 import { fileURLToPath } from "url";
 import { COLLECTION_SLUG_PAGES } from "./payload/constants";
@@ -15,8 +15,6 @@ import { seedDatabase } from "~/payload/seed";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
-
-const allowedOrigins = [env.NEXT_PUBLIC_BETTER_AUTH_URL].filter(Boolean);
 
 export default buildConfig({
 	telemetry: false,

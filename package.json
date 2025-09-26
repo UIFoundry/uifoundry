@@ -8,6 +8,7 @@
 		"registry:build": "shadcn build",
 		"check": "next lint && tsc --noEmit",
 		"dev": "next dev --port=3005 --turbo",
+		"dev:prod": "NODE_ENV=production NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3005 next dev --port=3005 --turbo",
 		"format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
 		"format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
 		"lint": "next lint",
