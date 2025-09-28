@@ -106,15 +106,13 @@ jobs:
         if: ${{ steps.determine-stage.outputs.stage == 'dev' }}
         env:
           NODE_OPTIONS: --max-old-space-size=4096
-          AWS_PROFILE: ""
-        run: pnpm deploy:dev
+        run: pnpm sst deploy --stage dev
 
       - name: Deploy (prod)
         if: ${{ steps.determine-stage.outputs.stage == 'production' }}
         env:
           NODE_OPTIONS: --max-old-space-size=4096
-          AWS_PROFILE: ""
-        run: pnpm deploy:prod
+        run: pnpm sst deploy --stage production
 
   post-e2e:
     name: Run E2E tests (post-deploy)

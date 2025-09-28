@@ -12,7 +12,11 @@ export default $config({
 			providers: {
 				aws: {
 					region: "us-west-1",
-					profile: isProd ? "uifoundry-production" : "uifoundry-dev",
+					profile: process.env.GITHUB_ACTIONS
+						? undefined
+						: isProd
+							? "uifoundry-production"
+							: "uifoundry-dev",
 				},
 			},
 		};
