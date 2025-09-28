@@ -10,6 +10,9 @@ import { hasPermission } from "~/auth/permissions";
 
 export const Sites: CollectionConfig = {
 	slug: COLLECTION_SLUG_SITES,
+	admin: {
+		useAsTitle: "title",
+	},
 	access: {
 		create: ({ req: { user } }: AccessArgs<Site>) => {
 			return hasPermission({

@@ -1,7 +1,4 @@
-import {
-	type CollectionBeforeOperationHook,
-	type CollectionConfig,
-} from "payload";
+import { type CollectionConfig } from "payload";
 import {
 	AUTOSAVE_INTERVAL,
 	COLLECTION_SLUG_PAGES,
@@ -11,22 +8,26 @@ import { env } from "~/env.mjs";
 import { blocks } from "~/payload/blocks";
 import userField from "~/payload/fields/user/config";
 
-const onCreate: CollectionBeforeOperationHook = ({
-	args,
-	collection,
-	context,
-	operation,
-}) => {
-	if (operation === "create" && collection.slug === COLLECTION_SLUG_PAGES) {
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-		const { req, ...safeArgs } = args;
-		console.log("window.location.href: ", req.pathname);
-		if (window.location.href.includes("/admin/collections/sites/")) {
-			console.log("creating site page from site collection page");
-		}
-		console.log("creating a page, ", safeArgs, context);
+function extractSiteIdFromReferer(
+	req: { headers?: Headers | Record<string, unknown> } | undefined,
+): string | undefined {
+	const headers = req?.headers;
+	let referer: string | undefined;
+
+	if (headers && typeof (headers as Headers).get === "function") {
+		const value = (headers as Headers).get("referer");
+		referer = typeof value === "string" ? value : undefined;
+	} else if (
+		headers &&
+		typeof (headers as Record<string, unknown>).referer === "string"
+	) {
+		referer = (headers as Record<string, unknown>).referer as string;
 	}
-};
+
+	if (!referer) return undefined;
+	const match = /\/admin\/collections\/sites\/([^\/\?]+)/.exec(referer);
+	return match?.[1];
+}
 
 export const Pages: CollectionConfig = {
 	slug: COLLECTION_SLUG_PAGES,
@@ -46,9 +47,6 @@ export const Pages: CollectionConfig = {
 				},
 			};
 		},
-	},
-	hooks: {
-		beforeOperation: [onCreate],
 	},
 	admin: {
 		useAsTitle: "title",
@@ -80,6 +78,7 @@ export const Pages: CollectionConfig = {
 			type: "relationship",
 			relationTo: COLLECTION_SLUG_SITES,
 			required: true,
+			defaultValue: ({ req }) => extractSiteIdFromReferer(req),
 		},
 		{
 			name: "slug",
