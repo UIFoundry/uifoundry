@@ -8,6 +8,27 @@ import { env } from "~/env.mjs";
 import { blocks } from "~/payload/blocks";
 import userField from "~/payload/fields/user/config";
 
+function extractSiteIdFromReferer(
+	req: { headers?: Headers | Record<string, unknown> } | undefined,
+): string | undefined {
+	const headers = req?.headers;
+	let referer: string | undefined;
+
+	if (headers && typeof (headers as Headers).get === "function") {
+		const value = (headers as Headers).get("referer");
+		referer = typeof value === "string" ? value : undefined;
+	} else if (
+		headers &&
+		typeof (headers as Record<string, unknown>).referer === "string"
+	) {
+		referer = (headers as Record<string, unknown>).referer as string;
+	}
+
+	if (!referer) return undefined;
+	const match = /\/admin\/collections\/sites\/([^\/\?]+)/.exec(referer);
+	return match?.[1];
+}
+
 export const Pages: CollectionConfig = {
 	slug: COLLECTION_SLUG_PAGES,
 	lockDocuments: false,
@@ -57,6 +78,7 @@ export const Pages: CollectionConfig = {
 			type: "relationship",
 			relationTo: COLLECTION_SLUG_SITES,
 			required: true,
+			defaultValue: ({ req }) => extractSiteIdFromReferer(req),
 		},
 		{
 			name: "slug",

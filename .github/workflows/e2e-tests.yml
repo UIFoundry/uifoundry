@@ -17,6 +17,20 @@ on:
         description: "Branch name"
         required: true
         type: string
+  workflow_call:
+    inputs:
+      stage:
+        description: "Stage name (production/dev/branch)"
+        required: true
+        type: string
+      commit:
+        description: "Commit SHA"
+        required: true
+        type: string
+      branch:
+        description: "Branch name"
+        required: true
+        type: string
 
 jobs:
   e2e-tests:
@@ -35,7 +49,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 10
 
       - name: Install dependencies
         run: pnpm install

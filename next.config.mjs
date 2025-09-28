@@ -18,6 +18,10 @@ const nextConfig = {
 		remotePatterns: [new URL(`http://localhost:3001/**`)],
 	},
 	output: "standalone",
+	// Exclude OpenNext and SST working dirs from file tracing to avoid recursion
+	outputFileTracingExcludes: {
+		"*": ["**/.open-next/**", "**/.sst/**"],
+	},
 };
 
 export default withPayload(withMDX(nextConfig));

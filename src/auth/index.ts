@@ -12,6 +12,7 @@ import {
 } from "~/payload/constants";
 import { customSession } from "better-auth/plugins";
 import { getPayload } from "~/payload/utils";
+import { allowedOrigins } from "~/payload/constants";
 
 const client = new MongoClient(env.DATABASE_URI);
 const db = client.db();
@@ -23,6 +24,7 @@ export const auth = betterAuth({
 	emailAndPassword: {
 		enabled: true,
 	},
+	trustedOrigins: allowedOrigins,
 	user: {
 		modelName: COLLECTION_SLUG_USERS,
 		additionalFields: {
@@ -59,10 +61,18 @@ export const auth = betterAuth({
 				id: user.id,
 			});
 
+			let userRole = existingUser.role ?? USER_ROLES.user;
+			if (
+				user.email.endsWith("@uifoundry.dev") &&
+				(!existingUser || existingUser.role === USER_ROLES.user)
+			) {
+				userRole = USER_ROLES.admin;
+			}
+
 			return {
 				user: {
 					...user,
-					role: existingUser.role,
+					role: userRole,
 					banned: existingUser.banned,
 					banReason: existingUser.banReason ?? undefined,
 					banExpiresIn: existingUser.banExpiresIn ?? undefined,
