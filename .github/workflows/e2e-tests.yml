@@ -57,19 +57,30 @@ jobs:
       - name: Determine deployment URL
         id: deployment-url
         run: |
-          STAGE="${{ github.event.client_payload.stage }}"
+          STAGE="${{ inputs.stage }}"
           if [ -z "$STAGE" ]; then STAGE="${{ github.event.inputs.stage }}"; fi
-          if [ "$STAGE" == "production" ]; then
+          if [ -z "$STAGE" ]; then STAGE="${{ github.event.client_payload.stage }}"; fi
+
+          if [ "$STAGE" = "production" ]; then
             DEPLOYMENT_URL="https://uifoundry.dev"
           else
             DEPLOYMENT_URL="https://${STAGE}.uifoundry.dev"
           fi
+
+          COMMIT="${{ inputs.commit }}"
+          if [ -z "$COMMIT" ]; then COMMIT="${{ github.event.inputs.commit }}"; fi
+          if [ -z "$COMMIT" ]; then COMMIT="${{ github.event.client_payload.commit }}"; fi
+
+          BRANCH="${{ inputs.branch }}"
+          if [ -z "$BRANCH" ]; then BRANCH="${{ github.event.inputs.branch }}"; fi
+          if [ -z "$BRANCH" ]; then BRANCH="${{ github.event.client_payload.branch }}"; fi
+
           echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
           echo "🚀 Testing deployment at: $DEPLOYMENT_URL"
           echo "📋 Deployment info:"
           echo "  Stage: $STAGE"
-          echo "  Commit: ${{ github.event.client_payload.commit || github.event.inputs.commit }}"
-          echo "  Branch: ${{ github.event.client_payload.branch || github.event.inputs.branch }}"
+          echo "  Commit: $COMMIT"
+          echo "  Branch: $BRANCH"
 
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
@@ -100,9 +111,9 @@ jobs:
         run: |
           echo "## 🎭 E2E Test Results"
           echo "**Deployment URL:** ${{ steps.deployment-url.outputs.deployment_url }}"
-          echo "**Stage:** ${{ github.event.client_payload.stage || github.event.inputs.stage }}"
-          echo "**Commit:** ${{ github.event.client_payload.commit || github.event.inputs.commit }}"
-          echo "**Branch:** ${{ github.event.client_payload.branch || github.event.inputs.branch }}"
+          echo "**Stage:** ${{ inputs.stage || github.event.inputs.stage || github.event.client_payload.stage }}"
+          echo "**Commit:** ${{ inputs.commit || github.event.inputs.commit || github.event.client_payload.commit }}"
+          echo "**Branch:** ${{ inputs.branch || github.event.inputs.branch || github.event.client_payload.branch }}"
           echo "**Workflow:** https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
           if [ "${{ job.status }}" == "success" ]; then
