@@ -19,9 +19,23 @@ jobs:
   deploy:
     name: Deploy to AWS via SST
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ (github.event.inputs.stage == 'production' || github.ref_name == 'master' || github.ref_name == 'main' || github.ref_name == 'prod' || github.ref_name == 'production') && 'production' || 'dev' }}
     permissions:
       id-token: write # for AWS OIDC
       contents: read
+    env:
+      NODE_ENV: ${{ (github.event.inputs.stage == 'production' || github.ref_name == 'master' || github.ref_name == 'main' || github.ref_name == 'prod' || github.ref_name == 'production') && 'production' || 'development' }}
+      DATABASE_URI: ${{ secrets.DATABASE_URI }}
+      PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+      BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      S3_REGION: ${{ secrets.S3_REGION }}
+      S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+      S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+      NEXT_PUBLIC_BETTER_AUTH_URL: ${{ vars.NEXT_PUBLIC_BETTER_AUTH_URL || secrets.NEXT_PUBLIC_BETTER_AUTH_URL }}
     outputs:
       stage: ${{ steps.determine-stage.outputs.stage }}
       commit: ${{ steps.git.outputs.commit }}
