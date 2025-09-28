@@ -25,7 +25,7 @@ jobs:
       id-token: write # for AWS OIDC
       contents: read
     env:
-      NODE_ENV: ${{ (github.event.inputs.stage == 'production' || github.ref_name == 'master' || github.ref_name == 'main' || github.ref_name == 'prod' || github.ref_name == 'production') && 'production' || 'development' }}
+      NODE_ENV: "production"
       DATABASE_URI: ${{ secrets.DATABASE_URI }}
       PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
