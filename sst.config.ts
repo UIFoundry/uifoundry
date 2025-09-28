@@ -185,7 +185,7 @@ export default $config({
 							await $`yum install -y gh`;
 							// Resolve workflow id from default branch to avoid 404s
 							const wfIdText =
-								await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh api repos/${owner}/${repo}/actions/workflows --jq '.workflows[] | select(.path == ".github/workflows/e2e-tests.yml") | .id'`.text();
+								await $`env GH_TOKEN=${process.env.GH_AUTH_TOKEN ?? ""} gh api repos/${owner}/${repo}/actions/workflows --jq '.workflows[] | select(.path == ".github/workflows/e2e-tests.yml") | .id'`.text();
 							const workflowId = wfIdText.trim();
 							if (!workflowId) {
 								console.warn(
@@ -193,10 +193,10 @@ export default $config({
 								);
 							} else {
 								// Trigger workflow_dispatch with inputs via GH API
-								await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh api --method POST repos/${owner}/${repo}/actions/workflows/${workflowId}/dispatches -f ref=${branchRef} -f inputs[stage]=${stage} -f inputs[commit]=${event.commit?.id ?? "unknown"} -f inputs[branch]=${branchRef}`;
+								await $`env GH_TOKEN=${process.env.GH_AUTH_TOKEN ?? ""} gh api --method POST repos/${owner}/${repo}/actions/workflows/${workflowId}/dispatches -f ref=${branchRef} -f inputs[stage]=${stage} -f inputs[commit]=${event.commit?.id ?? "unknown"} -f inputs[branch]=${branchRef}`;
 								// Fetch the latest workflow_dispatch run id for this branch
 								const runsJson =
-									await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh run list --branch ${branchRef} --event workflow_dispatch --limit 1 --json databaseId`.text();
+									await $`env GH_TOKEN=${process.env.GH_AUTH_TOKEN ?? ""} gh run list --branch ${branchRef} --event workflow_dispatch --limit 1 --json databaseId`.text();
 								let runId = "";
 								try {
 									runId =

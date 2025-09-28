@@ -159,7 +159,7 @@ The workflow uses **event-driven testing** to ensure tests run against the fresh
 
 ### E2E tests not triggering after deployment
 
-- Check if `GITHUB_TOKEN` environment variable is set in SST Console
+- Check if `GH_AUTH_TOKEN` environment variable is set in SST Console
 - Verify the GitHub token has `repo` permissions
 - Check SST Console deployment logs for repository dispatch call
 - Ensure the repository name is correct in SST config: `ianyimi/uifoundry`

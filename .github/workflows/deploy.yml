@@ -2,7 +2,7 @@ name: Deploy (SST)
 
 on:
   push:
-    branches: [dev, master]
+    branches: [dev, master, main, prod]
   workflow_dispatch:
     inputs:
       stage:
@@ -57,7 +57,7 @@ jobs:
           if [ -n "${{ github.event.inputs.stage }}" ]; then
             STAGE="${{ github.event.inputs.stage }}"
           else
-            if [ "${{ github.ref_name }}" = "master" ]; then
+            if [ "${{ github.ref_name }}" = "master" ] || [ "${{ github.ref_name }}" = "main" ] || [ "${{ github.ref_name }}" = "prod" ] || [ "${{ github.ref_name }}" = "production" ]; then
               STAGE="production"
             else
               STAGE="dev"
@@ -72,17 +72,35 @@ jobs:
           echo "commit=${GITHUB_SHA}" >> $GITHUB_OUTPUT
           echo "branch=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
 
-      - name: Configure AWS credentials (OIDC)
+      - name: Configure AWS credentials (dev)
+        if: ${{ steps.determine-stage.outputs.stage == 'dev' }}
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_DEV }}
           aws-region: us-west-1
-          role-session-name: GitHubActionsSST
+          role-session-name: GitHubActionsSSTDev
 
-      - name: Deploy with SST
+      - name: Configure AWS credentials (prod)
+        if: ${{ steps.determine-stage.outputs.stage == 'production' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_PROD }}
+          aws-region: us-west-1
+          role-session-name: GitHubActionsSSTProd
+
+      - name: Deploy (dev)
+        if: ${{ steps.determine-stage.outputs.stage == 'dev' }}
         env:
           NODE_OPTIONS: --max-old-space-size=4096
-        run: pnpm sst deploy --stage "${{ steps.determine-stage.outputs.stage }}"
+          AWS_PROFILE: ""
+        run: pnpm deploy:dev
+
+      - name: Deploy (prod)
+        if: ${{ steps.determine-stage.outputs.stage == 'production' }}
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+          AWS_PROFILE: ""
+        run: pnpm deploy:prod
 
   post-e2e:
     name: Run E2E tests (post-deploy)
