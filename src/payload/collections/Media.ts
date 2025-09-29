@@ -6,6 +6,7 @@ import {
 import { COLLECTION_SLUG_MEDIA } from "~/payload/constants";
 import type { Media as MediaType } from "~/payload-types";
 import { hasPermission } from "~/auth/permissions";
+import userRelationship from "../fields/userRelationship/config";
 
 export const Media: CollectionConfig = {
 	slug: COLLECTION_SLUG_MEDIA,
@@ -51,6 +52,13 @@ export const Media: CollectionConfig = {
 			type: "text",
 			required: true,
 		},
+		userRelationship({
+			name: "owner",
+			defaultValue: ({ user }) => {
+				if (!user) return undefined;
+				return user;
+			},
+		}),
 	],
 	upload: true,
 	endpoints: [
@@ -59,6 +67,15 @@ export const Media: CollectionConfig = {
 			method: "post",
 			handler: async (req) => {
 				try {
+					if (!req.user) {
+						return Response.json(
+							{
+								error: "You must be logged in to perform this action",
+							},
+							{ status: 400 },
+						);
+					}
+
 					await addDataAndFileToRequest(req);
 
 					if (!req.file) {
@@ -80,6 +97,7 @@ export const Media: CollectionConfig = {
 						collection: COLLECTION_SLUG_MEDIA,
 						data: {
 							alt: req.file.name,
+							owner: req.user,
 						},
 						file: req.file,
 					});

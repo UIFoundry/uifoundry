@@ -4,7 +4,7 @@ import {
 	COLLECTION_SLUG_SITES,
 } from "~/payload/constants/collections";
 import titleField from "~/payload/fields/titleField/config";
-import userField from "~/payload/fields/user/config";
+import userRelationship from "~/payload/fields/userRelationship/config";
 import type { Site } from "~/payload-types";
 import { hasPermission } from "~/auth/permissions";
 
@@ -48,7 +48,7 @@ export const Sites: CollectionConfig = {
 	},
 	fields: [
 		titleField(),
-		userField({
+		userRelationship({
 			name: "owner",
 			label: "Owner",
 		}),

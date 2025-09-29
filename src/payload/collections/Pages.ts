@@ -6,7 +6,7 @@ import {
 } from "~/payload/constants";
 import { env } from "~/env.mjs";
 import { blocks } from "~/payload/blocks";
-import userField from "~/payload/fields/user/config";
+import userRelationship from "~/payload/fields/userRelationship/config";
 
 function extractSiteIdFromReferer(
 	req: { headers?: Headers | Record<string, unknown> } | undefined,
@@ -95,7 +95,7 @@ export const Pages: CollectionConfig = {
 			label: "Page Details",
 			type: "collapsible",
 			fields: [
-				userField({
+				userRelationship({
 					name: "owner",
 					label: "Owner",
 				}),
