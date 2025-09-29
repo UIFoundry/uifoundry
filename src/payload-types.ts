@@ -1892,6 +1892,7 @@ export interface Teams_1_Members_Block {
 export interface Media {
   id: string;
   alt: string;
+  owner: string | User;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -2509,6 +2510,7 @@ export interface ComingSoon_1_BlockSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  owner?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
