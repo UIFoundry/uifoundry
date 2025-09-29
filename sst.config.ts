@@ -3,14 +3,20 @@
 
 export default $config({
 	app(input) {
+		const isProd = input.stage === "production";
 		return {
 			name: "UIFoundry",
-			removal: input?.stage === "production" ? "retain" : "remove",
+			removal: isProd ? "retain" : "remove",
 			protect: ["production"].includes(input?.stage),
 			home: "aws",
 			providers: {
 				aws: {
 					region: "us-west-1",
+					profile: process.env.GITHUB_ACTIONS
+						? undefined
+						: isProd
+							? "uifoundry-production"
+							: "uifoundry-dev",
 				},
 			},
 		};
@@ -23,7 +29,7 @@ export default $config({
 		// Skip env validation during SST builds
 		process.env.SKIP_ENV_VALIDATION = "1";
 
-		const bucket = new sst.aws.Bucket("uifoundry");
+		const bucket = new sst.aws.Bucket("bucket-uifoundry-media");
 
 		const rootDomain = "uifoundry.dev";
 		const domain = isProd ? rootDomain : `${$app.stage}.${rootDomain}`;
@@ -42,8 +48,7 @@ export default $config({
 		const S3_SECRET_ACCESS_KEY = new sst.Secret("S3_SECRET_ACCESS_KEY");
 		const DOMAIN_CERT_ARN = new sst.Secret("DOMAIN_CERT_ARN");
 
-		const routerName = isProd ? "GlobalRouter" : "DevRouter";
-		const router = new sst.aws.Router(routerName, {
+		const router = new sst.aws.Router("GlobalRouter", {
 			domain: {
 				name: domain,
 				redirects: isProd ? [`www.${domain}`] : [],
@@ -184,7 +189,7 @@ export default $config({
 							await $`yum install -y gh`;
 							// Resolve workflow id from default branch to avoid 404s
 							const wfIdText =
-								await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh api repos/${owner}/${repo}/actions/workflows --jq '.workflows[] | select(.path == ".github/workflows/e2e-tests.yml") | .id'`.text();
+								await $`env GH_TOKEN=${process.env.GH_AUTH_TOKEN ?? ""} gh api repos/${owner}/${repo}/actions/workflows --jq '.workflows[] | select(.path == ".github/workflows/e2e-tests.yml") | .id'`.text();
 							const workflowId = wfIdText.trim();
 							if (!workflowId) {
 								console.warn(
@@ -192,10 +197,10 @@ export default $config({
 								);
 							} else {
 								// Trigger workflow_dispatch with inputs via GH API
-								await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh api --method POST repos/${owner}/${repo}/actions/workflows/${workflowId}/dispatches -f ref=${branchRef} -f inputs[stage]=${stage} -f inputs[commit]=${event.commit?.id ?? "unknown"} -f inputs[branch]=${branchRef}`;
+								await $`env GH_TOKEN=${process.env.GH_AUTH_TOKEN ?? ""} gh api --method POST repos/${owner}/${repo}/actions/workflows/${workflowId}/dispatches -f ref=${branchRef} -f inputs[stage]=${stage} -f inputs[commit]=${event.commit?.id ?? "unknown"} -f inputs[branch]=${branchRef}`;
 								// Fetch the latest workflow_dispatch run id for this branch
 								const runsJson =
-									await $`env GH_TOKEN=${process.env.GITHUB_TOKEN ?? ""} gh run list --branch ${branchRef} --event workflow_dispatch --limit 1 --json databaseId`.text();
+									await $`env GH_TOKEN=${process.env.GH_AUTH_TOKEN ?? ""} gh run list --branch ${branchRef} --event workflow_dispatch --limit 1 --json databaseId`.text();
 								let runId = "";
 								try {
 									runId =

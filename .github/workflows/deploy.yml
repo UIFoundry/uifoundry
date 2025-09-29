@@ -1,0 +1,125 @@
+name: Deploy (SST)
+
+on:
+  push:
+    branches: [dev, master, main, prod]
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Override stage"
+        required: false
+        type: choice
+        options: [production, dev]
+
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to AWS via SST
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ (github.event.inputs.stage == 'production' || github.ref_name == 'master' || github.ref_name == 'main' || github.ref_name == 'prod' || github.ref_name == 'production') && 'production' || 'dev' }}
+    permissions:
+      id-token: write # for AWS OIDC
+      contents: read
+    env:
+      NODE_ENV: "production"
+      DATABASE_URI: ${{ secrets.DATABASE_URI }}
+      PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+      BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      S3_REGION: ${{ secrets.S3_REGION }}
+      S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+      S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+      NEXT_PUBLIC_BETTER_AUTH_URL: ${{ vars.NEXT_PUBLIC_BETTER_AUTH_URL || secrets.NEXT_PUBLIC_BETTER_AUTH_URL }}
+    outputs:
+      stage: ${{ steps.determine-stage.outputs.stage }}
+      commit: ${{ steps.git.outputs.commit }}
+      branch: ${{ steps.git.outputs.branch }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint + Typecheck
+        run: pnpm check
+
+      - name: Unit tests (Vitest)
+        run: pnpm vitest run
+
+      - name: Determine stage
+        id: determine-stage
+        run: |
+          if [ -n "${{ github.event.inputs.stage }}" ]; then
+            STAGE="${{ github.event.inputs.stage }}"
+          else
+            if [ "${{ github.ref_name }}" = "master" ] || [ "${{ github.ref_name }}" = "main" ] || [ "${{ github.ref_name }}" = "prod" ] || [ "${{ github.ref_name }}" = "production" ]; then
+              STAGE="production"
+            else
+              STAGE="dev"
+            fi
+          fi
+          echo "stage=$STAGE" >> $GITHUB_OUTPUT
+          echo "Deploy stage: $STAGE"
+
+      - name: Capture git metadata
+        id: git
+        run: |
+          echo "commit=${GITHUB_SHA}" >> $GITHUB_OUTPUT
+          echo "branch=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS credentials (dev)
+        if: ${{ steps.determine-stage.outputs.stage == 'dev' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_DEV }}
+          aws-region: us-west-1
+          role-session-name: GitHubActionsSSTDev
+
+      - name: Configure AWS credentials (prod)
+        if: ${{ steps.determine-stage.outputs.stage == 'production' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME_PROD }}
+          aws-region: us-west-1
+          role-session-name: GitHubActionsSSTProd
+
+      - name: Deploy (dev)
+        if: ${{ steps.determine-stage.outputs.stage == 'dev' }}
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: pnpm sst deploy --stage dev
+
+      - name: Deploy (prod)
+        if: ${{ steps.determine-stage.outputs.stage == 'production' }}
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: pnpm sst deploy --stage production
+
+  post-e2e:
+    name: Run E2E tests (post-deploy)
+    needs: deploy
+    uses: ./.github/workflows/e2e-tests.yml
+    with:
+      stage: ${{ needs.deploy.outputs.stage }}
+      commit: ${{ needs.deploy.outputs.commit }}
+      branch: ${{ needs.deploy.outputs.branch }}
+    secrets: inherit

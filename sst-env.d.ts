@@ -13,9 +13,9 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
-    "DevRouter": {
-      "type": "sst.aws.Router"
-      "url": string
+    "DOMAIN_CERT_ARN": {
+      "type": "sst.sst.Secret"
+      "value": string
     }
     "Frontend": {
       "type": "sst.aws.Nextjs"
@@ -28,6 +28,10 @@ declare module "sst" {
     "GOOGLE_CLIENT_SECRET": {
       "type": "sst.sst.Secret"
       "value": string
+    }
+    "GlobalRouter": {
+      "type": "sst.aws.Router"
+      "url": string
     }
     "NEXT_PUBLIC_BETTER_AUTH_URL": {
       "type": "sst.sst.Secret"
@@ -53,7 +57,7 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
-    "uifoundry": {
+    "bucket-uifoundry-media": {
       "name": string
       "type": "sst.aws.Bucket"
     }

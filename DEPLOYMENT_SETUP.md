@@ -21,7 +21,7 @@ Add the GitHub token as an environment variable in SST Console:
 
 1. Go to SST Console → Your App → Settings → Autodeploy
 2. Add environment variable:
-   - **Name**: `GITHUB_TOKEN`
+   - **Name**: `GH_AUTH_TOKEN`
    - **Value**: [Your GitHub token from step 1]
 
 ### 3. Verify Repository Details
@@ -78,7 +78,7 @@ Ensure the repository name in `sst.config.ts` matches your actual repo:
 
 ```bash
 curl -X POST \
-  -H "Authorization: token YOUR_GITHUB_TOKEN" \
+  -H "Authorization: token YOUR_GH_AUTH_TOKEN" \
   -H "Accept: application/vnd.github.v3+json" \
   https://api.github.com/repos/ianyimi/uifoundry/dispatches \
   -d '{"event_type":"deployment_complete","client_payload":{"stage":"dev","commit":"test","branch":"dev"}}'
@@ -98,6 +98,6 @@ This should trigger the E2E workflow immediately.
 - **Repository dispatch fails**: Check GitHub token permissions and repo name
 - **Memory issues**: Monitor SST Console logs, may need `xlarge` compute
 - **Unit tests fail**: Check SST Console deployment logs
-- **E2E tests don't start**: Verify GITHUB_TOKEN environment variable in SST Console
+- **E2E tests don't start**: Verify GH_AUTH_TOKEN environment variable in SST Console
 
 The setup is now fully event-driven and eliminates all timing-related issues!
