@@ -1846,7 +1846,101 @@ export interface Site {
   id: string;
   title: string;
   owner: string | User;
+  activeTheme: string | Theme;
+  light?: {
+    background?: string | null;
+    foreground?: string | null;
+    card?: string | null;
+    'card-foreground'?: string | null;
+    popover?: string | null;
+    'popover-foreground'?: string | null;
+    primary?: string | null;
+    'primary-foreground'?: string | null;
+    secondary?: string | null;
+    'secondary-foreground'?: string | null;
+    muted?: string | null;
+    'muted-foreground'?: string | null;
+    accent?: string | null;
+    'accent-foreground'?: string | null;
+    destructive?: string | null;
+    'destructive-foreground'?: string | null;
+    border?: string | null;
+    input?: string | null;
+    ring?: string | null;
+    'chart-1'?: string | null;
+    'chart-2'?: string | null;
+    'chart-3'?: string | null;
+    'chart-4'?: string | null;
+    'chart-5'?: string | null;
+    sidebar?: string | null;
+    'sidebar-foreground'?: string | null;
+    'sidebar-primary'?: string | null;
+    'sidebar-primary-foreground'?: string | null;
+    'sidebar-accent'?: string | null;
+    'sidebar-accent-foreground'?: string | null;
+    'sidebar-border'?: string | null;
+    'sidebar-ring'?: string | null;
+    'shadow-color'?: string | null;
+  };
+  dark?: {
+    background?: string | null;
+    foreground?: string | null;
+    card?: string | null;
+    'card-foreground'?: string | null;
+    popover?: string | null;
+    'popover-foreground'?: string | null;
+    primary?: string | null;
+    'primary-foreground'?: string | null;
+    secondary?: string | null;
+    'secondary-foreground'?: string | null;
+    muted?: string | null;
+    'muted-foreground'?: string | null;
+    accent?: string | null;
+    'accent-foreground'?: string | null;
+    destructive?: string | null;
+    'destructive-foreground'?: string | null;
+    border?: string | null;
+    input?: string | null;
+    ring?: string | null;
+    'chart-1'?: string | null;
+    'chart-2'?: string | null;
+    'chart-3'?: string | null;
+    'chart-4'?: string | null;
+    'chart-5'?: string | null;
+    sidebar?: string | null;
+    'sidebar-foreground'?: string | null;
+    'sidebar-primary'?: string | null;
+    'sidebar-primary-foreground'?: string | null;
+    'sidebar-accent'?: string | null;
+    'sidebar-accent-foreground'?: string | null;
+    'sidebar-border'?: string | null;
+    'sidebar-ring'?: string | null;
+    'shadow-color'?: string | null;
+  };
   pages?: (string | Page)[] | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "themes".
+ */
+export interface Theme {
+  id: string;
+  name: string;
+  type?: ('user' | 'template') | null;
+  owner: string | User;
+  styles:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  private: boolean;
   updatedAt: string;
   createdAt: string;
 }
@@ -2105,28 +2199,6 @@ export interface ComingSoon_1_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'coming_soon_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "themes".
- */
-export interface Theme {
-  id: string;
-  name: string;
-  type?: ('user' | 'template') | null;
-  owner: string | User;
-  styles:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  private: boolean;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2543,9 +2615,85 @@ export interface ThemesSelect<T extends boolean = true> {
 export interface SitesSelect<T extends boolean = true> {
   title?: T;
   owner?: T;
+  activeTheme?: T;
+  light?:
+    | T
+    | {
+        background?: T;
+        foreground?: T;
+        card?: T;
+        'card-foreground'?: T;
+        popover?: T;
+        'popover-foreground'?: T;
+        primary?: T;
+        'primary-foreground'?: T;
+        secondary?: T;
+        'secondary-foreground'?: T;
+        muted?: T;
+        'muted-foreground'?: T;
+        accent?: T;
+        'accent-foreground'?: T;
+        destructive?: T;
+        'destructive-foreground'?: T;
+        border?: T;
+        input?: T;
+        ring?: T;
+        'chart-1'?: T;
+        'chart-2'?: T;
+        'chart-3'?: T;
+        'chart-4'?: T;
+        'chart-5'?: T;
+        sidebar?: T;
+        'sidebar-foreground'?: T;
+        'sidebar-primary'?: T;
+        'sidebar-primary-foreground'?: T;
+        'sidebar-accent'?: T;
+        'sidebar-accent-foreground'?: T;
+        'sidebar-border'?: T;
+        'sidebar-ring'?: T;
+        'shadow-color'?: T;
+      };
+  dark?:
+    | T
+    | {
+        background?: T;
+        foreground?: T;
+        card?: T;
+        'card-foreground'?: T;
+        popover?: T;
+        'popover-foreground'?: T;
+        primary?: T;
+        'primary-foreground'?: T;
+        secondary?: T;
+        'secondary-foreground'?: T;
+        muted?: T;
+        'muted-foreground'?: T;
+        accent?: T;
+        'accent-foreground'?: T;
+        destructive?: T;
+        'destructive-foreground'?: T;
+        border?: T;
+        input?: T;
+        ring?: T;
+        'chart-1'?: T;
+        'chart-2'?: T;
+        'chart-3'?: T;
+        'chart-4'?: T;
+        'chart-5'?: T;
+        sidebar?: T;
+        'sidebar-foreground'?: T;
+        'sidebar-primary'?: T;
+        'sidebar-primary-foreground'?: T;
+        'sidebar-accent'?: T;
+        'sidebar-accent-foreground'?: T;
+        'sidebar-border'?: T;
+        'sidebar-ring'?: T;
+        'shadow-color'?: T;
+      };
   pages?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
