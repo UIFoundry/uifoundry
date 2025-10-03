@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { hasPermission } from "~/auth/permissions";
 import { COLLECTION_SLUG_THEMES } from "~/payload/constants";
+import { THEME_TYPES } from "~/payload/constants/themes";
 import { themeStylePropsSchema } from "~/payload/globals/SiteConfig/admin/theme";
 import {
 	defaultDarkThemeStyles,
@@ -54,6 +55,107 @@ export const themesRouter = createTRPCRouter({
 				return ok(newTheme);
 			} catch (error) {
 				console.error("error creating theme caught", error);
+				return err();
+			}
+		}),
+
+	findById: privateProcedure
+		.input(
+			z.object({
+				id: z.string(),
+			}),
+		)
+		.query(async ({ input, ctx }) => {
+			try {
+				const theme = await ctx.payload.findByID({
+					collection: COLLECTION_SLUG_THEMES,
+					id: input.id,
+				});
+
+				if (
+					!hasPermission({
+						user: ctx.user,
+						resource: COLLECTION_SLUG_THEMES,
+						action: "read",
+						data: theme,
+					})
+				) {
+					return err({ type: "no-access" });
+				}
+
+				return ok(theme);
+			} catch (error) {
+				console.error("error reading theme(s): ", error);
+				return err();
+			}
+		}),
+
+	update: privateProcedure
+		.input(
+			z.object({
+				id: z.string(),
+				styles: themeStylePropsSchema,
+				mode: z.enum(["light", "dark"]).default("light"),
+				name: z.string().optional(),
+				type: z.enum([THEME_TYPES.user, THEME_TYPES.template]).optional(),
+				private: z.boolean().optional(),
+			}),
+		)
+		.mutation(async ({ input, ctx }) => {
+			try {
+				const theme = await ctx.payload.findByID({
+					collection: COLLECTION_SLUG_THEMES,
+					id: input.id,
+				});
+
+				if (
+					!hasPermission({
+						user: ctx.user,
+						resource: COLLECTION_SLUG_THEMES,
+						action: "update",
+						data: theme,
+					})
+				) {
+					return err({ type: "no-access" });
+				}
+
+				const lightTheme = (
+					theme.styles as Record<string, Record<string, string>>
+				).light!;
+				const darkTheme = (
+					theme.styles as Record<string, Record<string, string>>
+				).dark!;
+
+				await ctx.payload.update({
+					collection: COLLECTION_SLUG_THEMES,
+					id: input.id,
+					data: {
+						...theme,
+						name: input.name ?? theme.name,
+						type: input.type ?? theme.type,
+						private: input.private ?? theme.private,
+						styles:
+							input.mode === "light"
+								? {
+									light: {
+										...lightTheme,
+										...input.styles,
+									},
+									dark: darkTheme,
+								}
+								: {
+									light: lightTheme,
+									dark: {
+										...darkTheme,
+										...input.styles,
+									},
+								},
+					},
+				});
+
+				return ok(theme);
+			} catch (error) {
+				console.error("error reading theme(s): ", error);
 				return err();
 			}
 		}),
