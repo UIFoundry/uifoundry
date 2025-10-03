@@ -11,6 +11,8 @@ import type { Site } from "~/payload-types";
 import { hasPermission } from "~/auth/permissions";
 import { env } from "~/env.mjs";
 import themeColorField from "./admin/ThemeColorField/config";
+import { blocks as headerBlocks } from "~/payload/blocks/Header/config";
+import { blocks as footerBlocks } from "~/payload/blocks/Footer";
 
 export const Sites: CollectionConfig = {
 	slug: COLLECTION_SLUG_SITES,
@@ -70,7 +72,39 @@ export const Sites: CollectionConfig = {
 		}),
 		{
 			type: "collapsible",
-			label: "Theme Settings",
+			label: "Header",
+			admin: {
+				initCollapsed: true,
+			},
+			fields: [
+				{
+					name: "header",
+					type: "blocks",
+					maxRows: 1,
+					minRows: 1,
+					blocks: headerBlocks,
+				},
+			],
+		},
+		{
+			type: "collapsible",
+			label: "Footer",
+			admin: {
+				initCollapsed: true,
+			},
+			fields: [
+				{
+					name: "footer",
+					type: "blocks",
+					maxRows: 1,
+					minRows: 1,
+					blocks: footerBlocks,
+				},
+			],
+		},
+		{
+			type: "collapsible",
+			label: "Theme",
 			fields: [
 				{
 					name: "activeTheme",
