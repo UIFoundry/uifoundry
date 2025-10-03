@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function ImportThemeTrigger() {
 	const [open, setOpen] = useState(false);
 	return (
-		<div className="relative grid place-items-center">
+		<div className="relative mb-6 grid place-items-center">
 			<Popover open={open} onOpenChange={setOpen}>
 				<PopoverTrigger asChild className="cursor-pointer">
 					<Button>Import Theme</Button>

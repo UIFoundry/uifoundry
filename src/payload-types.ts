@@ -1846,6 +1846,8 @@ export interface Site {
   id: string;
   title: string;
   owner: string | User;
+  header?: (Header_1_Block | Header_2_Block | CustomHeaderBlock)[] | null;
+  footer?: Footer_1_Block[] | null;
   activeTheme: string | Theme;
   light?: {
     background?: string | null;
@@ -1924,6 +1926,189 @@ export interface Site {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_1_Block".
+ */
+export interface Header_1_Block {
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_2_Block".
+ */
+export interface Header_2_Block {
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CustomHeaderBlock".
+ */
+export interface CustomHeaderBlock {
+  items?: (HeaderMenuItemsBlock | HeaderMenuButtonBlock | HeaderBrandLogoBlock)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_custom';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeaderMenuItemsBlock".
+ */
+export interface HeaderMenuItemsBlock {
+  alignment?: ('left' | 'right' | 'center') | null;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_menu_items';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeaderMenuButtonBlock".
+ */
+export interface HeaderMenuButtonBlock {
+  alignment?: ('left' | 'right' | 'center') | null;
+  label: string;
+  href?: string | null;
+  targetBlank: boolean;
+  auth?: {
+    provider?:
+      | (
+          | 'apple'
+          | 'atlassian'
+          | 'cognito'
+          | 'discord'
+          | 'dropbox'
+          | 'facebook'
+          | 'figma'
+          | 'github'
+          | 'gitlab'
+          | 'google'
+          | 'huggingface'
+          | 'kakao'
+          | 'kick'
+          | 'line'
+          | 'linear'
+          | 'linkedin'
+          | 'microsoft'
+          | 'naver'
+          | 'notion'
+          | 'paypal'
+          | 'reddit'
+          | 'roblox'
+          | 'salesforce'
+          | 'slack'
+          | 'spotify'
+          | 'tiktok'
+          | 'twitch'
+          | 'twitter'
+          | 'vk'
+          | 'zoom'
+        )
+      | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_menu_button';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeaderBrandLogoBlock".
+ */
+export interface HeaderBrandLogoBlock {
+  alignment?: ('left' | 'right' | 'center') | null;
+  href: string;
+  media?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_brand_logo';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: string;
+  alt: string;
+  owner: string | User;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_1_Block".
+ */
+export interface Footer_1_Block {
+  brandLogo?: (string | null) | Media;
+  copyright?: string | null;
+  links?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "themes".
  */
 export interface Theme {
@@ -1978,26 +2163,6 @@ export interface Teams_1_Members_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'teams_1_members';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  alt: string;
-  owner: string | User;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2615,6 +2780,18 @@ export interface ThemesSelect<T extends boolean = true> {
 export interface SitesSelect<T extends boolean = true> {
   title?: T;
   owner?: T;
+  header?:
+    | T
+    | {
+        header_1?: T | Header_1_BlockSelect<T>;
+        header_2?: T | Header_2_BlockSelect<T>;
+        header_custom?: T | CustomHeaderBlockSelect<T>;
+      };
+  footer?:
+    | T
+    | {
+        footer_1?: T | Footer_1_BlockSelect<T>;
+      };
   activeTheme?: T;
   light?:
     | T
@@ -2694,248 +2871,6 @@ export interface SitesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-locked-documents_select".
- */
-export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T;
-  globalSlug?: T;
-  user?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-preferences_select".
- */
-export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T;
-  key?: T;
-  value?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "payload-migrations_select".
- */
-export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T;
-  batch?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "header".
- */
-export interface Header {
-  id: string;
-  header: (Header_1_Block | Header_2_Block | CustomHeaderBlock)[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Header_1_Block".
- */
-export interface Header_1_Block {
-  menuItems: {
-    label: string;
-    href: string;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'header_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Header_2_Block".
- */
-export interface Header_2_Block {
-  menuItems: {
-    label: string;
-    href: string;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'header_2';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CustomHeaderBlock".
- */
-export interface CustomHeaderBlock {
-  items?: (HeaderMenuItemsBlock | HeaderMenuButtonBlock | HeaderBrandLogoBlock)[] | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'header_custom';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HeaderMenuItemsBlock".
- */
-export interface HeaderMenuItemsBlock {
-  alignment?: ('left' | 'right' | 'center') | null;
-  menuItems: {
-    label: string;
-    href: string;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'header_menu_items';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HeaderMenuButtonBlock".
- */
-export interface HeaderMenuButtonBlock {
-  alignment?: ('left' | 'right' | 'center') | null;
-  label: string;
-  href?: string | null;
-  targetBlank: boolean;
-  auth?: {
-    provider?:
-      | (
-          | 'apple'
-          | 'atlassian'
-          | 'cognito'
-          | 'discord'
-          | 'dropbox'
-          | 'facebook'
-          | 'figma'
-          | 'github'
-          | 'gitlab'
-          | 'google'
-          | 'huggingface'
-          | 'kakao'
-          | 'kick'
-          | 'line'
-          | 'linear'
-          | 'linkedin'
-          | 'microsoft'
-          | 'naver'
-          | 'notion'
-          | 'paypal'
-          | 'reddit'
-          | 'roblox'
-          | 'salesforce'
-          | 'slack'
-          | 'spotify'
-          | 'tiktok'
-          | 'twitch'
-          | 'twitter'
-          | 'vk'
-          | 'zoom'
-        )
-      | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'header_menu_button';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "HeaderBrandLogoBlock".
- */
-export interface HeaderBrandLogoBlock {
-  alignment?: ('left' | 'right' | 'center') | null;
-  href: string;
-  media?: (string | null) | Media;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'header_brand_logo';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footer".
- */
-export interface Footer {
-  id: string;
-  footer: Footer_1_Block[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Footer_1_Block".
- */
-export interface Footer_1_Block {
-  brandLogo?: (string | null) | Media;
-  copyright?: string | null;
-  links?:
-    | {
-        label: string;
-        href: string;
-        id?: string | null;
-      }[]
-    | null;
-  socialLinks: {
-    href: string;
-    icon:
-      | 'Facebook'
-      | 'Twitter'
-      | 'YouTube'
-      | 'LinkedIn'
-      | 'Telegram'
-      | 'Matrix'
-      | 'WhatsApp'
-      | 'Arc'
-      | 'Mastodon'
-      | 'Messenger'
-      | 'Infojobs'
-      | 'Skype'
-      | 'Threads'
-      | 'Instagram'
-      | 'X (formerly Twitter)'
-      | 'VK'
-      | 'Hashnode'
-      | 'Patreon'
-      | 'Peerlist'
-      | 'Pinterest'
-      | 'Reddit'
-      | 'Meta'
-      | 'TikTok'
-      | 'Carrd'
-      | 'Bluesky'
-      | 'daily.dev';
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'footer_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "site-config".
- */
-export interface SiteConfig {
-  id: string;
-  activeTheme: string | Theme;
-  _status?: ('draft' | 'published') | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "header_select".
- */
-export interface HeaderSelect<T extends boolean = true> {
-  header?:
-    | T
-    | {
-        header_1?: T | Header_1_BlockSelect<T>;
-        header_2?: T | Header_2_BlockSelect<T>;
-        header_custom?: T | CustomHeaderBlockSelect<T>;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3028,20 +2963,6 @@ export interface HeaderBrandLogoBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footer_select".
- */
-export interface FooterSelect<T extends boolean = true> {
-  footer?:
-    | T
-    | {
-        footer_1?: T | Footer_1_BlockSelect<T>;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "Footer_1_Block_select".
  */
 export interface Footer_1_BlockSelect<T extends boolean = true> {
@@ -3063,6 +2984,99 @@ export interface Footer_1_BlockSelect<T extends boolean = true> {
       };
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents_select".
+ */
+export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences_select".
+ */
+export interface PayloadPreferencesSelect<T extends boolean = true> {
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations_select".
+ */
+export interface PayloadMigrationsSelect<T extends boolean = true> {
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: string;
+  header: (Header_1_Block | Header_2_Block | CustomHeaderBlock)[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  footer: Footer_1_Block[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-config".
+ */
+export interface SiteConfig {
+  id: string;
+  activeTheme: string | Theme;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  header?:
+    | T
+    | {
+        header_1?: T | Header_1_BlockSelect<T>;
+        header_2?: T | Header_2_BlockSelect<T>;
+        header_custom?: T | CustomHeaderBlockSelect<T>;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  footer?:
+    | T
+    | {
+        footer_1?: T | Footer_1_BlockSelect<T>;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
