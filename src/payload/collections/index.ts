@@ -5,7 +5,7 @@ import { Verifications } from "./Verifications";
 import { Pages } from "./Pages";
 import { Media } from "./Media";
 import { Themes } from "./Themes";
-import { Sites } from "./Sites";
+import { Sites } from "./Sites/config";
 
 export const collections = [
 	Users,
