@@ -47,6 +47,8 @@ export default $config({
 		const S3_ACCESS_KEY_ID = new sst.Secret("S3_ACCESS_KEY_ID");
 		const S3_SECRET_ACCESS_KEY = new sst.Secret("S3_SECRET_ACCESS_KEY");
 		const DOMAIN_CERT_ARN = new sst.Secret("DOMAIN_CERT_ARN");
+		const STRIPE_SECRET_KEY = new sst.Secret("STRIPE_SECRET_KEY");
+		const STRIPE_WEBHOOK_SECRET = new sst.Secret("STRIPE_WEBHOOK_SECRET");
 
 		const router = new sst.aws.Router("GlobalRouter", {
 			domain: {
@@ -70,6 +72,8 @@ export default $config({
 				S3_REGION,
 				S3_ACCESS_KEY_ID,
 				S3_SECRET_ACCESS_KEY,
+				STRIPE_SECRET_KEY,
+				STRIPE_WEBHOOK_SECRET,
 			],
 			router: {
 				instance: router,
@@ -102,6 +106,8 @@ export default $config({
 				S3_REGION: S3_REGION.value,
 				S3_ACCESS_KEY_ID: S3_ACCESS_KEY_ID.value,
 				S3_SECRET_ACCESS_KEY: S3_SECRET_ACCESS_KEY.value,
+				STRIPE_SECRET_KEY: STRIPE_SECRET_KEY.value,
+				STRIPE_WEBHOOK_SECRET: STRIPE_WEBHOOK_SECRET.value,
 				// Build time for deployment verification
 				BUILD_TIME: new Date().toISOString(),
 			},
