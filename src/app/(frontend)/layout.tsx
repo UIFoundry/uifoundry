@@ -5,7 +5,7 @@ import { Geist } from "next/font/google";
 
 import ServerProviders from "~/components/ServerProviders";
 import ClientProviders from "~/components/ClientProviders";
-import TailwindConfig from "~/payload/globals/SiteConfig";
+// import TailwindConfig from "~/payload/globals/SiteConfig";
 
 export const metadata: Metadata = {
 	title: "UIFoundry",
@@ -26,7 +26,7 @@ export default function RootLayout({
 		<html lang="en" className={`${geist.variable}`} title="UIFoundry">
 			<body>
 				<ServerProviders>
-					<TailwindConfig />
+					{/* <TailwindConfig /> */}
 					<ClientProviders>
 						{children}
 						{auth}

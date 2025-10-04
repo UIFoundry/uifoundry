@@ -1,10 +1,20 @@
-import type { Site, Page, User, Theme, Media } from "~/payload-types";
+import type {
+	Site,
+	Page,
+	User,
+	Theme,
+	Media,
+	Header,
+	Footer,
+} from "~/payload-types";
 import {
 	COLLECTION_SLUG_PAGES,
 	COLLECTION_SLUG_SITES,
 	COLLECTION_SLUG_THEMES,
 	COLLECTION_SLUG_USERS,
 	COLLECTION_SLUG_MEDIA,
+	COLLECTION_SLUG_FOOTERS,
+	COLLECTION_SLUG_HEADERS,
 } from "~/payload/constants";
 
 export const USER_ROLES = {
@@ -27,6 +37,8 @@ export const RESOURCES = {
 	themes: COLLECTION_SLUG_THEMES,
 	sites: COLLECTION_SLUG_SITES,
 	pages: COLLECTION_SLUG_PAGES,
+	headers: COLLECTION_SLUG_HEADERS,
+	footers: COLLECTION_SLUG_FOOTERS,
 } as const;
 export type Resource = (typeof RESOURCES)[keyof typeof RESOURCES];
 
@@ -49,6 +61,14 @@ export type Permissions = {
 	};
 	[COLLECTION_SLUG_PAGES]: {
 		dataType: Page;
+		action: AuthAction;
+	};
+	[COLLECTION_SLUG_HEADERS]: {
+		dataType: Header;
+		action: AuthAction;
+	};
+	[COLLECTION_SLUG_FOOTERS]: {
+		dataType: Footer;
 		action: AuthAction;
 	};
 };
@@ -102,6 +122,18 @@ const ROLES = {
 			delete: true,
 		},
 		[COLLECTION_SLUG_PAGES]: {
+			create: true,
+			read: true,
+			update: true,
+			delete: true,
+		},
+		[COLLECTION_SLUG_HEADERS]: {
+			create: true,
+			read: true,
+			update: true,
+			delete: true,
+		},
+		[COLLECTION_SLUG_FOOTERS]: {
 			create: true,
 			read: true,
 			update: true,
@@ -183,6 +215,48 @@ const ROLES = {
 					return page.owner === user.id;
 				}
 				return page.owner?.id === user.id;
+			},
+		},
+		[COLLECTION_SLUG_HEADERS]: {
+			create: true,
+			read: ({ user, data: header }) => {
+				if (typeof header.owner === "string") {
+					return header.owner === user.id;
+				}
+				return header.owner?.id === user.id;
+			},
+			update: ({ user, data: header }) => {
+				if (typeof header.owner === "string") {
+					return header.owner === user.id;
+				}
+				return header.owner?.id === user.id;
+			},
+			delete: ({ user, data: header }) => {
+				if (typeof header.owner === "string") {
+					return header.owner === user.id;
+				}
+				return header.owner?.id === user.id;
+			},
+		},
+		[COLLECTION_SLUG_FOOTERS]: {
+			create: true,
+			read: ({ user, data: footer }) => {
+				if (typeof footer.owner === "string") {
+					return footer.owner === user.id;
+				}
+				return footer.owner?.id === user.id;
+			},
+			update: ({ user, data: footer }) => {
+				if (typeof footer.owner === "string") {
+					return footer.owner === user.id;
+				}
+				return footer.owner?.id === user.id;
+			},
+			delete: ({ user, data: footer }) => {
+				if (typeof footer.owner === "string") {
+					return footer.owner === user.id;
+				}
+				return footer.owner?.id === user.id;
 			},
 		},
 	},
