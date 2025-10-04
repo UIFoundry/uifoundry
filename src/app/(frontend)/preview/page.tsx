@@ -1,9 +1,13 @@
 import { getPayload } from "~/payload/utils";
-import type { Page as PageType } from "~/payload-types";
+import type {
+	Page as PageType,
+	Header as HeaderType,
+	Footer as FooterType,
+} from "~/payload-types";
 import { COLLECTION_SLUG_PAGES } from "~/payload/constants";
 import { notFound } from "next/navigation";
 import RenderBlocks from "~/components/RenderBlocks";
-import Header from "~/payload/globals/Header";
+import Header from "~/payload/collections/Headers";
 import {
 	GLOBAL_SLUG_FOOTER,
 	GLOBAL_SLUG_HEADER,
@@ -11,7 +15,7 @@ import {
 import { cn } from "~/styles/utils";
 import { blockComponents } from "~/payload/blocks";
 import HeaderSpacing from "~/components/HeaderSpacing";
-import Footer from "~/payload/globals/Footer";
+import Footer from "~/payload/collections/Footers";
 import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
 import { headers } from "next/headers";
 import { auth } from "~/auth";
@@ -89,11 +93,21 @@ export default async function Page({
 		<div>
 			<RefreshRouteOnSave />
 			<TailwindConfig draft={useTailwindDraftConfig as "true" | "false"} />
-			<Header header={header} className={cn(!page?.showHeader && "hidden")} />
+			{header && (
+				<Header
+					header={header as HeaderType}
+					className={cn(!page?.showHeader && "hidden")}
+				/>
+			)}
 			<HeaderSpacing showHeader={page.showHeader}>
 				<RenderBlocks blocks={page.blocks} blockComponents={blockComponents} />
 			</HeaderSpacing>
-			<Footer footer={footer} className={cn(!page.showFooter && "hidden")} />
+			{footer && (
+				<Footer
+					footer={footer as FooterType}
+					className={cn(!page.showFooter && "hidden")}
+				/>
+			)}
 		</div>
 	);
 }

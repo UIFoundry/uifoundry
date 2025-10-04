@@ -1,57 +1,51 @@
 import { getPayload } from "~/payload/utils";
 import type {
 	Page as PageType,
-	Header as HeaderType,
 	Footer as FooterType,
+	Header as HeaderType,
 } from "~/payload-types";
-import { COLLECTION_SLUG_PAGES } from "~/payload/constants";
+import { COLLECTION_SLUG_SITES } from "~/payload/constants";
 import { notFound } from "next/navigation";
 import RenderBlocks from "~/components/RenderBlocks";
-import Header from "~/payload/collections/Headers";
-import {
-	GLOBAL_SLUG_FOOTER,
-	GLOBAL_SLUG_HEADER,
-} from "~/payload/constants/globals";
 import { cn } from "~/styles/utils";
 import { blockComponents } from "~/payload/blocks";
 import HeaderSpacing from "~/components/HeaderSpacing";
+import Header from "~/payload/collections/Headers";
 import Footer from "~/payload/collections/Footers";
 import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
+import { headers } from "next/headers";
+import { auth } from "~/auth";
+import { redirect } from "next/navigation";
 import { api, HydrateClient } from "~/trpc/server";
 import HomeComponent from "~/components/Home";
-import TailwindConfig from "~/payload/globals/SiteConfig";
+import TailwindConfig from "~/payload/collections/Sites/TailwindConfig";
 
 interface PageParams {
+	params: Promise<{
+		id: string;
+		slug?: string;
+	}>;
 	searchParams: Promise<Record<string, string | string[]>>;
 }
 
-export default async function Page({
-	searchParams: searchParamsPromise,
-}: PageParams) {
-	const draft = (await searchParamsPromise).draft ?? "false";
+export default async function Page({ params: paramsPromise }: PageParams) {
+	const { id, slug = "" } = await paramsPromise;
 	const payload = await getPayload();
+	const session = await auth.api.getSession({ headers: await headers() });
 
-	const header = await payload.findGlobal({
-		slug: GLOBAL_SLUG_HEADER,
-		overrideAccess: true,
-	});
-	const footer = await payload.findGlobal({
-		slug: GLOBAL_SLUG_FOOTER,
-		overrideAccess: true,
-	});
-	const pageRes = await payload.find({
-		collection: COLLECTION_SLUG_PAGES,
-		limit: 1,
-		where: {
-			slug: {
-				equals: "home",
-			},
-		},
+	if (!session?.user) {
+		return redirect("/");
+	}
+
+	const site = await payload.findByID({
+		collection: COLLECTION_SLUG_SITES,
+		id: id,
+		draft: true,
+		depth: 1,
 	});
 
-	const page = pageRes?.docs?.[0] as null | PageType;
-
-	if (!page) {
+	const sitePages = site.pages!.docs;
+	if (!sitePages) {
 		const hello = await api.post.hello({ text: "from tRPC" });
 
 		void api.post.getLatest.prefetch();
@@ -59,7 +53,7 @@ export default async function Page({
 		return (
 			<HydrateClient>
 				<RefreshRouteOnSave />
-				<TailwindConfig draft={draft as "true" | "false"} />
+				<TailwindConfig site={site} />
 				<HomeComponent
 					greeting={hello.success ? hello.data.greeting : "Loading Query..."}
 				/>
@@ -67,26 +61,33 @@ export default async function Page({
 		);
 	}
 
-	if (page === null) {
+	const page = (sitePages as PageType[])?.find((p) => {
+		if (!slug || slug.length < 1) {
+			return p.slug === "/" || p.slug === "home";
+		}
+		return p.slug === slug;
+	});
+
+	if (!page) {
 		return notFound();
 	}
 
 	return (
 		<div>
 			<RefreshRouteOnSave />
-			<TailwindConfig draft={draft as "true" | "false"} />
-			{header && (
+			<TailwindConfig site={site} />
+			{site.header && (
 				<Header
-					header={header as HeaderType}
+					header={site.header as HeaderType}
 					className={cn(!page?.showHeader && "hidden")}
 				/>
 			)}
 			<HeaderSpacing showHeader={page.showHeader}>
 				<RenderBlocks blocks={page.blocks} blockComponents={blockComponents} />
 			</HeaderSpacing>
-			{footer && (
+			{site.footer && (
 				<Footer
-					footer={footer as FooterType}
+					footer={site.footer as FooterType}
 					className={cn(!page.showFooter && "hidden")}
 				/>
 			)}
