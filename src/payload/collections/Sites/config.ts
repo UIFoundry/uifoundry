@@ -1,6 +1,8 @@
 import type { AccessArgs, CollectionConfig } from "payload";
 import { AUTOSAVE_INTERVAL } from "~/payload/constants";
 import {
+	COLLECTION_SLUG_FOOTERS,
+	COLLECTION_SLUG_HEADERS,
 	COLLECTION_SLUG_PAGES,
 	COLLECTION_SLUG_SITES,
 	COLLECTION_SLUG_THEMES,
@@ -11,8 +13,7 @@ import type { Site } from "~/payload-types";
 import { hasPermission } from "~/auth/permissions";
 import { env } from "~/env.mjs";
 import themeColorField from "./admin/ThemeColorField/config";
-import { blocks as headerBlocks } from "~/payload/blocks/Header/config";
-import { blocks as footerBlocks } from "~/payload/blocks/Footer";
+import { beforeChange } from "./hooks/siteCollectionHooks";
 
 export const Sites: CollectionConfig = {
 	slug: COLLECTION_SLUG_SITES,
@@ -29,6 +30,9 @@ export const Sites: CollectionConfig = {
 				interval: AUTOSAVE_INTERVAL,
 			},
 		},
+	},
+	hooks: {
+		beforeChange: [beforeChange],
 	},
 	access: {
 		create: ({ req: { user } }: AccessArgs<Site>) => {
@@ -71,36 +75,14 @@ export const Sites: CollectionConfig = {
 			defaultValue: ({ user }) => (!user ? undefined : user.id),
 		}),
 		{
-			type: "collapsible",
-			label: "Header",
-			admin: {
-				initCollapsed: true,
-			},
-			fields: [
-				{
-					name: "header",
-					type: "blocks",
-					maxRows: 1,
-					minRows: 1,
-					blocks: headerBlocks,
-				},
-			],
+			name: "header",
+			type: "relationship",
+			relationTo: COLLECTION_SLUG_HEADERS,
 		},
 		{
-			type: "collapsible",
-			label: "Footer",
-			admin: {
-				initCollapsed: true,
-			},
-			fields: [
-				{
-					name: "footer",
-					type: "blocks",
-					maxRows: 1,
-					minRows: 1,
-					blocks: footerBlocks,
-				},
-			],
+			name: "footer",
+			type: "relationship",
+			relationTo: COLLECTION_SLUG_FOOTERS,
 		},
 		{
 			type: "collapsible",
@@ -585,10 +567,9 @@ export const Sites: CollectionConfig = {
 		},
 		{
 			name: "pages",
-			type: "relationship",
-			relationTo: COLLECTION_SLUG_PAGES,
-			hasMany: true,
-			defaultValue: [],
+			type: "join",
+			collection: COLLECTION_SLUG_PAGES,
+			on: "site",
 		},
 	],
 };

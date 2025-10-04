@@ -8,3 +8,5 @@ export const COLLECTION_SLUG_PAGES = "pages" as const;
 
 export const COLLECTION_SLUG_MEDIA = "media" as const;
 export const COLLECTION_SLUG_THEMES = "themes" as const;
+export const COLLECTION_SLUG_HEADERS = "headers" as const;
+export const COLLECTION_SLUG_FOOTERS = "footers" as const;

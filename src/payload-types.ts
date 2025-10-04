@@ -1691,11 +1691,17 @@ export interface Config {
     media: Media;
     themes: Theme;
     sites: Site;
+    headers: Header;
+    footers: Footer;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    sites: {
+      pages: 'pages';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     sessions: SessionsSelect<false> | SessionsSelect<true>;
@@ -1705,6 +1711,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     themes: ThemesSelect<false> | ThemesSelect<true>;
     sites: SitesSelect<false> | SitesSelect<true>;
+    headers: HeadersSelect<false> | HeadersSelect<true>;
+    footers: FootersSelect<false> | FootersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -1713,8 +1721,8 @@ export interface Config {
     defaultIDType: string;
   };
   globals: {
-    header: Header;
-    footer: Footer;
+    header: Header1;
+    footer: Footer1;
     'site-config': SiteConfig;
   };
   globalsSelect: {
@@ -1846,8 +1854,8 @@ export interface Site {
   id: string;
   title: string;
   owner: string | User;
-  header?: (Header_1_Block | Header_2_Block | CustomHeaderBlock)[] | null;
-  footer?: Footer_1_Block[] | null;
+  header?: (string | null) | Header;
+  footer?: (string | null) | Footer;
   activeTheme: string | Theme;
   light?: {
     background?: string | null;
@@ -1919,10 +1927,27 @@ export interface Site {
     'sidebar-ring'?: string | null;
     'shadow-color'?: string | null;
   };
-  pages?: (string | Page)[] | null;
+  pages?: {
+    docs?: (string | Page)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "headers".
+ */
+export interface Header {
+  id: string;
+  global?: boolean | null;
+  title: string;
+  owner: string | User;
+  header: (Header_1_Block | Header_2_Block | CustomHeaderBlock)[];
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2057,6 +2082,19 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footers".
+ */
+export interface Footer {
+  id: string;
+  global?: boolean | null;
+  title: string;
+  owner: string | User;
+  footer: Footer_1_Block[];
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2403,6 +2441,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'sites';
         value: string | Site;
+      } | null)
+    | ({
+        relationTo: 'headers';
+        value: string | Header;
+      } | null)
+    | ({
+        relationTo: 'footers';
+        value: string | Footer;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -2780,18 +2826,8 @@ export interface ThemesSelect<T extends boolean = true> {
 export interface SitesSelect<T extends boolean = true> {
   title?: T;
   owner?: T;
-  header?:
-    | T
-    | {
-        header_1?: T | Header_1_BlockSelect<T>;
-        header_2?: T | Header_2_BlockSelect<T>;
-        header_custom?: T | CustomHeaderBlockSelect<T>;
-      };
-  footer?:
-    | T
-    | {
-        footer_1?: T | Footer_1_BlockSelect<T>;
-      };
+  header?: T;
+  footer?: T;
   activeTheme?: T;
   light?:
     | T
@@ -2871,6 +2907,24 @@ export interface SitesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "headers_select".
+ */
+export interface HeadersSelect<T extends boolean = true> {
+  global?: T;
+  title?: T;
+  owner?: T;
+  header?:
+    | T
+    | {
+        header_1?: T | Header_1_BlockSelect<T>;
+        header_2?: T | Header_2_BlockSelect<T>;
+        header_custom?: T | CustomHeaderBlockSelect<T>;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2963,6 +3017,22 @@ export interface HeaderBrandLogoBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footers_select".
+ */
+export interface FootersSelect<T extends boolean = true> {
+  global?: T;
+  title?: T;
+  owner?: T;
+  footer?:
+    | T
+    | {
+        footer_1?: T | Footer_1_BlockSelect<T>;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "Footer_1_Block_select".
  */
 export interface Footer_1_BlockSelect<T extends boolean = true> {
@@ -3021,7 +3091,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header".
  */
-export interface Header {
+export interface Header1 {
   id: string;
   header: (Header_1_Block | Header_2_Block | CustomHeaderBlock)[];
   updatedAt?: string | null;
@@ -3031,7 +3101,7 @@ export interface Header {
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer".
  */
-export interface Footer {
+export interface Footer1 {
   id: string;
   footer: Footer_1_Block[];
   updatedAt?: string | null;
