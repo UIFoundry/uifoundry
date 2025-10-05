@@ -29,8 +29,8 @@
 		"secret:set:prod": "sst secret set --stage production",
 		"secret:list:dev": "sst secret list --stage dev",
 		"secret:list:prod": "sst secret list --stage production",
-		"deploy:dev": "pnpm vitest && pnpm sst unlock --stage=dev && sst deploy --stage dev",
-		"deploy:prod": "NODE_ENV=production pnpm vitest && pnpm sst unlock --stage=production && sst deploy --stage production",
+		"deploy:dev": "pnpm vitest && sst deploy --stage dev",
+		"deploy:prod": "NODE_ENV=production pnpm vitest && sst deploy --stage production",
 		"start": "next start",
 		"typecheck": "tsc --noEmit"
 	},
