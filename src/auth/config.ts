@@ -5,9 +5,14 @@ import { env } from "~/env.mjs";
 import { stripe } from "@better-auth/stripe";
 import Stripe from "stripe";
 
-const stripeClient = new Stripe(env.STRIPE_SECRET_KEY, {
-	apiVersion: "2025-09-30.clover",
-});
+let stripeClient: Stripe | null = null;
+
+function getStripeClient() {
+	stripeClient ??= new Stripe(env.STRIPE_SECRET_KEY, {
+		apiVersion: "2025-09-30.clover",
+	});
+	return stripeClient;
+}
 
 export const betterAuthPlugins = [
 	admin({
@@ -15,7 +20,7 @@ export const betterAuthPlugins = [
 		adminRoles: [USER_ROLES.admin],
 	}),
 	stripe({
-		stripeClient,
+		stripeClient: getStripeClient(),
 		stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET,
 		createCustomerOnSignUp: true,
 		onCustomerCreate: async ({ stripeCustomer, user }, request) => {
