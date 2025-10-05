@@ -5,7 +5,7 @@ import {
 	apiKeyClient,
 	customSessionClient,
 } from "better-auth/client/plugins";
-// import { stripeClient } from "@better-auth/stripe/client";
+import { stripeClient } from "@better-auth/stripe/client";
 import type { auth } from "~/auth";
 
 export const authClient = createAuthClient({
@@ -13,7 +13,7 @@ export const authClient = createAuthClient({
 	basePath: "/api/auth",
 	plugins: [
 		adminClient(),
-		// stripeClient(),
+		stripeClient(),
 		apiKeyClient(),
 		customSessionClient<typeof auth>(),
 	],
