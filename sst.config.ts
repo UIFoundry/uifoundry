@@ -47,6 +47,8 @@ export default $config({
 		const S3_ACCESS_KEY_ID = new sst.Secret("S3_ACCESS_KEY_ID");
 		const S3_SECRET_ACCESS_KEY = new sst.Secret("S3_SECRET_ACCESS_KEY");
 		const DOMAIN_CERT_ARN = new sst.Secret("DOMAIN_CERT_ARN");
+		const STRIPE_SECRET_KEY = new sst.Secret("STRIPE_SECRET_KEY");
+		const STRIPE_WEBHOOK_SECRET = new sst.Secret("STRIPE_WEBHOOK_SECRET");
 
 		const router = new sst.aws.Router("GlobalRouter", {
 			domain: {
@@ -70,6 +72,8 @@ export default $config({
 				S3_REGION,
 				S3_ACCESS_KEY_ID,
 				S3_SECRET_ACCESS_KEY,
+				STRIPE_SECRET_KEY,
+				STRIPE_WEBHOOK_SECRET,
 			],
 			router: {
 				instance: router,
@@ -102,6 +106,8 @@ export default $config({
 				S3_REGION: S3_REGION.value,
 				S3_ACCESS_KEY_ID: S3_ACCESS_KEY_ID.value,
 				S3_SECRET_ACCESS_KEY: S3_SECRET_ACCESS_KEY.value,
+				STRIPE_SECRET_KEY: STRIPE_SECRET_KEY.value,
+				STRIPE_WEBHOOK_SECRET: STRIPE_WEBHOOK_SECRET.value,
 				// Build time for deployment verification
 				BUILD_TIME: new Date().toISOString(),
 			},
@@ -156,70 +162,6 @@ export default $config({
 
 						console.log("✅ Unit tests passed! Deploying...");
 						await $`pnpm sst deploy`;
-
-						console.log("🎉 Deployment complete! Triggering E2E tests...");
-
-						// Trigger GitHub Action via GitHub CLI after successful deployment
-						try {
-							let stage = "local";
-							if (event.type === "branch") {
-								switch (event.branch) {
-									case "master":
-										stage = "production";
-										break;
-									case "dev":
-										stage = "dev";
-										break;
-									default:
-										stage = event.branch;
-								}
-							}
-							const branchRef =
-								event.type === "branch"
-									? event.branch
-									: event.type === "pull_request"
-										? event.head
-										: "dev";
-							const owner = "ianyimi";
-							const repo = "uifoundry";
-
-							// Ensure gh CLI is available (Amazon Linux via yum)
-							await $`yum install -y yum-utils`;
-							await $`yum-config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo`;
-							await $`yum install -y gh`;
-							// Resolve workflow id from default branch to avoid 404s
-							const wfIdText =
-								await $`env GH_TOKEN=${process.env.GH_AUTH_TOKEN ?? ""} gh api repos/${owner}/${repo}/actions/workflows --jq '.workflows[] | select(.path == ".github/workflows/e2e-tests.yml") | .id'`.text();
-							const workflowId = wfIdText.trim();
-							if (!workflowId) {
-								console.warn(
-									"⚠️  Workflow not found on default branch: .github/workflows/e2e-tests.yml. Ensure it is committed to the default branch.",
-								);
-							} else {
-								// Trigger workflow_dispatch with inputs via GH API
-								await $`env GH_TOKEN=${process.env.GH_AUTH_TOKEN ?? ""} gh api --method POST repos/${owner}/${repo}/actions/workflows/${workflowId}/dispatches -f ref=${branchRef} -f inputs[stage]=${stage} -f inputs[commit]=${event.commit?.id ?? "unknown"} -f inputs[branch]=${branchRef}`;
-								// Fetch the latest workflow_dispatch run id for this branch
-								const runsJson =
-									await $`env GH_TOKEN=${process.env.GH_AUTH_TOKEN ?? ""} gh run list --branch ${branchRef} --event workflow_dispatch --limit 1 --json databaseId`.text();
-								let runId = "";
-								try {
-									runId =
-										JSON.parse(runsJson)?.[0]?.databaseId?.toString() ?? "";
-								} catch { }
-								if (runId) {
-									console.log(
-										`✅ E2E tests triggered: https://github.com/${owner}/${repo}/actions/runs/${runId}`,
-									);
-								} else {
-									console.log(
-										`✅ E2E tests triggered. View runs: https://github.com/${owner}/${repo}/actions/workflows/e2e-tests-on-deploy.yml`,
-									);
-								}
-							}
-						} catch (triggerError) {
-							console.warn("⚠️  Failed to trigger E2E tests:", triggerError);
-							// Don't fail the deployment if GitHub trigger fails
-						}
 					}
 				} catch (error) {
 					console.error("❌ Workflow failed:", error);
