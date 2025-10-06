@@ -15,7 +15,7 @@ const nextConfig = {
 		reactCompiler: true,
 	},
 	images: {
-		remotePatterns: [new URL(`http://localhost:3001/**`)],
+		remotePatterns: [new URL(`http://localhost:3005/**`)],
 	},
 	output: "standalone",
 	// Exclude OpenNext and SST working dirs from file tracing to avoid recursion

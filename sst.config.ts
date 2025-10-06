@@ -58,7 +58,12 @@ export default $config({
 		});
 
 		const bucket = new sst.aws.Bucket("bucket-uifoundry-media", {
-			access: "cloudfront",
+			access: "public",
+			cors: {
+				allowMethods: ["GET", "POST", "PUT", "DELETE", "HEAD"],
+				allowOrigins: ["*"],
+				allowHeaders: ["*"],
+			},
 		});
 
 		new sst.aws.Nextjs("Frontend", {

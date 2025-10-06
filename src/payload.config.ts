@@ -82,6 +82,8 @@ export default buildConfig({
 					secretAccessKey: env.S3_SECRET_ACCESS_KEY,
 				},
 				region: env.S3_REGION,
+				// Ensure the endpoint is accessible
+				forcePathStyle: false,
 			},
 		}),
 	],
