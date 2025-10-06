@@ -15,7 +15,38 @@ const nextConfig = {
 		reactCompiler: true,
 	},
 	images: {
-		remotePatterns: [new URL(`http://localhost:3005/**`)],
+		remotePatterns: [
+			// Local development
+			{
+				protocol: "http",
+				hostname: "localhost",
+				port: "3005",
+				pathname: "/**",
+			},
+			// Production domain
+			{
+				protocol: "https",
+				hostname: "uifoundry.dev",
+				pathname: "/**",
+			},
+			// Dev domain
+			{
+				protocol: "https",
+				hostname: "dev.uifoundry.dev",
+				pathname: "/**",
+			},
+			// S3 bucket patterns - specific bucket naming patterns
+			{
+				protocol: "https",
+				hostname: "*.s3.us-west-1.amazonaws.com",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "s3.us-west-1.amazonaws.com",
+				pathname: "/**",
+			},
+		],
 	},
 	output: "standalone",
 	// Exclude OpenNext and SST working dirs from file tracing to avoid recursion
