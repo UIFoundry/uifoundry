@@ -9,7 +9,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { COLLECTION_SLUG_PAGES } from "./payload/constants";
 import { s3Storage } from "@payloadcms/storage-s3";
-import { getEnvVar } from "./utils/sst";
+import { getSSTS3BucketName } from "./utils/sst";
 import { seedDatabase } from "~/payload/seed";
 // import sharp from "sharp"
 
@@ -73,12 +73,16 @@ export default buildConfig({
 					},
 				},
 			},
-			bucket: getEnvVar("S3_BUCKET"),
+			bucket: getSSTS3BucketName(),
 			config: {
-				credentials: {
-					accessKeyId: env.S3_ACCESS_KEY_ID,
-					secretAccessKey: env.S3_SECRET_ACCESS_KEY,
-				},
+				// When running in SST, credentials are automatically provided via IAM roles
+				// For local development, you can still use your IAM user credentials
+				credentials: process.env.AWS_ACCESS_KEY_ID
+					? {
+						accessKeyId: env.S3_ACCESS_KEY_ID,
+						secretAccessKey: env.S3_SECRET_ACCESS_KEY,
+					}
+					: undefined,
 				region: env.S3_REGION,
 			},
 		}),
