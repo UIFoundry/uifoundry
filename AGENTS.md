@@ -1,5 +1,28 @@
 # Agent Guidelines for UIFoundry
 
+## CRITICAL RESTRICTIONS ⚠️
+
+**NEVER run these commands without explicit user permission:**
+
+- **DEPLOYMENT**: `sst deploy`, `pnpm deploy:dev`, `pnpm deploy:prod`, `pnpm sst deploy`
+- **GIT OPERATIONS**: `git push`, `git commit` (unless explicitly requested), creating/merging pull requests
+- **GLOBAL INSTALLS**: `npm install -g`, `pnpm add -g`, system-wide package installations
+- **INFRASTRUCTURE CHANGES**: Any command that modifies AWS resources, secrets, or deployment state
+
+**Always confirm before:**
+
+- Running commands that modify the deployed environment
+- Pushing changes to remote repositories
+- Installing system-wide dependencies
+- Modifying environment variables or secrets
+
+**Safe operations:**
+
+- Local development (`pnpm dev`, `pnpm build`, `pnpm typecheck`, `pnpm lint`)
+- Reading files and analyzing code
+- Testing at localhost:3001
+- Creating local commits for organization (if explicitly requested)
+
 ## Agent Documentation System
 
 When you hear "agent docs" or "agents docs", this refers to **both** this AGENTS.md file AND the entire `.agent-os/` directory structure. The `.agent-os/` directory contains task-specific documentation that agents should reference and update based on their current work.

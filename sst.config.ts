@@ -29,8 +29,6 @@ export default $config({
 		// Skip env validation during SST builds
 		process.env.SKIP_ENV_VALIDATION = "1";
 
-		const bucket = new sst.aws.Bucket("bucket-uifoundry-media");
-
 		const rootDomain = "uifoundry.dev";
 		const domain = isProd ? rootDomain : `${$app.stage}.${rootDomain}`;
 
@@ -57,6 +55,10 @@ export default $config({
 				dns: false,
 				cert: DOMAIN_CERT_ARN.value,
 			},
+		});
+
+		const bucket = new sst.aws.Bucket("bucket-uifoundry-media", {
+			access: "cloudfront",
 		});
 
 		new sst.aws.Nextjs("Frontend", {
@@ -93,6 +95,15 @@ export default $config({
 					actions: ["lambda:GetLayerVersion"],
 					resources: ["*"],
 				},
+				{
+					actions: [
+						"s3:GetObject",
+						"s3:PutObject",
+						"s3:DeleteObject",
+						"s3:ListBucket",
+					],
+					resources: [bucket.arn, `${bucket.arn}/*`],
+				},
 			],
 			environment: {
 				// NODE_ENV: process.env.NODE_ENV,
@@ -112,6 +123,10 @@ export default $config({
 				BUILD_TIME: new Date().toISOString(),
 			},
 		});
+
+		return {
+			bucketName: bucket.name,
+		};
 	},
 
 	console: {

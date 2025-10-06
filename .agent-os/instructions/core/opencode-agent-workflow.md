@@ -4,6 +4,8 @@
 
 UIFoundry integrates specialized OpenCode agents into the .agent-os workflow system for automated component development. This creates a complete pipeline from specification to documentation with quality validation at each step.
 
+**⚠️ CRITICAL:** All agents MUST read and follow `.agent-os/instructions/meta/critical-restrictions.md` before performing any operations. Never deploy, push to git, or install global packages without explicit user permission.
+
 ## Available Agents
 
 ### Primary Agents
