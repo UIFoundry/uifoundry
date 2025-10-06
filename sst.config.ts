@@ -102,7 +102,7 @@ export default $config({
 						"s3:DeleteObject",
 						"s3:ListBucket",
 					],
-					resources: [bucket.arn, `${bucket.arn}/*`],
+					resources: [bucket.arn, $interpolate`${bucket.arn}/*`],
 				},
 			],
 			environment: {
