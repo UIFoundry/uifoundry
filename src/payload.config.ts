@@ -75,14 +75,12 @@ export default buildConfig({
 			},
 			bucket: getSSTS3BucketName(),
 			config: {
-				// When running in SST, credentials are automatically provided via IAM roles
-				// For local development, you can still use your IAM user credentials
-				credentials: process.env.AWS_ACCESS_KEY_ID
-					? {
-						accessKeyId: env.S3_ACCESS_KEY_ID,
-						secretAccessKey: env.S3_SECRET_ACCESS_KEY,
-					}
-					: undefined,
+				// Always provide credentials for local development
+				// In deployed environments, SST will handle IAM roles automatically
+				credentials: {
+					accessKeyId: env.S3_ACCESS_KEY_ID,
+					secretAccessKey: env.S3_SECRET_ACCESS_KEY,
+				},
 				region: env.S3_REGION,
 			},
 		}),
