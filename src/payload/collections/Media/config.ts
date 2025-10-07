@@ -6,12 +6,16 @@ import {
 import { COLLECTION_SLUG_MEDIA } from "~/payload/constants";
 import type { Media as MediaType } from "~/payload-types";
 import { hasPermission } from "~/auth/permissions";
-import userRelationship from "../fields/userRelationship/config";
+import userRelationship from "~/payload/fields/userRelationship/config";
+import { afterRead } from "./hooks/mediaCollectionHooks";
 
 export const Media: CollectionConfig = {
 	slug: COLLECTION_SLUG_MEDIA,
 	admin: {
 		useAsTitle: "alt",
+	},
+	hooks: {
+		afterRead: [afterRead],
 	},
 	access: {
 		create: ({ req: { user } }: AccessArgs<MediaType>) => {

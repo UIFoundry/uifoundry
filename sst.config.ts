@@ -40,7 +40,6 @@ export default $config({
 		const GOOGLE_CLIENT_ID = new sst.Secret("GOOGLE_CLIENT_ID");
 		const GOOGLE_CLIENT_SECRET = new sst.Secret("GOOGLE_CLIENT_SECRET");
 		const PAYLOAD_SECRET = new sst.Secret("PAYLOAD_SECRET");
-		const S3_BUCKET = new sst.Secret("S3_BUCKET");
 		const S3_REGION = new sst.Secret("S3_REGION");
 		const S3_ACCESS_KEY_ID = new sst.Secret("S3_ACCESS_KEY_ID");
 		const S3_SECRET_ACCESS_KEY = new sst.Secret("S3_SECRET_ACCESS_KEY");
@@ -75,7 +74,6 @@ export default $config({
 				GOOGLE_CLIENT_ID,
 				GOOGLE_CLIENT_SECRET,
 				PAYLOAD_SECRET,
-				S3_BUCKET,
 				S3_REGION,
 				S3_ACCESS_KEY_ID,
 				S3_SECRET_ACCESS_KEY,
@@ -118,7 +116,7 @@ export default $config({
 				GOOGLE_CLIENT_ID: GOOGLE_CLIENT_ID.value,
 				GOOGLE_CLIENT_SECRET: GOOGLE_CLIENT_SECRET.value,
 				PAYLOAD_SECRET: PAYLOAD_SECRET.value,
-				S3_BUCKET: S3_BUCKET.value,
+				S3_BUCKET: bucket.name,
 				S3_REGION: S3_REGION.value,
 				S3_ACCESS_KEY_ID: S3_ACCESS_KEY_ID.value,
 				S3_SECRET_ACCESS_KEY: S3_SECRET_ACCESS_KEY.value,
