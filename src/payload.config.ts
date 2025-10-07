@@ -9,7 +9,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { COLLECTION_SLUG_PAGES } from "./payload/constants";
 import { s3Storage } from "@payloadcms/storage-s3";
-import { getSSTS3BucketName } from "./utils/sst";
 import { seedDatabase } from "~/payload/seed";
 // import sharp from "sharp"
 
@@ -73,7 +72,7 @@ export default buildConfig({
 					},
 				},
 			},
-			bucket: getSSTS3BucketName(),
+			bucket: env.S3_BUCKET,
 			config: {
 				// Always provide credentials for local development
 				// In deployed environments, SST will handle IAM roles automatically
