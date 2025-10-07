@@ -211,6 +211,25 @@ Semantic Versioning is recommended once the registry stabilizes. Use Conventiona
 
 Docs are added as components/blocks ship (docs‑first). See the roadmap for the current docs stage and links once Fumadocs is scaffolded.
 
+## License
+
+This project uses [PolyForm Perimeter License 1.0.0](https://polyformproject.org/licenses/perimeter/1.0.0).
+
+**You CAN use this for:**
+
+- Your business's marketing website
+- Client websites (agencies/freelancers)
+- Your SaaS product's marketing site
+- Internal company websites
+
+**You CANNOT:**
+
+- Resell this template
+- Create competing CMS templates
+- Offer competing website hosting services
+
+MIT-licensed templates for individual sites use will be available separately.
+
 ## Contributing
 
 - Use Conventional Commits (feat, fix, chore, docs). This helps future release automation.

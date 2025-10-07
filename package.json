@@ -2,6 +2,7 @@
 	"name": "uifoundry",
 	"version": "0.1.1",
 	"private": true,
+	"license": "PolyForm-Perimeter-1.0.0",
 	"type": "module",
 	"scripts": {
 		"build": "payload generate:types && payload generate:importmap && shadcn build && next build",
