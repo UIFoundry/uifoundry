@@ -219,7 +219,7 @@ This project uses [PolyForm Perimeter License 1.0.0](https://polyformproject.org
 
 - Your business's marketing website
 - Client websites (agencies/freelancers)
-- Your SaaS product's marketing site
+- Your SaaS product site
 - Internal company websites
 
 **You CANNOT:**
