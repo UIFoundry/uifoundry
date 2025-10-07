@@ -64,25 +64,15 @@ export default buildConfig({
 	plugins: [
 		s3Storage({
 			collections: {
-				media: {
-					signedDownloads: {
-						shouldUseSignedURL: ({ filename }) => {
-							return filename.endsWith(".mp4");
-						},
-					},
-				},
+				media: true,
 			},
 			bucket: env.S3_BUCKET,
 			config: {
-				// Always provide credentials for local development
-				// In deployed environments, SST will handle IAM roles automatically
 				credentials: {
 					accessKeyId: env.S3_ACCESS_KEY_ID,
 					secretAccessKey: env.S3_SECRET_ACCESS_KEY,
 				},
 				region: env.S3_REGION,
-				// Ensure the endpoint is accessible
-				forcePathStyle: false,
 			},
 		}),
 	],
