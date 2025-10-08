@@ -19,7 +19,7 @@ type PricingCardProps = {
 	name: string;
 	price?: number;
 	description: string;
-	features: string[];
+	features: readonly string[];
 	actionLabel: string;
 	popular?: boolean;
 	exclusive?: boolean;

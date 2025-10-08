@@ -27,7 +27,7 @@ export const stripeRouter = createTRPCRouter({
 		}
 		return err({ type: DAL_ERRORS.notFound.type });
 	}),
-	// Create one-time payment checkout session
+	// Create one-time payment checkout session since 'payment' mode does not yet work with better-auth stripe plugin
 	createCheckoutSession: privateProcedure
 		.input(
 			z.object({
@@ -39,7 +39,6 @@ export const stripeRouter = createTRPCRouter({
 		.mutation(async ({ ctx, input }) => {
 			const user = ctx.user;
 
-			// Map plan name to key
 			const planKey =
 				input.planName === "Founder"
 					? "founder"
@@ -49,7 +48,6 @@ export const stripeRouter = createTRPCRouter({
 
 			const plan = LIFETIME_PLANS[planKey];
 
-			// Get or create Stripe customer
 			const customers = await stripe.customers.list({
 				email: user.email,
 				limit: 1,
@@ -60,7 +58,6 @@ export const stripeRouter = createTRPCRouter({
 			if (customers.data.length > 0) {
 				customerId = customers.data[0]!.id;
 			} else {
-				// Create new customer if doesn't exist
 				const customer = await stripe.customers.create({
 					email: user.email,
 					name: user.name ?? undefined,
@@ -71,10 +68,17 @@ export const stripeRouter = createTRPCRouter({
 				customerId = customer.id;
 			}
 
-			// Create checkout session for ONE-TIME payment
+			const metadata = {
+				userId: user.id,
+				planName: plan.name,
+				planKey: planKey,
+				priceId: plan.priceId,
+				lifetime: "yes",
+			};
+
 			const session = await stripe.checkout.sessions.create({
 				customer: customerId,
-				mode: "payment", // ONE-TIME PAYMENT MODE (not subscription!)
+				mode: "payment",
 				line_items: [
 					{
 						price: plan.priceId,
@@ -84,13 +88,7 @@ export const stripeRouter = createTRPCRouter({
 				success_url: input.successUrl,
 				cancel_url: input.cancelUrl,
 				payment_intent_data: {
-					metadata: {
-						userId: user.id,
-						planName: plan.name,
-						planKey: planKey,
-						priceId: plan.priceId,
-						lifetime: "yes", // Mark as lifetime plan for easy identification
-					},
+					metadata,
 				},
 			});
 

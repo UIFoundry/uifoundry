@@ -41,13 +41,37 @@ export const betterAuthPlugins = [
 				},
 			],
 		},
-		onCustomerCreate: async ({ stripeCustomer, user }, request) => {
-			console.log(
-				`[${request.path}] - customer ${stripeCustomer.id} created for user ${user.id}`,
-			);
-		},
 		onEvent: async (event) => {
-			console.log("event fired: ", event);
+			if (event.type === "payment_intent.succeeded") {
+				const paymentIntent = event.data.object;
+				const lifetime = paymentIntent.metadata?.lifetime;
+				const planName = paymentIntent.metadata?.planName;
+				const userId = paymentIntent.metadata?.userId;
+
+				if (
+					lifetime === "yes" &&
+					planName &&
+					userId &&
+					(planName === "Founder" ||
+						planName === "Pioneer" ||
+						planName === "Early Adopter")
+				) {
+					try {
+						const { getPayload } = await import("~/payload/utils");
+						const payload = await getPayload();
+
+						await payload.update({
+							collection: "users",
+							id: userId,
+							data: {
+								lifetimeSubscription: planName,
+							},
+						});
+					} catch (error) {
+						console.error(`Error updating user ${userId}:`, error);
+					}
+				}
+			}
 		},
 	}),
 	apiKey(),

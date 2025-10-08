@@ -28,6 +28,8 @@
 		"secret:set": "sst secret set",
 		"secret:set:dev": "sst secret set --stage dev",
 		"secret:set:prod": "sst secret set --stage production",
+		"secret:remove:dev": "sst secret remove --stage dev",
+		"secret:remove:prod": "sst secret remove --stage production",
 		"secret:list:dev": "sst secret list --stage dev",
 		"secret:list:prod": "sst secret list --stage production",
 		"stripe:listen": "stripe listen --forward-to localhost:3005/api/auth/stripe/webhook",
