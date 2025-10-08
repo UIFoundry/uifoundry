@@ -46,6 +46,11 @@ export default $config({
 		const DOMAIN_CERT_ARN = new sst.Secret("DOMAIN_CERT_ARN");
 		const STRIPE_SECRET_KEY = new sst.Secret("STRIPE_SECRET_KEY");
 		const STRIPE_WEBHOOK_SECRET = new sst.Secret("STRIPE_WEBHOOK_SECRET");
+		const STRIPE_FOUNDER_PRICE_ID = new sst.Secret("STRIPE_FOUNDER_PRICE_ID");
+		const STRIPE_PIONEER_PRICE_ID = new sst.Secret("STRIPE_PIONEER_PRICE_ID");
+		const STRIPE_EARLY_ADOPTER_PRICE_ID = new sst.Secret(
+			"STRIPE_EARLY_ADOPTER_PRICE_ID",
+		);
 
 		const router = new sst.aws.Router("GlobalRouter", {
 			domain: {
@@ -79,6 +84,9 @@ export default $config({
 				S3_SECRET_ACCESS_KEY,
 				STRIPE_SECRET_KEY,
 				STRIPE_WEBHOOK_SECRET,
+				STRIPE_FOUNDER_PRICE_ID,
+				STRIPE_PIONEER_PRICE_ID,
+				STRIPE_EARLY_ADOPTER_PRICE_ID,
 			],
 			router: {
 				instance: router,
@@ -122,6 +130,9 @@ export default $config({
 				S3_SECRET_ACCESS_KEY: S3_SECRET_ACCESS_KEY.value,
 				STRIPE_SECRET_KEY: STRIPE_SECRET_KEY.value,
 				STRIPE_WEBHOOK_SECRET: STRIPE_WEBHOOK_SECRET.value,
+				STRIPE_FOUNDER_PRICE_ID: STRIPE_FOUNDER_PRICE_ID.value,
+				STRIPE_PIONEER_PRICE_ID: STRIPE_PIONEER_PRICE_ID.value,
+				STRIPE_EARLY_ADOPTER_PRICE_ID: STRIPE_EARLY_ADOPTER_PRICE_ID.value,
 				// Build time for deployment verification
 				BUILD_TIME: new Date().toISOString(),
 			},

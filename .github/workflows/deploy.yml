@@ -37,6 +37,9 @@ jobs:
       S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
       STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
       STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+      STRIPE_FOUNDER_PRICE_ID: ${{ secrets.STRIPE_FOUNDER_PRICE_ID }}
+      STRIPE_PIONEER_PRICE_ID: ${{ secrets.STRIPE_PIONEER_PRICE_ID }}
+      STRIPE_EARLY_ADOPTER_PRICE_ID: ${{ secrets.STRIPE_EARLY_ADOPTER_PRICE_ID }}
       NEXT_PUBLIC_BETTER_AUTH_URL: ${{ vars.NEXT_PUBLIC_BETTER_AUTH_URL || secrets.NEXT_PUBLIC_BETTER_AUTH_URL }}
     outputs:
       stage: ${{ steps.determine-stage.outputs.stage }}

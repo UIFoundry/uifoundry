@@ -4,6 +4,7 @@ import { USER_ROLES } from "./permissions";
 import { env } from "~/env.mjs";
 import { stripe } from "@better-auth/stripe";
 import Stripe from "stripe";
+import { STRIPE_PLANS } from "./stripe";
 
 let stripeClient: Stripe | null = null;
 
@@ -23,6 +24,10 @@ export const betterAuthPlugins = [
 		stripeClient: getStripeClient(),
 		stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET,
 		createCustomerOnSignUp: true,
+		subscription: {
+			enabled: true,
+			plans: STRIPE_PLANS,
+		},
 		onCustomerCreate: async ({ stripeCustomer, user }, request) => {
 			console.log(
 				`[${request.path}] - customer ${stripeCustomer.id} created for user ${user.id}`,
