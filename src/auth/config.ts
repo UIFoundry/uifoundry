@@ -4,7 +4,6 @@ import { USER_ROLES } from "./permissions";
 import { env } from "~/env.mjs";
 import { stripe } from "@better-auth/stripe";
 import Stripe from "stripe";
-import { LIFETIME_PLANS } from "~/utils/stripe";
 
 let stripeClient: Stripe | null = null;
 
@@ -26,20 +25,7 @@ export const betterAuthPlugins = [
 		createCustomerOnSignUp: true,
 		subscription: {
 			enabled: true,
-			plans: [
-				{
-					name: LIFETIME_PLANS.founder.name,
-					priceId: LIFETIME_PLANS.founder.priceId,
-				},
-				{
-					name: LIFETIME_PLANS.pioneer.name,
-					priceId: LIFETIME_PLANS.pioneer.priceId,
-				},
-				{
-					name: LIFETIME_PLANS.earlyAdopter.name,
-					priceId: LIFETIME_PLANS.earlyAdopter.priceId,
-				},
-			],
+			plans: [],
 		},
 		onEvent: async (event) => {
 			if (event.type === "payment_intent.succeeded") {

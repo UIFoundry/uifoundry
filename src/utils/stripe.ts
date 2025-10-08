@@ -56,6 +56,7 @@ export const LIFETIME_PLANS = {
 		actionLabel: "Upgrade",
 	},
 } as const;
+
 export type LifetimePlan = (typeof LIFETIME_PLANS)[keyof typeof LIFETIME_PLANS];
 export type LifetimePlanKey = keyof typeof LIFETIME_PLANS;
 export type LifetimePlanName =

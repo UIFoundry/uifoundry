@@ -159,22 +159,23 @@ const authMiddleware = t.middleware(async ({ next, ctx }) => {
 		}
 	}
 
-	const asContext: Partial<typeof activeSubscription> = activeSubscription
-		? {
-			id: activeSubscription.id,
-			plan: activeSubscription.plan,
-			priceId: activeSubscription.priceId,
-			limits: activeSubscription.limits,
-			seats: activeSubscription.seats,
-		}
-		: lifetimeMember;
+	const activeSubscriptionContext: Partial<typeof activeSubscription> =
+		activeSubscription
+			? {
+				id: activeSubscription.id,
+				plan: activeSubscription.plan,
+				priceId: activeSubscription.priceId,
+				limits: activeSubscription.limits,
+				seats: activeSubscription.seats,
+			}
+			: lifetimeMember;
 
 	return await next({
 		ctx: {
 			...ctx,
 			session: ctx.session,
 			user: ctx.user,
-			activeSubscription: asContext,
+			activeSubscription: activeSubscriptionContext,
 		},
 	});
 });
