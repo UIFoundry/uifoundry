@@ -3,15 +3,24 @@ import { env } from "~/env.mjs";
 export const LIFETIME_PLANS = {
 	founder: {
 		name: "Founder",
-		priceId: env.STRIPE_FOUNDER_PRICE_ID,
+		price: 197,
+		priceId: env.NEXT_PUBLIC_STRIPE_FOUNDER_PRICE_ID,
+		features: [],
+		description: "Lifetime Access Plan",
 	},
 	pioneer: {
 		name: "Pioneer",
-		priceId: env.STRIPE_PIONEER_PRICE_ID,
+		price: 297,
+		priceId: env.NEXT_PUBLIC_STRIPE_PIONEER_PRICE_ID,
+		features: [],
+		description: "Lifetime Access Plan",
 	},
 	earlyAdopter: {
 		name: "Early Adopter",
-		priceId: env.STRIPE_EARLY_ADOPTER_PRICE_ID,
+		price: 397,
+		priceId: env.NEXT_PUBLIC_STRIPE_EARLY_ADOPTER_PRICE_ID,
+		features: [],
+		description: "Lifetime Access Plan",
 	},
 } as const;
 export type LifetimePlan = (typeof LIFETIME_PLANS)[keyof typeof LIFETIME_PLANS];

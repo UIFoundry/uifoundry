@@ -13,7 +13,9 @@ export const authClient = createAuthClient({
 	basePath: "/api/auth",
 	plugins: [
 		adminClient(),
-		stripeClient(),
+		stripeClient({
+			subscription: true,
+		}),
 		apiKeyClient(),
 		customSessionClient<typeof auth>(),
 	],

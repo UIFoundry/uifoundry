@@ -119,13 +119,33 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
 export const publicProcedure = t.procedure.use(timingMiddleware);
 
 const authMiddleware = t.middleware(async ({ next, ctx }) => {
-	if (ctx.session === null || ctx.user === null)
+	if (ctx.session === null || ctx.user === null) {
 		return redirect("/auth/sign-in");
+	}
+
+	const subscriptions = await auth.api.listActiveSubscriptions({
+		headers: ctx.headers,
+	});
+
+	const activeSubscription = subscriptions.find(
+		(sub) => sub.status === "active" || sub.status === "trialing",
+	);
+	const asContext: Partial<typeof activeSubscription> = activeSubscription
+		? {
+			id: activeSubscription.id,
+			plan: activeSubscription.plan,
+			priceId: activeSubscription.priceId,
+			limits: activeSubscription.limits,
+			seats: activeSubscription.seats,
+		}
+		: undefined;
+
 	return await next({
 		ctx: {
 			...ctx,
 			session: ctx.session,
 			user: ctx.user,
+			activeSubscription: asContext,
 		},
 	});
 });
