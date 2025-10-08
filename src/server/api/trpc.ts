@@ -13,6 +13,7 @@ import { ZodError } from "zod";
 import { auth } from "~/auth";
 import type { User } from "~/payload-types";
 import { getPayload } from "~/payload/utils";
+import type { LifetimePlanKey } from "~/utils/stripe";
 
 /**
  * 1. CONTEXT
@@ -119,13 +120,62 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
 export const publicProcedure = t.procedure.use(timingMiddleware);
 
 const authMiddleware = t.middleware(async ({ next, ctx }) => {
-	if (ctx.session === null || ctx.user === null)
+	if (ctx.session === null || ctx.user === null) {
 		return redirect("/auth/sign-in");
+	}
+
+	const subscriptions = await auth.api.listActiveSubscriptions({
+		headers: ctx.headers,
+	});
+
+	const activeSubscription = subscriptions.find(
+		(sub) => sub.status === "active" || sub.status === "trialing",
+	);
+
+	// Check for lifetime membership if no active subscription
+	let lifetimeMember: typeof activeSubscription | undefined = undefined;
+	if (!activeSubscription && ctx.user.lifetimeSubscription) {
+		const { LIFETIME_PLANS } = await import("~/utils/stripe");
+		const planKey: LifetimePlanKey | undefined = Object.keys(
+			LIFETIME_PLANS,
+		).find(
+			// @ts-expect-error valid LIFETIME_PLANS key type
+			(key: LifetimePlanKey) =>
+				LIFETIME_PLANS[key].name === ctx.user?.lifetimeSubscription,
+		);
+
+		if (planKey) {
+			const plan = LIFETIME_PLANS[planKey];
+
+			lifetimeMember = {
+				id: `lifetime-${ctx.user.id}`,
+				plan: ctx.user.lifetimeSubscription as string,
+				priceId: plan.priceId,
+				limits: plan.limits,
+				seats: 1,
+				referenceId: ctx.user.id,
+				status: "active" as const,
+			};
+		}
+	}
+
+	const activeSubscriptionContext: Partial<typeof activeSubscription> =
+		activeSubscription
+			? {
+				id: activeSubscription.id,
+				plan: activeSubscription.plan,
+				priceId: activeSubscription.priceId,
+				limits: activeSubscription.limits,
+				seats: activeSubscription.seats,
+			}
+			: lifetimeMember;
+
 	return await next({
 		ctx: {
 			...ctx,
 			session: ctx.session,
 			user: ctx.user,
+			activeSubscription: activeSubscriptionContext,
 		},
 	});
 });
