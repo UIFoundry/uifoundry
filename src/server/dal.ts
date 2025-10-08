@@ -1,5 +1,39 @@
 import { redirect } from "next/navigation";
 
+export const DAL_ERRORS = {
+	noUser: {
+		type: "no-user",
+		name: "UserNotFound",
+		message: "User Not Found",
+	},
+	notFound: {
+		type: "not-found",
+		name: "Resource Not Found",
+		message: "Resource Not Found",
+	},
+	noAccess: {
+		type: "no-access",
+		name: "NoAccessAllowed",
+		message: "User not allowed to perform this action",
+	},
+	payload: {
+		type: "payload",
+		name: "PayloadError",
+		message: "Payload Error",
+	},
+	unknown: {
+		type: "unknown",
+		name: "UnknownError",
+		message: "Unknown Error",
+	},
+} as const;
+
+export type DalErrorType = (typeof DAL_ERRORS)[keyof typeof DAL_ERRORS];
+
+export interface DalError extends Error {
+	type: DalErrorType["type"];
+}
+
 export type DalReturn<T, E extends DalError = DalError> =
 	| {
 		success: true;
@@ -9,20 +43,6 @@ export type DalReturn<T, E extends DalError = DalError> =
 		success: false;
 		error: E;
 	};
-
-export const DAL_ERROR_TYPES = {
-	noUser: "no-user",
-	noAccess: "no-access",
-	payload: "payload",
-	unknown: "unknown",
-} as const;
-
-export type DalErrorType =
-	(typeof DAL_ERROR_TYPES)[keyof typeof DAL_ERROR_TYPES];
-
-export interface DalError extends Error {
-	type: DalErrorType;
-}
 
 export function noUserRedirect<T, E extends DalError>({
 	dalReturn,
@@ -80,46 +100,27 @@ export const err = (
 	error: Partial<DalError> = { type: "unknown" },
 ): DalReturn<never, DalError> => {
 	const errBase = { success: false } as const;
-	switch (error.type) {
-		case "no-user":
+	for (const dalErr of Object.values(DAL_ERRORS)) {
+		if (error.type === dalErr.type) {
 			return {
 				...errBase,
 				error: {
 					...error,
-					type: "no-user",
-					name: error.name ?? "UserNotFound",
-					message: error.message ?? "User Not Found",
+					type: error.type,
+					name: error.name ?? dalErr.name,
+					message: error.message ?? dalErr.message,
 				},
 			};
-		case "no-access":
-			return {
-				...errBase,
-				error: {
-					...error,
-					type: "no-access",
-					name: error.name ?? "NoAccessAllowed",
-					message: error.message ?? "User not allowed to perform this action",
-				},
-			};
-		case "payload":
-			return {
-				...errBase,
-				error: {
-					...error,
-					type: "payload",
-					name: error.name ?? "PayloadError",
-					message: error.message ?? "Payload Error",
-				},
-			};
-		default:
-			return {
-				...errBase,
-				error: {
-					...error,
-					type: "unknown",
-					name: error.name ?? "Unknown Error",
-					message: error.message ?? "Unknown Error",
-				},
-			};
+		}
 	}
+
+	return {
+		...errBase,
+		error: {
+			...error,
+			type: "unknown",
+			name: error.name ?? DAL_ERRORS.unknown.name,
+			message: error.message ?? DAL_ERRORS.unknown.message,
+		},
+	};
 };

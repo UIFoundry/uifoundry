@@ -1,5 +1,5 @@
 import { postRouter } from "~/server/api/routers/post";
-import { subscriptionsRouter } from "~/server/api/routers/subscriptions";
+import { stripeRouter } from "~/server/api/routers/stripe";
 import { themesRouter } from "~/server/api/routers/themes";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
@@ -11,7 +11,7 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 export const appRouter = createTRPCRouter({
 	post: postRouter,
 	themes: themesRouter,
-	subscriptions: subscriptionsRouter,
+	stripe: stripeRouter,
 });
 
 // export type definition of API

@@ -8,6 +8,7 @@ import selectEnumField from "~/payload/fields/selectEnumField/config";
 import { auth } from "~/auth";
 import { USER_ROLES, hasPermission } from "~/auth/permissions";
 import type { User } from "~/payload-types";
+import { LIFETIME_PLANS } from "~/utils/stripe";
 
 export const Users: CollectionConfig = {
 	slug: COLLECTION_SLUG_USERS,
@@ -144,5 +145,10 @@ export const Users: CollectionConfig = {
 			label: "Ban Expires In (seconds)",
 			type: "number",
 		},
+		selectEnumField(LIFETIME_PLANS, {
+			name: "lifetimeSubscription",
+			selectEnumKey: "name",
+			useValueAsLabel: true,
+		}),
 	],
 };

@@ -14,11 +14,10 @@ import React, { type MouseEvent } from "react";
 import { cn } from "~/styles/utils";
 import { LIFETIME_PLANS } from "~/utils/stripe";
 import { api, type RouterOutputs } from "~/trpc/react";
-import { authClient } from "~/auth/client";
 
 type PricingCardProps = {
-	title: string;
-	price?: string;
+	name: string;
+	price?: number;
 	description: string;
 	features: string[];
 	actionLabel: string;
@@ -26,7 +25,7 @@ type PricingCardProps = {
 	exclusive?: boolean;
 	priceId: string;
 	activeSubscription?: Extract<
-		RouterOutputs["subscriptions"]["getActiveSubscription"],
+		RouterOutputs["stripe"]["getSubscriptionStatus"],
 		{ success: true }
 	>["data"];
 };
@@ -46,7 +45,7 @@ const PricingHeader = ({
 );
 
 const PricingCard = ({
-	title,
+	name,
 	price,
 	description,
 	features,
@@ -57,38 +56,38 @@ const PricingCard = ({
 	activeSubscription,
 }: PricingCardProps) => {
 	const isActiveSub =
-		activeSubscription?.plan === title &&
+		activeSubscription?.name === name &&
 		activeSubscription?.priceId === priceId;
 	const apiUtils = api.useUtils();
 
+	const createCheckout = api.stripe.createCheckoutSession.useMutation();
+
 	async function handleSubscriptionChangeRequest(_e: MouseEvent) {
+		// For one-time payments, we don't support cancellation
+		// Users have lifetime access once purchased
 		if (activeSubscription && isActiveSub) {
-			const { data, error } = await authClient.subscription.cancel({
-				subscriptionId: activeSubscription.id,
-				returnUrl: window.location.href,
-			});
-			if (error) {
-				// TODO: error handling here when a cancelled subscription does work
-				return;
-			}
-			window.location.href = data.url;
-		} else {
-			const { data, error } = await authClient.subscription.upgrade({
-				plan: title,
+			alert("You have lifetime access to this plan. No cancellation needed!");
+			return;
+		}
+
+		// Create one-time payment checkout session
+		try {
+			const result = await createCheckout.mutateAsync({
+				planName: name as "Founder" | "Pioneer" | "Early Adopter",
 				successUrl: window.location.href,
 				cancelUrl: window.location.href,
-				subscriptionId: activeSubscription?.id,
 			});
-			if (error) {
-				// TODO: error handling here when a cancelled subscription does work
-				return;
+
+			if (result.url) {
+				window.location.href = result.url;
 			}
-			if (data.url) {
-				return (window.location.href = data.url);
-			}
-			console.log("data: ", data);
+		} catch (error) {
+			console.error("Error creating checkout session:", error);
+			alert("Failed to create checkout session. Please try again.");
 		}
-		await apiUtils.subscriptions.invalidate();
+
+		await apiUtils.stripe.invalidate();
+		console.log("invalidated client subscription queries");
 	}
 
 	return (
@@ -104,10 +103,12 @@ const PricingCard = ({
 			<div>
 				<CardHeader className="pt-4 pb-8">
 					<CardTitle className="text-lg text-zinc-700 dark:text-zinc-300">
-						{title}
+						{name} {isActiveSub && "Current Plan"}
 					</CardTitle>
 					<div className="flex gap-0.5">
-						<h3 className="text-3xl font-bold">{price ?? "Custom"}</h3>
+						<h3 className="text-3xl font-bold">
+							{price ? `$${price}` : "Custom"}
+						</h3>
 						<span className="mb-1 flex flex-col justify-end text-sm">
 							{price ? " lifetime" : null}
 						</span>
@@ -143,59 +144,8 @@ const CheckItem = ({ text }: { text: string }) => (
 );
 
 export default function SubscriptionsPage() {
-	const { data: activeSubRes, isLoading: loadingActiveSub } =
-		api.subscriptions.getActiveSubscription.useQuery();
-	// Convert LIFETIME_PLANS to pricing card format
-	const plans = [
-		{
-			title: LIFETIME_PLANS.founder.name,
-			price: "$99",
-			description: LIFETIME_PLANS.founder.description,
-			features: [
-				"Lifetime access to UIFoundry",
-				"All current and future blocks",
-				"All current and future fields",
-				"Priority support",
-				"Early access to new features",
-			],
-			actionLabel: "Get Started",
-			priceId: LIFETIME_PLANS.founder.priceId as string,
-			popular: false,
-			totalSeats: 100,
-		},
-		{
-			title: LIFETIME_PLANS.pioneer.name,
-			price: "$149",
-			description: LIFETIME_PLANS.pioneer.description,
-			features: [
-				"Lifetime access to UIFoundry",
-				"All current and future blocks",
-				"All current and future fields",
-				"Priority support",
-				"Early access to new features",
-			],
-			actionLabel: "Get Started",
-			priceId: LIFETIME_PLANS.pioneer.priceId as string,
-			popular: true,
-			totalSeats: 150,
-		},
-		{
-			title: LIFETIME_PLANS.earlyAdopter.name,
-			price: "$199",
-			description: LIFETIME_PLANS.earlyAdopter.description,
-			features: [
-				"Lifetime access to UIFoundry",
-				"All current and future blocks",
-				"All current and future fields",
-				"Priority support",
-				"Early access to new features",
-			],
-			actionLabel: "Get Started",
-			priceId: LIFETIME_PLANS.earlyAdopter.priceId as string,
-			exclusive: true,
-			totalSeats: 250,
-		},
-	];
+	const { data: subscriptionStatus } =
+		api.stripe.getSubscriptionStatus.useQuery();
 
 	return (
 		<div className="grid h-full w-full place-items-center py-8">
@@ -205,13 +155,15 @@ export default function SubscriptionsPage() {
 					subtitle="Choose the lifetime plan that's right for you"
 				/>
 				<section className="mt-8 flex flex-col justify-center gap-8 sm:flex-row sm:flex-wrap">
-					{plans.map((plan) => {
+					{Object.values(LIFETIME_PLANS).map((plan) => {
 						return (
 							<PricingCard
-								key={plan.title}
+								key={plan.name}
 								{...plan}
 								activeSubscription={
-									activeSubRes?.success ? activeSubRes.data : undefined
+									subscriptionStatus?.success
+										? subscriptionStatus.data
+										: undefined
 								}
 							/>
 						);
