@@ -19,6 +19,9 @@ export const env = createEnv({
 		S3_SECRET_ACCESS_KEY: z.string(),
 		STRIPE_SECRET_KEY: z.string(),
 		STRIPE_WEBHOOK_SECRET: z.string(),
+		STRIPE_FOUNDER_PRICE_ID: z.string(),
+		STRIPE_PIONEER_PRICE_ID: z.string(),
+		STRIPE_EARLY_ADOPTER_PRICE_ID: z.string(),
 	},
 
 	/**
@@ -48,6 +51,9 @@ export const env = createEnv({
 		S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
 		STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
 		STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+		STRIPE_FOUNDER_PRICE_ID: process.env.STRIPE_FOUNDER_PRICE_ID,
+		STRIPE_PIONEER_PRICE_ID: process.env.STRIPE_PIONEER_PRICE_ID,
+		STRIPE_EARLY_ADOPTER_PRICE_ID: process.env.STRIPE_EARLY_ADOPTER_PRICE_ID,
 	},
 	/**
 	 * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
