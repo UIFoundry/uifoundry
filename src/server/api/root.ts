@@ -1,3 +1,4 @@
+import { usersRouter } from "./routers/user";
 import { postRouter } from "~/server/api/routers/post";
 import { stripeRouter } from "~/server/api/routers/stripe";
 import { themesRouter } from "~/server/api/routers/themes";
@@ -12,6 +13,7 @@ export const appRouter = createTRPCRouter({
 	post: postRouter,
 	themes: themesRouter,
 	stripe: stripeRouter,
+	users: usersRouter,
 });
 
 // export type definition of API
