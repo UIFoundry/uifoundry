@@ -23,7 +23,13 @@ export default function RootLayout({
 	children,
 }: Readonly<{ auth: React.ReactNode; children: React.ReactNode }>) {
 	return (
-		<html lang="en" className={`${geist.variable}`} title="UIFoundry">
+		<html
+			lang="en"
+			className={`${geist.variable}`}
+			title="UIFoundry"
+			// next-themes error suppression
+			suppressHydrationWarning
+		>
 			<body>
 				<ServerProviders>
 					{/* <TailwindConfig /> */}

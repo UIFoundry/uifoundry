@@ -7,7 +7,7 @@ import { TextEffect } from "~/ui/motion-primitives/text-effect";
 import { AnimatedGroup } from "~/ui/motion-primitives/animated-group";
 import type { Hero_1_Block } from "~/payload-types";
 import { cn } from "~/styles/utils";
-import MediaField from "~/payload/fields/mediaField";
+import MediaField from "~/payload/fields/media";
 
 const transitionVariants = {
 	item: {

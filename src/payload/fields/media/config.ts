@@ -1,5 +1,5 @@
-import type { GroupField } from "~/payload/fields";
-import uploadField from "../uploadField/config";
+import type { GroupField } from "~/payload/fields/index.d.ts";
+import uploadField from "~/payload/fields/upload/config";
 
 export default function mediaField(props?: Partial<GroupField>): GroupField {
 	return {

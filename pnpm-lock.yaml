@@ -134,6 +134,9 @@ importers:
       next:
         specifier: 15.4.2-canary.33
         version: 15.4.2-canary.33(@babel/core@7.28.4)(@playwright/test@1.55.0)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@19.1.0-rc.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.77.4)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       payload:
         specifier: ^3.49.1
         version: 3.55.1(graphql@16.11.0)(typescript@5.9.2)
