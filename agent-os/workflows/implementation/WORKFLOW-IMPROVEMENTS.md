@@ -251,6 +251,66 @@ Use this checklist for every component migrated to registry:
 
 ---
 
+## 8. Use Correct Import Paths for Field Helpers
+
+**Pattern**: Field helper imports should use the folder name, not the file pattern.
+
+**Correct**:
+```typescript
+// ✅ Import from folder name
+import mediaField from "~/payload/fields/media/config";
+import MediaField from "~/payload/fields/media";
+```
+
+**Wrong**:
+```typescript
+// ❌ Don't append "Field" to import path
+import mediaField from "~/payload/fields/mediaField/config";
+import MediaField from "~/payload/fields/mediaField";
+```
+
+**Why**: The actual folder is named `media/`, not `mediaField/`. Always check the actual filesystem structure.
+
+**Registry equivalent**:
+```typescript
+import mediaField from "@/registry/default/lib/fields/media/config";
+```
+
+---
+
+## 9. Use `useTheme()` for Theme-Aware Media
+
+**Pattern**: When components need to switch media based on theme (light/dark), use the `useTheme()` hook from `next-themes`.
+
+**Implementation**:
+```typescript
+"use client";
+
+import { useTheme } from "next-themes";
+
+export default function Component(props: ComponentBlock) {
+  const { theme } = useTheme();
+
+  // Use theme to select appropriate media
+  const mediaSrc = theme === "dark"
+    ? (darkMedia ?? fallback)
+    : (lightMedia ?? fallback);
+
+  return <video src={mediaSrc} />;
+}
+```
+
+**Dependencies to add**:
+- **NPM**: Add `next-themes` to package.json dependencies
+- **Registry**: Add `next-themes` to registry.json dependencies array
+
+**When to use**:
+- Components with light/dark media variants
+- Components that need theme-aware styling beyond CSS
+- Video/image sources that differ by theme
+
+---
+
 ## Quick Reference: Essential Commands
 
 ```bash
