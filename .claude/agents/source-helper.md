@@ -84,14 +84,56 @@ cat package.json | jq '.dependencies."dependency-name"'
 
 #### 2C: Install Missing Dependencies
 
-```bash
-# Install one or multiple dependencies
-pnpm add [package-name] [package-name] ...
+**Two types of dependencies**:
 
-# Examples:
+1. **NPM Packages**
+2. **Shadcn UI Components** (CRITICAL - often forgotten)
+
+**Install NPM Packages**:
+
+```bash
+# Install missing npm packages
+pnpm add [dependency-name] [dependency-name] ...
+
+# Example for a hero with framer-motion and heroicons:
 pnpm add framer-motion @heroicons/react
-pnpm add react-wrap-balancer class-variance-authority
-pnpm add @radix-ui/react-dialog @radix-ui/react-dropdown-menu
+```
+
+**Install Shadcn UI Components**:
+
+```bash
+# Check source for shadcn imports like:
+# import { Button } from "@/components/ui/button"
+# import { Card } from "@/components/ui/card"
+
+# Install each required shadcn component
+npx shadcn@latest add button card dialog input
+```
+
+**Identify shadcn components in source**:
+
+```typescript
+// These imports indicate shadcn components needed:
+import { Button } from "@/components/ui/button"; // npx shadcn add button
+import { Card } from "@/components/ui/card"; // npx shadcn add card
+import { Badge } from "@/components/ui/badge"; // npx shadcn add badge
+import { Input } from "@/components/ui/input"; // npx shadcn add input
+```
+
+**Document ALL installations**:
+
+```
+Installing dependencies for Hero_3:
+
+NPM Packages:
+✅ framer-motion@^11.0.0 (animations)
+✅ @heroicons/react@^2.1.0 (icons)
+⏭️  lucide-react (already installed)
+
+Shadcn UI Components:
+✅ button (via shadcn CLI)
+✅ card (via shadcn CLI)
+⏭️  badge (already installed)
 ```
 
 **Document each installation**:
@@ -111,6 +153,14 @@ Installing dependencies for Hero_3:
 - Use latest stable if source uses outdated versions
 
 ### Step 3: Create PayloadCMS Block Configuration
+
+**CRITICAL**: Config.ts MUST be created BEFORE index.tsx. This is not optional.
+
+**WHY**:
+
+- PayloadCMS generates TypeScript types from config.ts
+- The React component needs these generated types
+- You cannot import `[BlockType]_N_Block` until config exists and `pnpm payload:types` runs
 
 **Reference**: `src/payload/blocks/Hero/Hero_1/config.ts`
 
@@ -240,22 +290,126 @@ export const BLOCK_SLUGS_ARRAY = [
 
 **Reference**: `src/payload/blocks/Hero/Hero_1/index.tsx`
 
-#### 4A: Component Template
+#### 4A: Pull Source Component
+
+**Copy the entire source component** from the repository you selected.
+
+For example, if using Tailark hero:
+
+```typescript
+// Original Tailark/Shadcn source
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+
+interface HeroSectionProps {
+  title: string;
+  description: string;
+  primaryButtonText: string;
+  secondaryButtonText: string;
+}
+
+export default function HeroSection({
+  title,
+  description,
+  primaryButtonText,
+  secondaryButtonText
+}: HeroSectionProps) {
+  return (
+    <section className="container mx-auto px-4">
+      <h1 className="text-5xl font-bold">{title}</h1>
+      <p className="text-lg text-muted-foreground">{description}</p>
+      <div className="flex gap-4">
+        <Button>{primaryButtonText}</Button>
+        <Button variant="outline">{secondaryButtonText}</Button>
+      </div>
+    </section>
+  );
+}
+```
+
+#### 4B: Refactor to PayloadCMS (Step-by-Step)
+
+**Step 1: Update imports**
 
 ```typescript
 "use client";
 
-import Link from "next/link";
+// ✅ Change @/components/ui to ~/ui for UI components
 import { Button } from "~/ui/button";
-// Import based on component needs:
-// - Icons from lucide-react or @heroicons/react
-// - Motion primitives from ~/ui/motion-primitives/
-// - Other UI components from ~/ui/
-import type { [BlockType]_N_Block } from "~/payload-types";
-import { cn } from "~/styles/utils";
-import MediaField from "~/payload/fields/mediaField";
 
-export default function [BlockType]NSection(props: [BlockType]_N_Block) {
+// ✅ Change @/lib/utils to ~/styles/utils for cn function (CRITICAL)
+import { cn } from "~/styles/utils";
+
+// ✅ Keep icon imports as-is
+import { ArrowRight } from "lucide-react";
+
+// ✅ Import PayloadCMS generated type
+import type { Hero_3_Block } from "~/payload-types";
+```
+
+**Common import path changes**:
+
+```typescript
+// ❌ Original shadcn/source paths
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+
+// ✅ UIFoundry project paths
+import { cn } from "~/styles/utils"; // IMPORTANT: Different path
+import { Button } from "~/ui/button";
+import { Card } from "~/ui/card";
+```
+
+**Step 2: Remove custom interface and update component signature**
+
+```typescript
+// ❌ DELETE the custom interface
+// interface HeroSectionProps { ... }  ← REMOVE THIS
+
+// ✅ Use PayloadCMS generated type
+export default function Hero3Section(props: Hero_3_Block) {
+```
+
+**Step 3: Update JSX to use PayloadCMS field names**
+
+```typescript
+  return (
+    <section className="container mx-auto px-4">
+      {/* ✅ Map to your config.ts field names */}
+      <h1 className="text-5xl font-bold">{props.header}</h1>  {/* was: title */}
+      <p className="text-lg text-muted-foreground">{props.subheader}</p>  {/* was: description */}
+      <div className="flex gap-4">
+        <Button>{props.primaryCtaLabel}</Button>  {/* was: primaryButtonText */}
+        <Button variant="outline">{props.secondaryCtaLabel}</Button>  {/* was: secondaryButtonText */}
+      </div>
+    </section>
+  );
+```
+
+**Final refactored version**:
+
+```typescript
+"use client";
+
+import { Button } from "~/ui/button";
+import { ArrowRight } from "lucide-react";
+import type { Hero_3_Block } from "~/payload-types";
+
+export default function Hero3Section(props: Hero_3_Block) {
+  return (
+    <section className="container mx-auto px-4">
+      <h1 className="text-5xl font-bold">{props.header}</h1>
+      <p className="text-lg text-muted-foreground">{props.subheader}</p>
+      <div className="flex gap-4">
+        <Button>{props.primaryCtaLabel}</Button>
+        <Button variant="outline">{props.secondaryCtaLabel}</Button>
+      </div>
+    </section>
+  );
+}
   return (
     <section className="relative">
       {/* Preserve source component structure */}

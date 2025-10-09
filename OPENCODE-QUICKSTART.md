@@ -44,21 +44,39 @@ The task-coordinator will:
 
 ---
 
-## Alternative: Use Slash Command
+## ⭐ Recommended: Use Slash Commands (BEST FOR OPENCODE)
 
-**Step 1: Run the command**
+OpenCode works best with explicit slash commands. I've created two for you:
+
+### Single Component
 
 ```bash
-/build-marketing-blocks
+/build-marketing-block
 ```
 
-**Step 2: Specify what you want**
+**What happens**:
 
-```
-Build 5 Hero blocks
+1. Asks what block type and number
+2. Searches Awesome Shadcn UI for sources (or you provide URL)
+3. Delegates to @source-helper → @registry-porter → @docs-writer
+4. Updates README when complete
+
+**Timeline**: ~10-15 minutes for 1 component
+
+### Batch of Components (2-5)
+
+```bash
+/build-marketing-blocks-batch
 ```
 
-The current agent (usually `build`) will load the workflow and guide you through it.
+**What happens**:
+
+1. Asks for block type and how many (max 5)
+2. Searches for sources or you provide URLs
+3. Runs all through Phase 1, then Phase 2, then Phase 3
+4. Updates README when complete
+
+**Timeline**: ~30-45 minutes for 5 components
 
 ---
 
