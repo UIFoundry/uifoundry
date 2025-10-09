@@ -296,6 +296,39 @@
 		},
 		{
 			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Hero 3 (Video Background)",
+			"name": "hero-3",
+			"type": "registry:block",
+			"description": "Hero section with video background (supports media upload or URL fallback), centered layout, and two CTA buttons. Based on Tailark Hero Section Five.",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react",
+				"next-themes"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/hero/hero-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/hero/hero-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
 			"title": "Header 1",
 			"name": "header-1",
 			"type": "registry:block",

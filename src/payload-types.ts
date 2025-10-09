@@ -2259,6 +2259,8 @@ export interface Hero_1_Block {
   blockType: 'hero_1';
 }
 /**
+ * Upload background video (light/dark variants). Falls back to Video URL if not provided.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "MediaField".
  */
@@ -2296,8 +2298,9 @@ export interface Hero_3_Block {
   primaryCtaHref: string;
   secondaryCtaLabel: string;
   secondaryCtaHref: string;
+  media?: MediaField;
   /**
-   * URL to background video (MP4 format recommended)
+   * Fallback video URL if media upload not provided (MP4 format recommended)
    */
   videoUrl?: string | null;
   id?: string | null;
@@ -2730,6 +2733,7 @@ export interface Hero_3_BlockSelect<T extends boolean = true> {
   primaryCtaHref?: T;
   secondaryCtaLabel?: T;
   secondaryCtaHref?: T;
+  media?: T | MediaFieldSelect<T>;
   videoUrl?: T;
   id?: T;
   blockName?: T;

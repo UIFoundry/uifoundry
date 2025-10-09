@@ -116,7 +116,7 @@ Goal: a working, self‑hostable Next.js + Payload starter with a UIFoundry regi
 
 **Marketing blocks checklist (MVP - target 5 of each)**
 
-- [ ] Hero (0/5)
+- [ ] Hero (3/5)
 - [ ] Header (0/5)
 - [ ] Footer (0/5)
 - [ ] Features (0/5)

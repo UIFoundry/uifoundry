@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "~/ui/button";
+import { Button } from "@/registry/ui/button";
 import { ChevronRight } from "lucide-react";
 import type { Hero_3_Block } from "~/payload-types";
 import { useTheme } from "next-themes";

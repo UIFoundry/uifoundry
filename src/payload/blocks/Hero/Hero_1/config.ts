@@ -3,7 +3,7 @@ import {
 	BLOCK_SLUG_HERO_1,
 } from "~/payload/constants/blocks";
 import type { Block } from "payload";
-import mediaField from "~/payload/fields/mediaField/config";
+import mediaField from "~/payload/fields/media/config";
 import headerField from "~/payload/fields/header/config";
 import subHeaderField from "~/payload/fields/subheader/config";
 

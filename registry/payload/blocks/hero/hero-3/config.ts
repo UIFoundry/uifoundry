@@ -1,11 +1,11 @@
 import {
 	BLOCK_GROUP_HERO,
 	BLOCK_SLUG_HERO_3,
-} from "~/payload/constants/blocks";
+} from "@/registry/default/lib/constants/blocks";
 import type { Block } from "payload";
-import headerField from "~/payload/fields/header/config";
-import subHeaderField from "~/payload/fields/subheader/config";
-import mediaField from "~/payload/fields/media/config";
+import headerField from "@/registry/default/lib/fields/header/config";
+import subHeaderField from "@/registry/default/lib/fields/subheader/config";
+import mediaField from "@/registry/default/lib/fields/media/config";
 
 export const Hero_3_Block: Block = {
 	slug: BLOCK_SLUG_HERO_3,

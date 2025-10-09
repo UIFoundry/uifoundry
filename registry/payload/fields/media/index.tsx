@@ -1,6 +1,6 @@
 import type { Media, MediaField as MediaFieldProps } from "~/payload-types";
 import Image from "next/image";
-import { cn } from "@registry/ui/utils";
+import { cn } from "@/registry/ui/utils";
 import type { ComponentPropsWithoutRef } from "react";
 
 export default function MediaField({
