@@ -1,4 +1,4 @@
-import { api } from "~/trpc/server";
+import { api, HydrateClient } from "~/trpc/server";
 import PageClient from "./PageClient";
 
 export default async function SubscriptionsPage() {
@@ -7,5 +7,9 @@ export default async function SubscriptionsPage() {
     api.users.getLifetimeUserCount.prefetch(),
   ]);
 
-  return <PageClient />;
+  return (
+    <HydrateClient>
+      <PageClient />
+    </HydrateClient>
+  );
 }

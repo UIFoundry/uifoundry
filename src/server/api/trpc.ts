@@ -27,21 +27,21 @@ import type { LifetimePlanKey } from "~/utils/stripe";
  * @see https://trpc.io/docs/server/context
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const session = await auth.api.getSession({ headers: opts.headers });
-  const user: User | null = session?.user
-    ? {
-        ...session.user,
-        createdAt: session.user.createdAt.toISOString(),
-        updatedAt: session.user.updatedAt.toISOString(),
-      }
-    : null;
-  const payload = await getPayload();
-  return {
-    ...opts,
-    payload,
-    session: session?.session ?? null,
-    user,
-  };
+	const session = await auth.api.getSession({ headers: opts.headers });
+	const user: User | null = session?.user
+		? {
+			...session.user,
+			createdAt: session.user.createdAt.toISOString(),
+			updatedAt: session.user.updatedAt.toISOString(),
+		}
+		: null;
+	const payload = await getPayload();
+	return {
+		...opts,
+		payload,
+		session: session?.session ?? null,
+		user,
+	};
 };
 
 /**
@@ -52,17 +52,17 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
  * errors on the backend.
  */
 const t = initTRPC.context<typeof createTRPCContext>().create({
-  transformer: superjson,
-  errorFormatter({ shape, error }) {
-    return {
-      ...shape,
-      data: {
-        ...shape.data,
-        zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
-      },
-    };
-  },
+	transformer: superjson,
+	errorFormatter({ shape, error }) {
+		return {
+			...shape,
+			data: {
+				...shape.data,
+				zodError:
+					error.cause instanceof ZodError ? error.cause.flatten() : null,
+			},
+		};
+	},
 });
 
 /**
@@ -93,20 +93,20 @@ export const createTRPCRouter = t.router;
  * network latency that would occur in production but not in local development.
  */
 const timingMiddleware = t.middleware(async ({ next, path }) => {
-  const start = Date.now();
+	const start = Date.now();
 
-  if (t._config.isDev) {
-    // artificial delay in dev
-    const waitMs = Math.floor(Math.random() * 400) + 100;
-    await new Promise((resolve) => setTimeout(resolve, waitMs));
-  }
+	if (t._config.isDev) {
+		// artificial delay in dev
+		const waitMs = Math.floor(Math.random() * 400) + 100;
+		await new Promise((resolve) => setTimeout(resolve, waitMs));
+	}
 
-  const result = await next();
+	const result = await next();
 
-  const end = Date.now();
-  console.log(`[TRPC] ${path} took ${end - start}ms to execute`);
+	const end = Date.now();
+	console.log(`[TRPC] ${path} took ${end - start}ms to execute`);
 
-  return result;
+	return result;
 });
 
 /**
@@ -119,67 +119,67 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
 export const publicProcedure = t.procedure.use(timingMiddleware);
 
 const authMiddleware = t.middleware(async ({ next, ctx }) => {
-  if (ctx.session === null || ctx.user === null) {
-    throw new TRPCError({
-      code: "UNAUTHORIZED",
-      message: "You must be logged in to access this resource",
-    });
-  }
+	if (ctx.session === null || ctx.user === null) {
+		throw new TRPCError({
+			code: "UNAUTHORIZED",
+			message: "You must be logged in to access this resource",
+		});
+	}
 
-  const subscriptions = await auth.api.listActiveSubscriptions({
-    headers: ctx.headers,
-  });
+	const subscriptions = await auth.api.listActiveSubscriptions({
+		headers: ctx.headers,
+	});
 
-  const activeSubscription = subscriptions.find(
-    (sub) => sub.status === "active" || sub.status === "trialing",
-  );
+	const activeSubscription = subscriptions.find(
+		(sub) => sub.status === "active" || sub.status === "trialing",
+	);
 
-  // Check for lifetime membership if no active subscription
-  let lifetimeMember: typeof activeSubscription | undefined = undefined;
-  if (!activeSubscription && ctx.user.lifetimeSubscription) {
-    const { LIFETIME_PLANS } = await import("~/utils/stripe");
-    const planKey: LifetimePlanKey | undefined = Object.keys(
-      LIFETIME_PLANS,
-    ).find(
-      // @ts-expect-error valid LIFETIME_PLANS key type
-      (key: LifetimePlanKey) =>
-        LIFETIME_PLANS[key].name === ctx.user?.lifetimeSubscription,
-    );
+	// Check for lifetime membership if no active subscription
+	let lifetimeMember: typeof activeSubscription | undefined = undefined;
+	if (!activeSubscription && ctx.user.lifetimeSubscription) {
+		const { LIFETIME_PLANS } = await import("~/utils/stripe");
+		const planKey: LifetimePlanKey | undefined = Object.keys(
+			LIFETIME_PLANS,
+		).find(
+			// @ts-expect-error valid LIFETIME_PLANS key type
+			(key: LifetimePlanKey) =>
+				LIFETIME_PLANS[key].name === ctx.user?.lifetimeSubscription,
+		);
 
-    if (planKey) {
-      const plan = LIFETIME_PLANS[planKey];
+		if (planKey) {
+			const plan = LIFETIME_PLANS[planKey];
 
-      lifetimeMember = {
-        id: `lifetime-${ctx.user.id}`,
-        plan: ctx.user.lifetimeSubscription as string,
-        priceId: plan.priceId,
-        limits: plan.limits,
-        seats: 1,
-        referenceId: ctx.user.id,
-        status: "active" as const,
-      };
-    }
-  }
+			lifetimeMember = {
+				id: `lifetime-${ctx.user.id}`,
+				plan: ctx.user.lifetimeSubscription as string,
+				priceId: plan.priceId,
+				limits: plan.limits,
+				seats: 1,
+				referenceId: ctx.user.id,
+				status: "active" as const,
+			};
+		}
+	}
 
-  const activeSubscriptionContext: Partial<typeof activeSubscription> =
-    activeSubscription
-      ? {
-          id: activeSubscription.id,
-          plan: activeSubscription.plan,
-          priceId: activeSubscription.priceId,
-          limits: activeSubscription.limits,
-          seats: activeSubscription.seats,
-        }
-      : lifetimeMember;
+	const activeSubscriptionContext: Partial<typeof activeSubscription> =
+		activeSubscription
+			? {
+				id: activeSubscription.id,
+				plan: activeSubscription.plan,
+				priceId: activeSubscription.priceId,
+				limits: activeSubscription.limits,
+				seats: activeSubscription.seats,
+			}
+			: lifetimeMember;
 
-  return await next({
-    ctx: {
-      ...ctx,
-      session: ctx.session,
-      user: ctx.user,
-      activeSubscription: activeSubscriptionContext,
-    },
-  });
+	return await next({
+		ctx: {
+			...ctx,
+			session: ctx.session,
+			user: ctx.user,
+			activeSubscription: activeSubscriptionContext,
+		},
+	});
 });
 
 export const privateProcedure = t.procedure.use(authMiddleware);
