@@ -5,7 +5,7 @@ import {
 import type { Block } from "payload";
 import headerField from "~/payload/fields/header/config";
 import subHeaderField from "~/payload/fields/subheader/config";
-import mediaField from "~/payload/fields/mediaField/config";
+import mediaField from "~/payload/fields/media/config";
 import callToActionPair from "~/payload/fields/callToActionPairField/config";
 
 export const Hero_2_Block: Block = {

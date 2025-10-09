@@ -1,0 +1,134 @@
+---
+title: "Hero 3 (Video Background)"
+description: "Hero section with video background, centered layout, and two CTA buttons"
+category: "blocks"
+---
+
+## Preview
+
+<Hero_3 />
+
+A modern hero section featuring a full-screen video background with DNA-like animation, centered content layout, and dual call-to-action buttons. This component supports both media uploads (with light/dark variants) and URL fallback, includes automatic color inversion for dark mode, and responsive design optimizations.
+
+**Key Features:**
+
+- Full-screen video background with MP4 support
+- **Flexible video sources**: Upload videos via media field OR provide a URL
+- **Light/dark mode variants**: Upload separate videos for each theme
+- Dark/light mode with automatic video color inversion (when using URL fallback)
+- Fully responsive with mobile-first design
+- Two customizable CTA buttons with distinct styles
+- Centered content that shifts to left-aligned on desktop
+- Smooth animations and polished hover states
+
+## Props
+
+The Hero_3 block accepts the following props from PayloadCMS:
+
+<TypeTable
+  type={{
+    header: {
+      description: "Main heading text displayed prominently",
+      type: "string",
+      default: "Build 10x Faster with NS",
+      required: true,
+    },
+    subheader: {
+      description: "Supporting description text below the header",
+      type: "string | undefined",
+      default:
+        "Highly customizable components for building modern websites and applications",
+    },
+    primaryCtaLabel: {
+      description: "Text label for the primary call-to-action button",
+      type: "string",
+      default: "Get Started",
+      required: true,
+    },
+    primaryCtaHref: {
+      description: "URL for the primary CTA button link",
+      type: "string",
+      default: "/get-started",
+      required: true,
+    },
+    secondaryCtaLabel: {
+      description: "Text label for the secondary call-to-action button",
+      type: "string",
+      default: "View Demo",
+      required: true,
+    },
+    secondaryCtaHref: {
+      description: "URL for the secondary CTA button link",
+      type: "string",
+      default: "/demo",
+      required: true,
+    },
+    media: {
+      description: "Background video upload field with light/dark variants. Takes priority over videoUrl if provided.",
+      type: "MediaField | undefined",
+    },
+    videoUrl: {
+      description: "Fallback URL to background video (used only if media field is empty). MP4 format recommended for best browser compatibility.",
+      type: "string | undefined",
+      default: "https://ik.imagekit.io/lrigu76hy/tailark/dna-video.mp4",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/hero-3
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [`button`](/docs/ui/button) - Customizable button component with variants
+- [`@uifoundry/header-field`](/docs/fields/header-field) - PayloadCMS text field for headers
+- [`@uifoundry/subheader-field`](/docs/fields/subheader-field) - PayloadCMS text field for subheaders
+- [`@uifoundry/media-field`](/docs/fields/media-field) - PayloadCMS double upload field (light & dark variants)
+- [`@uifoundry/block-constants`](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [Lucide React](https://github.com/lucide-icons/lucide/tree/main/packages/lucide-react) - Beautiful & consistent icon toolkit
+- [Payload](https://github.com/payloadcms/payload) - Headless CMS and application framework
+
+## Design Notes
+
+**Video Source Priority:**
+The component prioritizes video sources in this order:
+1. **Light variant** from media upload field
+2. **Dark variant** from media upload field
+3. **URL fallback** from videoUrl field
+
+This allows you to provide theme-specific videos (recommended) or a single fallback URL.
+
+**Video Background Behavior:**
+- Light mode: 50% opacity with color inversion (when using URL fallback)
+- Dark mode: 35% opacity on mobile, 75% on desktop with no inversion
+- When using media uploads, the appropriate variant displays without color manipulation
+
+**Responsive Layout:**
+- Mobile (< 1024px): Centered text with 2:3 aspect ratio video
+- Desktop (≥ 1024px): Left-aligned text with 16:9 aspect ratio video
+
+**Performance Tips:**
+- **Preferred approach**: Upload optimized videos via media field for best theme support
+- Keep video files under 5MB for optimal loading performance
+- Use MP4 format for best browser compatibility
+- Consider using a CDN for video hosting (like the default ImageKit URL for fallback)
+- Compress videos before uploading to reduce file size
+
+**Accessibility:**
+- Video includes `muted`, `autoPlay`, `loop`, and `playsInline` attributes for proper behavior
+- Semantic HTML with proper heading hierarchy
+- Color contrast meets WCAG standards in both themes

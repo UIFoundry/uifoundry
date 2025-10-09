@@ -1838,6 +1838,7 @@ export interface Page {
     | Features_2_Block
     | Hero_1_Block
     | Hero_2_Block
+    | Hero_3_Block
     | CTA_1_Block
     | FAQ_1_Block
     | Pricing_1_Block
@@ -2258,6 +2259,8 @@ export interface Hero_1_Block {
   blockType: 'hero_1';
 }
 /**
+ * Upload background video (light/dark variants). Falls back to Video URL if not provided.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "MediaField".
  */
@@ -2283,6 +2286,26 @@ export interface Hero_2_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_3_Block".
+ */
+export interface Hero_3_Block {
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: MediaField;
+  /**
+   * Fallback video URL if media upload not provided (MP4 format recommended)
+   */
+  videoUrl?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_3';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2571,6 +2594,7 @@ export interface PagesSelect<T extends boolean = true> {
         features_2?: T | Features_2_BlockSelect<T>;
         hero_1?: T | Hero_1_BlockSelect<T>;
         hero_2?: T | Hero_2_BlockSelect<T>;
+        hero_3?: T | Hero_3_BlockSelect<T>;
         cta_1?: T | CTA_1_BlockSelect<T>;
         faq_1?: T | FAQ_1_BlockSelect<T>;
         pricing_1?: T | Pricing_1_BlockSelect<T>;
@@ -2695,6 +2719,22 @@ export interface Hero_2_BlockSelect<T extends boolean = true> {
         href?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_3_Block_select".
+ */
+export interface Hero_3_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  media?: T | MediaFieldSelect<T>;
+  videoUrl?: T;
   id?: T;
   blockName?: T;
 }

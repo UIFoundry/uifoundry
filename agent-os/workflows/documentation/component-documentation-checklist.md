@@ -128,6 +128,9 @@
 - `@uifoundry/text-effect` → "Text animation effects with staggered reveals"
 - `@uifoundry/style-utils` → "Tailwind utility functions including cn() class merger"
 - `@uifoundry/media-field` → "PayloadCMS dual upload field (light/dark variants)"
+- `@uifoundry/header-field` → "PayloadCMS text field for headers"
+- `@uifoundry/subheader-field` → "PayloadCMS text field for subheaders"
+- `@uifoundry/block-constants` → "Block slug and group constants for PayloadCMS blocks"
 
 ### NPM Dependencies
 
