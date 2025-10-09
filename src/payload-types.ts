@@ -1771,6 +1771,7 @@ export interface User {
   banned: boolean;
   banReason?: string | null;
   banExpiresIn?: number | null;
+  lifetimeSubscription?: ('Founder' | 'Pioneer' | 'Early Adopter') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2505,6 +2506,7 @@ export interface UsersSelect<T extends boolean = true> {
   banned?: T;
   banReason?: T;
   banExpiresIn?: T;
+  lifetimeSubscription?: T;
   updatedAt?: T;
   createdAt?: T;
 }
