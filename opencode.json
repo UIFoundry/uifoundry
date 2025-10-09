@@ -3,7 +3,7 @@
   "agent": {
     "build": {
       "mode": "primary",
-      "model": "anthropic/claude-sonnet-4-20250514",
+      "model": "claude-sonnet-4-5-20250929",
       "tools": {
         "write": true,
         "edit": true,
@@ -31,7 +31,7 @@
     "registry-porter": {
       "description": "Moves components from src/ to registry/ with proper imports and dependencies",
       "mode": "subagent",
-      "model": "anthropic/claude-sonnet-4-20250514",
+      "model": "claude-sonnet-4-5-20250929",
       "temperature": 0.2,
       "tools": {
         "write": true,
@@ -60,7 +60,7 @@
     "source-helper": {
       "description": "Helps with source code development, debugging, and implementation in src/",
       "mode": "subagent",
-      "model": "anthropic/claude-sonnet-4-20250514",
+      "model": "claude-sonnet-4-5-20250929",
       "temperature": 0.1,
       "tools": {
         "write": true,
@@ -87,9 +87,9 @@
       }
     },
     "task-coordinator": {
-      "description": "Orchestrates execution and delegates tasks to specialist agents",
+      "description": "Orchestrates marketing blocks development and delegates tasks to specialist agents",
       "mode": "primary",
-      "model": "anthropic/claude-sonnet-4-20250514",
+      "model": "claude-sonnet-4-5-20250929",
       "temperature": 0.2,
       "tools": {
         "read": true,
@@ -98,7 +98,10 @@
         "write": true,
         "edit": true,
         "bash": false,
-        "task": true
+        "task": true,
+        "webfetch": true,
+        "todowrite": true,
+        "todoread": true
       }
     }
   }
