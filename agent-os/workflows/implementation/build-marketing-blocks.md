@@ -509,7 +509,22 @@ import type { Hero_3_Block } from "~/payload-types"; // ❌ Cannot find name 'He
 
 #### 4A: Create Component File
 
+**CRITICAL**: Always start the file with a source attribution comment:
+
 ```typescript
+/**
+ * [BlockType] [N] Component
+ *
+ * Source: [Full URL to original component]
+ * License: [MIT/Free Tier/etc.]
+ * Adapted from: [Original author/project name]
+ *
+ * Modifications:
+ * - Integrated with PayloadCMS block system
+ * - Replaced hardcoded content with dynamic props
+ * - [Any other significant changes]
+ */
+
 "use client";
 
 import Link from "next/link";
@@ -685,7 +700,42 @@ const messages = await playwright_browser_console_messages({
 - [ ] Images load correctly (if using MediaField)
 - [ ] Links navigate correctly
 
-### Step 6: Report Phase 1 Status
+### Step 6: Update Component Sources Tracking
+
+**CRITICAL**: After successfully building each component, update the centralized sources tracking document.
+
+**File**: `agent-os/standards/component-sources.md`
+
+**For EACH component**, add an entry:
+
+```markdown
+### [BlockType]_N
+- **Source**: [Full URL to original component]
+- **License**: [MIT/Free Tier/etc.]
+- **Date Added**: [YYYY-MM-DD]
+- **Notes**: [Brief description of component and any significant modifications]
+```
+
+**Also update**:
+1. **"Sources Used" section** - Add new libraries if this is first use
+2. **"Available Free Tier Sources NOT Yet Used"** - Remove used sources, add newly discovered ones
+
+**Example Entry**:
+```markdown
+### Hero_4
+- **Source**: https://tailark.com/preview/dusk/hero-section/six
+- **License**: Free Tier
+- **Date Added**: 2025-10-10
+- **Notes**: Hero with badge, heading, subheader, email signup form, and features list. Background image with radial gradient overlay.
+```
+
+**Why This Matters**:
+- Prevents duplicate sourcing from same components
+- Provides proper attribution for licensing
+- Helps future agents quickly see which sources have been used
+- Creates a reference for customization and maintenance
+
+### Step 7: Report Phase 1 Status
 
 **For EACH component**, report:
 
@@ -701,6 +751,7 @@ const messages = await playwright_browser_console_messages({
 - src/payload/blocks/Hero/Hero_3/index.tsx
 - Updated: src/payload/constants/blocks.ts
 - Updated: src/payload/blocks/Hero/index.ts
+- Updated: agent-os/standards/component-sources.md
 
 **Validation**:
 ✅ TypeScript compiles

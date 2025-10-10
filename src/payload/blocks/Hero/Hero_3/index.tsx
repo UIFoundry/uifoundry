@@ -1,3 +1,19 @@
+/**
+ * Hero 3 Component
+ *
+ * Source: https://tailark.com/preview/dusk/hero-section/one
+ * License: Free Tier
+ * Adapted from: Tailark Dusk UI Kit
+ *
+ * Modifications:
+ * - Integrated with PayloadCMS block system
+ * - Replaced hardcoded content with dynamic props from Hero_3_Block
+ * - Center-aligned hero with badge, heading, subheader, CTA buttons
+ * - Video background with theme-aware rendering (light/dark variants)
+ * - Added fallback videoUrl field for backwards compatibility
+ * - Decorative rounded borders and subtle opacity effects on video
+ */
+
 "use client";
 
 import Link from "next/link";

@@ -4,6 +4,8 @@ Build 2-5 marketing block components through the complete 3-phase pipeline.
 
 **CRITICAL**: This command follows a STRICT workflow. Do NOT deviate from the process outlined below.
 
+**IMPORTANT**: All components must include source attribution comments and be tracked in the centralized sources document (`agent-os/standards/component-sources.md`).
+
 **Usage Examples**:
 
 ```bash
@@ -213,10 +215,12 @@ For EACH component in the batch, delegate to `@source-helper`:
 1. Fetch source code
 2. Install ALL dependencies with pnpm
 3. Create config.ts (PayloadCMS block configuration)
-4. Create index.tsx (React component)
-5. Update block constants
-6. Register exports
-7. Test at localhost:3001
+4. Add source attribution comment to index.tsx (see workflow template)
+5. Create index.tsx (React component)
+6. Update block constants
+7. Register exports
+8. Update sources tracking document (agent-os/standards/component-sources.md)
+9. Test at localhost:3001
 
 **CRITICAL RULES**:
 - DO NOT create TypeScript prop interfaces

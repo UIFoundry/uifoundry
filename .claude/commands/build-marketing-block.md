@@ -205,7 +205,8 @@ Read @agent-os/workflows/implementation/CRITICAL-BLOCK-BUILD-ORDER.md for full d
 6. **Register in exports** - Add to src/payload/blocks/[BlockType]/index.ts
 7. **Generate types** - Run `pnpm payload:types` (CRITICAL - DO NOT SKIP)
 8. **Verify types** - Check types exist: `grep "[BlockType]_N_Block" src/payload-types.ts`
-9. **Create index.tsx using REFACTOR approach**:
+9. **Add source attribution comment** - At top of index.tsx, add comment with source URL, license, and modifications (see template in workflow)
+10. **Create index.tsx using REFACTOR approach**:
    - Copy source component code into index.tsx
    - Update imports following @agent-os/workflows/implementation/IMPORT-PATH-RULES.md:
      - Change `@/lib/utils` to `~/styles/utils` (for cn function)
@@ -215,8 +216,9 @@ Read @agent-os/workflows/implementation/CRITICAL-BLOCK-BUILD-ORDER.md for full d
    - Change function props to use PayloadCMS type
    - Update JSX to use PayloadCMS field names (from config.ts)
    - Keep all styling, animations, and structure
-10. **Register renderer** - Add to RenderBlocks.tsx or block renderer
-11. **Test at localhost:3001** - Verify in admin panel and frontend
+11. **Update sources tracking** - Add entry to agent-os/standards/component-sources.md
+12. **Register renderer** - Add to RenderBlocks.tsx or block renderer
+13. **Test at localhost:3001** - Verify in admin panel and frontend
 
 **CRITICAL RULES**:
 - Config.ts MUST be created BEFORE index.tsx
