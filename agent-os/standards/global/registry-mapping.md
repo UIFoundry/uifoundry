@@ -31,6 +31,9 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/hero-1` → `/docs/blocks/hero/hero-1`
 - `@uifoundry/hero-2` → `/docs/blocks/hero/hero-2`
 - `@uifoundry/hero-3` → `/docs/blocks/hero/hero-3`
+- `@uifoundry/hero-4` → `/docs/blocks/hero/hero-4`
+- `@uifoundry/hero-5` → `/docs/blocks/hero/hero-5`
+- `@uifoundry/flickering-grid` → `/docs/ui/flickering-grid`
 - `@uifoundry/block-constants` → `/docs/lib/block-constants`
 - `@uifoundry/header-1` → `/docs/blocks/header-1`
 - `@uifoundry/header-2` → `/docs/blocks/header-2`
@@ -81,6 +84,9 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/hero-1`: Hero section block with animated text effects and CTAs
 - `@uifoundry/hero-2`: Alternative hero section layout with split design
 - `@uifoundry/hero-3`: Hero section with video background, centered layout, and two CTAs
+- `@uifoundry/hero-4`: Hero section with badge, email signup form, feature list, and background image
+- `@uifoundry/hero-5`: Hero section with animated FlickeringGrid background, alert banner, and dual CTAs
+- `@uifoundry/flickering-grid`: Animated flickering grid background component with canvas rendering
 - `@uifoundry/block-constants`: Block slug and group constants for PayloadCMS blocks
 - `@uifoundry/renderblocks`: Component for rendering PayloadCMS blocks
 

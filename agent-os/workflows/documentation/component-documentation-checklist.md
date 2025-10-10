@@ -126,6 +126,7 @@
 - `button` → "Customizable button component with variants"
 - `@uifoundry/animated-group` → "Motion primitive for animating groups of elements"
 - `@uifoundry/text-effect` → "Text animation effects with staggered reveals"
+- `@uifoundry/flickering-grid` → "Animated flickering grid background component with canvas rendering"
 - `@uifoundry/style-utils` → "Tailwind utility functions including cn() class merger"
 - `@uifoundry/media-field` → "PayloadCMS dual upload field (light/dark variants)"
 - `@uifoundry/header-field` → "PayloadCMS text field for headers"

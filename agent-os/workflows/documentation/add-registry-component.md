@@ -44,11 +44,22 @@ Each registry component requires:
 | ----------------------------------- | ------------------------------------------------- | ----------------------------------- |
 | `~/payload/constants/blocks`        | `@/registry/default/lib/constants/blocks`         | Block constants                     |
 | `~/payload/fields/fieldName/config` | `@/registry/default/lib/fields/field-name/config` | Field configs                       |
-| `~/payload/fields/fieldName`        | `@/registry/payload/fields/field-name/index`      | Field components                    |
+| `~/payload/fields/fieldName`        | `@/registry/default/lib/fields/field-name` or `@/registry/default/lib/fields/field-name/index` | Field components (**CRITICAL**: Use `/lib/` path, not `/payload/`) |
 | `~/ui/button`                       | `@/registry/ui/button`                            | UI components                       |
 | `~/ui/motion-primitives/component`  | `@/registry/ui/motion-primitives/component`       | Motion components                   |
 | `~/styles/utils`                    | `@/registry/default/utils`                        | Utility functions                   |
 | `~/payload-types`                   | `~/payload-types`                                 | **No change** (external dependency) |
+
+**IMPORTANT**: MediaField and other payload field components MUST use `@/registry/default/lib/fields/` path, not `@/registry/payload/fields/`. The correct pattern is:
+```typescript
+// ✅ CORRECT
+import MediaField from "@/registry/default/lib/fields/media";
+// or
+import MediaField from "@/registry/default/lib/fields/media/index";
+
+// ❌ INCORRECT (will cause issues)
+import MediaField from "@/registry/payload/fields/media/index";
+```
 
 ### Import Transformation Rules
 

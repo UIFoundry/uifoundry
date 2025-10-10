@@ -312,7 +312,7 @@ Batch Complete! 🎉
 
 ---
 
-## Phase 4: README Update
+## Phase 4: README Update & Batch Summary
 
 1. Read README.md marketing blocks checklist
 2. Update the count: `- [ ] [BlockType] (X/5)` → `- [ ] [BlockType] (X+N/5)`
@@ -379,3 +379,31 @@ Batch Complete! 🎉
 - Updates README
 
 **Result**: 5 complete components in ~30-45 minutes
+
+---
+
+## Phase 5: Cleanup & Learning (Optional - Run After User Corrections)
+
+**When to Run**: After user has made manual corrections and pushed commits.
+
+**To trigger this phase**: User runs `/cleanup-learning` or explicitly requests analysis.
+
+**Purpose**: Analyze user corrections to improve future agent performance.
+
+### Process:
+
+1. **Compare git commits** - Find changes since agent completed work
+2. **Categorize corrections** - Code quality, functional fixes, performance, UX
+3. **Identify learnable patterns** - What could agents have predicted?
+4. **Update documentation** - Add learnings to workflow docs
+5. **Create improvement rules** - Specific guidance for future batches
+
+**Example learnings from this batch**:
+- Array fields need `minRows: 0` and `maxRows: 10`
+- Registry MediaField imports use `@/registry/default/lib/fields/media`
+- Canvas animations run at 20-30fps, not 60fps
+- Tailwind class ordering handled by Prettier (agents don't need to order)
+
+**Estimated Impact**: 15-20 minutes saved per future batch through fewer manual corrections.
+
+**See full Phase 4 documentation**: `@agent-os/workflows/implementation/build-marketing-blocks.md` Phase 4

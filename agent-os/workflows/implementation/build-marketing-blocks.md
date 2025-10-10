@@ -35,7 +35,7 @@ This workflow enables building marketing blocks at scale (1-5 at a time) using s
 
 ### Prerequisites
 
-- Dev server running at `localhost:3001`
+- Dev server running (check with user for port - typically `localhost:3005` for this project)
 - User has specified target block type(s)
 - Batch size determined (1-5 components)
 
@@ -416,6 +416,18 @@ export const [BlockType]_N_Block: Block = {
 - Provide sensible default values
 - Use clear, descriptive field labels
 - Add validation where appropriate (required fields)
+- **CRITICAL**: Always add `minRows` and `maxRows` to array fields:
+  ```typescript
+  {
+    name: "items",
+    type: "array",
+    minRows: 0,    // Allows deletion of all rows
+    maxRows: 10,   // Prevents infinite growth
+    defaultValue: [...],
+    fields: [...]
+  }
+  ```
+  Without `minRows: 0`, PayloadCMS may create un-deletable empty rows in the admin panel.
 
 #### 3C: Update Block Constants
 
@@ -566,6 +578,25 @@ export default function [BlockType]NSection(props: [BlockType]_N_Block) {
    - Use project icons from `~/ui/icons/`
    - Integrate motion primitives from `~/ui/motion-primitives/`
 
+5. **Animation Performance** (for canvas/custom animations):
+   - Run canvas animations at 20-30fps, NOT 60fps (use frame throttling)
+   - Use `requestAnimationFrame` with delta time calculation
+   - Apply slower fade rates (0.97 vs 0.95) for subtler effects
+   - Example frame throttling:
+   ```typescript
+   let lastFrameTime = 0;
+   const frameDelay = 1000 / 20; // 20fps
+
+   const animate = (currentTime: number) => {
+     requestAnimationFrame(animate);
+     const deltaTime = currentTime - lastFrameTime;
+     if (deltaTime < frameDelay) return;
+     lastFrameTime = currentTime;
+     // ... animation logic
+   };
+   ```
+   - Test animation speeds with user before finalizing
+
 #### 4C: Register Block
 
 **Add to**: `src/payload/blocks/[BlockType]/index.ts`
@@ -622,16 +653,18 @@ const messages = await playwright_browser_console_messages({
 **Manual Testing**:
 
 1. **Admin Panel Test**:
-   - Go to `localhost:3001/admin`
+   - Go to admin panel (check dev server port with user, typically `localhost:3005/admin`)
    - Create a new page or edit existing
    - Add the new block
    - Fill in all fields with test data
+   - **IMPORTANT**: Check array fields - ensure you can add/delete rows without issues
    - Save and preview
 
 2. **Frontend Test**:
    - Navigate to the page with the block
    - Verify all content renders correctly
    - Check animations and interactions
+   - **Performance Check**: If component has canvas animations, verify speed feels natural (not too fast)
    - Test responsive design (mobile/tablet/desktop)
    - Verify links work correctly
 
@@ -770,6 +803,215 @@ Proceed? (yes/no)
 - [ ] Preview renders in docs
 
 **Phase 3 Complete When**: All 5 components fully documented and validated.
+
+---
+
+## Phase 4: CLEANUP & LEARNING
+
+**Agent**: Self or dedicated cleanup agent
+**Goal**: Analyze user corrections, identify improvement patterns, and update workflow documentation so future agents produce better code with less manual correction needed.
+
+**When to Run**: After user has completed all manual corrections from Phase 3 and committed/pushed changes.
+
+### Step 1: Analyze User Corrections
+
+Compare the final committed code with the agent-generated code to identify what the user changed:
+
+```bash
+# Check recent commits since agent work
+git log --oneline -10
+
+# Compare changes since agent completion
+git diff <agent-completion-commit> HEAD --stat
+
+# Examine specific file changes
+git diff <agent-completion-commit> HEAD -- <file-path>
+```
+
+### Step 2: Categorize Corrections
+
+Group user corrections into categories:
+
+**Code Quality**:
+- Tailwind class ordering (Prettier/linter preferences)
+- Code formatting (blank lines, multi-line strings)
+- Import organization
+
+**Functional Fixes**:
+- Array field configuration (minRows, maxRows)
+- Import path corrections
+- Missing validations or constraints
+
+**Performance**:
+- Animation speed adjustments
+- Rendering optimizations
+
+**UX/Design**:
+- Layout tweaks
+- Spacing adjustments
+- Visual refinements
+
+### Step 3: Identify Learnable Patterns
+
+For each correction, ask:
+
+1. **Was this predictable?** - Could an agent have known to do this?
+2. **Is this project-specific?** - Or a general best practice?
+3. **Can it be automated?** - Should it be a linter rule or workflow step?
+4. **Should it be documented?** - Add to agent instructions?
+
+### Step 4: Update Workflow Documentation
+
+Add learnings to appropriate sections:
+
+**Create/Update Learning Documents**:
+
+1. **Code Quality Standards** (`agent-os/standards/code-quality.md`):
+   - Tailwind class ordering preferences
+   - Formatting conventions
+   - Import path patterns
+
+2. **Component Best Practices** (`agent-os/standards/component-best-practices.md`):
+   - Array field configuration rules
+   - Animation performance guidelines
+   - Common pitfalls to avoid
+
+3. **Workflow Improvements** (this document):
+   - Add automated checks
+   - Update agent prompts
+   - Add validation steps
+
+### Step 5: Create Improvement Rules
+
+**Example Improvements Based on This Batch**:
+
+#### Rule 1: Array Field Configuration
+**Location**: Phase 1, Step 3B (Create config.ts)
+
+Add to "Best Practices":
+```typescript
+// ALWAYS add minRows and maxRows to array fields
+{
+  name: "features",
+  type: "array",
+  minRows: 0,        // ← REQUIRED: Allows deletion of all rows
+  maxRows: 10,       // ← REQUIRED: Prevents infinite growth
+  defaultValue: [...],
+  fields: [...]
+}
+```
+
+**Why**: Without `minRows: 0`, PayloadCMS may enforce a minimum row count causing un-deletable empty rows in the admin panel.
+
+#### Rule 2: Registry Import Paths
+**Location**: Phase 2, Import Transformation Patterns
+
+Update MediaField import pattern:
+```typescript
+// ❌ INCORRECT (was causing issues)
+import MediaField from "@/registry/payload/fields/media/index";
+
+// ✅ CORRECT
+import MediaField from "@/registry/default/lib/fields/media";
+or
+import MediaField from "@/registry/default/lib/fields/media/index";
+```
+
+#### Rule 3: Animation Performance
+**Location**: Phase 1, Step 4B (Adapt Source Component)
+
+Add new subsection "Animation Performance":
+- Canvas-based animations should run at 20-30fps, not 60fps
+- Add frame throttling with `requestAnimationFrame` + delta time
+- Use slower fade rates (0.97 vs 0.95) for subtler effects
+- Test animations with user before finalizing speeds
+
+#### Rule 4: Tailwind Class Order
+**Location**: Code Quality Standards
+
+Note: Prettier with tailwind plugin handles this automatically. If agents notice unordered classes, mention that linter will fix them. Don't spend time manually ordering.
+
+### Step 6: Update Agent Prompts
+
+Modify agent task prompts to include new rules:
+
+**@source-helper** updates:
+- Check array fields always have `minRows` and `maxRows`
+- Test animations at multiple frame rates before committing
+- Note that code formatters will reorder Tailwind classes
+
+**@registry-porter** updates:
+- Use consistent MediaField import path pattern
+- Verify all registry imports use `@/registry/default/lib/` for fields
+
+**@docs-writer** updates:
+- Document any performance configurations (animation speeds, etc.)
+- Include notes about customization parameters
+
+### Step 7: Run Automated Checks (Future)
+
+Create validation scripts to catch common issues:
+
+```bash
+# Future validation script
+./scripts/validate-block-config.sh Hero_4
+
+# Checks:
+# - Array fields have minRows/maxRows
+# - All imports use correct patterns
+# - No hardcoded values in component
+# - TypeScript types generated
+```
+
+### Step 8: Report Learning Summary
+
+Create a summary report:
+
+```markdown
+## Phase 4 Learning Report - Hero Batch
+
+### User Corrections Analyzed
+- 10 files changed
+- 3 functional fixes
+- 7 code quality improvements
+
+### Key Learnings
+1. **Array Field Configuration**: Add minRows: 0, maxRows: 10 to all array fields
+2. **MediaField Import Path**: Use @/registry/default/lib/fields/media
+3. **Animation Speed**: Canvas animations at 20fps, fade rate 0.97
+4. **Tailwind Classes**: Prettier handles ordering automatically
+
+### Documentation Updated
+- ✅ Added array field rules to Phase 1 Step 3B
+- ✅ Updated registry import patterns in Phase 2
+- ✅ Added animation performance subsection to Phase 1 Step 4B
+- ✅ Created code-quality.md standards document
+
+### Future Prevention
+- [ ] Create block config validation script
+- [ ] Add pre-commit hook for import path checking
+- [ ] Document animation testing checklist
+
+### Estimated Impact
+- **Time Saved**: 15-20 minutes per batch (fewer manual corrections)
+- **Quality Improvement**: More consistent code patterns
+- **Knowledge Transfer**: Future agents learn from past corrections
+```
+
+### When to Skip Phase 4
+
+Skip this phase if:
+- No user corrections were made (perfect agent output)
+- Changes are trivial (typos, cosmetic only)
+- User explicitly wants to move to next batch immediately
+
+### Phase 4 Benefits
+
+1. **Continuous Improvement**: Workflow gets better over time
+2. **Reduced Manual Work**: Fewer corrections needed in future batches
+3. **Knowledge Capture**: Learnings are preserved for all agents
+4. **Standardization**: Consistent patterns across all components
+5. **Faster Iterations**: Less back-and-forth between agent and user
 
 ---
 

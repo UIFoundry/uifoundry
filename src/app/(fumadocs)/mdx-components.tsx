@@ -9,6 +9,8 @@ import type {
 	Hero_1_Block as Hero_1_BlockType,
 	Hero_2_Block as Hero_2_BlockType,
 	Hero_3_Block as Hero_3_BlockType,
+	Hero_4_Block as Hero_4_BlockType,
+	Hero_5_Block as Hero_5_BlockType,
 	Header_1_Block as Header_1_BlockType,
 	Header_2_Block as Header_2_BlockType,
 	ComingSoon_1_Block as ComingSoon_1_BlockType,
@@ -18,11 +20,15 @@ import type {
 import Hero_1 from "~/payload/blocks/Hero/Hero_1";
 import Hero_2 from "~/payload/blocks/Hero/Hero_2";
 import Hero_3 from "~/payload/blocks/Hero/Hero_3";
+import Hero_4 from "~/payload/blocks/Hero/Hero_4";
+import Hero_5 from "~/payload/blocks/Hero/Hero_5";
 import Header_1 from "~/payload/blocks/Header/Header_1";
 import Header_2 from "~/payload/blocks/Header/Header_2";
 import { Hero_1_Block } from "~/payload/blocks/Hero/Hero_1/config";
 import { Hero_2_Block } from "~/payload/blocks/Hero/Hero_2/config";
 import { Hero_3_Block } from "~/payload/blocks/Hero/Hero_3/config";
+import { Hero_4_Block } from "~/payload/blocks/Hero/Hero_4/config";
+import { Hero_5_Block } from "~/payload/blocks/Hero/Hero_5/config";
 import { Header_1_Block } from "~/payload/blocks/Header/Header_1/config";
 import { Header_2_Block } from "~/payload/blocks/Header/Header_2/config";
 import ComingSoon_1 from "~/payload/blocks/ComingSoon/ComingSoon_1";
@@ -35,6 +41,8 @@ const generator = createGenerator();
 const hero1Defaults = extractBlockDefaults(Hero_1_Block);
 const hero2Defaults = extractBlockDefaults(Hero_2_Block);
 const hero3Defaults = extractBlockDefaults(Hero_3_Block);
+const hero4Defaults = extractBlockDefaults(Hero_4_Block);
+const hero5Defaults = extractBlockDefaults(Hero_5_Block);
 const header1Defaults = extractBlockDefaults(Header_1_Block);
 const header2Defaults = extractBlockDefaults(Header_2_Block);
 const comingSoon1Defaults = extractBlockDefaults(ComingSoon_1_Block);
@@ -66,6 +74,20 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 					<Hero_3 {...combinedProps} />
 				</div>
 			);
+		},
+		Hero_4: (props: Partial<Hero_4_BlockType> = {}) => {
+			const combinedProps = {
+				...hero4Defaults,
+				...props,
+			} as Hero_4_BlockType;
+			return <Hero_4 {...combinedProps} />;
+		},
+		Hero_5: (props: Partial<Hero_5_BlockType> = {}) => {
+			const combinedProps = {
+				...hero5Defaults,
+				...props,
+			} as Hero_5_BlockType;
+			return <Hero_5 {...combinedProps} />;
 		},
 		Header_1: (props: Partial<Header_1_BlockType> = {}) => {
 			const combinedProps = {
