@@ -1,17 +1,89 @@
+"use client";
+
+import Link from "next/link";
+import { Button } from "@/registry/ui/button";
 import type { Hero_2_Block } from "~/payload-types";
+import MediaField from "@/registry/payload/fields/media/index";
+import { cn } from "@/registry/default/utils";
 
-export * from "./config";
+export default function Hero2Section(props: Hero_2_Block) {
+	return (
+		<section className="relative overflow-hidden">
+			{/* Content Container */}
+			<div className="py-24 md:pb-32 lg:pb-56 lg:pt-44">
+				<div className="relative mx-auto flex max-w-7xl flex-col px-6 lg:flex-row lg:items-center lg:px-12">
+					{/* Left Content Column */}
+					<div className="mx-auto max-w-lg text-center lg:mx-0 lg:w-1/2 lg:max-w-full lg:text-left">
+						{/* Main Heading */}
+						<h1 className="text-5xl text-balance font-semibold md:text-6xl xl:text-7xl">
+							{props.header}
+						</h1>
 
-export default function Hero_2(props: Hero_2_Block) {
-  return (
-    <div className="grid h-[75vh] w-full grid-cols-2 bg-red-50 p-4">
-      <div className="flex h-full flex-col items-start justify-center gap-2 bg-blue-200/30">
-        <h1 className="clamp-[text,4xl,6xl]">{props.header}</h1>
-        <p className="clamp-[text,md,xl]">{props.subheader}</p>
-      </div>
-      <div className="col-start-2 flex items-center justify-center">
-        image goes here
-      </div>
-    </div>
-  );
+						{/* Subheader */}
+						{props.subheader && (
+							<p className="mt-6 text-lg text-pretty text-muted-foreground">
+								{props.subheader}
+							</p>
+						)}
+
+						{/* CTA Buttons */}
+						<div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
+							{/* Primary CTA */}
+							<Button
+								asChild
+								size="lg"
+								className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-6 text-base font-medium shadow-sm"
+							>
+								<Link href={props.primaryCtaHref}>
+									{props.primaryCtaLabel}
+								</Link>
+							</Button>
+
+							{/* Secondary CTA */}
+							<Button
+								asChild
+								variant="outline"
+								size="lg"
+								className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-6 text-base font-medium"
+							>
+								<Link href={props.secondaryCtaHref}>
+									{props.secondaryCtaLabel}
+								</Link>
+							</Button>
+						</div>
+					</div>
+
+					{/* Right Image Column */}
+					{props.media && (
+						<div className="relative mt-12 lg:mt-0 lg:w-1/2 lg:pl-12">
+							<div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl lg:aspect-square">
+								<MediaField
+									media={props.media}
+									width="800"
+									height="800"
+									className={cn(
+										"size-full object-cover object-center",
+										"rounded-2xl shadow-2xl",
+									)}
+								/>
+							</div>
+							{/* Decorative background gradient */}
+							<div
+								aria-hidden="true"
+								className="absolute inset-0 -z-10 translate-x-8 translate-y-8 rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-3xl"
+							/>
+						</div>
+					)}
+				</div>
+			</div>
+
+			{/* Background gradient */}
+			<div
+				aria-hidden="true"
+				className="absolute inset-x-0 top-0 -z-20 h-[800px] overflow-hidden"
+			>
+				<div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
+			</div>
+		</section>
+	);
 }

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "flickering-grid",
+  "type": "registry:ui",
+  "title": "Flickering Grid",
+  "description": "Animated flickering grid background component with canvas rendering",
+  "dependencies": [
+    "react"
+  ],
+  "registryDependencies": [
+    "@uifoundry/style-utils"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/motion-primitives/flickering-grid.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useRef } from \"react\";\nimport { cn } from \"@/registry/default/utils\";\n\ninterface FlickeringGridProps {\n\tclassName?: string;\n\tsquareSize?: number;\n\tgridGap?: number;\n\tcolor?: string;\n\tmaxOpacity?: number;\n\tflickerChance?: number;\n\twidth?: number;\n\theight?: number;\n}\n\nexport default function FlickeringGrid({\n\tclassName,\n\tsquareSize = 4,\n\tgridGap = 6,\n\tcolor = \"#60A5FA\",\n\tmaxOpacity = 0.5,\n\tflickerChance = 0.1,\n\twidth = 800,\n\theight = 800,\n}: FlickeringGridProps) {\n\tconst canvasRef = useRef<HTMLCanvasElement>(null);\n\n\tuseEffect(() => {\n\t\tconst canvas = canvasRef.current;\n\t\tif (!canvas) return;\n\n\t\tconst ctx = canvas.getContext(\"2d\");\n\t\tif (!ctx) return;\n\n\t\t// Set canvas size\n\t\tcanvas.width = width;\n\t\tcanvas.height = height;\n\n\t\t// Calculate grid dimensions\n\t\tconst cellSize = squareSize + gridGap;\n\t\tconst cols = Math.ceil(width / cellSize);\n\t\tconst rows = Math.ceil(height / cellSize);\n\n\t\t// Create grid state\n\t\tconst grid: number[][] = [];\n\t\tfor (let i = 0; i < rows; i++) {\n\t\t\tgrid[i] = [];\n\t\t\tfor (let j = 0; j < cols; j++) {\n\t\t\t\tconst row = grid[i];\n\t\t\t\tif (row) {\n\t\t\t\t\trow[j] = Math.random() * maxOpacity;\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t// Animation loop\n\t\tlet animationFrameId: number;\n\n\t\tconst animate = () => {\n\t\t\tctx.clearRect(0, 0, width, height);\n\n\t\t\t// Draw grid\n\t\t\tfor (let i = 0; i < rows; i++) {\n\t\t\t\tfor (let j = 0; j < cols; j++) {\n\t\t\t\t\tconst row = grid[i];\n\t\t\t\t\tif (!row) continue;\n\n\t\t\t\t\tconst cell = row[j];\n\t\t\t\t\tif (cell === undefined) continue;\n\n\t\t\t\t\t// Randomly flicker cells\n\t\t\t\t\tif (Math.random() < flickerChance) {\n\t\t\t\t\t\trow[j] = Math.random() * maxOpacity;\n\t\t\t\t\t} else {\n\t\t\t\t\t\t// Gradually fade\n\t\t\t\t\t\trow[j] = cell * 0.95;\n\t\t\t\t\t}\n\n\t\t\t\t\t// Draw cell if visible\n\t\t\t\t\tconst currentCell = row[j];\n\t\t\t\t\tif (currentCell !== undefined && currentCell > 0.01) {\n\t\t\t\t\t\tctx.fillStyle = color;\n\t\t\t\t\t\tctx.globalAlpha = currentCell;\n\t\t\t\t\t\tctx.fillRect(j * cellSize, i * cellSize, squareSize, squareSize);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tctx.globalAlpha = 1;\n\t\t\tanimationFrameId = requestAnimationFrame(animate);\n\t\t};\n\n\t\tanimate();\n\n\t\treturn () => {\n\t\t\tcancelAnimationFrame(animationFrameId);\n\t\t};\n\t}, [squareSize, gridGap, color, maxOpacity, flickerChance, width, height]);\n\n\treturn (\n\t\t<canvas\n\t\t\tref={canvasRef}\n\t\t\tclassName={cn(\"pointer-events-none\", className)}\n\t\t/>\n\t);\n}\n",
+      "type": "registry:ui",
+      "target": "ui/motion-primitives/flickering-grid.tsx"
+    }
+  ]
+}

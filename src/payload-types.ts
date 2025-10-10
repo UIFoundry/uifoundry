@@ -1839,6 +1839,8 @@ export interface Page {
     | Hero_1_Block
     | Hero_2_Block
     | Hero_3_Block
+    | Hero_4_Block
+    | Hero_5_Block
     | CTA_1_Block
     | FAQ_1_Block
     | Pricing_1_Block
@@ -2259,8 +2261,6 @@ export interface Hero_1_Block {
   blockType: 'hero_1';
 }
 /**
- * Upload background video (light/dark variants). Falls back to Video URL if not provided.
- *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "MediaField".
  */
@@ -2275,14 +2275,11 @@ export interface MediaField {
 export interface Hero_2_Block {
   header: string;
   subheader?: string | null;
-  background?: MediaField;
-  actions?:
-    | {
-        label: string;
-        href: string;
-        id?: string | null;
-      }[]
-    | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: MediaField;
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero_2';
@@ -2306,6 +2303,47 @@ export interface Hero_3_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_4_Block".
+ */
+export interface Hero_4_Block {
+  badgeLabel?: string | null;
+  badgeText?: string | null;
+  badgeHref?: string | null;
+  header: string;
+  subheader?: string | null;
+  emailPlaceholder: string;
+  emailButtonText: string;
+  features?:
+    | {
+        feature: string;
+        id?: string | null;
+      }[]
+    | null;
+  media?: MediaField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_5_Block".
+ */
+export interface Hero_5_Block {
+  alertLabel?: string | null;
+  alertLink?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: MediaField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_5';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2595,6 +2633,8 @@ export interface PagesSelect<T extends boolean = true> {
         hero_1?: T | Hero_1_BlockSelect<T>;
         hero_2?: T | Hero_2_BlockSelect<T>;
         hero_3?: T | Hero_3_BlockSelect<T>;
+        hero_4?: T | Hero_4_BlockSelect<T>;
+        hero_5?: T | Hero_5_BlockSelect<T>;
         cta_1?: T | CTA_1_BlockSelect<T>;
         faq_1?: T | FAQ_1_BlockSelect<T>;
         pricing_1?: T | Pricing_1_BlockSelect<T>;
@@ -2711,14 +2751,11 @@ export interface MediaFieldSelect<T extends boolean = true> {
 export interface Hero_2_BlockSelect<T extends boolean = true> {
   header?: T;
   subheader?: T;
-  background?: T | MediaFieldSelect<T>;
-  actions?:
-    | T
-    | {
-        label?: T;
-        href?: T;
-        id?: T;
-      };
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  media?: T | MediaFieldSelect<T>;
   id?: T;
   blockName?: T;
 }
@@ -2735,6 +2772,45 @@ export interface Hero_3_BlockSelect<T extends boolean = true> {
   secondaryCtaHref?: T;
   media?: T | MediaFieldSelect<T>;
   videoUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_4_Block_select".
+ */
+export interface Hero_4_BlockSelect<T extends boolean = true> {
+  badgeLabel?: T;
+  badgeText?: T;
+  badgeHref?: T;
+  header?: T;
+  subheader?: T;
+  emailPlaceholder?: T;
+  emailButtonText?: T;
+  features?:
+    | T
+    | {
+        feature?: T;
+        id?: T;
+      };
+  media?: T | MediaFieldSelect<T>;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_5_Block_select".
+ */
+export interface Hero_5_BlockSelect<T extends boolean = true> {
+  alertLabel?: T;
+  alertLink?: T;
+  header?: T;
+  subheader?: T;
+  primaryCtaLabel?: T;
+  primaryCtaHref?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaHref?: T;
+  media?: T | MediaFieldSelect<T>;
   id?: T;
   blockName?: T;
 }
