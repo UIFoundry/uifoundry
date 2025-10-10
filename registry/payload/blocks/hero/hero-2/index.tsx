@@ -3,25 +3,25 @@
 import Link from "next/link";
 import { Button } from "@/registry/ui/button";
 import type { Hero_2_Block } from "~/payload-types";
-import MediaField from "@/registry/payload/fields/media/index";
+import MediaField from "@/registry/default/lib/fields/media/index";
 import { cn } from "@/registry/default/utils";
 
 export default function Hero2Section(props: Hero_2_Block) {
 	return (
 		<section className="relative overflow-hidden">
 			{/* Content Container */}
-			<div className="py-24 md:pb-32 lg:pb-56 lg:pt-44">
+			<div className="py-24 md:pb-32 lg:pt-44 lg:pb-56">
 				<div className="relative mx-auto flex max-w-7xl flex-col px-6 lg:flex-row lg:items-center lg:px-12">
 					{/* Left Content Column */}
 					<div className="mx-auto max-w-lg text-center lg:mx-0 lg:w-1/2 lg:max-w-full lg:text-left">
 						{/* Main Heading */}
-						<h1 className="text-5xl text-balance font-semibold md:text-6xl xl:text-7xl">
+						<h1 className="text-5xl font-semibold text-balance md:text-6xl xl:text-7xl">
 							{props.header}
 						</h1>
 
 						{/* Subheader */}
 						{props.subheader && (
-							<p className="mt-6 text-lg text-pretty text-muted-foreground">
+							<p className="text-muted-foreground mt-6 text-lg text-pretty">
 								{props.subheader}
 							</p>
 						)}
@@ -32,11 +32,9 @@ export default function Hero2Section(props: Hero_2_Block) {
 							<Button
 								asChild
 								size="lg"
-								className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-6 text-base font-medium shadow-sm"
+								className="inline-flex h-11 items-center justify-center gap-2 rounded-lg px-6 text-base font-medium whitespace-nowrap shadow-sm"
 							>
-								<Link href={props.primaryCtaHref}>
-									{props.primaryCtaLabel}
-								</Link>
+								<Link href={props.primaryCtaHref}>{props.primaryCtaLabel}</Link>
 							</Button>
 
 							{/* Secondary CTA */}
@@ -44,7 +42,7 @@ export default function Hero2Section(props: Hero_2_Block) {
 								asChild
 								variant="outline"
 								size="lg"
-								className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-6 text-base font-medium"
+								className="inline-flex h-11 items-center justify-center gap-2 rounded-lg px-6 text-base font-medium whitespace-nowrap"
 							>
 								<Link href={props.secondaryCtaHref}>
 									{props.secondaryCtaLabel}
@@ -70,7 +68,7 @@ export default function Hero2Section(props: Hero_2_Block) {
 							{/* Decorative background gradient */}
 							<div
 								aria-hidden="true"
-								className="absolute inset-0 -z-10 translate-x-8 translate-y-8 rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent blur-3xl"
+								className="from-primary/20 via-primary/10 absolute inset-0 -z-10 translate-x-8 translate-y-8 rounded-2xl bg-gradient-to-br to-transparent blur-3xl"
 							/>
 						</div>
 					)}
@@ -82,7 +80,7 @@ export default function Hero2Section(props: Hero_2_Block) {
 				aria-hidden="true"
 				className="absolute inset-x-0 top-0 -z-20 h-[800px] overflow-hidden"
 			>
-				<div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
+				<div className="from-primary/5 absolute inset-0 bg-gradient-to-b via-transparent to-transparent" />
 			</div>
 		</section>
 	);

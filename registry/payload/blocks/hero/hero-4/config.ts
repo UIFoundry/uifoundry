@@ -79,6 +79,8 @@ export const Hero_4_Block: Block = {
 			name: "features",
 			label: "Features List",
 			type: "array",
+			minRows: 0,
+			maxRows: 10,
 			defaultValue: [
 				{ feature: "Faster" },
 				{ feature: "Modern" },

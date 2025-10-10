@@ -4,10 +4,9 @@ import Link from "next/link";
 import { Button } from "@/registry/ui/button";
 import { ArrowRight, Mail, SendHorizontal } from "lucide-react";
 import type { Hero_4_Block } from "~/payload-types";
-import MediaField from "@/registry/payload/fields/media/index";
+import MediaField from "@/registry/default/lib/fields/media";
 
 export default function Hero4Section(props: Hero_4_Block) {
-
 	return (
 		<section className="overflow-hidden">
 			<div className="relative mx-auto max-w-5xl px-6 py-28 lg:py-20">
@@ -21,7 +20,7 @@ export default function Hero4Section(props: Hero_4_Block) {
 								href={props.badgeHref ?? "#"}
 							>
 								{props.badgeLabel && (
-									<span className="rounded-[calc(var(--radius)-0.25rem)] bg-muted px-2 py-1 text-xs">
+									<span className="bg-muted rounded-[calc(var(--radius)-0.25rem)] px-2 py-1 text-xs">
 										{props.badgeLabel}
 									</span>
 								)}
@@ -34,7 +33,7 @@ export default function Hero4Section(props: Hero_4_Block) {
 						)}
 
 						{/* Main Heading */}
-						<h1 className="mt-10 text-balance text-4xl font-bold md:text-5xl xl:text-5xl">
+						<h1 className="mt-10 text-4xl font-bold text-balance md:text-5xl xl:text-5xl">
 							{props.header}
 						</h1>
 
@@ -46,15 +45,13 @@ export default function Hero4Section(props: Hero_4_Block) {
 						{/* Email Form */}
 						<div>
 							<form
-								className="mx-auto my-10 max-w-sm lg:my-12 lg:ml-0 lg:mr-auto"
+								className="mx-auto my-10 max-w-sm lg:my-12 lg:mr-auto lg:ml-0"
 								action=""
 							>
-								<div className="relative grid grid-cols-[1fr_auto] items-center rounded-[calc(var(--radius)+0.75rem)] border bg-background pr-3 shadow shadow-zinc-950/5 has-[input:focus]:ring-2 has-[input:focus]:ring-muted">
-									<Mail className="pointer-events-none absolute inset-y-0 left-5 my-auto size-5 text-caption" />
+								<div className="bg-background has-[input:focus]:ring-muted relative grid grid-cols-[1fr_auto] items-center rounded-[calc(var(--radius)+0.75rem)] border pr-3 shadow shadow-zinc-950/5 has-[input:focus]:ring-2">
+									<Mail className="text-caption pointer-events-none absolute inset-y-0 left-5 my-auto size-5" />
 									<input
-										placeholder={
-											props.emailPlaceholder ?? "Your mail address"
-										}
+										placeholder={props.emailPlaceholder ?? "Your mail address"}
 										className="h-14 w-full bg-transparent pl-12 focus:outline-none"
 										type="email"
 									/>
@@ -90,7 +87,7 @@ export default function Hero4Section(props: Hero_4_Block) {
 					<div className="absolute inset-0 -mx-4 rounded-3xl p-3 lg:col-span-3">
 						<div className="relative">
 							{/* Gradient overlay */}
-							<div className="absolute inset-0 -mx-[4.25rem] z-[1] bg-[radial-gradient(at_65%_25%,transparent,var(--background)_40%)]"></div>
+							<div className="absolute inset-0 z-[1] -mx-[4.25rem] bg-[radial-gradient(at_65%_25%,transparent,var(--background)_40%)]"></div>
 
 							{/* Media Field - handles theme-aware rendering automatically */}
 							<MediaField

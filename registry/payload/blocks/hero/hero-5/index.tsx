@@ -7,7 +7,7 @@ import { TextEffect } from "@/registry/ui/motion-primitives/text-effect";
 import { AnimatedGroup } from "@/registry/ui/motion-primitives/animated-group";
 import type { Hero_5_Block } from "~/payload-types";
 import { cn } from "@/registry/default/utils";
-import MediaField from "@/registry/payload/fields/media/index";
+import MediaField from "@/registry/default/lib/fields/media/index";
 import FlickeringGrid from "@/registry/ui/motion-primitives/flickering-grid";
 
 const transitionVariants = {
