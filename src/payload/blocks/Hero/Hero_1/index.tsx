@@ -1,3 +1,18 @@
+/**
+ * Hero 1 Component
+ *
+ * Source: Custom design (original to this project)
+ * License: N/A
+ * Adapted from: N/A
+ *
+ * Modifications:
+ * - Original hero component with animated gradient background
+ * - Integrated with PayloadCMS block system
+ * - Features TextEffect animations, AlertLink badge, dual CTA buttons
+ * - Optional MediaField with theme-aware rendering
+ * - Animated group transitions with stagger effects
+ */
+
 "use client";
 
 import Link from "next/link";
