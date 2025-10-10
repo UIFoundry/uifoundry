@@ -1,0 +1,137 @@
+---
+title: "Hero 4"
+description: "Hero section with badge, email signup form, feature list, and background image"
+category: "blocks"
+---
+
+## Preview
+
+<Hero_4 />
+
+A modern hero section with a prominent badge/alert, email signup form, and feature list displayed over a themed background image. Based on Tailark Hero Section 6, this component combines lead capture functionality with clear value propositions in a visually engaging layout.
+
+**Key Features:**
+
+- Prominent badge with customizable label and link
+- Email signup form with inline submit button
+- Feature list with check marks for value propositions
+- Background image with light/dark mode variants
+- Gradient overlay for enhanced content readability
+- Fully responsive with centered mobile layout
+
+## Props
+
+The Hero_4 block accepts the following props from PayloadCMS:
+
+<TypeTable
+  type={{
+    badgeLabel: {
+      description: "Label text for the badge (e.g., 'New', 'Beta')",
+      type: "string | undefined",
+      default: "New",
+    },
+    badgeText: {
+      description: "Main text displayed in the badge",
+      type: "string | undefined",
+      default: "Introduction Tailark Html",
+    },
+    badgeHref: {
+      description: "URL for the badge link",
+      type: "string | undefined",
+      default: "/",
+    },
+    header: {
+      description: "Main heading text",
+      type: "string",
+      default: "Production Ready Digital Marketing blocks",
+      required: true,
+    },
+    subheader: {
+      description: "Supporting description text below the header",
+      type: "string | undefined",
+      default:
+        "Error totam sit illum. Voluptas doloribus asperiores quaerat aperiam. Quidem harum omnis beatae ipsum soluta!",
+    },
+    emailPlaceholder: {
+      description: "Placeholder text for email input field",
+      type: "string",
+      default: "Your mail address",
+      required: true,
+    },
+    emailButtonText: {
+      description: "Text for the email form submit button",
+      type: "string",
+      default: "Get Started",
+      required: true,
+    },
+    features: {
+      description: "Array of feature items displayed as a bulleted list",
+      type: "array",
+      default: "[{ feature: 'Faster' }, { feature: 'Modern' }, { feature: '100% Customizable' }]",
+    },
+    media: {
+      description: "Background image with light/dark variants. Recommended dimensions: 2796x2008",
+      type: "MediaField | undefined",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/hero-4
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [`button`](/docs/ui/button) - Customizable button component with variants
+- [`@uifoundry/header-field`](/docs/fields/header-field) - PayloadCMS text field for headers
+- [`@uifoundry/subheader-field`](/docs/fields/subheader-field) - PayloadCMS text field for subheaders
+- [`@uifoundry/media-field`](/docs/fields/media-field) - PayloadCMS double upload field (light & dark variants)
+- [`@uifoundry/block-constants`](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [Payload](https://github.com/payloadcms/payload) - Headless CMS and application framework
+- [Lucide React](https://github.com/lucide-icons/lucide/tree/main/packages/lucide-react) - Beautiful & consistent icon toolkit
+
+## Design Notes
+
+**Badge Component:**
+The badge includes both a label (styled with muted background) and main text, connected with a separator and arrow icon. It's clickable and links to a customizable URL.
+
+**Email Form:**
+- Inline email input with mail icon
+- Responsive submit button (shows text on desktop, icon on mobile)
+- Form has focus states with ring styling
+- Includes form validation attributes for email input
+
+**Features List:**
+- Displays as an unordered list with bullet points
+- Automatically renders from the features array
+- Each feature is a simple text item
+
+**Background Image:**
+- Positioned absolutely to cover the entire section
+- Includes gradient overlay for better text contrast
+- Radial gradient positioned at 65% horizontal, 25% vertical
+- Automatically switches between light/dark variants based on theme
+
+**Responsive Behavior:**
+- Mobile: Centered text with full-width form
+- Desktop: Left-aligned content with background extending to right side
+- Form adapts to show full button text on larger screens
+
+**Performance Tips:**
+- Optimize background images (recommended 2796x2008px)
+- Keep background images under 500KB for fast loading
+- Use appropriate image formats (WebP with fallback)
+- Consider lazy loading for background images

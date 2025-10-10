@@ -1,36 +1,49 @@
 import {
 	BLOCK_GROUP_HERO,
-	BLOCK_SLUG_HERO_2,
+	BLOCK_SLUG_HERO_5,
 } from "~/payload/constants/blocks";
 import type { Block } from "payload";
+import mediaField from "~/payload/fields/media/config";
 import headerField from "~/payload/fields/header/config";
 import subHeaderField from "~/payload/fields/subheader/config";
-import mediaField from "~/payload/fields/media/config";
 
-export const Hero_2_Block: Block = {
-	slug: BLOCK_SLUG_HERO_2,
+export const Hero_5_Block: Block = {
+	slug: BLOCK_SLUG_HERO_5,
 	labels: {
-		singular: "Hero 2",
-		plural: "Hero 2's",
+		singular: "Hero 5",
+		plural: "Hero 5's",
 	},
 	admin: {
 		group: BLOCK_GROUP_HERO,
 	},
-	interfaceName: "Hero_2_Block",
+	interfaceName: "Hero_5_Block",
 	fields: [
-		headerField({
-			defaultValue: "Ship 10x Faster with NS",
-		}),
-		subHeaderField({
-			defaultValue:
-				"Highly customizable components for building modern websites and applications that look and feel the way you mean it.",
-		}),
+		{
+			type: "collapsible",
+			label: "New Update Alert",
+			admin: {
+				initCollapsed: true,
+			},
+			fields: [
+				{
+					name: "alertLabel",
+					label: "Alert Label",
+					defaultValue: "Introducing Support for AI Models",
+					type: "text",
+				},
+				{
+					name: "alertLink",
+					label: "Alert Link (href)",
+					defaultValue: "/new-models",
+					type: "text",
+				},
+			],
+		},
+		headerField(),
+		subHeaderField(),
 		{
 			label: "Primary Call To Action",
 			type: "collapsible",
-			admin: {
-				initCollapsed: false,
-			},
 			fields: [
 				{
 					name: "primaryCtaLabel",
@@ -44,16 +57,13 @@ export const Hero_2_Block: Block = {
 					label: "Primary Call To Action: Link (href)",
 					type: "text",
 					required: true,
-					defaultValue: "/get-started",
+					defaultValue: "/getting-started",
 				},
 			],
 		},
 		{
 			label: "Secondary Call To Action",
 			type: "collapsible",
-			admin: {
-				initCollapsed: false,
-			},
 			fields: [
 				{
 					name: "secondaryCtaLabel",
@@ -67,16 +77,10 @@ export const Hero_2_Block: Block = {
 					label: "Secondary Call To Action: Link (href)",
 					type: "text",
 					required: true,
-					defaultValue: "/demo",
+					defaultValue: "/request-demo",
 				},
 			],
 		},
-		mediaField({
-			label: "Background Image",
-			admin: {
-				description:
-					"Upload background image (light/dark variants). Displays as a floating image on the right side.",
-			},
-		}),
+		mediaField(),
 	],
 };

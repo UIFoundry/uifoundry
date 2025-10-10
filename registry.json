@@ -62,6 +62,26 @@
 		},
 		{
 			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Flickering Grid",
+			"name": "flickering-grid",
+			"type": "registry:ui",
+			"description": "Animated flickering grid background component with canvas rendering",
+			"dependencies": [
+				"react"
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/ui/motion-primitives/flickering-grid.tsx",
+					"type": "registry:ui",
+					"target": "ui/motion-primitives/flickering-grid.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
 			"title": "User Avatar",
 			"name": "user-avatar",
 			"type": "registry:component",
@@ -270,12 +290,13 @@
 			"title": "Hero 2",
 			"name": "hero-2",
 			"type": "registry:block",
-			"description": "Hero Block Variant 2",
+			"description": "Hero section with two-column layout, primary and secondary CTAs, and background image",
 			"registryDependencies": [
+				"button",
 				"@uifoundry/header-field",
 				"@uifoundry/subheader-field",
 				"@uifoundry/media-field",
-				"@uifoundry/cta-pair-field"
+				"@uifoundry/style-utils"
 			],
 			"dependencies": [
 				"react",
@@ -324,6 +345,74 @@
 					"path": "registry/payload/blocks/hero/hero-3/config.ts",
 					"type": "registry:component",
 					"target": "src/payload/blocks/Hero/Hero_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Hero 4",
+			"name": "hero-4",
+			"type": "registry:block",
+			"description": "Hero section with badge, email signup form, feature list, and background image",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/hero/hero-4/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_4/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/hero/hero-4/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_4/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Hero 5",
+			"name": "hero-5",
+			"type": "registry:block",
+			"description": "Hero section with animated FlickeringGrid background, alert banner, and dual CTAs",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/animated-group",
+				"@uifoundry/text-effect",
+				"@uifoundry/flickering-grid",
+				"@uifoundry/media-field",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/style-utils",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/hero/hero-5/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_5/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/hero/hero-5/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_5/config.ts"
 				}
 			]
 		},
