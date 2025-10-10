@@ -46,56 +46,56 @@
 
 ## CTA Blocks
 
-_(No entries yet)_
+- No entries yet.
 
 ---
 
 ## Feature Blocks
 
-_(No entries yet)_
+- No entries yet.
 
 ---
 
 ## Testimonial Blocks
 
-_(No entries yet)_
+- No entries yet.
 
 ---
 
 ## Pricing Blocks
 
-_(No entries yet)_
+- No entries yet.
 
 ---
 
 ## FAQ Blocks
 
-_(No entries yet)_
+- No entries yet.
 
 ---
 
 ## Contact Blocks
 
-_(No entries yet)_
+- No entries yet.
 
 ---
 
 ## Sources Used
 
 **External Component Libraries**:
-- **Tailark** (https://tailark.com) - Free tier components
+- **Tailark** (<https://tailark.com>) - Free tier components
   - Hero Section 1 (used in Hero_3)
   - Hero Section 4 (used in Hero_2)
   - Hero Section 6 (used in Hero_4)
-- **MagicUI** (https://magicui.design) - MIT licensed components
+- **MagicUI** (<https://magicui.design>) - MIT licensed components
   - FlickeringGrid (used in Hero_5)
-- **Awesome Shadcn UI** (https://github.com/birobirobiro/awesome-shadcn-ui) - Community registry (fallback source)
+- **Awesome Shadcn UI** (<https://github.com/birobirobiro/awesome-shadcn-ui>) - Community registry (fallback source)
 
 **Available Free Tier Sources NOT Yet Used**:
 - Tailark Hero Section 2
 - Tailark Hero Section 3
 - Tailark Hero Section 5
-- _(Add more as discovered)_
+- (Add more as discovered)
 
 ---
 
