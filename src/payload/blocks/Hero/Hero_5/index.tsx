@@ -1,3 +1,20 @@
+/**
+ * Hero 5 Component
+ *
+ * Source: Inspired by Hero_1 + https://magicui.design/docs/components/flickering-grid
+ * License: MIT (MagicUI)
+ * Adapted from: Hero_1 structure with MagicUI FlickeringGrid background
+ *
+ * Modifications:
+ * - Integrated with PayloadCMS block system
+ * - Replaced hardcoded content with dynamic props from Hero_5_Block
+ * - Added FlickeringGrid animated background (throttled to 20fps)
+ * - Features TextEffect animations, AlertLink badge, dual CTA buttons
+ * - Optional MediaField with theme-aware rendering
+ * - Radial gradient overlay for visual depth
+ * - Similar layout to Hero_1 but with FlickeringGrid instead of static gradient
+ */
+
 "use client";
 
 import Link from "next/link";

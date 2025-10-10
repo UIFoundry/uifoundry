@@ -1,3 +1,20 @@
+/**
+ * Hero 4 Component
+ *
+ * Source: https://tailark.com/preview/dusk/hero-section/six
+ * License: Free Tier
+ * Adapted from: Tailark Dusk UI Kit
+ *
+ * Modifications:
+ * - Integrated with PayloadCMS block system
+ * - Replaced hardcoded content with dynamic props from Hero_4_Block
+ * - Added MediaField for theme-aware background image rendering
+ * - Implemented email form with controlled input placeholder and button text
+ * - Converted static features list to dynamic array field
+ * - Badge component with label, text, and link fields
+ * - Background image with radial gradient overlay for content readability
+ */
+
 "use client";
 
 import Link from "next/link";

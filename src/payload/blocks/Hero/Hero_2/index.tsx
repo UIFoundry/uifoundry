@@ -1,3 +1,19 @@
+/**
+ * Hero 2 Component
+ *
+ * Source: https://tailark.com/preview/dusk/hero-section/four
+ * License: Free Tier
+ * Adapted from: Tailark Dusk UI Kit
+ *
+ * Modifications:
+ * - Integrated with PayloadCMS block system
+ * - Replaced hardcoded content with dynamic props from Hero_2_Block
+ * - Removed logo carousel section for cleaner layout
+ * - Two-column split layout: content left, image right
+ * - Added MediaField for theme-aware image rendering
+ * - Decorative gradient background on image
+ */
+
 "use client";
 
 import Link from "next/link";
