@@ -13,7 +13,7 @@ export * from "./config";
 export default function Header_2({
 	preview = false,
 	brandLogo,
-	logoHref,
+	logoHref = "/",
 	menuItems,
 	actionButtons,
 	...navProps
