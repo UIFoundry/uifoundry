@@ -1949,7 +1949,7 @@ export interface Header {
   global?: boolean | null;
   title: string;
   owner: string | User;
-  header: (Header_1_Block | Header_2_Block | CustomHeaderBlock)[];
+  header: (Header_1_Block | Header_2_Block | Header_3_Block | Header_4_Block | Header_5_Block | CustomHeaderBlock)[];
   updatedAt: string;
   createdAt: string;
 }
@@ -1958,28 +1958,148 @@ export interface Header {
  * via the `definition` "Header_1_Block".
  */
 export interface Header_1_Block {
+  brandLogo?: MediaField;
+  logoHref: string;
   menuItems: {
     label: string;
     href: string;
     id?: string | null;
   }[];
+  actionButtons?:
+    | {
+        label: string;
+        href: string;
+        variant: 'default' | 'outline' | 'ghost';
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'header_1';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaField".
+ */
+export interface MediaField {
+  light?: (string | null) | Media;
+  dark?: (string | null) | Media;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: string;
+  alt: string;
+  owner: string | User;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "Header_2_Block".
  */
 export interface Header_2_Block {
+  brandLogo?: MediaField;
+  logoHref: string;
   menuItems: {
     label: string;
     href: string;
     id?: string | null;
   }[];
+  actionButtons?:
+    | {
+        label: string;
+        href: string;
+        variant: 'default' | 'outline' | 'ghost';
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'header_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_3_Block".
+ */
+export interface Header_3_Block {
+  brandLogo?: MediaField;
+  logoHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  actionButtons?:
+    | {
+        label: string;
+        href: string;
+        variant: 'default' | 'outline' | 'ghost';
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_4_Block".
+ */
+export interface Header_4_Block {
+  brandLogo?: MediaField;
+  logoHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  actionButtons?:
+    | {
+        label: string;
+        href: string;
+        variant: 'default' | 'outline' | 'ghost';
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_5_Block".
+ */
+export interface Header_5_Block {
+  brandLogo?: MediaField;
+  logoHref: string;
+  menuItems: {
+    label: string;
+    href: string;
+    id?: string | null;
+  }[];
+  actionButtons?:
+    | {
+        label: string;
+        href: string;
+        variant: 'default' | 'outline' | 'ghost';
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'header_5';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2062,30 +2182,10 @@ export interface HeaderMenuButtonBlock {
 export interface HeaderBrandLogoBlock {
   alignment?: ('left' | 'right' | 'center') | null;
   href: string;
-  media?: (string | null) | Media;
+  media?: MediaField;
   id?: string | null;
   blockName?: string | null;
   blockType: 'header_brand_logo';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  alt: string;
-  owner: string | User;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2105,7 +2205,7 @@ export interface Footer {
  * via the `definition` "Footer_1_Block".
  */
 export interface Footer_1_Block {
-  brandLogo?: (string | null) | Media;
+  brandLogo?: MediaField;
   copyright?: string | null;
   links?:
     | {
@@ -2259,14 +2359,6 @@ export interface Hero_1_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaField".
- */
-export interface MediaField {
-  light?: (string | null) | Media;
-  dark?: (string | null) | Media;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3039,6 +3131,9 @@ export interface HeadersSelect<T extends boolean = true> {
     | {
         header_1?: T | Header_1_BlockSelect<T>;
         header_2?: T | Header_2_BlockSelect<T>;
+        header_3?: T | Header_3_BlockSelect<T>;
+        header_4?: T | Header_4_BlockSelect<T>;
+        header_5?: T | Header_5_BlockSelect<T>;
         header_custom?: T | CustomHeaderBlockSelect<T>;
       };
   updatedAt?: T;
@@ -3049,11 +3144,21 @@ export interface HeadersSelect<T extends boolean = true> {
  * via the `definition` "Header_1_Block_select".
  */
 export interface Header_1_BlockSelect<T extends boolean = true> {
+  brandLogo?: T | MediaFieldSelect<T>;
+  logoHref?: T;
   menuItems?:
     | T
     | {
         label?: T;
         href?: T;
+        id?: T;
+      };
+  actionButtons?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
         id?: T;
       };
   id?: T;
@@ -3064,11 +3169,96 @@ export interface Header_1_BlockSelect<T extends boolean = true> {
  * via the `definition` "Header_2_Block_select".
  */
 export interface Header_2_BlockSelect<T extends boolean = true> {
+  brandLogo?: T | MediaFieldSelect<T>;
+  logoHref?: T;
   menuItems?:
     | T
     | {
         label?: T;
         href?: T;
+        id?: T;
+      };
+  actionButtons?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_3_Block_select".
+ */
+export interface Header_3_BlockSelect<T extends boolean = true> {
+  brandLogo?: T | MediaFieldSelect<T>;
+  logoHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  actionButtons?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_4_Block_select".
+ */
+export interface Header_4_BlockSelect<T extends boolean = true> {
+  brandLogo?: T | MediaFieldSelect<T>;
+  logoHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  actionButtons?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Header_5_Block_select".
+ */
+export interface Header_5_BlockSelect<T extends boolean = true> {
+  brandLogo?: T | MediaFieldSelect<T>;
+  logoHref?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  actionButtons?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        variant?: T;
         id?: T;
       };
   id?: T;
@@ -3129,7 +3319,7 @@ export interface HeaderMenuButtonBlockSelect<T extends boolean = true> {
 export interface HeaderBrandLogoBlockSelect<T extends boolean = true> {
   alignment?: T;
   href?: T;
-  media?: T;
+  media?: T | MediaFieldSelect<T>;
   id?: T;
   blockName?: T;
 }
@@ -3154,7 +3344,7 @@ export interface FootersSelect<T extends boolean = true> {
  * via the `definition` "Footer_1_Block_select".
  */
 export interface Footer_1_BlockSelect<T extends boolean = true> {
-  brandLogo?: T;
+  brandLogo?: T | MediaFieldSelect<T>;
   copyright?: T;
   links?:
     | T
@@ -3211,7 +3401,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header1 {
   id: string;
-  header: (Header_1_Block | Header_2_Block | CustomHeaderBlock)[];
+  header: (Header_1_Block | Header_2_Block | Header_3_Block | Header_4_Block | Header_5_Block | CustomHeaderBlock)[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3246,6 +3436,9 @@ export interface HeaderSelect<T extends boolean = true> {
     | {
         header_1?: T | Header_1_BlockSelect<T>;
         header_2?: T | Header_2_BlockSelect<T>;
+        header_3?: T | Header_3_BlockSelect<T>;
+        header_4?: T | Header_4_BlockSelect<T>;
+        header_5?: T | Header_5_BlockSelect<T>;
         header_custom?: T | CustomHeaderBlockSelect<T>;
       };
   updatedAt?: T;

@@ -1,16 +1,16 @@
 import type { Block } from "payload";
 import {
   BLOCK_GROUP_HEADERS,
-  BLOCK_SLUG_HEADER_2,
-} from "~/payload/constants/blocks";
-import mediaField from "~/payload/fields/media/config";
+  BLOCK_SLUG_HEADER_5,
+} from "@/registry/default/lib/constants/blocks";
+import mediaField from "@/registry/default/lib/fields/media/config";
 
-export const Header_2_Block: Block = {
-  slug: BLOCK_SLUG_HEADER_2,
-  interfaceName: "Header_2_Block",
+export const Header_5_Block: Block = {
+  slug: BLOCK_SLUG_HEADER_5,
+  interfaceName: "Header_5_Block",
   labels: {
-    singular: "Header 2",
-    plural: "Header 2's",
+    singular: "Header 5",
+    plural: "Header 5's",
   },
   admin: {
     group: BLOCK_GROUP_HEADERS,
@@ -49,20 +49,20 @@ export const Header_2_Block: Block = {
           maxRows: 10,
           defaultValue: [
             {
-              label: "Home",
-              href: "/",
+              label: "Features",
+              href: "/features",
             },
             {
-              label: "Products",
-              href: "/products",
+              label: "Solution",
+              href: "/solution",
             },
             {
-              label: "Services",
-              href: "/services",
+              label: "Pricing",
+              href: "/pricing",
             },
             {
-              label: "Contact",
-              href: "/contact",
+              label: "About",
+              href: "/about",
             },
           ],
           fields: [

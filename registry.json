@@ -421,7 +421,7 @@
 			"title": "Header 1",
 			"name": "header-1",
 			"type": "registry:block",
-			"description": "Header 1 Block",
+			"description": "Header 1 Block with adaptive scroll-based styling",
 			"files": [
 				{
 					"path": "registry/payload/blocks/header/header-1/config.ts",
@@ -435,7 +435,10 @@
 				}
 			],
 			"registryDependencies": [
-				"@uifoundry/style-utils"
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants",
+				"button"
 			],
 			"dependencies": [
 				"payload",
@@ -463,7 +466,104 @@
 				}
 			],
 			"registryDependencies": [
-				"@uifoundry/style-utils"
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants",
+				"button"
+			],
+			"dependencies": [
+				"payload",
+				"next",
+				"react",
+				"lucide-react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header 3",
+			"name": "header-3",
+			"type": "registry:block",
+			"description": "Header 3 Block with scroll-based backdrop blur animation",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/header-3/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/Header_3/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header/header-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/Header_3/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants",
+				"button"
+			],
+			"dependencies": [
+				"payload",
+				"next",
+				"react",
+				"lucide-react",
+				"motion"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header 4",
+			"name": "header-4",
+			"type": "registry:block",
+			"description": "Header 4 Block with dashed border and light background",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/header-4/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/Header_4/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header/header-4/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/Header_4/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants",
+				"button"
+			],
+			"dependencies": [
+				"payload",
+				"next",
+				"react",
+				"lucide-react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header 5",
+			"name": "header-5",
+			"type": "registry:block",
+			"description": "Header 5 Block with fixed backdrop blur and border bottom",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/header-5/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/Header_5/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header/header-5/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/Header_5/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants",
+				"button"
 			],
 			"dependencies": [
 				"payload",
@@ -487,7 +587,10 @@
 			],
 			"registryDependencies": [
 				"@uifoundry/header-1",
-				"@uifoundry/header-2"
+				"@uifoundry/header-2",
+				"@uifoundry/header-3",
+				"@uifoundry/header-4",
+				"@uifoundry/header-5"
 			]
 		},
 		{
@@ -529,7 +632,7 @@
 			"registryDependencies": [
 				"@uifoundry/style-utils",
 				"@uifoundry/select-enum-field",
-				"@uifoundry/upload-field"
+				"@uifoundry/media-field"
 			],
 			"dependencies": [
 				"react",

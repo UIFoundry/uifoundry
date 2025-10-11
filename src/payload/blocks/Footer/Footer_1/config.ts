@@ -1,11 +1,10 @@
 import type { Block } from "payload";
-import { COLLECTION_SLUG_MEDIA } from "~/payload/constants";
 import {
 	BLOCK_GROUP_FOOTERS,
 	BLOCK_SLUG_FOOTER_1,
 } from "~/payload/constants/blocks";
 import socialLinksField from "~/payload/fields/socialLinks/config";
-import uploadField from "~/payload/fields/uploadField/config";
+import mediaField from "~/payload/fields/media/config";
 
 export const Footer_1_Block: Block = {
 	slug: BLOCK_SLUG_FOOTER_1,
@@ -18,10 +17,9 @@ export const Footer_1_Block: Block = {
 		group: BLOCK_GROUP_FOOTERS,
 	},
 	fields: [
-		uploadField({
+		mediaField({
 			name: "brandLogo",
 			label: "Brand Logo",
-			relationTo: COLLECTION_SLUG_MEDIA,
 		}),
 		{
 			name: "copyright",

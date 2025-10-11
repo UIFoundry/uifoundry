@@ -40,14 +40,14 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 		collection: COLLECTION_SLUG_SITES,
 		id: id,
 		draft: true,
-		depth: 1,
+		depth: 2,
 	});
 
 	if (!session?.user) {
 		return redirect("/auth/sign-in");
 	}
 
-	const sitePages = site.pages!.docs;
+	const sitePages = site.pages?.docs;
 	if (!sitePages) {
 		const hello = await api.post.hello({ text: "from tRPC" });
 

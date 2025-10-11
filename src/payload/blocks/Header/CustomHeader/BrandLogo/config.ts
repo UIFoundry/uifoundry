@@ -5,7 +5,7 @@ import {
 } from "~/payload/constants/blocks";
 import { FLEX_ALIGNMENT } from "~/payload/constants";
 import selectEnumField from "~/payload/fields/selectEnumField/config";
-import uploadField from "~/payload/fields/uploadField/config";
+import mediaField from "~/payload/fields/media/config";
 
 export const HeaderBrandLogoBlock: Block = {
 	slug: BLOCK_SLUG_HEADER_BRAND_LOGO,
@@ -29,7 +29,7 @@ export const HeaderBrandLogoBlock: Block = {
 			required: true,
 			defaultValue: "/home",
 		},
-		uploadField({
+		mediaField({
 			name: "media",
 		}),
 	],

@@ -6,7 +6,10 @@
   "description": "PayloadCMS Header Blocks",
   "registryDependencies": [
     "@uifoundry/header-1",
-    "@uifoundry/header-2"
+    "@uifoundry/header-2",
+    "@uifoundry/header-3",
+    "@uifoundry/header-4",
+    "@uifoundry/header-5"
   ],
   "files": [
     {
