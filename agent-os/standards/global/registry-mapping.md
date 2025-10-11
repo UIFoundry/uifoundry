@@ -35,8 +35,11 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/hero-5` → `/docs/blocks/hero/hero-5`
 - `@uifoundry/flickering-grid` → `/docs/ui/flickering-grid`
 - `@uifoundry/block-constants` → `/docs/lib/block-constants`
-- `@uifoundry/header-1` → `/docs/blocks/header-1`
-- `@uifoundry/header-2` → `/docs/blocks/header-2`
+- `@uifoundry/header-1` → `/docs/blocks/header/header-1`
+- `@uifoundry/header-2` → `/docs/blocks/header/header-2`
+- `@uifoundry/header-3` → `/docs/blocks/header/header-3`
+- `@uifoundry/header-4` → `/docs/blocks/header/header-4`
+- `@uifoundry/header-5` → `/docs/blocks/header/header-5`
 - `@uifoundry/header-blocks` → `/docs/blocks/header-blocks`
 - `@uifoundry/renderblocks` → `/docs/ui/renderblocks`
 - `@uifoundry/header-global` → `/docs/globals/header-global`
@@ -88,6 +91,11 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/hero-5`: Hero section with animated FlickeringGrid background, alert banner, and dual CTAs
 - `@uifoundry/flickering-grid`: Animated flickering grid background component with canvas rendering
 - `@uifoundry/block-constants`: Block slug and group constants for PayloadCMS blocks
+- `@uifoundry/header-1`: Header block with adaptive scroll-based styling and rounded border
+- `@uifoundry/header-2`: Header block with full-width border bottom and backdrop blur
+- `@uifoundry/header-3`: Header block with scroll-based backdrop blur animation using Framer Motion
+- `@uifoundry/header-4`: Header block with dashed border and light background styling
+- `@uifoundry/header-5`: Header block with fixed backdrop blur and border bottom
 - `@uifoundry/renderblocks`: Component for rendering PayloadCMS blocks
 
 ### ShadCN Components

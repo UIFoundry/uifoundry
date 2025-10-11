@@ -1,49 +1,55 @@
+/**
+ * Header 5 Component
+ *
+ * Source: https://tailark.com/r/hero-section-4.json (header.tsx)
+ * License: Free Tier
+ * Adapted from: Tailark Hero Section 4 - Header Component
+ *
+ * Modifications:
+ * - Integrated with PayloadCMS block system
+ * - Replaced hardcoded menuItems with dynamic props from Header_5_Block
+ * - Replaced Logo component with Home icon from lucide-react
+ * - Added preview prop support for admin panel rendering
+ * - Preserved backdrop blur and border styling
+ */
+
 "use client";
 
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState, type ComponentPropsWithRef } from "react";
-import type { Header_2_Block, MediaField as MediaFieldProps } from "~/payload-types";
-import { cn } from "~/styles/utils";
-import { Button } from "~/ui/button";
-import MediaField from "~/payload/fields/media";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/registry/ui/button";
+import React from "react";
+import { cn } from "@/registry/default/utils";
+import type {
+	Header_5_Block,
+	MediaField as MediaFieldProps,
+} from "~/payload-types";
+import type { ComponentPropsWithRef } from "react";
+import MediaField from "@/registry/default/lib/fields/media";
 
 export * from "./config";
 
-export default function Header_2({
+export default function Header_5({
 	preview = false,
 	brandLogo,
 	logoHref,
 	menuItems,
 	actionButtons,
 	...navProps
-}: { preview?: boolean } & Header_2_Block & ComponentPropsWithRef<"nav">) {
-	const [menuState, setMenuState] = useState(false);
-	const [isScrolled, setIsScrolled] = useState(false);
-
-	useEffect(() => {
-		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 50);
-		};
-		window.addEventListener("scroll", handleScroll);
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	});
+}: { preview?: boolean } & Header_5_Block & ComponentPropsWithRef<"nav">) {
+	const [menuState, setMenuState] = React.useState(false);
 
 	return (
-		<header>
+		<header className="border-b">
 			<nav
 				data-state={menuState && "active"}
-				id="header"
 				className={cn(
-					"fixed z-20 w-full border-b transition-colors duration-150",
-					isScrolled && "bg-background/50 backdrop-blur-3xl",
+					"bg-background/50 fixed z-20 w-full",
 					preview && "relative",
 				)}
 				{...navProps}
 			>
-				<div className="mx-auto max-w-5xl px-6 transition-all duration-300">
+				<div className="mx-auto max-w-6xl px-6 transition-all duration-300">
 					<div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
 						<div className="flex w-full items-center justify-between gap-12 lg:w-auto">
 							{brandLogo && (
@@ -71,7 +77,7 @@ export default function Header_2({
 
 							<div className="hidden lg:block">
 								<ul className="flex gap-8 text-sm">
-									{menuItems.map((item, index) => (
+									{menuItems?.map((item, index) => (
 										<li key={index}>
 											<Link
 												href={item.href}
@@ -104,10 +110,10 @@ export default function Header_2({
 							)}
 						</div>
 
-						<div className="bg-background absolute top-[125%] mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:w-fit lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
+						<div className="bg-background absolute top-[125%] z-10 mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:w-fit lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
 							<div className="lg:hidden">
 								<ul className="space-y-6 text-base">
-									{menuItems.map((item, index) => (
+									{menuItems?.map((item, index) => (
 										<li key={index}>
 											<Link
 												href={item.href}
