@@ -864,7 +864,59 @@ Proceed? (yes/no)
 
 **When to Run**: After user has completed all manual corrections from Phase 3 and committed/pushed changes.
 
-### Step 1: Analyze User Corrections
+### Step 1: Analyze Conversation History
+
+**CRITICAL**: Before looking at code changes, retrace the ENTIRE conversation from start to finish to understand:
+- Where did agents get stuck or confused?
+- What questions did agents ask that they should have known?
+- When did the user have to provide clarification or corrections?
+- What information was missing that caused delays?
+- Where did agents make wrong assumptions?
+
+**Conversation Analysis Questions**:
+
+1. **Agent Confusion Points**:
+   - What did the agent not understand on first try?
+   - Which concepts required user explanation?
+   - Where did the agent ask for clarification?
+
+2. **User Intervention Points**:
+   - When did the user have to step in to correct direction?
+   - What information did the user provide that wasn't in docs?
+   - Where did the user say "no, do it this way instead"?
+
+3. **Missing Context**:
+   - What knowledge gaps were revealed?
+   - Which workflow steps were unclear?
+   - What assumptions did agents make incorrectly?
+
+4. **Timing Issues**:
+   - Did agents get information too late in the process?
+   - Would earlier documentation have prevented backtracking?
+   - Were there steps done out of order?
+
+**Example Analysis**:
+```markdown
+**Conversation Point 1**: User said "I want to completely remove the upload field"
+- Agent initially started removing all upload field files
+- User had to clarify: "uploadField is used by mediaField, don't remove it"
+- **Learning**: Agent didn't understand field architecture hierarchy
+- **Fix Needed**: Document field dependencies BEFORE any migration workflow
+
+**Conversation Point 2**: Agent completed registry update but missed config files
+- User pointed out: "registry configs still have uploadField"
+- Agent had to search again and fix registry/payload/blocks/header/header-{3,4,5}/config.ts
+- **Learning**: Registry has TWO levels (components AND configs)
+- **Fix Needed**: Add explicit checklist in Phase 2 for all registry file types
+
+**Conversation Point 3**: Registry.json had circular dependency
+- Agent used replace_all which accidentally made media-field depend on itself
+- User noticed: "circular dependencies warning when installing"
+- **Learning**: Bulk find-replace on registry.json is dangerous
+- **Fix Needed**: Add validation step after registry.json edits
+```
+
+### Step 2: Analyze Code Changes
 
 Compare the final committed code with the agent-generated code to identify what the user changed:
 
@@ -879,7 +931,7 @@ git diff <agent-completion-commit> HEAD --stat
 git diff <agent-completion-commit> HEAD -- <file-path>
 ```
 
-### Step 2: Categorize Corrections
+### Step 3: Categorize Corrections
 
 Group user corrections into categories:
 
@@ -902,18 +954,51 @@ Group user corrections into categories:
 - Spacing adjustments
 - Visual refinements
 
-### Step 3: Identify Learnable Patterns
+### Step 4: Identify Learnable Patterns
 
-For each correction, ask:
+For each correction AND each conversation intervention, ask:
 
 1. **Was this predictable?** - Could an agent have known to do this?
 2. **Is this project-specific?** - Or a general best practice?
 3. **Can it be automated?** - Should it be a linter rule or workflow step?
 4. **Should it be documented?** - Add to agent instructions?
 
-### Step 4: Update Workflow Documentation
+### Step 5: Map Learnings to Workflow Timing
 
-Add learnings to appropriate sections:
+**CRITICAL**: Determine WHERE in the workflow each learning should be documented:
+
+**Phase 1 Learnings** (Source & Build):
+- Field architecture understanding → Add to Step 3 (before config creation)
+- Dependency analysis → Add to Step 2 (before installation)
+- Component structure patterns → Add to Step 4 (component creation)
+
+**Phase 2 Learnings** (Registry Migration):
+- Registry file structure → Add to Quick Process Overview
+- Import path patterns → Add to import transformation rules
+- Validation checks → Add to validation checklist
+
+**Phase 3 Learnings** (Documentation):
+- Documentation patterns → Add to template requirements
+- Prop documentation → Add to props section requirements
+
+**Phase 4 Learnings** (Cleanup):
+- Conversation analysis patterns → Add to this step
+- Learning capture methods → Add to reporting template
+
+**Example Timing Map**:
+```markdown
+**Learning**: "Registry has both component index.tsx AND config.ts files"
+**User Said**: "You missed the registry config files for headers 3, 4, 5"
+**When Agent Needed It**: During Phase 2, before starting registry migration
+**Where to Add**: Phase 2, Step 1 (Transform imports) - add explicit checklist:
+  - [ ] Transform component files (index.tsx)
+  - [ ] Transform config files (config.ts)  ← NEW
+  - [ ] Update registry.json entries
+```
+
+### Step 6: Update Workflow Documentation
+
+Add learnings to appropriate sections AT THE RIGHT TIMING:
 
 **Create/Update Learning Documents**:
 
@@ -932,7 +1017,7 @@ Add learnings to appropriate sections:
    - Update agent prompts
    - Add validation steps
 
-### Step 5: Create Improvement Rules
+### Step 7: Create Improvement Rules
 
 **Example Improvements Based on This Batch**:
 
@@ -982,7 +1067,7 @@ Add new subsection "Animation Performance":
 
 Note: Prettier with tailwind plugin handles this automatically. If agents notice unordered classes, mention that linter will fix them. Don't spend time manually ordering.
 
-### Step 6: Update Agent Prompts
+### Step 8: Update Agent Prompts
 
 Modify agent task prompts to include new rules:
 
@@ -999,7 +1084,7 @@ Modify agent task prompts to include new rules:
 - Document any performance configurations (animation speeds, etc.)
 - Include notes about customization parameters
 
-### Step 7: Run Automated Checks (Future)
+### Step 9: Run Automated Checks (Future)
 
 Create validation scripts to catch common issues:
 
@@ -1014,39 +1099,153 @@ Create validation scripts to catch common issues:
 # - TypeScript types generated
 ```
 
-### Step 8: Report Learning Summary
+### Step 10: Report Learning Summary
 
-Create a summary report:
+Create a summary report that includes BOTH conversation analysis AND code corrections:
 
 ```markdown
-## Phase 4 Learning Report - Hero Batch
+## Phase 4 Learning Report - [Batch Name]
 
-### User Corrections Analyzed
-- 10 files changed
-- 3 functional fixes
-- 7 code quality improvements
+### Session Overview
+- **Date**: YYYY-MM-DD
+- **Session Type**: [Migration/New Features/Bug Fixes]
+- **Agent**: [Agent names used]
+- **Duration**: [Estimated time]
 
-### Key Learnings
-1. **Array Field Configuration**: Add minRows: 0, maxRows: 10 to all array fields
-2. **MediaField Import Path**: Use @/registry/default/lib/fields/media
-3. **Animation Speed**: Canvas animations at 20fps, fade rate 0.97
-4. **Tailwind Classes**: Prettier handles ordering automatically
+### Part 1: Conversation Analysis
 
-### Documentation Updated
-- ✅ Added array field rules to Phase 1 Step 3B
-- ✅ Updated registry import patterns in Phase 2
-- ✅ Added animation performance subsection to Phase 1 Step 4B
-- ✅ Created code-quality.md standards document
+#### Critical Intervention Points
 
-### Future Prevention
-- [ ] Create block config validation script
-- [ ] Add pre-commit hook for import path checking
-- [ ] Document animation testing checklist
+**Intervention 1: [Brief description]**
+- **What Happened**: User said "[exact quote]"
+- **Agent Confusion**: Agent was trying to [what agent was doing wrong]
+- **Root Cause**: [Why agent got confused - missing docs, unclear workflow, etc.]
+- **Impact**: [Time lost, rework needed, frustration level]
+- **When Agent Needed Info**: [Phase X, Step Y, before doing Z]
 
-### Estimated Impact
-- **Time Saved**: 15-20 minutes per batch (fewer manual corrections)
-- **Quality Improvement**: More consistent code patterns
-- **Knowledge Transfer**: Future agents learn from past corrections
+**Intervention 2: [Brief description]**
+- **What Happened**: User corrected "[exact quote]"
+- **Agent Confusion**: Agent assumed [wrong assumption]
+- **Root Cause**: [Documentation gap, timing issue, etc.]
+- **Impact**: [Consequences of the confusion]
+- **When Agent Needed Info**: [Specific workflow location]
+
+#### Questions Agent Asked That Shouldn't Have Been Necessary
+
+1. **Question**: "[Agent's question]"
+   - **Should Have Known**: [What docs should have covered this]
+   - **Fix**: Add to [specific workflow section]
+
+2. **Question**: "[Another question]"
+   - **Should Have Known**: [What was missing]
+   - **Fix**: Document in [location]
+
+#### User Explanations That Should Be Documentation
+
+1. **User Explained**: "[User's explanation]"
+   - **Context**: User had to explain because [reason]
+   - **Document Where**: [Workflow section + timing]
+   - **Format As**: [Rule/Warning/Example/Checklist]
+
+### Part 2: Code Corrections Analysis
+
+#### User Corrections by Category
+- **Files Changed**: 10
+- **Functional Fixes**: 3
+- **Code Quality**: 7
+- **Architecture**: 2
+
+#### Detailed Corrections
+
+**Functional Fix 1**: [Description]
+- **What Was Wrong**: [Original code issue]
+- **What User Fixed**: [Corrected version]
+- **Why It Matters**: [Impact on functionality]
+- **Prevention**: Add to [workflow section]
+
+### Part 3: Extracted Learnings with Timing
+
+#### Learning 1: [Title]
+**Conversation Context**: User said "[quote]" when agent [action]
+**Code Context**: Affected files [list]
+**Root Cause**: [Why this happened]
+**Timing**: Agent needed this at [Phase X, Step Y, before Z]
+**Documentation Fix**:
+```markdown
+**Add to Phase X, Step Y, BEFORE [action]**:
+
+⚠️ **CRITICAL**: [New rule or warning]
+
+[Detailed explanation with examples]
+
+**Why This Matters**: [Consequences if ignored]
+
+**Validation**: [How to check you did it right]
+```
+**Estimated Future Impact**: Saves [X] minutes per batch
+
+#### Learning 2: [Title]
+[Same structure...]
+
+### Part 4: Documentation Updates Made
+
+**Workflow Updates**:
+- ✅ Phase 1, Step 3: Added [specific rule]
+- ✅ Phase 2, Overview: Added [checklist item]
+- ✅ Phase 4, Step 1: Enhanced [conversation analysis]
+
+**New Documents Created**:
+- ✅ `agent-os/standards/[new-doc].md`
+- ✅ `agent-os/workflows/implementation/learning-reports/[this-report].md`
+
+**Agent Prompts Updated**:
+- ✅ @source-helper: Now checks [new requirement]
+- ✅ @registry-porter: Now validates [new check]
+
+### Part 5: Future Prevention Checklist
+
+**Immediate Actions Completed**:
+- ✅ [Action taken]
+- ✅ [Action taken]
+
+**Recommended Future Automation**:
+- [ ] Create validation script for [pattern]
+- [ ] Add pre-commit hook for [check]
+- [ ] Build linter rule for [pattern]
+
+### Part 6: Impact Assessment
+
+**Time Metrics**:
+- **This Session**: [X] hours total, [Y] hours of agent confusion/rework
+- **Future Sessions**: Estimated [Z] minutes saved per batch
+- **Cumulative Savings**: Over 10 batches: [total] hours saved
+
+**Quality Improvements**:
+- ✅ [Specific improvement]
+- ✅ [Specific improvement]
+- ✅ [Specific improvement]
+
+**Knowledge Transfer Success**:
+- Documentation now covers [X] previously confusing areas
+- Future agents will receive guidance at [Y] critical decision points
+- Workflow now has [Z] new validation checkpoints
+
+### Part 7: Conversation-to-Documentation Map
+
+**This section shows exactly where each user clarification was added to docs**:
+
+| User Said | Conversation Turn | Added To Workflow | Timing | Format |
+|-----------|------------------|-------------------|---------|---------|
+| "[quote]" | Turn #15 | Phase 2, Step 1 | Before migration | Checklist |
+| "[quote]" | Turn #23 | Phase 1, Step 3 | Before config | Warning |
+| "[quote]" | Turn #31 | Phase 2, Overview | At start | Rule |
+
+### Conclusion
+
+**Session Success**: [Overall assessment]
+**Biggest Win**: [Most valuable learning]
+**Biggest Gap Filled**: [Most critical documentation added]
+**Ready For**: Next batch will be [X]% faster and [Y]% more accurate
 ```
 
 ### When to Skip Phase 4
@@ -1064,6 +1263,47 @@ Skip this phase if:
 4. **Standardization**: Consistent patterns across all components
 5. **Faster Iterations**: Less back-and-forth between agent and user
 
+### End-of-Session Cleanup Command
+
+**When to Run**: At the end of each work session, after all changes have been committed and pushed.
+
+**Command for User**:
+```
+Run the cleanup and learning protocol from Phase 4 of the build marketing blocks workflow
+```
+
+**What the Agent Does**:
+
+1. **Analyze Recent Work**:
+   - Review git commits from the session
+   - Identify patterns in changes made
+   - Categorize corrections and improvements
+
+2. **Create Learning Report**:
+   - Document key learnings
+   - Identify improvement opportunities
+   - Create actionable rules for future work
+
+3. **Update Documentation**:
+   - Add learnings to agent docs
+   - Update workflow with new best practices
+   - Enhance agent prompts with discovered patterns
+
+4. **Generate Session Summary**:
+   - List what was accomplished
+   - Document time saved through learnings
+   - Provide recommendations for next session
+
+**Output Location**: `agent-os/workflows/implementation/learning-reports/YYYY-MM-DD-[session-name].md`
+
+**Agent Behavior**: This protocol MUST run automatically at the end of every batch session, even without explicit user request. The agent should proactively offer to run this when detecting:
+- User says "done", "finished", "that's it for today"
+- User mentions committing/pushing changes
+- User asks about next steps
+- Session appears to be wrapping up
+
+**Integration with Batch Workflow**: Phase 4 is now the REQUIRED final step of every batch cycle. Do not consider a batch complete until Phase 4 cleanup has been executed and documented.
+
 ---
 
 ## Workflow Coordination
@@ -1072,8 +1312,31 @@ Skip this phase if:
 
 **Batch Size**: 1-5 components maximum per workflow run
 
+**Parallel Execution**: When building 2-5 components in a batch, agents MUST run in parallel using Claude Code's multi-agent capability.
+
+**How to Run Agents in Parallel**:
+
+1. **Single Message, Multiple Agents**: Use ONE message with multiple Task tool calls
+2. **Each Agent Gets One Component**: Assign exactly one block to each agent
+3. **All Phases Support Parallel**: Phase 1, 2, and 3 can all run concurrently
+
+**Example Parallel Execution**:
+
+```
+User: "Build headers 3, 4, and 5"
+
+Claude Code sends ONE message with THREE Task calls:
+- Task 1: @source-helper → Build Header_3
+- Task 2: @source-helper → Build Header_4
+- Task 3: @source-helper → Build Header_5
+
+(All three agents run simultaneously)
+```
+
 **Rationale**:
 
+- Faster completion time (3-5x speedup for batches)
+- Better resource utilization
 - Easier to monitor progress
 - Manageable review points
 - Reduces context switching

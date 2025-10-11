@@ -14,10 +14,45 @@ The Header_2 block accepts the following props from PayloadCMS:
 
 <TypeTable
   type={{
+    brandLogo: {
+      type: "MediaField",
+      required: false,
+      description: "Brand logo with light and dark theme support (see MediaField structure below)",
+    },
+    logoHref: {
+      type: "string",
+      required: true,
+      default: "/",
+      description: "URL for the logo link",
+    },
     menuItems: {
       type: "Array<NavItem>",
       required: true,
       description: "An array of navigation items (see NavItem structure below)",
+    },
+    actionButtons: {
+      type: "Array<ActionButton>",
+      required: false,
+      description: "Action buttons displayed on the right side (max 3, see ActionButton structure below)",
+    },
+  }}
+/>
+
+### MediaField
+
+The brand logo field supports separate images for light and dark themes:
+
+<TypeTable
+  type={{
+    light: {
+      type: "Media",
+      required: false,
+      description: "Logo image for light theme",
+    },
+    dark: {
+      type: "Media",
+      required: false,
+      description: "Logo image for dark theme",
     },
   }}
 />
@@ -41,6 +76,31 @@ Each navigation item in the `menuItems` array has the following structure:
   }}
 />
 
+### ActionButton
+
+Each action button in the `actionButtons` array has the following structure:
+
+<TypeTable
+  type={{
+    label: {
+      type: "string",
+      description: "Button text",
+      required: true,
+    },
+    href: {
+      type: "string",
+      description: "Target URL for the button",
+      required: true,
+    },
+    variant: {
+      type: "\"default\" | \"outline\" | \"ghost\"",
+      description: "Button style variant",
+      required: true,
+      default: "default",
+    },
+  }}
+/>
+
 ## Installation
 
 ```bash
@@ -54,6 +114,9 @@ If you encounter issues, check the [registry setup guide](/docs/guides/registry-
 This component uses the following registry components:
 
 - [Style Utils](/docs/lib/style-utils) - Tailwind utility functions including `cn()` class merger
+- [Media Field](/docs/fields/media-field) - PayloadCMS media field with theme support
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+- [Button](/docs/ui/button) - Customizable button component with variants
 
 ## Dependencies
 

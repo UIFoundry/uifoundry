@@ -5,7 +5,7 @@ import {
 } from "@/registry/default/lib/constants/blocks";
 import { FLEX_ALIGNMENT } from "@/registry/default/lib/constants";
 import selectEnumField from "@/registry/default/lib/fields/select-enum-field/config";
-import uploadField from "@/registry/default/lib/fields/upload-field/config";
+import mediaField from "@/registry/default/lib/fields/media/config";
 
 export const HeaderBrandLogoBlock: Block = {
   slug: BLOCK_SLUG_HEADER_BRAND_LOGO,
@@ -29,7 +29,7 @@ export const HeaderBrandLogoBlock: Block = {
       required: true,
       defaultValue: "/home",
     },
-    uploadField({
+    mediaField({
       name: "media",
     }),
   ],

@@ -1,53 +1,72 @@
+/**
+ * Header 3 Component
+ *
+ * Source: https://tailark.com/r/hero-section-5.json (header.tsx)
+ * License: Free Tier
+ * Adapted from: Tailark Hero Section 5 - Header Component
+ *
+ * Modifications:
+ * - Integrated with PayloadCMS block system
+ * - Replaced hardcoded menuItems with dynamic props from Header_3_Block
+ * - Replaced Logo component with Home icon from lucide-react
+ * - Added preview prop support for admin panel rendering
+ * - Preserved scroll-based backdrop blur animation
+ */
+
 "use client";
 
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState, type ComponentPropsWithRef } from "react";
-import type { Header_1_Block, MediaField as MediaFieldProps } from "~/payload-types";
-import { cn } from "@/registry/default/utils";
-import { Button } from "@/registry/ui/button";
-import MediaField from "@/registry/default/lib/fields/media";
+import { Menu, X } from "lucide-react";
+import { Button } from "~/ui/button";
+import React from "react";
+import { useScroll, motion } from "motion/react";
+import { cn } from "~/styles/utils";
+import type { Header_3_Block } from "~/payload-types";
+import type { ComponentPropsWithRef } from "react";
+import MediaField from "~/payload/fields/media";
 
 export * from "./config";
 
-export default function Header_1({
+export default function Header_3({
 	preview = false,
 	brandLogo,
-	logoHref = "/",
+	logoHref,
 	menuItems,
 	actionButtons,
 	...navProps
-}: { preview?: boolean } & Header_1_Block & ComponentPropsWithRef<"nav">) {
-	const [menuState, setMenuState] = useState(false);
-	const [isScrolled, setIsScrolled] = useState(false);
+}: { preview?: boolean } & Header_3_Block & ComponentPropsWithRef<"nav">) {
+	const [menuState, setMenuState] = React.useState(false);
+	const [scrolled, setScrolled] = React.useState(false);
+	const { scrollYProgress } = useScroll();
 
-	useEffect(() => {
-		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 50);
-		};
-		window.addEventListener("scroll", handleScroll);
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	});
+	React.useEffect(() => {
+		const unsubscribe = scrollYProgress.on("change", (latest) => {
+			setScrolled(latest > 0.05);
+		});
+		return () => unsubscribe();
+	}, [scrollYProgress]);
 
 	return (
 		<header>
 			<nav
 				data-state={menuState && "active"}
-				id="header"
-				className={cn("fixed z-20 w-full px-2", preview && "relative")}
+				className={cn("fixed z-20 w-full pt-2", preview && "relative")}
 				{...navProps}
 			>
 				<div
 					className={cn(
-						"mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12",
-						isScrolled &&
-						"bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5",
+						"mx-auto max-w-7xl rounded-3xl px-6 transition-all duration-300 lg:px-12",
+						scrolled && "bg-background/50 backdrop-blur-2xl",
 					)}
 				>
-					<div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
-						<div className="flex w-full justify-between lg:w-auto">
+					<motion.div
+						key={1}
+						className={cn(
+							"relative flex flex-wrap items-center justify-between gap-6 py-3 duration-200 lg:gap-0 lg:py-6",
+							scrolled && "lg:py-4",
+						)}
+					>
+						<div className="flex w-full items-center justify-between gap-12 lg:w-auto">
 							{brandLogo && (
 								<Link
 									href={logoHref}
@@ -55,7 +74,7 @@ export default function Header_1({
 									className="relative h-8 w-24 lg:w-32"
 								>
 									<MediaField
-										media={brandLogo as MediaFieldProps}
+										media={brandLogo}
 										fill
 										className="object-contain object-left"
 									/>
@@ -65,15 +84,17 @@ export default function Header_1({
 							<button
 								onClick={() => setMenuState(!menuState)}
 								aria-label={menuState == true ? "Close Menu" : "Open Menu"}
+								aria-expanded={menuState}
+								aria-controls="mobile-menu"
 								className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
 							>
 								<Menu className="m-auto size-6 duration-200 in-data-[state=active]:scale-0 in-data-[state=active]:rotate-180 in-data-[state=active]:opacity-0" />
 								<X className="absolute inset-0 m-auto size-6 scale-0 -rotate-180 opacity-0 duration-200 in-data-[state=active]:scale-100 in-data-[state=active]:rotate-0 in-data-[state=active]:opacity-100" />
 							</button>
 
-							<div className="absolute inset-0 m-auto hidden size-fit lg:block">
+							<div className="hidden lg:block">
 								<ul className="flex gap-8 text-sm">
-									{menuItems.map((item, index) => (
+									{menuItems?.map((item, index) => (
 										<li key={index}>
 											<Link
 												href={item.href}
@@ -106,10 +127,10 @@ export default function Header_1({
 							)}
 						</div>
 
-						<div className="bg-background absolute top-[125%] z-10 mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:w-fit lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
+						<div id="mobile-menu" className="bg-background absolute top-[125%] z-10 mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:w-fit lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
 							<div className="lg:hidden">
 								<ul className="space-y-6 text-base">
-									{menuItems.map((item, index) => (
+									{menuItems?.map((item, index) => (
 										<li key={index}>
 											<Link
 												href={item.href}
@@ -139,7 +160,7 @@ export default function Header_1({
 								)}
 							</div>
 						</div>
-					</div>
+					</motion.div>
 				</div>
 			</nav>
 		</header>

@@ -1,17 +1,23 @@
 "use client";
 
-import { Home, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState, type ComponentPropsWithRef } from "react";
-import type { Header_2_Block } from "~/payload-types";
+import type { Header_2_Block, MediaField as MediaFieldProps } from "~/payload-types";
 import { cn } from "@/registry/default/utils";
+import { Button } from "@/registry/ui/button";
+import MediaField from "@/registry/default/lib/fields/media";
 
 export * from "./config";
 
 export default function Header_2({
+	preview = false,
+	brandLogo,
+	logoHref = "/",
 	menuItems,
+	actionButtons,
 	...navProps
-}: Header_2_Block & ComponentPropsWithRef<"nav">) {
+}: { preview?: boolean } & Header_2_Block & ComponentPropsWithRef<"nav">) {
 	const [menuState, setMenuState] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 
@@ -33,19 +39,26 @@ export default function Header_2({
 				className={cn(
 					"fixed z-20 w-full border-b transition-colors duration-150",
 					isScrolled && "bg-background/50 backdrop-blur-3xl",
+					preview && "relative",
 				)}
 				{...navProps}
 			>
 				<div className="mx-auto max-w-5xl px-6 transition-all duration-300">
 					<div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
 						<div className="flex w-full items-center justify-between gap-12 lg:w-auto">
-							<Link
-								href="/"
-								aria-label="home"
-								className="flex items-center space-x-2"
-							>
-								<Home />
-							</Link>
+							{brandLogo && (
+								<Link
+									href={logoHref}
+									aria-label="home"
+									className="relative h-8 w-24 lg:w-32"
+								>
+									<MediaField
+										media={brandLogo as MediaFieldProps}
+										fill
+										className="object-contain object-left"
+									/>
+								</Link>
+							)}
 
 							<button
 								onClick={() => setMenuState(!menuState)}
@@ -72,7 +85,26 @@ export default function Header_2({
 							</div>
 						</div>
 
-						<div className="bg-background absolute top-[125%] mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none lg:in-data-[state=active]:flex dark:shadow-none dark:lg:bg-transparent">
+						<div className="hidden lg:flex lg:gap-3">
+							{actionButtons && actionButtons.length > 0 && (
+								<>
+									{actionButtons.map((button, index) => (
+										<Button
+											key={index}
+											asChild
+											variant={button.variant}
+											size="sm"
+										>
+											<Link href={button.href}>
+												<span>{button.label}</span>
+											</Link>
+										</Button>
+									))}
+								</>
+							)}
+						</div>
+
+						<div className="bg-background absolute top-[125%] mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:w-fit lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
 							<div className="lg:hidden">
 								<ul className="space-y-6 text-base">
 									{menuItems.map((item, index) => (
@@ -86,6 +118,23 @@ export default function Header_2({
 										</li>
 									))}
 								</ul>
+
+								{actionButtons && actionButtons.length > 0 && (
+									<div className="mt-6 flex flex-col space-y-3">
+										{actionButtons.map((button, index) => (
+											<Button
+												key={index}
+												asChild
+												variant={button.variant}
+												size="sm"
+											>
+												<Link href={button.href}>
+													<span>{button.label}</span>
+												</Link>
+											</Button>
+										))}
+									</div>
+								)}
 							</div>
 						</div>
 					</div>

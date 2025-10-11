@@ -9,6 +9,7 @@ export default function uploadField({
 }: RequiredFields): UploadField {
 	return {
 		type: "upload",
+		interfaceName: "UploadField",
 		relationTo: COLLECTION_SLUG_MEDIA,
 		...restConfig,
 	} as UploadField;

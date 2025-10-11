@@ -44,6 +44,40 @@
 
 ---
 
+## Header Blocks
+
+### Header_1
+- **Source**: Custom design (original to this project)
+- **License**: N/A
+- **Date Added**: Before tracking system
+- **Notes**: Centered navigation with scroll-based backdrop blur and border animation
+
+### Header_2
+- **Source**: Custom design (original to this project)
+- **License**: N/A
+- **Date Added**: Before tracking system
+- **Notes**: Standard navigation header with mobile menu
+
+### Header_3
+- **Source**: [Tailark Hero Section 5 - Header Component](https://tailark.com/r/hero-section-5.json)
+- **License**: Free Tier
+- **Date Added**: 2025-10-10
+- **Notes**: Navigation with scroll-based backdrop blur animation. Uses motion/react for scroll detection. Features rounded container that adds background on scroll.
+
+### Header_4
+- **Source**: [Tailark Hero Section 6 - Navigation Component](https://tailark.com/r/hero-section-6.json)
+- **License**: Free Tier
+- **Date Added**: 2025-10-10
+- **Notes**: Navigation with dashed border and fixed positioning. Extracted from hero section main component. Features login/signup buttons with border separator.
+
+### Header_5
+- **Source**: [Tailark Hero Section 4 - Header Component](https://tailark.com/r/hero-section-4.json)
+- **License**: Free Tier
+- **Date Added**: 2025-10-10
+- **Notes**: Navigation with backdrop blur and solid border. Features centered menu items on desktop with mobile menu overlay.
+
+---
+
 ## CTA Blocks
 
 - No entries yet.
@@ -85,8 +119,9 @@
 **External Component Libraries**:
 - **Tailark** (<https://tailark.com>) - Free tier components
   - Hero Section 1 (used in Hero_3)
-  - Hero Section 4 (used in Hero_2)
-  - Hero Section 6 (used in Hero_4)
+  - Hero Section 4 (used in Hero_2, Header_5)
+  - Hero Section 5 (header used in Header_3)
+  - Hero Section 6 (used in Hero_4, header used in Header_4)
 - **MagicUI** (<https://magicui.design>) - MIT licensed components
   - FlickeringGrid (used in Hero_5)
 - **Awesome Shadcn UI** (<https://github.com/birobirobiro/awesome-shadcn-ui>) - Community registry (fallback source)
@@ -94,7 +129,7 @@
 **Available Free Tier Sources NOT Yet Used**:
 - Tailark Hero Section 2
 - Tailark Hero Section 3
-- Tailark Hero Section 5
+- Tailark Hero Section 7+
 - (Add more as discovered)
 
 ---
