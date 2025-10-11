@@ -1,5 +1,4 @@
 import type { Block } from "payload";
-import { COLLECTION_SLUG_MEDIA } from "~/payload/constants";
 import {
 	BLOCK_GROUP_FOOTERS,
 	BLOCK_SLUG_FOOTER_1,

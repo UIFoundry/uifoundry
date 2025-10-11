@@ -20,10 +20,7 @@ import { Button } from "~/ui/button";
 import Link from "next/link";
 import { useState } from "react";
 import { cn } from "~/styles/utils";
-import type {
-	Header_4_Block,
-	MediaField as MediaFieldProps,
-} from "~/payload-types";
+import type { Header_4_Block } from "~/payload-types";
 import type { ComponentPropsWithRef } from "react";
 import MediaField from "~/payload/fields/media";
 
@@ -59,7 +56,7 @@ export default function Header_4({
 									className="relative h-8 w-24 lg:w-32"
 								>
 									<MediaField
-										media={brandLogo as MediaFieldProps}
+										media={brandLogo}
 										fill
 										className="object-contain object-left"
 									/>

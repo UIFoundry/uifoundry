@@ -2182,7 +2182,7 @@ export interface HeaderMenuButtonBlock {
 export interface HeaderBrandLogoBlock {
   alignment?: ('left' | 'right' | 'center') | null;
   href: string;
-  media?: (string | null) | Media;
+  media?: MediaField;
   id?: string | null;
   blockName?: string | null;
   blockType: 'header_brand_logo';
@@ -2205,7 +2205,7 @@ export interface Footer {
  * via the `definition` "Footer_1_Block".
  */
 export interface Footer_1_Block {
-  brandLogo?: (string | null) | Media;
+  brandLogo?: MediaField;
   copyright?: string | null;
   links?:
     | {
@@ -3319,7 +3319,7 @@ export interface HeaderMenuButtonBlockSelect<T extends boolean = true> {
 export interface HeaderBrandLogoBlockSelect<T extends boolean = true> {
   alignment?: T;
   href?: T;
-  media?: T;
+  media?: T | MediaFieldSelect<T>;
   id?: T;
   blockName?: T;
 }
@@ -3344,7 +3344,7 @@ export interface FootersSelect<T extends boolean = true> {
  * via the `definition` "Footer_1_Block_select".
  */
 export interface Footer_1_BlockSelect<T extends boolean = true> {
-  brandLogo?: T;
+  brandLogo?: T | MediaFieldSelect<T>;
   copyright?: T;
   links?:
     | T

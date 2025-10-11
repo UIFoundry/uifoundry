@@ -20,10 +20,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "~/ui/button";
 import React from "react";
 import { cn } from "~/styles/utils";
-import type {
-	Header_5_Block,
-	MediaField as MediaFieldProps,
-} from "~/payload-types";
+import type { Header_5_Block } from "~/payload-types";
 import type { ComponentPropsWithRef } from "react";
 import MediaField from "~/payload/fields/media";
 
@@ -59,7 +56,7 @@ export default function Header_5({
 									className="relative h-8 w-24 lg:w-32"
 								>
 									<MediaField
-										media={brandLogo as MediaFieldProps}
+										media={brandLogo}
 										fill
 										className="object-contain object-left"
 									/>
