@@ -17,7 +17,6 @@ export default function Footer_1({
 		<footer {...divProps}>
 			<div className="mx-auto max-w-5xl px-6 py-8 md:py-16">
 				<Link href="/" aria-label="go home" className="mx-auto block size-fit">
-					{ }
 					{brandLogo && (
 						<Image
 							src={(brandLogo as Media).url!}

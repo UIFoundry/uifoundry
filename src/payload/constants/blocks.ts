@@ -20,6 +20,7 @@ export const BLOCK_SLUG_HEADER_BRAND_LOGO = "header_brand_logo" as const;
 // Footers
 export const BLOCK_GROUP_FOOTERS = "Footers" as const;
 export const BLOCK_SLUG_FOOTER_1 = "footer_1" as const;
+export const BLOCK_SLUG_FOOTER_2 = "footer_2" as const;
 
 // Features
 export const BLOCK_GROUP_FEATURES = "Features" as const;
