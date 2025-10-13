@@ -99,7 +99,7 @@ export const Footer_1_Block: Block = {
 				},
 				{
 					href: "",
-					icon: "Tik Tok",
+					icon: "TikTok",
 				},
 			],
 		}),

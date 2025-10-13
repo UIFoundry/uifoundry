@@ -161,14 +161,16 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 				...footer1Defaults,
 				...props,
 			} as Footer_1_BlockType;
-			return <Footer_1 {...combinedProps} />;
+			const { id, ...otherProps } = combinedProps;
+			return <Footer_1 id={id ?? undefined} {...otherProps} />;
 		},
 		Footer_2: (props: Partial<Footer_2_BlockType> = {}) => {
 			const combinedProps = {
 				...footer2Defaults,
 				...props,
 			} as Footer_2_BlockType;
-			return <Footer_2 {...combinedProps} />;
+			const { id, ...otherProps } = combinedProps;
+			return <Footer_2 id={id ?? undefined} {...otherProps} />;
 		},
 		...components,
 	};

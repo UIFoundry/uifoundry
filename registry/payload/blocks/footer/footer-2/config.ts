@@ -197,7 +197,7 @@ export const Footer_2_Block: Block = {
 				},
 				{
 					href: "",
-					icon: "Tik Tok",
+					icon: "TikTok",
 				},
 			],
 		}),
