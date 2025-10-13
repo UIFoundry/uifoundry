@@ -192,6 +192,74 @@ mediaField()            → imageSrc
 
 **File location**: `src/payload/blocks/[BlockType]/[BlockType]_N/config.ts`
 
+**CRITICAL: Extract Hardcoded Values to Default Values**
+
+Before creating the config, identify ALL hardcoded values in the source component:
+- Text content (labels, titles, descriptions, copyright, etc.)
+- Link data (navigation links, social links, etc.)
+- Array data (lists of items, groups, etc.)
+- Any other static data that should be editable
+
+**These hardcoded values MUST be extracted into the `defaultValue` properties** of your Payload config fields. This ensures:
+1. Documentation previews show complete, realistic examples
+2. Users see meaningful starter data when adding blocks
+3. The block works immediately without requiring users to fill every field
+
+**EXCEPTION: href/link fields MUST use empty strings (`""`) as defaults** - we don't want to link users anywhere by default.
+
+**Example - Extracting hardcoded data**:
+
+```typescript
+// ❌ BAD: Source component with hardcoded values
+export default function Footer({ links }: FooterProps) {
+  const hardcodedLinks = [
+    { label: "Features", href: "/features" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "About", href: "/about" },
+  ];
+
+  return (
+    <footer>
+      {hardcodedLinks.map(link => <a href={link.href}>{link.label}</a>)}
+      <p>© 2024 Company Name</p>
+    </footer>
+  );
+}
+
+// ✅ GOOD: Extract to config defaultValue
+export const Footer_1_Block: Block = {
+  // ...
+  fields: [
+    {
+      name: "links",
+      type: "array",
+      fields: [
+        { name: "label", type: "text", required: true },
+        { name: "href", type: "text", required: true },
+      ],
+      defaultValue: [
+        { label: "Features", href: "" },  // ✅ href is empty string
+        { label: "Pricing", href: "" },   // ✅ href is empty string
+        { label: "About", href: "" },     // ✅ href is empty string
+      ],
+    },
+    {
+      name: "copyright",
+      type: "text",
+      defaultValue: "Company Name, All rights reserved",  // ✅ Text extracted
+    },
+  ],
+};
+```
+
+**Real-world example from Footer blocks**:
+
+See `registry/payload/blocks/footer/footer-1/config.ts` and `registry/payload/blocks/footer/footer-2/config.ts` for complete examples of extracting:
+- Link arrays with labels (text) and hrefs (empty strings)
+- Social media links with icons (text) and hrefs (empty strings)
+- Copyright text
+- Grouped navigation structures
+
 **Template**:
 
 ```typescript
@@ -238,14 +306,14 @@ export const [BlockType]_N_Block: Block = {
           label: "Button Label",
           type: "text",
           required: true,
-          defaultValue: "Get Started",
+          defaultValue: "Get Started", // ✅ Extracted from source
         },
         {
           name: "ctaHref",
           label: "Button Link",
           type: "text",
           required: true,
-          defaultValue: "/signup",
+          defaultValue: "", // ✅ Empty string for href fields
         },
       ],
     },
@@ -258,7 +326,9 @@ export const [BlockType]_N_Block: Block = {
 
 - Use existing field helpers (`headerField()`, `mediaField()`, etc.)
 - Group related fields in collapsible sections
-- Provide sensible default values
+- **ALWAYS extract hardcoded values from source to defaultValue properties**
+- **ALWAYS use empty strings (`""`) for href/link fields - NEVER use actual URLs**
+- Provide complete, realistic default values that demonstrate the block
 - Mark critical fields as `required: true`
 - Use clear, descriptive labels
 - Initialize common sections as expanded (`initCollapsed: false`)

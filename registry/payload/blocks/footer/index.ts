@@ -1,12 +1,12 @@
 import type { Block } from "payload";
-import Footer_1 from "./Footer_1";
-import { Footer_1_Block } from "./Footer_1/config";
-import Footer_2 from "./Footer_1";
-import { Footer_2_Block } from "./Footer_2/config";
+import Footer_1 from "./footer-1";
+import Footer_2 from "./footer-2";
+import { Footer_1_Block } from "./footer-1/config";
+import { Footer_2_Block } from "./footer-2/config";
 import {
 	BLOCK_SLUG_FOOTER_1,
 	BLOCK_SLUG_FOOTER_2,
-} from "~/payload/constants/blocks";
+} from "@/registry/default/lib/constants/blocks";
 
 export const blocks: Block[] = [Footer_1_Block, Footer_2_Block];
 

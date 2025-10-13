@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-blocks",
+  "type": "registry:block",
+  "title": "Footer Blocks",
+  "description": "PayloadCMS Footer Blocks",
+  "registryDependencies": [
+    "@uifoundry/footer-1",
+    "@uifoundry/footer-2"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/footer/index.ts",
+      "content": "import type { Block } from \"payload\";\nimport Footer_1 from \"./footer-1\";\nimport Footer_2 from \"./footer-2\";\nimport { Footer_1_Block } from \"./footer-1/config\";\nimport { Footer_2_Block } from \"./footer-2/config\";\nimport {\n\tBLOCK_SLUG_FOOTER_1,\n\tBLOCK_SLUG_FOOTER_2,\n} from \"@/registry/default/lib/constants/blocks\";\n\nexport const blocks: Block[] = [Footer_1_Block, Footer_2_Block];\n\nexport const blockComponents = {\n\t[BLOCK_SLUG_FOOTER_1]: Footer_1,\n\t[BLOCK_SLUG_FOOTER_2]: Footer_2,\n};\n",
+      "type": "registry:file",
+      "target": "src/payload/blocks/Footer/index.ts"
+    }
+  ]
+}
