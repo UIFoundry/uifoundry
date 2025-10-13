@@ -57,7 +57,7 @@ export default function Footer_2({
 						© {new Date().getFullYear()} {copyright}
 					</span>
 					<div className="order-first flex flex-wrap justify-center gap-6 text-sm md:order-last">
-						{socialLinks.map((icon, index) => (
+						{(socialLinks ?? []).map((icon, index) => (
 							<SocialIcon icon={icon.icon} href={icon.href} key={`${index}`} />
 						))}
 					</div>

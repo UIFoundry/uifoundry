@@ -154,7 +154,7 @@ export const Footer_2_Block: Block = {
 					group: "Legal",
 					items: [
 						{
-							label: "Licese",
+							label: "License",
 							href: "",
 						},
 						{
