@@ -2,9 +2,9 @@ import type { Block } from "payload";
 import {
 	BLOCK_GROUP_FOOTERS,
 	BLOCK_SLUG_FOOTER_2,
-} from "~/payload/constants/blocks";
-import socialLinksField from "~/payload/fields/socialLinks/config";
-import mediaField from "~/payload/fields/media/config";
+} from "@/registry/default/lib/constants/blocks";
+import socialLinksField from "@/registry/default/lib/fields/socialLinks/config";
+import mediaField from "@/registry/default/lib/fields/media/config";
 
 export const Footer_2_Block: Block = {
 	slug: BLOCK_SLUG_FOOTER_2,

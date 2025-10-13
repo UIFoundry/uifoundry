@@ -3,6 +3,7 @@
 	"pages": [
 		"hero",
 		"header",
+		"footer",
 		"coming-soon"
 	]
 }

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-1",
+  "type": "registry:block",
+  "title": "Footer 1",
+  "description": "Footer 1 Block with centered layout, brand logo, navigation links, social icons, and copyright",
+  "dependencies": [
+    "payload",
+    "react",
+    "next"
+  ],
+  "registryDependencies": [
+    "@uifoundry/media-field",
+    "@uifoundry/social-links-field",
+    "@uifoundry/block-constants"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/footer/footer-1/config.ts",
+      "content": "import type { Block } from \"payload\";\nimport {\n\tBLOCK_GROUP_FOOTERS,\n\tBLOCK_SLUG_FOOTER_1,\n} from \"@/registry/default/lib/constants/blocks\";\nimport socialLinksField from \"@/registry/default/lib/fields/socialLinks/config\";\nimport mediaField from \"@/registry/default/lib/fields/media/config\";\n\nexport const Footer_1_Block: Block = {\n\tslug: BLOCK_SLUG_FOOTER_1,\n\tinterfaceName: \"Footer_1_Block\",\n\tlabels: {\n\t\tsingular: \"Footer 1\",\n\t\tplural: \"Footer 1's\",\n\t},\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_FOOTERS,\n\t},\n\tfields: [\n\t\tmediaField({\n\t\t\tname: \"brandLogo\",\n\t\t\tlabel: \"Brand Logo\",\n\t\t}),\n\t\t{\n\t\t\tname: \"copyright\",\n\t\t\ttype: \"text\",\n\t\t\tlabel: \"Copyright\",\n\t\t\tdefaultValue: \"UIFoundry, All rights reserved\",\n\t\t},\n\t\t{\n\t\t\tname: \"links\",\n\t\t\ttype: \"array\",\n\t\t\tlabels: {\n\t\t\t\tsingular: \"Link\",\n\t\t\t\tplural: \"Links\",\n\t\t\t},\n\t\t\tfields: [\n\t\t\t\t{\n\t\t\t\t\tname: \"label\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\tlabel: \"Label\",\n\t\t\t\t\trequired: true,\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: \"href\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\tlabel: \"Link (Href)\",\n\t\t\t\t\trequired: true,\n\t\t\t\t},\n\t\t\t],\n\t\t\tdefaultValue: [\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Features\",\n\t\t\t\t\thref: \"\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Solution\",\n\t\t\t\t\thref: \"\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Customer\",\n\t\t\t\t\thref: \"\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Pricing\",\n\t\t\t\t\thref: \"\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Help\",\n\t\t\t\t\thref: \"\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"About\",\n\t\t\t\t\thref: \"\",\n\t\t\t\t},\n\t\t\t],\n\t\t},\n\t\tsocialLinksField({\n\t\t\tdefaultValue: [\n\t\t\t\t{\n\t\t\t\t\thref: \"\",\n\t\t\t\t\ticon: \"X (formerly Twitter)\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\thref: \"\",\n\t\t\t\t\ticon: \"LinkedIn\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\thref: \"\",\n\t\t\t\t\ticon: \"Facebook\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\thref: \"\",\n\t\t\t\t\ticon: \"Threads\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\thref: \"\",\n\t\t\t\t\ticon: \"Instagram\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\thref: \"\",\n\t\t\t\t\ticon: \"Tik Tok\",\n\t\t\t\t},\n\t\t\t],\n\t\t}),\n\t],\n};\n",
+      "type": "registry:file",
+      "target": "src/payload/blocks/Footer/Footer_1/config.ts"
+    },
+    {
+      "path": "registry/payload/blocks/footer/footer-1/index.tsx",
+      "content": "\"use client\";\n\nimport Image from \"next/image\";\nimport Link from \"next/link\";\nimport { type ComponentPropsWithRef } from \"react\";\nimport type { Footer_1_Block, Media } from \"~/payload-types\";\nimport SocialIcon from \"@/registry/default/lib/fields/socialLinks\";\n\nexport default function Footer_1({\n\tbrandLogo,\n\tlinks,\n\tsocialLinks,\n\tcopyright,\n\t...divProps\n}: Footer_1_Block & ComponentPropsWithRef<\"div\">) {\n\treturn (\n\t\t<footer {...divProps}>\n\t\t\t<div className=\"mx-auto max-w-5xl px-6 py-8 md:py-16\">\n\t\t\t\t<Link href=\"/\" aria-label=\"go home\" className=\"mx-auto block size-fit\">\n\t\t\t\t\t{brandLogo && (\n\t\t\t\t\t\t<Image\n\t\t\t\t\t\t\tsrc={(brandLogo as Media).url!}\n\t\t\t\t\t\t\talt={(brandLogo as Media).alt}\n\t\t\t\t\t\t\twidth={200}\n\t\t\t\t\t\t\theight={150}\n\t\t\t\t\t\t/>\n\t\t\t\t\t)}\n\t\t\t\t</Link>\n\n\t\t\t\t<div className=\"flex flex-wrap justify-center gap-6 text-sm\">\n\t\t\t\t\t{(links ?? []).map((link, index) => (\n\t\t\t\t\t\t<Link\n\t\t\t\t\t\t\tkey={index}\n\t\t\t\t\t\t\thref={link.href}\n\t\t\t\t\t\t\tclassName=\"text-muted-foreground hover:text-primary block duration-150\"\n\t\t\t\t\t\t>\n\t\t\t\t\t\t\t<span>{link.label}</span>\n\t\t\t\t\t\t</Link>\n\t\t\t\t\t))}\n\t\t\t\t</div>\n\t\t\t\t<div className=\"my-8 flex flex-wrap justify-center gap-6 text-sm\">\n\t\t\t\t\t{socialLinks.map((icon, index) => (\n\t\t\t\t\t\t<SocialIcon icon={icon.icon} href={icon.href} key={`${index}`} />\n\t\t\t\t\t))}\n\t\t\t\t</div>\n\t\t\t\t<span className=\"text-muted-foreground block text-center text-sm\">\n\t\t\t\t\t{\" \"}\n\t\t\t\t\t© {new Date().getFullYear()} {copyright}\n\t\t\t\t</span>\n\t\t\t</div>\n\t\t</footer>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Footer/Footer_1/index.tsx"
+    }
+  ]
+}

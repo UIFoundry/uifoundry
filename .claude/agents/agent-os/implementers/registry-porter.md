@@ -86,6 +86,10 @@ registry/payload/[type]/[component-name]/
 }
 ```
 
+**CRITICAL**: Update the root `/registry.json` file with the new component entry.
+
+Note: The `/public/r/registry.json` file is auto-generated from the root registry.json via the shadcn build command and should NOT be manually edited.
+
 2. **Update registry exports** if needed
 
 ### Phase 5: CLI Installation Testing

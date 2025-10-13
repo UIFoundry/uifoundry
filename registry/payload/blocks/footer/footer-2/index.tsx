@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { type ComponentPropsWithRef } from "react";
 import type { Footer_2_Block, Media } from "~/payload-types";
-import SocialIcon from "~/payload/fields/socialLinks";
-import { cn } from "~/styles/utils";
+import SocialIcon from "@/registry/default/lib/fields/socialLinks";
+import { cn } from "@/registry/default/utils";
 
 export default function Footer_2({
 	brandLogo,

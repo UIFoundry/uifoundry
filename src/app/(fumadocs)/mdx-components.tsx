@@ -16,6 +16,8 @@ import type {
 	Header_3_Block as Header_3_BlockType,
 	Header_4_Block as Header_4_BlockType,
 	Header_5_Block as Header_5_BlockType,
+	Footer_1_Block as Footer_1_BlockType,
+	Footer_2_Block as Footer_2_BlockType,
 	ComingSoon_1_Block as ComingSoon_1_BlockType,
 } from "~/payload-types";
 
@@ -30,6 +32,8 @@ import Header_2 from "~/payload/blocks/Header/Header_2";
 import Header_3 from "~/payload/blocks/Header/Header_3";
 import Header_4 from "~/payload/blocks/Header/Header_4";
 import Header_5 from "~/payload/blocks/Header/Header_5";
+import Footer_1 from "~/payload/blocks/Footer/Footer_1";
+import Footer_2 from "~/payload/blocks/Footer/Footer_2";
 import { Hero_1_Block } from "~/payload/blocks/Hero/Hero_1/config";
 import { Hero_2_Block } from "~/payload/blocks/Hero/Hero_2/config";
 import { Hero_3_Block } from "~/payload/blocks/Hero/Hero_3/config";
@@ -40,6 +44,8 @@ import { Header_2_Block } from "~/payload/blocks/Header/Header_2/config";
 import { Header_3_Block } from "~/payload/blocks/Header/Header_3/config";
 import { Header_4_Block } from "~/payload/blocks/Header/Header_4/config";
 import { Header_5_Block } from "~/payload/blocks/Header/Header_5/config";
+import { Footer_1_Block } from "~/payload/blocks/Footer/Footer_1/config";
+import { Footer_2_Block } from "~/payload/blocks/Footer/Footer_2/config";
 import ComingSoon_1 from "~/payload/blocks/ComingSoon/ComingSoon_1";
 import { ComingSoon_1_Block } from "~/payload/blocks/ComingSoon/ComingSoon_1/config";
 
@@ -57,6 +63,8 @@ const header2Defaults = extractBlockDefaults(Header_2_Block);
 const header3Defaults = extractBlockDefaults(Header_3_Block);
 const header4Defaults = extractBlockDefaults(Header_4_Block);
 const header5Defaults = extractBlockDefaults(Header_5_Block);
+const footer1Defaults = extractBlockDefaults(Footer_1_Block);
+const footer2Defaults = extractBlockDefaults(Footer_2_Block);
 const comingSoon1Defaults = extractBlockDefaults(ComingSoon_1_Block);
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -147,6 +155,20 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 				...props,
 			} as ComingSoon_1_BlockType;
 			return <ComingSoon_1 {...combinedProps} />;
+		},
+		Footer_1: (props: Partial<Footer_1_BlockType> = {}) => {
+			const combinedProps = {
+				...footer1Defaults,
+				...props,
+			} as Footer_1_BlockType;
+			return <Footer_1 {...combinedProps} />;
+		},
+		Footer_2: (props: Partial<Footer_2_BlockType> = {}) => {
+			const combinedProps = {
+				...footer2Defaults,
+				...props,
+			} as Footer_2_BlockType;
+			return <Footer_2 {...combinedProps} />;
 		},
 		...components,
 	};

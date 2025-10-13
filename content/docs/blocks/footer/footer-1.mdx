@@ -1,0 +1,119 @@
+---
+title: "Footer 1"
+description: "Centered footer layout with brand logo, horizontal navigation, social media icons, and copyright text"
+category: "blocks"
+---
+
+## Preview
+
+<Footer_1 />
+
+## Props
+
+The Footer_1 block accepts the following props from PayloadCMS:
+
+<TypeTable
+  type={{
+    brandLogo: {
+      type: "MediaField",
+      required: false,
+      description: "Brand logo with light and dark theme support (see MediaField structure below)",
+    },
+    links: {
+      type: "Array<LinkItem>",
+      required: false,
+      description: "An array of navigation links displayed horizontally below the logo (see LinkItem structure below)",
+    },
+    socialLinks: {
+      type: "Array<SocialLink>",
+      required: true,
+      description: "Array of social media links with icons (see SocialLink structure below)",
+    },
+    copyright: {
+      type: "string",
+      required: false,
+      description: "Copyright text displayed at the bottom of the footer",
+    },
+  }}
+/>
+
+### MediaField
+
+The brand logo field supports separate images for light and dark themes:
+
+<TypeTable
+  type={{
+    light: {
+      type: "Media",
+      required: false,
+      description: "Logo image for light theme",
+    },
+    dark: {
+      type: "Media",
+      required: false,
+      description: "Logo image for dark theme",
+    },
+  }}
+/>
+
+### LinkItem
+
+Each navigation link in the `links` array has the following structure:
+
+<TypeTable
+  type={{
+    label: {
+      type: "string",
+      description: "Display text for the navigation link",
+      required: true,
+    },
+    href: {
+      type: "string",
+      description: "Target URL for the navigation link",
+      required: true,
+    },
+  }}
+/>
+
+### SocialLink
+
+Each social link in the `socialLinks` array has the following structure:
+
+<TypeTable
+  type={{
+    href: {
+      type: "string",
+      description: "URL for the social media profile",
+      required: true,
+    },
+    icon: {
+      type: "SocialIconKey",
+      description: "The social media platform icon to display (Facebook, Twitter, LinkedIn, Instagram, etc.)",
+      required: true,
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/footer-1
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Media Field](/docs/fields/media-field) - PayloadCMS media field with theme support
+- [Social Links Field](/docs/fields/social-links-field) - PayloadCMS field for managing social media links with icon selection
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+- [Lucide React](https://github.com/lucide-icons/lucide/tree/main/packages/lucide-react) - Beautiful & consistent icon toolkit
