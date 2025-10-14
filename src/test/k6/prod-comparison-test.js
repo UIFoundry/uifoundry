@@ -17,7 +17,7 @@ export const options = {
 	],
 };
 
-export default function () {
+const tests = () => {
 	// Test 1: Health Check (Baseline)
 	group("Health Check API", () => {
 		const res = http.get(`${PROD_URL}/api/health`);
@@ -52,4 +52,5 @@ export default function () {
 	});
 
 	sleep(1);
-}
+};
+export default tests;

@@ -14,7 +14,7 @@ export const options = {
 	],
 };
 
-export default function () {
+const tests = () => {
 	group("Health Check (Baseline)", () => {
 		const res = http.get("http://localhost:3005/api/health");
 		check(res, {
@@ -38,4 +38,6 @@ export default function () {
 			"static asset loaded": (r) => r.status === 200 || r.status === 404,
 		});
 	});
-}
+};
+
+export default tests;

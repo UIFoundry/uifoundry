@@ -25,7 +25,7 @@ export const options = {
 	},
 };
 
-export default function () {
+const tests = () => {
 	const res = http.get(PROD_URL);
 	check(res, {
 		"status is 200": (r) => r.status === 200,
@@ -37,4 +37,6 @@ export default function () {
 
 	// Simulate real user behavior - wait between requests
 	sleep(1);
-}
+};
+
+export default tests;
