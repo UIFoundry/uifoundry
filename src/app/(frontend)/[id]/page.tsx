@@ -38,7 +38,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 	const site = await payload.findByID({
 		collection: COLLECTION_SLUG_SITES,
 		id: id,
-		depth: 1,
+		depth: 2,
 	});
 
 	if (!session?.user) {

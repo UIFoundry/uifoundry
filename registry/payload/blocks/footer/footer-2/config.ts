@@ -64,27 +64,27 @@ export const Footer_2_Block: Block = {
 					items: [
 						{
 							label: "Features",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Solution",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Customers",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Pricing",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Help",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "About",
-							href: "",
+							href: "/",
 						},
 					],
 				},
@@ -93,31 +93,31 @@ export const Footer_2_Block: Block = {
 					items: [
 						{
 							label: "Startup",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Freelancers",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Organizations",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Students",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Collaboration",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Design",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Management",
-							href: "",
+							href: "/",
 						},
 					],
 				},
@@ -126,27 +126,27 @@ export const Footer_2_Block: Block = {
 					items: [
 						{
 							label: "About",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Careers",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Blog",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Press",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Contact",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Help",
-							href: "",
+							href: "/",
 						},
 					],
 				},
@@ -155,19 +155,19 @@ export const Footer_2_Block: Block = {
 					items: [
 						{
 							label: "License",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Privacy",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Cookies",
-							href: "",
+							href: "/",
 						},
 						{
 							label: "Security",
-							href: "",
+							href: "/",
 						},
 					],
 				},
@@ -176,27 +176,27 @@ export const Footer_2_Block: Block = {
 		socialLinksField({
 			defaultValue: [
 				{
-					href: "",
+					href: "https://x.com",
 					icon: "X (formerly Twitter)",
 				},
 				{
-					href: "",
+					href: "https://linkedin.com",
 					icon: "LinkedIn",
 				},
 				{
-					href: "",
+					href: "https://facebook.com",
 					icon: "Facebook",
 				},
 				{
-					href: "",
+					href: "https://threads.com",
 					icon: "Threads",
 				},
 				{
-					href: "",
+					href: "https://instagram.com",
 					icon: "Instagram",
 				},
 				{
-					href: "",
+					href: "https://tiktok.com",
 					icon: "TikTok",
 				},
 			],
