@@ -51,54 +51,54 @@ export const Footer_1_Block: Block = {
 			defaultValue: [
 				{
 					label: "Features",
-					href: "",
+					href: "/",
 				},
 				{
 					label: "Solution",
-					href: "",
+					href: "/",
 				},
 				{
 					label: "Customer",
-					href: "",
+					href: "/",
 				},
 				{
 					label: "Pricing",
-					href: "",
+					href: "/",
 				},
 				{
 					label: "Help",
-					href: "",
+					href: "/",
 				},
 				{
 					label: "About",
-					href: "",
+					href: "/",
 				},
 			],
 		},
 		socialLinksField({
 			defaultValue: [
 				{
-					href: "",
+					href: "https://x.com",
 					icon: "X (formerly Twitter)",
 				},
 				{
-					href: "",
+					href: "https://linkedin.com",
 					icon: "LinkedIn",
 				},
 				{
-					href: "",
+					href: "https://facebook.com",
 					icon: "Facebook",
 				},
 				{
-					href: "",
+					href: "https://threads.com",
 					icon: "Threads",
 				},
 				{
-					href: "",
+					href: "https://instagram.com",
 					icon: "Instagram",
 				},
 				{
-					href: "",
+					href: "https://tiktok.com",
 					icon: "TikTok",
 				},
 			],
