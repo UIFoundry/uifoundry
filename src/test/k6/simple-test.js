@@ -1,6 +1,13 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var http_1 = require("k6/http");
-exports.default = (function () {
-    http_1.default.get("uifoundry.dev");
-});
+// @ts-ignore
+import http from "k6/http";
+
+export const options = {
+	vus: 1,
+	duration: "10s",
+};
+
+const tests = () => {
+	http.get("https://uifoundry.dev");
+};
+
+export default tests;
