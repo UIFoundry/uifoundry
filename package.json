@@ -16,6 +16,7 @@
 		"lint:fix": "next lint --fix",
 		"vitest": "vitest --config ./vitest.config.ts",
 		"test": "playwright test --config=playwright.config.ts",
+		"test:load": "k6 run src/test/k6/simple-test.ts",
 		"test:docs": "playwright test tests/docs-pages.spec.ts --config=playwright.config.ts",
 		"test:docs:retry": "playwright test tests/docs-pages.spec.ts --config=playwright.config.ts --retries=3",
 		"test:report": "playwright show-report",
