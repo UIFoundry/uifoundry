@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "footer-4",
+  "type": "registry:block",
+  "title": "Footer 4",
+  "description": "Footer 4 Block with minimal layout, copyright text, and inline navigation links",
+  "dependencies": [
+    "payload",
+    "react",
+    "next"
+  ],
+  "registryDependencies": [
+    "@uifoundry/style-utils",
+    "@uifoundry/block-constants"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/footer/footer-4/config.ts",
+      "content": "import type { Block } from \"payload\";\nimport {\n\tBLOCK_GROUP_FOOTERS,\n\tBLOCK_SLUG_FOOTER_4,\n} from \"@/registry/default/lib/constants/blocks\";\n\nexport const Footer_4_Block: Block = {\n\tslug: BLOCK_SLUG_FOOTER_4,\n\tinterfaceName: \"Footer_4_Block\",\n\tlabels: {\n\t\tsingular: \"Footer 4\",\n\t\tplural: \"Footer 4's\",\n\t},\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_FOOTERS,\n\t},\n\tfields: [\n\t\t{\n\t\t\tname: \"copyright\",\n\t\t\ttype: \"text\",\n\t\t\tlabel: \"Copyright\",\n\t\t\tdefaultValue: \"UIFoundry, All rights reserved\",\n\t\t},\n\t\t{\n\t\t\tname: \"links\",\n\t\t\ttype: \"array\",\n\t\t\tlabels: {\n\t\t\t\tsingular: \"Link\",\n\t\t\t\tplural: \"Links\",\n\t\t\t},\n\t\t\tfields: [\n\t\t\t\t{\n\t\t\t\t\tname: \"label\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\tlabel: \"Label\",\n\t\t\t\t\trequired: true,\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: \"href\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\tlabel: \"Link (Href)\",\n\t\t\t\t\trequired: true,\n\t\t\t\t},\n\t\t\t],\n\t\t\tdefaultValue: [\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Features\",\n\t\t\t\t\thref: \"/\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Solution\",\n\t\t\t\t\thref: \"/\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Customer\",\n\t\t\t\t\thref: \"/\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Pricing\",\n\t\t\t\t\thref: \"/\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"Help\",\n\t\t\t\t\thref: \"/\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"About\",\n\t\t\t\t\thref: \"/\",\n\t\t\t\t},\n\t\t\t],\n\t\t},\n\t],\n};\n",
+      "type": "registry:file",
+      "target": "src/payload/blocks/Footer/Footer_4/config.ts"
+    },
+    {
+      "path": "registry/payload/blocks/footer/footer-4/index.tsx",
+      "content": "import Link from \"next/link\";\nimport { type ComponentPropsWithRef } from \"react\";\nimport type { Footer_4_Block } from \"~/payload-types\";\nimport { cn } from \"@/registry/default/utils\";\n\nexport * from \"./config\";\n\nexport default function Footer_4({\n\tlinks,\n\tcopyright,\n\tclassName,\n\t...divProps\n}: Footer_4_Block & ComponentPropsWithRef<\"div\">) {\n\treturn (\n\t\t<footer\n\t\t\tclassName={cn(\"border-b bg-white py-12 dark:bg-transparent\", className)}\n\t\t\t{...divProps}\n\t\t>\n\t\t\t<div className=\"mx-auto max-w-5xl px-6\">\n\t\t\t\t<div className=\"flex flex-wrap justify-between gap-6\">\n\t\t\t\t\t<span className=\"text-muted-foreground order-last block text-center text-sm md:order-first\">\n\t\t\t\t\t\t© {new Date().getFullYear()} {copyright}\n\t\t\t\t\t</span>\n\t\t\t\t\t<div className=\"order-first flex flex-wrap justify-center gap-6 text-sm md:order-last\">\n\t\t\t\t\t\t{links?.map((link, index) => (\n\t\t\t\t\t\t\t<Link\n\t\t\t\t\t\t\t\tkey={index}\n\t\t\t\t\t\t\t\thref={link.href}\n\t\t\t\t\t\t\t\tclassName=\"text-muted-foreground hover:text-primary block duration-150\"\n\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t<span>{link.label}</span>\n\t\t\t\t\t\t\t</Link>\n\t\t\t\t\t\t))}\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</footer>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Footer/Footer_4/index.tsx"
+    }
+  ]
+}

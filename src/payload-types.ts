@@ -2196,7 +2196,7 @@ export interface Footer {
   global?: boolean | null;
   title: string;
   owner: string | User;
-  footer: (Footer_1_Block | Footer_2_Block | Footer_3_Block | Footer_4_Block)[];
+  footer: (Footer_1_Block | Footer_2_Block | Footer_3_Block | Footer_4_Block | Footer_5_Block)[];
   updatedAt: string;
   createdAt: string;
 }
@@ -2375,6 +2375,70 @@ export interface Footer_4_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'footer_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_5_Block".
+ */
+export interface Footer_5_Block {
+  brandLogo?: MediaField;
+  copyright?: {
+    copyright?: string | null;
+    actions?:
+      | {
+          label?: string | null;
+          href?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  links?:
+    | {
+        group?: string | null;
+        items?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks: {
+    href: string;
+    icon:
+      | 'Facebook'
+      | 'Twitter'
+      | 'YouTube'
+      | 'LinkedIn'
+      | 'Telegram'
+      | 'Matrix'
+      | 'WhatsApp'
+      | 'Arc'
+      | 'Mastodon'
+      | 'Messenger'
+      | 'Infojobs'
+      | 'Skype'
+      | 'Threads'
+      | 'Instagram'
+      | 'X (formerly Twitter)'
+      | 'VK'
+      | 'Hashnode'
+      | 'Patreon'
+      | 'Peerlist'
+      | 'Pinterest'
+      | 'Reddit'
+      | 'Meta'
+      | 'TikTok'
+      | 'Carrd'
+      | 'Bluesky'
+      | 'daily.dev';
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'footer_5';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3465,6 +3529,7 @@ export interface FootersSelect<T extends boolean = true> {
         footer_2?: T | Footer_2_BlockSelect<T>;
         footer_3?: T | Footer_3_BlockSelect<T>;
         footer_4?: T | Footer_4_BlockSelect<T>;
+        footer_5?: T | Footer_5_BlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -3571,6 +3636,47 @@ export interface Footer_4_BlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Footer_5_Block_select".
+ */
+export interface Footer_5_BlockSelect<T extends boolean = true> {
+  brandLogo?: T | MediaFieldSelect<T>;
+  copyright?:
+    | T
+    | {
+        copyright?: T;
+        actions?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+      };
+  links?:
+    | T
+    | {
+        group?: T;
+        items?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        href?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -3617,7 +3723,7 @@ export interface Header1 {
  */
 export interface Footer1 {
   id: string;
-  footer: (Footer_1_Block | Footer_2_Block | Footer_3_Block | Footer_4_Block)[];
+  footer: (Footer_1_Block | Footer_2_Block | Footer_3_Block | Footer_4_Block | Footer_5_Block)[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3663,6 +3769,7 @@ export interface FooterSelect<T extends boolean = true> {
         footer_2?: T | Footer_2_BlockSelect<T>;
         footer_3?: T | Footer_3_BlockSelect<T>;
         footer_4?: T | Footer_4_BlockSelect<T>;
+        footer_5?: T | Footer_5_BlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
