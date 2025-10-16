@@ -22,7 +22,7 @@ export default function Footer_4({
 						© {new Date().getFullYear()} {copyright}
 					</span>
 					<div className="order-first flex flex-wrap justify-center gap-6 text-sm md:order-last">
-						{links.map((link, index) => (
+						{links?.map((link, index) => (
 							<Link
 								key={index}
 								href={link.href}

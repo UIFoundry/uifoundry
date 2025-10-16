@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { auth } from "~/auth";
 import { headers } from "next/headers";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
 	// Skip auth check for docs routes (belt and suspenders approach)
 	if (request.nextUrl.pathname.startsWith("/docs")) {
 		return NextResponse.next();

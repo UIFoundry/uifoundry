@@ -2,7 +2,7 @@
 
 import { RefreshRouteOnSave as PayloadLivePreview } from "@payloadcms/live-preview-react";
 import { useRouter } from "next/navigation.js";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { env } from "~/env.mjs";
 
 export default function RefreshRouteOnSave() {

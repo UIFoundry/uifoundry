@@ -11,9 +11,6 @@ const withMDX = createMDX();
 /** @type {import("next").NextConfig} */
 const nextConfig = {
 	serverExternalPackages: ["mongodb"],
-	experimental: {
-		reactCompiler: true,
-	},
 	images: {
 		remotePatterns: [
 			// Local development
