@@ -63,7 +63,7 @@ export default function Footer_5({
 				{copyright ? (
 					<div className="bg-muted mt-16 flex items-center justify-between rounded-md p-4 px-6 py-3">
 						<small className="text-muted-foreground order-last block text-center text-sm md:order-first">
-							`© ${new Date().getFullYear()} ${copyright?.copyright}`
+							{`© ${new Date().getFullYear()} ${copyright?.copyright ?? ""}`}
 						</small>
 						<div className="flex">
 							{copyright?.actions?.map((action, index) => {
