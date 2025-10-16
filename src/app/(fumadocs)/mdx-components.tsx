@@ -18,6 +18,9 @@ import type {
 	Header_5_Block as Header_5_BlockType,
 	Footer_1_Block as Footer_1_BlockType,
 	Footer_2_Block as Footer_2_BlockType,
+	Footer_3_Block as Footer_3_BlockType,
+	Footer_4_Block as Footer_4_BlockType,
+	Footer_5_Block as Footer_5_BlockType,
 	ComingSoon_1_Block as ComingSoon_1_BlockType,
 } from "~/payload-types";
 
@@ -34,6 +37,9 @@ import Header_4 from "~/payload/blocks/Header/Header_4";
 import Header_5 from "~/payload/blocks/Header/Header_5";
 import Footer_1 from "~/payload/blocks/Footer/Footer_1";
 import Footer_2 from "~/payload/blocks/Footer/Footer_2";
+import Footer_3 from "~/payload/blocks/Footer/Footer_3";
+import Footer_4 from "~/payload/blocks/Footer/Footer_4";
+import Footer_5 from "~/payload/blocks/Footer/Footer_5";
 import { Hero_1_Block } from "~/payload/blocks/Hero/Hero_1/config";
 import { Hero_2_Block } from "~/payload/blocks/Hero/Hero_2/config";
 import { Hero_3_Block } from "~/payload/blocks/Hero/Hero_3/config";
@@ -46,6 +52,9 @@ import { Header_4_Block } from "~/payload/blocks/Header/Header_4/config";
 import { Header_5_Block } from "~/payload/blocks/Header/Header_5/config";
 import { Footer_1_Block } from "~/payload/blocks/Footer/Footer_1/config";
 import { Footer_2_Block } from "~/payload/blocks/Footer/Footer_2/config";
+import { Footer_3_Block } from "~/payload/blocks/Footer/Footer_3/config";
+import { Footer_4_Block } from "~/payload/blocks/Footer/Footer_4/config";
+import { Footer_5_Block } from "~/payload/blocks/Footer/Footer_5/config";
 import ComingSoon_1 from "~/payload/blocks/ComingSoon/ComingSoon_1";
 import { ComingSoon_1_Block } from "~/payload/blocks/ComingSoon/ComingSoon_1/config";
 
@@ -65,6 +74,9 @@ const header4Defaults = extractBlockDefaults(Header_4_Block);
 const header5Defaults = extractBlockDefaults(Header_5_Block);
 const footer1Defaults = extractBlockDefaults(Footer_1_Block);
 const footer2Defaults = extractBlockDefaults(Footer_2_Block);
+const footer3Defaults = extractBlockDefaults(Footer_3_Block);
+const footer4Defaults = extractBlockDefaults(Footer_4_Block);
+const footer5Defaults = extractBlockDefaults(Footer_5_Block);
 const comingSoon1Defaults = extractBlockDefaults(ComingSoon_1_Block);
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -171,6 +183,30 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 			} as Footer_2_BlockType;
 			const { id, ...otherProps } = combinedProps;
 			return <Footer_2 id={id ?? undefined} {...otherProps} />;
+		},
+		Footer_3: (props: Partial<Footer_3_BlockType> = {}) => {
+			const combinedProps = {
+				...footer3Defaults,
+				...props,
+			} as Footer_3_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <Footer_3 id={id ?? undefined} {...otherProps} />;
+		},
+		Footer_4: (props: Partial<Footer_4_BlockType> = {}) => {
+			const combinedProps = {
+				...footer4Defaults,
+				...props,
+			} as Footer_4_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <Footer_4 id={id ?? undefined} {...otherProps} />;
+		},
+		Footer_5: (props: Partial<Footer_5_BlockType> = {}) => {
+			const combinedProps = {
+				...footer5Defaults,
+				...props,
+			} as Footer_5_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <Footer_5 id={id ?? undefined} {...otherProps} />;
 		},
 		...components,
 	};

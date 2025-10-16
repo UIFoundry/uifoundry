@@ -934,6 +934,94 @@
 		},
 		{
 			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Footer 3",
+			"name": "footer-3",
+			"type": "registry:block",
+			"description": "Footer 3 Block with horizontal layout, brand logo at top with social icons, grouped navigation links below, and copyright",
+			"files": [
+				{
+					"path": "registry/payload/blocks/footer/footer-3/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Footer/Footer_3/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/footer/footer-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Footer/Footer_3/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/social-links-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"payload",
+				"react",
+				"next"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Footer 4",
+			"name": "footer-4",
+			"type": "registry:block",
+			"description": "Footer 4 Block with minimal layout, copyright text, and inline navigation links",
+			"files": [
+				{
+					"path": "registry/payload/blocks/footer/footer-4/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Footer/Footer_4/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/footer/footer-4/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Footer/Footer_4/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"payload",
+				"react",
+				"next"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Footer 5",
+			"name": "footer-5",
+			"type": "registry:block",
+			"description": "Footer 5 Block with flexible grid layout, brand logo with social icons header, grouped navigation links, and rounded copyright section with action links",
+			"files": [
+				{
+					"path": "registry/payload/blocks/footer/footer-5/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Footer/Footer_5/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/footer/footer-5/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Footer/Footer_5/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/social-links-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"payload",
+				"react",
+				"next"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
 			"title": "Footer Blocks",
 			"name": "footer-blocks",
 			"type": "registry:block",
@@ -947,7 +1035,10 @@
 			],
 			"registryDependencies": [
 				"@uifoundry/footer-1",
-				"@uifoundry/footer-2"
+				"@uifoundry/footer-2",
+				"@uifoundry/footer-3",
+				"@uifoundry/footer-4",
+				"@uifoundry/footer-5"
 			]
 		}
 	]

@@ -6,12 +6,15 @@
   "description": "PayloadCMS Footer Blocks",
   "registryDependencies": [
     "@uifoundry/footer-1",
-    "@uifoundry/footer-2"
+    "@uifoundry/footer-2",
+    "@uifoundry/footer-3",
+    "@uifoundry/footer-4",
+    "@uifoundry/footer-5"
   ],
   "files": [
     {
       "path": "registry/payload/blocks/footer/index.ts",
-      "content": "import type { Block } from \"payload\";\nimport Footer_1 from \"./footer-1\";\nimport Footer_2 from \"./footer-2\";\nimport { Footer_1_Block } from \"./footer-1/config\";\nimport { Footer_2_Block } from \"./footer-2/config\";\nimport {\n\tBLOCK_SLUG_FOOTER_1,\n\tBLOCK_SLUG_FOOTER_2,\n} from \"@/registry/default/lib/constants/blocks\";\n\nexport const blocks: Block[] = [Footer_1_Block, Footer_2_Block];\n\nexport const blockComponents = {\n\t[BLOCK_SLUG_FOOTER_1]: Footer_1,\n\t[BLOCK_SLUG_FOOTER_2]: Footer_2,\n};\n",
+      "content": "import type { Block } from \"payload\";\nimport Footer_1 from \"./footer-1\";\nimport Footer_2 from \"./footer-2\";\nimport Footer_3 from \"./footer-3\";\nimport Footer_4 from \"./footer-4\";\nimport Footer_5 from \"./footer-5\";\nimport { Footer_1_Block } from \"./footer-1/config\";\nimport { Footer_2_Block } from \"./footer-2/config\";\nimport { Footer_3_Block } from \"./footer-3/config\";\nimport { Footer_4_Block } from \"./footer-4/config\";\nimport { Footer_5_Block } from \"./footer-5/config\";\nimport {\n\tBLOCK_SLUG_FOOTER_1,\n\tBLOCK_SLUG_FOOTER_2,\n\tBLOCK_SLUG_FOOTER_3,\n\tBLOCK_SLUG_FOOTER_4,\n\tBLOCK_SLUG_FOOTER_5,\n} from \"@/registry/default/lib/constants/blocks\";\n\nexport const blocks: Block[] = [\n\tFooter_1_Block,\n\tFooter_2_Block,\n\tFooter_3_Block,\n\tFooter_4_Block,\n\tFooter_5_Block,\n];\n\nexport const blockComponents = {\n\t[BLOCK_SLUG_FOOTER_1]: Footer_1,\n\t[BLOCK_SLUG_FOOTER_2]: Footer_2,\n\t[BLOCK_SLUG_FOOTER_3]: Footer_3,\n\t[BLOCK_SLUG_FOOTER_4]: Footer_4,\n\t[BLOCK_SLUG_FOOTER_5]: Footer_5,\n};\n",
       "type": "registry:file",
       "target": "src/payload/blocks/Footer/index.ts"
     }
