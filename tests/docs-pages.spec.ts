@@ -13,7 +13,7 @@ function discoverDocsPages(): Array<{ url: string; title: string }> {
   // Always include the docs index
   pages.push({ url: "/docs", title: "UIFoundry Documentation" });
 
-  function scanDirectory(dir: string, urlPath: string = "/docs") {
+  function scanDirectory(dir: string, urlPath = "/docs") {
     try {
       const entries = fs.readdirSync(dir, { withFileTypes: true });
 

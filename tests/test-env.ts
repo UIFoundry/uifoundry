@@ -31,17 +31,17 @@ function loadTestEnv() {
 
     return {
       NEXT_PUBLIC_BETTER_AUTH_URL:
-        process.env.NEXT_PUBLIC_BETTER_AUTH_URL || "http://localhost:3001",
-      DATABASE_URI: process.env.DATABASE_URI || "",
-      PAYLOAD_SECRET: process.env.PAYLOAD_SECRET || "",
-      BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET || "",
-      NODE_ENV: process.env.NODE_ENV || "test",
-      GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || "",
-      GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET || "",
-      S3_BUCKET: process.env.S3_BUCKET || "",
-      S3_REGION: process.env.S3_REGION || "",
-      S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID || "",
-      S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY || "",
+        process.env.NEXT_PUBLIC_BETTER_AUTH_URL ?? "http://localhost:3001",
+      DATABASE_URI: process.env.DATABASE_URI ?? "",
+      PAYLOAD_SECRET: process.env.PAYLOAD_SECRET ?? "",
+      BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET ?? "",
+      NODE_ENV: process.env.NODE_ENV ?? "test",
+      GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ?? "",
+      GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET ?? "",
+      S3_BUCKET: process.env.S3_BUCKET ?? "",
+      S3_REGION: process.env.S3_REGION ?? "",
+      S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID ?? "",
+      S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY ?? "",
     };
   } catch (error) {
     console.warn("Could not load .env file for tests:", error);

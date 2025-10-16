@@ -1,0 +1,71 @@
+---
+title: "Footer 4"
+description: "Minimal footer with copyright text and inline navigation links"
+category: "blocks"
+---
+
+## Preview
+
+<Footer_4 />
+
+## Props
+
+The Footer_4 block accepts the following props from PayloadCMS:
+
+<TypeTable
+  type={{
+    copyright: {
+      type: "string",
+      required: false,
+      description: "Copyright text displayed in the footer",
+      default: "UIFoundry, All rights reserved"
+    },
+    links: {
+      type: "Array<LinkItem>",
+      required: false,
+      description: "An array of navigation links displayed inline (see LinkItem structure below)",
+    },
+  }}
+/>
+
+### LinkItem
+
+Each navigation link in the `links` array has the following structure:
+
+<TypeTable
+  type={{
+    label: {
+      type: "string",
+      description: "Display text for the navigation link",
+      required: true,
+    },
+    href: {
+      type: "string",
+      description: "Target URL for the navigation link",
+      required: true,
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/footer-4
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Style Utils](/docs/lib/style-utils) - Tailwind utility functions including cn() class merger
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework

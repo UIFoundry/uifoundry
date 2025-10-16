@@ -43,6 +43,14 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/header-blocks` → `/docs/blocks/header-blocks`
 - `@uifoundry/renderblocks` → `/docs/ui/renderblocks`
 - `@uifoundry/header-global` → `/docs/globals/header-global`
+- `@uifoundry/footer-1` → `/docs/blocks/footer/footer-1`
+- `@uifoundry/footer-2` → `/docs/blocks/footer/footer-2`
+- `@uifoundry/footer-3` → `/docs/blocks/footer/footer-3`
+- `@uifoundry/footer-4` → `/docs/blocks/footer/footer-4`
+- `@uifoundry/footer-5` → `/docs/blocks/footer/footer-5`
+- `@uifoundry/footer-blocks` → `/docs/blocks/footer-blocks`
+- `@uifoundry/social-links-field` → `/docs/fields/social-links-field`
+- `@uifoundry/social-icons` → `/docs/ui/social-icons`
 
 ### ShadCN Components (no @uifoundry prefix)
 
@@ -97,6 +105,13 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/header-4`: Header block with dashed border and light background styling
 - `@uifoundry/header-5`: Header block with fixed backdrop blur and border bottom
 - `@uifoundry/renderblocks`: Component for rendering PayloadCMS blocks
+- `@uifoundry/footer-1`: Footer block with centered layout, brand logo, navigation links, social icons, and copyright
+- `@uifoundry/footer-2`: Footer block with grid layout, brand logo, grouped navigation links, social icons, and copyright
+- `@uifoundry/footer-3`: Footer block with horizontal layout, brand logo at top with social icons, grouped navigation links below, and copyright
+- `@uifoundry/footer-4`: Footer block with minimal layout, copyright text, and inline navigation links
+- `@uifoundry/footer-5`: Footer block with flexible grid layout, brand logo with social icons header, grouped navigation links, and rounded copyright section with action links
+- `@uifoundry/social-links-field`: PayloadCMS field for managing social media links with icon selection
+- `@uifoundry/social-icons`: Social media icon components and types
 
 ### ShadCN Components
 

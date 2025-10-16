@@ -1,5 +1,3 @@
-// // Slugs Split by Component Sections
-// Teams
 export const BLOCK_GROUP_TEAMS = "Teams" as const;
 export const BLOCK_SLUG_TEAMS_1 = "teams_1" as const;
 export const BLOCK_SLUG_TEAMS_1_HEADING = "teams_1_heading" as const;
