@@ -1,0 +1,78 @@
+---
+title: "Description Field"
+description: "PayloadCMS text field for descriptions with sensible defaults"
+category: "fields"
+---
+
+## Preview
+
+```typescript
+import descriptionField from "~/payload/fields/description/config";
+
+// Usage in PayloadCMS block/collection config
+const featureDescription = descriptionField({
+  name: "description",
+  label: "Feature Description",
+  required: true,
+});
+```
+
+## Props
+
+The descriptionField function accepts the following configuration options:
+
+<TypeTable
+  type={{
+    name: {
+      description: "Field name for the description field",
+      type: "string",
+      default: "description",
+    },
+    label: {
+      description: "Display label in PayloadCMS admin",
+      type: "string",
+      default: "Description",
+    },
+    required: {
+      description: "Whether the field is required",
+      type: "boolean",
+    },
+    admin: {
+      description: "Admin-specific configuration options",
+      type: "AdminConfig",
+    },
+    access: {
+      description: "Access control configuration",
+      type: "AccessConfig",
+    },
+    hooks: {
+      description: "Field-level hooks",
+      type: "FieldHooks",
+    },
+    validate: {
+      description: "Custom validation function",
+      type: "ValidateFunction",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/description-field
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Field Types](/docs/lib/field-types) - TypeScript definitions for PayloadCMS fields
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production

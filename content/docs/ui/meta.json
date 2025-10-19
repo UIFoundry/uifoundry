@@ -3,6 +3,7 @@
   "pages": [
     "animated-group",
     "button",
+    "icon",
     "popover",
     "renderblocks",
     "text-effect"

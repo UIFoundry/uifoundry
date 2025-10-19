@@ -6,13 +6,26 @@ This directory contains the Agent OS 2.0 installation for UIFoundry, providing a
 
 **Every agent working with UIFoundry MUST read and follow Agent OS 2.0 guidelines.**
 
+### ⚠️ READ THIS FIRST: Project Configuration
+
+**MANDATORY READ**: `standards/global/project-config.md`
+
+**Key Configuration**:
+- 🔴 **Dev server runs on port 3005** (NOT 3001, NOT 3000)
+- ❌ **NEVER start/stop/restart the dev server**
+- ✅ **ALWAYS use `localhost:3005` for ALL testing**
+- ✅ **If server is down, ASK USER to start it**
+
+**Why This Matters**: Time is wasted constantly when agents use wrong ports or try to manage the dev server. The server is ALWAYS running on 3005 and managed by the user only.
+
 ### Quick Start for New Agents
 
-1. **Critical Restrictions**: Read `standards/global/critical-restrictions.md` FIRST - never deploy, push, or install globals without permission
-2. **Component Development**: Read `workflows/documentation/maintain-documentation-system.md` for component workflows
-3. **Documentation Template**: Use `standards/global/documentation-template.md` for all new docs
-4. **Testing Protocols**: Follow `workflows/documentation/registry-testing-protocol.md` for registry components
-5. **OpenCode Integration**: Review `standards/global/opencode-agent-workflow.md` for subagent usage
+1. **Project Config**: Read `standards/global/project-config.md` FIRST - dev server on port 3005, never touch it
+2. **Critical Restrictions**: Read `standards/global/critical-restrictions.md` SECOND - never deploy, push, or install globals without permission
+3. **Component Development**: Read `workflows/documentation/maintain-documentation-system.md` for component workflows
+4. **Documentation Template**: Use `standards/global/documentation-template.md` for all new docs
+5. **Testing Protocols**: Follow `workflows/documentation/registry-testing-protocol.md` for registry components
+6. **OpenCode Integration**: Review `standards/global/opencode-agent-workflow.md` for subagent usage
 
 ## 📁 Agent OS 2.0 Structure
 

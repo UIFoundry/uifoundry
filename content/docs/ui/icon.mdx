@@ -1,0 +1,64 @@
+---
+title: "Icon"
+description: "Icon component for rendering Lucide React icons dynamically by name"
+category: "ui"
+---
+
+## Preview
+
+```tsx
+import { Icon } from "~/ui/icon";
+
+<Icon icon="Sparkles" className="w-6 h-6" />
+```
+
+## Props
+
+The Icon component accepts the following props:
+
+<TypeTable
+  type={{
+    icon: {
+      description: "Name of the Lucide React icon to render",
+      type: "keyof typeof icons",
+      required: true,
+    },
+    className: {
+      description: "CSS classes to apply to the icon SVG element",
+      type: "string",
+    },
+    size: {
+      description: "Icon size (width and height)",
+      type: "number | string",
+    },
+    color: {
+      description: "Icon color",
+      type: "string",
+    },
+    strokeWidth: {
+      description: "Stroke width of the icon",
+      type: "number",
+    },
+  }}
+/>
+
+All standard SVG props are supported through `ComponentPropsWithRef<"svg">`.
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/icon
+```
+
+If you encounter issues, check the [registry setup guide](/docs/guides/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component has no registry dependencies.
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Lucide React](https://github.com/lucide-icons/lucide/tree/main/packages/lucide-react) - Beautiful & consistent icon toolkit

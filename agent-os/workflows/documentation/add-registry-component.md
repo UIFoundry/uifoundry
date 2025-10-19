@@ -218,11 +218,17 @@ cat public/r/component-name.json | jq '.files[0].content' | head -20
 
 ### Step 6: Test Component Installation
 
+**CRITICAL**: Dev server runs on port **3005** (NOT 3001). See @agent-os/standards/global/project-config.md
+
+- ❌ **NEVER start/stop the dev server**
+- ✅ **ALWAYS use port 3005**
+- ✅ **If server down, ASK USER to start it**
+
 Test the component installation via shadcn CLI:
 
 ```bash
-# Test installation (you may need to set up a test project)
-npx shadcn add localhost:3001/r/component-name
+# Test installation (ALWAYS use port 3005)
+npx shadcn add http://localhost:3005/r/component-name
 
 # Verify files are installed correctly
 ls -la src/payload/blocks/ComponentName/Variant_1/

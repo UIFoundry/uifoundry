@@ -119,7 +119,7 @@ Goal: a working, self‑hostable Next.js + Payload starter with a UIFoundry regi
 - [x] Hero (5/5) ✅
 - [x] Header (5/5) ✅
 - [x] Footer (5/5) ✅
-- [ ] Features (0/5)
+- [ ] Features (2/5)
 - [ ] Pricing (0/5)
 - [ ] Testimonials (0/5)
 - [ ] FAQ (0/5)

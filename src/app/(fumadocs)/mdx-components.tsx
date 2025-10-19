@@ -22,6 +22,8 @@ import type {
 	Footer_4_Block as Footer_4_BlockType,
 	Footer_5_Block as Footer_5_BlockType,
 	ComingSoon_1_Block as ComingSoon_1_BlockType,
+	Features_1_Block as Features_1_BlockType,
+	Features_2_Block as Features_2_BlockType,
 } from "~/payload-types";
 
 // Import block components
@@ -40,6 +42,8 @@ import Footer_2 from "~/payload/blocks/Footer/Footer_2";
 import Footer_3 from "~/payload/blocks/Footer/Footer_3";
 import Footer_4 from "~/payload/blocks/Footer/Footer_4";
 import Footer_5 from "~/payload/blocks/Footer/Footer_5";
+import Features_1 from "~/payload/blocks/Features/Features_1";
+import Features_2 from "~/payload/blocks/Features/Features_2";
 import { Hero_1_Block } from "~/payload/blocks/Hero/Hero_1/config";
 import { Hero_2_Block } from "~/payload/blocks/Hero/Hero_2/config";
 import { Hero_3_Block } from "~/payload/blocks/Hero/Hero_3/config";
@@ -57,6 +61,8 @@ import { Footer_4_Block } from "~/payload/blocks/Footer/Footer_4/config";
 import { Footer_5_Block } from "~/payload/blocks/Footer/Footer_5/config";
 import ComingSoon_1 from "~/payload/blocks/ComingSoon/ComingSoon_1";
 import { ComingSoon_1_Block } from "~/payload/blocks/ComingSoon/ComingSoon_1/config";
+import { Features_1_Block } from "~/payload/blocks/Features/Features_1/config";
+import { Features_2_Block } from "~/payload/blocks/Features/Features_2/config";
 
 // Create TypeScript generator for AutoTypeTable
 const generator = createGenerator();
@@ -78,6 +84,8 @@ const footer3Defaults = extractBlockDefaults(Footer_3_Block);
 const footer4Defaults = extractBlockDefaults(Footer_4_Block);
 const footer5Defaults = extractBlockDefaults(Footer_5_Block);
 const comingSoon1Defaults = extractBlockDefaults(ComingSoon_1_Block);
+const features1Defaults = extractBlockDefaults(Features_1_Block);
+const features2Defaults = extractBlockDefaults(Features_2_Block);
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
 	return {
@@ -207,6 +215,22 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 			} as Footer_5_BlockType;
 			const { id, ...otherProps } = combinedProps;
 			return <Footer_5 id={id ?? undefined} {...otherProps} />;
+		},
+		Features_1: (props: Partial<Features_1_BlockType> = {}) => {
+			const combinedProps = {
+				...features1Defaults,
+				...props,
+			} as Features_1_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <Features_1 id={id ?? undefined} {...otherProps} />;
+		},
+		Features_2: (props: Partial<Features_2_BlockType> = {}) => {
+			const combinedProps = {
+				...features2Defaults,
+				...props,
+			} as Features_2_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <Features_2 id={id ?? undefined} {...otherProps} />;
 		},
 		...components,
 	};

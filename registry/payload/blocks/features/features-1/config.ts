@@ -2,8 +2,8 @@ import type { Block } from "payload";
 import {
 	BLOCK_GROUP_FEATURES,
 	BLOCK_SLUG_FEATURES_1,
-} from "~/payload/constants/blocks";
-import iconField from "~/payload/fields/iconField/config";
+} from "@/registry/default/lib/constants/blocks";
+import iconField from "@/registry/default/lib/fields/icon/config";
 
 export const Features_1_Block: Block = {
 	slug: BLOCK_SLUG_FEATURES_1,

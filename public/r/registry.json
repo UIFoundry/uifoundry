@@ -1040,6 +1040,141 @@
 				"@uifoundry/footer-4",
 				"@uifoundry/footer-5"
 			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Icon Component",
+			"name": "icon",
+			"type": "registry:ui",
+			"description": "Icon component for rendering Lucide React icons dynamically by name",
+			"dependencies": [
+				"react",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/ui/icon.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/icon.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Icon Field",
+			"name": "icon-field",
+			"type": "registry:block",
+			"description": "PayloadCMS icon selection field with searchable dropdown for Lucide React icons",
+			"dependencies": [
+				"react",
+				"payload",
+				"@payloadcms/ui",
+				"lucide-react"
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types",
+				"@uifoundry/select-enum-field",
+				"command",
+				"popover",
+				"button",
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/icon/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/icon/config.ts"
+				},
+				{
+					"path": "registry/payload/fields/icon/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/fields/icon/index.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Features 1",
+			"name": "features-1",
+			"type": "registry:block",
+			"description": "Features Block with grid layout, icon decorators, and feature cards",
+			"registryDependencies": [
+				"card",
+				"@uifoundry/icon",
+				"@uifoundry/icon-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/features/features-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/features/features-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Description Field",
+			"name": "description-field",
+			"type": "registry:component",
+			"description": "Text Field for Description elements",
+			"dependencies": [
+				"react",
+				"next"
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/description/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/description/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Features 2",
+			"name": "features-2",
+			"type": "registry:block",
+			"description": "Features block with grid layout and icon-based feature cards",
+			"registryDependencies": [
+				"@uifoundry/icon",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/icon-field",
+				"@uifoundry/description-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/features/features-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/features/features-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_2/config.ts"
+				}
+			]
 		}
 	]
 }

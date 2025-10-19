@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "icon-field",
+  "type": "registry:block",
+  "title": "Icon Field",
+  "description": "PayloadCMS icon selection field with searchable dropdown for Lucide React icons",
+  "dependencies": [
+    "react",
+    "payload",
+    "@payloadcms/ui",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@uifoundry/field-types",
+    "@uifoundry/select-enum-field",
+    "command",
+    "popover",
+    "button",
+    "@uifoundry/style-utils"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/fields/icon/config.ts",
+      "content": "import { icons } from \"lucide-react\";\nimport type { SelectField } from \"@/registry/default/lib/fields\";\nimport selectEnumField from \"@/registry/default/lib/fields/selectEnum/config\";\n\nexport default function iconField(props?: Partial<SelectField>): SelectField {\n\treturn selectEnumField<typeof icons>(icons, {\n\t\tname: \"icon\",\n\t\tinterfaceName: \"IconField\",\n\t\tuseKeyAsValue: true,\n\t\tadmin: {\n\t\t\tcomponents: {\n\t\t\t\tField: \"@/registry/default/lib/fields/icon\",\n\t\t\t},\n\t\t},\n\t\t...props,\n\t});\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/fields/icon/config.ts"
+    },
+    {
+      "path": "registry/payload/fields/icon/index.tsx",
+      "content": "\"use client\";\n\nimport { Check, ChevronsUpDown, icons } from \"lucide-react\";\nimport type { OptionObject, SelectFieldClientProps } from \"payload\";\nimport { useField } from \"@payloadcms/ui\";\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from \"@/registry/ui/command\";\n\nimport { Popover, PopoverContent, PopoverTrigger } from \"@/registry/ui/popover\";\nimport { cn } from \"@/registry/default/utils\";\nimport { useState, type Dispatch, type SetStateAction } from \"react\";\nimport { Button } from \"@/registry/ui/button\";\n\ntype IconName = keyof typeof icons;\n\nfunction Icon({\n  icon,\n  index,\n  value,\n  setValue,\n  setOpen,\n}: {\n  icon: OptionObject;\n  index: number;\n  value: IconName;\n  setValue: (val: unknown, disableModifyingForm?: boolean) => void;\n  setOpen: Dispatch<SetStateAction<boolean>>;\n}) {\n  const SelectIcon = icons[icon.value as IconName];\n  return (\n    <CommandItem\n      value={icon.value}\n      onSelect={(currentValue) => {\n        setValue(currentValue === value ? \"\" : currentValue);\n        setOpen(false);\n      }}\n      key={`${index}-${icon.value}`}\n      className=\"cursor-pointer transition-colors duration-400 hover:bg-neutral-300\"\n    >\n      <SelectIcon />\n      {icon.value}\n      <Check\n        className={cn(\n          \"ml-auto opacity-0\",\n          value === icon.label && \"opacity-100\",\n        )}\n      />\n    </CommandItem>\n  );\n}\n\nexport default function IconField({ field, path }: SelectFieldClientProps) {\n  const { value, setValue } = useField<IconName>({ path });\n  const [open, setOpen] = useState(false);\n  const SelectIcon = icons[value];\n\n  return (\n    <div className=\"\">\n      <label>\n        {field.label as string}\n        {field.required ? <span className=\"pl-1 text-red-500\">*</span> : \"\"}\n      </label>\n      <Popover open={open} onOpenChange={setOpen}>\n        <PopoverTrigger asChild className=\"mt-2 w-full cursor-pointer\">\n          <Button\n            variant=\"outline\"\n            role=\"combobox\"\n            aria-expanded={open}\n            className=\"justify-between\"\n          >\n            {SelectIcon && <SelectIcon />}\n            {value ? value : \"Select Icon...\"}\n            <ChevronsUpDown className=\"opacity-50\" />\n          </Button>\n        </PopoverTrigger>\n        <PopoverContent className=\"w-[var(--radix-popover-trigger-width)] bg-neutral-200 dark:bg-neutral-600\">\n          <Command value={value}>\n            <CommandInput\n              placeholder=\"Search Icons...\"\n              className=\"border-none\"\n            />\n            <CommandList>\n              <CommandEmpty>No Icons Found.</CommandEmpty>\n              <CommandGroup>\n                {field.options.map((icon, index) => (\n                  <Icon\n                    key={`${index}-${(icon as OptionObject).value}`}\n                    icon={icon as OptionObject}\n                    index={index}\n                    value={value}\n                    setValue={setValue}\n                    setOpen={setOpen}\n                  />\n                ))}\n              </CommandGroup>\n            </CommandList>\n          </Command>\n        </PopoverContent>\n      </Popover>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/fields/icon/index.tsx"
+    }
+  ]
+}

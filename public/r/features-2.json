@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "features-2",
+  "type": "registry:block",
+  "title": "Features 2",
+  "description": "Features block with grid layout and icon-based feature cards",
+  "dependencies": [
+    "react",
+    "next",
+    "payload",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@uifoundry/icon",
+    "@uifoundry/header-field",
+    "@uifoundry/subheader-field",
+    "@uifoundry/icon-field",
+    "@uifoundry/description-field",
+    "@uifoundry/block-constants"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/features/features-2/index.tsx",
+      "content": "import type { Features_2_Block } from \"~/payload-types\";\nimport { Icon } from \"@/registry/ui/icon\";\n\nexport * from \"./config\";\n\nexport default function Features(props: NonNullable<Features_2_Block>) {\n\treturn (\n\t\t<section className=\"py-12 md:py-20\">\n\t\t\t<div className=\"mx-auto max-w-5xl space-y-8 px-6 md:space-y-16\">\n\t\t\t\t<div className=\"relative z-10 mx-auto max-w-xl space-y-6 text-center md:space-y-12\">\n\t\t\t\t\t<h2 className=\"text-4xl font-medium text-balance lg:text-5xl\">\n\t\t\t\t\t\t{props.header ?? \"\"}\n\t\t\t\t\t</h2>\n\t\t\t\t\t<p>{props.subheader ?? \"\"}</p>\n\t\t\t\t</div>\n\n\t\t\t\t<div className=\"relative mx-auto grid max-w-4xl divide-x divide-y rounded-md border *:p-12 sm:grid-cols-2 lg:grid-cols-3\">\n\t\t\t\t\t{(props.features ?? []).map((feature, index) => (\n\t\t\t\t\t\t<div className=\"space-y-2\" key={`feature-${index}`}>\n\t\t\t\t\t\t\t<div className=\"flex items-center gap-2\">\n\t\t\t\t\t\t\t\t<Icon icon={feature.icon} />\n\t\t\t\t\t\t\t\t<h3 className=\"text-sm font-medium\">{feature.header}</h3>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<p className=\"text-sm\">{feature.description}</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t))}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</section>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Features/Features_2/index.tsx"
+    },
+    {
+      "path": "registry/payload/blocks/features/features-2/config.ts",
+      "content": "import type { Block } from \"payload\";\nimport {\n\tBLOCK_GROUP_FEATURES,\n\tBLOCK_SLUG_FEATURES_2,\n} from \"@/registry/default/lib/constants/blocks\";\nimport descriptionField from \"@/registry/default/lib/fields/description/config\";\nimport headerField from \"@/registry/default/lib/fields/header/config\";\nimport iconField from \"@/registry/default/lib/fields/icon/config\";\nimport subHeaderField from \"@/registry/default/lib/fields/subheader/config\";\n\nexport const Features_2_Block: Block = {\n\tslug: BLOCK_SLUG_FEATURES_2,\n\tinterfaceName: \"Features_2_Block\",\n\tlabels: {\n\t\tsingular: \"Features 2\",\n\t\tplural: \"Features 2's\",\n\t},\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_FEATURES,\n\t},\n\tfields: [\n\t\theaderField({\n\t\t\trequired: false,\n\t\t\tdefaultValue: \"Everything You Need to Ship Fast\",\n\t\t}),\n\t\tsubHeaderField({\n\t\t\trequired: false,\n\t\t\tdefaultValue:\n\t\t\t\t\"Professional blocks, templates, and hosting solutions. Build stunning marketing sites with no-code ease, or customize everything with full developer control.\",\n\t\t}),\n\t\t{\n\t\t\tname: \"features\",\n\t\t\ttype: \"array\",\n\t\t\tfields: [\n\t\t\t\ticonField({\n\t\t\t\t\trequired: true,\n\t\t\t\t}),\n\t\t\t\theaderField(),\n\t\t\t\tdescriptionField({ required: true }),\n\t\t\t],\n\t\t\tdefaultValue: [\n\t\t\t\t{\n\t\t\t\t\ticon: \"Blocks\",\n\t\t\t\t\theader: \"50+ PayloadCMS Blocks\",\n\t\t\t\t\tdescription: \"Production-ready components for any marketing site\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\ticon: \"Zap\",\n\t\t\t\t\theader: \"One-Click Deploy\",\n\t\t\t\t\tdescription: \"Deploy to AWS with SST in minutes, not hours\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\ticon: \"Palette\",\n\t\t\t\t\theader: \"Full Customization\",\n\t\t\t\t\tdescription: \"Tailwind + shadcn/ui with your design system\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\ticon: \"Smartphone\",\n\t\t\t\t\theader: \"Mobile-First Design\",\n\t\t\t\t\tdescription: \"Responsive blocks that work perfectly on all devices\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\ticon: \"Shield\",\n\t\t\t\t\theader: \"Enterprise Auth\",\n\t\t\t\t\tdescription: \"Better-auth integration with role-based access\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\ticon: \"Rocket\",\n\t\t\t\t\theader: \"Managed Hosting\",\n\t\t\t\t\tdescription: \"Zero-config hosting for non-technical founders\",\n\t\t\t\t},\n\t\t\t],\n\t\t},\n\t],\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Features/Features_2/config.ts"
+    }
+  ]
+}

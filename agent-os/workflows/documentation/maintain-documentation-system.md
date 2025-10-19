@@ -47,9 +47,13 @@ When copying source components to registry, use these **exact import patterns**:
 
 #### 4. Test Registry Installation
 
+**CRITICAL**: Dev server runs on port **3005**. See @agent-os/standards/global/project-config.md
+- ❌ **NEVER start/stop the dev server**
+- ✅ **ALWAYS use localhost:3005**
+
 ```bash
-# Test installation from custom registry
-npx shadcn@latest add [registry-url]/[component-name]
+# Test installation from custom registry (ALWAYS port 3005)
+npx shadcn@latest add http://localhost:3005/r/[component-name]
 ```
 
 - Verify component installs correctly
