@@ -4,7 +4,12 @@ Build 2-5 marketing block components through the complete 3-phase pipeline.
 
 **CRITICAL**: This command follows a STRICT workflow. Do NOT deviate from the process outlined below.
 
-**IMPORTANT**: All components must include source attribution comments and be tracked in the centralized sources document (`agent-os/standards/component-sources.md`).
+**IMPORTANT**:
+- All components must include source attribution comments and be tracked in the centralized sources document (`agent-os/standards/component-sources.md`)
+- **Dev server runs on port 3005** - See `@agent-os/standards/global/project-config.md`
+  - ❌ NEVER start/stop/restart the dev server
+  - ✅ ALWAYS use `localhost:3005` for all URLs
+  - ✅ If server is down, ASK USER to start it
 
 **Usage Examples**:
 
@@ -289,12 +294,39 @@ Ready for Phase 3: Documentation
 
 ## Phase 3: Documentation (Batch)
 
-For EACH component, delegate to `@docs-writer`:
+**Step 1: Check for new registry components added in Phase 2**
+
+```bash
+git status --porcelain | grep "^A" | grep registry/
+```
+
+If Phase 2 added NEW fields or UI components (icon-field, description-field, icon, etc.), delegate documentation for those FIRST:
+
+```
+@docs-writer Document new registry components
+
+**Task**: Check git status for new registry files added in Phase 2. Document any new fields or UI components that were added (like icon-field, description-field, icon component) BEFORE documenting the blocks.
+
+**Registry Discovery**: Use `git status --porcelain | grep "^A" | grep registry/` to find new additions.
+
+For EACH new component found:
+1. Create documentation following 5-section template
+2. Update registry mappings
+3. Add to navigation
+
+Follow @agent-os/workflows/documentation/maintain-documentation-system.md.
+```
+
+**Step 2: Document the blocks**
+
+For EACH block component, delegate to `@docs-writer`:
 
 ```
 @docs-writer Create documentation for [BlockType]_[N]
 
 **Registry**: registry/payload/blocks/[block-type]/[block-type]-[n]/
+
+**CRITICAL**: Ensure Preview section has working defaults. Check mdx-components.tsx registration.
 
 Follow @agent-os/workflows/documentation/maintain-documentation-system.md.
 ```

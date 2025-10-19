@@ -4,6 +4,7 @@ import { USER_ROLES } from "./permissions";
 import { env } from "~/env.mjs";
 import { stripe } from "@better-auth/stripe";
 import Stripe from "stripe";
+import { LIFETIME_PLANS, type LifetimePlan } from "~/utils/stripe";
 
 let stripeClient: Stripe | null = null;
 
@@ -43,14 +44,19 @@ export const betterAuthPlugins = [
 						planName === "Early Adopter")
 				) {
 					try {
+						const plan: LifetimePlan | undefined = Object.values(
+							LIFETIME_PLANS,
+						).find((p) => p.name === planName);
+						if (!plan) return;
+
 						const { getPayload } = await import("~/payload/utils");
 						const payload = await getPayload();
-
 						await payload.update({
 							collection: "users",
 							id: userId,
 							data: {
-								lifetimeSubscription: planName,
+								// @ts-expect-error types corect, readonly object is screwing up types here
+								lifetimeSubscription: plan,
 							},
 						});
 					} catch (error) {

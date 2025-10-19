@@ -124,6 +124,9 @@
 ### Registry Dependencies
 
 - `button` → "Customizable button component with variants"
+- `card` → "Card component with header and content sections"
+- `command` → "Command menu component for searchable selection"
+- `popover` → "Floating UI popover component"
 - `@uifoundry/animated-group` → "Motion primitive for animating groups of elements"
 - `@uifoundry/text-effect` → "Text animation effects with staggered reveals"
 - `@uifoundry/flickering-grid` → "Animated flickering grid background component with canvas rendering"
@@ -131,6 +134,10 @@
 - `@uifoundry/media-field` → "PayloadCMS dual upload field (light/dark variants)"
 - `@uifoundry/header-field` → "PayloadCMS text field for headers"
 - `@uifoundry/subheader-field` → "PayloadCMS text field for subheaders"
+- `@uifoundry/icon` → "Icon component for rendering Lucide React icons dynamically by name"
+- `@uifoundry/icon-field` → "PayloadCMS icon selection field with searchable dropdown"
+- `@uifoundry/description-field` → "PayloadCMS text field for descriptions"
+- `@uifoundry/select-enum-field` → "Base select field configuration with enum support"
 - `@uifoundry/block-constants` → "Block slug and group constants for PayloadCMS blocks"
 
 ### NPM Dependencies

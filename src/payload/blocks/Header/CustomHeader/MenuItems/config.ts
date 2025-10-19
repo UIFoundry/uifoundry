@@ -4,7 +4,7 @@ import {
 	BLOCK_SLUG_HEADER_MENU_ITEMS,
 } from "~/payload/constants/blocks";
 import { FLEX_ALIGNMENT } from "~/payload/constants";
-import selectEnumField from "~/payload/fields/selectEnumField/config";
+import selectEnumField from "~/payload/fields/selectEnum/config";
 
 export const HeaderMenuItemsBlock: Block = {
 	slug: BLOCK_SLUG_HEADER_MENU_ITEMS,

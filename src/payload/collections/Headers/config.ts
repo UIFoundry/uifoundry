@@ -3,7 +3,7 @@ import { hasPermission } from "~/auth/permissions";
 import type { Header } from "~/payload-types";
 import { blocks } from "~/payload/blocks/Header/config";
 import { COLLECTION_SLUG_HEADERS } from "~/payload/constants";
-import titleField from "~/payload/fields/titleField/config";
+import titleField from "~/payload/fields/title/config";
 import userRelationship from "~/payload/fields/userRelationship/config";
 
 export const Headers: CollectionConfig = {

@@ -2,10 +2,12 @@
   "title": "Fields",
   "pages": [
     "color-field",
+    "description-field",
     "header-field",
-    "subheader-field",
+    "icon-field",
     "media-field",
     "social-links-field",
+    "subheader-field",
     "upload-field"
   ]
 }

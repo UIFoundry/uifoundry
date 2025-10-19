@@ -3,7 +3,7 @@ import { hasPermission } from "~/auth/permissions";
 import type { Footer } from "~/payload-types";
 import { blocks } from "~/payload/blocks/Footer";
 import { COLLECTION_SLUG_FOOTERS } from "~/payload/constants";
-import titleField from "~/payload/fields/titleField/config";
+import titleField from "~/payload/fields/title/config";
 import userRelationship from "~/payload/fields/userRelationship/config";
 
 export const Footers: CollectionConfig = {
