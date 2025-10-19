@@ -140,11 +140,61 @@ export const blockComponents = {
 
 ## Field Architecture Pattern
 
+### Field Directory Naming Convention
+
+**CRITICAL RULE**: Field directories should NOT include "Field" suffix.
+
+#### Correct Pattern
+
+```
+fields/
+├── icon/          ✅ (NOT iconField/)
+│   ├── config.ts
+│   └── index.tsx
+├── description/   ✅ (NOT descriptionField/)
+│   └── config.ts
+├── selectEnum/    ✅ (NOT selectEnumField/)
+│   └── config.ts
+├── color/         ✅ (NOT colorField/)
+│   ├── config.ts
+│   └── index.tsx
+├── header/        ✅ Correct
+├── media/         ✅ Correct
+```
+
+#### Import Pattern
+
+```typescript
+// ✅ CORRECT - Variable name includes "Field" for clarity
+import iconField from "~/payload/fields/icon/config";
+import descriptionField from "~/payload/fields/description/config";
+import selectEnumField from "~/payload/fields/selectEnum/config";
+
+// ❌ INCORRECT - Directory includes redundant "Field" suffix
+import iconField from "~/payload/fields/iconField/config";
+```
+
+#### Reasoning
+
+1. **Cleaner Paths**: `fields/icon` vs `fields/iconField`
+2. **Consistency**: Matches fields like `header/`, `subheader/`, `media/`
+3. **No Redundancy**: `fields/` parent directory already indicates these are fields
+4. **Clear Variables**: Variable names still include "Field" for code clarity
+
+#### Registry Mapping
+
+Source and registry use the same naming:
+
+| Source | Registry | Import |
+|--------|----------|--------|
+| `src/payload/fields/icon/` | `registry/payload/fields/icon/` | `@/registry/default/lib/fields/icon/config` |
+| `src/payload/fields/description/` | `registry/payload/fields/description/` | `@/registry/default/lib/fields/description/config` |
+
 ### Field Structure
 
 ```
 fields/
-└── fieldName/               # e.g., mediaField, headerField
+└── fieldName/               # e.g., media, header, icon
     ├── config.ts            # Function that returns field config
     └── index.tsx            # React component for rendering
 ```
