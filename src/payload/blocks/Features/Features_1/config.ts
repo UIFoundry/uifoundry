@@ -3,7 +3,7 @@ import {
 	BLOCK_GROUP_FEATURES,
 	BLOCK_SLUG_FEATURES_1,
 } from "~/payload/constants/blocks";
-import iconField from "~/payload/fields/iconField/config";
+import iconField from "~/payload/fields/icon/config";
 
 export const Features_1_Block: Block = {
 	slug: BLOCK_SLUG_FEATURES_1,
@@ -21,14 +21,15 @@ export const Features_1_Block: Block = {
 			type: "text",
 			label: "Header",
 			required: true,
-			defaultValue: "",
+			defaultValue: "Powerful Features",
 		},
 		{
 			name: "subheader",
 			type: "text",
 			label: "SubHeader",
 			required: true,
-			defaultValue: "",
+			defaultValue:
+				"Everything you need to build modern web applications with confidence",
 		},
 		{
 			name: "features",
@@ -54,6 +55,23 @@ export const Features_1_Block: Block = {
 					defaultValue: "",
 				},
 				iconField(),
+			],
+			defaultValue: [
+				{
+					icon: "Zap",
+					title: "Lightning Fast",
+					description: "Optimized for speed and performance",
+				},
+				{
+					icon: "Shield",
+					title: "Secure by Default",
+					description: "Built with security best practices",
+				},
+				{
+					icon: "Code",
+					title: "Developer Friendly",
+					description: "Clean APIs and excellent documentation",
+				},
 			],
 		},
 	],

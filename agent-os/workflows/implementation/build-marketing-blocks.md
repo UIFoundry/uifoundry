@@ -35,7 +35,10 @@ This workflow enables building marketing blocks at scale (1-5 at a time) using s
 
 ### Prerequisites
 
-- Dev server running (check with user for port - typically `localhost:3005` for this project)
+- **CRITICAL**: Dev server running at `localhost:3005` - See @agent-os/standards/global/project-config.md
+  - ❌ **NEVER start/stop/restart the dev server**
+  - ✅ **ALWAYS assume it's running on port 3005**
+  - ✅ **If down, ASK USER to start it**
 - User has specified target block type(s)
 - Batch size determined (1-5 components)
 
@@ -668,7 +671,7 @@ const messages = await playwright_browser_console_messages({
 **Manual Testing**:
 
 1. **Admin Panel Test**:
-   - Go to admin panel (check dev server port with user, typically `localhost:3005/admin`)
+   - Go to admin panel at `localhost:3005/admin` (See project-config.md - port is ALWAYS 3005)
    - Create a new page or edit existing
    - Add the new block
    - Fill in all fields with test data
@@ -676,7 +679,7 @@ const messages = await playwright_browser_console_messages({
    - Save and preview
 
 2. **Frontend Test**:
-   - Navigate to the page with the block
+   - Navigate to the page with the block at `localhost:3005`
    - Verify all content renders correctly
    - Check animations and interactions
    - **Performance Check**: If component has canvas animations, verify speed feels natural (not too fast)
@@ -827,10 +830,31 @@ Proceed? (yes/no)
 
 ### Quick Process Overview
 
-**For EACH component from Phases 1-2**:
+**Step 0: Discover New Registry Components**
+
+BEFORE documenting the blocks, check for NEW registry files added during Phase 2:
+
+```bash
+# Check for new registry additions (uncommitted files)
+git status --porcelain | grep "^A" | grep registry/
+
+# Common new additions:
+# - registry/payload/fields/[field-name]/ (new PayloadCMS fields)
+# - registry/ui/[component-name] (new UI components)
+```
+
+**CRITICAL**: If Phase 2 added NEW fields or UI components to the registry (like icon-field, description-field, icon component), you MUST document these FIRST before documenting the blocks.
+
+**For EACH NEW field/component discovered**:
+
+1. Create documentation MDX file (e.g., `content/docs/fields/icon-field.mdx`)
+2. Follow the same 5-section template
+3. Add to registry mappings and navigation
+
+**For EACH block component from Phases 1-2**:
 
 1. **Create MDX file** with 5 sections:
-   - Preview
+   - Preview (ensure defaults are working)
    - Props (from config.ts)
    - Installation (CLI command)
    - Registry Dependencies
@@ -842,7 +866,7 @@ Proceed? (yes/no)
    - Navigation (meta.json)
    - MDX component registration
 
-3. **Validate** documentation builds correctly
+3. **Validate** documentation builds correctly and preview renders without errors
 
 **Validation Checklist**:
 

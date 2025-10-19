@@ -7,7 +7,7 @@ import {
 	FLEX_ALIGNMENT,
 	AUTH_PROVIDERS,
 } from "~/payload/constants";
-import selectEnumField from "~/payload/fields/selectEnumField/config";
+import selectEnumField from "~/payload/fields/selectEnum/config";
 
 export const HeaderMenuButtonBlock: Block = {
 	slug: BLOCK_SLUG_HEADER_MENU_BUTTON,

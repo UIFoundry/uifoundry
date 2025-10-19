@@ -59,18 +59,44 @@ encoding: UTF-8
 
 **Why:** Infrastructure changes can break production systems and affect billing.
 
+## DEV SERVER RESTRICTIONS
+
+**CRITICAL**: See `standards/global/project-config.md` for complete details.
+
+**Dev Server Port**: `3005` (NOT 3001, NOT 3000)
+
+**NEVER manage the dev server:**
+
+- ❌ `pnpm dev` (starting the server)
+- ❌ Stopping the dev server (Ctrl+C, kill commands)
+- ❌ Restarting the dev server
+- ❌ Any command that affects the running dev server
+
+**ALWAYS:**
+
+- ✅ Use `localhost:3005` for ALL testing URLs
+- ✅ Assume the server is already running
+- ✅ If server is down, ASK USER to start it (don't do it yourself)
+
+**Why:** The user maintains a continuous dev server session on port 3005. Agents interfering with it causes significant workflow disruption and time waste. Wrong port usage (3001, 3000) leads to confusing "connection refused" errors.
+
 ## SAFE OPERATIONS
 
 **These are always safe to run:**
 
-- `pnpm dev` - Local development server
-- `pnpm build` - Local builds
+- `pnpm build` - Local builds (generates types and builds Next.js)
 - `pnpm typecheck` - TypeScript checking
 - `pnpm lint` - Code linting
 - `pnpm vitest` - Unit tests
-- `pnpm test` - E2E tests (if localhost:3001 is running)
+- `pnpm test` - E2E tests (server must be running on port 3005)
+- `pnpm registry:build` - Build registry JSON files
+- `pnpm payload:types` - Generate PayloadCMS types
 - File operations (read, write, edit)
 - Code analysis and suggestions
+
+**⚠️ NOT SAFE (removed from list):**
+
+- ❌ `pnpm dev` - Do NOT run this (see DEV SERVER RESTRICTIONS above)
 
 ## CONFIRMATION REQUIRED
 

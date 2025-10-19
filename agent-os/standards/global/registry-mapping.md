@@ -51,13 +51,21 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/footer-blocks` → `/docs/blocks/footer-blocks`
 - `@uifoundry/social-links-field` → `/docs/fields/social-links-field`
 - `@uifoundry/social-icons` → `/docs/ui/social-icons`
+- `@uifoundry/icon` → `/docs/ui/icon`
+- `@uifoundry/icon-field` → `/docs/fields/icon-field`
+- `@uifoundry/description-field` → `/docs/fields/description-field`
+- `@uifoundry/select-enum-field` → `/docs/lib/select-enum-field`
+- `@uifoundry/features-1` → `/docs/blocks/features/features-1`
+- `@uifoundry/features-2` → `/docs/blocks/features/features-2`
 
 ### ShadCN Components (no @uifoundry prefix)
 
 - `button` → `/docs/ui/button`
-- `popover` → `/docs/ui/popover`
+- `card` → `/docs/ui/card`
+- `command` → `/docs/ui/command`
 - `input` → `/docs/ui/input`
 - `label` → `/docs/ui/label`
+- `popover` → `/docs/ui/popover`
 - `select` → `/docs/ui/select`
 - `textarea` → `/docs/ui/textarea`
 
@@ -112,12 +120,20 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/footer-5`: Footer block with flexible grid layout, brand logo with social icons header, grouped navigation links, and rounded copyright section with action links
 - `@uifoundry/social-links-field`: PayloadCMS field for managing social media links with icon selection
 - `@uifoundry/social-icons`: Social media icon components and types
+- `@uifoundry/icon`: Icon component for rendering Lucide React icons dynamically by name
+- `@uifoundry/icon-field`: PayloadCMS icon selection field with searchable dropdown for Lucide React icons
+- `@uifoundry/description-field`: PayloadCMS text field for descriptions
+- `@uifoundry/select-enum-field`: Base select field configuration with enum support for PayloadCMS
+- `@uifoundry/features-1`: Features block with grid layout, icon decorators, and feature cards
+- `@uifoundry/features-2`: Features block with grid layout and icon-based feature cards
 
 ### ShadCN Components
 
 - `button`: Customizable button component with variants
-- `popover`: Floating UI popover component
+- `card`: Card component with header and content sections
+- `command`: Command menu component for searchable selection
 - `input`: Styled input field component
 - `label`: Form label component
+- `popover`: Floating UI popover component
 - `select`: Dropdown selection component
 - `textarea`: Multi-line text input component

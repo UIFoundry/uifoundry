@@ -4,7 +4,7 @@ import {
 	BLOCK_SLUG_HEADER_BRAND_LOGO,
 } from "~/payload/constants/blocks";
 import { FLEX_ALIGNMENT } from "~/payload/constants";
-import selectEnumField from "~/payload/fields/selectEnumField/config";
+import selectEnumField from "~/payload/fields/selectEnum/config";
 import mediaField from "~/payload/fields/media/config";
 
 export const HeaderBrandLogoBlock: Block = {

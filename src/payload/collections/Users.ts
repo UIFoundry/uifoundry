@@ -4,7 +4,7 @@ import {
 	type CollectionConfig,
 } from "payload";
 import { COLLECTION_SLUG_USERS } from "~/payload/constants";
-import selectEnumField from "~/payload/fields/selectEnumField/config";
+import selectEnumField from "~/payload/fields/selectEnum/config";
 import { auth } from "~/auth";
 import { USER_ROLES, hasPermission } from "~/auth/permissions";
 import type { User } from "~/payload-types";

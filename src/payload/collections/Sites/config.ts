@@ -7,7 +7,7 @@ import {
 	COLLECTION_SLUG_SITES,
 	COLLECTION_SLUG_THEMES,
 } from "~/payload/constants/collections";
-import titleField from "~/payload/fields/titleField/config";
+import titleField from "~/payload/fields/title/config";
 import userRelationship from "~/payload/fields/userRelationship/config";
 import type { Site } from "~/payload-types";
 import { hasPermission } from "~/auth/permissions";

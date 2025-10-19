@@ -1,6 +1,6 @@
 import type { AccessArgs, CollectionConfig } from "payload";
 import { COLLECTION_SLUG_THEMES } from "~/payload/constants";
-import selectEnumField from "~/payload/fields/selectEnumField/config";
+import selectEnumField from "~/payload/fields/selectEnum/config";
 import { THEME_TYPES } from "~/payload/constants/themes";
 import userRelationship from "../fields/userRelationship/config";
 import type { Theme } from "~/payload-types";

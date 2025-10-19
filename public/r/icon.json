@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "icon",
+  "type": "registry:ui",
+  "title": "Icon Component",
+  "description": "Icon component for rendering Lucide React icons dynamically by name",
+  "dependencies": [
+    "react",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/icon.tsx",
+      "content": "import { icons } from \"lucide-react\";\nimport type { ComponentPropsWithRef } from \"react\";\n\nexport function Icon({\n  icon,\n  ...svgProps\n}: { icon: keyof typeof icons } & ComponentPropsWithRef<\"svg\">) {\n  const SelectIcon = icons[icon];\n  if (!SelectIcon) {\n    console.log(\"no icon found: \", SelectIcon, icon);\n    return <></>;\n  }\n  return <SelectIcon {...svgProps} />;\n}\n",
+      "type": "registry:ui",
+      "target": "src/ui/icon.tsx"
+    }
+  ]
+}
