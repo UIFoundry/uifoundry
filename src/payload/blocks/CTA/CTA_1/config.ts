@@ -2,7 +2,7 @@ import type { Block } from "payload";
 import { BLOCK_GROUP_CTA, BLOCK_SLUG_CTA_1 } from "~/payload/constants/blocks";
 import headerField from "~/payload/fields/header/config";
 import subheaderField from "~/payload/fields/subheader/config";
-import callToActionPair from "~/payload/fields/callToActionPairField/config";
+import callToActionPair from "~/payload/fields/callToActionPair/config";
 
 export const CTA_1_Block: Block = {
 	slug: BLOCK_SLUG_CTA_1,

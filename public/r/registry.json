@@ -744,7 +744,7 @@
 				{
 					"path": "registry/payload/fields/selectEnum/config.ts",
 					"type": "registry:component",
-					"target": "src/payload/fields/selectEnumField/config.ts"
+					"target": "src/payload/fields/selectEnum/config.ts"
 				}
 			],
 			"registryDependencies": [

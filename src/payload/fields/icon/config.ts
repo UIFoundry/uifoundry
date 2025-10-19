@@ -1,6 +1,6 @@
 import { icons } from "lucide-react";
 import type { SelectField } from "~/payload/fields";
-import selectEnumField from "../selectEnumField/config";
+import selectEnumField from "~/payload/fields/selectEnum/config";
 
 export default function iconField(props?: Partial<SelectField>): SelectField {
 	return selectEnumField<typeof icons>(icons, {
@@ -9,7 +9,7 @@ export default function iconField(props?: Partial<SelectField>): SelectField {
 		useKeyAsValue: true,
 		admin: {
 			components: {
-				Field: "~/payload/fields/iconField",
+				Field: "~/payload/fields/icon",
 			},
 		},
 		...props,

@@ -1,4 +1,4 @@
-import { default as default_ec8058a0093235c8c727ba185ac285fa } from '~/payload/fields/iconField'
+import { default as default_79d694352af05c941398ecf7e471db37 } from '~/payload/fields/icon'
 import { default as default_f3d2bcc12296c90dd5541a716e09a3c6 } from '~/payload/fields/socialLinks/admin/SocialLinksField'
 import { default as default_1cbdf851dd4cb63526702442b51025c8 } from '~/payload/components/RefreshPreview'
 import { default as default_327c8dd8e46745334c375570d61bb41b } from '~/payload/collections/Sites/admin/ImportThemeTrigger'
@@ -8,7 +8,7 @@ import { default as default_fa9e824f539f90a57a5772210ba133b6 } from '~/payload/c
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 
 export const importMap = {
-  "~/payload/fields/iconField#default": default_ec8058a0093235c8c727ba185ac285fa,
+  "~/payload/fields/icon#default": default_79d694352af05c941398ecf7e471db37,
   "~/payload/fields/socialLinks/admin/SocialLinksField#default": default_f3d2bcc12296c90dd5541a716e09a3c6,
   "~/payload/components/RefreshPreview#default": default_1cbdf851dd4cb63526702442b51025c8,
   "~/payload/collections/Sites/admin/ImportThemeTrigger#default": default_327c8dd8e46745334c375570d61bb41b,

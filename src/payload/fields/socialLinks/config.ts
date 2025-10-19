@@ -1,5 +1,5 @@
 import { socialIcons } from "~/ui/icons/social-icons";
-import selectEnumField from "~/payload/fields/selectEnumField/config";
+import selectEnumField from "~/payload/fields/selectEnum/config";
 import type { ArrayField } from "~/payload/fields";
 import type { Field } from "payload";
 

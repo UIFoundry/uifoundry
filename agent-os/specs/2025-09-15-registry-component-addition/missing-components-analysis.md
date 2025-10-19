@@ -42,7 +42,7 @@ Fields that may need registry distribution:
 ### Fields Config-Only
 
 - [ ] **callToActionPairField** → `cta-pair/cta-pair-field`
-- [ ] **colorPaletteField** → `color-palette/color-palette-field`
+- [ ] **colorPalette** → `color-palette/color-palette-field`
 - [ ] **descriptionField** → `description/description-field`
 - [ ] **selectEnumField** → `select-enum/select-enum-field`
 - [ ] **titleField** → `title/title-field`
@@ -107,7 +107,7 @@ Supporting files that need registry distribution:
 
 1. **iconField** - Icon selection functionality
 2. **socialLinksField** - Social media links
-3. **colorPaletteField** - Advanced color management
+3. **colorPalette** - Advanced color management
 4. **callToActionPairField** - CTA configurations
 
 ## Estimated Work

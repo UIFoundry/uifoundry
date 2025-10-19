@@ -7,7 +7,7 @@ import {
 	FLEX_ALIGNMENT,
 	AUTH_PROVIDERS,
 } from "@/registry/default/lib/constants";
-import selectEnumField from "@/registry/default/lib/fields/selectEnumField/config";
+import selectEnumField from "@/registry/default/lib/fields/selectEnum/config";
 
 export const HeaderMenuButtonBlock: Block = {
 	slug: BLOCK_SLUG_HEADER_MENU_BUTTON,

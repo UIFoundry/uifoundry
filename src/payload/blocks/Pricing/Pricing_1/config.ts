@@ -3,7 +3,7 @@ import {
 	BLOCK_GROUP_PRICING,
 	BLOCK_SLUG_PRICING_1,
 } from "~/payload/constants/blocks";
-import descriptionField from "~/payload/fields/descriptionField/config";
+import descriptionField from "~/payload/fields/description/config";
 import headerField from "~/payload/fields/header/config";
 import subHeaderField from "~/payload/fields/subheader/config";
 

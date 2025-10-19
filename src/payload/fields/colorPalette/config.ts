@@ -1,6 +1,6 @@
 import { THEME_COLORS } from "~/styles/utils";
 import type { SelectField } from "..";
-import selectEnumField from "~/payload/fields/selectEnumField/config";
+import selectEnumField from "~/payload/fields/selectEnum/config";
 
 export default function colorPaletteField({
 	name = "color",

@@ -3,9 +3,9 @@ import {
 	BLOCK_GROUP_FEATURES,
 	BLOCK_SLUG_FEATURES_2,
 } from "~/payload/constants/blocks";
-import descriptionField from "~/payload/fields/descriptionField/config";
+import descriptionField from "~/payload/fields/description/config";
 import headerField from "~/payload/fields/header/config";
-import iconField from "~/payload/fields/iconField/config";
+import iconField from "~/payload/fields/icon/config";
 import subHeaderField from "~/payload/fields/subheader/config";
 
 export const Features_2_Block: Block = {
