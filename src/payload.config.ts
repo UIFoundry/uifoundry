@@ -4,12 +4,23 @@ import { buildConfig } from "payload";
 import { env } from "~/env.mjs";
 import { collections } from "./payload/collections";
 import { globals } from "./payload/globals";
-import { allowedOrigins, COLLECTION_SLUG_USERS } from "./payload/constants";
+import {
+	allowedOrigins,
+	COLLECTION_SLUG_ACCOUNTS,
+	COLLECTION_SLUG_SESSIONS,
+	COLLECTION_SLUG_PAGES,
+	COLLECTION_SLUG_SITES,
+	COLLECTION_SLUG_THEMES,
+	COLLECTION_SLUG_USERS,
+	COLLECTION_SLUG_VERIFICATIONS,
+	GLOBAL_SLUG_FOOTER,
+	GLOBAL_SLUG_HEADER,
+} from "./payload/constants";
 import path from "path";
 import { fileURLToPath } from "url";
-import { COLLECTION_SLUG_PAGES } from "./payload/constants";
 import { s3Storage } from "@payloadcms/storage-s3";
 import { seedDatabase } from "~/payload/seed";
+import { redisCachePlugin } from "~/payload/plugins/redis-cache";
 // import sharp from "sharp"
 
 const filename = fileURLToPath(import.meta.url);
@@ -74,6 +85,27 @@ export default buildConfig({
 				},
 				region: env.S3_REGION,
 			},
+		}),
+
+		redisCachePlugin({
+			redis: {
+				url: env.REDIS_URL,
+			},
+			collections: [
+				COLLECTION_SLUG_PAGES,
+				COLLECTION_SLUG_SITES,
+				COLLECTION_SLUG_THEMES,
+				COLLECTION_SLUG_USERS,
+			],
+			excludeCollections: [
+				COLLECTION_SLUG_SESSIONS,
+				COLLECTION_SLUG_ACCOUNTS,
+				COLLECTION_SLUG_VERIFICATIONS,
+			],
+			globals: [GLOBAL_SLUG_FOOTER, GLOBAL_SLUG_HEADER],
+			defaultTTL: 300,
+			keyPrefix: "uifoundry",
+			debug: false, // Set to true when debugging cache issues
 		}),
 	],
 });

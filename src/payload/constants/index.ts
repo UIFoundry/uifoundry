@@ -1,6 +1,7 @@
 import { env } from "~/env.mjs";
 
 export * from "./collections";
+export * from "./globals";
 
 export const AUTOSAVE_INTERVAL = 200;
 

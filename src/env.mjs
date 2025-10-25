@@ -19,6 +19,7 @@ export const env = createEnv({
 		S3_SECRET_ACCESS_KEY: z.string(),
 		STRIPE_SECRET_KEY: z.string(),
 		STRIPE_WEBHOOK_SECRET: z.string(),
+		REDIS_URL: z.string().url(),
 	},
 
 	/**
@@ -51,6 +52,7 @@ export const env = createEnv({
 		S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
 		STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
 		STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
+		REDIS_URL: process.env.REDIS_URL,
 		NEXT_PUBLIC_STRIPE_FOUNDER_PRICE_ID:
 			process.env.NEXT_PUBLIC_STRIPE_FOUNDER_PRICE_ID,
 		NEXT_PUBLIC_STRIPE_PIONEER_PRICE_ID:
