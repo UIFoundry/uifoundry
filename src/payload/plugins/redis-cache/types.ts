@@ -1,5 +1,5 @@
-import "payload";
 import type { Redis } from "ioredis";
+import type { FindArgs, FindOneArgs, CountArgs, FindGlobalArgs } from "payload";
 
 /**
  * Cache options that can be passed to Payload operations
@@ -17,6 +17,15 @@ export interface CacheOptions {
 	/** Cache tags for grouped invalidation */
 	tags?: string[];
 }
+
+/**
+ * Extended Payload types with cache options
+ * Use these types when you want to pass cache options to Payload operations
+ */
+export type FindArgsWithCache = FindArgs & { cache?: CacheOptions };
+export type FindOneArgsWithCache = FindOneArgs & { cache?: CacheOptions };
+export type CountArgsWithCache = CountArgs & { cache?: CacheOptions };
+export type FindGlobalArgsWithCache = FindGlobalArgs & { cache?: CacheOptions };
 
 /**
  * Plugin configuration options
@@ -59,4 +68,3 @@ export interface RedisCachePluginConfig {
 	/** Prefix for all cache keys (default: 'payload') */
 	keyPrefix?: string;
 }
-
