@@ -1,7 +1,10 @@
 import type {
+	CountArgs,
 	DatabaseAdapter,
 	Find,
 	FindArgs,
+	FindGlobalArgs,
+	FindOneArgs,
 	PaginatedDocs,
 	TypeWithID,
 } from "payload";
@@ -32,11 +35,11 @@ export function wrapAdapterWithCache(
 	 * Args takes precedence over context
 	 */
 	function getCacheOptions(
-		args: FindArgs & { cache?: CacheOptions },
+		args: FindArgs | FindGlobalArgs | CountArgs,
 	): CacheOptions | undefined {
-		// First check if cache options are in args (direct property)
-		if (args.cache) {
-			return args.cache;
+		// First check req.context.cache (highest precedence)
+		if (args.req?.context?.cache) {
+			return args.req.context.cache;
 		}
 
 		// Fall back to AsyncLocalStorage context
@@ -46,14 +49,12 @@ export function wrapAdapterWithCache(
 	/**
 	 * Get data from cache
 	 */
-	async function getFromCache<T = TypeWithID>(
-		key: string,
-	): Promise<PaginatedDocs<T> | null> {
+	async function getFromCache<T = unknown>(key: string): Promise<T | null> {
 		try {
 			const cached = await redis.get(key);
 			if (cached) {
 				debugLog(config, `Cache HIT: ${key}`);
-				return JSON.parse(cached) as PaginatedDocs<T>;
+				return JSON.parse(cached) as T;
 			}
 			debugLog(config, `Cache MISS: ${key}`);
 			return null;
@@ -103,7 +104,7 @@ export function wrapAdapterWithCache(
 		/**
 		 * Cached find operation
 		 */
-		find: async <T = TypeWithID>(args: any) => {
+		find: async <T = TypeWithID>(args: FindArgs) => {
 			const { collection } = args;
 			const cache = getCacheOptions(args);
 
@@ -117,7 +118,7 @@ export function wrapAdapterWithCache(
 			const cacheKey = generateCacheKey("find", args, config);
 
 			// Try to get from cache
-			const cached = await getFromCache(cacheKey);
+			const cached = await getFromCache<PaginatedDocs<T>>(cacheKey);
 			if (cached) {
 				return cached;
 			}
@@ -135,30 +136,30 @@ export function wrapAdapterWithCache(
 		/**
 		 * Cached findOne operation
 		 */
-		findOne: async <T extends TypeWithID = TypeWithID>(args: any) => {
+		findOne: async <T = TypeWithID>(args: FindOneArgs) => {
 			const { collection } = args;
 			const cache = getCacheOptions(args);
 
 			// Skip cache if requested or collection not configured for caching
 			if (cache?.skip || !shouldCacheCollection(collection, config)) {
 				debugLog(config, `Cache SKIP: findOne ${collection}`);
-				return baseAdapter.findOne<T>(args);
+				return baseAdapter.findOne(args) as Promise<T | null>;
 			}
 
 			// Generate cache key
 			const cacheKey = generateCacheKey("findOne", args, config);
 
 			// Try to get from cache
-			const cached = await getFromCache(cacheKey);
-			if (cached) {
+			const cached = await getFromCache<T | null>(cacheKey);
+			if (cached !== null) {
 				return cached;
 			}
 
 			// Cache miss - query database
-			const result = await baseAdapter.findOne<T>(args);
+			const result = (await baseAdapter.findOne(args)) as T | null;
 
 			// Store in cache
-			const ttl = cache?.ttl || defaultTTL;
+			const ttl = cache?.ttl ?? defaultTTL;
 			await setInCache(cacheKey, result, ttl);
 
 			return result;
@@ -167,7 +168,7 @@ export function wrapAdapterWithCache(
 		/**
 		 * Cached count operation
 		 */
-		count: async (args) => {
+		count: async (args: CountArgs) => {
 			const { collection } = args;
 			const cache = getCacheOptions(args);
 
@@ -181,7 +182,7 @@ export function wrapAdapterWithCache(
 			const cacheKey = generateCacheKey("count", args, config);
 
 			// Try to get from cache
-			const cached = await getFromCache(cacheKey);
+			const cached = await getFromCache<{ totalDocs: number }>(cacheKey);
 			if (cached !== null) {
 				return cached;
 			}
@@ -190,7 +191,7 @@ export function wrapAdapterWithCache(
 			const result = await baseAdapter.count(args);
 
 			// Store in cache
-			const ttl = cache?.ttl || defaultTTL;
+			const ttl = cache?.ttl ?? defaultTTL;
 			await setInCache(cacheKey, result, ttl);
 
 			return result;
@@ -199,7 +200,9 @@ export function wrapAdapterWithCache(
 		/**
 		 * Cached findGlobal operation
 		 */
-		findGlobal: async <T extends Record<string, unknown> = any>(args: any) => {
+		findGlobal: async <T extends Record<string, unknown>>(
+			args: FindGlobalArgs,
+		) => {
 			const { slug } = args;
 			const cache = getCacheOptions(args);
 
@@ -213,7 +216,7 @@ export function wrapAdapterWithCache(
 			const cacheKey = generateCacheKey("findGlobal", args, config);
 
 			// Try to get from cache
-			const cached = await getFromCache(cacheKey);
+			const cached = await getFromCache<T>(cacheKey);
 			if (cached) {
 				return cached;
 			}
@@ -222,7 +225,7 @@ export function wrapAdapterWithCache(
 			const result = await baseAdapter.findGlobal<T>(args);
 
 			// Store in cache
-			const ttl = cache?.ttl || defaultTTL;
+			const ttl = cache?.ttl ?? defaultTTL;
 			await setInCache(cacheKey, result, ttl);
 
 			return result;
@@ -244,7 +247,7 @@ export function wrapAdapterWithCache(
 		/**
 		 * UpdateOne with cache invalidation
 		 */
-		updateOne: async (args: any) => {
+		updateOne: async (args) => {
 			const result = await baseAdapter.updateOne(args);
 
 			// Invalidate collection cache
@@ -257,7 +260,7 @@ export function wrapAdapterWithCache(
 		/**
 		 * UpdateMany with cache invalidation
 		 */
-		updateMany: async (args: any) => {
+		updateMany: async (args) => {
 			const result = await baseAdapter.updateMany(args);
 
 			// Invalidate collection cache
@@ -305,5 +308,5 @@ export function wrapAdapterWithCache(
 
 			return result;
 		},
-	} as DatabaseAdapter;
+	};
 }
