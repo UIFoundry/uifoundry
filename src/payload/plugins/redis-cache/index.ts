@@ -1,8 +1,10 @@
+import type { Redis } from "ioredis";
 import type { Plugin } from "payload";
+
 import type { RedisCachePluginConfig } from "./types";
+
 import { wrapAdapterWithCache } from "./adapter";
 import { debugLog } from "./utils";
-import type { Redis } from "ioredis";
 
 /**
  * Redis Cache Plugin for Payload CMS
@@ -97,11 +99,11 @@ export const redisCachePlugin =
 					// Log configuration
 					if (pluginConfig.debug) {
 						console.log("[RedisCache] Configuration:", {
-							defaultTTL: pluginConfig.defaultTTL ?? 300,
 							collections: pluginConfig.collections ?? "all",
+							defaultTTL: pluginConfig.defaultTTL ?? 300,
 							excludeCollections: pluginConfig.excludeCollections ?? "none",
-							globals: pluginConfig.globals ?? "all",
 							excludeGlobals: pluginConfig.excludeGlobals ?? "none",
+							globals: pluginConfig.globals ?? "all",
 							keyPrefix: pluginConfig.keyPrefix ?? "payload",
 						});
 					}
@@ -109,6 +111,6 @@ export const redisCachePlugin =
 			};
 		};
 
-// Re-export types and utilities for convenience
-export type { RedisCachePluginConfig, CacheOptions } from "./types";
 export { withCache } from "./context";
+// Re-export types and utilities for convenience
+export type { CacheOptions, RedisCachePluginConfig } from "./types";

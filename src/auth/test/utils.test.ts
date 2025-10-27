@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 
 // Simple utility tests that don't depend on external services
 describe("Auth Utils", () => {
@@ -7,13 +7,13 @@ describe("Auth Utils", () => {
     const mockSession = {
       session: {
         id: "test-session-id",
-        userId: "test-user-id",
         expiresAt: new Date(Date.now() + 86400000), // 24 hours from now
+        userId: "test-user-id",
       },
       user: {
         id: "test-user-id",
-        email: "test@example.com",
         banned: false,
+        email: "test@example.com",
       },
     };
 

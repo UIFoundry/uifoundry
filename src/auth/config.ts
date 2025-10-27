@@ -1,12 +1,14 @@
-import { admin, apiKey } from "better-auth/plugins";
-import { nextCookies } from "better-auth/next-js";
-import { USER_ROLES } from "./permissions";
-import { env } from "~/env.mjs";
 import { stripe } from "@better-auth/stripe";
+import { nextCookies } from "better-auth/next-js";
+import { admin, apiKey } from "better-auth/plugins";
 import Stripe from "stripe";
+
+import { env } from "~/env.mjs";
 import { LIFETIME_PLANS, type LifetimePlan } from "~/utils/stripe";
 
-let stripeClient: Stripe | null = null;
+import { USER_ROLES } from "./permissions";
+
+let stripeClient: null | Stripe = null;
 
 function getStripeClient() {
 	stripeClient ??= new Stripe(env.STRIPE_SECRET_KEY, {
@@ -17,17 +19,11 @@ function getStripeClient() {
 
 export const betterAuthPlugins = [
 	admin({
-		defaultRole: USER_ROLES.user,
 		adminRoles: [USER_ROLES.admin],
+		defaultRole: USER_ROLES.user,
 	}),
 	stripe({
-		stripeClient: getStripeClient(),
-		stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET,
 		createCustomerOnSignUp: true,
-		subscription: {
-			enabled: true,
-			plans: [],
-		},
 		onEvent: async (event) => {
 			if (event.type === "payment_intent.succeeded") {
 				const paymentIntent = event.data.object;
@@ -47,13 +43,13 @@ export const betterAuthPlugins = [
 						const plan: LifetimePlan | undefined = Object.values(
 							LIFETIME_PLANS,
 						).find((p) => p.name === planName);
-						if (!plan) return;
+						if (!plan) {return;}
 
 						const { getPayload } = await import("~/payload/utils");
 						const payload = await getPayload();
 						await payload.update({
-							collection: "users",
 							id: userId,
+							collection: "users",
 							data: {
 								// @ts-expect-error types corect, readonly object is screwing up types here
 								lifetimeSubscription: plan,
@@ -64,6 +60,12 @@ export const betterAuthPlugins = [
 					}
 				}
 			}
+		},
+		stripeClient: getStripeClient(),
+		stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET,
+		subscription: {
+			enabled: true,
+			plans: [],
 		},
 	}),
 	apiKey(),

@@ -1,8 +1,8 @@
 import { COLLECTION_SLUG_USERS } from "~/payload/constants";
+import { withCache } from "~/payload/plugins/redis-cache";
+import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
 import { DAL_ERRORS, err, ok } from "~/server/dal";
 import { LIFETIME_PLANS } from "~/utils/stripe";
-import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
-import { withCache } from "~/payload/plugins/redis-cache";
 
 export const usersRouter = createTRPCRouter({
 	getLifetimeUserCount: privateProcedure.query(async ({ ctx }) => {

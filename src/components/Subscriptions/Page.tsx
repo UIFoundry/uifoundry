@@ -1,4 +1,5 @@
 import { api, HydrateClient } from "~/trpc/server";
+
 import PageClient from "./PageClient";
 
 export default async function SubscriptionsPage() {

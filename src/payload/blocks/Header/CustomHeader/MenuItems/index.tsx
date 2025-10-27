@@ -1,11 +1,13 @@
 import Link from "next/link";
+
 import type { HeaderMenuItemsBlock } from "~/payload-types";
+
 import { cn } from "~/styles/utils";
 
 export default function MenuItems({
-	mobileView = false,
 	menuItems,
-}: { mobileView?: boolean } & HeaderMenuItemsBlock) {
+	mobileView = false,
+}: HeaderMenuItemsBlock & { mobileView?: boolean }) {
 	return (
 		<div className={cn("hidden lg:block", mobileView === true && "block")}>
 			<ul
@@ -17,8 +19,8 @@ export default function MenuItems({
 				{menuItems.map((item, index) => (
 					<li key={index}>
 						<Link
-							href={item.href}
 							className="text-muted-foreground hover:text-primary block duration-300"
+							href={item.href}
 						>
 							<span>{item.label}</span>
 						</Link>

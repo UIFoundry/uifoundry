@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+
 import {
 	BLOCK_GROUP_FEATURES,
 	BLOCK_SLUG_FEATURES_2,
@@ -10,27 +11,54 @@ import subHeaderField from "~/payload/fields/subheader/config";
 
 export const Features_2_Block: Block = {
 	slug: BLOCK_SLUG_FEATURES_2,
-	interfaceName: "Features_2_Block",
-	labels: {
-		singular: "Features 2",
-		plural: "Features 2's",
-	},
 	admin: {
 		group: BLOCK_GROUP_FEATURES,
 	},
 	fields: [
 		headerField({
-			required: false,
 			defaultValue: "Everything You Need to Ship Fast",
+			required: false,
 		}),
 		subHeaderField({
-			required: false,
 			defaultValue:
 				"Professional blocks, templates, and hosting solutions. Build stunning marketing sites with no-code ease, or customize everything with full developer control.",
+			required: false,
 		}),
 		{
 			name: "features",
 			type: "array",
+			defaultValue: [
+				{
+					description: "Production-ready components for any marketing site",
+					header: "50+ PayloadCMS Blocks",
+					icon: "Blocks",
+				},
+				{
+					description: "Deploy to AWS with SST in minutes, not hours",
+					header: "One-Click Deploy",
+					icon: "Zap",
+				},
+				{
+					description: "Tailwind + shadcn/ui with your design system",
+					header: "Full Customization",
+					icon: "Palette",
+				},
+				{
+					description: "Responsive blocks that work perfectly on all devices",
+					header: "Mobile-First Design",
+					icon: "Smartphone",
+				},
+				{
+					description: "Better-auth integration with role-based access",
+					header: "Enterprise Auth",
+					icon: "Shield",
+				},
+				{
+					description: "Zero-config hosting for non-technical founders",
+					header: "Managed Hosting",
+					icon: "Rocket",
+				},
+			],
 			fields: [
 				iconField({
 					required: true,
@@ -38,38 +66,11 @@ export const Features_2_Block: Block = {
 				headerField(),
 				descriptionField({ required: true }),
 			],
-			defaultValue: [
-				{
-					icon: "Blocks",
-					header: "50+ PayloadCMS Blocks",
-					description: "Production-ready components for any marketing site",
-				},
-				{
-					icon: "Zap",
-					header: "One-Click Deploy",
-					description: "Deploy to AWS with SST in minutes, not hours",
-				},
-				{
-					icon: "Palette",
-					header: "Full Customization",
-					description: "Tailwind + shadcn/ui with your design system",
-				},
-				{
-					icon: "Smartphone",
-					header: "Mobile-First Design",
-					description: "Responsive blocks that work perfectly on all devices",
-				},
-				{
-					icon: "Shield",
-					header: "Enterprise Auth",
-					description: "Better-auth integration with role-based access",
-				},
-				{
-					icon: "Rocket",
-					header: "Managed Hosting",
-					description: "Zero-config hosting for non-technical founders",
-				},
-			],
 		},
 	],
+	interfaceName: "Features_2_Block",
+	labels: {
+		plural: "Features 2's",
+		singular: "Features 2",
+	},
 };

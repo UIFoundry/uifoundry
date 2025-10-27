@@ -1,6 +1,8 @@
 import type { AccessArgs, CollectionConfig } from "payload";
-import { hasPermission } from "~/auth/permissions";
+
 import type { Header } from "~/payload-types";
+
+import { hasPermission } from "~/auth/permissions";
 import { blocks } from "~/payload/blocks/Header/config";
 import { COLLECTION_SLUG_HEADERS } from "~/payload/constants";
 import titleField from "~/payload/fields/title/config";
@@ -8,67 +10,67 @@ import userRelationship from "~/payload/fields/userRelationship/config";
 
 export const Headers: CollectionConfig = {
 	slug: COLLECTION_SLUG_HEADERS,
-	admin: {
-		useAsTitle: "title",
-	},
 	access: {
 		create: ({ req: { user } }: AccessArgs<Header>) => {
 			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_HEADERS,
 				action: "create",
+				resource: COLLECTION_SLUG_HEADERS,
+				user,
 			});
 		},
-		read: ({ req: { user }, data }: AccessArgs<Header>) => {
+		delete: ({ data, req: { user } }: AccessArgs<Header>) => {
 			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_HEADERS,
-				action: "read",
-				data,
-			});
-		},
-		update: ({ req: { user }, data }: AccessArgs<Header>) => {
-			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_HEADERS,
-				action: "update",
-				data,
-			});
-		},
-		delete: ({ req: { user }, data }: AccessArgs<Header>) => {
-			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_HEADERS,
 				action: "delete",
 				data,
+				resource: COLLECTION_SLUG_HEADERS,
+				user,
 			});
 		},
+		read: ({ data, req: { user } }: AccessArgs<Header>) => {
+			return hasPermission({
+				action: "read",
+				data,
+				resource: COLLECTION_SLUG_HEADERS,
+				user,
+			});
+		},
+		update: ({ data, req: { user } }: AccessArgs<Header>) => {
+			return hasPermission({
+				action: "update",
+				data,
+				resource: COLLECTION_SLUG_HEADERS,
+				user,
+			});
+		},
+	},
+	admin: {
+		useAsTitle: "title",
 	},
 	fields: [
 		{
 			name: "global",
 			type: "checkbox",
-			defaultValue: true,
 			access: {
 				create: () => false,
 				read: () => true,
 				update: () => false,
 			},
+			defaultValue: true,
 		},
 		titleField(),
 		userRelationship({
 			name: "owner",
+			defaultValue: ({ user }) => user,
 			label: "Owner",
 			required: true,
-			defaultValue: ({ user }) => user,
 		}),
 		{
 			name: "header",
 			type: "blocks",
-			required: true,
+			blocks,
 			maxRows: 1,
 			minRows: 1,
-			blocks: blocks,
+			required: true,
 		},
 	],
 };

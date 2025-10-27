@@ -1,8 +1,9 @@
-import { usersRouter } from "./routers/user";
 import { postRouter } from "~/server/api/routers/post";
 import { stripeRouter } from "~/server/api/routers/stripe";
 import { themesRouter } from "~/server/api/routers/themes";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
+
+import { usersRouter } from "./routers/user";
 
 /**
  * This is the primary router for your server.
@@ -11,8 +12,8 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
 	post: postRouter,
-	themes: themesRouter,
 	stripe: stripeRouter,
+	themes: themesRouter,
 	users: usersRouter,
 });
 

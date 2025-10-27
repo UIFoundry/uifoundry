@@ -1,24 +1,25 @@
-import { getPayload } from "~/payload/utils";
-import type {
-	Page as PageType,
-	Header as HeaderType,
-	Footer as FooterType,
-} from "~/payload-types";
-import { COLLECTION_SLUG_SITES } from "~/payload/constants";
-import { notFound } from "next/navigation";
-import RenderBlocks from "~/components/RenderBlocks";
-import Header from "~/payload/collections/Headers";
-import { cn } from "~/styles/utils";
-import { blockComponents } from "~/payload/blocks";
-import HeaderSpacing from "~/components/HeaderSpacing";
-import Footer from "~/payload/collections/Footers";
-import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
 import { headers } from "next/headers";
+import { notFound, redirect  } from "next/navigation";
+
+import type {
+	Footer as FooterType,
+	Header as HeaderType,
+	Page as PageType,
+} from "~/payload-types";
+
 import { auth } from "~/auth";
-import { redirect } from "next/navigation";
-import { api, HydrateClient } from "~/trpc/server";
+import HeaderSpacing from "~/components/HeaderSpacing";
 import HomeComponent from "~/components/Home";
+import RenderBlocks from "~/components/RenderBlocks";
+import { blockComponents } from "~/payload/blocks";
+import Footer from "~/payload/collections/Footers";
+import Header from "~/payload/collections/Headers";
 import TailwindConfig from "~/payload/collections/Sites/TailwindConfig";
+import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
+import { COLLECTION_SLUG_SITES } from "~/payload/constants";
+import { getPayload } from "~/payload/utils";
+import { cn } from "~/styles/utils";
+import { api, HydrateClient } from "~/trpc/server";
 
 interface PageParams {
 	params: Promise<{
@@ -37,10 +38,10 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 	}
 
 	const site = await payload.findByID({
+		id,
 		collection: COLLECTION_SLUG_SITES,
-		id: id,
-		draft: true,
 		depth: 2,
+		draft: true,
 	});
 
 	if (!session?.user) {
@@ -78,21 +79,21 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 			<TailwindConfig site={site} />
 			{site.header && (
 				<Header
-					header={site.header as HeaderType}
 					className={cn(!page?.showHeader && "hidden")}
+					header={site.header as HeaderType}
 				/>
 			)}
 			<HeaderSpacing showHeader={page.showHeader}>
 				<RenderBlocks
-					blocks={page.blocks}
 					blockComponents={blockComponents}
+					blocks={page.blocks}
 					meta={site}
 				/>
 			</HeaderSpacing>
 			{site.footer && (
 				<Footer
-					footer={site.footer as FooterType}
 					className={cn(!page.showFooter && "hidden")}
+					footer={site.footer as FooterType}
 				/>
 			)}
 		</div>

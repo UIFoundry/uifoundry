@@ -1,10 +1,11 @@
 "use client";
 
 import { AuthUIProvider } from "@daveyplate/better-auth-ui";
-import { type PropsWithChildren } from "react";
-import { useRouter } from "next/navigation";
-import { authClient } from "~/auth/client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { type PropsWithChildren } from "react";
+
+import { authClient } from "~/auth/client";
 
 export default function ClientProviders({ children }: PropsWithChildren) {
   const router = useRouter();
@@ -12,15 +13,15 @@ export default function ClientProviders({ children }: PropsWithChildren) {
   return (
     <AuthUIProvider
       authClient={authClient}
+      Link={Link}
       navigate={router.push}
-      replace={router.replace}
       onSessionChange={() => {
         router.refresh();
       }}
+      replace={router.replace}
       social={{
         providers: ["google"],
       }}
-      Link={Link}
     >
       {children}
     </AuthUIProvider>

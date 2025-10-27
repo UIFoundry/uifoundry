@@ -17,10 +17,12 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "~/ui/button";
+
 import type { Hero_2_Block } from "~/payload-types";
+
 import MediaField from "~/payload/fields/media";
 import { cn } from "~/styles/utils";
+import { Button } from "~/ui/button";
 
 export default function Hero2Section(props: Hero_2_Block) {
 	return (
@@ -47,8 +49,8 @@ export default function Hero2Section(props: Hero_2_Block) {
 							{/* Primary CTA */}
 							<Button
 								asChild
-								size="lg"
 								className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-6 text-base font-medium shadow-sm"
+								size="lg"
 							>
 								<Link href={props.primaryCtaHref}>
 									{props.primaryCtaLabel}
@@ -58,9 +60,9 @@ export default function Hero2Section(props: Hero_2_Block) {
 							{/* Secondary CTA */}
 							<Button
 								asChild
-								variant="outline"
-								size="lg"
 								className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-6 text-base font-medium"
+								size="lg"
+								variant="outline"
 							>
 								<Link href={props.secondaryCtaHref}>
 									{props.secondaryCtaLabel}
@@ -74,13 +76,13 @@ export default function Hero2Section(props: Hero_2_Block) {
 						<div className="relative mt-12 lg:mt-0 lg:w-1/2 lg:pl-12">
 							<div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl lg:aspect-square">
 								<MediaField
-									media={props.media}
-									width="800"
-									height="800"
 									className={cn(
 										"size-full object-cover object-center",
 										"rounded-2xl shadow-2xl",
 									)}
+									height="800"
+									media={props.media}
+									width="800"
 								/>
 							</div>
 							{/* Decorative background gradient */}

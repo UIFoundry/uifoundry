@@ -14,7 +14,7 @@ const inter = Inter({
 export default async function RootLayout(props: { children: React.ReactNode }) {
 	const { children } = props;
 	return (
-		<html lang="en" className={inter.className} suppressHydrationWarning>
+		<html className={inter.className} lang="en" suppressHydrationWarning>
 			<body className="flex min-h-screen flex-col">
 				<RootProvider>{children}</RootProvider>
 			</body>

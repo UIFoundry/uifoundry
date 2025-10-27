@@ -1,46 +1,18 @@
-import type { RedisCachePluginConfig } from './types'
 import { createHash } from 'crypto'
 
-/**
- * Check if a collection should be cached based on plugin config
- */
-export function shouldCacheCollection(
-  slug: string,
-  config: RedisCachePluginConfig
-): boolean {
-  // If excludeCollections is defined and includes this collection, don't cache
-  if (config.excludeCollections?.includes(slug)) {
-    return false
-  }
-
-  // If collections is defined, only cache those specified
-  if (config.collections && config.collections.length > 0) {
-    return config.collections.includes(slug)
-  }
-
-  // Default: cache everything
-  return true
-}
+import type { RedisCachePluginConfig } from './types'
 
 /**
- * Check if a global should be cached based on plugin config
+ * Log debug message if debug mode is enabled
  */
-export function shouldCacheGlobal(
-  slug: string,
-  config: RedisCachePluginConfig
-): boolean {
-  // If excludeGlobals is defined and includes this global, don't cache
-  if (config.excludeGlobals?.includes(slug)) {
-    return false
+export function debugLog(
+  config: RedisCachePluginConfig,
+  message: string,
+  data?: any
+) {
+  if (config.debug) {
+    console.log(`[RedisCache] ${message}`, data || '')
   }
-
-  // If globals is defined, only cache those specified
-  if (config.globals && config.globals.length > 0) {
-    return config.globals.includes(slug)
-  }
-
-  // Default: cache everything
-  return true
 }
 
 /**
@@ -65,17 +37,17 @@ export function generateCacheKey(
 
   // Default: hash the operation and args
   const dataToHash = {
-    operation,
-    collection: args.collection,
-    slug: args.slug,
     id: args.id,
-    where: args.where,
+    slug: args.slug,
+    collection: args.collection,
+    depth: args.depth,
+    fallbackLocale: args.fallbackLocale,
     limit: args.limit,
+    locale: args.locale,
+    operation,
     page: args.page,
     sort: args.sort,
-    depth: args.depth,
-    locale: args.locale,
-    fallbackLocale: args.fallbackLocale,
+    where: args.where,
   }
 
   const hash = createHash('md5')
@@ -121,14 +93,43 @@ export function getTagPatterns(
 }
 
 /**
- * Log debug message if debug mode is enabled
+ * Check if a collection should be cached based on plugin config
  */
-export function debugLog(
-  config: RedisCachePluginConfig,
-  message: string,
-  data?: any
-) {
-  if (config.debug) {
-    console.log(`[RedisCache] ${message}`, data || '')
+export function shouldCacheCollection(
+  slug: string,
+  config: RedisCachePluginConfig
+): boolean {
+  // If excludeCollections is defined and includes this collection, don't cache
+  if (config.excludeCollections?.includes(slug)) {
+    return false
   }
+
+  // If collections is defined, only cache those specified
+  if (config.collections && config.collections.length > 0) {
+    return config.collections.includes(slug)
+  }
+
+  // Default: cache everything
+  return true
+}
+
+/**
+ * Check if a global should be cached based on plugin config
+ */
+export function shouldCacheGlobal(
+  slug: string,
+  config: RedisCachePluginConfig
+): boolean {
+  // If excludeGlobals is defined and includes this global, don't cache
+  if (config.excludeGlobals?.includes(slug)) {
+    return false
+  }
+
+  // If globals is defined, only cache those specified
+  if (config.globals && config.globals.length > 0) {
+    return config.globals.includes(slug)
+  }
+
+  // Default: cache everything
+  return true
 }

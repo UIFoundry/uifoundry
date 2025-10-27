@@ -1,8 +1,9 @@
+import { ThemeProvider } from "next-themes";
 import { type PropsWithChildren } from "react";
-import { TRPCReactProvider } from "~/trpc/react";
+
 import { BetterAuthProvider } from "~/auth/context";
 import { getContextProps } from "~/auth/utils";
-import { ThemeProvider } from "next-themes";
+import { TRPCReactProvider } from "~/trpc/react";
 
 export default function ServerProviders({ children }: PropsWithChildren) {
 	return (

@@ -1,19 +1,21 @@
 "use client";
 
 import Link from "next/link";
+
 import type { HeaderMenuButtonBlock } from "~/payload-types";
+
 import { useSession } from "~/auth/client";
-import { cn } from "~/styles/utils";
 import UserAvatar from "~/components/UserAvatar";
+import { cn } from "~/styles/utils";
 
 export default function MenuButton({
-	mobileView = false,
-	label,
-	href = "",
-	targetBlank,
 	alignment,
 	auth,
-}: { mobileView?: boolean } & HeaderMenuButtonBlock) {
+	href = "",
+	label,
+	mobileView = false,
+	targetBlank,
+}: HeaderMenuButtonBlock & { mobileView?: boolean }) {
 	const { data: session } = useSession();
 	if (auth) {
 		if (!session?.user) {
@@ -28,7 +30,7 @@ export default function MenuButton({
 						mobileView === true && "hidden",
 					)}
 				>
-					<Link href="/auth/sign-in" className="cursor-pointer">
+					<Link className="cursor-pointer" href="/auth/sign-in">
 						{label}
 					</Link>
 				</div>
@@ -54,9 +56,9 @@ export default function MenuButton({
 			)}
 		>
 			<Link
-				target={targetBlank ? "_blank" : "_self"}
-				href={href ?? "/home"}
 				className="cursor-pointer"
+				href={href ?? "/home"}
+				target={targetBlank ? "_blank" : "_self"}
 			>
 				{label}
 			</Link>

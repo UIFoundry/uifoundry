@@ -1,4 +1,13 @@
 import type { Block } from "payload";
+
+import {
+	BLOCK_SLUG_FOOTER_1,
+	BLOCK_SLUG_FOOTER_2,
+	BLOCK_SLUG_FOOTER_3,
+	BLOCK_SLUG_FOOTER_4,
+	BLOCK_SLUG_FOOTER_5,
+} from "~/payload/constants/blocks";
+
 import Footer_1 from "./Footer_1";
 import { Footer_1_Block } from "./Footer_1/config";
 import Footer_2 from "./Footer_2";
@@ -9,14 +18,6 @@ import Footer_4 from "./Footer_4";
 import { Footer_4_Block } from "./Footer_4/config";
 import Footer_5 from "./Footer_5";
 import { Footer_5_Block } from "./Footer_5/config";
-
-import {
-	BLOCK_SLUG_FOOTER_1,
-	BLOCK_SLUG_FOOTER_2,
-	BLOCK_SLUG_FOOTER_3,
-	BLOCK_SLUG_FOOTER_4,
-	BLOCK_SLUG_FOOTER_5,
-} from "~/payload/constants/blocks";
 
 export const blocks: Block[] = [
 	Footer_1_Block,

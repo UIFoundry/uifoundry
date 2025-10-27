@@ -16,11 +16,13 @@
 
 "use client";
 
-import Link from "next/link";
-import { Button } from "~/ui/button";
 import { ChevronRight } from "lucide-react";
-import type { Hero_3_Block } from "~/payload-types";
 import { useTheme } from "next-themes";
+import Link from "next/link";
+
+import type { Hero_3_Block } from "~/payload-types";
+
+import { Button } from "~/ui/button";
 
 export default function Hero3Section(props: Hero_3_Block) {
 	const { theme } = useTheme();
@@ -53,10 +55,10 @@ export default function Hero3Section(props: Hero_3_Block) {
 				{videoSrc && (
 					<video
 						autoPlay
+						className="size-full object-cover opacity-50 invert dark:opacity-35 dark:invert-0 dark:lg:opacity-75"
 						loop
 						muted
 						playsInline
-						className="size-full object-cover opacity-50 invert dark:opacity-35 dark:invert-0 dark:lg:opacity-75"
 					>
 						<source
 							src={
@@ -91,8 +93,8 @@ export default function Hero3Section(props: Hero_3_Block) {
 							{/* Primary CTA */}
 							<Button
 								asChild
-								size="lg"
 								className="inline-flex items-center justify-center gap-2 rounded-full px-8 pr-3 pl-5 text-base whitespace-nowrap shadow-sm shadow-black/20"
+								size="lg"
 							>
 								<Link href={props.primaryCtaHref}>
 									<span className="text-nowrap">{props.primaryCtaLabel}</span>
@@ -103,9 +105,9 @@ export default function Hero3Section(props: Hero_3_Block) {
 							{/* Secondary CTA */}
 							<Button
 								asChild
-								variant="ghost"
-								size="lg"
 								className="inline-flex items-center justify-center gap-2 rounded-full px-8 text-base whitespace-nowrap hover:bg-zinc-950/5 dark:hover:bg-white/5"
+								size="lg"
+								variant="ghost"
 							>
 								<Link href={props.secondaryCtaHref}>
 									<span className="text-nowrap">{props.secondaryCtaLabel}</span>

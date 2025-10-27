@@ -1,4 +1,5 @@
 import { AsyncLocalStorage } from 'async_hooks'
+
 import type { CacheOptions } from './types'
 
 /**
@@ -32,16 +33,6 @@ export function setCacheContext(options: CacheOptions): void {
 }
 
 /**
- * Run a function with cache context
- */
-export function withCacheContext<T>(
-  options: CacheOptions,
-  fn: () => Promise<T>
-): Promise<T> {
-  return cacheContextStorage.run({ options }, fn)
-}
-
-/**
  * Wrapper for Payload operations with cache options
  *
  * Usage:
@@ -56,4 +47,14 @@ export async function withCache<T>(
   operation: () => Promise<T>
 ): Promise<T> {
   return withCacheContext(options, operation)
+}
+
+/**
+ * Run a function with cache context
+ */
+export function withCacheContext<T>(
+  options: CacheOptions,
+  fn: () => Promise<T>
+): Promise<T> {
+  return cacheContextStorage.run({ options }, fn)
 }

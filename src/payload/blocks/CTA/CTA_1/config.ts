@@ -1,19 +1,15 @@
 import type { Block } from "payload";
+
 import { BLOCK_GROUP_CTA, BLOCK_SLUG_CTA_1 } from "~/payload/constants/blocks";
+import callToActionPair from "~/payload/fields/callToActionPair/config";
 import headerField from "~/payload/fields/header/config";
 import subheaderField from "~/payload/fields/subheader/config";
-import callToActionPair from "~/payload/fields/callToActionPair/config";
 
 export const CTA_1_Block: Block = {
 	slug: BLOCK_SLUG_CTA_1,
-	labels: {
-		singular: "CTA 1",
-		plural: "CTA 1's",
-	},
 	admin: {
 		group: BLOCK_GROUP_CTA,
 	},
-	interfaceName: "CTA_1_Block",
 	fields: [
 		headerField({
 			defaultValue: "Ready to Ship Your Next Project?",
@@ -28,14 +24,19 @@ export const CTA_1_Block: Block = {
 			},
 			defaultValue: [
 				{
-					label: "Get Developer Template",
 					href: "/purchase",
+					label: "Get Developer Template",
 				},
 				{
-					label: "Start Hosted Trial",
 					href: "/signup",
+					label: "Start Hosted Trial",
 				},
 			],
 		}),
 	],
+	interfaceName: "CTA_1_Block",
+	labels: {
+		plural: "CTA 1's",
+		singular: "CTA 1",
+	},
 };

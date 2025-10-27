@@ -2,22 +2,24 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState, type ComponentPropsWithRef } from "react";
+import { type ComponentPropsWithRef, useEffect, useState } from "react";
+
 import type { Header_1_Block } from "~/payload-types";
+
+import MediaField from "~/payload/fields/media";
 import { cn } from "~/styles/utils";
 import { Button } from "~/ui/button";
-import MediaField from "~/payload/fields/media";
 
 export * from "./config";
 
 export default function Header_1({
-	preview = false,
+	actionButtons,
 	brandLogo,
 	logoHref = "/",
 	menuItems,
-	actionButtons,
+	preview = false,
 	...navProps
-}: { preview?: boolean } & Header_1_Block & ComponentPropsWithRef<"nav">) {
+}: ComponentPropsWithRef<"nav"> & Header_1_Block & { preview?: boolean }) {
 	const [menuState, setMenuState] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
 
@@ -34,9 +36,9 @@ export default function Header_1({
 	return (
 		<header>
 			<nav
+				className={cn("fixed z-20 w-full px-2", preview && "relative")}
 				data-state={menuState && "active"}
 				id="header"
-				className={cn("fixed z-20 w-full px-2", preview && "relative")}
 				{...navProps}
 			>
 				<div
@@ -50,22 +52,22 @@ export default function Header_1({
 						<div className="flex w-full justify-between lg:w-auto">
 							{brandLogo && (
 								<Link
-									href={logoHref}
 									aria-label="home"
 									className="relative h-8 w-24 lg:w-32"
+									href={logoHref}
 								>
 									<MediaField
-										media={brandLogo}
-										fill
 										className="object-contain object-left"
+										fill
+										media={brandLogo}
 									/>
 								</Link>
 							)}
 
 							<button
-								onClick={() => setMenuState(!menuState)}
 								aria-label={menuState == true ? "Close Menu" : "Open Menu"}
 								className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
+								onClick={() => setMenuState(!menuState)}
 							>
 								<Menu className="m-auto size-6 duration-200 in-data-[state=active]:scale-0 in-data-[state=active]:rotate-180 in-data-[state=active]:opacity-0" />
 								<X className="absolute inset-0 m-auto size-6 scale-0 -rotate-180 opacity-0 duration-200 in-data-[state=active]:scale-100 in-data-[state=active]:rotate-0 in-data-[state=active]:opacity-100" />
@@ -76,8 +78,8 @@ export default function Header_1({
 									{menuItems.map((item, index) => (
 										<li key={index}>
 											<Link
-												href={item.href}
 												className="text-muted-foreground hover:text-accent-foreground block duration-150"
+												href={item.href}
 											>
 												<span>{item.label}</span>
 											</Link>
@@ -92,10 +94,10 @@ export default function Header_1({
 								<>
 									{actionButtons.map((button, index) => (
 										<Button
-											key={index}
 											asChild
-											variant={button.variant}
+											key={index}
 											size="sm"
+											variant={button.variant}
 										>
 											<Link href={button.href}>
 												<span>{button.label}</span>
@@ -112,8 +114,8 @@ export default function Header_1({
 									{menuItems.map((item, index) => (
 										<li key={index}>
 											<Link
-												href={item.href}
 												className="text-muted-foreground hover:text-accent-foreground block duration-150"
+												href={item.href}
 											>
 												<span>{item.label}</span>
 											</Link>
@@ -125,10 +127,10 @@ export default function Header_1({
 									<div className="mt-6 flex flex-col space-y-3">
 										{actionButtons.map((button, index) => (
 											<Button
-												key={index}
 												asChild
-												variant={button.variant}
+												key={index}
 												size="sm"
+												variant={button.variant}
 											>
 												<Link href={button.href}>
 													<span>{button.label}</span>

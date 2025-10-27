@@ -1,18 +1,14 @@
 import type { Block } from "payload";
+
 import {
 	BLOCK_GROUP_FOOTERS,
 	BLOCK_SLUG_FOOTER_1,
 } from "~/payload/constants/blocks";
-import socialLinksField from "~/payload/fields/socialLinks/config";
 import mediaField from "~/payload/fields/media/config";
+import socialLinksField from "~/payload/fields/socialLinks/config";
 
 export const Footer_1_Block: Block = {
 	slug: BLOCK_SLUG_FOOTER_1,
-	interfaceName: "Footer_1_Block",
-	labels: {
-		singular: "Footer 1",
-		plural: "Footer 1's",
-	},
 	admin: {
 		group: BLOCK_GROUP_FOOTERS,
 	},
@@ -24,16 +20,38 @@ export const Footer_1_Block: Block = {
 		{
 			name: "copyright",
 			type: "text",
-			label: "Copyright",
 			defaultValue: "UIFoundry, All rights reserved",
+			label: "Copyright",
 		},
 		{
 			name: "links",
 			type: "array",
-			labels: {
-				singular: "Link",
-				plural: "Links",
-			},
+			defaultValue: [
+				{
+					href: "/",
+					label: "Features",
+				},
+				{
+					href: "/",
+					label: "Solution",
+				},
+				{
+					href: "/",
+					label: "Customer",
+				},
+				{
+					href: "/",
+					label: "Pricing",
+				},
+				{
+					href: "/",
+					label: "Help",
+				},
+				{
+					href: "/",
+					label: "About",
+				},
+			],
 			fields: [
 				{
 					name: "label",
@@ -48,32 +66,10 @@ export const Footer_1_Block: Block = {
 					required: true,
 				},
 			],
-			defaultValue: [
-				{
-					label: "Features",
-					href: "/",
-				},
-				{
-					label: "Solution",
-					href: "/",
-				},
-				{
-					label: "Customer",
-					href: "/",
-				},
-				{
-					label: "Pricing",
-					href: "/",
-				},
-				{
-					label: "Help",
-					href: "/",
-				},
-				{
-					label: "About",
-					href: "/",
-				},
-			],
+			labels: {
+				plural: "Links",
+				singular: "Link",
+			},
 		},
 		socialLinksField({
 			defaultValue: [
@@ -104,4 +100,9 @@ export const Footer_1_Block: Block = {
 			],
 		}),
 	],
+	interfaceName: "Footer_1_Block",
+	labels: {
+		plural: "Footer 1's",
+		singular: "Footer 1",
+	},
 };

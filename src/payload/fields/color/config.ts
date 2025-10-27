@@ -2,19 +2,19 @@ import type { TextField } from "~/payload/fields";
 
 type ColorFieldProps = Omit<
 	Partial<TextField>,
-	"hasMany" | "type" | "maxRows" | "minRows"
+	"hasMany" | "maxRows" | "minRows" | "type"
 > & { description: string };
 
 export default function colorField(props?: ColorFieldProps): TextField {
 	return {
 		name: "color",
 		type: "text" as const,
-		interfaceName: "ColorField",
 		admin: {
 			components: {
 				Field: "~/payload/fields/colorField",
 			},
 		},
+		interfaceName: "ColorField",
 		...props,
 	} as TextField;
 }

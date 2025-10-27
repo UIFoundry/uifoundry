@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type Block, type Field } from "payload";
+
 import { type CollapsibleField } from "~/payload/fields";
 
 /**

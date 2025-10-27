@@ -1,18 +1,14 @@
 import type { Block } from "payload";
+
 import {
 	BLOCK_GROUP_FOOTERS,
 	BLOCK_SLUG_FOOTER_5,
 } from "~/payload/constants/blocks";
-import socialLinksField from "~/payload/fields/socialLinks/config";
 import mediaField from "~/payload/fields/media/config";
+import socialLinksField from "~/payload/fields/socialLinks/config";
 
 export const Footer_5_Block: Block = {
 	slug: BLOCK_SLUG_FOOTER_5,
-	interfaceName: "Footer_5_Block",
-	labels: {
-		singular: "Footer 5",
-		plural: "Footer 5's",
-	},
 	admin: {
 		group: BLOCK_GROUP_FOOTERS,
 	},
@@ -24,7 +20,6 @@ export const Footer_5_Block: Block = {
 		{
 			name: "copyright",
 			type: "group",
-			label: "Copyright",
 			fields: [
 				{
 					name: "copyright",
@@ -48,14 +43,125 @@ export const Footer_5_Block: Block = {
 					],
 				},
 			],
+			label: "Copyright",
 		},
 		{
 			name: "links",
 			type: "array",
-			labels: {
-				singular: "Link",
-				plural: "Links",
-			},
+			defaultValue: [
+				{
+					group: "Product",
+					items: [
+						{
+							href: "/",
+							label: "Features",
+						},
+						{
+							href: "/",
+							label: "Solution",
+						},
+						{
+							href: "/",
+							label: "Customers",
+						},
+						{
+							href: "/",
+							label: "Pricing",
+						},
+						{
+							href: "/",
+							label: "Help",
+						},
+						{
+							href: "/",
+							label: "About",
+						},
+					],
+				},
+				{
+					group: "Solution",
+					items: [
+						{
+							href: "/",
+							label: "Startup",
+						},
+						{
+							href: "/",
+							label: "Freelancers",
+						},
+						{
+							href: "/",
+							label: "Organizations",
+						},
+						{
+							href: "/",
+							label: "Students",
+						},
+						{
+							href: "/",
+							label: "Collaboration",
+						},
+						{
+							href: "/",
+							label: "Design",
+						},
+						{
+							href: "/",
+							label: "Management",
+						},
+					],
+				},
+				{
+					group: "Company",
+					items: [
+						{
+							href: "/",
+							label: "About",
+						},
+						{
+							href: "/",
+							label: "Careers",
+						},
+						{
+							href: "/",
+							label: "Blog",
+						},
+						{
+							href: "/",
+							label: "Press",
+						},
+						{
+							href: "/",
+							label: "Contact",
+						},
+						{
+							href: "/",
+							label: "Help",
+						},
+					],
+				},
+				{
+					group: "Legal",
+					items: [
+						{
+							href: "/",
+							label: "License",
+						},
+						{
+							href: "/",
+							label: "Privacy",
+						},
+						{
+							href: "/",
+							label: "Cookies",
+						},
+						{
+							href: "/",
+							label: "Security",
+						},
+					],
+				},
+			],
 			fields: [
 				{
 					name: "group",
@@ -80,120 +186,10 @@ export const Footer_5_Block: Block = {
 					],
 				},
 			],
-			defaultValue: [
-				{
-					group: "Product",
-					items: [
-						{
-							label: "Features",
-							href: "/",
-						},
-						{
-							label: "Solution",
-							href: "/",
-						},
-						{
-							label: "Customers",
-							href: "/",
-						},
-						{
-							label: "Pricing",
-							href: "/",
-						},
-						{
-							label: "Help",
-							href: "/",
-						},
-						{
-							label: "About",
-							href: "/",
-						},
-					],
-				},
-				{
-					group: "Solution",
-					items: [
-						{
-							label: "Startup",
-							href: "/",
-						},
-						{
-							label: "Freelancers",
-							href: "/",
-						},
-						{
-							label: "Organizations",
-							href: "/",
-						},
-						{
-							label: "Students",
-							href: "/",
-						},
-						{
-							label: "Collaboration",
-							href: "/",
-						},
-						{
-							label: "Design",
-							href: "/",
-						},
-						{
-							label: "Management",
-							href: "/",
-						},
-					],
-				},
-				{
-					group: "Company",
-					items: [
-						{
-							label: "About",
-							href: "/",
-						},
-						{
-							label: "Careers",
-							href: "/",
-						},
-						{
-							label: "Blog",
-							href: "/",
-						},
-						{
-							label: "Press",
-							href: "/",
-						},
-						{
-							label: "Contact",
-							href: "/",
-						},
-						{
-							label: "Help",
-							href: "/",
-						},
-					],
-				},
-				{
-					group: "Legal",
-					items: [
-						{
-							label: "License",
-							href: "/",
-						},
-						{
-							label: "Privacy",
-							href: "/",
-						},
-						{
-							label: "Cookies",
-							href: "/",
-						},
-						{
-							label: "Security",
-							href: "/",
-						},
-					],
-				},
-			],
+			labels: {
+				plural: "Links",
+				singular: "Link",
+			},
 		},
 		socialLinksField({
 			defaultValue: [
@@ -224,4 +220,9 @@ export const Footer_5_Block: Block = {
 			],
 		}),
 	],
+	interfaceName: "Footer_5_Block",
+	labels: {
+		plural: "Footer 5's",
+		singular: "Footer 5",
+	},
 };

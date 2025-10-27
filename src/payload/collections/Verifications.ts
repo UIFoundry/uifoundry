@@ -1,4 +1,5 @@
 import { type CollectionConfig } from "payload";
+
 import { COLLECTION_SLUG_VERIFICATIONS } from "../constants";
 
 export const Verifications: CollectionConfig = {
@@ -7,20 +8,20 @@ export const Verifications: CollectionConfig = {
     {
       name: "identifier",
       type: "text",
-      required: true,
       defaultValue: "",
+      required: true,
     },
     {
       name: "value",
       type: "text",
-      required: true,
       defaultValue: "",
+      required: true,
     },
     {
       name: "expiresAt",
       type: "date",
-      required: true,
       defaultValue: new Date(),
+      required: true,
     },
   ],
 };

@@ -3,18 +3,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { type ComponentPropsWithRef } from "react";
+
 import type { Footer_3_Block, Media } from "~/payload-types";
+
 import SocialIcon from "~/payload/fields/socialLinks";
 import { cn } from "~/styles/utils";
 
 export default function Footer_3({
 	brandLogo,
+	className,
 	copyright,
 	links,
 	socialLinks,
-	className,
 	...divProps
-}: Footer_3_Block & ComponentPropsWithRef<"div">) {
+}: ComponentPropsWithRef<"div"> & Footer_3_Block) {
 	return (
 		<footer
 			className={cn("border-b bg-white pt-20 dark:bg-transparent", className)}
@@ -23,18 +25,18 @@ export default function Footer_3({
 			<div className="mb-8 border-b md:mb-12">
 				<div className="mx-auto flex max-w-5xl flex-wrap items-end justify-between gap-6 px-6 pb-6">
 					{brandLogo && (
-						<Link href="/" aria-label="go home" className="block size-fit">
+						<Link aria-label="go home" className="block size-fit" href="/">
 							<Image
-								src={(brandLogo as Media).url!}
 								alt={(brandLogo as Media).alt}
-								width={200}
 								height={150}
+								src={(brandLogo as Media).url!}
+								width={200}
 							/>
 						</Link>
 					)}
 					<div className="flex flex-wrap justify-center gap-6 text-sm">
 						{socialLinks.map((icon, index) => (
-							<SocialIcon icon={icon.icon} href={icon.href} key={`${index}`} />
+							<SocialIcon href={icon.href} icon={icon.icon} key={`${index}`} />
 						))}
 					</div>
 				</div>
@@ -43,13 +45,13 @@ export default function Footer_3({
 				<div className="grid gap-12 md:grid-cols-5 md:gap-0 lg:grid-cols-4">
 					<div className="grid grid-cols-2 gap-6 sm:grid-cols-4 md:col-span-5 md:row-start-1 lg:col-span-3">
 						{links?.map((link, index) => (
-							<div key={index} className="space-y-4 text-sm">
+							<div className="space-y-4 text-sm" key={index}>
 								<span className="block font-medium">{link.group}</span>
 								{link.items?.map((item, index) => (
 									<Link
-										key={index}
-										href={item.href}
 										className="text-muted-foreground hover:text-primary block duration-150"
+										href={item.href}
+										key={index}
 									>
 										<span>{item.label}</span>
 									</Link>

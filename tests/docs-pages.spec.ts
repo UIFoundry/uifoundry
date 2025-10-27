@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -6,12 +6,12 @@ import * as path from "path";
 test.describe.configure({ mode: "parallel", retries: 2, timeout: 60000 });
 
 // Helper function to discover docs pages from file system
-function discoverDocsPages(): Array<{ url: string; title: string }> {
+function discoverDocsPages(): Array<{ title: string; url: string; }> {
   const docsPath = path.join(process.cwd(), "content", "docs");
-  const pages: Array<{ url: string; title: string }> = [];
+  const pages: Array<{ title: string; url: string; }> = [];
 
   // Always include the docs index
-  pages.push({ url: "/docs", title: "UIFoundry Documentation" });
+  pages.push({ title: "UIFoundry Documentation", url: "/docs" });
 
   function scanDirectory(dir: string, urlPath = "/docs") {
     try {
@@ -38,7 +38,7 @@ function discoverDocsPages(): Array<{ url: string; title: string }> {
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ");
 
-          pages.push({ url: pageUrl, title });
+          pages.push({ title, url: pageUrl });
         }
       }
     } catch (error) {
@@ -66,7 +66,7 @@ test.describe("Documentation Pages", () => {
   });
 
   test("docs index should load", async ({ page }) => {
-    await page.goto("/docs", { waitUntil: "domcontentloaded", timeout: 30000 });
+    await page.goto("/docs", { timeout: 30000, waitUntil: "domcontentloaded" });
 
     await expect(page).toHaveTitle(/UIFoundry/);
     await expect(page.locator("body")).toBeVisible();
@@ -78,8 +78,8 @@ test.describe("Documentation Pages", () => {
   for (const docPage of allDocsPages) {
     test(`should load docs page: ${docPage.url}`, async ({ page }) => {
       await page.goto(docPage.url, {
-        waitUntil: "domcontentloaded",
         timeout: 30000,
+        waitUntil: "domcontentloaded",
       });
 
       await expect(page.locator('text="404"')).not.toBeVisible();

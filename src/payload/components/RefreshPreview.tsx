@@ -10,11 +10,11 @@ export default function RefreshPreview() {
 
 	return (
 		<RotateCcw
-			type="button"
-			aria-label="Refresh Live Preview"
 			aria-description="Refresh Live Preview"
+			aria-label="Refresh Live Preview"
 			className="cursor-pointer transition-colors duration-300 hover:stroke-neutral-500"
 			onClick={handleClick}
+			type="button"
 		/>
 	);
 }

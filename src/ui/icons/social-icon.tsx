@@ -1,17 +1,19 @@
-import Link from "next/link";
-import { socialIcons, type SocialIconKey } from "./social-icons";
 import Image, { type ImageProps } from "next/image";
+import Link from "next/link";
+
 import { cn } from "~/styles/utils";
 
+import { type SocialIconKey, socialIcons } from "./social-icons";
+
 export default function SocialIcon({
-	icon,
-	href = "",
 	className,
+	href = "",
+	icon,
 	...imageProps
-}: {
-	icon: SocialIconKey;
+}: Partial<ImageProps> & {
 	href?: string;
-} & Partial<ImageProps>) {
+	icon: SocialIconKey;
+}) {
 	const selectIcon = socialIcons[icon];
 	if (!selectIcon?.route || selectIcon.route === "") {
 		console.log("social icon not found: ", icon);
@@ -23,32 +25,32 @@ export default function SocialIcon({
 			{typeof selectIcon.route !== "string" &&
 				Object.hasOwn(selectIcon.route, "light") && (
 					<Image
-						src={selectIcon.route.light}
 						alt={`${icon}`}
-						width={20}
-						height={20}
 						className={cn("dark:hidden", className)}
+						height={20}
+						src={selectIcon.route.light}
+						width={20}
 						{...imageProps}
 					/>
 				)}
 			{typeof selectIcon.route !== "string" &&
 				Object.hasOwn(selectIcon.route, "dark") && (
 					<Image
-						src={selectIcon.route.dark}
 						alt={`${icon}`}
-						width={20}
-						height={20}
 						className={cn("hidden dark:block", className)}
+						height={20}
+						src={selectIcon.route.dark}
+						width={20}
 						{...imageProps}
 					/>
 				)}
 			{typeof selectIcon.route === "string" && (
 				<Image
-					src={selectIcon.route}
 					alt={`${icon}`}
-					width={20}
-					height={20}
 					className={className}
+					height={20}
+					src={selectIcon.route}
+					width={20}
 					{...imageProps}
 				/>
 			)}

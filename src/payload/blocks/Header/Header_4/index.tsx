@@ -15,35 +15,38 @@
 
 "use client";
 
+import type { ComponentPropsWithRef } from "react";
+
 import { Menu, X } from "lucide-react";
-import { Button } from "~/ui/button";
 import Link from "next/link";
 import { useState } from "react";
-import { cn } from "~/styles/utils";
+
 import type { Header_4_Block } from "~/payload-types";
-import type { ComponentPropsWithRef } from "react";
+
 import MediaField from "~/payload/fields/media";
+import { cn } from "~/styles/utils";
+import { Button } from "~/ui/button";
 
 export * from "./config";
 
 export default function Header_4({
-	preview = false,
+	actionButtons,
 	brandLogo,
 	logoHref,
 	menuItems,
-	actionButtons,
+	preview = false,
 	...navProps
-}: { preview?: boolean } & Header_4_Block & ComponentPropsWithRef<"nav">) {
+}: ComponentPropsWithRef<"nav"> & Header_4_Block & { preview?: boolean }) {
 	const [menuState, setMenuState] = useState(false);
 
 	return (
 		<header className="border-b border-dashed">
 			<nav
-				data-state={menuState && "active"}
 				className={cn(
 					"fixed z-20 w-full bg-white backdrop-blur md:relative dark:bg-zinc-950/50 lg:dark:bg-transparent",
 					preview && "relative",
 				)}
+				data-state={menuState && "active"}
 				{...navProps}
 			>
 				<div className="m-auto max-w-5xl px-6">
@@ -51,24 +54,24 @@ export default function Header_4({
 						<div className="flex w-full items-center justify-between lg:w-auto">
 							{brandLogo && (
 								<Link
-									href={logoHref}
 									aria-label="home"
 									className="relative h-8 w-24 lg:w-32"
+									href={logoHref}
 								>
 									<MediaField
-										media={brandLogo}
-										fill
 										className="object-contain object-left"
+										fill
+										media={brandLogo}
 									/>
 								</Link>
 							)}
 
 							<button
-								onClick={() => setMenuState(!menuState)}
-								aria-label={menuState == true ? "Close Menu" : "Open Menu"}
-								aria-expanded={menuState}
 								aria-controls="mobile-menu"
+								aria-expanded={menuState}
+								aria-label={menuState == true ? "Close Menu" : "Open Menu"}
 								className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
+								onClick={() => setMenuState(!menuState)}
 							>
 								<Menu className="m-auto size-6 duration-200 in-data-[state=active]:scale-0 in-data-[state=active]:rotate-180 in-data-[state=active]:opacity-0" />
 								<X className="absolute inset-0 m-auto size-6 scale-0 -rotate-180 opacity-0 duration-200 in-data-[state=active]:scale-100 in-data-[state=active]:rotate-0 in-data-[state=active]:opacity-100" />
@@ -79,8 +82,8 @@ export default function Header_4({
 									{menuItems?.map((item, index) => (
 										<li key={index}>
 											<Link
-												href={item.href}
 												className="text-muted-foreground hover:text-accent-foreground block duration-150"
+												href={item.href}
 											>
 												<span>{item.label}</span>
 											</Link>
@@ -95,10 +98,10 @@ export default function Header_4({
 								<>
 									{actionButtons.map((button, index) => (
 										<Button
-											key={index}
 											asChild
-											variant={button.variant}
+											key={index}
 											size="sm"
+											variant={button.variant}
 										>
 											<Link href={button.href}>
 												<span>{button.label}</span>
@@ -109,14 +112,14 @@ export default function Header_4({
 							)}
 						</div>
 
-						<div id="mobile-menu" className="bg-background absolute top-[125%] z-10 mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:w-fit lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
+						<div className="bg-background absolute top-[125%] z-10 mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:w-fit lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent" id="mobile-menu">
 							<div className="lg:hidden">
 								<ul className="space-y-6 text-base">
 									{menuItems?.map((item, index) => (
 										<li key={index}>
 											<Link
-												href={item.href}
 												className="text-muted-foreground hover:text-accent-foreground block duration-150"
+												href={item.href}
 											>
 												<span>{item.label}</span>
 											</Link>
@@ -128,10 +131,10 @@ export default function Header_4({
 									<div className="mt-6 flex flex-col space-y-3">
 										{actionButtons.map((button, index) => (
 											<Button
-												key={index}
 												asChild
-												variant={button.variant}
+												key={index}
 												size="sm"
+												variant={button.variant}
 											>
 												<Link href={button.href}>
 													<span>{button.label}</span>

@@ -1,28 +1,21 @@
 import type { GlobalConfig } from "payload";
-import { GLOBAL_SLUG_SITE_CONFIG } from "~/payload/constants/globals";
-import { AUTOSAVE_INTERVAL, COLLECTION_SLUG_THEMES } from "~/payload/constants";
+
 import { env } from "~/env.mjs";
+import { AUTOSAVE_INTERVAL, COLLECTION_SLUG_THEMES } from "~/payload/constants";
+import { GLOBAL_SLUG_SITE_CONFIG } from "~/payload/constants/globals";
 
 export const SiteConfigGlobal: GlobalConfig = {
 	slug: GLOBAL_SLUG_SITE_CONFIG,
-	label: "Site Config",
 	admin: {
 		livePreview: {
 			url: `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/home?draft=true`,
 		},
 	},
-	versions: {
-		drafts: {
-			autosave: {
-				interval: AUTOSAVE_INTERVAL,
-			},
-		},
-	},
 	fields: [
 		{
 			name: "activeTheme",
-			label: "Active Site Theme",
 			type: "relationship",
+			label: "Active Site Theme",
 			relationTo: COLLECTION_SLUG_THEMES,
 			required: true,
 		},
@@ -36,4 +29,12 @@ export const SiteConfigGlobal: GlobalConfig = {
 			},
 		},
 	],
+	label: "Site Config",
+	versions: {
+		drafts: {
+			autosave: {
+				interval: AUTOSAVE_INTERVAL,
+			},
+		},
+	},
 };

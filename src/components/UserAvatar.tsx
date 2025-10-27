@@ -1,28 +1,29 @@
-import { Avatar, AvatarImage, AvatarFallback } from "~/ui/avatar";
-import { getInitials } from "~/utils";
 import type { User } from "~/payload-types";
+
 import { useSession } from "~/auth/client";
+import { Avatar, AvatarFallback, AvatarImage } from "~/ui/avatar";
+import { getInitials } from "~/utils";
 
 export default function UserAvatar({
-	user,
 	showUsername = false,
+	user,
 }: {
-	user?: User;
 	showUsername?: boolean;
+	user?: User;
 }) {
 	const { data: session } = useSession();
 
 	const currentUser = user ?? session?.user;
 
-	if (!currentUser) return <></>;
+	if (!currentUser) {return <></>;}
 
 	if (showUsername) {
 		return (
 			<div className="grid place-items-center">
 				<Avatar>
 					<AvatarImage
-						src={currentUser.image ?? undefined}
 						alt="Profile image"
+						src={currentUser.image ?? undefined}
 					/>
 					<AvatarFallback>
 						{getInitials(currentUser.name, 2).toUpperCase()}
@@ -35,7 +36,7 @@ export default function UserAvatar({
 
 	return (
 		<Avatar>
-			<AvatarImage src={currentUser.image ?? undefined} alt="Profile image" />
+			<AvatarImage alt="Profile image" src={currentUser.image ?? undefined} />
 			<AvatarFallback>
 				{getInitials(currentUser.name, 2).toUpperCase()}
 			</AvatarFallback>

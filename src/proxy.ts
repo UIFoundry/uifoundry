@@ -1,6 +1,7 @@
-import { NextResponse, type NextRequest } from "next/server";
-import { auth } from "~/auth";
 import { headers } from "next/headers";
+import { type NextRequest, NextResponse } from "next/server";
+
+import { auth } from "~/auth";
 
 export async function proxy(request: NextRequest) {
 	// Skip auth check for docs routes (belt and suspenders approach)
@@ -23,8 +24,8 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-	runtime: "nodejs",
 	matcher: [
 		"/((?!api|_next/static|_next/image|favicon.ico|registry|r|docs|auth/sign-in|auth/sign-up$).*)",
 	],
+	runtime: "nodejs",
 };

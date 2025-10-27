@@ -1,5 +1,7 @@
 import type { BasePayload } from "payload";
+
 import { COLLECTION_SLUG_SITES } from "~/payload/constants";
+
 import { seedSites } from "./collections";
 
 export async function seedDatabase(payload: BasePayload) {

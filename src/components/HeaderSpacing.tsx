@@ -1,17 +1,18 @@
 "use client";
 
 import type { ComponentPropsWithRef } from "react";
+
 import { useEffect, useState } from "react";
 
 export default function HeaderSpacing({
-  showHeader,
   children,
+  showHeader,
   ...divProps
-}: { showHeader: boolean } & ComponentPropsWithRef<"div">) {
+}: ComponentPropsWithRef<"div"> & { showHeader: boolean }) {
   const [headerHeight, setHeaderHeight] = useState(showHeader ? 64 : 0); // Default height to prevent layout shift
 
   useEffect(() => {
-    if (!showHeader) return;
+    if (!showHeader) {return;}
 
     const updateHeaderHeight = () => {
       const header = document.getElementById("header");

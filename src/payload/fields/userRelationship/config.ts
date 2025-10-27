@@ -1,5 +1,6 @@
-import { COLLECTION_SLUG_USERS } from "~/payload/constants";
 import type { RelationshipField } from "~/payload/fields";
+
+import { COLLECTION_SLUG_USERS } from "~/payload/constants";
 
 export default function userRelationship(
 	props?: Partial<RelationshipField>,
@@ -10,7 +11,7 @@ export default function userRelationship(
 		// Default to the authenticated user when available
 		defaultValue:
 			props?.defaultValue ??
-			(({ req }: { req?: { user?: { id?: string } | null } }) =>
+			(({ req }: { req?: { user?: null | { id?: string } } }) =>
 				req?.user?.id ?? undefined),
 		required: props?.required ?? true,
 		...props,

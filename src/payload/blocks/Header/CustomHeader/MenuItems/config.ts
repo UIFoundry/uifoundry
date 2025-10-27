@@ -1,70 +1,71 @@
 import type { Block } from "payload";
+
+import { FLEX_ALIGNMENT } from "~/payload/constants";
 import {
 	BLOCK_GROUP_HEADERS,
 	BLOCK_SLUG_HEADER_MENU_ITEMS,
 } from "~/payload/constants/blocks";
-import { FLEX_ALIGNMENT } from "~/payload/constants";
 import selectEnumField from "~/payload/fields/selectEnum/config";
 
 export const HeaderMenuItemsBlock: Block = {
 	slug: BLOCK_SLUG_HEADER_MENU_ITEMS,
-	interfaceName: "HeaderMenuItemsBlock",
-	labels: {
-		singular: "Menu Items",
-		plural: "Menu Items'",
-	},
 	admin: {
 		group: BLOCK_GROUP_HEADERS,
 	},
 	fields: [
 		selectEnumField(FLEX_ALIGNMENT, {
 			name: "alignment",
-			label: "Header Alignment",
 			defaultValue: FLEX_ALIGNMENT.center,
+			label: "Header Alignment",
 		}),
 		{
 			name: "menuItems",
-			labels: {
-				singular: "Menu Item",
-				plural: "Menu Items",
-			},
 			type: "array",
-			required: true,
 			defaultValue: [
 				{
-					label: "Home",
 					href: "/",
+					label: "Home",
 				},
 				{
-					label: "Products",
 					href: "/products",
+					label: "Products",
 				},
 				{
-					label: "Services",
 					href: "/services",
+					label: "Services",
 				},
 				{
-					label: "Contact",
 					href: "/contact",
+					label: "Contact",
 				},
 			],
 			fields: [
 				{
 					name: "label",
-					label: "Label",
 					type: "text",
+					label: "Label",
 					required: true,
 				},
 				{
 					name: "href",
-					label: "Href",
 					type: "text",
-					required: true,
 					admin: {
 						placeholder: "/features | #features",
 					},
+					label: "Href",
+					required: true,
 				},
 			],
+			labels: {
+				plural: "Menu Items",
+				singular: "Menu Item",
+			},
+			required: true,
 		},
 	],
+	interfaceName: "HeaderMenuItemsBlock",
+	labels: {
+		plural: "Menu Items'",
+		singular: "Menu Items",
+	},
 };

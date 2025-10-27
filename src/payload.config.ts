@@ -1,14 +1,20 @@
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { s3Storage } from "@payloadcms/storage-s3";
+import path from "path";
 import { buildConfig } from "payload";
+import { fileURLToPath } from "url";
+
 import { env } from "~/env.mjs";
+import { redisCachePlugin } from "~/payload/plugins/redis-cache";
+import { seedDatabase } from "~/payload/seed";
+
 import { collections } from "./payload/collections";
-import { globals } from "./payload/globals";
 import {
 	allowedOrigins,
 	COLLECTION_SLUG_ACCOUNTS,
-	COLLECTION_SLUG_SESSIONS,
 	COLLECTION_SLUG_PAGES,
+	COLLECTION_SLUG_SESSIONS,
 	COLLECTION_SLUG_SITES,
 	COLLECTION_SLUG_THEMES,
 	COLLECTION_SLUG_USERS,
@@ -16,11 +22,7 @@ import {
 	GLOBAL_SLUG_FOOTER,
 	GLOBAL_SLUG_HEADER,
 } from "./payload/constants";
-import path from "path";
-import { fileURLToPath } from "url";
-import { s3Storage } from "@payloadcms/storage-s3";
-import { seedDatabase } from "~/payload/seed";
-import { redisCachePlugin } from "~/payload/plugins/redis-cache";
+import { globals } from "./payload/globals";
 // import sharp from "sharp"
 
 const filename = fileURLToPath(import.meta.url);
@@ -29,25 +31,25 @@ const dirname = path.dirname(filename);
 export default buildConfig({
 	telemetry: false,
 	// If you'd like to use Rich Text, pass your editor here
-	editor: lexicalEditor(),
 	admin: {
-		user: COLLECTION_SLUG_USERS,
+		components: {
+			actions: ["~/payload/components/VisitSite"],
+		},
 		importMap: {
 			baseDir: path.resolve(dirname),
 		},
 		livePreview: {
-			url: env.NEXT_PUBLIC_BETTER_AUTH_URL,
 			collections: [COLLECTION_SLUG_PAGES],
+			url: env.NEXT_PUBLIC_BETTER_AUTH_URL,
 		},
-		components: {
-			actions: ["~/payload/components/VisitSite"],
-		},
+		user: COLLECTION_SLUG_USERS,
 	},
+	editor: lexicalEditor(),
 	onInit: seedDatabase,
 
 	// Define and configure your collections in this array
-	collections: collections,
-	globals: globals,
+	collections,
+	globals,
 
 	cors: allowedOrigins,
 	csrf: allowedOrigins,
@@ -58,9 +60,9 @@ export default buildConfig({
 	// Whichever Database Adapter you're using should go here
 	// Mongoose is shown as an example, but you can also use Postgres
 	db: mongooseAdapter({
-		url: env.DATABASE_URI || "",
-		transactionOptions: false,
 		allowIDOnCreate: true,
+		transactionOptions: false,
+		url: env.DATABASE_URI || "",
 	}),
 
 	// If you want to resize images, crop, set focal point, etc.
@@ -74,10 +76,10 @@ export default buildConfig({
 
 	plugins: [
 		s3Storage({
+			bucket: env.S3_BUCKET,
 			collections: {
 				media: true,
 			},
-			bucket: env.S3_BUCKET,
 			config: {
 				credentials: {
 					accessKeyId: env.S3_ACCESS_KEY_ID,
@@ -88,24 +90,24 @@ export default buildConfig({
 		}),
 
 		redisCachePlugin({
-			redis: {
-				url: env.REDIS_URL,
-			},
 			collections: [
 				COLLECTION_SLUG_PAGES,
 				COLLECTION_SLUG_SITES,
 				COLLECTION_SLUG_THEMES,
 				COLLECTION_SLUG_USERS,
 			],
+			debug: false, // Set to true when debugging cache issues
+			defaultTTL: 300,
 			excludeCollections: [
 				COLLECTION_SLUG_SESSIONS,
 				COLLECTION_SLUG_ACCOUNTS,
 				COLLECTION_SLUG_VERIFICATIONS,
 			],
 			globals: [GLOBAL_SLUG_FOOTER, GLOBAL_SLUG_HEADER],
-			defaultTTL: 300,
 			keyPrefix: "uifoundry",
-			debug: false, // Set to true when debugging cache issues
+			redis: {
+				url: env.REDIS_URL,
+			},
 		}),
 	],
 });

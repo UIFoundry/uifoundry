@@ -1,6 +1,7 @@
 import type { GlobalConfig } from "payload";
-import { GLOBAL_SLUG_FOOTER } from "~/payload/constants/globals";
+
 import { blocks } from "~/payload/blocks/Footer";
+import { GLOBAL_SLUG_FOOTER } from "~/payload/constants/globals";
 
 export const FooterGlobal: GlobalConfig = {
   slug: GLOBAL_SLUG_FOOTER,
@@ -8,10 +9,10 @@ export const FooterGlobal: GlobalConfig = {
     {
       name: "footer",
       type: "blocks",
-      required: true,
+      blocks,
       maxRows: 1,
       minRows: 1,
-      blocks: blocks,
+      required: true,
     },
   ],
 };

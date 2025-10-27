@@ -1,52 +1,47 @@
 import type { Block } from "payload";
+
+import {
+	AUTH_PROVIDERS,
+	FLEX_ALIGNMENT,
+} from "~/payload/constants";
 import {
 	BLOCK_GROUP_HEADERS,
 	BLOCK_SLUG_HEADER_MENU_BUTTON,
 } from "~/payload/constants/blocks";
-import {
-	FLEX_ALIGNMENT,
-	AUTH_PROVIDERS,
-} from "~/payload/constants";
 import selectEnumField from "~/payload/fields/selectEnum/config";
 
 export const HeaderMenuButtonBlock: Block = {
 	slug: BLOCK_SLUG_HEADER_MENU_BUTTON,
-	interfaceName: "HeaderMenuButtonBlock",
-	labels: {
-		singular: "Menu Button",
-		plural: "Menu Buttons",
-	},
 	admin: {
 		group: BLOCK_GROUP_HEADERS,
 	},
 	fields: [
 		selectEnumField(FLEX_ALIGNMENT, {
 			name: "alignment",
-			label: "Header Alignment",
 			defaultValue: FLEX_ALIGNMENT.left,
+			label: "Header Alignment",
 		}),
 		{
 			name: "label",
-			label: "Label",
 			type: "text",
-			required: true,
 			defaultValue: "Sign In",
+			label: "Label",
+			required: true,
 		},
 		{
 			name: "href",
-			label: "Target Link (href)",
 			type: "text",
+			label: "Target Link (href)",
 		},
 		{
 			name: "targetBlank",
-			label: "Open Link in new Tab",
 			type: "checkbox",
-			required: true,
 			defaultValue: false,
+			label: "Open Link in new Tab",
+			required: true,
 		},
 		{
 			name: "auth",
-			label: "Auth",
 			type: "group",
 			fields: [
 				selectEnumField(AUTH_PROVIDERS, {
@@ -54,6 +49,12 @@ export const HeaderMenuButtonBlock: Block = {
 					defaultValue: AUTH_PROVIDERS.google,
 				}),
 			],
+			label: "Auth",
 		},
 	],
+	interfaceName: "HeaderMenuButtonBlock",
+	labels: {
+		plural: "Menu Buttons",
+		singular: "Menu Button",
+	},
 };

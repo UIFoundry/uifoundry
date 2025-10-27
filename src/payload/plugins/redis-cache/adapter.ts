@@ -1,3 +1,4 @@
+import type Redis from "ioredis";
 import type {
 	CountArgs,
 	DatabaseAdapter,
@@ -8,17 +9,18 @@ import type {
 	PaginatedDocs,
 	TypeWithID,
 } from "payload";
-import type { RedisCachePluginConfig, CacheOptions } from "./types";
+
+import type { CacheOptions, RedisCachePluginConfig } from "./types";
+
+import { getCacheContext } from "./context";
 import {
+	debugLog,
 	generateCacheKey,
 	getCollectionPattern,
 	getGlobalPattern,
 	shouldCacheCollection,
 	shouldCacheGlobal,
-	debugLog,
 } from "./utils";
-import { getCacheContext } from "./context";
-import type Redis from "ioredis";
 
 /**
  * Wraps a Payload database adapter with Redis caching
@@ -35,7 +37,7 @@ export function wrapAdapterWithCache(
 	 * Args takes precedence over context
 	 */
 	function getCacheOptions(
-		args: FindArgs | FindGlobalArgs | CountArgs,
+		args: CountArgs | FindArgs | FindGlobalArgs,
 	): CacheOptions | undefined {
 		// First check req.context.cache (highest precedence)
 		if (args.req?.context?.cache) {
@@ -49,7 +51,7 @@ export function wrapAdapterWithCache(
 	/**
 	 * Get data from cache
 	 */
-	async function getFromCache<T = unknown>(key: string): Promise<T | null> {
+	async function getFromCache<T = unknown>(key: string): Promise<null | T> {
 		try {
 			const cached = await redis.get(key);
 			if (cached) {
@@ -143,20 +145,20 @@ export function wrapAdapterWithCache(
 			// Skip cache if requested or collection not configured for caching
 			if (cache?.skip || !shouldCacheCollection(collection, config)) {
 				debugLog(config, `Cache SKIP: findOne ${collection}`);
-				return baseAdapter.findOne(args) as Promise<T | null>;
+				return baseAdapter.findOne(args) as Promise<null | T>;
 			}
 
 			// Generate cache key
 			const cacheKey = generateCacheKey("findOne", args, config);
 
 			// Try to get from cache
-			const cached = await getFromCache<T | null>(cacheKey);
+			const cached = await getFromCache<null | T>(cacheKey);
 			if (cached !== null) {
 				return cached;
 			}
 
 			// Cache miss - query database
-			const result = (await baseAdapter.findOne(args)) as T | null;
+			const result = (await baseAdapter.findOne(args)) as null | T;
 
 			// Store in cache
 			const ttl = cache?.ttl ?? defaultTTL;

@@ -1,57 +1,57 @@
 import { redirect } from "next/navigation";
 
 export const DAL_ERRORS = {
-	noUser: {
-		type: "no-user",
-		name: "UserNotFound",
-		message: "User Not Found",
-	},
-	notFound: {
-		type: "not-found",
-		name: "Resource Not Found",
-		message: "Resource Not Found",
-	},
 	noAccess: {
-		type: "no-access",
 		name: "NoAccessAllowed",
+		type: "no-access",
 		message: "User not allowed to perform this action",
 	},
+	notFound: {
+		name: "Resource Not Found",
+		type: "not-found",
+		message: "Resource Not Found",
+	},
+	noUser: {
+		name: "UserNotFound",
+		type: "no-user",
+		message: "User Not Found",
+	},
 	payload: {
-		type: "payload",
 		name: "PayloadError",
+		type: "payload",
 		message: "Payload Error",
 	},
 	unknown: {
-		type: "unknown",
 		name: "UnknownError",
+		type: "unknown",
 		message: "Unknown Error",
 	},
 } as const;
-
-export type DalErrorType = (typeof DAL_ERRORS)[keyof typeof DAL_ERRORS];
 
 export interface DalError extends Error {
 	type: DalErrorType["type"];
 }
 
+export type DalErrorType = (typeof DAL_ERRORS)[keyof typeof DAL_ERRORS];
+
 export type DalReturn<T, E extends DalError = DalError> =
 	| {
-		success: true;
 		data: T;
+		success: true;
 	}
 	| {
-		success: false;
 		error: E;
+		success: false;
 	};
 
-export function noUserRedirect<T, E extends DalError>({
+export function dalThrowError<T, E extends DalError>({
 	dalReturn,
 }: {
 	dalReturn: DalReturn<T, E>;
 }) {
-	if (dalReturn.success) return dalReturn;
-	if (dalReturn.error.type === "no-user") return redirect("/auth/sign-in");
-	return dalReturn as DalReturn<T, Exclude<E, { type: "no-user" }>>;
+	if (dalReturn.success) {return dalReturn;}
+
+	throw dalReturn.error;
 }
 
 export function noAccessRedirect<T, E extends DalError>({
@@ -61,19 +61,19 @@ export function noAccessRedirect<T, E extends DalError>({
 	dalReturn: DalReturn<T, E>;
 	redirectPath?: string;
 }) {
-	if (dalReturn.success) return dalReturn;
-	if (dalReturn.error.type === "no-access") return redirect(redirectPath);
+	if (dalReturn.success) {return dalReturn;}
+	if (dalReturn.error.type === "no-access") {return redirect(redirectPath);}
 	return dalReturn as DalReturn<T, Exclude<E, { type: "no-access" }>>;
 }
 
-export function dalThrowError<T, E extends DalError>({
+export function noUserRedirect<T, E extends DalError>({
 	dalReturn,
 }: {
 	dalReturn: DalReturn<T, E>;
 }) {
-	if (dalReturn.success) return dalReturn;
-
-	throw dalReturn.error;
+	if (dalReturn.success) {return dalReturn;}
+	if (dalReturn.error.type === "no-user") {return redirect("/auth/sign-in");}
+	return dalReturn as DalReturn<T, Exclude<E, { type: "no-user" }>>;
 }
 
 export function verifySuccess<T, E extends DalError>({
@@ -86,7 +86,7 @@ export function verifySuccess<T, E extends DalError>({
 	const res = dalThrowError({
 		dalReturn: noAccessRedirect({
 			dalReturn: noUserRedirect({
-				dalReturn: dalReturn,
+				dalReturn,
 			}),
 			redirectPath,
 		}),
@@ -95,7 +95,7 @@ export function verifySuccess<T, E extends DalError>({
 }
 
 // Ergonomic helpers to infer success data type automatically
-export const ok = <T>(data: T): DalReturn<T> => ({ success: true, data });
+export const ok = <T>(data: T): DalReturn<T> => ({ data, success: true });
 export const err = (
 	error: Partial<DalError> = { type: "unknown" },
 ): DalReturn<never, DalError> => {
@@ -106,8 +106,8 @@ export const err = (
 				...errBase,
 				error: {
 					...error,
-					type: error.type,
 					name: error.name ?? dalErr.name,
+					type: error.type,
 					message: error.message ?? dalErr.message,
 				},
 			};
@@ -118,8 +118,8 @@ export const err = (
 		...errBase,
 		error: {
 			...error,
-			type: "unknown",
 			name: error.name ?? DAL_ERRORS.unknown.name,
+			type: "unknown",
 			message: error.message ?? DAL_ERRORS.unknown.message,
 		},
 	};

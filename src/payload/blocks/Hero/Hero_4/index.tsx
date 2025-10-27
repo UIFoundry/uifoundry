@@ -17,11 +17,13 @@
 
 "use client";
 
-import Link from "next/link";
-import { Button } from "~/ui/button";
 import { ArrowRight, Mail, SendHorizontal } from "lucide-react";
+import Link from "next/link";
+
 import type { Hero_4_Block } from "~/payload-types";
+
 import MediaField from "~/payload/fields/media";
+import { Button } from "~/ui/button";
 
 export default function Hero4Section(props: Hero_4_Block) {
 	return (
@@ -62,20 +64,20 @@ export default function Hero4Section(props: Hero_4_Block) {
 						{/* Email Form */}
 						<div>
 							<form
-								className="mx-auto my-10 max-w-sm lg:my-12 lg:mr-auto lg:ml-0"
 								action=""
+								className="mx-auto my-10 max-w-sm lg:my-12 lg:mr-auto lg:ml-0"
 							>
 								<div className="bg-background has-[input:focus]:ring-muted relative grid grid-cols-[1fr_auto] items-center rounded-[calc(var(--radius)+0.75rem)] border pr-3 shadow shadow-zinc-950/5 has-[input:focus]:ring-2">
 									<Mail className="text-caption pointer-events-none absolute inset-y-0 left-5 my-auto size-5" />
 									<input
-										placeholder={props.emailPlaceholder ?? "Your mail address"}
 										className="h-14 w-full bg-transparent pl-12 focus:outline-none"
+										placeholder={props.emailPlaceholder ?? "Your mail address"}
 										type="email"
 									/>
 									<div className="md:pr-1.5 lg:pr-0">
 										<Button
-											className="h-9 rounded-[var(--radius)] px-4 py-2 shadow-sm shadow-black/20"
 											aria-label="submit"
+											className="h-9 rounded-[var(--radius)] px-4 py-2 shadow-sm shadow-black/20"
 											type="submit"
 										>
 											<span className="hidden md:block">
@@ -108,10 +110,10 @@ export default function Hero4Section(props: Hero_4_Block) {
 
 							{/* Media Field - handles theme-aware rendering automatically */}
 							<MediaField
+								className="object-cover"
+								height={2008}
 								media={props.media}
 								width={2796}
-								height={2008}
-								className="object-cover"
 							/>
 						</div>
 					</div>

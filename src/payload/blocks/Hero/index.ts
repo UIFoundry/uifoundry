@@ -5,6 +5,7 @@ import {
 	BLOCK_SLUG_HERO_4,
 	BLOCK_SLUG_HERO_5,
 } from "~/payload/constants/blocks";
+
 import Hero_1 from "./Hero_1";
 import { Hero_1_Block } from "./Hero_1/config";
 import Hero_2 from "./Hero_2";

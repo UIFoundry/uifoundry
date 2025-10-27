@@ -1,14 +1,15 @@
 import type { Block } from "payload";
-import { GLOBAL_SLUG_SITE_CONFIG } from "~/payload/constants/globals";
+
 import { COLLECTION_SLUG_THEMES } from "~/payload/constants";
+import { GLOBAL_SLUG_SITE_CONFIG } from "~/payload/constants/globals";
 
 export const SiteConfig_Block: Block = {
 	slug: GLOBAL_SLUG_SITE_CONFIG,
 	fields: [
 		{
 			name: "activeTheme",
-			label: "Active Site Theme",
 			type: "relationship",
+			label: "Active Site Theme",
 			relationTo: COLLECTION_SLUG_THEMES,
 			required: true,
 		},

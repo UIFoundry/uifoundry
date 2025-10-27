@@ -1,26 +1,26 @@
 import type { ArrayField } from "~/payload/fields";
 
 export default function callToActionPair(
-	props?: { defaultLabel?: string; defaultHref?: string } & Partial<ArrayField>,
+	props?: Partial<ArrayField> & { defaultHref?: string; defaultLabel?: string; },
 ): ArrayField {
 	return {
 		name: props?.name ?? "actions",
 		type: "array",
-		maxRows: 2,
 		fields: [
 			{
 				name: "label",
 				type: "text",
-				required: true,
 				defaultValue: props?.defaultLabel ?? "Start Building",
+				required: true,
 			},
 			{
 				name: "href",
 				type: "text",
-				required: true,
 				defaultValue: props?.defaultHref ?? "",
+				required: true,
 			},
 		],
+		maxRows: 2,
 		...props,
 	};
 }

@@ -9,12 +9,12 @@ export default function Team_1_Members({ members }: Teams_1_Members_Block) {
             <div className="bg-background size-20 rounded-full border p-0.5 shadow shadow-zinc-950/5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                className="aspect-square rounded-full object-cover"
-                src={(member.avatar as Media).url!}
                 alt={(member.avatar as Media).alt}
+                className="aspect-square rounded-full object-cover"
                 height="460"
-                width="460"
                 loading="lazy"
+                src={(member.avatar as Media).url!}
+                width="460"
               />
             </div>
           )}

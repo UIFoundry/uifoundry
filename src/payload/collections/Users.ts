@@ -3,56 +3,57 @@ import {
 	type AuthStrategyResult,
 	type CollectionConfig,
 } from "payload";
+
+import type { User } from "~/payload-types";
+
+import { auth } from "~/auth";
+import { hasPermission, USER_ROLES } from "~/auth/permissions";
 import { COLLECTION_SLUG_USERS } from "~/payload/constants";
 import selectEnumField from "~/payload/fields/selectEnum/config";
-import { auth } from "~/auth";
-import { USER_ROLES, hasPermission } from "~/auth/permissions";
-import type { User } from "~/payload-types";
 import { LIFETIME_PLANS } from "~/utils/stripe";
 
 export const Users: CollectionConfig = {
 	slug: COLLECTION_SLUG_USERS,
-	admin: {
-		hidden: () => false,
-		useAsTitle: "name",
-		defaultColumns: ["id", "name", "email", "role", "image"],
-	},
 	access: {
 		create: ({ req: { user } }: AccessArgs<User>) => {
 			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_USERS,
 				action: "create",
+				resource: COLLECTION_SLUG_USERS,
+				user,
 			});
 		},
-		read: ({ req: { user }, data }: AccessArgs<User>) => {
+		delete: ({ data, req: { user } }: AccessArgs<User>) => {
 			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_USERS,
-				action: "read",
-				data,
-			});
-		},
-		update: ({ req: { user }, data }: AccessArgs<User>) => {
-			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_USERS,
-				action: "update",
-				data,
-			});
-		},
-		delete: ({ req: { user }, data }: AccessArgs<User>) => {
-			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_USERS,
 				action: "delete",
 				data,
+				resource: COLLECTION_SLUG_USERS,
+				user,
+			});
+		},
+		read: ({ data, req: { user } }: AccessArgs<User>) => {
+			return hasPermission({
+				action: "read",
+				data,
+				resource: COLLECTION_SLUG_USERS,
+				user,
+			});
+		},
+		update: ({ data, req: { user } }: AccessArgs<User>) => {
+			return hasPermission({
+				action: "update",
+				data,
+				resource: COLLECTION_SLUG_USERS,
+				user,
 			});
 		},
 	},
+	admin: {
+		hidden: () => false,
+		defaultColumns: ["id", "name", "email", "role", "image"],
+		useAsTitle: "name",
+	},
 	auth: {
 		disableLocalStrategy: true,
-		useSessions: false,
 		strategies: [
 			{
 				name: "better-auth",
@@ -60,11 +61,11 @@ export const Users: CollectionConfig = {
 					try {
 						const userSession = await auth.api.getSession({ headers });
 
-						if (!userSession?.user) return { user: null };
+						if (!userSession?.user) {return { user: null };}
 
 						const userData = await payload.findByID({
-							collection: COLLECTION_SLUG_USERS,
 							id: userSession?.user?.id,
+							collection: COLLECTION_SLUG_USERS,
 						});
 
 						return {
@@ -80,11 +81,10 @@ export const Users: CollectionConfig = {
 				},
 			},
 		],
+		useSessions: false,
 	},
 	endpoints: [
 		{
-			path: "/logout",
-			method: "post",
 			handler: async (req) => {
 				await auth.api.signOut({
 					headers: req.headers,
@@ -94,11 +94,13 @@ export const Users: CollectionConfig = {
 						message: "Token revoked successfully",
 					},
 					{
-						status: 200,
 						headers: req.headers,
+						status: 200,
 					},
 				);
 			},
+			method: "post",
+			path: "/logout",
 		},
 	],
 	fields: [
@@ -111,8 +113,8 @@ export const Users: CollectionConfig = {
 		{
 			name: "emailVerified",
 			type: "checkbox",
-			required: true,
 			defaultValue: false,
+			required: true,
 		},
 		{
 			name: "name",
@@ -125,25 +127,25 @@ export const Users: CollectionConfig = {
 		},
 		selectEnumField(USER_ROLES, {
 			name: "role",
-			required: true,
 			defaultValue: USER_ROLES.user,
+			required: true,
 		}),
 		{
 			name: "banned",
-			label: "Banned",
 			type: "checkbox",
-			required: true,
 			defaultValue: false,
+			label: "Banned",
+			required: true,
 		},
 		{
 			name: "banReason",
-			label: "Ban Reason",
 			type: "text",
+			label: "Ban Reason",
 		},
 		{
 			name: "banExpiresIn",
-			label: "Ban Expires In (seconds)",
 			type: "number",
+			label: "Ban Expires In (seconds)",
 		},
 		selectEnumField(LIFETIME_PLANS, {
 			name: "lifetimeSubscription",
