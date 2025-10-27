@@ -106,6 +106,7 @@
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.1",
 		"@next/eslint-plugin-next": "^15.4.3",
+		"@payloadcms/eslint-config": "^3.28.0",
 		"@playwright/test": "^1.55.0",
 		"@tailwindcss/postcss": "^4.0.15",
 		"@types/culori": "^4.0.1",
@@ -118,6 +119,8 @@
 		"dotenv-cli": "^10.0.0",
 		"eslint": "^9.23.0",
 		"eslint-config-next": "^15.2.3",
+		"eslint-plugin-import-x": "^4.16.1",
+		"eslint-plugin-perfectionist": "^4.15.1",
 		"eslint-plugin-react-hooks": "^5.2.0",
 		"postcss": "^8.5.3",
 		"prettier": "^3.5.3",
