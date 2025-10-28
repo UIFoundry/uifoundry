@@ -90,7 +90,7 @@
 		"next": "16.0.0-canary.7",
 		"next-themes": "^0.4.6",
 		"payload": "^3.61.1",
-		"payloadcms-redis-plugin": "^0.2.2",
+		"payloadcms-redis-plugin": "^0.2.9",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
 		"react-syntax-highlighter": "^15.6.6",
