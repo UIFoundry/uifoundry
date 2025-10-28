@@ -95,7 +95,9 @@ export default buildConfig({
 				[COLLECTION_SLUG_SITES]: {
 					versions: true,
 				},
-				[COLLECTION_SLUG_THEMES]: true,
+				[COLLECTION_SLUG_THEMES]: {
+					versions: true,
+				},
 				[COLLECTION_SLUG_USERS]: true,
 			},
 			debug: true, // Set to true when debugging cache issues

@@ -27,6 +27,7 @@ jobs:
     env:
       NODE_ENV: "production"
       DATABASE_URI: ${{ secrets.DATABASE_URI }}
+      REDIS_URL: ${{ secrets.REDIS_URL }}
       PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
       GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
