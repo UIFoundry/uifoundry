@@ -34,6 +34,7 @@ export const defaultESLintIgnores = [
 	"**/sst.config.ts",
 	"**/sst.workflow.ts",
 	"**/src/payload/plugins/",
+	"**/src/app/(payload)/admin/importMap.js",
 ];
 
 export default tseslint.config(

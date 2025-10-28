@@ -12,13 +12,10 @@ import { seedDatabase } from "~/payload/seed";
 import { collections } from "./payload/collections";
 import {
 	allowedOrigins,
-	COLLECTION_SLUG_ACCOUNTS,
 	COLLECTION_SLUG_PAGES,
-	COLLECTION_SLUG_SESSIONS,
 	COLLECTION_SLUG_SITES,
 	COLLECTION_SLUG_THEMES,
 	COLLECTION_SLUG_USERS,
-	COLLECTION_SLUG_VERIFICATIONS,
 	GLOBAL_SLUG_FOOTER,
 	GLOBAL_SLUG_HEADER,
 } from "./payload/constants";
