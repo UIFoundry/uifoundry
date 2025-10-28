@@ -15,26 +15,29 @@
 
 "use client";
 
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
-import { Button } from "~/ui/button";
-import React from "react";
-import { useScroll, motion } from "motion/react";
-import { cn } from "~/styles/utils";
-import type { Header_3_Block } from "~/payload-types";
 import type { ComponentPropsWithRef } from "react";
+
+import { Menu, X } from "lucide-react";
+import { motion, useScroll } from "motion/react";
+import Link from "next/link";
+import React from "react";
+
+import type { Header_3_Block } from "~/payload-types";
+
 import MediaField from "~/payload/fields/media";
+import { cn } from "~/styles/utils";
+import { Button } from "~/ui/button";
 
 export * from "./config";
 
 export default function Header_3({
-	preview = false,
+	actionButtons,
 	brandLogo,
 	logoHref,
 	menuItems,
-	actionButtons,
+	preview = false,
 	...navProps
-}: { preview?: boolean } & Header_3_Block & ComponentPropsWithRef<"nav">) {
+}: ComponentPropsWithRef<"nav"> & Header_3_Block & { preview?: boolean }) {
 	const [menuState, setMenuState] = React.useState(false);
 	const [scrolled, setScrolled] = React.useState(false);
 	const { scrollYProgress } = useScroll();
@@ -49,8 +52,8 @@ export default function Header_3({
 	return (
 		<header>
 			<nav
-				data-state={menuState && "active"}
 				className={cn("fixed z-20 w-full pt-2", preview && "relative")}
+				data-state={menuState && "active"}
 				{...navProps}
 			>
 				<div
@@ -60,33 +63,33 @@ export default function Header_3({
 					)}
 				>
 					<motion.div
-						key={1}
 						className={cn(
 							"relative flex flex-wrap items-center justify-between gap-6 py-3 duration-200 lg:gap-0 lg:py-6",
 							scrolled && "lg:py-4",
 						)}
+						key={1}
 					>
 						<div className="flex w-full items-center justify-between gap-12 lg:w-auto">
 							{brandLogo && (
 								<Link
-									href={logoHref}
 									aria-label="home"
 									className="relative h-8 w-24 lg:w-32"
+									href={logoHref}
 								>
 									<MediaField
-										media={brandLogo}
-										fill
 										className="object-contain object-left"
+										fill
+										media={brandLogo}
 									/>
 								</Link>
 							)}
 
 							<button
-								onClick={() => setMenuState(!menuState)}
-								aria-label={menuState == true ? "Close Menu" : "Open Menu"}
-								aria-expanded={menuState}
 								aria-controls="mobile-menu"
+								aria-expanded={menuState}
+								aria-label={menuState == true ? "Close Menu" : "Open Menu"}
 								className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
+								onClick={() => setMenuState(!menuState)}
 							>
 								<Menu className="m-auto size-6 duration-200 in-data-[state=active]:scale-0 in-data-[state=active]:rotate-180 in-data-[state=active]:opacity-0" />
 								<X className="absolute inset-0 m-auto size-6 scale-0 -rotate-180 opacity-0 duration-200 in-data-[state=active]:scale-100 in-data-[state=active]:rotate-0 in-data-[state=active]:opacity-100" />
@@ -97,8 +100,8 @@ export default function Header_3({
 									{menuItems?.map((item, index) => (
 										<li key={index}>
 											<Link
-												href={item.href}
 												className="text-muted-foreground hover:text-accent-foreground block duration-150"
+												href={item.href}
 											>
 												<span>{item.label}</span>
 											</Link>
@@ -113,10 +116,10 @@ export default function Header_3({
 								<>
 									{actionButtons.map((button, index) => (
 										<Button
-											key={index}
 											asChild
-											variant={button.variant}
+											key={index}
 											size="sm"
+											variant={button.variant}
 										>
 											<Link href={button.href}>
 												<span>{button.label}</span>
@@ -127,14 +130,14 @@ export default function Header_3({
 							)}
 						</div>
 
-						<div id="mobile-menu" className="bg-background absolute top-[125%] z-10 mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:w-fit lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
+						<div className="bg-background absolute top-[125%] z-10 mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 in-data-[state=active]:block md:flex-nowrap lg:m-0 lg:w-fit lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent" id="mobile-menu">
 							<div className="lg:hidden">
 								<ul className="space-y-6 text-base">
 									{menuItems?.map((item, index) => (
 										<li key={index}>
 											<Link
-												href={item.href}
 												className="text-muted-foreground hover:text-accent-foreground block duration-150"
+												href={item.href}
 											>
 												<span>{item.label}</span>
 											</Link>
@@ -146,10 +149,10 @@ export default function Header_3({
 									<div className="mt-6 flex flex-col space-y-3">
 										{actionButtons.map((button, index) => (
 											<Button
-												key={index}
 												asChild
-												variant={button.variant}
+												key={index}
 												size="sm"
+												variant={button.variant}
 											>
 												<Link href={button.href}>
 													<span>{button.label}</span>

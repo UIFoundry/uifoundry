@@ -1,6 +1,8 @@
-import { Button } from "~/ui/button";
 import Link from "next/link";
+
 import type { CTA_1_Block } from "~/payload-types";
+
+import { Button } from "~/ui/button";
 
 export * from "./config";
 
@@ -19,9 +21,9 @@ export default function CallToAction(props: NonNullable<CTA_1_Block>) {
 							return (
 								<Button
 									asChild
+									key={`CTA_1_Block-action-${index}`}
 									size="lg"
 									variant={index % 0 === 1 ? "outline" : undefined}
-									key={`CTA_1_Block-action-${index}`}
 								>
 									<Link href={action.href ?? "/"}>
 										<span>{action.label ?? "Get Started"}</span>

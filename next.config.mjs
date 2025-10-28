@@ -10,38 +10,37 @@ const withMDX = createMDX();
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-	serverExternalPackages: ["mongodb"],
 	images: {
 		remotePatterns: [
 			// Local development
 			{
-				protocol: "http",
 				hostname: "localhost",
-				port: "3005",
 				pathname: "/**",
+				port: "3005",
+				protocol: "http",
 			},
 			// Production domain
 			{
-				protocol: "https",
 				hostname: "uifoundry.dev",
 				pathname: "/**",
+				protocol: "https",
 			},
 			// Dev domain
 			{
-				protocol: "https",
 				hostname: "dev.uifoundry.dev",
 				pathname: "/**",
+				protocol: "https",
 			},
 			// S3 bucket patterns - specific bucket naming patterns
 			{
-				protocol: "https",
 				hostname: "*.s3.us-west-1.amazonaws.com",
 				pathname: "/**",
+				protocol: "https",
 			},
 			{
-				protocol: "https",
 				hostname: "s3.us-west-1.amazonaws.com",
 				pathname: "/**",
+				protocol: "https",
 			},
 		],
 	},
@@ -50,6 +49,7 @@ const nextConfig = {
 	outputFileTracingExcludes: {
 		"*": ["**/.open-next/**", "**/.sst/**"],
 	},
+	serverExternalPackages: ["mongodb"],
 };
 
 export default withPayload(withMDX(nextConfig));

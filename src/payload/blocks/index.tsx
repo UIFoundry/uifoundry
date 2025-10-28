@@ -1,56 +1,57 @@
 import type { Block } from "payload";
+
 import {
-  blocks as teamsBlocks,
-  blockComponents as teamsBlockComponents,
-} from "./Teams";
-import {
-  blocks as featuresBlocks,
-  blockComponents as featuresBlockComponents,
-} from "./Features";
-import {
-  blocks as heroBlocks,
-  blockComponents as heroBlockComponents,
-} from "./Hero";
-import {
-  blocks as ctaBlocks,
-  blockComponents as ctaBlockComponents,
-} from "./CTA";
-import {
-  blocks as testimonialsBlocks,
-  blockComponents as testimonialsBlockComponents,
-} from "./Testimonials";
-import {
-  blocks as faqBlocks,
-  blockComponents as faqBlockComponents,
-} from "./FAQ";
-import {
-  blocks as pricingBlocks,
-  blockComponents as pricingBlockComponents,
-} from "./Pricing";
-import {
-  blocks as aboutBlocks,
   blockComponents as aboutBlockComponents,
+  blocks as aboutBlocks,
 } from "./About";
 import {
-  blocks as contactBlocks,
+  blockComponents as comingSoonBlockComponents,
+  blocks as comingSoonBlocks,
+} from "./ComingSoon";
+import {
   blockComponents as contactBlockComponents,
+  blocks as contactBlocks,
 } from "./Contact";
 import {
-  blocks as newsletterBlocks,
-  blockComponents as newsletterBlockComponents,
-} from "./Newsletter";
+  blockComponents as ctaBlockComponents,
+  blocks as ctaBlocks,
+} from "./CTA";
 import {
-  blocks as statsBlocks,
-  blockComponents as statsBlockComponents,
-} from "./Stats";
+  blockComponents as faqBlockComponents,
+  blocks as faqBlocks,
+} from "./FAQ";
 import {
-  blocks as galleryBlocks,
+  blockComponents as featuresBlockComponents,
+  blocks as featuresBlocks,
+} from "./Features";
+import {
   blockComponents as galleryBlockComponents,
+  blocks as galleryBlocks,
 } from "./Gallery";
 import {
-  blocks as comingSoonBlocks,
-  blockComponents as comingSoonBlockComponents,
-} from "./ComingSoon";
+  blockComponents as heroBlockComponents,
+  blocks as heroBlocks,
+} from "./Hero";
+import {
+  blockComponents as newsletterBlockComponents,
+  blocks as newsletterBlocks,
+} from "./Newsletter";
+import {
+  blockComponents as pricingBlockComponents,
+  blocks as pricingBlocks,
+} from "./Pricing";
+import {
+  blockComponents as statsBlockComponents,
+  blocks as statsBlocks,
+} from "./Stats";
+import {
+  blockComponents as teamsBlockComponents,
+  blocks as teamsBlocks,
+} from "./Teams";
+import {
+  blockComponents as testimonialsBlockComponents,
+  blocks as testimonialsBlocks,
+} from "./Testimonials";
 
 export const blocks: Block[] = teamsBlocks
   .concat(featuresBlocks)

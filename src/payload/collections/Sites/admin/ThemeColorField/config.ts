@@ -2,14 +2,13 @@ import type { TextField } from "~/payload/fields";
 
 type ColorFieldProps = Omit<
 	Partial<TextField>,
-	"hasMany" | "type" | "maxRows" | "minRows"
-> & { description: string; mode: "light" | "dark" };
+	"hasMany" | "maxRows" | "minRows" | "type"
+> & { description: string; mode: "dark" | "light" };
 
 export default function themeColorField(props?: ColorFieldProps): TextField {
 	return {
 		name: "color",
 		type: "text" as const,
-		interfaceName: "ColorField",
 		admin: {
 			components: {
 				Field: {
@@ -20,6 +19,7 @@ export default function themeColorField(props?: ColorFieldProps): TextField {
 				},
 			},
 		},
+		interfaceName: "ColorField",
 		...props,
 	} as TextField;
 }

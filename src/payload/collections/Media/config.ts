@@ -1,74 +1,57 @@
 import {
-	addDataAndFileToRequest,
 	type AccessArgs,
+	addDataAndFileToRequest,
 	type CollectionConfig,
 } from "payload";
-import { COLLECTION_SLUG_MEDIA } from "~/payload/constants";
+
 import type { Media as MediaType } from "~/payload-types";
+
 import { hasPermission } from "~/auth/permissions";
+import { COLLECTION_SLUG_MEDIA } from "~/payload/constants";
 import userRelationship from "~/payload/fields/userRelationship/config";
+
 import { afterRead } from "./hooks/mediaCollectionHooks";
 
 export const Media: CollectionConfig = {
 	slug: COLLECTION_SLUG_MEDIA,
-	admin: {
-		useAsTitle: "alt",
-	},
-	hooks: {
-		afterRead: [afterRead],
-	},
 	access: {
 		create: ({ req: { user } }: AccessArgs<MediaType>) => {
 			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_MEDIA,
 				action: "create",
+				resource: COLLECTION_SLUG_MEDIA,
+				user,
 			});
 		},
-		read: ({ req: { user }, data }: AccessArgs<MediaType>) => {
+		delete: ({ data, req: { user } }: AccessArgs<MediaType>) => {
 			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_MEDIA,
-				action: "read",
-				data,
-			});
-		},
-		update: ({ req: { user }, data }: AccessArgs<MediaType>) => {
-			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_MEDIA,
-				action: "update",
-				data,
-			});
-		},
-		delete: ({ req: { user }, data }: AccessArgs<MediaType>) => {
-			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_MEDIA,
 				action: "delete",
 				data,
+				resource: COLLECTION_SLUG_MEDIA,
+				user,
+			});
+		},
+		read: ({ data, req: { user } }: AccessArgs<MediaType>) => {
+			return hasPermission({
+				action: "read",
+				data,
+				resource: COLLECTION_SLUG_MEDIA,
+				user,
+			});
+		},
+		update: ({ data, req: { user } }: AccessArgs<MediaType>) => {
+			return hasPermission({
+				action: "update",
+				data,
+				resource: COLLECTION_SLUG_MEDIA,
+				user,
 			});
 		},
 	},
-	fields: [
-		{
-			name: "alt",
-			type: "text",
-			required: true,
-		},
-		userRelationship({
-			name: "owner",
-			defaultValue: ({ user }) => {
-				if (!user) return undefined;
-				return user;
-			},
-		}),
-	],
-	upload: true,
+	admin: {
+		useAsTitle: "alt",
+	},
 	endpoints: [
 		{
-			path: "/upload",
-			method: "post",
 			handler: async (req) => {
 				try {
 					if (!req.user) {
@@ -111,13 +94,33 @@ export const Media: CollectionConfig = {
 					console.error("Error details:", error);
 					return Response.json(
 						{
-							error: "Error uploading file",
 							details: error instanceof Error ? error.message : "Unknown error",
+							error: "Error uploading file",
 						},
 						{ status: 500 },
 					);
 				}
 			},
+			method: "post",
+			path: "/upload",
 		},
 	],
+	fields: [
+		{
+			name: "alt",
+			type: "text",
+			required: true,
+		},
+		userRelationship({
+			name: "owner",
+			defaultValue: ({ user }) => {
+				if (!user) {return undefined;}
+				return user;
+			},
+		}),
+	],
+	hooks: {
+		afterRead: [afterRead],
+	},
+	upload: true,
 };

@@ -3,7 +3,8 @@
 import type { Metadata } from "next";
 
 import config from "@payload-config";
-import { NotFoundPage, generatePageMetadata } from "@payloadcms/next/views";
+import { generatePageMetadata, NotFoundPage } from "@payloadcms/next/views";
+
 import { importMap } from "../importMap";
 
 type Args = {
@@ -20,6 +21,6 @@ export const generateMetadata = ({
   generatePageMetadata({ config, params, searchParams });
 
 const NotFound = ({ params, searchParams }: Args) =>
-  NotFoundPage({ config, params, searchParams, importMap });
+  NotFoundPage({ config, importMap, params, searchParams });
 
 export default NotFound;

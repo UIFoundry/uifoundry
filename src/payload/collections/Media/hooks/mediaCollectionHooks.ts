@@ -1,5 +1,7 @@
 import type { CollectionAfterReadHook } from "payload";
+
 import type { Media } from "~/payload-types";
+
 import { env } from "~/env.mjs";
 
 export const afterRead: CollectionAfterReadHook<Media> = ({ doc }) => {

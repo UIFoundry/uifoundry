@@ -1,15 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Button } from "~/ui/button";
-import { Input } from "~/ui/input";
-import { TextEffect } from "~/ui/motion-primitives/text-effect";
-import { AnimatedGroup } from "~/ui/motion-primitives/animated-group";
+import { Mail } from "lucide-react";
+import { useEffect, useState } from "react";
+
 import type { ComingSoon_1_Block } from "~/payload-types";
 
-import { cn } from "~/styles/utils";
 import SocialIcon from "~/payload/fields/socialLinks";
-import { Mail } from "lucide-react";
+import { cn } from "~/styles/utils";
+import { Button } from "~/ui/button";
+import { Input } from "~/ui/input";
+import { AnimatedGroup } from "~/ui/motion-primitives/animated-group";
+import { TextEffect } from "~/ui/motion-primitives/text-effect";
 
 interface TimeLeft {
 	days: number;
@@ -21,37 +22,22 @@ interface TimeLeft {
 const transitionVariants = {
 	item: {
 		hidden: {
-			opacity: 0,
 			filter: "blur(12px)",
+			opacity: 0,
 			y: 12,
 		},
 		visible: {
-			opacity: 1,
 			filter: "blur(0px)",
-			y: 0,
+			opacity: 1,
 			transition: {
 				type: "spring",
 				bounce: 0.3,
 				duration: 1.5,
 			},
+			y: 0,
 		},
 	},
 };
-
-function calculateTimeLeft(targetDate: string): TimeLeft {
-	const difference = +new Date(targetDate) - +new Date();
-
-	if (difference > 0) {
-		return {
-			days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-			hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-			minutes: Math.floor((difference / 1000 / 60) % 60),
-			seconds: Math.floor((difference / 1000) % 60),
-		};
-	}
-
-	return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-}
 
 export default function ComingSoonSection(props: ComingSoon_1_Block) {
 	const [timeLeft, setTimeLeft] = useState<TimeLeft>({
@@ -64,7 +50,7 @@ export default function ComingSoonSection(props: ComingSoon_1_Block) {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	useEffect(() => {
-		if (!props.launchDate) return;
+		if (!props.launchDate) {return;}
 
 		const timer = setInterval(() => {
 			setTimeLeft(calculateTimeLeft(props.launchDate));
@@ -105,32 +91,32 @@ export default function ComingSoonSection(props: ComingSoon_1_Block) {
 								},
 								visible: {
 									opacity: 1,
-									y: 0,
 									transition: {
 										type: "spring",
 										bounce: 0.3,
 										duration: 1.5,
 									},
+									y: 0,
 								},
 							},
 						}}
 					>
 						<TextEffect
-							preset="fade-in-blur"
-							speedSegment={0.3}
 							as="h1"
 							className="mb-6 text-5xl font-bold text-balance md:text-6xl lg:text-7xl"
+							preset="fade-in-blur"
+							speedSegment={0.3}
 						>
 							{props.header ?? "Something Amazing is Coming"}
 						</TextEffect>
 
 						<TextEffect
+							as="p"
+							className="text-muted-foreground mx-auto mb-12 max-w-2xl text-xl text-balance"
+							delay={0.3}
 							per="line"
 							preset="fade-in-blur"
 							speedSegment={0.3}
-							delay={0.3}
-							as="p"
-							className="text-muted-foreground mx-auto mb-12 max-w-2xl text-xl text-balance"
 						>
 							{props.subheader ??
 								"We're working hard to bring you something special. Stay tuned!"}
@@ -139,19 +125,19 @@ export default function ComingSoonSection(props: ComingSoon_1_Block) {
 						{/* Countdown Timer */}
 						{props.launchDate && (
 							<AnimatedGroup
+								className="mb-12"
 								// @ts-expect-error mismatch anim group type
 								variants={{
 									container: {
 										visible: {
 											transition: {
-												staggerChildren: 0.05,
 												delayChildren: 0.6,
+												staggerChildren: 0.05,
 											},
 										},
 									},
 									...transitionVariants,
 								}}
-								className="mb-12"
 							>
 								<div className="mx-auto grid max-w-md grid-cols-2 gap-4 md:grid-cols-4">
 									{[
@@ -161,8 +147,8 @@ export default function ComingSoonSection(props: ComingSoon_1_Block) {
 										{ label: "Seconds", value: timeLeft.seconds },
 									].map((item) => (
 										<div
-											key={item.label}
 											className="bg-card rounded-lg border p-4 shadow-sm"
+											key={item.label}
 										>
 											<div className="text-primary text-3xl font-bold">
 												{item.value.toString().padStart(2, "0")}
@@ -179,37 +165,37 @@ export default function ComingSoonSection(props: ComingSoon_1_Block) {
 						{/* Email Signup */}
 						{props.showEmailSignup && (
 							<AnimatedGroup
+								className="mb-12"
 								// @ts-expect-error mismatch anim group type
 								variants={{
 									container: {
 										visible: {
 											transition: {
-												staggerChildren: 0.05,
 												delayChildren: 0.9,
+												staggerChildren: 0.05,
 											},
 										},
 									},
 									...transitionVariants,
 								}}
-								className="mb-12"
 							>
 								{!isSubmitted ? (
 									<form
-										onSubmit={handleEmailSubmit}
 										className="mx-auto max-w-md"
+										onSubmit={handleEmailSubmit}
 									>
 										<div className="flex gap-2">
 											<Input
-												type="email"
+												className="flex-1"
+												onChange={(e) => setEmail(e.target.value)}
 												placeholder={
 													props.emailPlaceholder ?? "Enter your email"
 												}
-												value={email}
-												onChange={(e) => setEmail(e.target.value)}
 												required
-												className="flex-1"
+												type="email"
+												value={email}
 											/>
-											<Button type="submit" className="px-6">
+											<Button className="px-6" type="submit">
 												{props.emailButtonText ?? "Notify me"}
 											</Button>
 										</div>
@@ -233,8 +219,8 @@ export default function ComingSoonSection(props: ComingSoon_1_Block) {
 										container: {
 											visible: {
 												transition: {
-													staggerChildren: 0.05,
 													delayChildren: 1.2,
+													staggerChildren: 0.05,
 												},
 											},
 										},
@@ -244,8 +230,8 @@ export default function ComingSoonSection(props: ComingSoon_1_Block) {
 									<div className="flex justify-center gap-4">
 										{props.socialLinks.map((link, index) => (
 											<SocialIcon
-												icon={link.icon}
 												href={link.href}
+												icon={link.icon}
 												key={`${index}`}
 											/>
 										))}
@@ -257,4 +243,19 @@ export default function ComingSoonSection(props: ComingSoon_1_Block) {
 			</section>
 		</div>
 	);
+}
+
+function calculateTimeLeft(targetDate: string): TimeLeft {
+	const difference = +new Date(targetDate) - +new Date();
+
+	if (difference > 0) {
+		return {
+			days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+			hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+			minutes: Math.floor((difference / 1000 / 60) % 60),
+			seconds: Math.floor((difference / 1000) % 60),
+		};
+	}
+
+	return { days: 0, hours: 0, minutes: 0, seconds: 0 };
 }

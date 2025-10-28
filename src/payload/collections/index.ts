@@ -1,13 +1,13 @@
-import { Users } from "./Users";
-import { Sessions } from "./Sessions";
 import { Accounts } from "./Accounts";
-import { Verifications } from "./Verifications";
-import { Pages } from "./Pages/config";
-import { Media } from "./Media/config";
-import { Themes } from "./Themes";
-import { Sites } from "./Sites/config";
-import { Headers } from "./Headers/config";
 import { Footers } from "./Footers/config";
+import { Headers } from "./Headers/config";
+import { Media } from "./Media/config";
+import { Pages } from "./Pages/config";
+import { Sessions } from "./Sessions";
+import { Sites } from "./Sites/config";
+import { Themes } from "./Themes";
+import { Users } from "./Users";
+import { Verifications } from "./Verifications";
 
 export const collections = [
 	Users,

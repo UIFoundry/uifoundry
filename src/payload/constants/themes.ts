@@ -1,55 +1,39 @@
 export const THEME_TYPES = {
-	user: "user",
 	template: "template",
+	user: "user",
 } as const;
 export type ThemeType = (typeof THEME_TYPES)[keyof typeof THEME_TYPES];
 
 const themeJsonSchema = {
-	background: {
+	sidebar: {
 		type: "string",
 		required: true,
 	},
-	foreground: {
+	"sidebar-accent": {
 		type: "string",
 		required: true,
 	},
-	card: {
+	"sidebar-accent-foreground": {
 		type: "string",
 		required: true,
 	},
-	"card-foreground": {
+	"sidebar-border": {
 		type: "string",
 		required: true,
 	},
-	popover: {
+	"sidebar-foreground": {
 		type: "string",
 		required: true,
 	},
-	"popover-foreground": {
+	"sidebar-primary": {
 		type: "string",
 		required: true,
 	},
-	primary: {
+	"sidebar-primary-foreground": {
 		type: "string",
 		required: true,
 	},
-	"primary-foreground": {
-		type: "string",
-		required: true,
-	},
-	secondary: {
-		type: "string",
-		required: true,
-	},
-	"secondary-foreground": {
-		type: "string",
-		required: true,
-	},
-	muted: {
-		type: "string",
-		required: true,
-	},
-	"muted-foreground": {
+	"sidebar-ring": {
 		type: "string",
 		required: true,
 	},
@@ -61,11 +45,7 @@ const themeJsonSchema = {
 		type: "string",
 		required: true,
 	},
-	destructive: {
-		type: "string",
-		required: true,
-	},
-	"destructive-foreground": {
+	background: {
 		type: "string",
 		required: true,
 	},
@@ -73,11 +53,11 @@ const themeJsonSchema = {
 		type: "string",
 		required: true,
 	},
-	input: {
+	card: {
 		type: "string",
 		required: true,
 	},
-	ring: {
+	"card-foreground": {
 		type: "string",
 		required: true,
 	},
@@ -101,35 +81,15 @@ const themeJsonSchema = {
 		type: "string",
 		required: true,
 	},
-	sidebar: {
+	destructive: {
 		type: "string",
 		required: true,
 	},
-	"sidebar-foreground": {
+	"destructive-foreground": {
 		type: "string",
 		required: true,
 	},
-	"sidebar-primary": {
-		type: "string",
-		required: true,
-	},
-	"sidebar-primary-foreground": {
-		type: "string",
-		required: true,
-	},
-	"sidebar-accent": {
-		type: "string",
-		required: true,
-	},
-	"sidebar-accent-foreground": {
-		type: "string",
-		required: true,
-	},
-	"sidebar-border": {
-		type: "string",
-		required: true,
-	},
-	"sidebar-ring": {
+	"font-mono": {
 		type: "string",
 		required: true,
 	},
@@ -141,7 +101,39 @@ const themeJsonSchema = {
 		type: "string",
 		required: true,
 	},
-	"font-mono": {
+	foreground: {
+		type: "string",
+		required: true,
+	},
+	input: {
+		type: "string",
+		required: true,
+	},
+	"letter-spacing": {
+		type: "string",
+		required: true,
+	},
+	muted: {
+		type: "string",
+		required: true,
+	},
+	"muted-foreground": {
+		type: "string",
+		required: true,
+	},
+	popover: {
+		type: "string",
+		required: true,
+	},
+	"popover-foreground": {
+		type: "string",
+		required: true,
+	},
+	primary: {
+		type: "string",
+		required: true,
+	},
+	"primary-foreground": {
 		type: "string",
 		required: true,
 	},
@@ -149,11 +141,15 @@ const themeJsonSchema = {
 		type: "string",
 		required: true,
 	},
-	"shadow-color": {
+	ring: {
 		type: "string",
 		required: true,
 	},
-	"shadow-opacity": {
+	secondary: {
+		type: "string",
+		required: true,
+	},
+	"secondary-foreground": {
 		type: "string",
 		required: true,
 	},
@@ -161,7 +157,7 @@ const themeJsonSchema = {
 		type: "string",
 		required: true,
 	},
-	"shadow-spread": {
+	"shadow-color": {
 		type: "string",
 		required: true,
 	},
@@ -173,7 +169,11 @@ const themeJsonSchema = {
 		type: "string",
 		required: true,
 	},
-	"letter-spacing": {
+	"shadow-opacity": {
+		type: "string",
+		required: true,
+	},
+	"shadow-spread": {
 		type: "string",
 		required: true,
 	},
@@ -184,14 +184,14 @@ const themeJsonSchema = {
 } as const;
 
 export const jsonSchema = {
-	light: {
-		type: "object",
-		required: true,
-		properties: themeJsonSchema,
-	},
 	dark: {
 		type: "object",
-		required: true,
 		properties: themeJsonSchema,
+		required: true,
+	},
+	light: {
+		type: "object",
+		properties: themeJsonSchema,
+		required: true,
 	},
 } as const;

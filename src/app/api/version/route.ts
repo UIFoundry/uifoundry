@@ -8,7 +8,7 @@ export async function GET() {
   return NextResponse.json({
     buildTime: process.env.BUILD_TIME ?? new Date().toISOString(),
     stage: process.env.SST_STAGE ?? "local",
-    version: "1.0.0",
     timestamp: new Date().toISOString(),
+    version: "1.0.0",
   });
 }

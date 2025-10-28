@@ -1,4 +1,5 @@
 import { AuthView } from "@daveyplate/better-auth-ui";
+
 import { Dialog, DialogContent } from "~/ui/dialog";
 
 export default function AuthCard({ pathname }: { pathname: string }) {

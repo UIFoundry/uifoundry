@@ -1,16 +1,18 @@
 import Link from "next/link";
 import { type ComponentPropsWithRef } from "react";
+
 import type { Footer_4_Block } from "~/payload-types";
+
 import { cn } from "~/styles/utils";
 
 export * from "./config";
 
 export default function Footer_4({
-	links,
-	copyright,
 	className,
+	copyright,
+	links,
 	...divProps
-}: Footer_4_Block & ComponentPropsWithRef<"div">) {
+}: ComponentPropsWithRef<"div"> & Footer_4_Block) {
 	return (
 		<footer
 			className={cn("border-b bg-white py-12 dark:bg-transparent", className)}
@@ -24,9 +26,9 @@ export default function Footer_4({
 					<div className="order-first flex flex-wrap justify-center gap-6 text-sm md:order-last">
 						{links?.map((link, index) => (
 							<Link
-								key={index}
-								href={link.href}
 								className="text-muted-foreground hover:text-primary block duration-150"
+								href={link.href}
+								key={index}
 							>
 								<span>{link.label}</span>
 							</Link>

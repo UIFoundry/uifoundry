@@ -1,6 +1,8 @@
-import { describe, it, expect } from "vitest";
-import { extractBlockDefaults } from "./extractBlockDefaults";
 import type { Block } from "payload";
+
+import { describe, expect, it } from "vitest";
+
+import { extractBlockDefaults } from "./extractBlockDefaults";
 
 describe("extractBlockDefaults", () => {
   it("should extract default values from simple text fields", () => {
@@ -23,8 +25,8 @@ describe("extractBlockDefaults", () => {
     const result = extractBlockDefaults(mockBlock);
 
     expect(result).toEqual({
-      title: "Default Title",
       description: "Default Description",
+      title: "Default Title",
     });
   });
 
@@ -34,7 +36,6 @@ describe("extractBlockDefaults", () => {
       fields: [
         {
           type: "collapsible",
-          label: "Alert Section",
           fields: [
             {
               name: "alertLabel",
@@ -47,6 +48,7 @@ describe("extractBlockDefaults", () => {
               defaultValue: "/updates",
             },
           ],
+          label: "Alert Section",
         },
         {
           name: "mainTitle",
@@ -88,8 +90,8 @@ describe("extractBlockDefaults", () => {
     const result = extractBlockDefaults(mockBlock);
 
     expect(result).toEqual({
-      header: "Header Default Value",
       directField: "Direct Default",
+      header: "Header Default Value",
     });
   });
 
@@ -109,7 +111,6 @@ describe("extractBlockDefaults", () => {
         },
         {
           type: "collapsible",
-          label: "No Name Field",
           fields: [
             {
               name: "nestedWithDefault",
@@ -117,6 +118,7 @@ describe("extractBlockDefaults", () => {
               defaultValue: "Nested Default",
             },
           ],
+          label: "No Name Field",
         },
       ],
     } as Block;
@@ -135,7 +137,6 @@ describe("extractBlockDefaults", () => {
       fields: [
         {
           type: "collapsible",
-          label: "Level 1",
           fields: [
             {
               name: "level1Field",
@@ -144,7 +145,6 @@ describe("extractBlockDefaults", () => {
             },
             {
               type: "collapsible",
-              label: "Level 2",
               fields: [
                 {
                   name: "level2Field",
@@ -152,8 +152,10 @@ describe("extractBlockDefaults", () => {
                   defaultValue: "Level 2 Default",
                 },
               ],
+              label: "Level 2",
             },
           ],
+          label: "Level 1",
         },
       ],
     } as Block;

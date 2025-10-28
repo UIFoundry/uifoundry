@@ -1,5 +1,11 @@
 "use client";
 
+import { CheckCircle2 } from "lucide-react";
+import React, { type MouseEvent } from "react";
+
+import { cn } from "~/styles/utils";
+import { api, type RouterOutputs } from "~/trpc/react";
+import { Button } from "~/ui/button";
 import {
 	Card,
 	CardContent,
@@ -8,34 +14,29 @@ import {
 	CardHeader,
 	CardTitle,
 } from "~/ui/card";
-import { Button } from "~/ui/button";
-import { CheckCircle2 } from "lucide-react";
-import React, { type MouseEvent } from "react";
-import { cn } from "~/styles/utils";
 import { LIFETIME_PLANS, type LifetimePlan } from "~/utils/stripe";
-import { api, type RouterOutputs } from "~/trpc/react";
 
-type PricingCardProps = {
+type PricingCardProps = LifetimePlan & {
 	activeSubscription?: Extract<
 		RouterOutputs["stripe"]["getSubscriptionStatus"],
 		{ success: true }
 	>["data"];
 	lifetimeUserCount: number;
-} & LifetimePlan;
+};
 
 const PricingCard = ({
 	name,
-	price,
-	description,
-	features,
 	actionLabel,
-	popular,
-	exclusive,
-	priceId,
 	activeSubscription,
-	minSeats,
-	maxSeats,
+	description,
+	exclusive,
+	features,
 	lifetimeUserCount,
+	maxSeats,
+	minSeats,
+	popular,
+	price,
+	priceId,
 }: PricingCardProps) => {
 	const openSeats =
 		lifetimeUserCount > minSeats && lifetimeUserCount - minSeats < maxSeats;
@@ -57,9 +58,9 @@ const PricingCard = ({
 		// Create one-time payment checkout session
 		try {
 			const result = await createCheckout.mutateAsync({
+				cancelUrl: window.location.href,
 				planName: name,
 				successUrl: window.location.href,
-				cancelUrl: window.location.href,
 			});
 
 			if (result.url) {
@@ -106,8 +107,8 @@ const PricingCard = ({
 				</CardHeader>
 				<CardContent className="flex flex-col gap-2">
 					{features.map((feature: string) => (
-						<div key={feature} className="flex gap-2">
-							<CheckCircle2 size={18} className="my-auto text-green-400" />
+						<div className="flex gap-2" key={feature}>
+							<CheckCircle2 className="my-auto text-green-400" size={18} />
 							<p className="pt-0.5 text-sm text-zinc-700 dark:text-zinc-300">
 								{feature}
 							</p>
@@ -117,9 +118,9 @@ const PricingCard = ({
 			</div>
 			<CardFooter className="mt-2 mb-6">
 				<Button
-					onClick={(e) => handleSubscriptionChangeRequest(e)}
 					className="relative inline-flex w-full items-center justify-center rounded-md bg-black px-6 font-medium text-white transition-colors focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 focus:outline-none dark:bg-white dark:text-black"
 					disabled={!openSeats}
+					onClick={(e) => handleSubscriptionChangeRequest(e)}
 				>
 					<div className="absolute -inset-0.5 -z-10 rounded-lg bg-gradient-to-b from-[#c7d2fe] to-[#8678f9] opacity-75 blur" />
 					{isActiveSub ? "Current Plan" : actionLabel}
@@ -130,11 +131,11 @@ const PricingCard = ({
 };
 
 const PricingHeader = ({
-	title,
 	subtitle,
+	title,
 }: {
-	title: string;
 	subtitle: string;
+	title: string;
 }) => (
 	<section className="text-center">
 		<h2 className="text-3xl font-bold">{title}</h2>
@@ -152,8 +153,8 @@ export default function SubscriptionsPage() {
 		<div className="grid h-full w-full place-items-center py-8">
 			<div>
 				<PricingHeader
-					title="Subscription Plans"
 					subtitle="Choose the lifetime plan that's right for you"
+					title="Subscription Plans"
 				/>
 				<section className="mt-8 flex flex-col justify-center gap-8 sm:flex-row sm:flex-wrap">
 					{Object.values(LIFETIME_PLANS).map((plan) => {
@@ -161,13 +162,13 @@ export default function SubscriptionsPage() {
 							<PricingCard
 								key={plan.name}
 								{...plan}
-								lifetimeUserCount={
-									lifetimeUserCount.success ? lifetimeUserCount.data : 0
-								}
 								activeSubscription={
 									subscriptionStatus?.success
 										? subscriptionStatus.data
 										: undefined
+								}
+								lifetimeUserCount={
+									lifetimeUserCount.success ? lifetimeUserCount.data : 0
 								}
 							/>
 						);

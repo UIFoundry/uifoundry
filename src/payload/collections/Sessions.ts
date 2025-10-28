@@ -1,4 +1,5 @@
 import { type CollectionConfig } from "payload";
+
 import { COLLECTION_SLUG_SESSIONS, COLLECTION_SLUG_USERS } from "../constants";
 
 export const Sessions: CollectionConfig = {
@@ -7,21 +8,21 @@ export const Sessions: CollectionConfig = {
     {
       name: "userId",
       type: "relationship",
+      hasMany: false,
       relationTo: COLLECTION_SLUG_USERS,
       required: true,
-      hasMany: false,
     },
     {
       name: "token",
       type: "text",
-      required: true,
       defaultValue: false,
+      required: true,
     },
     {
       name: "expiresAt",
       type: "date",
-      required: true,
       defaultValue: new Date(),
+      required: true,
     },
     {
       name: "ipAddress",

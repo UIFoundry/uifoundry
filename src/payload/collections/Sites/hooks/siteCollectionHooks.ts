@@ -1,9 +1,11 @@
 import type { CollectionBeforeChangeHook } from "payload";
+
 import type { Site } from "~/payload-types";
+
+import { auth } from "~/auth";
 import { COLLECTION_SLUG_THEMES } from "~/payload/constants";
 import { THEME_TYPES } from "~/payload/constants/themes";
 import { getPayload } from "~/payload/utils";
-import { auth } from "~/auth";
 
 export const beforeChange: CollectionBeforeChangeHook<Site> = async ({
 	data,
@@ -13,7 +15,7 @@ export const beforeChange: CollectionBeforeChangeHook<Site> = async ({
 	try {
 		if (operation === "create") {
 			const session = await auth.api.getSession({ headers: req.headers });
-			if (!session?.user) return data;
+			if (!session?.user) {return data;}
 			const payload = await getPayload();
 
 			const res = await payload.find({
@@ -27,8 +29,8 @@ export const beforeChange: CollectionBeforeChangeHook<Site> = async ({
 			});
 			if (res.docs.length > 0) {
 				const newUserTheme = await payload.duplicate({
-					collection: COLLECTION_SLUG_THEMES,
 					id: res.docs[0]!.id,
+					collection: COLLECTION_SLUG_THEMES,
 					data: {
 						type: THEME_TYPES.user,
 					},
@@ -50,8 +52,8 @@ export const beforeChange: CollectionBeforeChangeHook<Site> = async ({
 			});
 			if (templateThemesRes && templateThemesRes.docs.length > 0) {
 				const newUserTheme = await payload.duplicate({
-					collection: COLLECTION_SLUG_THEMES,
 					id: templateThemesRes.docs[0]!.id,
+					collection: COLLECTION_SLUG_THEMES,
 					data: {
 						type: THEME_TYPES.user,
 						owner: session.user.id,

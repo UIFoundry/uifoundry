@@ -1,28 +1,29 @@
-import { getPayload } from "~/payload/utils";
+import { headers } from "next/headers";
+import { notFound, redirect  } from "next/navigation";
+
 import type {
-	Page as PageType,
-	Header as HeaderType,
 	Footer as FooterType,
+	Header as HeaderType,
+	Page as PageType,
 } from "~/payload-types";
-import { COLLECTION_SLUG_PAGES } from "~/payload/constants";
-import { notFound } from "next/navigation";
+
+import { auth } from "~/auth";
+import HeaderSpacing from "~/components/HeaderSpacing";
+import HomeComponent from "~/components/Home";
 import RenderBlocks from "~/components/RenderBlocks";
+import { blockComponents } from "~/payload/blocks";
+import Footer from "~/payload/collections/Footers";
 import Header from "~/payload/collections/Headers";
+import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
+import { COLLECTION_SLUG_PAGES } from "~/payload/constants";
 import {
 	GLOBAL_SLUG_FOOTER,
 	GLOBAL_SLUG_HEADER,
 } from "~/payload/constants/globals";
-import { cn } from "~/styles/utils";
-import { blockComponents } from "~/payload/blocks";
-import HeaderSpacing from "~/components/HeaderSpacing";
-import Footer from "~/payload/collections/Footers";
-import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
-import { headers } from "next/headers";
-import { auth } from "~/auth";
-import { redirect } from "next/navigation";
-import { api, HydrateClient } from "~/trpc/server";
-import HomeComponent from "~/components/Home";
 import TailwindConfig from "~/payload/globals/SiteConfig";
+import { getPayload } from "~/payload/utils";
+import { cn } from "~/styles/utils";
+import { api, HydrateClient } from "~/trpc/server";
 
 interface PageParams {
 	params: Promise<{
@@ -45,19 +46,19 @@ export default async function Page({
 	}
 
 	const header = await payload.findGlobal({
+		overrideAccess: true,
 		slug: GLOBAL_SLUG_HEADER,
 		draft: true,
-		overrideAccess: true,
 	});
 	const footer = await payload.findGlobal({
+		overrideAccess: true,
 		slug: GLOBAL_SLUG_FOOTER,
 		draft: true,
-		overrideAccess: true,
 	});
 	const pageRes = await payload.find({
+		overrideAccess: true,
 		collection: COLLECTION_SLUG_PAGES,
 		draft: true,
-		overrideAccess: true,
 		limit: 1,
 		where: {
 			slug: {
@@ -76,7 +77,7 @@ export default async function Page({
 		return (
 			<HydrateClient>
 				<RefreshRouteOnSave />
-				<TailwindConfig draft={useTailwindDraftConfig as "true" | "false"} />
+				<TailwindConfig draft={useTailwindDraftConfig as "false" | "true"} />
 				<HomeComponent
 					greeting={hello.success ? hello.data.greeting : "Loading Query..."}
 				/>
@@ -92,20 +93,20 @@ export default async function Page({
 	return (
 		<div>
 			<RefreshRouteOnSave />
-			<TailwindConfig draft={useTailwindDraftConfig as "true" | "false"} />
+			<TailwindConfig draft={useTailwindDraftConfig as "false" | "true"} />
 			{header && (
 				<Header
-					header={header as HeaderType}
 					className={cn(!page?.showHeader && "hidden")}
+					header={header as HeaderType}
 				/>
 			)}
 			<HeaderSpacing showHeader={page.showHeader}>
-				<RenderBlocks blocks={page.blocks} blockComponents={blockComponents} />
+				<RenderBlocks blockComponents={blockComponents} blocks={page.blocks} />
 			</HeaderSpacing>
 			{footer && (
 				<Footer
-					footer={footer as FooterType}
 					className={cn(!page.showFooter && "hidden")}
+					footer={footer as FooterType}
 				/>
 			)}
 		</div>

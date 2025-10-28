@@ -1,24 +1,26 @@
-import { getPayload } from "~/payload/utils";
-import { GLOBAL_SLUG_SITE_CONFIG } from "~/payload/constants/globals";
 import type { Theme } from "~/payload-types";
+
+import { GLOBAL_SLUG_SITE_CONFIG } from "~/payload/constants/globals";
+import { getPayload } from "~/payload/utils";
+
 import type { ThemeStyles } from "../SiteConfig/admin/theme";
 
 export default async function TailwindConfig({
 	draft,
 }: {
-	draft?: "true" | "false";
+	draft?: "false" | "true";
 }) {
 	const payload = await getPayload();
 	const config = await payload.findGlobal({
-		slug: GLOBAL_SLUG_SITE_CONFIG,
-		draft: draft === "true",
 		overrideAccess: true,
+		slug: GLOBAL_SLUG_SITE_CONFIG,
 		depth: 1,
+		draft: draft === "true",
 	});
 	const theme = config.activeTheme as Theme;
 
 	// eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-	if (!config || !theme || !theme.styles) return null;
+	if (!config || !theme || !theme.styles) {return null;}
 
 	const lightCssVars: string[] = [];
 	const darkCssVars: string[] = [];
@@ -38,7 +40,7 @@ export default async function TailwindConfig({
 		}
 	}
 
-	if (lightCssVars.length === 0 && darkCssVars.length === 0) return null;
+	if (lightCssVars.length === 0 && darkCssVars.length === 0) {return null;}
 
 	const css = `:root{${lightCssVars.join("")}}\n.dark{${darkCssVars.join("")}}`;
 

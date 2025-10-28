@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("Docs Middleware Fix", () => {
   test("docs routes should bypass auth middleware", async ({ page }) => {

@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { hasPermission } from "~/auth/permissions";
 import { COLLECTION_SLUG_THEMES } from "~/payload/constants";
 import { THEME_TYPES } from "~/payload/constants/themes";
@@ -7,7 +8,6 @@ import {
 	defaultDarkThemeStyles,
 	defaultLightThemeStyles,
 } from "~/payload/globals/SiteConfig/admin/themeConfig";
-
 import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
 import { err, ok } from "~/server/dal";
 
@@ -16,17 +16,17 @@ export const themesRouter = createTRPCRouter({
 		.input(
 			z.object({
 				name: z.string(),
-				light: themeStylePropsSchema,
 				dark: themeStylePropsSchema,
+				light: themeStylePropsSchema,
 			}),
 		)
-		.mutation(async ({ input, ctx }) => {
+		.mutation(async ({ ctx, input }) => {
 			try {
 				if (
 					!hasPermission({
-						user: ctx.user,
-						resource: COLLECTION_SLUG_THEMES,
 						action: "create",
+						resource: COLLECTION_SLUG_THEMES,
+						user: ctx.user,
 					})
 				) {
 					return err({ type: "no-access" });
@@ -38,13 +38,13 @@ export const themesRouter = createTRPCRouter({
 						owner: ctx.user.id,
 						private: false,
 						styles: {
-							light: {
-								...defaultLightThemeStyles,
-								...input.light,
-							},
 							dark: {
 								...defaultDarkThemeStyles,
 								...input.dark,
+							},
+							light: {
+								...defaultLightThemeStyles,
+								...input.light,
 							},
 						},
 					},
@@ -65,19 +65,19 @@ export const themesRouter = createTRPCRouter({
 				id: z.string(),
 			}),
 		)
-		.query(async ({ input, ctx }) => {
+		.query(async ({ ctx, input }) => {
 			try {
 				const theme = await ctx.payload.findByID({
-					collection: COLLECTION_SLUG_THEMES,
 					id: input.id,
+					collection: COLLECTION_SLUG_THEMES,
 				});
 
 				if (
 					!hasPermission({
-						user: ctx.user,
-						resource: COLLECTION_SLUG_THEMES,
 						action: "read",
 						data: theme,
+						resource: COLLECTION_SLUG_THEMES,
+						user: ctx.user,
 					})
 				) {
 					return err({ type: "no-access" });
@@ -94,26 +94,26 @@ export const themesRouter = createTRPCRouter({
 		.input(
 			z.object({
 				id: z.string(),
-				styles: themeStylePropsSchema,
-				mode: z.enum(["light", "dark"]).default("light"),
 				name: z.string().optional(),
 				type: z.enum([THEME_TYPES.user, THEME_TYPES.template]).optional(),
+				mode: z.enum(["light", "dark"]).default("light"),
 				private: z.boolean().optional(),
+				styles: themeStylePropsSchema,
 			}),
 		)
-		.mutation(async ({ input, ctx }) => {
+		.mutation(async ({ ctx, input }) => {
 			try {
 				const theme = await ctx.payload.findByID({
-					collection: COLLECTION_SLUG_THEMES,
 					id: input.id,
+					collection: COLLECTION_SLUG_THEMES,
 				});
 
 				if (
 					!hasPermission({
-						user: ctx.user,
-						resource: COLLECTION_SLUG_THEMES,
 						action: "update",
 						data: theme,
+						resource: COLLECTION_SLUG_THEMES,
+						user: ctx.user,
 					})
 				) {
 					return err({ type: "no-access" });
@@ -127,8 +127,8 @@ export const themesRouter = createTRPCRouter({
 				).dark!;
 
 				await ctx.payload.update({
-					collection: COLLECTION_SLUG_THEMES,
 					id: input.id,
+					collection: COLLECTION_SLUG_THEMES,
 					data: {
 						...theme,
 						name: input.name ?? theme.name,
@@ -137,18 +137,18 @@ export const themesRouter = createTRPCRouter({
 						styles:
 							input.mode === "light"
 								? {
+									dark: darkTheme,
 									light: {
 										...lightTheme,
 										...input.styles,
 									},
-									dark: darkTheme,
 								}
 								: {
-									light: lightTheme,
 									dark: {
 										...darkTheme,
 										...input.styles,
 									},
+									light: lightTheme,
 								},
 					},
 				});

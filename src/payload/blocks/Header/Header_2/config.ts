@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+
 import {
   BLOCK_GROUP_HEADERS,
   BLOCK_SLUG_HEADER_2,
@@ -7,18 +8,12 @@ import mediaField from "~/payload/fields/media/config";
 
 export const Header_2_Block: Block = {
   slug: BLOCK_SLUG_HEADER_2,
-  interfaceName: "Header_2_Block",
-  labels: {
-    singular: "Header 2",
-    plural: "Header 2's",
-  },
   admin: {
     group: BLOCK_GROUP_HEADERS,
   },
   fields: [
     {
       type: "collapsible",
-      label: "Brand Logo",
       fields: [
         mediaField({
           name: "brandLogo",
@@ -26,118 +21,124 @@ export const Header_2_Block: Block = {
         }),
         {
           name: "logoHref",
-          label: "Logo Link (href)",
           type: "text",
-          required: true,
           defaultValue: "/",
+          label: "Logo Link (href)",
+          required: true,
         },
       ],
+      label: "Brand Logo",
     },
     {
       type: "collapsible",
-      label: "Menu Items",
       fields: [
         {
           name: "menuItems",
-          labels: {
-            singular: "Menu Item",
-            plural: "Menu Items",
-          },
           type: "array",
-          required: true,
-          minRows: 0,
-          maxRows: 10,
           defaultValue: [
             {
-              label: "Home",
               href: "/",
+              label: "Home",
             },
             {
-              label: "Products",
               href: "/products",
+              label: "Products",
             },
             {
-              label: "Services",
               href: "/services",
+              label: "Services",
             },
             {
-              label: "Contact",
               href: "/contact",
+              label: "Contact",
             },
           ],
           fields: [
             {
               name: "label",
-              label: "Label",
               type: "text",
+              label: "Label",
               required: true,
             },
             {
               name: "href",
-              label: "Href",
               type: "text",
-              required: true,
               admin: {
                 placeholder: "/features | #features",
               },
+              label: "Href",
+              required: true,
             },
           ],
+          labels: {
+            plural: "Menu Items",
+            singular: "Menu Item",
+          },
+          maxRows: 10,
+          minRows: 0,
+          required: true,
         },
       ],
+      label: "Menu Items",
     },
     {
       type: "collapsible",
-      label: "Action Buttons",
       fields: [
         {
           name: "actionButtons",
-          labels: {
-            singular: "Action Button",
-            plural: "Action Buttons",
-          },
           type: "array",
-          minRows: 0,
-          maxRows: 3,
           defaultValue: [
             {
-              label: "Login",
               href: "/auth/sign-in",
+              label: "Login",
               variant: "outline",
             },
             {
-              label: "Sign Up",
               href: "/auth/sign-up",
+              label: "Sign Up",
               variant: "default",
             },
           ],
           fields: [
             {
               name: "label",
-              label: "Button Label",
               type: "text",
+              label: "Button Label",
               required: true,
             },
             {
               name: "href",
-              label: "Button Link (href)",
               type: "text",
+              label: "Button Link (href)",
               required: true,
             },
             {
               name: "variant",
-              label: "Button Variant",
               type: "select",
-              required: true,
               defaultValue: "default",
+              label: "Button Variant",
               options: [
                 { label: "Default", value: "default" },
                 { label: "Outline", value: "outline" },
                 { label: "Ghost", value: "ghost" },
               ],
+              required: true,
             },
           ],
+          labels: {
+            plural: "Action Buttons",
+            singular: "Action Button",
+          },
+          maxRows: 3,
+          minRows: 0,
         },
       ],
+      label: "Action Buttons",
     },
   ],
+  interfaceName: "Header_2_Block",
+  labels: {
+    plural: "Header 2's",
+    singular: "Header 2",
+  },
 };

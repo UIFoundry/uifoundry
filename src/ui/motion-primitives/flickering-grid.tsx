@@ -1,37 +1,38 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+
 import { cn } from "~/styles/utils";
 
 interface FlickeringGridProps {
 	className?: string;
-	squareSize?: number;
-	gridGap?: number;
 	color?: string;
-	maxOpacity?: number;
 	flickerChance?: number;
-	width?: number;
+	gridGap?: number;
 	height?: number;
+	maxOpacity?: number;
+	squareSize?: number;
+	width?: number;
 }
 
 export default function FlickeringGrid({
-	className,
-	squareSize = 4,
 	gridGap = 6,
-	color = "#60A5FA",
-	maxOpacity = 0.5,
-	flickerChance = 0.1,
 	width = 800,
+	className,
+	color = "#60A5FA",
+	flickerChance = 0.1,
 	height = 800,
+	maxOpacity = 0.5,
+	squareSize = 4,
 }: FlickeringGridProps) {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
-		if (!canvas) return;
+		if (!canvas) {return;}
 
 		const ctx = canvas.getContext("2d");
-		if (!ctx) return;
+		if (!ctx) {return;}
 
 		// Set canvas size
 		canvas.width = width;
@@ -64,7 +65,7 @@ export default function FlickeringGrid({
 
 			// Throttle to ~20fps for slower, more subtle animation
 			const deltaTime = currentTime - lastFrameTime;
-			if (deltaTime < frameDelay) return;
+			if (deltaTime < frameDelay) {return;}
 			lastFrameTime = currentTime;
 
 			ctx.clearRect(0, 0, width, height);
@@ -73,10 +74,10 @@ export default function FlickeringGrid({
 			for (let i = 0; i < rows; i++) {
 				for (let j = 0; j < cols; j++) {
 					const row = grid[i];
-					if (!row) continue;
+					if (!row) {continue;}
 
 					const cell = row[j];
-					if (cell === undefined) continue;
+					if (cell === undefined) {continue;}
 
 					// Randomly flicker cells (less frequently)
 					if (Math.random() < flickerChance) {
@@ -107,6 +108,6 @@ export default function FlickeringGrid({
 	}, [squareSize, gridGap, color, maxOpacity, flickerChance, width, height]);
 
 	return (
-		<canvas ref={canvasRef} className={cn("pointer-events-none", className)} />
+		<canvas className={cn("pointer-events-none", className)} ref={canvasRef} />
 	);
 }

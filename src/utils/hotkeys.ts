@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 
 interface Hotkey {
-	key: string;
 	action: (e?: KeyboardEvent) => void;
+	key: string;
 }
 
 export function useHotKeys() {
@@ -13,7 +13,7 @@ export function useHotKeys() {
 	useEffect(() => {
 		const down = (e: KeyboardEvent) => {
 			const hotkey = hotkeys.find((h) => h.key === e.key);
-			if (!hotkey) return;
+			if (!hotkey) {return;}
 			if (hotkey && (e.metaKey || e.ctrlKey)) {
 				e.preventDefault();
 				hotkey.action(e);

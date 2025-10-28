@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+
 import {
 	BLOCK_GROUP_FEATURES,
 	BLOCK_SLUG_FEATURES_1,
@@ -7,11 +8,6 @@ import iconField from "~/payload/fields/icon/config";
 
 export const Features_1_Block: Block = {
 	slug: BLOCK_SLUG_FEATURES_1,
-	interfaceName: "Features_1_Block",
-	labels: {
-		singular: "Features 1",
-		plural: "Features 1's",
-	},
 	admin: {
 		group: BLOCK_GROUP_FEATURES,
 	},
@@ -19,60 +15,65 @@ export const Features_1_Block: Block = {
 		{
 			name: "header",
 			type: "text",
+			defaultValue: "Powerful Features",
 			label: "Header",
 			required: true,
-			defaultValue: "Powerful Features",
 		},
 		{
 			name: "subheader",
 			type: "text",
-			label: "SubHeader",
-			required: true,
 			defaultValue:
 				"Everything you need to build modern web applications with confidence",
+			label: "SubHeader",
+			required: true,
 		},
 		{
 			name: "features",
 			type: "array",
-			required: true,
-			minRows: 1,
+			defaultValue: [
+				{
+					description: "Optimized for speed and performance",
+					icon: "Zap",
+					title: "Lightning Fast",
+				},
+				{
+					description: "Built with security best practices",
+					icon: "Shield",
+					title: "Secure by Default",
+				},
+				{
+					description: "Clean APIs and excellent documentation",
+					icon: "Code",
+					title: "Developer Friendly",
+				},
+			],
 			fields: [
 				{
 					name: "title",
 					type: "text",
-					label: "Title",
-					required: true,
-					defaultValue: "New Feature",
 					admin: {
 						placeholder: "New Feature",
 					},
+					defaultValue: "New Feature",
+					label: "Title",
+					required: true,
 				},
 				{
 					name: "description",
 					type: "text",
+					defaultValue: "",
 					label: "Description",
 					required: true,
-					defaultValue: "",
 				},
 				iconField(),
 			],
-			defaultValue: [
-				{
-					icon: "Zap",
-					title: "Lightning Fast",
-					description: "Optimized for speed and performance",
-				},
-				{
-					icon: "Shield",
-					title: "Secure by Default",
-					description: "Built with security best practices",
-				},
-				{
-					icon: "Code",
-					title: "Developer Friendly",
-					description: "Clean APIs and excellent documentation",
-				},
-			],
+			minRows: 1,
+			required: true,
 		},
 	],
+	interfaceName: "Features_1_Block",
+	labels: {
+		plural: "Features 1's",
+		singular: "Features 1",
+	},
 };
