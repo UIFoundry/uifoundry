@@ -1,27 +1,29 @@
-import { getPayload } from "~/payload/utils";
+import { headers } from "next/headers";
+import { notFound, redirect } from "next/navigation";
+
 import type {
+	Footer as FooterType,
+	Header as HeaderType,
 	Page,
 	Page as PageType,
-	Header as HeaderType,
-	Footer as FooterType,
 } from "~/payload-types";
+
+import { auth } from "~/auth";
+import HeaderSpacing from "~/components/HeaderSpacing";
+import HomeComponent from "~/components/Home";
+import RenderBlocks from "~/components/RenderBlocks";
+import { blockComponents } from "~/payload/blocks";
+import TailwindConfig from "~/payload/collections/Sites/TailwindConfig";
+import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
 import {
 	COLLECTION_SLUG_PAGES,
 	COLLECTION_SLUG_SITES,
 } from "~/payload/constants";
-import { notFound, redirect } from "next/navigation";
-import RenderBlocks from "~/components/RenderBlocks";
-import Header from "~/payload/globals/Header";
-import { cn } from "~/styles/utils";
-import { blockComponents } from "~/payload/blocks";
-import HeaderSpacing from "~/components/HeaderSpacing";
 import Footer from "~/payload/globals/Footer";
-import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
-import { headers } from "next/headers";
-import { auth } from "~/auth";
+import Header from "~/payload/globals/Header";
+import { getPayload } from "~/payload/utils";
+import { cn } from "~/styles/utils";
 import { api, HydrateClient } from "~/trpc/server";
-import HomeComponent from "~/components/Home";
-import TailwindConfig from "~/payload/collections/Sites/TailwindConfig";
 
 interface PageParams {
 	params: Promise<{
@@ -29,6 +31,24 @@ interface PageParams {
 		slug?: string;
 	}>;
 	searchParams: Promise<Record<string, string | string[]>>;
+}
+
+export async function generateStaticParams() {
+	const payload = await getPayload();
+	const pageRes = await payload.find({
+		collection: COLLECTION_SLUG_PAGES,
+		draft: false,
+		limit: 100,
+	});
+
+	const pages: Page[] = pageRes?.docs;
+
+	return pages.map(({ slug, _status }) => {
+		if (_status !== "published" || slug === "home") {
+			return {};
+		}
+		return { slug };
+	});
 }
 
 export default async function Page({ params: paramsPromise }: PageParams) {
@@ -41,8 +61,8 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 	}
 
 	const site = await payload.findByID({
+		id,
 		collection: COLLECTION_SLUG_SITES,
-		id: id,
 		depth: 1,
 	});
 
@@ -79,37 +99,19 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 			<RefreshRouteOnSave />
 			{site.header && (
 				<Header
-					header={site.header as HeaderType}
 					className={cn(!page.showHeader && "hidden")}
+					header={site.header as HeaderType}
 				/>
 			)}
 			<HeaderSpacing showHeader={page.showHeader}>
-				<RenderBlocks blocks={page.blocks} blockComponents={blockComponents} />
+				<RenderBlocks blockComponents={blockComponents} blocks={page.blocks} />
 			</HeaderSpacing>
 			{site.footer && (
 				<Footer
-					footer={site.footer as FooterType}
 					className={cn(!page.showFooter && "hidden")}
+					footer={site.footer as FooterType}
 				/>
 			)}
 		</div>
 	);
-}
-
-export async function generateStaticParams() {
-	const payload = await getPayload();
-	const pageRes = await payload.find({
-		collection: COLLECTION_SLUG_PAGES,
-		draft: false,
-		limit: 100,
-	});
-
-	const pages: Page[] = pageRes?.docs;
-
-	return pages.map(({ slug, _status }) => {
-		if (_status !== "published" || slug === "home") {
-			return {};
-		}
-		return { slug };
-	});
 }

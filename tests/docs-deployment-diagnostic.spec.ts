@@ -119,9 +119,9 @@ test.describe("Docs Deployment Diagnostic", () => {
     // Test CloudFront behavior
     await page.goto("/docs/blocks/header/header-1");
     const pageResponse = await page.evaluate(() => ({
-      url: window.location.href,
-      title: document.title,
       hasContent: document.body.children.length > 0,
+      title: document.title,
+      url: window.location.href,
     }));
 
     console.log(`📊 Page evaluation result:`, pageResponse);

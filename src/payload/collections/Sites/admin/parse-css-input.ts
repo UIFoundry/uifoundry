@@ -1,5 +1,5 @@
-import { type ThemeStyleProps } from "./theme";
 import { colorFormatter } from "./color-converter";
+import { type ThemeStyleProps } from "./theme";
 import { COMMON_STYLES, defaultThemeState } from "./themeConfig";
 
 export const variableNames = Object.keys(defaultThemeState.styles.light);
@@ -24,13 +24,13 @@ export const parseCssInput = (input: string) => {
 		console.error("Error parsing CSS input:", error);
 	}
 
-	return { lightColors, darkColors };
+	return { darkColors, lightColors };
 };
 
 const extractCssBlockContent = (
 	input: string,
 	selector: string,
-): string | null => {
+): null | string => {
 	const regex = new RegExp(`${escapeRegExp(selector)}\\s*{([^}]+)}`);
 	return input.match(regex)?.[1]?.trim() ?? null;
 };

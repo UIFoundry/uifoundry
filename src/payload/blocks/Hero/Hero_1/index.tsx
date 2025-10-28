@@ -15,31 +15,33 @@
 
 "use client";
 
-import Link from "next/link";
 import { ArrowDown, ArrowRight } from "lucide-react";
-import { Button } from "~/ui/button";
-import { TextEffect } from "~/ui/motion-primitives/text-effect";
-import { AnimatedGroup } from "~/ui/motion-primitives/animated-group";
+import Link from "next/link";
+
 import type { Hero_1_Block } from "~/payload-types";
-import { cn } from "~/styles/utils";
+
 import MediaField from "~/payload/fields/media";
+import { cn } from "~/styles/utils";
+import { Button } from "~/ui/button";
+import { AnimatedGroup } from "~/ui/motion-primitives/animated-group";
+import { TextEffect } from "~/ui/motion-primitives/text-effect";
 
 const transitionVariants = {
 	item: {
 		hidden: {
-			opacity: 0,
 			filter: "blur(12px)",
+			opacity: 0,
 			y: 12,
 		},
 		visible: {
-			opacity: 1,
 			filter: "blur(0px)",
-			y: 0,
+			opacity: 1,
 			transition: {
 				type: "spring",
 				bounce: 0.3,
 				duration: 1.5,
 			},
+			y: 0,
 		},
 	},
 };
@@ -58,6 +60,7 @@ export default function HeroSection(props: Hero_1_Block) {
 			<section>
 				<div className="relative min-h-[90vh]">
 					<AnimatedGroup
+						className="absolute inset-0 -z-20"
 						variants={{
 							container: {
 								visible: {
@@ -73,16 +76,15 @@ export default function HeroSection(props: Hero_1_Block) {
 								},
 								visible: {
 									opacity: 1,
-									y: 0,
 									transition: {
 										type: "spring",
 										bounce: 0.3,
 										duration: 2,
 									},
+									y: 0,
 								},
 							},
 						}}
-						className="absolute inset-0 -z-20"
 					>
 						{/* {props?.media?.url ? <Image */}
 						{/*                   src={props.media.url} */}
@@ -97,15 +99,15 @@ export default function HeroSection(props: Hero_1_Block) {
 						<div className="text-center sm:mx-auto lg:mt-0 lg:mr-auto">
 							{props.alertLink && (
 								<AnimatedGroup
-									// @ts-expect-error mismatch anim group variants type
-									variants={transitionVariants}
 									className={cn(
 										(!props.alertLabel || !props.alertLink) && "hidden",
 									)}
+									// @ts-expect-error mismatch anim group variants type
+									variants={transitionVariants}
 								>
 									<Link
-										href={props.alertLink}
 										className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
+										href={props.alertLink}
 									>
 										<span className="text-foreground text-sm">
 											{props.alertLabel}
@@ -127,47 +129,47 @@ export default function HeroSection(props: Hero_1_Block) {
 							)}
 
 							<TextEffect
-								preset="fade-in-blur"
-								speedSegment={0.3}
 								as="h1"
 								className="mt-8 text-6xl text-balance md:text-7xl lg:mt-16 xl:text-[5.25rem]"
+								preset="fade-in-blur"
+								speedSegment={0.3}
 							>
 								{props.header}
 							</TextEffect>
 							<TextEffect
+								as="p"
+								className="mx-auto mt-8 max-w-2xl text-lg text-balance"
+								delay={0.5}
 								per="line"
 								preset="fade-in-blur"
 								speedSegment={0.3}
-								delay={0.5}
-								as="p"
-								className="mx-auto mt-8 max-w-2xl text-lg text-balance"
 							>
 								{props.subheader ?? ""}
 							</TextEffect>
 
 							<AnimatedGroup
+								className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
 								// @ts-expect-error mismatch anim group type
 								variants={{
 									container: {
 										visible: {
 											transition: {
-												staggerChildren: 0.05,
 												delayChildren: 0.75,
+												staggerChildren: 0.05,
 											},
 										},
 									},
 									...transitionVariants,
 								}}
-								className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
 							>
 								<div
-									key={1}
 									className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+									key={1}
 								>
 									<Button
 										asChild
-										size="lg"
 										className="rounded-xl px-5 text-base"
+										size="lg"
 									>
 										<Link href={props.primaryCtaHref}>
 											<span className="text-nowrap">
@@ -177,11 +179,11 @@ export default function HeroSection(props: Hero_1_Block) {
 									</Button>
 								</div>
 								<Button
-									key={2}
 									asChild
+									className="h-10.5 rounded-xl px-5"
+									key={2}
 									size="lg"
 									variant="ghost"
-									className="h-10.5 rounded-xl px-5"
 								>
 									<Link href={props.secondaryCtaHref}>
 										<span className="text-nowrap">
@@ -200,8 +202,8 @@ export default function HeroSection(props: Hero_1_Block) {
 								container: {
 									visible: {
 										transition: {
-											staggerChildren: 0.05,
 											delayChildren: 0.75,
+											staggerChildren: 0.05,
 										},
 									},
 								},
@@ -215,24 +217,24 @@ export default function HeroSection(props: Hero_1_Block) {
 								/>
 								<div className="ring-background bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg ring-1 inset-shadow-2xs shadow-zinc-950/15 dark:inset-shadow-white/20">
 									<MediaField
+										className="border-border/25 relative z-2 aspect-15/8 rounded-2xl border"
+										height="1440"
 										media={props.media!}
 										width="2700"
-										height="1440"
-										className="border-border/25 relative z-2 aspect-15/8 rounded-2xl border"
 									/>
 								</div>
 							</div>
 						</AnimatedGroup>
 					) : (
 						<ArrowDown
+							className="hover:stroke-primary absolute bottom-30 left-1/2 -translate-x-1/2 cursor-pointer transition-colors duration-300"
 							onClick={() => {
 								window.scrollTo({
-									top: window.innerHeight,
 									behavior: "smooth",
+									top: window.innerHeight,
 								});
 							}}
 							size={30}
-							className="hover:stroke-primary absolute bottom-30 left-1/2 -translate-x-1/2 cursor-pointer transition-colors duration-300"
 						/>
 					)}
 				</div>

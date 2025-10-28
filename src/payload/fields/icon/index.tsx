@@ -1,8 +1,13 @@
 "use client";
 
-import { Check, ChevronsUpDown, icons } from "lucide-react";
 import type { OptionObject, SelectFieldClientProps } from "payload";
+
 import { useField } from "@payloadcms/ui";
+import { Check, ChevronsUpDown, icons } from "lucide-react";
+import { type Dispatch, type SetStateAction, useState } from "react";
+
+import { cn } from "~/styles/utils";
+import { Button } from "~/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -11,37 +16,85 @@ import {
   CommandItem,
   CommandList,
 } from "~/ui/command";
-
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover";
-import { cn } from "~/styles/utils";
-import { useState, type Dispatch, type SetStateAction } from "react";
-import { Button } from "~/ui/button";
 
 type IconName = keyof typeof icons;
+
+export default function IconField({ field, path }: SelectFieldClientProps) {
+  const { setValue, value } = useField<IconName>({ path });
+  const [open, setOpen] = useState(false);
+  const SelectIcon = icons[value];
+
+  return (
+    <div className="">
+      <label>
+        {field.label as string}
+        {field.required ? <span className="pl-1 text-red-500">*</span> : ""}
+      </label>
+      <Popover onOpenChange={setOpen} open={open}>
+        <PopoverTrigger asChild className="mt-2 w-full cursor-pointer">
+          <Button
+            aria-expanded={open}
+            className="justify-between"
+            role="combobox"
+            variant="outline"
+          >
+            {SelectIcon && <SelectIcon />}
+            {value ? value : "Select Icon..."}
+            <ChevronsUpDown className="opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-[var(--radix-popover-trigger-width)] bg-neutral-200 dark:bg-neutral-600">
+          <Command value={value}>
+            <CommandInput
+              className="border-none"
+              placeholder="Search Icons..."
+            />
+            <CommandList>
+              <CommandEmpty>No Icons Found.</CommandEmpty>
+              <CommandGroup>
+                {field.options.map((icon, index) => (
+                  <Icon
+                    icon={icon as OptionObject}
+                    index={index}
+                    key={`${index}-${(icon as OptionObject).value}`}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    value={value}
+                  />
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+}
 
 function Icon({
   icon,
   index,
-  value,
-  setValue,
   setOpen,
+  setValue,
+  value,
 }: {
   icon: OptionObject;
   index: number;
-  value: IconName;
-  setValue: (val: unknown, disableModifyingForm?: boolean) => void;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  setValue: (val: unknown, disableModifyingForm?: boolean) => void;
+  value: IconName;
 }) {
   const SelectIcon = icons[icon.value as IconName];
   return (
     <CommandItem
-      value={icon.value}
+      className="cursor-pointer transition-colors duration-400 hover:bg-neutral-300"
+      key={`${index}-${icon.value}`}
       onSelect={(currentValue) => {
         setValue(currentValue === value ? "" : currentValue);
         setOpen(false);
       }}
-      key={`${index}-${icon.value}`}
-      className="cursor-pointer transition-colors duration-400 hover:bg-neutral-300"
+      value={icon.value}
     >
       <SelectIcon />
       {icon.value}
@@ -52,57 +105,5 @@ function Icon({
         )}
       />
     </CommandItem>
-  );
-}
-
-export default function IconField({ field, path }: SelectFieldClientProps) {
-  const { value, setValue } = useField<IconName>({ path });
-  const [open, setOpen] = useState(false);
-  const SelectIcon = icons[value];
-
-  return (
-    <div className="">
-      <label>
-        {field.label as string}
-        {field.required ? <span className="pl-1 text-red-500">*</span> : ""}
-      </label>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild className="mt-2 w-full cursor-pointer">
-          <Button
-            variant="outline"
-            role="combobox"
-            aria-expanded={open}
-            className="justify-between"
-          >
-            {SelectIcon && <SelectIcon />}
-            {value ? value : "Select Icon..."}
-            <ChevronsUpDown className="opacity-50" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-[var(--radix-popover-trigger-width)] bg-neutral-200 dark:bg-neutral-600">
-          <Command value={value}>
-            <CommandInput
-              placeholder="Search Icons..."
-              className="border-none"
-            />
-            <CommandList>
-              <CommandEmpty>No Icons Found.</CommandEmpty>
-              <CommandGroup>
-                {field.options.map((icon, index) => (
-                  <Icon
-                    key={`${index}-${(icon as OptionObject).value}`}
-                    icon={icon as OptionObject}
-                    index={index}
-                    value={value}
-                    setValue={setValue}
-                    setOpen={setOpen}
-                  />
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
-    </div>
   );
 }

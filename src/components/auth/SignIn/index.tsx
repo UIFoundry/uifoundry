@@ -1,8 +1,9 @@
-import { Button } from "~/ui/button";
-import { LogOut, LogIn } from "lucide-react";
-import Link from "next/link";
+import { LogIn, LogOut } from "lucide-react";
 import { headers } from "next/headers";
+import Link from "next/link";
+
 import { auth } from "~/auth";
+import { Button } from "~/ui/button";
 
 export default async function SignInButton() {
 	const session = await auth.api.getSession({ headers: await headers() });

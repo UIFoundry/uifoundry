@@ -1767,11 +1767,11 @@ export interface User {
   emailVerified: boolean;
   name: string;
   image?: string | null;
-  role: 'user' | 'admin';
+  role: 'admin' | 'user';
   banned: boolean;
   banReason?: string | null;
   banExpiresIn?: number | null;
-  lifetimeSubscription?: ('Founder' | 'Pioneer' | 'Early Adopter') | null;
+  lifetimeSubscription?: ('Early Adopter' | 'Founder' | 'Pioneer') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2116,7 +2116,7 @@ export interface CustomHeaderBlock {
  * via the `definition` "HeaderMenuItemsBlock".
  */
 export interface HeaderMenuItemsBlock {
-  alignment?: ('left' | 'right' | 'center') | null;
+  alignment?: ('center' | 'left' | 'right') | null;
   menuItems: {
     label: string;
     href: string;
@@ -2131,7 +2131,7 @@ export interface HeaderMenuItemsBlock {
  * via the `definition` "HeaderMenuButtonBlock".
  */
 export interface HeaderMenuButtonBlock {
-  alignment?: ('left' | 'right' | 'center') | null;
+  alignment?: ('center' | 'left' | 'right') | null;
   label: string;
   href?: string | null;
   targetBlank: boolean;
@@ -2180,7 +2180,7 @@ export interface HeaderMenuButtonBlock {
  * via the `definition` "HeaderBrandLogoBlock".
  */
 export interface HeaderBrandLogoBlock {
-  alignment?: ('left' | 'right' | 'center') | null;
+  alignment?: ('center' | 'left' | 'right') | null;
   href: string;
   media?: MediaField;
   id?: string | null;
@@ -2217,32 +2217,32 @@ export interface Footer_1_Block {
   socialLinks: {
     href: string;
     icon:
-      | 'Facebook'
-      | 'Twitter'
-      | 'YouTube'
-      | 'LinkedIn'
-      | 'Telegram'
-      | 'Matrix'
-      | 'WhatsApp'
       | 'Arc'
-      | 'Mastodon'
-      | 'Messenger'
-      | 'Infojobs'
-      | 'Skype'
-      | 'Threads'
-      | 'Instagram'
-      | 'X (formerly Twitter)'
-      | 'VK'
+      | 'Bluesky'
+      | 'Carrd'
+      | 'daily.dev'
+      | 'Facebook'
       | 'Hashnode'
+      | 'Infojobs'
+      | 'Instagram'
+      | 'LinkedIn'
+      | 'Mastodon'
+      | 'Matrix'
+      | 'Messenger'
+      | 'Meta'
       | 'Patreon'
       | 'Peerlist'
       | 'Pinterest'
       | 'Reddit'
-      | 'Meta'
+      | 'Skype'
+      | 'Telegram'
+      | 'Threads'
       | 'TikTok'
-      | 'Carrd'
-      | 'Bluesky'
-      | 'daily.dev';
+      | 'Twitter'
+      | 'VK'
+      | 'WhatsApp'
+      | 'X (formerly Twitter)'
+      | 'YouTube';
     id?: string | null;
   }[];
   id?: string | null;
@@ -2272,32 +2272,32 @@ export interface Footer_2_Block {
   socialLinks: {
     href: string;
     icon:
-      | 'Facebook'
-      | 'Twitter'
-      | 'YouTube'
-      | 'LinkedIn'
-      | 'Telegram'
-      | 'Matrix'
-      | 'WhatsApp'
       | 'Arc'
-      | 'Mastodon'
-      | 'Messenger'
-      | 'Infojobs'
-      | 'Skype'
-      | 'Threads'
-      | 'Instagram'
-      | 'X (formerly Twitter)'
-      | 'VK'
+      | 'Bluesky'
+      | 'Carrd'
+      | 'daily.dev'
+      | 'Facebook'
       | 'Hashnode'
+      | 'Infojobs'
+      | 'Instagram'
+      | 'LinkedIn'
+      | 'Mastodon'
+      | 'Matrix'
+      | 'Messenger'
+      | 'Meta'
       | 'Patreon'
       | 'Peerlist'
       | 'Pinterest'
       | 'Reddit'
-      | 'Meta'
+      | 'Skype'
+      | 'Telegram'
+      | 'Threads'
       | 'TikTok'
-      | 'Carrd'
-      | 'Bluesky'
-      | 'daily.dev';
+      | 'Twitter'
+      | 'VK'
+      | 'WhatsApp'
+      | 'X (formerly Twitter)'
+      | 'YouTube';
     id?: string | null;
   }[];
   id?: string | null;
@@ -2327,32 +2327,32 @@ export interface Footer_3_Block {
   socialLinks: {
     href: string;
     icon:
-      | 'Facebook'
-      | 'Twitter'
-      | 'YouTube'
-      | 'LinkedIn'
-      | 'Telegram'
-      | 'Matrix'
-      | 'WhatsApp'
       | 'Arc'
-      | 'Mastodon'
-      | 'Messenger'
-      | 'Infojobs'
-      | 'Skype'
-      | 'Threads'
-      | 'Instagram'
-      | 'X (formerly Twitter)'
-      | 'VK'
+      | 'Bluesky'
+      | 'Carrd'
+      | 'daily.dev'
+      | 'Facebook'
       | 'Hashnode'
+      | 'Infojobs'
+      | 'Instagram'
+      | 'LinkedIn'
+      | 'Mastodon'
+      | 'Matrix'
+      | 'Messenger'
+      | 'Meta'
       | 'Patreon'
       | 'Peerlist'
       | 'Pinterest'
       | 'Reddit'
-      | 'Meta'
+      | 'Skype'
+      | 'Telegram'
+      | 'Threads'
       | 'TikTok'
-      | 'Carrd'
-      | 'Bluesky'
-      | 'daily.dev';
+      | 'Twitter'
+      | 'VK'
+      | 'WhatsApp'
+      | 'X (formerly Twitter)'
+      | 'YouTube';
     id?: string | null;
   }[];
   id?: string | null;
@@ -2408,32 +2408,32 @@ export interface Footer_5_Block {
   socialLinks: {
     href: string;
     icon:
-      | 'Facebook'
-      | 'Twitter'
-      | 'YouTube'
-      | 'LinkedIn'
-      | 'Telegram'
-      | 'Matrix'
-      | 'WhatsApp'
       | 'Arc'
-      | 'Mastodon'
-      | 'Messenger'
-      | 'Infojobs'
-      | 'Skype'
-      | 'Threads'
-      | 'Instagram'
-      | 'X (formerly Twitter)'
-      | 'VK'
+      | 'Bluesky'
+      | 'Carrd'
+      | 'daily.dev'
+      | 'Facebook'
       | 'Hashnode'
+      | 'Infojobs'
+      | 'Instagram'
+      | 'LinkedIn'
+      | 'Mastodon'
+      | 'Matrix'
+      | 'Messenger'
+      | 'Meta'
       | 'Patreon'
       | 'Peerlist'
       | 'Pinterest'
       | 'Reddit'
-      | 'Meta'
+      | 'Skype'
+      | 'Telegram'
+      | 'Threads'
       | 'TikTok'
-      | 'Carrd'
-      | 'Bluesky'
-      | 'daily.dev';
+      | 'Twitter'
+      | 'VK'
+      | 'WhatsApp'
+      | 'X (formerly Twitter)'
+      | 'YouTube';
     id?: string | null;
   }[];
   id?: string | null;
@@ -2447,7 +2447,7 @@ export interface Footer_5_Block {
 export interface Theme {
   id: string;
   name: string;
-  type?: ('user' | 'template') | null;
+  type?: ('template' | 'user') | null;
   owner: string | User;
   styles:
     | {
@@ -2716,32 +2716,32 @@ export interface ComingSoon_1_Block {
   socialLinks: {
     href: string;
     icon:
-      | 'Facebook'
-      | 'Twitter'
-      | 'YouTube'
-      | 'LinkedIn'
-      | 'Telegram'
-      | 'Matrix'
-      | 'WhatsApp'
       | 'Arc'
-      | 'Mastodon'
-      | 'Messenger'
-      | 'Infojobs'
-      | 'Skype'
-      | 'Threads'
-      | 'Instagram'
-      | 'X (formerly Twitter)'
-      | 'VK'
+      | 'Bluesky'
+      | 'Carrd'
+      | 'daily.dev'
+      | 'Facebook'
       | 'Hashnode'
+      | 'Infojobs'
+      | 'Instagram'
+      | 'LinkedIn'
+      | 'Mastodon'
+      | 'Matrix'
+      | 'Messenger'
+      | 'Meta'
       | 'Patreon'
       | 'Peerlist'
       | 'Pinterest'
       | 'Reddit'
-      | 'Meta'
+      | 'Skype'
+      | 'Telegram'
+      | 'Threads'
       | 'TikTok'
-      | 'Carrd'
-      | 'Bluesky'
-      | 'daily.dev';
+      | 'Twitter'
+      | 'VK'
+      | 'WhatsApp'
+      | 'X (formerly Twitter)'
+      | 'YouTube';
     id?: string | null;
   }[];
   id?: string | null;

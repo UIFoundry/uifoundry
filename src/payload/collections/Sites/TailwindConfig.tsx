@@ -1,11 +1,12 @@
-import type { Theme, Site } from "~/payload-types";
+import type { Site, Theme } from "~/payload-types";
+
 import type { ThemeStyles } from "./admin/theme";
 
 export default async function TailwindConfig({ site }: { site: Site }) {
 	const theme = site.activeTheme as Theme;
 
 	// eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-	if (!theme || !theme.styles) return null;
+	if (!theme || !theme.styles) {return null;}
 
 	const lightCssVars: string[] = [];
 	const darkCssVars: string[] = [];
@@ -25,7 +26,7 @@ export default async function TailwindConfig({ site }: { site: Site }) {
 		}
 	}
 
-	if (lightCssVars.length === 0 && darkCssVars.length === 0) return null;
+	if (lightCssVars.length === 0 && darkCssVars.length === 0) {return null;}
 
 	const css = `:root{${lightCssVars.join("")}}\n.dark{${darkCssVars.join("")}}`;
 

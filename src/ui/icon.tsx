@@ -1,10 +1,11 @@
-import { icons } from "lucide-react";
 import type { ComponentPropsWithRef } from "react";
+
+import { icons } from "lucide-react";
 
 export function Icon({
   icon,
   ...svgProps
-}: { icon: keyof typeof icons } & ComponentPropsWithRef<"svg">) {
+}: ComponentPropsWithRef<"svg"> & { icon: keyof typeof icons }) {
   const SelectIcon = icons[icon];
   if (!SelectIcon) {
     console.log("no icon found: ", SelectIcon, icon);

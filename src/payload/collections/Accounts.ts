@@ -1,4 +1,5 @@
 import { type CollectionConfig } from "payload";
+
 import { COLLECTION_SLUG_ACCOUNTS, COLLECTION_SLUG_USERS } from "../constants";
 
 export const Accounts: CollectionConfig = {
@@ -7,21 +8,21 @@ export const Accounts: CollectionConfig = {
     {
       name: "userId",
       type: "relationship",
+      hasMany: false,
       relationTo: COLLECTION_SLUG_USERS,
       required: true,
-      hasMany: false,
     },
     {
       name: "accountId",
       type: "text",
-      required: true,
       defaultValue: "",
+      required: true,
     },
     {
       name: "providerId",
       type: "text",
-      required: true,
       defaultValue: "",
+      required: true,
     },
     {
       name: "accessToken",

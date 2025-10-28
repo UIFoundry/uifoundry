@@ -1,13 +1,14 @@
 import { env } from "~/env.mjs";
 
 export * from "./collections";
+export * from "./globals";
 
 export const AUTOSAVE_INTERVAL = 200;
 
 export const FLEX_ALIGNMENT = {
+	center: "center",
 	left: "left",
 	right: "right",
-	center: "center",
 } as const;
 export type HeaderAlignment =
 	(typeof FLEX_ALIGNMENT)[keyof typeof FLEX_ALIGNMENT];

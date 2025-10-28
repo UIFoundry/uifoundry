@@ -1,13 +1,15 @@
 "use client";
 
 import { useField } from "@payloadcms/ui";
-import { Textarea } from "~/ui/textarea";
+import { useForm } from "@tanstack/react-form";
+
+import { api } from "~/trpc/react";
+import { Button } from "~/ui/button";
 import { Input } from "~/ui/input";
 import { Label } from "~/ui/label";
-import { Button } from "~/ui/button";
-import { useForm } from "@tanstack/react-form";
+import { Textarea } from "~/ui/textarea";
+
 import { parseCssInput } from "./parse-css-input";
-import { api } from "~/trpc/react";
 
 export default function ImportThemePopover({ path }: { path: string }) {
 	const { setValue } = useField<string>({ path });
@@ -15,23 +17,27 @@ export default function ImportThemePopover({ path }: { path: string }) {
 
 	const form = useForm({
 		defaultValues: {
-			themeName: "",
-			themeCss: "",
 			setThemeOnImport: true,
+			themeCss: "",
+			themeName: "",
 		},
-		onSubmit: async ({ value: data, formApi }) => {
+		onSubmit: async ({ formApi, value: data }) => {
 			if (data.themeCss.length === 0) {
 				console.log("no theme given");
 				return;
 			}
 			const theme = parseCssInput(data.themeCss);
-			if (!theme || (!theme.lightColors && !theme.darkColors)) return;
+			if (!theme || (!theme.lightColors && !theme.darkColors)) {
+				return;
+			}
 			const res = await createThemeMutator.mutateAsync({
 				name: data.themeName,
-				light: theme.lightColors,
 				dark: theme.darkColors,
+				light: theme.lightColors,
 			});
-			if (!res.success) return;
+			if (!res.success) {
+				return;
+			}
 			if (data.setThemeOnImport) {
 				setValue(res.data.id);
 				formApi.reset();
@@ -49,88 +55,95 @@ export default function ImportThemePopover({ path }: { path: string }) {
 			}}
 		>
 			<form.Field
-				name="themeName"
-				validators={{
-					onChange: ({ value }) => {
-						if (!value) return "A theme name is required";
-						if (value.length < 3)
-							return "Theme name must be at least three characters";
-						return undefined;
-					},
-				}}
 				// eslint-disable-next-line react/no-children-prop
 				children={(field) => {
 					return (
 						<div className="pb-6">
-							<Label htmlFor={field.name} className="pb-2">
+							<Label className="pb-2" htmlFor={field.name}>
 								Theme Name
 							</Label>
 							<Input
 								id={field.name}
 								name={field.name}
-								value={field.state.value}
-								onChange={(e) => field.handleChange(e.target.value)}
 								onBlur={field.handleBlur}
+								onChange={(e) => field.handleChange(e.target.value)}
+								value={field.state.value}
 							/>
 						</div>
 					);
 				}}
-			/>
-			<form.Field
-				name="themeCss"
+				name="themeName"
 				validators={{
 					onChange: ({ value }) => {
-						if (!value) return "Theme css contents are required";
-						if (value.length < 3) return "Theme css contents are required";
+						if (!value) {
+							return "A theme name is required";
+						}
+						if (value.length < 3) {
+							return "Theme name must be at least three characters";
+						}
 						return undefined;
 					},
 				}}
+			/>
+			<form.Field
 				// eslint-disable-next-line react/no-children-prop
 				children={(field) => {
 					return (
 						<>
 							<Label htmlFor={field.name}>globals.css file contents</Label>
 							<Textarea
+								className="mx-auto my-2 max-h-64 min-h-42 max-w-90 min-w-90 overflow-x-clip overflow-y-scroll"
 								id={field.name}
 								name={field.name}
-								value={field.state.value}
 								onBlur={field.handleBlur}
 								onChange={(e) => field.handleChange(e.target.value)}
-								className="mx-auto my-2 max-h-64 min-h-42 max-w-90 min-w-90 overflow-x-clip overflow-y-scroll"
+								value={field.state.value}
 							/>
 						</>
 					);
 				}}
+				name="themeCss"
+				validators={{
+					onChange: ({ value }) => {
+						if (!value) {
+							return "Theme css contents are required";
+						}
+						if (value.length < 3) {
+							return "Theme css contents are required";
+						}
+						return undefined;
+					},
+				}}
 			/>
 			<form.Field
-				name="setThemeOnImport"
 				// eslint-disable-next-line react/no-children-prop
 				children={(field) => {
 					return (
 						<div className="flex justify-center gap-2">
 							<Label htmlFor="setThemeOnImport">Set to Active Theme</Label>
 							<Input
+								checked={field.state.value}
+								className="size-8"
 								id={field.name}
 								name={field.name}
-								type="checkbox"
-								checked={field.state.value}
 								onChange={() => field.handleChange(!field.state.value)}
 								size={4}
-								className="size-8"
+								type="checkbox"
 							/>
 						</div>
 					);
 				}}
+				name="setThemeOnImport"
 			/>
 			<form.Subscribe
 				selector={(state) => [state.canSubmit, state.isSubmitting]}
-				// eslint-disable-next-line react/no-children-prop
-				children={([canSubmit, isSubmitting]) => (
-					<Button type="submit" disabled={!canSubmit}>
+			>
+				{([canSubmit, isSubmitting]) => (
+					<Button disabled={!canSubmit} type="submit">
 						{isSubmitting ? "..." : "Import"}
 					</Button>
 				)}
-			/>
+			</form.Subscribe>
 		</form>
 	);
 }

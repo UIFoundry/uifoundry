@@ -1,22 +1,18 @@
+import type { Block } from "payload";
+
 import {
 	BLOCK_GROUP_HERO,
 	BLOCK_SLUG_HERO_2,
 } from "~/payload/constants/blocks";
-import type { Block } from "payload";
 import headerField from "~/payload/fields/header/config";
-import subHeaderField from "~/payload/fields/subheader/config";
 import mediaField from "~/payload/fields/media/config";
+import subHeaderField from "~/payload/fields/subheader/config";
 
 export const Hero_2_Block: Block = {
 	slug: BLOCK_SLUG_HERO_2,
-	labels: {
-		singular: "Hero 2",
-		plural: "Hero 2's",
-	},
 	admin: {
 		group: BLOCK_GROUP_HERO,
 	},
-	interfaceName: "Hero_2_Block",
 	fields: [
 		headerField({
 			defaultValue: "Ship 10x Faster with NS",
@@ -26,7 +22,6 @@ export const Hero_2_Block: Block = {
 				"Highly customizable components for building modern websites and applications that look and feel the way you mean it.",
 		}),
 		{
-			label: "Primary Call To Action",
 			type: "collapsible",
 			admin: {
 				initCollapsed: false,
@@ -34,22 +29,22 @@ export const Hero_2_Block: Block = {
 			fields: [
 				{
 					name: "primaryCtaLabel",
-					label: "Primary Call To Action: Label",
 					type: "text",
-					required: true,
 					defaultValue: "Start Building",
+					label: "Primary Call To Action: Label",
+					required: true,
 				},
 				{
 					name: "primaryCtaHref",
-					label: "Primary Call To Action: Link (href)",
 					type: "text",
-					required: true,
 					defaultValue: "/get-started",
+					label: "Primary Call To Action: Link (href)",
+					required: true,
 				},
 			],
+			label: "Primary Call To Action",
 		},
 		{
-			label: "Secondary Call To Action",
 			type: "collapsible",
 			admin: {
 				initCollapsed: false,
@@ -57,26 +52,32 @@ export const Hero_2_Block: Block = {
 			fields: [
 				{
 					name: "secondaryCtaLabel",
-					label: "Secondary Call To Action: Label",
 					type: "text",
-					required: true,
 					defaultValue: "Request a demo",
+					label: "Secondary Call To Action: Label",
+					required: true,
 				},
 				{
 					name: "secondaryCtaHref",
-					label: "Secondary Call To Action: Link (href)",
 					type: "text",
-					required: true,
 					defaultValue: "/demo",
+					label: "Secondary Call To Action: Link (href)",
+					required: true,
 				},
 			],
+			label: "Secondary Call To Action",
 		},
 		mediaField({
-			label: "Background Image",
 			admin: {
 				description:
 					"Upload background image (light/dark variants). Displays as a floating image on the right side.",
 			},
+			label: "Background Image",
 		}),
 	],
+	interfaceName: "Hero_2_Block",
+	labels: {
+		plural: "Hero 2's",
+		singular: "Hero 2",
+	},
 };

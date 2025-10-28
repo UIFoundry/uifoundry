@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BETTER_AUTH_URL ?? "";
 const IS_DEPLOYED =
@@ -14,7 +14,7 @@ test.describe("Deployment Docs Verification", () => {
 	});
 
 	test("should access deployment docs index", async ({ page }) => {
-		await page.goto("/docs", { waitUntil: "domcontentloaded", timeout: 60000 });
+		await page.goto("/docs", { timeout: 60000, waitUntil: "domcontentloaded" });
 
 		// Check that we're not getting a 404 or error page
 		const response = await page.evaluate(() => document.title);
@@ -34,7 +34,7 @@ test.describe("Deployment Docs Verification", () => {
 	});
 
 	test("should serve static assets correctly", async ({ page }) => {
-		await page.goto("/docs", { waitUntil: "domcontentloaded", timeout: 60000 });
+		await page.goto("/docs", { timeout: 60000, waitUntil: "domcontentloaded" });
 
 		// Check that CSS is loading
 		const styles = await page.locator("link[rel='stylesheet'], style").count();

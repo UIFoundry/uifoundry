@@ -1,9 +1,10 @@
-import { z } from "zod";
-import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
 import Stripe from "stripe";
+import { z } from "zod";
+
 import { env } from "~/env.mjs";
+import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
+import { DAL_ERRORS, err, ok } from "~/server/dal";
 import { LIFETIME_PLANS } from "~/utils/stripe";
-import { ok, err, DAL_ERRORS } from "~/server/dal";
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-09-30.clover",
@@ -12,8 +13,8 @@ const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
 export const stripeRouter = createTRPCRouter({
   getSubscriptionStatus: privateProcedure.query(async ({ ctx }) => {
     const fullUser = await ctx.payload.findByID({
-      collection: "users",
       id: ctx.user.id,
+      collection: "users",
     });
 
     if (fullUser.lifetimeSubscription) {
@@ -36,9 +37,9 @@ export const stripeRouter = createTRPCRouter({
   createCheckoutSession: privateProcedure
     .input(
       z.object({
+        cancelUrl: z.string(),
         planName: z.enum(["Founder", "Pioneer", "Early Adopter"]),
         successUrl: z.string(),
-        cancelUrl: z.string(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -64,8 +65,8 @@ export const stripeRouter = createTRPCRouter({
         customerId = customers.data[0]!.id;
       } else {
         const customer = await stripe.customers.create({
-          email: user.email,
           name: user.name ?? undefined,
+          email: user.email,
           metadata: {
             userId: user.id,
           },
@@ -74,32 +75,32 @@ export const stripeRouter = createTRPCRouter({
       }
 
       const metadata = {
-        userId: user.id,
-        planName: plan.name,
-        planKey: planKey,
-        priceId: plan.priceId,
         lifetime: "yes",
+        planKey,
+        planName: plan.name,
+        priceId: plan.priceId,
+        userId: user.id,
       };
 
       const session = await stripe.checkout.sessions.create({
+        cancel_url: input.cancelUrl,
         customer: customerId,
-        mode: "payment",
         line_items: [
           {
             price: plan.priceId,
             quantity: 1,
           },
         ],
-        success_url: input.successUrl,
-        cancel_url: input.cancelUrl,
+        mode: "payment",
         payment_intent_data: {
           metadata,
         },
+        success_url: input.successUrl,
       });
 
       return {
-        url: session.url,
         sessionId: session.id,
+        url: session.url,
       };
     }),
 });

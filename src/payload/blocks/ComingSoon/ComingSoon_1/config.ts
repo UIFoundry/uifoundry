@@ -1,87 +1,88 @@
+import type { Block } from "payload";
+
 import {
 	BLOCK_GROUP_COMING_SOON,
 	BLOCK_SLUG_COMING_SOON_1,
 } from "~/payload/constants/blocks";
-import type { Block } from "payload";
 import headerField from "~/payload/fields/header/config";
-import subHeaderField from "~/payload/fields/subheader/config";
 import socialLinksField from "~/payload/fields/socialLinks/config";
+import subHeaderField from "~/payload/fields/subheader/config";
 
 export const ComingSoon_1_Block: Block = {
 	slug: BLOCK_SLUG_COMING_SOON_1,
-	labels: {
-		singular: "Coming Soon 1",
-		plural: "Coming Soon 1's",
-	},
 	admin: {
 		group: BLOCK_GROUP_COMING_SOON,
 	},
-	interfaceName: "ComingSoon_1_Block",
 	fields: [
 		headerField(),
 		subHeaderField(),
 		{
 			type: "collapsible",
-			label: "Launch Date",
 			admin: {
 				initCollapsed: false,
 			},
 			fields: [
 				{
 					name: "launchDate",
-					label: "Launch Date",
 					type: "date",
-					required: true,
 					admin: {
 						description: "The date when your project will launch",
 					},
+					label: "Launch Date",
+					required: true,
 				},
 			],
+			label: "Launch Date",
 		},
 		{
 			type: "collapsible",
-			label: "Email Signup",
 			admin: {
 				initCollapsed: true,
 			},
 			fields: [
 				{
 					name: "showEmailSignup",
-					label: "Show Email Signup",
 					type: "checkbox",
 					defaultValue: true,
+					label: "Show Email Signup",
 				},
 				{
 					name: "emailPlaceholder",
-					label: "Email Input Placeholder",
 					type: "text",
 					defaultValue: "Enter your email",
+					label: "Email Input Placeholder",
 				},
 				{
 					name: "emailButtonText",
-					label: "Email Button Text",
 					type: "text",
 					defaultValue: "Notify me",
+					label: "Email Button Text",
 				},
 			],
+			label: "Email Signup",
 		},
 		{
 			type: "collapsible",
-			label: "Social Links",
 			admin: {
 				initCollapsed: true,
 			},
 			fields: [
 				{
 					name: "showSocialLinks",
-					label: "Show Social Links",
 					type: "checkbox",
 					defaultValue: false,
+					label: "Show Social Links",
 				},
 				socialLinksField({
 					name: "socialLinks",
 				}),
 			],
+			label: "Social Links",
 		},
 	],
+	interfaceName: "ComingSoon_1_Block",
+	labels: {
+		plural: "Coming Soon 1's",
+		singular: "Coming Soon 1",
+	},
 };

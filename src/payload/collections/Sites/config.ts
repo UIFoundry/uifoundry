@@ -1,4 +1,9 @@
 import type { AccessArgs, CollectionConfig } from "payload";
+
+import type { Site } from "~/payload-types";
+
+import { hasPermission } from "~/auth/permissions";
+import { env } from "~/env.mjs";
 import { AUTOSAVE_INTERVAL } from "~/payload/constants";
 import {
 	COLLECTION_SLUG_FOOTERS,
@@ -9,70 +14,58 @@ import {
 } from "~/payload/constants/collections";
 import titleField from "~/payload/fields/title/config";
 import userRelationship from "~/payload/fields/userRelationship/config";
-import type { Site } from "~/payload-types";
-import { hasPermission } from "~/auth/permissions";
-import { env } from "~/env.mjs";
+
 import themeColorField from "./admin/ThemeColorField/config";
 import { beforeChange } from "./hooks/siteCollectionHooks";
 
 export const Sites: CollectionConfig = {
 	slug: COLLECTION_SLUG_SITES,
+	access: {
+		create: ({ req: { user } }: AccessArgs<Site>) => {
+			return hasPermission({
+				action: "create",
+				resource: COLLECTION_SLUG_SITES,
+				user,
+			});
+		},
+		delete: ({ data, req: { user } }: AccessArgs<Site>) => {
+			return hasPermission({
+				action: "delete",
+				data,
+				resource: COLLECTION_SLUG_SITES,
+				user,
+			});
+		},
+		read: ({ data, req: { user } }: AccessArgs<Site>) => {
+			return hasPermission({
+				action: "read",
+				data,
+				resource: COLLECTION_SLUG_SITES,
+				user,
+			});
+		},
+		update: ({ data, req: { user } }: AccessArgs<Site>) => {
+			return hasPermission({
+				action: "update",
+				data,
+				resource: COLLECTION_SLUG_SITES,
+				user,
+			});
+		},
+	},
 	admin: {
-		useAsTitle: "title",
 		livePreview: {
 			url: ({ data }) =>
 				`${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/${data.id}?draft=true`,
 		},
-	},
-	versions: {
-		drafts: {
-			autosave: {
-				interval: AUTOSAVE_INTERVAL,
-			},
-		},
-	},
-	hooks: {
-		beforeChange: [beforeChange],
-	},
-	access: {
-		create: ({ req: { user } }: AccessArgs<Site>) => {
-			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_SITES,
-				action: "create",
-			});
-		},
-		read: ({ req: { user }, data }: AccessArgs<Site>) => {
-			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_SITES,
-				action: "read",
-				data,
-			});
-		},
-		update: ({ req: { user }, data }: AccessArgs<Site>) => {
-			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_SITES,
-				action: "update",
-				data,
-			});
-		},
-		delete: ({ req: { user }, data }: AccessArgs<Site>) => {
-			return hasPermission({
-				user,
-				resource: COLLECTION_SLUG_SITES,
-				action: "delete",
-				data,
-			});
-		},
+		useAsTitle: "title",
 	},
 	fields: [
 		titleField(),
 		userRelationship({
 			name: "owner",
-			label: "Owner",
 			defaultValue: ({ user }) => (!user ? undefined : user.id),
+			label: "Owner",
 		}),
 		{
 			name: "header",
@@ -86,12 +79,11 @@ export const Sites: CollectionConfig = {
 		},
 		{
 			type: "collapsible",
-			label: "Theme",
 			fields: [
 				{
 					name: "activeTheme",
-					label: "Active Site Theme",
 					type: "relationship",
+					label: "Active Site Theme",
 					relationTo: COLLECTION_SLUG_THEMES,
 					required: true,
 				},
@@ -109,8 +101,6 @@ export const Sites: CollectionConfig = {
 					tabs: [
 						{
 							name: "light",
-							label: "Light",
-							virtual: true,
 							fields: [
 								themeColorField({
 									name: "background",
@@ -333,11 +323,11 @@ export const Sites: CollectionConfig = {
 								// 	mode: "light",
 								// }),
 							],
+							label: "Light",
+							virtual: true,
 						},
 						{
 							name: "dark",
-							label: "Dark",
-							virtual: true,
 							fields: [
 								themeColorField({
 									name: "background",
@@ -560,10 +550,13 @@ export const Sites: CollectionConfig = {
 								// 	mode: "dark",
 								// }),
 							],
+							label: "Dark",
+							virtual: true,
 						},
 					],
 				},
 			],
+			label: "Theme",
 		},
 		{
 			name: "pages",
@@ -572,4 +565,14 @@ export const Sites: CollectionConfig = {
 			on: "site",
 		},
 	],
+	hooks: {
+		beforeChange: [beforeChange],
+	},
+	versions: {
+		drafts: {
+			autosave: {
+				interval: AUTOSAVE_INTERVAL,
+			},
+		},
+	},
 };

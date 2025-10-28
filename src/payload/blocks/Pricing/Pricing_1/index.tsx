@@ -1,4 +1,11 @@
+import type { ComponentPropsWithRef } from "react";
+
+import { Check } from "lucide-react";
 import Link from "next/link";
+
+import type { Pricing_1_Block } from "~/payload-types";
+
+import { cn } from "~/styles/utils";
 import { Button } from "~/ui/button";
 import {
 	Card,
@@ -7,30 +14,55 @@ import {
 	CardHeader,
 	CardTitle,
 } from "~/ui/card";
-import { Check } from "lucide-react";
-import type { Pricing_1_Block } from "~/payload-types";
-import type { ComponentPropsWithRef } from "react";
-import { cn } from "~/styles/utils";
 
 export * from "./config";
 
+export default function Pricing(props: NonNullable<Pricing_1_Block>) {
+	return (
+		<section className="py-16 md:py-32">
+			<div className="mx-auto max-w-6xl px-6">
+				<div className="mx-auto max-w-2xl space-y-6 text-center">
+					<h1 className="text-center text-4xl font-semibold lg:text-5xl">
+						{props?.header ?? ""}
+					</h1>
+					<p>{props?.subheader ?? ""}</p>
+				</div>
+
+				<div className="mt-8 justify-center gap-6 md:mt-20 md:flex">
+					{(props?.tiers ?? []).map((tier, index) => (
+						<PricingTier
+							focusedTier={{
+								index: props?.focusIndex ?? -1,
+								label: props?.focusLabel ?? "Popular",
+							}}
+							index={index}
+							key={`Pricing_1_Block-${index}`}
+							tier={tier}
+						/>
+					))}
+				</div>
+			</div>
+		</section>
+	);
+}
+
 function PricingTier({
-	tier,
 	index,
 	focusedTier = {
 		index: -1,
 		label: "Popular",
 	},
+	tier,
 	...divProps
-}: {
-	tier: NonNullable<Pricing_1_Block["tiers"]>[number];
-	index: number;
+}: ComponentPropsWithRef<"div"> & {
 	focusedTier?: {
 		index: number;
 		label: string;
 	};
-} & ComponentPropsWithRef<"div">) {
-	if (!tier) return null;
+	index: number;
+	tier: NonNullable<Pricing_1_Block["tiers"]>[number];
+}) {
+	if (!tier) {return null;}
 
 	const annualPricing = tier.pricing.annual;
 	const monthlyPricing = tier.pricing.monthly;
@@ -61,8 +93,8 @@ function PricingTier({
 				)}
 				<Button
 					asChild
-					variant={!isFocused ? "outline" : undefined}
 					className="mt-4 w-full"
+					variant={!isFocused ? "outline" : undefined}
 				>
 					<Link href="">{tier.callToAction ?? "Get Started"}</Link>
 				</Button>
@@ -74,8 +106,8 @@ function PricingTier({
 				<ul className="list-outside space-y-3 text-sm">
 					{(tier.features ?? []).map((feature, index) => (
 						<li
-							key={`Pricing_1_Block-tier-${tier.label}-feature-${index}`}
 							className="flex items-center gap-2"
+							key={`Pricing_1_Block-tier-${tier.label}-feature-${index}`}
 						>
 							<Check className="size-3" />
 							{feature.text}
@@ -84,34 +116,5 @@ function PricingTier({
 				</ul>
 			</CardContent>
 		</Card>
-	);
-}
-
-export default function Pricing(props: NonNullable<Pricing_1_Block>) {
-	return (
-		<section className="py-16 md:py-32">
-			<div className="mx-auto max-w-6xl px-6">
-				<div className="mx-auto max-w-2xl space-y-6 text-center">
-					<h1 className="text-center text-4xl font-semibold lg:text-5xl">
-						{props?.header ?? ""}
-					</h1>
-					<p>{props?.subheader ?? ""}</p>
-				</div>
-
-				<div className="mt-8 justify-center gap-6 md:mt-20 md:flex">
-					{(props?.tiers ?? []).map((tier, index) => (
-						<PricingTier
-							tier={tier}
-							index={index}
-							focusedTier={{
-								index: props?.focusIndex ?? -1,
-								label: props?.focusLabel ?? "Popular",
-							}}
-							key={`Pricing_1_Block-${index}`}
-						/>
-					))}
-				</div>
-			</div>
-		</section>
 	);
 }

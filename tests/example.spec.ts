@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test("has title", async ({ page }) => {
   await page.goto("/");
@@ -9,8 +9,8 @@ test("has title", async ({ page }) => {
 
 test("homepage loads successfully", async ({ page }) => {
   const response = await page.goto("/", {
-    waitUntil: "domcontentloaded",
     timeout: 30000,
+    waitUntil: "domcontentloaded",
   });
 
   // Page should load and not error

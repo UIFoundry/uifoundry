@@ -1,14 +1,16 @@
 import type { ComponentPropsWithRef } from "react";
+
 import type { Features_1_Block } from "~/payload-types";
-import { Card, CardHeader, CardContent } from "~/ui/card";
+
+import { Card, CardContent, CardHeader } from "~/ui/card";
 import { Icon } from "~/ui/icon";
 
 export * from "./config";
 
 export default function Features_1({
+  features,
   header,
   subheader,
-  features,
 }: Features_1_Block) {
   return (
     <section className="bg-zinc-50 py-16 md:py-32 dark:bg-transparent">

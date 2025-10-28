@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { USER_ROLES } from "~/auth/permissions";
+
 import type { Session } from "~/auth/types";
+
+import { USER_ROLES } from "~/auth/permissions";
 import { Button } from "~/ui/button";
 
 export default function AdminPanelLinkClient({

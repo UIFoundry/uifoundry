@@ -6,6 +6,6 @@ import { SiteConfigGlobal } from "./SiteConfig/config";
 export const globals = [HeaderGlobal, FooterGlobal, SiteConfigGlobal];
 
 export const globalComponents = {
-	[GLOBAL_SLUG_HEADER]: Header,
 	[GLOBAL_SLUG_FOOTER]: Footer,
+	[GLOBAL_SLUG_HEADER]: Header,
 };

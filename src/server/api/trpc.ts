@@ -9,10 +9,12 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { auth } from "~/auth";
+
 import type { User } from "~/payload-types";
-import { getPayload } from "~/payload/utils";
 import type { LifetimePlanKey } from "~/utils/stripe";
+
+import { auth } from "~/auth";
+import { getPayload } from "~/payload/utils";
 
 /**
  * 1. CONTEXT
@@ -28,7 +30,7 @@ import type { LifetimePlanKey } from "~/utils/stripe";
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
 	const session = await auth.api.getSession({ headers: opts.headers });
-	const user: User | null = session?.user
+	const user: null | User = session?.user
 		? {
 			...session.user,
 			createdAt: session.user.createdAt.toISOString(),
@@ -52,8 +54,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
  * errors on the backend.
  */
 const t = initTRPC.context<typeof createTRPCContext>().create({
-	transformer: superjson,
-	errorFormatter({ shape, error }) {
+	errorFormatter({ error, shape }) {
 		return {
 			...shape,
 			data: {
@@ -63,6 +64,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
 			},
 		};
 	},
+	transformer: superjson,
 });
 
 /**
@@ -118,7 +120,7 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  */
 export const publicProcedure = t.procedure.use(timingMiddleware);
 
-const authMiddleware = t.middleware(async ({ next, ctx }) => {
+const authMiddleware = t.middleware(async ({ ctx, next }) => {
 	if (ctx.session === null || ctx.user === null) {
 		throw new TRPCError({
 			code: "UNAUTHORIZED",
@@ -151,11 +153,11 @@ const authMiddleware = t.middleware(async ({ next, ctx }) => {
 
 			lifetimeMember = {
 				id: `lifetime-${ctx.user.id}`,
+				limits: plan.limits,
 				plan: ctx.user.lifetimeSubscription as string,
 				priceId: plan.priceId,
-				limits: plan.limits,
-				seats: 1,
 				referenceId: ctx.user.id,
+				seats: 1,
 				status: "active" as const,
 			};
 		}
@@ -165,9 +167,9 @@ const authMiddleware = t.middleware(async ({ next, ctx }) => {
 		activeSubscription
 			? {
 				id: activeSubscription.id,
+				limits: activeSubscription.limits,
 				plan: activeSubscription.plan,
 				priceId: activeSubscription.priceId,
-				limits: activeSubscription.limits,
 				seats: activeSubscription.seats,
 			}
 			: lifetimeMember;
@@ -175,9 +177,9 @@ const authMiddleware = t.middleware(async ({ next, ctx }) => {
 	return await next({
 		ctx: {
 			...ctx,
+			activeSubscription: activeSubscriptionContext,
 			session: ctx.session,
 			user: ctx.user,
-			activeSubscription: activeSubscriptionContext,
 		},
 	});
 });

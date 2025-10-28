@@ -1,27 +1,30 @@
 "use client";
 
 import type { TextFieldClientProps, TextFieldServerProps } from "payload";
+import type z from "zod";
+
 import { useField } from "@payloadcms/ui";
 import Sketch from "@uiw/react-color-sketch";
-import { Popover, PopoverTrigger, PopoverContent } from "~/ui/popover";
-import { Button } from "~/ui/button";
-import { useEffect, useState } from "react";
-import { api } from "~/trpc/react";
-import { cn } from "~/styles/utils";
 import { LoaderCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+
 import { useDebounce } from "~/hooks/use-debounce";
-import { type themeStylePropsSchema } from "../theme";
-import type z from "zod";
+import { cn } from "~/styles/utils";
+import { api } from "~/trpc/react";
+import { Button } from "~/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover";
+
 import { colorFormatter } from "../color-converter";
+import { type themeStylePropsSchema } from "../theme";
 
 export default function ThemeColorField({
 	field,
-}: {
-	field: {
+}: TextFieldClientProps & {
+	field: TextFieldServerProps["clientField"] & {
 		description?: string;
-		mode: "light" | "dark";
-	} & TextFieldServerProps["clientField"];
-} & TextFieldClientProps) {
+		mode: "dark" | "light";
+	};
+}) {
 	const { value } = useField<string>({ path: "activeTheme" });
 	const [open, setOpen] = useState(false);
 	const [activeTheme] = api.themes.findById.useSuspenseQuery({ id: value });
@@ -40,7 +43,7 @@ export default function ThemeColorField({
 
 	useEffect(() => {
 		async function updateThemeStyles() {
-			if (!updatedColor) return;
+			if (!updatedColor) {return;}
 			await updateThemeMutator.mutateAsync({
 				id: value,
 				mode: field.mode,
@@ -65,14 +68,14 @@ export default function ThemeColorField({
 						</p>
 					) : null}
 				</label>
-				<Popover open={open} onOpenChange={setOpen}>
+				<Popover onOpenChange={setOpen} open={open}>
 					<PopoverTrigger asChild className="col-span-2 mt-2 cursor-pointer">
 						<Button
-							variant="outline"
-							role="combobox"
 							aria-expanded={open}
 							className="relative justify-center"
+							role="combobox"
 							style={{ borderColor: currentColor }}
+							variant="outline"
 						>
 							<span
 								className="absolute left-4 h-4 w-4 rounded-full"

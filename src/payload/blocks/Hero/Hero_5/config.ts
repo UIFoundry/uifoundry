@@ -1,86 +1,87 @@
+import type { Block } from "payload";
+
 import {
 	BLOCK_GROUP_HERO,
 	BLOCK_SLUG_HERO_5,
 } from "~/payload/constants/blocks";
-import type { Block } from "payload";
-import mediaField from "~/payload/fields/media/config";
 import headerField from "~/payload/fields/header/config";
+import mediaField from "~/payload/fields/media/config";
 import subHeaderField from "~/payload/fields/subheader/config";
 
 export const Hero_5_Block: Block = {
 	slug: BLOCK_SLUG_HERO_5,
-	labels: {
-		singular: "Hero 5",
-		plural: "Hero 5's",
-	},
 	admin: {
 		group: BLOCK_GROUP_HERO,
 	},
-	interfaceName: "Hero_5_Block",
 	fields: [
 		{
 			type: "collapsible",
-			label: "New Update Alert",
 			admin: {
 				initCollapsed: true,
 			},
 			fields: [
 				{
 					name: "alertLabel",
-					label: "Alert Label",
-					defaultValue: "Introducing Support for AI Models",
 					type: "text",
+					defaultValue: "Introducing Support for AI Models",
+					label: "Alert Label",
 				},
 				{
 					name: "alertLink",
-					label: "Alert Link (href)",
-					defaultValue: "/new-models",
 					type: "text",
+					defaultValue: "/new-models",
+					label: "Alert Link (href)",
 				},
 			],
+			label: "New Update Alert",
 		},
 		headerField(),
 		subHeaderField(),
 		{
-			label: "Primary Call To Action",
 			type: "collapsible",
 			fields: [
 				{
 					name: "primaryCtaLabel",
-					label: "Primary Call To Action: Label",
 					type: "text",
-					required: true,
 					defaultValue: "Start Building",
+					label: "Primary Call To Action: Label",
+					required: true,
 				},
 				{
 					name: "primaryCtaHref",
-					label: "Primary Call To Action: Link (href)",
 					type: "text",
-					required: true,
 					defaultValue: "/getting-started",
+					label: "Primary Call To Action: Link (href)",
+					required: true,
 				},
 			],
+			label: "Primary Call To Action",
 		},
 		{
-			label: "Secondary Call To Action",
 			type: "collapsible",
 			fields: [
 				{
 					name: "secondaryCtaLabel",
-					label: "Secondary Call To Action: Label",
 					type: "text",
-					required: true,
 					defaultValue: "Request a demo",
+					label: "Secondary Call To Action: Label",
+					required: true,
 				},
 				{
 					name: "secondaryCtaHref",
-					label: "Secondary Call To Action: Link (href)",
 					type: "text",
-					required: true,
 					defaultValue: "/request-demo",
+					label: "Secondary Call To Action: Link (href)",
+					required: true,
 				},
 			],
+			label: "Secondary Call To Action",
 		},
 		mediaField(),
 	],
+	interfaceName: "Hero_5_Block",
+	labels: {
+		plural: "Hero 5's",
+		singular: "Hero 5",
+	},
 };

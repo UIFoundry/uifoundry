@@ -1,18 +1,21 @@
 "use client";
 
 import type { TextFieldClientProps } from "payload";
+
 import { useField } from "@payloadcms/ui";
 import Sketch from "@uiw/react-color-sketch";
-import { Popover, PopoverTrigger, PopoverContent } from "~/ui/popover";
-import { Button } from "~/ui/button";
 import { useState } from "react";
+
 import type { TextField } from "~/payload/fields";
+
+import { Button } from "~/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover";
 
 export default function ColorField({
   field,
   path,
-}: { field: { description?: string } & TextField } & TextFieldClientProps) {
-  const { value, setValue } = useField<string>({ path });
+}: TextFieldClientProps & { field: TextField & { description?: string } }) {
+  const { setValue, value } = useField<string>({ path });
   const [open, setOpen] = useState(false);
   const current = typeof value === "string" && value ? value : "#000000";
   return (
@@ -29,14 +32,14 @@ export default function ColorField({
             </p>
           ) : null}
         </label>
-        <Popover open={open} onOpenChange={setOpen}>
+        <Popover onOpenChange={setOpen} open={open}>
           <PopoverTrigger asChild className="mt-2 w-sm cursor-pointer">
             <Button
-              variant="outline"
-              role="combobox"
               aria-expanded={open}
               className="justify-between"
+              role="combobox"
               style={{ background: value }}
+              variant="outline"
             >
               {value}
             </Button>
