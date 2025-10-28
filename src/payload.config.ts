@@ -3,10 +3,10 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { s3Storage } from "@payloadcms/storage-s3";
 import path from "path";
 import { buildConfig } from "payload";
+import { redisCache } from "payloadcms-redis-plugin";
 import { fileURLToPath } from "url";
 
 import { env } from "~/env.mjs";
-import { redisCachePlugin } from "~/payload/plugins/redis-cache";
 import { seedDatabase } from "~/payload/seed";
 
 import { collections } from "./payload/collections";
@@ -89,22 +89,22 @@ export default buildConfig({
 			},
 		}),
 
-		redisCachePlugin({
-			collections: [
-				COLLECTION_SLUG_PAGES,
-				COLLECTION_SLUG_SITES,
-				COLLECTION_SLUG_THEMES,
-				COLLECTION_SLUG_USERS,
-			],
-			debug: false, // Set to true when debugging cache issues
-			defaultTTL: 300,
-			excludeCollections: [
-				COLLECTION_SLUG_SESSIONS,
-				COLLECTION_SLUG_ACCOUNTS,
-				COLLECTION_SLUG_VERIFICATIONS,
-			],
-			globals: [GLOBAL_SLUG_FOOTER, GLOBAL_SLUG_HEADER],
-			keyPrefix: "uifoundry",
+		redisCache({
+			collections: {
+				[COLLECTION_SLUG_PAGES]: true,
+				[COLLECTION_SLUG_SITES]: true,
+				[COLLECTION_SLUG_THEMES]: true,
+				[COLLECTION_SLUG_USERS]: true,
+			},
+			debug: true, // Set to true when debugging cache issues
+			defaultCacheOptions: {
+				keyPrefix: "uifoundry",
+				ttl: 300,
+			},
+			globals: {
+				[GLOBAL_SLUG_FOOTER]: true,
+				[GLOBAL_SLUG_HEADER]: true,
+			},
 			redis: {
 				url: env.REDIS_URL,
 			},

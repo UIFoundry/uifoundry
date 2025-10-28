@@ -27,13 +27,17 @@ export default function ImportThemePopover({ path }: { path: string }) {
 				return;
 			}
 			const theme = parseCssInput(data.themeCss);
-			if (!theme || (!theme.lightColors && !theme.darkColors)) {return;}
+			if (!theme || (!theme.lightColors && !theme.darkColors)) {
+				return;
+			}
 			const res = await createThemeMutator.mutateAsync({
 				name: data.themeName,
 				dark: theme.darkColors,
 				light: theme.lightColors,
 			});
-			if (!res.success) {return;}
+			if (!res.success) {
+				return;
+			}
 			if (data.setThemeOnImport) {
 				setValue(res.data.id);
 				formApi.reset();
@@ -71,9 +75,12 @@ export default function ImportThemePopover({ path }: { path: string }) {
 				name="themeName"
 				validators={{
 					onChange: ({ value }) => {
-						if (!value) {return "A theme name is required";}
-						if (value.length < 3)
-							{return "Theme name must be at least three characters";}
+						if (!value) {
+							return "A theme name is required";
+						}
+						if (value.length < 3) {
+							return "Theme name must be at least three characters";
+						}
 						return undefined;
 					},
 				}}
@@ -98,8 +105,12 @@ export default function ImportThemePopover({ path }: { path: string }) {
 				name="themeCss"
 				validators={{
 					onChange: ({ value }) => {
-						if (!value) {return "Theme css contents are required";}
-						if (value.length < 3) {return "Theme css contents are required";}
+						if (!value) {
+							return "Theme css contents are required";
+						}
+						if (value.length < 3) {
+							return "Theme css contents are required";
+						}
 						return undefined;
 					},
 				}}
@@ -125,14 +136,14 @@ export default function ImportThemePopover({ path }: { path: string }) {
 				name="setThemeOnImport"
 			/>
 			<form.Subscribe
-				// eslint-disable-next-line react/no-children-prop
-				children={([canSubmit, isSubmitting]) => (
+				selector={(state) => [state.canSubmit, state.isSubmitting]}
+			>
+				{([canSubmit, isSubmitting]) => (
 					<Button disabled={!canSubmit} type="submit">
 						{isSubmitting ? "..." : "Import"}
 					</Button>
 				)}
-				selector={(state) => [state.canSubmit, state.isSubmitting]}
-			/>
+			</form.Subscribe>
 		</form>
 	);
 }
