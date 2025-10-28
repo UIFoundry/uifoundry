@@ -144,8 +144,8 @@ importers:
         specifier: ^3.61.1
         version: 3.61.1(graphql@16.11.0)(typescript@5.9.2)
       payloadcms-redis-plugin:
-        specifier: ^0.2.9
-        version: 0.2.9(payload@3.61.1(graphql@16.11.0)(typescript@5.9.2))
+        specifier: ^0.2.13
+        version: 0.2.13(payload@3.61.1(graphql@16.11.0)(typescript@5.9.2))
       react:
         specifier: ^19.2.0
         version: 19.2.0
@@ -6283,8 +6283,8 @@ packages:
     peerDependencies:
       graphql: ^16.8.1
 
-  payloadcms-redis-plugin@0.2.9:
-    resolution: {integrity: sha512-px1rxxVQygiGR557RrRw7Y/zKyLx/PpLXFacHhiTy4iJryOEV7s/RDR03Y3HvzxGzvBAXHV/qAweDDVwxLLciA==}
+  payloadcms-redis-plugin@0.2.13:
+    resolution: {integrity: sha512-gDgdSynAXp7iiItqHIVvIW1E3mdrtUAUl8VhzZsIgUsgjDYsp9Tv1CBAQrhT6SmBSZAnzLn8xb+oegLGOqk1xw==}
     engines: {node: ^18.20.2 || >=20.9.0, pnpm: ^9 || ^10}
     peerDependencies:
       payload: ^3.37.0
@@ -15173,7 +15173,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  payloadcms-redis-plugin@0.2.9(payload@3.61.1(graphql@16.11.0)(typescript@5.9.2)):
+  payloadcms-redis-plugin@0.2.13(payload@3.61.1(graphql@16.11.0)(typescript@5.9.2)):
     dependencies:
       ioredis: 5.8.2
       payload: 3.61.1(graphql@16.11.0)(typescript@5.9.2)

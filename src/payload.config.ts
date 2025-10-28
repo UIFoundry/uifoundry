@@ -92,7 +92,9 @@ export default buildConfig({
 		redisCache({
 			collections: {
 				[COLLECTION_SLUG_PAGES]: true,
-				[COLLECTION_SLUG_SITES]: true,
+				[COLLECTION_SLUG_SITES]: {
+					versions: true,
+				},
 				[COLLECTION_SLUG_THEMES]: true,
 				[COLLECTION_SLUG_USERS]: true,
 			},
