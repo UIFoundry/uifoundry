@@ -8,6 +8,7 @@ import type { TextField } from "~/payload/fields";
 import { createTRPCServer, HydrateClient } from "~/trpc/server";
 
 import ThemeColorFieldClient from "./client";
+import Loader from "./loading"
 
 export default async function ThemeColorField({
 	clientField,
@@ -29,7 +30,7 @@ export default async function ThemeColorField({
 	}
 
 	return (
-		<HydrateClient>
+		<HydrateClient fallback={<Loader field={{ mode: field.mode, ...clientField }} path={path} />}>
 			<ThemeColorFieldClient
 				field={{ mode: field.mode, ...clientField }}
 				path={path}
