@@ -50,7 +50,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 		const { api, queryClient, trpc } = await createTRPCServer()
 		const hello = await api.post.hello({ text: "from tRPC" });
 
-		void queryClient.prefetchQuery(trpc.post.hello.queryOptions({ text: "from tRPC" }));
+		await queryClient.prefetchQuery(trpc.post.hello.queryOptions({ text: "from tRPC" }));
 
 		return (
 			<HydrateClient>

@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-query";
 import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import { headers } from "next/headers";
-import { cache, type ComponentPropsWithRef } from "react";
+import { cache, type ComponentPropsWithRef, type ReactNode, Suspense } from "react";
 
 import { appRouter, createCaller } from "~/server/api/root";
 import { createTRPCContext } from "~/server/api/trpc";
@@ -27,12 +27,15 @@ export async function createTRPCServer() {
 
 export function HydrateClient({
 	children,
+	fallback = null,
 	...divProps
-}: ComponentPropsWithRef<"div">) {
+}: ComponentPropsWithRef<"div"> & { fallback?: ReactNode }) {
 	const queryClient = getQueryClientServer()
 	return (
-		<HydrationBoundary state={dehydrate(queryClient)} {...divProps}>
-			{children}
-		</HydrationBoundary>
+		<Suspense fallback={fallback} {...divProps}>
+			<HydrationBoundary state={dehydrate(queryClient)}>
+				{children}
+			</HydrationBoundary>
+		</Suspense>
 	);
 }
