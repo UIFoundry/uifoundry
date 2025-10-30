@@ -1,26 +1,32 @@
 "use client";
 
+import {
+	useMutation,
+	useQueryClient,
+	useSuspenseQuery,
+} from "@tanstack/react-query";
 import { useState } from "react";
 
-import { api } from "~/trpc/react";
+import { trpc } from "~/trpc/react";
 
 export function LatestPost() {
-	const [latestPost] = api.post.getLatest.useSuspenseQuery();
+	const queryClient = useQueryClient();
+	const latestPost = useSuspenseQuery(trpc.post.getLatest.queryOptions());
 
-	const utils = api.useUtils();
 	const [name, setName] = useState("");
-	const createPost = api.post.create.useMutation({
-		onSuccess: async () => {
-			await utils.post.invalidate();
-			setName("");
-		},
-	});
+	const createPost = useMutation(
+		trpc.post.create.mutationOptions({
+			onSuccess: async () => {
+				await queryClient.invalidateQueries(trpc.post.pathFilter());
+			},
+		}),
+	);
 
 	return (
 		<div className="w-full max-w-xs">
-			{latestPost.success && latestPost.data ? (
+			{latestPost.isSuccess && latestPost.data.success ? (
 				<p className="truncate">
-					Your most recent post: {latestPost.data.name}
+					Your most recent post: {latestPost.data.data.name}
 				</p>
 			) : (
 				<p>You have no posts yet.</p>
