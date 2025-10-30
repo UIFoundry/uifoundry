@@ -5,7 +5,7 @@ import type { TextFieldServerProps } from "payload";
 import type { Site } from "~/payload-types";
 import type { TextField } from "~/payload/fields";
 
-import { api } from "~/trpc/server";
+import { createTRPCServer, HydrateClient } from "~/trpc/server";
 
 import ThemeColorFieldClient from "./client";
 
@@ -18,18 +18,22 @@ export default async function ThemeColorField({
 	data: Site;
 	field: TextField & { description?: string; mode: "dark" | "light" };
 }) {
+	const { queryClient, trpc } = await createTRPCServer()
+
 	if (data?.activeTheme) {
 		if (typeof data.activeTheme === "string") {
-			await api.themes.findById.prefetch({ id: data.activeTheme });
+			await queryClient.prefetchQuery(trpc.themes.findById.queryOptions({ id: data.activeTheme }))
 		} else {
-			await api.themes.findById.prefetch({ id: data.activeTheme.id });
+			await queryClient.prefetchQuery(trpc.themes.findById.queryOptions({ id: data.activeTheme.id }))
 		}
 	}
 
 	return (
-		<ThemeColorFieldClient
-			field={{ mode: field.mode, ...clientField }}
-			path={path}
-		/>
+		<HydrateClient>
+			<ThemeColorFieldClient
+				field={{ mode: field.mode, ...clientField }}
+				path={path}
+			/>
+		</HydrateClient>
 	);
 }

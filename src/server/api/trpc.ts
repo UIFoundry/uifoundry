@@ -7,6 +7,7 @@
  * need to use are documented accordingly near the end.
  */
 import { initTRPC, TRPCError } from "@trpc/server";
+import { headers } from "next/headers";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
@@ -28,8 +29,8 @@ import { getPayload } from "~/payload/utils";
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { headers: Headers }) => {
-	const session = await auth.api.getSession({ headers: opts.headers });
+export const createTRPCContext = async (opts?: { headers: Headers }) => {
+	const session = await auth.api.getSession({ headers: opts?.headers ?? await headers() });
 	const user: null | User = session?.user
 		? {
 			...session.user,

@@ -53,13 +53,13 @@ export default buildConfig({
 	serverURL: `${env.NEXT_PUBLIC_BETTER_AUTH_URL}`,
 
 	// Your Payload secret - should be a complex and secure string, unguessable
-	secret: env.PAYLOAD_SECRET || "",
+	secret: env.PAYLOAD_SECRET ?? "",
 	// Whichever Database Adapter you're using should go here
 	// Mongoose is shown as an example, but you can also use Postgres
 	db: mongooseAdapter({
 		allowIDOnCreate: true,
 		transactionOptions: false,
-		url: env.DATABASE_URI || "",
+		url: env.DATABASE_URI ?? "",
 	}),
 
 	// If you want to resize images, crop, set focal point, etc.
@@ -97,7 +97,7 @@ export default buildConfig({
 				},
 				[COLLECTION_SLUG_USERS]: true,
 			},
-			debug: true, // Set to true when debugging cache issues
+			debug: env.NODE_ENV !== "production", // Set to true when debugging cache issues
 			defaultCacheOptions: {
 				keyPrefix: "uifoundry",
 				ttl: 300,

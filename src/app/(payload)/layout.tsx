@@ -7,7 +7,7 @@ import config from "@payload-config";
 import { handleServerFunctions, RootLayout } from "@payloadcms/next/layouts";
 import React from "react";
 
-import { TRPCReactProvider } from "~/trpc/react";
+import { TRPCReactProvider } from "~/trpc/client";
 import "~/payload/styles.css";
 
 import { importMap } from "./admin/importMap.js";

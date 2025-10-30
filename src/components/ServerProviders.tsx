@@ -3,7 +3,7 @@ import { type PropsWithChildren } from "react";
 
 import { BetterAuthProvider } from "~/auth/context";
 import { getContextProps } from "~/auth/utils";
-import { TRPCReactProvider } from "~/trpc/react";
+import { TRPCReactProvider } from "~/trpc/client";
 
 export default function ServerProviders({ children }: PropsWithChildren) {
 	return (
