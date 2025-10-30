@@ -97,7 +97,7 @@ export default buildConfig({
 				},
 				[COLLECTION_SLUG_USERS]: true,
 			},
-			debug: true, // Set to true when debugging cache issues
+			debug: env.NODE_ENV !== "production", // Set to true when debugging cache issues
 			defaultCacheOptions: {
 				keyPrefix: "uifoundry",
 				ttl: 300,
