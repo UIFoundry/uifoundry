@@ -19,7 +19,7 @@ import Footer from "~/payload/globals/Footer";
 import Header from "~/payload/globals/Header";
 import { getPayload } from "~/payload/utils";
 import { cn } from "~/styles/utils";
-import { api, HydrateClient } from "~/trpc/server";
+import { createTRPCServer, HydrateClient } from "~/trpc/server";
 
 interface PageParams {
 	params: Promise<{
@@ -49,9 +49,10 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 
 	const sitePages = site.pages!.docs;
 	if (!sitePages) {
+		const { api, queryClient, trpc } = await createTRPCServer();
 		const hello = await api.post.hello({ text: "from tRPC" });
 
-		void api.post.getLatest.prefetch();
+		await queryClient.prefetchQuery(trpc.post.hello.queryOptions({ text: "from tRPC" }));
 
 		return (
 			<HydrateClient>

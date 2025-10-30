@@ -1,10 +1,15 @@
 "use client";
 
+import {
+	useMutation,
+	useQueryClient,
+	useSuspenseQuery,
+} from "@tanstack/react-query";
 import { CheckCircle2 } from "lucide-react";
 import React, { type MouseEvent } from "react";
 
 import { cn } from "~/styles/utils";
-import { api, type RouterOutputs } from "~/trpc/react";
+import { type RouterOutputs, useTRPC } from "~/trpc/client";
 import { Button } from "~/ui/button";
 import {
 	Card,
@@ -38,14 +43,18 @@ const PricingCard = ({
 	price,
 	priceId,
 }: PricingCardProps) => {
+	const trpc = useTRPC();
+	const queryClient = useQueryClient();
+
 	const openSeats =
 		lifetimeUserCount > minSeats && lifetimeUserCount - minSeats < maxSeats;
 	const isActiveSub =
 		activeSubscription?.name === name &&
 		activeSubscription?.priceId === priceId;
-	const apiUtils = api.useUtils();
 
-	const createCheckout = api.stripe.createCheckoutSession.useMutation();
+	const createCheckout = useMutation(
+		trpc.stripe.createCheckoutSession.mutationOptions(),
+	);
 
 	async function handleSubscriptionChangeRequest(_e: MouseEvent) {
 		// For one-time payments, we don't support cancellation
@@ -71,7 +80,7 @@ const PricingCard = ({
 			alert("Failed to create checkout session. Please try again.");
 		}
 
-		await apiUtils.stripe.invalidate();
+		await queryClient.invalidateQueries(trpc.stripe.pathFilter());
 		console.log("invalidated client subscription queries");
 	}
 
@@ -145,9 +154,13 @@ const PricingHeader = ({
 );
 
 export default function SubscriptionsPage() {
-	const [subscriptionStatus] =
-		api.stripe.getSubscriptionStatus.useSuspenseQuery();
-	const [lifetimeUserCount] = api.users.getLifetimeUserCount.useSuspenseQuery();
+	const trpc = useTRPC();
+	const subscriptionStatus = useSuspenseQuery(
+		trpc.stripe.getSubscriptionStatus.queryOptions(),
+	);
+	const lifetimeUserCount = useSuspenseQuery(
+		trpc.users.getLifetimeUserCount.queryOptions(),
+	);
 
 	return (
 		<div className="grid h-full w-full place-items-center py-8">
@@ -163,12 +176,14 @@ export default function SubscriptionsPage() {
 								key={plan.name}
 								{...plan}
 								activeSubscription={
-									subscriptionStatus?.success
-										? subscriptionStatus.data
+									subscriptionStatus?.data.success
+										? subscriptionStatus.data.data
 										: undefined
 								}
 								lifetimeUserCount={
-									lifetimeUserCount.success ? lifetimeUserCount.data : 0
+									lifetimeUserCount.data.success
+										? lifetimeUserCount.data.data
+										: 0
 								}
 							/>
 						);

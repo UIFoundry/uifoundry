@@ -21,7 +21,7 @@ import {
 import TailwindConfig from "~/payload/globals/SiteConfig";
 import { getPayload } from "~/payload/utils";
 import { cn } from "~/styles/utils";
-import { api, HydrateClient } from "~/trpc/server";
+import { createTRPCServer, HydrateClient } from "~/trpc/server";
 
 interface PageParams {
 	searchParams: Promise<Record<string, string | string[]>>;
@@ -54,9 +54,10 @@ export default async function Page({
 	const page = pageRes?.docs?.[0] as null | PageType;
 
 	if (!page) {
+		const { api, queryClient, trpc } = await createTRPCServer();
 		const hello = await api.post.hello({ text: "from tRPC" });
 
-		void api.post.getLatest.prefetch();
+		await queryClient.prefetchQuery(trpc.post.hello.queryOptions({ text: "from tRPC" }));
 
 		return (
 			<HydrateClient>

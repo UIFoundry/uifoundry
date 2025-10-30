@@ -2,8 +2,9 @@
 
 import { useField } from "@payloadcms/ui";
 import { useForm } from "@tanstack/react-form";
+import { useMutation } from "@tanstack/react-query";
 
-import { api } from "~/trpc/react";
+import { useTRPC } from "~/trpc/client";
 import { Button } from "~/ui/button";
 import { Input } from "~/ui/input";
 import { Label } from "~/ui/label";
@@ -12,8 +13,9 @@ import { Textarea } from "~/ui/textarea";
 import { parseCssInput } from "./parse-css-input";
 
 export default function ImportThemePopover({ path }: { path: string }) {
+	const trpc = useTRPC()
 	const { setValue } = useField<string>({ path });
-	const createThemeMutator = api.themes.create.useMutation();
+	const createThemeMutator = useMutation(trpc.themes.create.mutationOptions());
 
 	const form = useForm({
 		defaultValues: {
