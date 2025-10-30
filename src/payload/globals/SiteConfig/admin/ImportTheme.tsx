@@ -4,7 +4,7 @@ import { useField } from "@payloadcms/ui";
 import { useForm } from "@tanstack/react-form";
 import { useMutation } from "@tanstack/react-query";
 
-import { useTRPC } from "~/trpc/react";
+import { useTRPC } from "~/trpc/client";
 import { Button } from "~/ui/button";
 import { Input } from "~/ui/input";
 import { Label } from "~/ui/label";

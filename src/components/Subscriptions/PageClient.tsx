@@ -9,7 +9,7 @@ import { CheckCircle2 } from "lucide-react";
 import React, { type MouseEvent } from "react";
 
 import { cn } from "~/styles/utils";
-import { type RouterOutputs, useTRPC } from "~/trpc/react";
+import { type RouterOutputs, useTRPC } from "~/trpc/client";
 import { Button } from "~/ui/button";
 import {
 	Card,

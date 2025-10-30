@@ -5,14 +5,8 @@ import PageClient from "./PageClient";
 export default async function SubscriptionsPage() {
 	const { queryClient, trpc } = await createTRPCServer()
 	await Promise.all([
-		queryClient.prefetchQuery({
-			queryFn: () => trpc.users.getLifetimeUserCount(),
-			queryKey: [["users", "getLifetimeUserCount"], {}, "query"]
-		}),
-		queryClient.prefetchQuery({
-			queryFn: () => trpc.stripe.getSubscriptionStatus(),
-			queryKey: [["stripe", "getSubscriptionStatus"], {}, "query"]
-		})
+		queryClient.prefetchQuery(trpc.users.getLifetimeUserCount.queryOptions()),
+		queryClient.prefetchQuery(trpc.stripe.getSubscriptionStatus.queryOptions())
 	]);
 
 	return (

@@ -7,9 +7,10 @@ import {
 } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { trpc } from "~/trpc/react";
+import { useTRPC } from "~/trpc/client";
 
 export function LatestPost() {
+	const trpc = useTRPC()
 	const queryClient = useQueryClient();
 	const latestPost = useSuspenseQuery(trpc.post.getLatest.queryOptions());
 

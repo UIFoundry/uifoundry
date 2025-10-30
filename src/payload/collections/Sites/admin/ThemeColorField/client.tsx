@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 import { useDebounce } from "~/hooks/use-debounce";
 import { cn } from "~/styles/utils";
-import { useTRPC } from "~/trpc/react";
+import { useTRPC } from "~/trpc/client";
 import { Button } from "~/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/popover";
 

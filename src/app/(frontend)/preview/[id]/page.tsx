@@ -50,13 +50,10 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 
 	const sitePages = site.pages?.docs;
 	if (!sitePages) {
-		const { queryClient, trpc } = await createTRPCServer();
-		const hello = await trpc.post.hello({ text: "from tRPC" });
+		const { api, queryClient, trpc } = await createTRPCServer();
+		const hello = await api.post.hello({ text: "from tRPC" });
 
-		void queryClient.prefetchQuery({
-			queryFn: () => trpc.post.getLatest(),
-			queryKey: [["post", "getLatest"], { input: { text: "from tRPC" } }, "query"],
-		});
+		void queryClient.prefetchQuery(trpc.post.hello.queryOptions({ text: "from tRPC" }));
 
 		return (
 			<HydrateClient>

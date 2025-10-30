@@ -2,7 +2,7 @@
 
 import type { TextFieldServerProps } from "payload";
 
-import type { Site, Theme } from "~/payload-types";
+import type { Site } from "~/payload-types";
 import type { TextField } from "~/payload/fields";
 
 import { createTRPCServer, HydrateClient } from "~/trpc/server";
@@ -22,15 +22,9 @@ export default async function ThemeColorField({
 
 	if (data?.activeTheme) {
 		if (typeof data.activeTheme === "string") {
-			await queryClient.prefetchQuery({
-				queryFn: () => trpc.themes.findById({ id: data.activeTheme as string }),
-				queryKey: [["themes", "findById"], { input: { id: data.activeTheme } }, "query"]
-			})
+			await queryClient.prefetchQuery(trpc.themes.findById.queryOptions({ id: data.activeTheme }))
 		} else {
-			await queryClient.prefetchQuery({
-				queryFn: () => trpc.themes.findById({ id: (data.activeTheme as Theme).id }),
-				queryKey: [["themes", "findById"], { input: { id: data.activeTheme } }, "query"]
-			})
+			await queryClient.prefetchQuery(trpc.themes.findById.queryOptions({ id: data.activeTheme.id }))
 		}
 	}
 
