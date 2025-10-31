@@ -27,6 +27,7 @@ export const BLOCK_SLUG_FOOTER_5 = "footer_5" as const;
 export const BLOCK_GROUP_FEATURES = "Features" as const;
 export const BLOCK_SLUG_FEATURES_1 = "features_1" as const;
 export const BLOCK_SLUG_FEATURES_2 = "features_2" as const;
+export const BLOCK_SLUG_FEATURES_3 = "features_3" as const;
 
 // Hero
 export const BLOCK_GROUP_HERO = "Hero" as const;
@@ -39,6 +40,8 @@ export const BLOCK_SLUG_HERO_5 = "hero_5" as const;
 // CTA (Call to Action)
 export const BLOCK_GROUP_CTA = "CTA" as const;
 export const BLOCK_SLUG_CTA_1 = "cta_1" as const;
+export const BLOCK_SLUG_CTA_2 = "cta_2" as const;
+export const BLOCK_SLUG_CTA_3 = "cta_3" as const;
 
 // Testimonials
 export const BLOCK_GROUP_TESTIMONIALS = "Testimonials" as const;
@@ -51,6 +54,8 @@ export const BLOCK_SLUG_FAQ_1 = "faq_1" as const;
 // Pricing
 export const BLOCK_GROUP_PRICING = "Pricing" as const;
 export const BLOCK_SLUG_PRICING_1 = "pricing_1" as const;
+export const BLOCK_SLUG_PRICING_2 = "pricing_2" as const;
+export const BLOCK_SLUG_PRICING_3 = "pricing_3" as const;
 
 // About
 export const BLOCK_GROUP_ABOUT = "About" as const;

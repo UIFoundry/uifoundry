@@ -70,9 +70,11 @@ pnpm dev
 
 ## Roadmap
 
-A living, stage‑based plan (no version numbers). Docs‑first: document every block as it's built with Fumadocs.
+A living, stage‑based plan (no version numbers). Focus: Ship AI-powered site builder with essential marketing blocks.
 
 Legend: [x] done · [ ] planned · (MVP) minimum viable for the stage
+
+> **Note:** Original comprehensive roadmap archived at `agent-os/archive/README-original-roadmap-2025-10-30.md`
 
 ### Completed (summary)
 
@@ -86,9 +88,9 @@ Stage 0 — Initial Setup (completed items so far)
 - [x] Styled Payload Admin (`src/payload/styles.css`)
 - [x] Example site pages + preview flow (`src/app/(frontend)/*`)
 
-### Stage 0 — Initial Release (Docs + Registry + Blocks + Multi‑site + RBAC)
+### Stage 0 — MVP Marketing Blocks (Essential Blocks Only)
 
-Goal: a working, self‑hostable Next.js + Payload starter with a UIFoundry registry, docs, multi‑tenancy, and access control.
+Goal: Build minimal set of marketing blocks needed to enable AI site generation.
 
 **Scope (MVP)**
 
@@ -103,105 +105,149 @@ Goal: a working, self‑hostable Next.js + Payload starter with a UIFoundry regi
 - [x] Fumadocs scaffold inside repo
 - [x] "Import Theme" UI in Payload Tailwind Config global (`src/payload/globals/TailwindConfig/*`): paste JSON and file upload → preview → Apply
 - [x] One‑click apply writes to Tailwind Config global fields and injects `<style>` via existing component
-- [ ] **Multi‑site architecture:** Data model + guards to isolate content by `Site` (`src/payload/collections/Sites.ts`)
-- [ ] **RBAC system:** Link users↔sites, choose active site context in admin
-- [ ] **Role‑based permissions:** Roles (Owner, Admin, Editor, Viewer) enforced in Payload access rules
-- [ ] **Role‑aware UI:** Admin interface affordances where applicable
-- [ ] **Template architecture planning:** Document single‑site vs multi‑site hosting strategy and implementation approach
-- [ ] Marketing blocks initial set (target 5 per type; stretch 7)
-- [ ] Documentation for each shipped block/component
-- [ ] Block metadata: tags (array of strings) and optional default-content templates (for Stage 2 agents)
+- [ ] Marketing blocks: 3 variants each (sufficient for AI to generate varied sites)
+- [ ] Block metadata: tags (array of strings) and default-content templates for AI site builder
+- [ ] Basic documentation for blocks (reference, not comprehensive)
 - [ ] Quickstart docs in README (install, dev, build, deploy)
-- [ ] Export current theme as JSON
 
-**Marketing blocks checklist (MVP - target 5 of each)**
+**Marketing blocks checklist (MVP - target 3 variants each)**
 
-- [x] Hero (5/5) ✅
-- [x] Header (5/5) ✅
-- [x] Footer (5/5) ✅
-- [ ] Features (2/5)
-- [ ] Pricing (0/5)
-- [ ] Testimonials (0/5)
-- [ ] FAQ (0/5)
-- [ ] CTA (0/5)
-- [ ] Gallery (0/5)
-- [ ] Stats (0/5)
-- [ ] Teams (0/5)
-- [ ] Newsletter (0/5)
-- [ ] About (0/5)
-- [ ] Contact (0/5)
-- [ ] Feedback (0/5)
+- [x] Hero (5/3) ✅ *exceeds target*
+- [x] Header (5/3) ✅ *exceeds target*
+- [x] Footer (5/3) ✅ *exceeds target*
+- [ ] Features (2/3) - need 1 more
+- [ ] Pricing (0/3) - need 3
+- [ ] CTA (0/3) - need 3
+- [ ] Testimonials (0/3) - optional for MVP
+- [ ] FAQ (0/3) - optional for MVP
+- [ ] Contact (0/3) - optional for MVP
 
 **Exit criteria**
 
 - `pnpm build` passes and generates Payload types
-- New project boots locally; admin loads; content edits render on the sample site
-- UIFoundry Registry can add/update blocks; each shipped block has a doc page
-- Multi‑site isolation working: users see only their sites' content in admin
-- RBAC enforced: different user roles have appropriate access levels
-- Template architecture strategy documented and validated
-- README quickstart lets a new user go 0→1 without external help
+- 9-12 total marketing blocks across essential types (Hero, Header, Footer, Features, Pricing, CTA)
+- Each block has metadata (tags, default content) for AI site builder
+- Basic block documentation exists
+- Blocks have good defaults and work with AI-generated content
 
-### Stage 1 — Template Export
+### Stage 1 — AI Site Builder (Priority)
 
-Goal: optional template repository generation for developers who want self-hosted single-site solutions.
+Goal: Enable AI-powered full site generation from user prompts. This is the core differentiator.
 
 **Scope (MVP)**
 
-- [ ] Template repository generator (creates blank single‑site repo)
-- [ ] Site configuration transformation (multi‑site → single‑site payload.config.ts)
-- [ ] GitHub integration for automated template repo creation
-- [ ] Template includes all field hook optimizations (headerField, etc.)
-- [ ] Full shadcn registry compatibility for exported templates
-- [ ] Site content export as seed data or default configuration
-- [ ] Template repo documentation and setup instructions
-
-### Stage 2 — Custom domains + LLM site builders (combined)
-
-Goal: production‑ready hosting and AI‑assisted full‑site creation.
-
-**Custom domains**
-
-- [ ] Domain mapping model (domain↔site)
-- [ ] SST infrastructure for DNS/SSL (CloudFront/ALB + Route53 or documented alternative)
-- [ ] Domain verification and status surfaced in admin
-
-**LLM site builders (full sites)**
-
-- [ ] Accept brief → plan sitemap (home, features, pricing, about, contact, etc.)
-- [ ] Select blocks by tags; map sitemap sections to compatible blocks
-- [ ] Populate Payload DB: create Site + Pages with block arrays and reasonable field inputs based on each block's config/defaults
-- [ ] One‑off generation: allow generating a single page/section using tags
-- [ ] Guardrails: dry‑run preview, diff, and approval before writing; rollback path
+- [ ] **AI chat interface** for collecting site requirements (Next.js App Router + Vercel AI SDK)
+- [ ] **SQS + Lambda job queue** for async site generation (avoid timeouts)
+- [ ] **Site structure analyzer agent**: Parse user prompt → determine site structure (business type, sections needed, tone, colors)
+- [ ] **Block selector agent**: Choose appropriate blocks based on site structure + block tags/metadata
+- [ ] **Content generator agent**: Generate content for each block using block schemas (Zod validation)
+- [ ] **Database population**: Create Site + Pages with fully populated blocks in MongoDB
+- [ ] **Real-time progress updates**: Show user site generation progress (WebSocket or polling)
+- [ ] **Theme generation**: AI generates color scheme + typography based on user input
+- [ ] **Preview before publish**: User can review generated site before going live
+- [ ] **Block metadata system**: Tags, default content templates, and AI prompts for each block type
 
 **Exit criteria**
 
-- From a brief, generate a full site (sitemap → pages → blocks) and review/publish it
-- Custom domain attached with valid SSL; misconfigurations are detectable
+- User provides prompt → AI generates complete site (3-5 pages, 10-15 blocks)
+- Generated sites have good content quality (not generic placeholders)
+- Site generation completes in 30-90 seconds
+- User can preview and edit before publishing
+- AI reliably selects appropriate blocks for each section
 
-### Stage 3 — Form builder plugin (MVP)
+### Stage 2 — Custom Domains (CNAME Support)
 
-- [ ] Form schema builder (fields, validation, layout) and renderer block
-- [ ] Submissions stored; basic spam protection; optional email/webhook
+Goal: Enable users to connect custom domains to their AI-generated sites. Essential for paid hosting.
 
-### Backlog / Ideas (not scheduled)
+**Scope (MVP)**
 
-**Template Export (developer self-hosting)**
+- [ ] **Domains global** in PayloadCMS (manage custom domains per site)
+- [ ] **CNAME-only support**: Users connect www.example.com (apex domains deferred to v2)
+- [ ] **DNS instructions UI**: Clear step-by-step guide for adding CNAME records
+- [ ] **SSL certificate provisioning**: AWS ACM + Let's Encrypt integration (automatic)
+- [ ] **DNS validation**: Check if CNAME points correctly (manual verification for MVP)
+- [ ] **CloudFront configuration**: Add custom domain as alias to distribution
+- [ ] **Domain status tracking**: Pending → Verifying → Active → Error states
+- [ ] **Basic error handling**: Show helpful messages when DNS misconfigured
+- [ ] **One domain per site**: Limit to single custom domain in MVP (multiple domains in v2)
 
-- [ ] Template repository generator (creates blank single-site repo)
-- [ ] Site configuration transformation (multi-site → single-site payload.config.ts)
-- [ ] GitHub integration for automated template repo creation
-- [ ] Template includes all field hook optimizations (headerField, etc.)
-- [ ] Full shadcn registry compatibility (devs can add any payload components)
-- [ ] Site content export as seed data or default configuration
-- [ ] Template repo documentation and setup instructions
+**Exit criteria**
+
+- User can add www.example.com to their site
+- DNS instructions are clear and accurate
+- SSL certificate provisions automatically
+- Site accessible via custom domain with HTTPS
+- Errors are surfaced with actionable guidance
+
+### Stage 3 — Subscription & Payments
+
+Goal: Enable paid hosting tiers and monetize the platform.
+
+**Scope (MVP)**
+
+- [ ] **Stripe integration**: Subscription management with Stripe Checkout
+- [ ] **Pricing tiers**: Free (1 site, uifoundry.dev subdomain), Starter ($15/mo, custom domain), Pro ($30/mo, 3 sites)
+- [ ] **Subscription enforcement**: Check user tier before allowing site creation or domain addition
+- [ ] **Billing portal**: Users can manage subscription, update payment method, view invoices
+- [ ] **Usage tracking**: Track sites per user, enforce limits
+- [ ] **Cancellation flow**: Graceful downgrade, site archival (not deletion)
+
+**Exit criteria**
+
+- Users can subscribe to paid tiers via Stripe
+- Subscription status controls feature access (domains, site count)
+- Billing portal works for managing subscription
+- Revenue tracking works correctly
+
+### Stage 4 — Polish & Growth
+
+Goal: Improve quality, add more blocks, optimize for conversions.
+
+**Scope**
+
+- [ ] Additional marketing blocks (Testimonials, FAQ, Contact - 3 variants each)
+- [ ] Improved AI content quality (better prompts, examples, validation)
+- [ ] Site editing after generation (AI can regenerate individual blocks)
+- [ ] More theme options (dark mode, brand presets)
+- [ ] SEO optimization (meta tags, structured data, sitemap)
+- [ ] Performance optimization (image optimization, lazy loading)
+- [ ] Analytics integration (privacy-friendly by default)
+- [ ] Email notifications (site published, domain verified, payment failed)
+
+### Backlog / Future Ideas (not scheduled)
+
+**Multi-site & RBAC (Deferred)**
+
+- Multi-site architecture: Data model + guards to isolate content by Site
+- RBAC system: Link users↔sites, roles (Owner, Admin, Editor, Viewer)
+- Role-based permissions: Enforced in Payload access rules
+- Role-aware UI: Admin interface affordances
+
+**Apex Domain Support (v2)**
+
+- Support for example.com (not just www.example.com)
+- ALIAS records for Route 53 users
+- Redirect service for other DNS providers
+- Automatic www ↔ apex redirects
+
+**Template Export (Developer Self-Hosting)**
+
+- Template repository generator (creates blank single-site repo)
+- Site configuration transformation (multi-site → single-site)
+- GitHub integration for automated template repo creation
+- MIT-licensed single-site templates for developers
+
+**Form Builder Plugin**
+
+- Form schema builder (fields, validation, layout) and renderer block
+- Submissions stored; basic spam protection; optional email/webhook
 
 **Other Ideas**
 
-- Analytics integration (privacy‑friendly by default)
-- Import/export starters
+- Import/export site JSON
 - Webhooks and integrations library
 - Performance budget + Lighthouse CI
+- White label option for agencies
 
 ### Release strategy for the UIFoundry registry
 
