@@ -19,7 +19,7 @@ export default function callToActionPair(
 				required: true,
 			},
 		],
-		minRows: 0,
 		maxRows: 2,
+		minRows: 0,
 	};
 }

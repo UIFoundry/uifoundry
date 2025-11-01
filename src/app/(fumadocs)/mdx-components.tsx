@@ -328,22 +328,22 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 		},
 		// UI Components
 		Card: (props: React.ComponentProps<"div">) => <Card {...props} />,
-		CardHeader: (props: React.ComponentProps<"div">) => (
-			<CardHeader {...props} />
-		),
-		CardTitle: (props: React.ComponentProps<"div">) => <CardTitle {...props} />,
-		CardDescription: (props: React.ComponentProps<"div">) => (
-			<CardDescription {...props} />
+		CardAction: (props: React.ComponentProps<"div">) => (
+			<CardAction {...props} />
 		),
 		CardContent: (props: React.ComponentProps<"div">) => (
 			<CardContent {...props} />
 		),
+		CardDescription: (props: React.ComponentProps<"div">) => (
+			<CardDescription {...props} />
+		),
 		CardFooter: (props: React.ComponentProps<"div">) => (
 			<CardFooter {...props} />
 		),
-		CardAction: (props: React.ComponentProps<"div">) => (
-			<CardAction {...props} />
+		CardHeader: (props: React.ComponentProps<"div">) => (
+			<CardHeader {...props} />
 		),
+		CardTitle: (props: React.ComponentProps<"div">) => <CardTitle {...props} />,
 		...components,
 	};
 }

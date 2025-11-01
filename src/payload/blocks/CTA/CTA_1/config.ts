@@ -19,8 +19,6 @@ export const CTA_1_Block: Block = {
 				"Join the developers and founders building faster with UIFoundry. Choose your path and start building today.",
 		}),
 		callToActionPair({
-			minRows: 0,
-			maxRows: 2,
 			defaultValue: [
 				{
 					href: "/purchase",
@@ -31,6 +29,8 @@ export const CTA_1_Block: Block = {
 					label: "Start Hosted Trial",
 				},
 			],
+			maxRows: 2,
+			minRows: 0,
 		}),
 	],
 	interfaceName: "CTA_1_Block",

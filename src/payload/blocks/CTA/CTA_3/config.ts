@@ -19,8 +19,8 @@ export const CTA_3_Block: Block = {
 				"Join thousands of teams already using our platform to build better products faster.",
 		}),
 		callToActionPair({
-			minRows: 0,
 			maxRows: 2,
+			minRows: 0,
 		}),
 	],
 	interfaceName: "CTA_3_Block",

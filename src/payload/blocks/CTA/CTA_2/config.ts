@@ -14,8 +14,8 @@ export const CTA_2_Block: Block = {
 			defaultValue: "Action-driving headline that creates urgency",
 		}),
 		callToActionPair({
-			minRows: 0,
 			maxRows: 2,
+			minRows: 0,
 		}),
 	],
 	interfaceName: "CTA_2_Block",

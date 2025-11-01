@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import type { Pricing_2_Block } from "~/payload-types";
 
-import { cn } from "~/styles/utils";
 import { Button } from "~/ui/button";
 
 export * from "./config";

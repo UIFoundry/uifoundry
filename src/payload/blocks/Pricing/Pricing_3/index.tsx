@@ -15,7 +15,6 @@ import Link from "next/link";
 
 import type { Pricing_3_Block } from "~/payload-types";
 
-import { cn } from "~/styles/utils";
 import { Button } from "~/ui/button";
 import {
 	Card,
@@ -26,6 +25,12 @@ import {
 } from "~/ui/card";
 
 export * from "./config";
+
+interface PricingCardProps {
+	isPopular: boolean;
+	popularLabel: string;
+	tier: NonNullable<Pricing_3_Block["tiers"]>[number];
+}
 
 export default function Pricing3(props: NonNullable<Pricing_3_Block>) {
 	const popularIndex = props?.config?.popularIndex ?? -1;
@@ -55,10 +60,10 @@ export default function Pricing3(props: NonNullable<Pricing_3_Block>) {
 
 						return (
 							<PricingCard
-								key={`pricing-3-tier-${index}`}
-								tier={tier}
 								isPopular={isPopular}
+								key={`pricing-3-tier-${index}`}
 								popularLabel={popularLabel}
+								tier={tier}
 							/>
 						);
 					})}
@@ -68,14 +73,8 @@ export default function Pricing3(props: NonNullable<Pricing_3_Block>) {
 	);
 }
 
-interface PricingCardProps {
-	tier: NonNullable<Pricing_3_Block["tiers"]>[number];
-	isPopular: boolean;
-	popularLabel: string;
-}
-
-function PricingCard({ tier, isPopular, popularLabel }: PricingCardProps) {
-	if (!tier) return null;
+function PricingCard({ isPopular, popularLabel, tier }: PricingCardProps) {
+	if (!tier) { return null; }
 
 	const periodLabel =
 		tier.period === "month" ? "/mo" : tier.period === "year" ? "/yr" : "";
@@ -117,8 +116,8 @@ function PricingCard({ tier, isPopular, popularLabel }: PricingCardProps) {
 					className="mt-4 w-full"
 					variant={isPopular ? "default" : "outline"}
 				>
-					<Link href={tier.ctaHref || "#"}>
-						{tier.ctaLabel || "Get Started"}
+					<Link href={tier.ctaHref ?? "#"}>
+						{tier.ctaLabel ?? "Get Started"}
 					</Link>
 				</Button>
 			</CardHeader>
@@ -131,8 +130,8 @@ function PricingCard({ tier, isPopular, popularLabel }: PricingCardProps) {
 				<ul className="space-y-3 text-sm">
 					{(tier.features ?? []).map((feature, featureIndex) => (
 						<li
-							key={`pricing-3-tier-${tier.name}-feature-${featureIndex}`}
 							className="flex items-start gap-2"
+							key={`pricing-3-tier-${tier.name}-feature-${featureIndex}`}
 						>
 							<Check className="size-4 shrink-0 text-green-600 dark:text-green-400" />
 							<span>{feature.text}</span>
