@@ -206,14 +206,6 @@ For each URL, I will verify:
 3. User URLs (LAST RESORT)
 ```
 
-1. Awesome Shadcn UI (ALWAYS CHECK FIRST)
-   ↓ (if insufficient)
-2. Tailark Free Tier (FALLBACK)
-   ↓ (if both fail)
-3. User URLs (LAST RESORT)
-
-````
-
 ### Step 2: Dependency Installation & Source Integration
 
 **For EACH selected component**:

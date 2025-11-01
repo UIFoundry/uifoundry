@@ -21,7 +21,7 @@ export default function Features_3({
 					</h2>
 					<p className="mt-4">{subheader}</p>
 				</div>
-				<Card className="mx-auto mt-8 grid max-w-sm overflow-hidden bg-white *:text-center md:mt-16 @min-4xl:max-w-full @min-4xl:grid-cols-3">
+				<Card className="mx-auto mt-8 grid max-w-sm overflow-hidden *:text-center md:mt-16 @min-4xl:max-w-full @min-4xl:grid-cols-3">
 					{features.map((feature, index) => (
 						<div className="group" key={`feature-${index}`}>
 							<CardHeader className="pb-3">
