@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-3",
+  "type": "registry:block",
+  "title": "CTA 3",
+  "description": "Vibrant gradient background CTA with centered layout and two CTA buttons",
+  "dependencies": [
+    "react",
+    "next",
+    "payload"
+  ],
+  "registryDependencies": [
+    "button",
+    "@uifoundry/header-field",
+    "@uifoundry/subheader-field",
+    "@uifoundry/call-to-action-pair-field",
+    "@uifoundry/block-constants"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/cta/cta-3/index.tsx",
+      "content": "/**\n * CTA 3 Component\n *\n * Source: Custom gradient design for UIFoundry\n * License: MIT\n * Created: 2025-10-31\n *\n * Design:\n * - Vibrant gradient background for high impact\n * - Centered layout for focus\n * - Modern button styling with good contrast\n */\n\nimport Link from \"next/link\";\n\nimport type { CTA_3_Block } from \"~/payload-types\";\n\nimport { Button } from \"@/registry/ui/button\";\n\nexport * from \"./config\";\n\nexport default function CallToAction3(props: NonNullable<CTA_3_Block>) {\n\treturn (\n\t\t<section className=\"relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 py-20 md:py-32\">\n\t\t\t{/* Gradient overlay for depth */}\n\t\t\t<div className=\"absolute inset-0 bg-gradient-to-t from-black/20 to-transparent\" />\n\n\t\t\t<div className=\"relative mx-auto max-w-4xl px-6\">\n\t\t\t\t<div className=\"text-center\">\n\t\t\t\t\t<h2 className=\"text-4xl font-bold text-white text-balance lg:text-5xl xl:text-6xl\">\n\t\t\t\t\t\t{props.header}\n\t\t\t\t\t</h2>\n\n\t\t\t\t\t{props.subheader && (\n\t\t\t\t\t\t<p className=\"mt-6 text-lg text-white/90 text-balance md:text-xl\">\n\t\t\t\t\t\t\t{props.subheader}\n\t\t\t\t\t\t</p>\n\t\t\t\t\t)}\n\n\t\t\t\t\t<div className=\"mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center sm:gap-4\">\n\t\t\t\t\t\t{(props.actions ?? []).map((action, index) => {\n\t\t\t\t\t\t\tconst isSecondary = index === 1;\n\n\t\t\t\t\t\t\treturn (\n\t\t\t\t\t\t\t\t<Button\n\t\t\t\t\t\t\t\t\tasChild\n\t\t\t\t\t\t\t\t\tkey={`CTA_3_Block-action-${index}`}\n\t\t\t\t\t\t\t\t\tsize=\"lg\"\n\t\t\t\t\t\t\t\t\tvariant={isSecondary ? \"outline\" : \"default\"}\n\t\t\t\t\t\t\t\t\tclassName={\n\t\t\t\t\t\t\t\t\t\tisSecondary\n\t\t\t\t\t\t\t\t\t\t\t? \"border-2 border-white bg-transparent text-white hover:bg-white hover:text-purple-600\"\n\t\t\t\t\t\t\t\t\t\t\t: \"bg-white text-purple-600 hover:bg-white/90\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t<Link href={action.href ?? \"/\"}>\n\t\t\t\t\t\t\t\t\t\t<span>{action.label ?? \"Get Started\"}</span>\n\t\t\t\t\t\t\t\t\t</Link>\n\t\t\t\t\t\t\t\t</Button>\n\t\t\t\t\t\t\t);\n\t\t\t\t\t\t})}\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</section>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/CTA/CTA_3/index.tsx"
+    },
+    {
+      "path": "registry/payload/blocks/cta/cta-3/config.ts",
+      "content": "import type { Block } from \"payload\";\n\nimport { BLOCK_GROUP_CTA, BLOCK_SLUG_CTA_3 } from \"@/registry/default/lib/constants/blocks\";\nimport callToActionPair from \"@/registry/default/lib/fields/callToActionPair/config\";\nimport headerField from \"@/registry/default/lib/fields/header/config\";\nimport subheaderField from \"@/registry/default/lib/fields/subheader/config\";\n\nexport const CTA_3_Block: Block = {\n\tslug: BLOCK_SLUG_CTA_3,\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_CTA,\n\t},\n\tfields: [\n\t\theaderField({\n\t\t\tdefaultValue: \"Transform Your Workflow Today\",\n\t\t}),\n\t\tsubheaderField({\n\t\t\tdefaultValue:\n\t\t\t\t\"Join thousands of teams already using our platform to build better products faster.\",\n\t\t}),\n\t\tcallToActionPair({\n\t\t\tadmin: {\n\t\t\t\tinitCollapsed: true,\n\t\t\t},\n\t\t\tdefaultValue: [\n\t\t\t\t{\n\t\t\t\t\thref: \"\",\n\t\t\t\t\tlabel: \"Start Free Trial\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\thref: \"\",\n\t\t\t\t\tlabel: \"View Demo\",\n\t\t\t\t},\n\t\t\t],\n\t\t}),\n\t],\n\tinterfaceName: \"CTA_3_Block\",\n\tlabels: {\n\t\tplural: \"CTA 3's\",\n\t\tsingular: \"CTA 3\",\n\t},\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/CTA/CTA_3/config.ts"
+    }
+  ]
+}

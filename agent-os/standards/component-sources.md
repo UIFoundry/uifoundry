@@ -80,7 +80,23 @@
 
 ## CTA Blocks
 
-- No entries yet.
+### CTA_1
+- **Source**: Custom design (original to this project)
+- **License**: N/A
+- **Date Added**: Before tracking system
+- **Notes**: Simple centered CTA with heading, subheading, and action buttons
+
+### CTA_2
+- **Source**: Based on shadcnblocks.com CTA design pattern
+- **License**: MIT-licensed shadcn pattern
+- **Date Added**: 2025-10-31
+- **Notes**: Dark background CTA with responsive layout. Desktop: left-aligned heading with right-aligned buttons. Mobile: centered stack. Features primary button and secondary text link.
+
+### CTA_3
+- **Source**: Custom gradient design for UIFoundry
+- **License**: MIT
+- **Date Added**: 2025-10-31
+- **Notes**: Vibrant gradient background (blue-purple-pink) with white text and contrasting buttons. Centered layout with responsive button stacking.
 
 ---
 
@@ -98,7 +114,23 @@
 
 ## Pricing Blocks
 
-- No entries yet.
+### Pricing_1
+- **Source**: Custom design (original to this project)
+- **License**: N/A
+- **Date Added**: Before tracking system
+- **Notes**: Pricing block with tier comparison, features list, and focused tier highlighting
+
+### Pricing_2
+- **Source**: [Tailark Pricing Section 2](https://tailark.com/preview/dusk/pricing/two)
+- **License**: Free Tier
+- **Date Added**: 2025-10-31
+- **Notes**: Three-tier pricing grid with popular badge, per-period pricing, feature lists with checkmarks. Clean card-based design with optional "popular" highlighting.
+
+### Pricing_3
+- **Source**: [Tailark Pricing Section 3](https://tailark.com/preview/dusk/pricing/three)
+- **License**: Free Tier
+- **Date Added**: 2025-10-31
+- **Notes**: Three-column pricing cards with Free, Pro, and Startup tiers. Features popular badge, per-editor pricing label, feature lists with check icons, and dashed dividers. Gradient badge styling on popular plan.
 
 ---
 
@@ -122,6 +154,8 @@
   - Hero Section 4 (used in Hero_2, Header_5)
   - Hero Section 5 (header used in Header_3)
   - Hero Section 6 (used in Hero_4, header used in Header_4)
+  - Pricing Section 2 (used in Pricing_2)
+  - Pricing Section 3 (used in Pricing_3)
 - **MagicUI** (<https://magicui.design>) - MIT licensed components
   - FlickeringGrid (used in Hero_5)
 - **Awesome Shadcn UI** (<https://github.com/birobirobiro/awesome-shadcn-ui>) - Community registry (fallback source)

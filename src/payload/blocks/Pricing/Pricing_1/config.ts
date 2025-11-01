@@ -23,6 +23,7 @@ export const Pricing_1_Block: Block = {
 				"Choose the perfect plan for your needs. Get the template for self-hosting or let us handle everything with managed hosting.",
 		}),
 		{
+			name: "config",
 			type: "group",
 			fields: [
 				{

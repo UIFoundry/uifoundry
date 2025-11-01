@@ -19,7 +19,7 @@ export default function Features(props: NonNullable<Features_2_Block>) {
 					{(props.features ?? []).map((feature, index) => (
 						<div className="space-y-2" key={`feature-${index}`}>
 							<div className="flex items-center gap-2">
-								<Icon icon={feature.icon} />
+								{feature.icon && <Icon icon={feature.icon} />}
 								<h3 className="text-sm font-medium">{feature.header}</h3>
 							</div>
 							<p className="text-sm">{feature.description}</p>

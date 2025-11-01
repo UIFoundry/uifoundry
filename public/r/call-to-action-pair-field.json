@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "call-to-action-pair-field",
+  "type": "registry:component",
+  "title": "Call To Action Pair Field",
+  "description": "PayloadCMS array field for pairs of call-to-action buttons with label and href",
+  "dependencies": [
+    "react",
+    "next",
+    "payload"
+  ],
+  "registryDependencies": [
+    "@uifoundry/field-types"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/fields/callToActionPair/config.ts",
+      "content": "import type { ArrayField } from \"@/registry/default/lib/fields\";\n\nexport default function callToActionPair(\n\tprops?: Partial<ArrayField> & { defaultHref?: string; defaultLabel?: string; },\n): ArrayField {\n\treturn {\n\t\tname: props?.name ?? \"actions\",\n\t\ttype: \"array\",\n\t\tfields: [\n\t\t\t{\n\t\t\t\tname: \"label\",\n\t\t\t\ttype: \"text\",\n\t\t\t\tdefaultValue: props?.defaultLabel ?? \"Start Building\",\n\t\t\t\trequired: true,\n\t\t\t},\n\t\t\t{\n\t\t\t\tname: \"href\",\n\t\t\t\ttype: \"text\",\n\t\t\t\tdefaultValue: props?.defaultHref ?? \"\",\n\t\t\t\trequired: true,\n\t\t\t},\n\t\t],\n\t\tmaxRows: 2,\n\t\t...props,\n\t};\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/fields/callToActionPair/config.ts"
+    }
+  ]
+}

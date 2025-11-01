@@ -147,8 +147,8 @@ importers:
         specifier: ^3.61.1
         version: 3.61.1(graphql@16.11.0)(typescript@5.9.2)
       payloadcms-redis-plugin:
-        specifier: ^0.2.13
-        version: 0.2.13(payload@3.61.1(graphql@16.11.0)(typescript@5.9.2))
+        specifier: ^0.2.17
+        version: 0.2.17(payload@3.61.1(graphql@16.11.0)(typescript@5.9.2))
       react:
         specifier: ^19.2.0
         version: 19.2.0
@@ -6296,8 +6296,8 @@ packages:
     peerDependencies:
       graphql: ^16.8.1
 
-  payloadcms-redis-plugin@0.2.13:
-    resolution: {integrity: sha512-gDgdSynAXp7iiItqHIVvIW1E3mdrtUAUl8VhzZsIgUsgjDYsp9Tv1CBAQrhT6SmBSZAnzLn8xb+oegLGOqk1xw==}
+  payloadcms-redis-plugin@0.2.17:
+    resolution: {integrity: sha512-KIgCsDgrGy+Ifj7zCg3cUP4kjS/Rw+z/+WXkJfRfcDTps7yEblc2r8R1E1mIs2uCcjOHiUKxQMUruzwjpi8bWw==}
     engines: {node: ^18.20.2 || >=20.9.0, pnpm: ^9 || ^10}
     peerDependencies:
       payload: ^3.37.0
@@ -7209,8 +7209,8 @@ packages:
     resolution: {integrity: sha512-5JRxVqC8I8NuOUjzBbvVJAKNM8qoVuH0O77h4WInc/qC2q5IreqKxYwgkga3PfA22OayK2ikceb/B26dztPl+Q==}
     engines: {node: '>=16'}
 
-  superjson@2.2.3:
-    resolution: {integrity: sha512-ay3d+LW/S6yppKoTz3Bq4mG0xrS5bFwfWEBmQfbC7lt5wmtk+Obq0TxVuA9eYRirBTQb1K3eEpBRHMQEo0WyVw==}
+  superjson@2.2.5:
+    resolution: {integrity: sha512-zWPTX96LVsA/eVYnqOM2+ofcdPqdS1dAF1LN4TS2/MWuUpfitd9ctTa87wt4xrYnZnkLtS69xpBdSxVBP5Rm6w==}
     engines: {node: '>=16'}
 
   supports-color@7.2.0:
@@ -11167,7 +11167,7 @@ snapshots:
       '@triplit/db': 1.1.10(typescript@5.9.2)
       '@triplit/logger': 0.0.3(typescript@5.9.2)
       comlink: 4.4.2
-      superjson: 2.2.3
+      superjson: 2.2.5
     transitivePeerDependencies:
       - better-sqlite3
       - expo-sqlite
@@ -15195,7 +15195,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  payloadcms-redis-plugin@0.2.13(payload@3.61.1(graphql@16.11.0)(typescript@5.9.2)):
+  payloadcms-redis-plugin@0.2.17(payload@3.61.1(graphql@16.11.0)(typescript@5.9.2)):
     dependencies:
       ioredis: 5.8.2
       payload: 3.61.1(graphql@16.11.0)(typescript@5.9.2)
@@ -16259,7 +16259,7 @@ snapshots:
     dependencies:
       copy-anything: 3.0.5
 
-  superjson@2.2.3:
+  superjson@2.2.5:
     dependencies:
       copy-anything: 4.0.5
 

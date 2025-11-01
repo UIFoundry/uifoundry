@@ -457,22 +457,100 @@ export const BLOCK_SLUGS_ARRAY = [
 
 **Add to**: `src/payload/blocks/[BlockType]/index.ts`
 
+**Pattern for blocks WITH "use client"** (recommended for all new blocks):
+
 ```typescript
-export { [BlockType]_N_Block } from "./[BlockType]_N/config";
+import { BLOCK_SLUG_[TYPE]_N } from "~/payload/constants/blocks";
+
+import [BlockType]_N from "./[BlockType]_N";  // Component
+import { [BlockType]_N_Block } from "./[BlockType]_N/config";  // Config (separate import)
+
+export const blocks = [
+  // ... existing blocks
+  [BlockType]_N_Block,  // Add this
+];
+
+export const blockComponents = {
+  // ... existing components
+  [BLOCK_SLUG_[TYPE]_N]: [BlockType]_N,  // Add this
+};
 ```
 
 **Example**:
 
 ```typescript
-// src/payload/blocks/Hero/index.ts
-export { Hero_1_Block } from "./Hero_1/config";
-export { Hero_2_Block } from "./Hero_2/config";
-export { Hero_3_Block } from "./Hero_3/config"; // Add this
+// src/payload/blocks/CTA/index.ts
+import { BLOCK_SLUG_CTA_1, BLOCK_SLUG_CTA_2, BLOCK_SLUG_CTA_3 } from "~/payload/constants/blocks";
+
+import CTA_1, { CTA_1_Block } from "./CTA_1";  // No "use client"
+import CTA_2 from "./CTA_2";  // Has "use client"
+import { CTA_2_Block } from "./CTA_2/config";  // Config imported separately
+import CTA_3 from "./CTA_3";  // Has "use client"
+import { CTA_3_Block } from "./CTA_3/config";  // Config imported separately
+
+export const blocks = [CTA_1_Block, CTA_2_Block, CTA_3_Block];
+
+export const blockComponents = {
+  [BLOCK_SLUG_CTA_1]: CTA_1,
+  [BLOCK_SLUG_CTA_2]: CTA_2,
+  [BLOCK_SLUG_CTA_3]: CTA_3,
+};
 ```
+
+**Why separate imports for "use client" components**: PayloadCMS configs must stay server-side (they use Node.js APIs). When a component has "use client", Next.js bundles it for the browser. Importing the config separately keeps it on the server.
 
 This makes the block config available to PayloadCMS.
 
-#### 3E: Generate TypeScript Types (CRITICAL STEP)
+#### 3E: Register Block Type in Main Index (CRITICAL)
+
+**CRITICAL**: Every block type folder (CTA, Hero, Features, etc.) MUST be registered in the main blocks index.
+
+**File**: `src/payload/blocks/index.tsx`
+
+**Check if your block type is already registered**:
+
+```typescript
+// Look for imports like:
+import {
+  blockComponents as ctaBlockComponents,
+  blocks as ctaBlocks,
+} from "./CTA";
+```
+
+**If missing, add the import and registration**:
+
+```typescript
+// 1. Add import at top of file
+import {
+  blockComponents as [blockType]BlockComponents,
+  blocks as [blockType]Blocks,
+} from "./[BlockType]";  // or "./[BlockType]/config" if no index.ts exists
+
+// 2. Add to blocks array
+export const blocks: Block[] = teamsBlocks
+  .concat(featuresBlocks)
+  .concat(heroBlocks)
+  .concat([blockType]Blocks)  // ← Add this line
+  .concat(ctaBlocks)
+  // ... rest of blocks
+
+// 3. Add to blockComponents object
+export const blockComponents = {
+  ...teamsBlockComponents,
+  ...featuresBlockComponents,
+  ...[blockType]BlockComponents,  // ← Add this line
+  ...ctaBlockComponents,
+  // ... rest of components
+};
+```
+
+**Why this matters**: Without this registration, PayloadCMS cannot find your blocks and will throw initialization errors like "Cannot read properties of undefined (reading 'some')".
+
+**Common patterns**:
+- Most block types: Import from `./[BlockType]` (has index.ts)
+- Header blocks: Import from `./Header/config` (has config.ts instead of index.ts)
+
+#### 3F: Generate TypeScript Types (CRITICAL STEP)
 
 **BEFORE creating the React component, you MUST generate types**:
 
@@ -528,7 +606,7 @@ import type { Hero_3_Block } from "~/payload-types"; // ❌ Cannot find name 'He
  * - [Any other significant changes]
  */
 
-"use client";
+// ← IMPORTANT: Only add "use client" if component needs client-side interactivity (see guidelines below)
 
 import Link from "next/link";
 import { Button } from "~/ui/button";
@@ -536,6 +614,8 @@ import { Button } from "~/ui/button";
 import type { [BlockType]_N_Block } from "~/payload-types";
 import { cn } from "~/styles/utils";
 import MediaField from "~/payload/fields/mediaField";
+
+export * from "./config";  // ✅ Safe to export config from server components
 
 export default function [BlockType]NSection(props: [BlockType]_N_Block) {
   return (
@@ -564,6 +644,79 @@ export default function [BlockType]NSection(props: [BlockType]_N_Block) {
   );
 }
 ```
+
+**CRITICAL: "use client" Directive Guidelines**:
+
+**ONLY add "use client" when the component actually needs client-side interactivity**. Most marketing blocks can be server components that simply render props and pass data to child client components.
+
+**When to add "use client"**:
+- Component uses React hooks (useState, useEffect, useRef, etc.)
+- Component has onClick or other event handlers directly in the component
+- Component needs browser APIs (window, document, localStorage, etc.)
+- Component has client-side animations or interactivity managed by state
+
+**When NOT to add "use client"** (most marketing blocks):
+- Component only renders props (header, subheader, media, etc.)
+- Component uses Next.js Link or other framework components
+- Component uses UI components like Button (these handle their own client-side needs)
+- Component just displays content without state or event handlers
+
+**Reference Example**: See `src/payload/blocks/Pricing/Pricing_1/index.tsx` for the correct server component pattern that exports config and renders props.
+
+**CRITICAL: Config Export Rules**:
+
+✅ **CORRECT** (Server Component - Preferred Pattern):
+```typescript
+// NO "use client" directive
+import Link from "next/link";
+import type { [BlockType]_N_Block } from "~/payload-types";
+
+export * from "./config";  // ✅ Safe to export config from server components
+
+export default function Component(props: [BlockType]_N_Block) {
+  // Just renders props, passes data to client components
+  return <section>{props.header}</section>;
+}
+```
+
+❌ **WRONG** (will cause PayloadCMS initialization errors):
+```typescript
+"use client";  // ❌ PROBLEM: Has "use client"
+// ... imports
+export * from "./config";  // ❌ PROBLEM: Cannot export config from client components
+export default function Component() { ... }
+```
+
+✅ **CORRECT** (Client Component - Only if needed):
+
+**Component file** (`index.tsx`):
+```typescript
+"use client";  // Only if component truly needs client-side features
+import { useState } from "react";
+// ... imports
+// NO config export here
+
+export default function Component(props: [BlockType]_N_Block) {
+  const [count, setCount] = useState(0);  // Example: needs state
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+```
+
+**Config file** (`config.ts`):
+```typescript
+export const [BlockType]_N_Block: Block = { ... };
+```
+
+**Block type index** (`src/payload/blocks/[BlockType]/index.ts`):
+```typescript
+import Component from "./[BlockType]_N";
+import { [BlockType]_N_Block } from "./[BlockType]_N/config";
+
+export const blocks = [[BlockType]_N_Block];
+export const blockComponents = { [[SLUG]]: Component };
+```
+
+**Why this matters**: PayloadCMS cannot traverse field configurations exported from client component files. The "use client" directive marks the entire module as client-side code, preventing PayloadCMS from accessing the server-side Block configuration during initialization. This causes `TypeError: Cannot read properties of undefined (reading 'some')` errors.
 
 #### 4B: Adapt Source Component
 

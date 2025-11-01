@@ -1,5 +1,7 @@
 import { type CollectionConfig } from "payload";
 
+import type { Site } from "~/payload-types";
+
 import { env } from "~/env.mjs";
 import { blocks } from "~/payload/blocks";
 import {
@@ -62,10 +64,17 @@ export const Pages: CollectionConfig = {
 		defaultColumns: ["title", "slug", "_status", "blocks", "updatedAt"],
 		livePreview: {
 			url: ({ data }) => {
-				if ((data.slug as string) === "home") {
-					return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview`;
+				if (!data.site) { return }
+				if (typeof data.slug === "string") {
+					if ((data.slug) === "home") {
+						return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/${data.site}`;
+					}
+					return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/${data.site}/${data.slug}`;
 				}
-				return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/${data.slug}`;
+				if ((data.slug) === "home") {
+					return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/${(data.site as Site).id}`;
+				}
+				return `${env.NEXT_PUBLIC_BETTER_AUTH_URL}/preview/${(data.site as Site).id}/${data.slug}`;
 			},
 		},
 		useAsTitle: "title",

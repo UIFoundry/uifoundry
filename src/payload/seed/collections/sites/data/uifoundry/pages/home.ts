@@ -66,8 +66,10 @@ const home: Page = {
 		{
 			id: "68a6b269b848f1443a4c21cc",
 			blockType: "pricing_1",
-			focusIndex: 0,
-			focusLabel: "Most Popular",
+			config: {
+				focusIndex: 0,
+				focusLabel: "Most Popular",
+			},
 			header: "Choose Your Plan",
 			subheader:
 				"Choose the perfect plan for your needs. Get the template for self-hosting or let us handle everything with managed hosting.",

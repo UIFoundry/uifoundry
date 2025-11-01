@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "features-3",
+  "type": "registry:block",
+  "title": "Features 3",
+  "description": "Features block with card decorator grid background, icons, and three-column layout",
+  "dependencies": [
+    "react",
+    "next",
+    "payload",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "card",
+    "@uifoundry/icon",
+    "@uifoundry/icon-field",
+    "@uifoundry/block-constants"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/features/features-3/index.tsx",
+      "content": "import type { ComponentPropsWithRef } from \"react\";\n\nimport type { Features_3_Block } from \"~/payload-types\";\n\nimport { Card, CardContent, CardHeader } from \"@/registry/ui/card\";\nimport { Icon } from \"@/registry/ui/icon\";\n\nexport * from \"./config\";\n\nexport default function Features_3({\n\tfeatures,\n\theader,\n\tsubheader,\n}: Features_3_Block) {\n\treturn (\n\t\t<section className=\"bg-zinc-50 py-16 md:py-32 dark:bg-transparent\">\n\t\t\t<div className=\"@container mx-auto max-w-5xl px-6\">\n\t\t\t\t<div className=\"text-center\">\n\t\t\t\t\t<h2 className=\"text-4xl font-semibold text-balance lg:text-5xl\">\n\t\t\t\t\t\t{header}\n\t\t\t\t\t</h2>\n\t\t\t\t\t<p className=\"mt-4\">{subheader}</p>\n\t\t\t\t</div>\n\t\t\t\t<Card className=\"mx-auto mt-8 grid max-w-sm overflow-hidden bg-white *:text-center md:mt-16 @min-4xl:max-w-full @min-4xl:grid-cols-3\">\n\t\t\t\t\t{features.map((feature, index) => (\n\t\t\t\t\t\t<div className=\"group\" key={`feature-${index}`}>\n\t\t\t\t\t\t\t<CardHeader className=\"pb-3\">\n\t\t\t\t\t\t\t\t{feature.icon && (\n\t\t\t\t\t\t\t\t\t<CardDecorator>\n\t\t\t\t\t\t\t\t\t\t<Icon icon={feature.icon} />\n\t\t\t\t\t\t\t\t\t</CardDecorator>\n\t\t\t\t\t\t\t\t)}\n\n\t\t\t\t\t\t\t\t<h3 className=\"mt-6 font-medium\">{feature.title}</h3>\n\t\t\t\t\t\t\t</CardHeader>\n\n\t\t\t\t\t\t\t<CardContent>\n\t\t\t\t\t\t\t\t<p className=\"text-sm\">{feature.description}</p>\n\t\t\t\t\t\t\t</CardContent>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t))}\n\t\t\t\t</Card>\n\t\t\t</div>\n\t\t</section>\n\t);\n}\n\nfunction CardDecorator({\n\tchildren,\n\t...divProps\n}: ComponentPropsWithRef<\"div\">) {\n\treturn (\n\t\t<div\n\t\t\tclassName=\"relative mx-auto size-36 duration-200 dark:group-hover:bg-white/5\"\n\t\t\t{...divProps}\n\t\t>\n\t\t\t<div\n\t\t\t\taria-hidden\n\t\t\t\tclassName=\"absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px]\"\n\t\t\t/>\n\t\t\t<div\n\t\t\t\taria-hidden\n\t\t\t\tclassName=\"absolute inset-0 bg-[linear-gradient(to_left,var(--color-border)_1px,transparent_1px),linear-gradient(to_top,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px]\"\n\t\t\t/>\n\t\t\t<div\n\t\t\t\taria-hidden\n\t\t\t\tclassName=\"to-white absolute inset-0 bg-radial from-transparent to-75%\"\n\t\t\t/>\n\t\t\t<div className=\"bg-transparent absolute inset-0 m-auto flex size-12 items-center justify-center border-t border-l\">\n\t\t\t\t{children}\n\t\t\t</div>\n\t\t</div>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Features/Features_3/index.tsx"
+    },
+    {
+      "path": "registry/payload/blocks/features/features-3/config.ts",
+      "content": "import type { Block } from \"payload\";\n\nimport {\n\tBLOCK_GROUP_FEATURES,\n\tBLOCK_SLUG_FEATURES_3,\n} from \"@/registry/default/lib/constants/blocks\";\nimport iconField from \"@/registry/default/lib/fields/icon/config\";\n\nexport const Features_3_Block: Block = {\n\tslug: BLOCK_SLUG_FEATURES_3,\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_FEATURES,\n\t},\n\tfields: [\n\t\t{\n\t\t\tname: \"header\",\n\t\t\ttype: \"text\",\n\t\t\tdefaultValue: \"Powerful Features\",\n\t\t\tlabel: \"Header\",\n\t\t\trequired: true,\n\t\t},\n\t\t{\n\t\t\tname: \"subheader\",\n\t\t\ttype: \"text\",\n\t\t\tdefaultValue:\n\t\t\t\t\"Everything you need to build modern web applications with confidence\",\n\t\t\tlabel: \"SubHeader\",\n\t\t\trequired: true,\n\t\t},\n\t\t{\n\t\t\tname: \"features\",\n\t\t\ttype: \"array\",\n\t\t\tdefaultValue: [\n\t\t\t\t{\n\t\t\t\t\tdescription: \"Optimized for speed and performance\",\n\t\t\t\t\ticon: \"Zap\",\n\t\t\t\t\ttitle: \"Lightning Fast\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tdescription: \"Built with security best practices\",\n\t\t\t\t\ticon: \"Shield\",\n\t\t\t\t\ttitle: \"Secure by Default\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tdescription: \"Clean APIs and excellent documentation\",\n\t\t\t\t\ticon: \"Code\",\n\t\t\t\t\ttitle: \"Developer Friendly\",\n\t\t\t\t},\n\t\t\t],\n\t\t\tfields: [\n\t\t\t\t{\n\t\t\t\t\tname: \"title\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\tadmin: {\n\t\t\t\t\t\tplaceholder: \"New Feature\",\n\t\t\t\t\t},\n\t\t\t\t\tdefaultValue: \"New Feature\",\n\t\t\t\t\tlabel: \"Title\",\n\t\t\t\t\trequired: true,\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: \"description\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\tdefaultValue: \"\",\n\t\t\t\t\tlabel: \"Description\",\n\t\t\t\t\trequired: true,\n\t\t\t\t},\n\t\t\t\ticonField(),\n\t\t\t],\n\t\t\tminRows: 1,\n\t\t\trequired: true,\n\t\t},\n\t],\n\tinterfaceName: \"Features_3_Block\",\n\tlabels: {\n\t\tplural: \"Features 3's\",\n\t\tsingular: \"Features 3\",\n\t},\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Features/Features_3/config.ts"
+    }
+  ]
+}

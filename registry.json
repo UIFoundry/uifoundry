@@ -1175,6 +1175,293 @@
 					"target": "src/payload/blocks/Features/Features_2/config.ts"
 				}
 			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Card",
+			"name": "card",
+			"type": "registry:ui",
+			"description": "Card component with header, content, footer, title, description, and action slots",
+			"dependencies": [
+				"react"
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/ui/card.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/card.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Features 3",
+			"name": "features-3",
+			"type": "registry:block",
+			"description": "Features block with card decorator grid background, icons, and three-column layout",
+			"registryDependencies": [
+				"card",
+				"@uifoundry/icon",
+				"@uifoundry/icon-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/features/features-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/features/features-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Pricing 1",
+			"name": "pricing-1",
+			"type": "registry:block",
+			"description": "Pricing table with two-column card layout, featured plan badge, and pricing options",
+			"registryDependencies": [
+				"button",
+				"card",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/description-field",
+				"@uifoundry/style-utils",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/pricing/pricing-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/pricing/pricing-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Pricing 2",
+			"name": "pricing-2",
+			"type": "registry:block",
+			"description": "Pricing table with three-column layout, popular badge, and feature lists",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/description-field",
+				"@uifoundry/style-utils",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/pricing/pricing-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/pricing/pricing-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_2/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Pricing 3",
+			"name": "pricing-3",
+			"type": "registry:block",
+			"description": "Pricing table with card-based design, configurable popular tier, and dynamic pricing periods",
+			"registryDependencies": [
+				"button",
+				"card",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/description-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/pricing/pricing-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/pricing/pricing-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Call To Action Pair Field",
+			"name": "call-to-action-pair-field",
+			"type": "registry:component",
+			"description": "PayloadCMS array field for pairs of call-to-action buttons with label and href",
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/callToActionPair/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/callToActionPair/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "CTA 1",
+			"name": "cta-1",
+			"type": "registry:block",
+			"description": "Centered CTA with header, subheader, and configurable action buttons",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/call-to-action-pair-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/cta/cta-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/cta/cta-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "CTA 2",
+			"name": "cta-2",
+			"type": "registry:block",
+			"description": "Dark background CTA with responsive horizontal layout, header, and dual action buttons",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/call-to-action-pair-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/cta/cta-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/cta/cta-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_2/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Button",
+			"name": "button",
+			"type": "registry:ui",
+			"description": "Button component with multiple variants and sizes",
+			"dependencies": [
+				"react",
+				"@radix-ui/react-slot",
+				"class-variance-authority"
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/ui/button.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/button.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "CTA 3",
+			"name": "cta-3",
+			"type": "registry:block",
+			"description": "Vibrant gradient background CTA with centered layout and two CTA buttons",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/call-to-action-pair-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/cta/cta-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/cta/cta-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_3/config.ts"
+				}
+			]
 		}
 	]
 }
