@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-1",
+  "type": "registry:block",
+  "title": "CTA 1",
+  "description": "Centered CTA with header, subheader, and configurable action buttons",
+  "dependencies": [
+    "react",
+    "next",
+    "payload"
+  ],
+  "registryDependencies": [
+    "button",
+    "@uifoundry/header-field",
+    "@uifoundry/subheader-field",
+    "@uifoundry/call-to-action-pair-field",
+    "@uifoundry/block-constants"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/cta/cta-1/index.tsx",
+      "content": "import Link from \"next/link\";\n\nimport type { CTA_1_Block } from \"~/payload-types\";\n\nimport { Button } from \"@/registry/ui/button\";\n\nexport * from \"./config\";\n\nexport default function CallToAction(props: NonNullable<CTA_1_Block>) {\n\treturn (\n\t\t<section className=\"py-16 md:py-32\">\n\t\t\t<div className=\"mx-auto max-w-5xl px-6\">\n\t\t\t\t<div className=\"text-center\">\n\t\t\t\t\t<h2 className=\"text-4xl font-semibold text-balance lg:text-5xl\">\n\t\t\t\t\t\t{props.header}\n\t\t\t\t\t</h2>\n\t\t\t\t\t<p className=\"mt-4\">{props.subheader}</p>\n\n\t\t\t\t\t<div className=\"mt-12 flex flex-wrap justify-center gap-4\">\n\t\t\t\t\t\t{(props.actions ?? []).map((action, index) => {\n\t\t\t\t\t\t\treturn (\n\t\t\t\t\t\t\t\t<Button\n\t\t\t\t\t\t\t\t\tasChild\n\t\t\t\t\t\t\t\t\tkey={`CTA_1_Block-action-${index}`}\n\t\t\t\t\t\t\t\t\tsize=\"lg\"\n\t\t\t\t\t\t\t\t\tvariant={index % 2 === 1 ? \"outline\" : undefined}\n\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t<Link href={action.href ?? \"/\"}>\n\t\t\t\t\t\t\t\t\t\t<span>{action.label ?? \"Get Started\"}</span>\n\t\t\t\t\t\t\t\t\t</Link>\n\t\t\t\t\t\t\t\t</Button>\n\t\t\t\t\t\t\t);\n\t\t\t\t\t\t})}\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</section>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/CTA/CTA_1/index.tsx"
+    },
+    {
+      "path": "registry/payload/blocks/cta/cta-1/config.ts",
+      "content": "import type { Block } from \"payload\";\n\nimport { BLOCK_GROUP_CTA, BLOCK_SLUG_CTA_1 } from \"@/registry/default/lib/constants/blocks\";\nimport callToActionPair from \"@/registry/default/lib/fields/callToActionPair/config\";\nimport headerField from \"@/registry/default/lib/fields/header/config\";\nimport subheaderField from \"@/registry/default/lib/fields/subheader/config\";\n\nexport const CTA_1_Block: Block = {\n\tslug: BLOCK_SLUG_CTA_1,\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_CTA,\n\t},\n\tfields: [\n\t\theaderField({\n\t\t\tdefaultValue: \"Ready to Ship Your Next Project?\",\n\t\t}),\n\t\tsubheaderField({\n\t\t\tdefaultValue:\n\t\t\t\t\"Join the developers and founders building faster with UIFoundry. Choose your path and start building today.\",\n\t\t}),\n\t\tcallToActionPair({\n\t\t\tminRows: 0,\n\t\t\tmaxRows: 2,\n\t\t\tdefaultValue: [\n\t\t\t\t{\n\t\t\t\t\thref: \"/purchase\",\n\t\t\t\t\tlabel: \"Get Developer Template\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\thref: \"/signup\",\n\t\t\t\t\tlabel: \"Start Hosted Trial\",\n\t\t\t\t},\n\t\t\t],\n\t\t}),\n\t],\n\tinterfaceName: \"CTA_1_Block\",\n\tlabels: {\n\t\tplural: \"CTA 1's\",\n\t\tsingular: \"CTA 1\",\n\t},\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/CTA/CTA_1/config.ts"
+    }
+  ]
+}

@@ -23,7 +23,7 @@ export default function CallToAction(props: NonNullable<CTA_1_Block>) {
 									asChild
 									key={`CTA_1_Block-action-${index}`}
 									size="lg"
-									variant={index % 0 === 1 ? "outline" : undefined}
+									variant={index % 2 === 1 ? "outline" : undefined}
 								>
 									<Link href={action.href ?? "/"}>
 										<span>{action.label ?? "Get Started"}</span>

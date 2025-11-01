@@ -1,0 +1,125 @@
+---
+title: "Pricing 3"
+description: "Pricing table with card-based design, configurable popular tier, and dynamic pricing periods"
+category: "blocks"
+---
+
+## Preview
+
+<Pricing_3 />
+
+## Props
+
+The Pricing_3 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    header: {
+      description: "Main heading text displayed at the top of the pricing section",
+      type: "string",
+      required: false,
+      default: "Pricing that Scales with You",
+    },
+    subheader: {
+      description: "Supporting description text displayed below the header",
+      type: "string",
+      required: false,
+      default: "Choose the plan that best fits your needs",
+    },
+    "config.popularIndex": {
+      description: "Zero-based index of which tier should display the 'Popular' badge (0 = first tier, 1 = second tier, 2 = third tier, -1 = no badge)",
+      type: "number",
+      required: false,
+      default: "1",
+    },
+    "config.popularLabel": {
+      description: "Custom text label for the popular badge",
+      type: "string",
+      required: true,
+      default: "Popular",
+    },
+    tiers: {
+      description: "Array of pricing tier cards. Each tier displays as a card with pricing details and features. Maximum 4 tiers supported. Displays in a responsive grid layout (stacked on mobile, 3-column on desktop). Includes 3 default tiers: Starter ($29/mo), Professional ($79/mo), and Enterprise ($199/mo).",
+      type: "array",
+      required: false,
+      default: "3 default pricing tiers (Starter, Professional, Enterprise)",
+    },
+    "tiers[].name": {
+      description: "Plan name displayed as the card title (e.g., 'Starter', 'Professional', 'Enterprise')",
+      type: "string",
+      required: true,
+    },
+    "tiers[].price": {
+      description: "Price value displayed prominently (e.g., 29 for $29). Use 0 for free plans.",
+      type: "number",
+      required: true,
+    },
+    "tiers[].period": {
+      description: "Billing period for the price. Options: 'month' (displays '/mo'), 'year' (displays '/yr'), or 'once' (no suffix)",
+      type: "select",
+      required: true,
+      default: "month",
+    },
+    "tiers[].perEditor": {
+      description: "Whether to display 'Per editor' label below the price",
+      type: "checkbox",
+      required: false,
+      default: "true",
+    },
+    "tiers[].description": {
+      description: "Short description of the plan displayed below the price",
+      type: "string",
+      required: false,
+    },
+    "tiers[].ctaLabel": {
+      description: "Call-to-action button text",
+      type: "string",
+      required: true,
+      default: "Get Started",
+    },
+    "tiers[].ctaHref": {
+      description: "URL link for the CTA button",
+      type: "string",
+      required: false,
+      default: "",
+    },
+    "tiers[].features": {
+      description: "Array of feature items displayed as a checklist. Each feature shows with a green checkmark icon. Minimum 1 feature required, maximum 10 features supported.",
+      type: "array",
+      required: false,
+    },
+    "tiers[].features[].text": {
+      description: "Feature description text",
+      type: "string",
+      required: true,
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn add --registry https://uifoundry.com/r pricing-3
+```
+
+For detailed setup instructions, see the [Registry Setup Guide](/docs/registry-setup).
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Button](/docs/ui/button) - Customizable button component with variants (popular tier uses default variant, others use outline)
+- [Card](/docs/ui/card) - Card component providing the pricing tier container structure with header and content sections
+- [Header Field](/docs/fields/header-field) - PayloadCMS text field for the main heading
+- [Subheader Field](/docs/fields/subheader-field) - PayloadCMS text field for the supporting description
+- [Description Field](/docs/fields/description-field) - PayloadCMS text field for tier descriptions
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+- [Lucide React](https://github.com/lucide-icons/lucide/tree/main/packages/lucide-react) - Beautiful & consistent icon toolkit (provides Check icon for feature lists)

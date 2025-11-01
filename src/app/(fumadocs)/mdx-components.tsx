@@ -7,8 +7,12 @@ import defaultMdxComponents from "fumadocs-ui/mdx";
 
 import type {
 	ComingSoon_1_Block as ComingSoon_1_BlockType,
+	CTA_1_Block as CTA_1_BlockType,
+	CTA_2_Block as CTA_2_BlockType,
+	CTA_3_Block as CTA_3_BlockType,
 	Features_1_Block as Features_1_BlockType,
 	Features_2_Block as Features_2_BlockType,
+	Features_3_Block as Features_3_BlockType,
 	Footer_1_Block as Footer_1_BlockType,
 	Footer_2_Block as Footer_2_BlockType,
 	Footer_3_Block as Footer_3_BlockType,
@@ -24,14 +28,25 @@ import type {
 	Hero_3_Block as Hero_3_BlockType,
 	Hero_4_Block as Hero_4_BlockType,
 	Hero_5_Block as Hero_5_BlockType,
+	Pricing_1_Block as Pricing_1_BlockType,
+	Pricing_2_Block as Pricing_2_BlockType,
+	Pricing_3_Block as Pricing_3_BlockType,
 } from "~/payload-types";
 
 import ComingSoon_1 from "~/payload/blocks/ComingSoon/ComingSoon_1";
 import { ComingSoon_1_Block } from "~/payload/blocks/ComingSoon/ComingSoon_1/config";
+import CTA_1 from "~/payload/blocks/CTA/CTA_1";
+import { CTA_1_Block } from "~/payload/blocks/CTA/CTA_1/config";
+import CTA_2 from "~/payload/blocks/CTA/CTA_2";
+import { CTA_2_Block } from "~/payload/blocks/CTA/CTA_2/config";
+import CTA_3 from "~/payload/blocks/CTA/CTA_3";
+import { CTA_3_Block } from "~/payload/blocks/CTA/CTA_3/config";
 import Features_1 from "~/payload/blocks/Features/Features_1";
 import { Features_1_Block } from "~/payload/blocks/Features/Features_1/config";
 import Features_2 from "~/payload/blocks/Features/Features_2";
 import { Features_2_Block } from "~/payload/blocks/Features/Features_2/config";
+import Features_3 from "~/payload/blocks/Features/Features_3";
+import { Features_3_Block } from "~/payload/blocks/Features/Features_3/config";
 import Footer_1 from "~/payload/blocks/Footer/Footer_1";
 import { Footer_1_Block } from "~/payload/blocks/Footer/Footer_1/config";
 import Footer_2 from "~/payload/blocks/Footer/Footer_2";
@@ -63,6 +78,21 @@ import Hero_4 from "~/payload/blocks/Hero/Hero_4";
 import { Hero_4_Block } from "~/payload/blocks/Hero/Hero_4/config";
 import Hero_5 from "~/payload/blocks/Hero/Hero_5";
 import { Hero_5_Block } from "~/payload/blocks/Hero/Hero_5/config";
+import Pricing_1 from "~/payload/blocks/Pricing/Pricing_1";
+import { Pricing_1_Block } from "~/payload/blocks/Pricing/Pricing_1/config";
+import Pricing_2 from "~/payload/blocks/Pricing/Pricing_2";
+import { Pricing_2_Block } from "~/payload/blocks/Pricing/Pricing_2/config";
+import Pricing_3 from "~/payload/blocks/Pricing/Pricing_3";
+import { Pricing_3_Block } from "~/payload/blocks/Pricing/Pricing_3/config";
+import {
+	Card,
+	CardAction,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "~/ui/card";
 import { extractBlockDefaults } from "~/utils/extractBlockDefaults";
 
 // Create TypeScript generator for AutoTypeTable
@@ -85,8 +115,15 @@ const footer3Defaults = extractBlockDefaults(Footer_3_Block);
 const footer4Defaults = extractBlockDefaults(Footer_4_Block);
 const footer5Defaults = extractBlockDefaults(Footer_5_Block);
 const comingSoon1Defaults = extractBlockDefaults(ComingSoon_1_Block);
+const cta1Defaults = extractBlockDefaults(CTA_1_Block);
+const cta2Defaults = extractBlockDefaults(CTA_2_Block);
+const cta3Defaults = extractBlockDefaults(CTA_3_Block);
 const features1Defaults = extractBlockDefaults(Features_1_Block);
 const features2Defaults = extractBlockDefaults(Features_2_Block);
+const features3Defaults = extractBlockDefaults(Features_3_Block);
+const pricing1Defaults = extractBlockDefaults(Pricing_1_Block);
+const pricing2Defaults = extractBlockDefaults(Pricing_2_Block);
+const pricing3Defaults = extractBlockDefaults(Pricing_3_Block);
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
 	return {
@@ -106,6 +143,30 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 			} as ComingSoon_1_BlockType;
 			return <ComingSoon_1 {...combinedProps} />;
 		},
+		CTA_1: (props: Partial<CTA_1_BlockType> = {}) => {
+			const combinedProps = {
+				...cta1Defaults,
+				...props,
+			} as CTA_1_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <CTA_1 id={id ?? undefined} {...otherProps} />;
+		},
+		CTA_2: (props: Partial<CTA_2_BlockType> = {}) => {
+			const combinedProps = {
+				...cta2Defaults,
+				...props,
+			} as CTA_2_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <CTA_2 id={id ?? undefined} {...otherProps} />;
+		},
+		CTA_3: (props: Partial<CTA_3_BlockType> = {}) => {
+			const combinedProps = {
+				...cta3Defaults,
+				...props,
+			} as CTA_3_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <CTA_3 id={id ?? undefined} {...otherProps} />;
+		},
 		Features_1: (props: Partial<Features_1_BlockType> = {}) => {
 			const combinedProps = {
 				...features1Defaults,
@@ -121,6 +182,14 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 			} as Features_2_BlockType;
 			const { id, ...otherProps } = combinedProps;
 			return <Features_2 id={id ?? undefined} {...otherProps} />;
+		},
+		Features_3: (props: Partial<Features_3_BlockType> = {}) => {
+			const combinedProps = {
+				...features3Defaults,
+				...props,
+			} as Features_3_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <Features_3 id={id ?? undefined} {...otherProps} />;
 		},
 		Footer_1: (props: Partial<Footer_1_BlockType> = {}) => {
 			const combinedProps = {
@@ -233,6 +302,48 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 			} as Hero_5_BlockType;
 			return <Hero_5 {...combinedProps} />;
 		},
+		Pricing_1: (props: Partial<Pricing_1_BlockType> = {}) => {
+			const combinedProps = {
+				...pricing1Defaults,
+				...props,
+			} as Pricing_1_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <Pricing_1 id={id ?? undefined} {...otherProps} />;
+		},
+		Pricing_2: (props: Partial<Pricing_2_BlockType> = {}) => {
+			const combinedProps = {
+				...pricing2Defaults,
+				...props,
+			} as Pricing_2_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <Pricing_2 id={id ?? undefined} {...otherProps} />;
+		},
+		Pricing_3: (props: Partial<Pricing_3_BlockType> = {}) => {
+			const combinedProps = {
+				...pricing3Defaults,
+				...props,
+			} as Pricing_3_BlockType;
+			const { id, ...otherProps } = combinedProps;
+			return <Pricing_3 id={id ?? undefined} {...otherProps} />;
+		},
+		// UI Components
+		Card: (props: React.ComponentProps<"div">) => <Card {...props} />,
+		CardAction: (props: React.ComponentProps<"div">) => (
+			<CardAction {...props} />
+		),
+		CardContent: (props: React.ComponentProps<"div">) => (
+			<CardContent {...props} />
+		),
+		CardDescription: (props: React.ComponentProps<"div">) => (
+			<CardDescription {...props} />
+		),
+		CardFooter: (props: React.ComponentProps<"div">) => (
+			<CardFooter {...props} />
+		),
+		CardHeader: (props: React.ComponentProps<"div">) => (
+			<CardHeader {...props} />
+		),
+		CardTitle: (props: React.ComponentProps<"div">) => <CardTitle {...props} />,
 		...components,
 	};
 }

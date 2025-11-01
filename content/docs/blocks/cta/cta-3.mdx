@@ -1,0 +1,73 @@
+---
+title: "CTA 3"
+description: "Vibrant gradient background CTA with centered layout and two CTA buttons"
+category: "blocks"
+---
+
+## Preview
+
+<CTA_3 />
+
+## Props
+
+The CTA_3 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    header: {
+      description: "Main heading text displayed prominently in the center",
+      type: "string",
+      required: false,
+      default: "Transform Your Workflow Today",
+    },
+    subheader: {
+      description: "Supporting description text displayed below the header",
+      type: "string",
+      required: false,
+      default: "Join thousands of teams already using our platform to build better products faster.",
+    },
+    actions: {
+      description: "Array of call-to-action buttons (maximum 2)",
+      type: "array",
+      default: "2 default actions (Start Free Trial, View Demo)",
+    },
+    "actions[].label": {
+      description: "Button text displayed on the call-to-action",
+      type: "string",
+      required: true,
+      default: "Get Started",
+    },
+    "actions[].href": {
+      description: "URL link for the call-to-action button",
+      type: "string",
+      required: true,
+      default: "",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/cta-3
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Button](/docs/ui/button) - Customizable button component with variants
+- [Header Field](/docs/fields/header-field) - PayloadCMS text field for headers
+- [Subheader Field](/docs/fields/subheader-field) - PayloadCMS text field for subheaders
+- [Call To Action Pair Field](/docs/fields/call-to-action-pair-field) - PayloadCMS array field for pairs of call-to-action buttons
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
