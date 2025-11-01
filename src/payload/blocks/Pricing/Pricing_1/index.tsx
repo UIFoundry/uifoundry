@@ -32,8 +32,8 @@ export default function Pricing(props: NonNullable<Pricing_1_Block>) {
 					{(props?.tiers ?? []).map((tier, index) => (
 						<PricingTier
 							focusedTier={{
-								index: props?.focusIndex ?? -1,
-								label: props?.focusLabel ?? "Popular",
+								index: props?.config?.focusIndex ?? -1,
+								label: props?.config?.focusLabel ?? "Popular",
 							}}
 							index={index}
 							key={`Pricing_1_Block-${index}`}

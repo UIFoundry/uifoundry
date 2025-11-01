@@ -19,9 +19,8 @@ export const CTA_1_Block: Block = {
 				"Join the developers and founders building faster with UIFoundry. Choose your path and start building today.",
 		}),
 		callToActionPair({
-			admin: {
-				initCollapsed: true,
-			},
+			minRows: 0,
+			maxRows: 2,
 			defaultValue: [
 				{
 					href: "/purchase",

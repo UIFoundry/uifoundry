@@ -57,6 +57,13 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/select-enum-field` → `/docs/lib/select-enum-field`
 - `@uifoundry/features-1` → `/docs/blocks/features/features-1`
 - `@uifoundry/features-2` → `/docs/blocks/features/features-2`
+- `@uifoundry/features-3` → `/docs/blocks/features/features-3`
+- `@uifoundry/pricing-2` → `/docs/blocks/pricing/pricing-2`
+- `@uifoundry/pricing-3` → `/docs/blocks/pricing/pricing-3`
+- `@uifoundry/cta-1` → `/docs/blocks/cta/cta-1`
+- `@uifoundry/cta-2` → `/docs/blocks/cta/cta-2`
+- `@uifoundry/cta-3` → `/docs/blocks/cta/cta-3`
+- `@uifoundry/call-to-action-pair-field` → `/docs/fields/call-to-action-pair-field`
 
 ### ShadCN Components (no @uifoundry prefix)
 
@@ -126,11 +133,18 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/select-enum-field`: Base select field configuration with enum support for PayloadCMS
 - `@uifoundry/features-1`: Features block with grid layout, icon decorators, and feature cards
 - `@uifoundry/features-2`: Features block with grid layout and icon-based feature cards
+- `@uifoundry/features-3`: Features block with card decorator grid background, icons, and three-column layout
+- `@uifoundry/pricing-2`: Pricing table with three-column layout, popular badge, and feature lists
+- `@uifoundry/pricing-3`: Pricing table with card-based design, configurable popular tier, and dynamic pricing periods
+- `@uifoundry/cta-1`: Clean centered CTA with header, subheader, and flexible action buttons
+- `@uifoundry/cta-2`: Dark background CTA with responsive horizontal layout, header, and dual action buttons
+- `@uifoundry/cta-3`: Vibrant gradient background CTA with centered layout and two CTA buttons
+- `@uifoundry/call-to-action-pair-field`: PayloadCMS array field for pairs of call-to-action buttons with label and href
 
 ### ShadCN Components
 
 - `button`: Customizable button component with variants
-- `card`: Card component with header and content sections
+- `card`: Card component with header, content, footer, title, description, and action slots
 - `command`: Command menu component for searchable selection
 - `input`: Styled input field component
 - `label`: Form label component

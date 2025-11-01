@@ -124,7 +124,7 @@
 ### Registry Dependencies
 
 - `button` → "Customizable button component with variants"
-- `card` → "Card component with header and content sections"
+- `card` → "Card component with header, content, footer, title, description, and action slots"
 - `command` → "Command menu component for searchable selection"
 - `popover` → "Floating UI popover component"
 - `@uifoundry/animated-group` → "Motion primitive for animating groups of elements"
@@ -139,6 +139,7 @@
 - `@uifoundry/description-field` → "PayloadCMS text field for descriptions"
 - `@uifoundry/select-enum-field` → "Base select field configuration with enum support"
 - `@uifoundry/block-constants` → "Block slug and group constants for PayloadCMS blocks"
+- `@uifoundry/call-to-action-pair-field` → "PayloadCMS array field for pairs of call-to-action buttons"
 
 ### NPM Dependencies
 
