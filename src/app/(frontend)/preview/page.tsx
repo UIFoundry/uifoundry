@@ -11,11 +11,12 @@ import { auth } from "~/auth";
 import HeaderSpacing from "~/components/HeaderSpacing";
 import HomeComponent from "~/components/Home";
 import RenderBlocks from "~/components/RenderBlocks";
+import { env } from "~/env.mjs";
 import { blockComponents } from "~/payload/blocks";
 import Footer from "~/payload/collections/Footers";
 import Header from "~/payload/collections/Headers";
 import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
-import { COLLECTION_SLUG_PAGES } from "~/payload/constants";
+import { COLLECTION_SLUG_PAGES, COLLECTION_SLUG_SITES } from "~/payload/constants";
 import {
 	GLOBAL_SLUG_FOOTER,
 	GLOBAL_SLUG_HEADER,
@@ -55,19 +56,19 @@ export default async function Page({
 		slug: GLOBAL_SLUG_FOOTER,
 		draft: true,
 	});
-	const pageRes = await payload.find({
-		overrideAccess: true,
-		collection: COLLECTION_SLUG_PAGES,
+	const mainSite = await payload.find({
+		collection: COLLECTION_SLUG_SITES,
+		depth: 1,
 		draft: true,
 		limit: 1,
 		where: {
-			slug: {
-				equals: slug,
-			},
-		},
-	});
+			domainUrl: {
+				equals: env.NODE_ENV === "production" ? env.NEXT_PUBLIC_BETTER_AUTH_URL : "https://dev.uifoundry.dev"
+			}
+		}
+	})
 
-	const page = pageRes?.docs?.[0] as null | PageType;
+	const page = mainSite.docs.at(0)?.pages?.find(p => p.slug === "home")
 
 	if (!page) {
 		const { api, queryClient, trpc } = await createTRPCServer()
@@ -87,7 +88,7 @@ export default async function Page({
 	}
 
 	if (page === null) {
-		console.log("page is null: ", pageRes);
+		console.log("page is null: ", mainSite);
 		return notFound();
 	}
 
@@ -102,7 +103,7 @@ export default async function Page({
 				/>
 			)}
 			<HeaderSpacing showHeader={page.showHeader}>
-				<RenderBlocks blockComponents={blockComponents} blocks={page.blocks} />
+				<RenderBlocks blockComponents={blockComponents} blocks={(page.content as PageType).blocks} />
 			</HeaderSpacing>
 			{footer && (
 				<Footer

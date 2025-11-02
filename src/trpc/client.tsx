@@ -1,6 +1,6 @@
 "use client";
 
-import { type QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { type QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 import {
 	createTRPCClient,
 	httpBatchStreamLink,
@@ -18,18 +18,6 @@ import type { AppRouter } from "~/server/api/root";
 import { createQueryClient } from "./query-client";
 
 let browserQueryClient: QueryClient;
-function getBrowserQueryClient() {
-	if (typeof window === "undefined") {
-		return createQueryClient()
-	}
-	if (!browserQueryClient) {
-		browserQueryClient = createQueryClient()
-	}
-	return browserQueryClient
-}
-
-export const { TRPCProvider, useTRPC } = createTRPCContext<AppRouter>();
-
 /**
  * Inference helper for inputs.
  *
@@ -43,6 +31,18 @@ export type RouterInputs = inferRouterInputs<AppRouter>;
  * @example type HelloOutput = RouterOutputs['example']['hello']
  */
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
+
+function getBrowserQueryClient() {
+	if (typeof window === "undefined") {
+		return createQueryClient()
+	}
+	if (!browserQueryClient) {
+		browserQueryClient = createQueryClient()
+	}
+	return browserQueryClient
+}
+
+const { TRPCProvider, useTRPC: useTRPCOptions } = createTRPCContext<AppRouter>();
 
 export function TRPCReactProvider(props: { children: React.ReactNode }) {
 	const queryClient = getBrowserQueryClient()
@@ -74,6 +74,10 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
 			</TRPCProvider>
 		</QueryClientProvider>
 	);
+}
+
+export function useTRPC() {
+	return { queryClient: useQueryClient(), trpc: useTRPCOptions() }
 }
 
 function getBaseUrl() {

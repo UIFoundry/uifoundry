@@ -2,7 +2,6 @@
 
 import {
 	useMutation,
-	useQueryClient,
 	useSuspenseQuery,
 } from "@tanstack/react-query";
 import { useState } from "react";
@@ -10,8 +9,7 @@ import { useState } from "react";
 import { useTRPC } from "~/trpc/client";
 
 export function LatestPost() {
-	const trpc = useTRPC()
-	const queryClient = useQueryClient();
+	const { queryClient, trpc } = useTRPC()
 	const latestPost = useSuspenseQuery(trpc.post.getLatest.queryOptions());
 
 	const [name, setName] = useState("");

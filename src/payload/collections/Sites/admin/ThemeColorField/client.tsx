@@ -4,7 +4,7 @@ import type { TextFieldClientProps, TextFieldServerProps } from "payload";
 import type z from "zod";
 
 import { useField } from "@payloadcms/ui";
-import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import Sketch from "@uiw/react-color-sketch";
 import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -26,8 +26,7 @@ export default function ThemeColorField({
 		mode: "dark" | "light";
 	};
 }) {
-	const trpc = useTRPC()
-	const queryClient = useQueryClient()
+	const { queryClient, trpc } = useTRPC()
 	const { value } = useField<string>({ path: "activeTheme" });
 	const [open, setOpen] = useState(false);
 	const activeTheme = useSuspenseQuery(trpc.themes.findById.queryOptions({ id: value }));

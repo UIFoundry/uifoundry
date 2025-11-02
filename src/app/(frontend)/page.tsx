@@ -9,11 +9,12 @@ import type {
 import HeaderSpacing from "~/components/HeaderSpacing";
 import HomeComponent from "~/components/Home";
 import RenderBlocks from "~/components/RenderBlocks";
+import { env } from "~/env.mjs";
 import { blockComponents } from "~/payload/blocks";
 import Footer from "~/payload/collections/Footers";
 import Header from "~/payload/collections/Headers";
 import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
-import { COLLECTION_SLUG_PAGES } from "~/payload/constants";
+import { COLLECTION_SLUG_SITES } from "~/payload/constants";
 import {
 	GLOBAL_SLUG_FOOTER,
 	GLOBAL_SLUG_HEADER,
@@ -41,17 +42,18 @@ export default async function Page({
 		overrideAccess: true,
 		slug: GLOBAL_SLUG_FOOTER,
 	});
-	const pageRes = await payload.find({
-		collection: COLLECTION_SLUG_PAGES,
+	const mainSite = await payload.find({
+		collection: COLLECTION_SLUG_SITES,
 		limit: 1,
 		where: {
-			slug: {
-				equals: "home",
-			},
-		},
-	});
-
-	const page = pageRes?.docs?.[0] as null | PageType;
+			domainUrl: {
+				equals: env.NODE_ENV === "production" ? env.NEXT_PUBLIC_BETTER_AUTH_URL : "https://dev.uifoundry.dev"
+			}
+		}
+	})
+	const page = mainSite?.docs?.at(0)?.pages?.find((p) => {
+		return p.slug === "home"
+	})
 
 	if (!page) {
 		const { api, queryClient, trpc } = await createTRPCServer();
@@ -85,7 +87,7 @@ export default async function Page({
 				/>
 			)}
 			<HeaderSpacing showHeader={page.showHeader}>
-				<RenderBlocks blockComponents={blockComponents} blocks={page.blocks} />
+				<RenderBlocks blockComponents={blockComponents} blocks={(page.content as PageType).blocks} />
 			</HeaderSpacing>
 			{footer && (
 				<Footer

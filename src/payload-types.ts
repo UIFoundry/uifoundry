@@ -1700,11 +1700,7 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {
-    sites: {
-      pages: 'pages';
-    };
-  };
+  collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     sessions: SessionsSelect<false> | SessionsSelect<true>;
@@ -1829,12 +1825,7 @@ export interface Verification {
  */
 export interface Page {
   id: string;
-  site: string | Site;
-  slug: string;
-  title: string;
-  owner: string | User;
-  showHeader: boolean;
-  showFooter: boolean;
+  name: string;
   blocks: (
     | Teams_1_Block
     | Features_1_Block
@@ -1865,112 +1856,221 @@ export interface Page {
     | Pricing_3_Block
     | ComingSoon_1_Block
   )[];
+  owner: string | User;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sites".
+ * via the `definition` "Teams_1_Block".
  */
-export interface Site {
-  id: string;
-  title: string;
-  owner: string | User;
-  header?: (string | null) | Header;
-  footer?: (string | null) | Footer;
-  activeTheme: string | Theme;
-  light?: {
-    background?: string | null;
-    foreground?: string | null;
-    card?: string | null;
-    'card-foreground'?: string | null;
-    popover?: string | null;
-    'popover-foreground'?: string | null;
-    primary?: string | null;
-    'primary-foreground'?: string | null;
-    secondary?: string | null;
-    'secondary-foreground'?: string | null;
-    muted?: string | null;
-    'muted-foreground'?: string | null;
-    accent?: string | null;
-    'accent-foreground'?: string | null;
-    destructive?: string | null;
-    'destructive-foreground'?: string | null;
-    border?: string | null;
-    input?: string | null;
-    ring?: string | null;
-    'chart-1'?: string | null;
-    'chart-2'?: string | null;
-    'chart-3'?: string | null;
-    'chart-4'?: string | null;
-    'chart-5'?: string | null;
-    sidebar?: string | null;
-    'sidebar-foreground'?: string | null;
-    'sidebar-primary'?: string | null;
-    'sidebar-primary-foreground'?: string | null;
-    'sidebar-accent'?: string | null;
-    'sidebar-accent-foreground'?: string | null;
-    'sidebar-border'?: string | null;
-    'sidebar-ring'?: string | null;
-    'shadow-color'?: string | null;
-  };
-  dark?: {
-    background?: string | null;
-    foreground?: string | null;
-    card?: string | null;
-    'card-foreground'?: string | null;
-    popover?: string | null;
-    'popover-foreground'?: string | null;
-    primary?: string | null;
-    'primary-foreground'?: string | null;
-    secondary?: string | null;
-    'secondary-foreground'?: string | null;
-    muted?: string | null;
-    'muted-foreground'?: string | null;
-    accent?: string | null;
-    'accent-foreground'?: string | null;
-    destructive?: string | null;
-    'destructive-foreground'?: string | null;
-    border?: string | null;
-    input?: string | null;
-    ring?: string | null;
-    'chart-1'?: string | null;
-    'chart-2'?: string | null;
-    'chart-3'?: string | null;
-    'chart-4'?: string | null;
-    'chart-5'?: string | null;
-    sidebar?: string | null;
-    'sidebar-foreground'?: string | null;
-    'sidebar-primary'?: string | null;
-    'sidebar-primary-foreground'?: string | null;
-    'sidebar-accent'?: string | null;
-    'sidebar-accent-foreground'?: string | null;
-    'sidebar-border'?: string | null;
-    'sidebar-ring'?: string | null;
-    'shadow-color'?: string | null;
-  };
-  pages?: {
-    docs?: (string | Page)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
+export interface Teams_1_Block {
+  blocks: (Teams_1_Heading_Block | Teams_1_Members_Block)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_1';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "headers".
+ * via the `definition` "Teams_1_Heading_Block".
  */
-export interface Header {
+export interface Teams_1_Heading_Block {
+  text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_1_heading';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_1_Members_Block".
+ */
+export interface Teams_1_Members_Block {
+  members: {
+    name: string;
+    role: string;
+    avatar?: (string | null) | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_1_members';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
   id: string;
-  global?: boolean | null;
-  title: string;
+  alt: string;
   owner: string | User;
-  header: (Header_1_Block | Header_2_Block | Header_3_Block | Header_4_Block | Header_5_Block | CustomHeaderBlock)[];
   updatedAt: string;
   createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_1_Block".
+ */
+export interface Features_1_Block {
+  header: string;
+  subheader: string;
+  features: {
+    title: string;
+    description: string;
+    icon?: IconField;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_2_Block".
+ */
+export interface Features_2_Block {
+  header?: string | null;
+  subheader?: string | null;
+  features?:
+    | {
+        icon: IconField;
+        header: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_3_Block".
+ */
+export interface Features_3_Block {
+  header: string;
+  subheader: string;
+  features: {
+    title: string;
+    description: string;
+    icon?: IconField;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_1_Block".
+ */
+export interface Hero_1_Block {
+  alertLabel?: string | null;
+  alertLink?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: MediaField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaField".
+ */
+export interface MediaField {
+  light?: (string | null) | Media;
+  dark?: (string | null) | Media;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_2_Block".
+ */
+export interface Hero_2_Block {
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: MediaField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_3_Block".
+ */
+export interface Hero_3_Block {
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: MediaField;
+  /**
+   * Fallback video URL if media upload not provided (MP4 format recommended)
+   */
+  videoUrl?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_4_Block".
+ */
+export interface Hero_4_Block {
+  badgeLabel?: string | null;
+  badgeText?: string | null;
+  badgeHref?: string | null;
+  header: string;
+  subheader?: string | null;
+  emailPlaceholder: string;
+  emailButtonText: string;
+  features?:
+    | {
+        feature: string;
+        id?: string | null;
+      }[]
+    | null;
+  media?: MediaField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_5_Block".
+ */
+export interface Hero_5_Block {
+  alertLabel?: string | null;
+  alertLink?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: MediaField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_5';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1995,34 +2095,6 @@ export interface Header_1_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'header_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaField".
- */
-export interface MediaField {
-  light?: (string | null) | Media;
-  dark?: (string | null) | Media;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  alt: string;
-  owner: string | User;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2205,19 +2277,6 @@ export interface HeaderBrandLogoBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'header_brand_logo';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footers".
- */
-export interface Footer {
-  id: string;
-  global?: boolean | null;
-  title: string;
-  owner: string | User;
-  footer: (Footer_1_Block | Footer_2_Block | Footer_3_Block | Footer_4_Block | Footer_5_Block)[];
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2461,211 +2520,6 @@ export interface Footer_5_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "themes".
- */
-export interface Theme {
-  id: string;
-  name: string;
-  type?: ('template' | 'user') | null;
-  owner: string | User;
-  styles:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  private: boolean;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Teams_1_Block".
- */
-export interface Teams_1_Block {
-  blocks: (Teams_1_Heading_Block | Teams_1_Members_Block)[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'teams_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Teams_1_Heading_Block".
- */
-export interface Teams_1_Heading_Block {
-  text: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'teams_1_heading';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Teams_1_Members_Block".
- */
-export interface Teams_1_Members_Block {
-  members: {
-    name: string;
-    role: string;
-    avatar?: (string | null) | Media;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'teams_1_members';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Features_1_Block".
- */
-export interface Features_1_Block {
-  header: string;
-  subheader: string;
-  features: {
-    title: string;
-    description: string;
-    icon?: IconField;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'features_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Features_2_Block".
- */
-export interface Features_2_Block {
-  header?: string | null;
-  subheader?: string | null;
-  features?:
-    | {
-        icon: IconField;
-        header: string;
-        description: string;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'features_2';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Features_3_Block".
- */
-export interface Features_3_Block {
-  header: string;
-  subheader: string;
-  features: {
-    title: string;
-    description: string;
-    icon?: IconField;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'features_3';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_1_Block".
- */
-export interface Hero_1_Block {
-  alertLabel?: string | null;
-  alertLink?: string | null;
-  header: string;
-  subheader?: string | null;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  secondaryCtaLabel: string;
-  secondaryCtaHref: string;
-  media?: MediaField;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_2_Block".
- */
-export interface Hero_2_Block {
-  header: string;
-  subheader?: string | null;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  secondaryCtaLabel: string;
-  secondaryCtaHref: string;
-  media?: MediaField;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero_2';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_3_Block".
- */
-export interface Hero_3_Block {
-  header: string;
-  subheader?: string | null;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  secondaryCtaLabel: string;
-  secondaryCtaHref: string;
-  media?: MediaField;
-  /**
-   * Fallback video URL if media upload not provided (MP4 format recommended)
-   */
-  videoUrl?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero_3';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_4_Block".
- */
-export interface Hero_4_Block {
-  badgeLabel?: string | null;
-  badgeText?: string | null;
-  badgeHref?: string | null;
-  header: string;
-  subheader?: string | null;
-  emailPlaceholder: string;
-  emailButtonText: string;
-  features?:
-    | {
-        feature: string;
-        id?: string | null;
-      }[]
-    | null;
-  media?: MediaField;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero_4';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_5_Block".
- */
-export interface Hero_5_Block {
-  alertLabel?: string | null;
-  alertLink?: string | null;
-  header: string;
-  subheader?: string | null;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  secondaryCtaLabel: string;
-  secondaryCtaHref: string;
-  media?: MediaField;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero_5';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "CTA_1_Block".
  */
 export interface CTA_1_Block {
@@ -2888,6 +2742,150 @@ export interface ComingSoon_1_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "themes".
+ */
+export interface Theme {
+  id: string;
+  name: string;
+  type?: ('template' | 'user') | null;
+  owner: string | User;
+  styles:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  private: boolean;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sites".
+ */
+export interface Site {
+  id: string;
+  domainUrl: string;
+  title: string;
+  owner: string | User;
+  header?: (string | null) | Header;
+  footer?: (string | null) | Footer;
+  activeTheme: string | Theme;
+  light?: {
+    background?: string | null;
+    foreground?: string | null;
+    card?: string | null;
+    'card-foreground'?: string | null;
+    popover?: string | null;
+    'popover-foreground'?: string | null;
+    primary?: string | null;
+    'primary-foreground'?: string | null;
+    secondary?: string | null;
+    'secondary-foreground'?: string | null;
+    muted?: string | null;
+    'muted-foreground'?: string | null;
+    accent?: string | null;
+    'accent-foreground'?: string | null;
+    destructive?: string | null;
+    'destructive-foreground'?: string | null;
+    border?: string | null;
+    input?: string | null;
+    ring?: string | null;
+    'chart-1'?: string | null;
+    'chart-2'?: string | null;
+    'chart-3'?: string | null;
+    'chart-4'?: string | null;
+    'chart-5'?: string | null;
+    sidebar?: string | null;
+    'sidebar-foreground'?: string | null;
+    'sidebar-primary'?: string | null;
+    'sidebar-primary-foreground'?: string | null;
+    'sidebar-accent'?: string | null;
+    'sidebar-accent-foreground'?: string | null;
+    'sidebar-border'?: string | null;
+    'sidebar-ring'?: string | null;
+    'shadow-color'?: string | null;
+  };
+  dark?: {
+    background?: string | null;
+    foreground?: string | null;
+    card?: string | null;
+    'card-foreground'?: string | null;
+    popover?: string | null;
+    'popover-foreground'?: string | null;
+    primary?: string | null;
+    'primary-foreground'?: string | null;
+    secondary?: string | null;
+    'secondary-foreground'?: string | null;
+    muted?: string | null;
+    'muted-foreground'?: string | null;
+    accent?: string | null;
+    'accent-foreground'?: string | null;
+    destructive?: string | null;
+    'destructive-foreground'?: string | null;
+    border?: string | null;
+    input?: string | null;
+    ring?: string | null;
+    'chart-1'?: string | null;
+    'chart-2'?: string | null;
+    'chart-3'?: string | null;
+    'chart-4'?: string | null;
+    'chart-5'?: string | null;
+    sidebar?: string | null;
+    'sidebar-foreground'?: string | null;
+    'sidebar-primary'?: string | null;
+    'sidebar-primary-foreground'?: string | null;
+    'sidebar-accent'?: string | null;
+    'sidebar-accent-foreground'?: string | null;
+    'sidebar-border'?: string | null;
+    'sidebar-ring'?: string | null;
+    'shadow-color'?: string | null;
+  };
+  pages?:
+    | {
+        slug: string;
+        title: string;
+        showHeader: boolean;
+        showFooter: boolean;
+        content?: (string | null) | Page;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "headers".
+ */
+export interface Header {
+  id: string;
+  global?: boolean | null;
+  title: string;
+  owner: string | User;
+  header: (Header_1_Block | Header_2_Block | Header_3_Block | Header_4_Block | Header_5_Block | CustomHeaderBlock)[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footers".
+ */
+export interface Footer {
+  id: string;
+  global?: boolean | null;
+  title: string;
+  owner: string | User;
+  footer: (Footer_1_Block | Footer_2_Block | Footer_3_Block | Footer_4_Block | Footer_5_Block)[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -3039,12 +3037,7 @@ export interface VerificationsSelect<T extends boolean = true> {
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
-  site?: T;
-  slug?: T;
-  title?: T;
-  owner?: T;
-  showHeader?: T;
-  showFooter?: T;
+  name?: T;
   blocks?:
     | T
     | {
@@ -3077,6 +3070,7 @@ export interface PagesSelect<T extends boolean = true> {
         pricing_3?: T | Pricing_3_BlockSelect<T>;
         coming_soon_1?: T | ComingSoon_1_BlockSelect<T>;
       };
+  owner?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -3821,6 +3815,7 @@ export interface ThemesSelect<T extends boolean = true> {
  * via the `definition` "sites_select".
  */
 export interface SitesSelect<T extends boolean = true> {
+  domainUrl?: T;
   title?: T;
   owner?: T;
   header?: T;
@@ -3900,7 +3895,16 @@ export interface SitesSelect<T extends boolean = true> {
         'sidebar-ring'?: T;
         'shadow-color'?: T;
       };
-  pages?: T;
+  pages?:
+    | T
+    | {
+        slug?: T;
+        title?: T;
+        showHeader?: T;
+        showFooter?: T;
+        content?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
