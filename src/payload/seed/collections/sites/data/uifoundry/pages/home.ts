@@ -2,7 +2,7 @@ import type { Page } from "~/payload-types";
 
 const home: Page = {
 	id: "68a54a78d816f5409031fb8a",
-	slug: "home",
+	name: "UIFoundry Home",
 	_status: "published",
 	blocks: [
 		{
@@ -239,10 +239,6 @@ const home: Page = {
 	],
 	createdAt: new Date().toString(),
 	owner: "",
-	showFooter: false,
-	showHeader: true,
-	site: "",
-	title: "Home",
 	updatedAt: new Date().toString(),
 };
 

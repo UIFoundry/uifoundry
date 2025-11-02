@@ -48,7 +48,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 		return redirect("/auth/sign-in");
 	}
 
-	const sitePages = site.pages?.docs;
+	const sitePages = site.pages;
 	if (!sitePages) {
 		const { api, queryClient, trpc } = await createTRPCServer();
 		const hello = await api.post.hello({ text: "from tRPC" });
@@ -66,7 +66,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 		);
 	}
 
-	const page = (sitePages as PageType[])?.find(
+	const page = sitePages.find(
 		(p) => p.slug === "/" || p.slug === "home",
 	);
 
@@ -87,7 +87,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 			<HeaderSpacing showHeader={page.showHeader}>
 				<RenderBlocks
 					blockComponents={blockComponents}
-					blocks={page.blocks}
+					blocks={(page.content as unknown as PageType)?.blocks ?? []}
 					meta={site}
 				/>
 			</HeaderSpacing>

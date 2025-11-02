@@ -45,7 +45,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 		draft: true,
 	});
 
-	const sitePages = site.pages!.docs;
+	const sitePages = site.pages;
 	if (!sitePages) {
 		const { api, queryClient, trpc } = await createTRPCServer()
 		const hello = await api.post.hello({ text: "from tRPC" });
@@ -63,7 +63,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 		);
 	}
 
-	const page = (sitePages as PageType[])?.find((p) => {
+	const page = sitePages.find((p) => {
 		if (!slug || slug.length < 1) {
 			return p.slug === "/" || p.slug === "home";
 		}
@@ -80,12 +80,12 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 			<TailwindConfig site={site} />
 			{site.header && (
 				<Header
-					className={cn(!page?.showHeader && "hidden")}
+					className={cn(!page.showHeader && "hidden")}
 					header={site.header as HeaderType}
 				/>
 			)}
 			<HeaderSpacing showHeader={page.showHeader}>
-				<RenderBlocks blockComponents={blockComponents} blocks={page.blocks} />
+				<RenderBlocks blockComponents={blockComponents} blocks={(page.content as unknown as PageType[]) ?? []} />
 			</HeaderSpacing>
 			{site.footer && (
 				<Footer
