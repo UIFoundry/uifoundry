@@ -1,25 +1,31 @@
 {
-	"$schema": "https://ui.shadcn.com/schema.json",
-	"style": "new-york",
-	"rsc": true,
-	"tsx": true,
-	"tailwind": {
-		"config": "",
-		"css": "src/styles/globals.css",
-		"baseColor": "stone",
-		"cssVariables": true,
-		"prefix": ""
-	},
-	"aliases": {
-		"components": "~/components",
-		"utils": "~/styles/utils",
-		"ui": "~/ui",
-		"lib": "~/payload",
-		"hooks": "~/hooks",
-		"payload": "~/payload"
-	},
-	"iconLibrary": "lucide",
-	"registries": {
-		"@uifoundry": "http://localhost:3005/r/{name}.json"
-	}
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/styles/globals.css",
+    "baseColor": "stone",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "~/components",
+    "utils": "~/styles/utils",
+    "ui": "~/ui",
+    "lib": "~/payload",
+    "hooks": "~/hooks",
+    "payload": "~/payload"
+  },
+  "iconLibrary": "lucide",
+  "registries": {
+    "@uifoundry": "http://localhost:3005/r/{name}.json",
+    "@irsyad": {
+      "url": "https://design.intentui.com/r/{name}",
+      "headers": {
+        "Authorization": "Bearer ${REGISTRY_TOEN}"
+      }
+    }
+  }
 }

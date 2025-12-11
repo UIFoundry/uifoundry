@@ -603,7 +603,7 @@ export const Sites: CollectionConfig = {
 				{
 					name: "content",
 					type: "relationship",
-					relationTo: COLLECTION_SLUG_PAGES,
+					relationTo: COLLECTION_SLUG_PAGES
 				},
 			]
 		}

@@ -27,11 +27,72 @@ Read these standards before starting:
 - @agent-os/standards/global/best-practices.md
 - @agent-os/standards/frontend/code-style.md
 
+## Helper Documentation
+
+When working with blocks, refer to these detailed guides:
+
+1. **Installing from IntentUI**: @agent-os/docs/blocks/01-installing-from-intentui.md
+2. **Analyzing Block Source**: @agent-os/docs/blocks/02-analyzing-block-source.md
+3. **Creating Block Configs**: @agent-os/docs/blocks/03-creating-block-configs.md
+4. **Transforming Components**: @agent-os/docs/blocks/04-transforming-block-components.md
+5. **Registering Blocks**: @agent-os/docs/blocks/05-registering-blocks.md
+
 ## Marketing Blocks Workflow (Phase 1)
 
 When building marketing blocks following the marketing blocks workflow:
 
+### Block Source Options
+
+You can source blocks from multiple locations:
+
+1. **IntentUI Registry** (Premium UI Kit): https://design.intentui.com/blocks
+   - **Recommended for most blocks** - high-quality, production-ready components
+   - Authentication token available for access
+   - See: @agent-os/docs/blocks/01-installing-from-intentui.md
+
+2. **MIT-Licensed Sources** (Tailark, Awesome Shadcn UI, etc.):
+   - Community components and examples
+   - Free and open source
+
+3. **Custom implementations**: Only when no suitable source exists
+
 ### Step 1: Analyze Source Component
+
+**Choose your source path based on block origin:**
+
+#### Path A: IntentUI Registry (RECOMMENDED)
+
+**For detailed guide**, read: @agent-os/docs/blocks/01-installing-from-intentui.md
+
+1. **Install block from IntentUI**:
+
+   ```bash
+   # Install block from intentui registry
+   npx shadcn@latest add https://design.intentui.com/blocks/[block-id] --yes --overwrite
+   ```
+
+   The block will be installed to `components/ui/` or `components/`
+
+2. **Locate installed files**:
+
+   ```bash
+   # Find all newly installed files
+   find components -type f -name "*.tsx" -o -name "*.ts" | head -20
+   ```
+
+3. **Read the component**:
+
+   Use Read tool to examine the main component file
+
+4. **Identify dependencies**:
+   - UI components (Button, Badge, etc.)
+   - Icons (lucide-react)
+   - Animations (framer-motion)
+   - Utilities (cn function)
+
+**For complete IntentUI installation guide**: @agent-os/docs/blocks/01-installing-from-intentui.md
+
+#### Path B: MIT-Licensed Sources
 
 **Receive from user**: Selected component source (URL or code)
 
@@ -164,7 +225,13 @@ Installing dependencies for Hero_3:
 
 **Reference**: `src/payload/blocks/Hero/Hero_1/config.ts`
 
+**Detailed Guides**:
+- **Content Analysis**: @agent-os/docs/blocks/02-analyzing-block-source.md
+- **Config Creation**: @agent-os/docs/blocks/03-creating-block-configs.md
+
 #### 3A: Analyze Source Component Props
+
+**For detailed content analysis guide**, read: @agent-os/docs/blocks/02-analyzing-block-source.md
 
 Map source component props to PayloadCMS fields:
 
@@ -359,6 +426,10 @@ export const BLOCK_SLUGS_ARRAY = [
 **File location**: `src/payload/blocks/[BlockType]/[BlockType]_N/index.tsx`
 
 **Reference**: `src/payload/blocks/Hero/Hero_1/index.tsx`
+
+**Detailed Guides**:
+- **Component Transformation**: @agent-os/docs/blocks/04-transforming-block-components.md
+- **Block Registration**: @agent-os/docs/blocks/05-registering-blocks.md
 
 #### 4A: Pull Source Component
 
