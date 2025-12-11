@@ -126,6 +126,7 @@
 		"@types/react-dom": "^19.0.0",
 		"@types/react-syntax-highlighter": "^15.5.13",
 		"babel-plugin-react-compiler": "19.1.0-rc.1",
+		"baseline-browser-mapping": "^2.9.6",
 		"bun": "^1.2.21",
 		"dotenv-cli": "^10.0.0",
 		"eslint": "^9.23.0",

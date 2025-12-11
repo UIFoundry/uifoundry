@@ -806,6 +806,122 @@ await playwright_browser_snapshot();
 - [ ] **Images**: MediaField loads correctly (if used)
 - [ ] **Links**: Navigate correctly (if present)
 
+#### 6D: Cleanup Original Installation
+
+**CRITICAL**: After successfully building the PayloadCMS block, delete the original shadcn CLI installation to avoid confusion and maintain a clean codebase.
+
+**When to run**: After all validation checks pass and the component is confirmed working.
+
+**For IntentUI Components**:
+
+IntentUI components are typically installed to `src/app/[component-name]/page.tsx` by the shadcn CLI. These demo pages are no longer needed once the code has been copied and adapted to the PayloadCMS block structure.
+
+```bash
+# Example: Remove IntentUI testimonials demo pages
+rm -rf src/app/testimonials-01
+rm -rf src/app/testimonials-02
+rm -rf src/app/testimonials-03
+# etc.
+```
+
+**For Other shadcn Components**:
+
+Other shadcn registry components may install to different locations. Check where the component was installed:
+
+```bash
+# Find the original installation location
+# (Look for the component name in src/)
+find src -type d -name "*[component-name]*" | grep -v "payload/blocks"
+
+# Example output might be:
+# src/components/[component-name]
+# src/app/[component-name]
+```
+
+**Cleanup Steps**:
+
+1. **Verify PayloadCMS block is complete**:
+   - Config exists at `src/payload/blocks/[BlockType]/[BlockType]_N/config.ts`
+   - Component exists at `src/payload/blocks/[BlockType]/[BlockType]_N/index.tsx`
+   - Block is registered and exports are configured
+   - TypeScript compiles successfully
+   - Browser testing passed
+
+2. **Identify original installation location**:
+   ```bash
+   # For IntentUI components installed via CLI
+   ls -la src/app/ | grep [component-name]
+
+   # Example for testimonials-01:
+   # drwxr-xr-x  3 user  staff   96 Dec 10 20:00 testimonials-01
+   ```
+
+3. **Remove the original installation directory**:
+   ```bash
+   # Remove the entire demo/installation directory
+   rm -rf src/app/[component-name]
+
+   # Example:
+   rm -rf src/app/testimonials-01
+   ```
+
+4. **Verify cleanup**:
+   ```bash
+   # Confirm directory is removed
+   ls -la src/app/ | grep [component-name]
+
+   # Should return no results
+   ```
+
+5. **Verify project still builds**:
+   ```bash
+   # Make sure nothing broke
+   pnpm typecheck
+   ```
+
+**What to Keep**:
+
+- **DO NOT remove** any components installed to `src/ui/` (like buttons, cards, avatars)
+- **DO NOT remove** any dependencies from `package.json`
+- **DO NOT remove** any shared utilities or helpers
+- **ONLY remove** the specific demo page/component that was copied into the PayloadCMS block structure
+
+**Example Cleanup Session**:
+
+```bash
+# After building Testimonials_1 from @irsyad/testimonials-01
+
+# 1. Verify the PayloadCMS block exists
+ls src/payload/blocks/Testimonials/Testimonials_1/
+# Output: config.ts  index.tsx ✅
+
+# 2. Find original installation
+ls src/app/testimonials-01/
+# Output: page.tsx ✅
+
+# 3. Remove original installation
+rm -rf src/app/testimonials-01
+
+# 4. Verify removal
+ls src/app/ | grep testimonials-01
+# Output: (empty) ✅
+
+# 5. Verify project still works
+pnpm typecheck
+# Output: No errors ✅
+```
+
+**Document in Report**:
+
+Include cleanup status in your final report:
+
+```markdown
+**Cleanup**:
+✅ Removed original installation: src/app/testimonials-01/
+✅ PayloadCMS block preserved at: src/payload/blocks/Testimonials/Testimonials_1/
+✅ TypeScript compilation verified after cleanup
+```
+
 ### Step 7: Report Results
 
 **For each component**:

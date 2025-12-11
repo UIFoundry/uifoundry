@@ -1850,6 +1850,11 @@ export interface Page {
     | CTA_1_Block
     | CTA_2_Block
     | CTA_3_Block
+    | Testimonials_1_Block
+    | Testimonials_2_Block
+    | Testimonials_3_Block
+    | Testimonials_4_Block
+    | Testimonials_5_Block
     | FAQ_1_Block
     | Pricing_1_Block
     | Pricing_2_Block
@@ -2573,6 +2578,102 @@ export interface CTA_3_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_1_Block".
+ */
+export interface Testimonials_1_Block {
+  header: string;
+  subheader?: string | null;
+  testimonials?:
+    | {
+        name: string;
+        role: string;
+        avatar?: string | null;
+        quote: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_2_Block".
+ */
+export interface Testimonials_2_Block {
+  header: string;
+  subheader?: string | null;
+  testimonials?:
+    | {
+        name: string;
+        role: string;
+        avatar: string;
+        quote: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_3_Block".
+ */
+export interface Testimonials_3_Block {
+  header: string;
+  subheader?: string | null;
+  testimonials?:
+    | {
+        name: string;
+        role: string;
+        /**
+         * URL to the avatar image
+         */
+        avatar?: string | null;
+        quote: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_4_Block".
+ */
+export interface Testimonials_4_Block {
+  header: string;
+  subheader?: string | null;
+  testimonials?:
+    | {
+        name: string;
+        role: string;
+        avatar?: (string | null) | Media;
+        quote: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_5_Block".
+ */
+export interface Testimonials_5_Block {
+  quote: string;
+  authorName: string;
+  authorRole: string;
+  authorImage: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FAQ_1_Block".
  */
 export interface FAQ_1_Block {
@@ -3064,6 +3165,11 @@ export interface PagesSelect<T extends boolean = true> {
         cta_1?: T | CTA_1_BlockSelect<T>;
         cta_2?: T | CTA_2_BlockSelect<T>;
         cta_3?: T | CTA_3_BlockSelect<T>;
+        testimonials_1?: T | Testimonials_1_BlockSelect<T>;
+        testimonials_2?: T | Testimonials_2_BlockSelect<T>;
+        testimonials_3?: T | Testimonials_3_BlockSelect<T>;
+        testimonials_4?: T | Testimonials_4_BlockSelect<T>;
+        testimonials_5?: T | Testimonials_5_BlockSelect<T>;
         faq_1?: T | FAQ_1_BlockSelect<T>;
         pricing_1?: T | Pricing_1_BlockSelect<T>;
         pricing_2?: T | Pricing_2_BlockSelect<T>;
@@ -3635,6 +3741,94 @@ export interface CTA_3_BlockSelect<T extends boolean = true> {
         href?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_1_Block_select".
+ */
+export interface Testimonials_1_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        avatar?: T;
+        quote?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_2_Block_select".
+ */
+export interface Testimonials_2_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        avatar?: T;
+        quote?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_3_Block_select".
+ */
+export interface Testimonials_3_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        avatar?: T;
+        quote?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_4_Block_select".
+ */
+export interface Testimonials_4_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        avatar?: T;
+        quote?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_5_Block_select".
+ */
+export interface Testimonials_5_BlockSelect<T extends boolean = true> {
+  quote?: T;
+  authorName?: T;
+  authorRole?: T;
+  authorImage?: T;
   id?: T;
   blockName?: T;
 }

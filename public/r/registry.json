@@ -1434,6 +1434,42 @@
 		},
 		{
 			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Avatar IntentUI",
+			"name": "avatar-intentui",
+			"type": "registry:ui",
+			"description": "Avatar component with support for images, initials, and various sizes",
+			"dependencies": [
+				"react",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/ui/avatar-intentui.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/avatar-intentui.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Container",
+			"name": "container",
+			"type": "registry:ui",
+			"description": "Container component for consistent page width and padding",
+			"dependencies": [
+				"react",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/ui/container.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/container.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
 			"title": "CTA 3",
 			"name": "cta-3",
 			"type": "registry:block",
@@ -1460,6 +1496,162 @@
 					"path": "registry/payload/blocks/cta/cta-3/config.ts",
 					"type": "registry:component",
 					"target": "src/payload/blocks/CTA/CTA_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Testimonials 3",
+			"name": "testimonials-3",
+			"type": "registry:block",
+			"description": "Testimonials section with grid layout, avatar cards, and customer quotes",
+			"registryDependencies": [
+				"card",
+				"@uifoundry/avatar-intentui",
+				"@uifoundry/container",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Testimonials 4",
+			"name": "testimonials-4",
+			"type": "registry:block",
+			"description": "Testimonials section with masonry layout, avatar cards, and customer quotes",
+			"registryDependencies": [
+				"@uifoundry/avatar-intentui",
+				"@uifoundry/container",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/upload-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-4/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_4/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-4/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_4/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Testimonials 1",
+			"name": "testimonials-1",
+			"type": "registry:block",
+			"description": "Testimonials section with centered layout, avatar images, and customer quotes",
+			"registryDependencies": [
+				"@uifoundry/avatar-intentui",
+				"@uifoundry/container",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Testimonials 2",
+			"name": "testimonials-2",
+			"type": "registry:block",
+			"description": "Testimonials section with three-column grid layout, decorative quote marks, and customer testimonials",
+			"registryDependencies": [
+				"@uifoundry/avatar-intentui",
+				"@uifoundry/container",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_2/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Testimonials 5",
+			"name": "testimonials-5",
+			"type": "registry:block",
+			"description": "Centered single testimonial with large quote, avatar, and author details",
+			"registryDependencies": [
+				"card",
+				"@uifoundry/avatar-intentui",
+				"@uifoundry/container",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-5/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_5/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-5/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_5/config.ts"
 				}
 			]
 		}

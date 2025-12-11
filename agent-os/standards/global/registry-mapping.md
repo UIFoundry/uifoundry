@@ -64,6 +64,13 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/cta-2` → `/docs/blocks/cta/cta-2`
 - `@uifoundry/cta-3` → `/docs/blocks/cta/cta-3`
 - `@uifoundry/call-to-action-pair-field` → `/docs/fields/call-to-action-pair-field`
+- `@uifoundry/testimonials-1` → `/docs/blocks/testimonials/testimonials-1`
+- `@uifoundry/testimonials-2` → `/docs/blocks/testimonials/testimonials-2`
+- `@uifoundry/testimonials-3` → `/docs/blocks/testimonials/testimonials-3`
+- `@uifoundry/testimonials-4` → `/docs/blocks/testimonials/testimonials-4`
+- `@uifoundry/testimonials-5` → `/docs/blocks/testimonials/testimonials-5`
+- `@uifoundry/avatar-intentui` → `/docs/ui/avatar-intentui`
+- `@uifoundry/container` → `/docs/ui/container`
 
 ### ShadCN Components (no @uifoundry prefix)
 
@@ -140,6 +147,13 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/cta-2`: Dark background CTA with responsive horizontal layout, header, and dual action buttons
 - `@uifoundry/cta-3`: Vibrant gradient background CTA with centered layout and two CTA buttons
 - `@uifoundry/call-to-action-pair-field`: PayloadCMS array field for pairs of call-to-action buttons with label and href
+- `@uifoundry/testimonials-1`: Testimonials section with centered layout, avatar images, and customer quotes in a grid
+- `@uifoundry/testimonials-2`: Testimonials section with three-column grid layout, decorative quote marks, and customer testimonials
+- `@uifoundry/testimonials-3`: Testimonials section with grid layout, avatar cards, and customer quotes
+- `@uifoundry/testimonials-4`: Testimonials section with masonry layout, avatar cards, and customer quotes
+- `@uifoundry/testimonials-5`: Centered single testimonial with large quote, avatar, and author details
+- `@uifoundry/avatar-intentui`: Avatar component with support for images, initials, and various sizes
+- `@uifoundry/container`: Container component for consistent page width and padding
 
 ### ShadCN Components
 

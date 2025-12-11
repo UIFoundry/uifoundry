@@ -24,7 +24,7 @@
     "@irsyad": {
       "url": "https://design.intentui.com/r/{name}",
       "headers": {
-        "Authorization": "Bearer ${REGISTRY_TOEN}"
+        "Authorization": "Bearer ${REGISTRY_TOKEN}"
       }
     }
   }

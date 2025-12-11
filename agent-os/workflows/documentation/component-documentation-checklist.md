@@ -140,6 +140,9 @@
 - `@uifoundry/select-enum-field` → "Base select field configuration with enum support"
 - `@uifoundry/block-constants` → "Block slug and group constants for PayloadCMS blocks"
 - `@uifoundry/call-to-action-pair-field` → "PayloadCMS array field for pairs of call-to-action buttons"
+- `@uifoundry/avatar-intentui` → "Avatar component with support for images, initials, and various sizes"
+- `@uifoundry/container` → "Container component for consistent page width and padding"
+- `@uifoundry/testimonials-5` → "Centered single testimonial with large quote, avatar, and author details"
 
 ### NPM Dependencies
 

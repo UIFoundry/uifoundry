@@ -46,6 +46,10 @@ export const BLOCK_SLUG_CTA_3 = "cta_3" as const;
 // Testimonials
 export const BLOCK_GROUP_TESTIMONIALS = "Testimonials" as const;
 export const BLOCK_SLUG_TESTIMONIALS_1 = "testimonials_1" as const;
+export const BLOCK_SLUG_TESTIMONIALS_2 = "testimonials_2" as const;
+export const BLOCK_SLUG_TESTIMONIALS_3 = "testimonials_3" as const;
+export const BLOCK_SLUG_TESTIMONIALS_4 = "testimonials_4" as const;
+export const BLOCK_SLUG_TESTIMONIALS_5 = "testimonials_5" as const;
 
 // FAQ
 export const BLOCK_GROUP_FAQ = "FAQ" as const;

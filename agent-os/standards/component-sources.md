@@ -108,7 +108,35 @@
 
 ## Testimonial Blocks
 
-- No entries yet.
+### Testimonials_1
+- **Source**: [@irsyad/testimonials-01 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: Grid layout testimonials with avatars, quotes, names, and roles. Uses Avatar component (2xl size) with centered text layout. Responsive 1/2/3 column grid.
+
+### Testimonials_2
+- **Source**: [@irsyad/testimonials-02 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: Grid layout (1/2/3 columns) with rounded cards (rounded-3xl) on secondary/40 background. Features decorative quotation mark, italic quote text, avatar (lg size) with name/role. Includes section header with title and description. Clean card-based design with visual hierarchy.
+
+### Testimonials_3
+- **Source**: [@irsyad/testimonials-03 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: Grid layout (3 columns) with rounded cards (rounded-3xl). Avatar on left (lg size) with name/role inline. Quote text below in italics with muted color. Features section header with title and description. Responsive 1/2/3 column layout.
+
+### Testimonials_4
+- **Source**: [@irsyad/testimonials-04 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: Masonry/columns layout (1/2/3 responsive columns) with break-inside-avoid for testimonial cards. Cards have rounded-2xl border, muted background, hover shadow effect. Features large decorative quotation mark (font-serif, text-9xl), avatar (lg size) with name/role, and italic quote text. Optimized for variable-length testimonials with elegant waterfall layout.
+
+### Testimonials_5
+- **Source**: [@irsyad/testimonials-05 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: Single centered testimonial with large quote (italic, light font, 2xl text), author avatar (2xl with ring), name, and role. Clean centered layout optimized for impactful single testimonial display.
 
 ---
 
@@ -149,6 +177,12 @@
 ## Sources Used
 
 **External Component Libraries**:
+- **IntentUI** (<https://design.intentui.com/blocks>) - Pro subscription components
+  - @irsyad/testimonials-01 (used in Testimonials_1)
+  - @irsyad/testimonials-02 (used in Testimonials_2)
+  - @irsyad/testimonials-03 (used in Testimonials_3)
+  - @irsyad/testimonials-04 (used in Testimonials_4)
+  - @irsyad/testimonials-05 (used in Testimonials_5)
 - **Tailark** (<https://tailark.com>) - Free tier components
   - Hero Section 1 (used in Hero_3)
   - Hero Section 4 (used in Hero_2, Header_5)
