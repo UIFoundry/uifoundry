@@ -71,9 +71,18 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/testimonials-5` → `/docs/blocks/testimonials/testimonials-5`
 - `@uifoundry/avatar-intentui` → `/docs/ui/avatar-intentui`
 - `@uifoundry/container` → `/docs/ui/container`
+- `@uifoundry/disclosure-group` → `/docs/ui/disclosure-group`
+- `@uifoundry/link` → `/docs/ui/link`
+- `@uifoundry/primitive` → `/docs/lib/primitive`
+- `@uifoundry/faq-1` → `/docs/blocks/faq/faq-1`
+- `@uifoundry/faq-2` → `/docs/blocks/faq/faq-2`
+- `@uifoundry/faq-3` → `/docs/blocks/faq/faq-3`
+- `@uifoundry/faq-4` → `/docs/blocks/faq/faq-4`
+- `@uifoundry/faq-5` → `/docs/blocks/faq/faq-5`
 
 ### ShadCN Components (no @uifoundry prefix)
 
+- `accordion` → `/docs/ui/accordion`
 - `button` → `/docs/ui/button`
 - `card` → `/docs/ui/card`
 - `command` → `/docs/ui/command`
@@ -98,6 +107,10 @@ When adding new registry components, you MUST update this file with:
 - `tailwind-merge` → `https://github.com/dcastil/tailwind-merge`
 - `@payloadcms/ui` → `https://github.com/payloadcms/payload/tree/main/packages/ui`
 - `@uiw/react-color-sketch` → `https://github.com/uiwjs/react-color`
+- `react-aria-components` → `https://github.com/adobe/react-spectrum/tree/main/packages/react-aria-components`
+- `@radix-ui/react-accordion` → `https://github.com/radix-ui/primitives/tree/main/packages/react/accordion`
+- `@radix-ui/react-slot` → `https://github.com/radix-ui/primitives/tree/main/packages/react/slot`
+- `class-variance-authority` → `https://github.com/joe-bell/cva`
 
 ## Component Descriptions
 
@@ -154,9 +167,18 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/testimonials-5`: Centered single testimonial with large quote, avatar, and author details
 - `@uifoundry/avatar-intentui`: Avatar component with support for images, initials, and various sizes
 - `@uifoundry/container`: Container component for consistent page width and padding
+- `@uifoundry/disclosure-group`: Accordion/disclosure component with expandable panels built on react-aria-components
+- `@uifoundry/link`: Accessible link component built on react-aria-components
+- `@uifoundry/primitive`: Utility function for composing Tailwind classes with react-aria-components
+- `@uifoundry/faq-1`: FAQ section with collapsible accordion, styled panels, and support link
+- `@uifoundry/faq-2`: FAQ section with collapsible questions and answers, documentation link support
+- `@uifoundry/faq-3`: FAQ section with accordion-style disclosure panels, custom styling, and support link
+- `@uifoundry/faq-4`: FAQ section with accordion-style disclosure panels and support link
+- `@uifoundry/faq-5`: FAQ section with expandable disclosure panels, documentation link, and customizable default expanded items
 
 ### ShadCN Components
 
+- `accordion`: Collapsible accordion component built on Radix UI with animated expand/collapse
 - `button`: Customizable button component with variants
 - `card`: Card component with header, content, footer, title, description, and action slots
 - `command`: Command menu component for searchable selection

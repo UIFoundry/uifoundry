@@ -1856,6 +1856,10 @@ export interface Page {
     | Testimonials_4_Block
     | Testimonials_5_Block
     | FAQ_1_Block
+    | FAQ_2_Block
+    | FAQ_3_Block
+    | FAQ_4_Block
+    | FAQ_5_Block
     | Pricing_1_Block
     | Pricing_2_Block
     | Pricing_3_Block
@@ -2693,6 +2697,92 @@ export interface FAQ_1_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_2_Block".
+ */
+export interface FAQ_2_Block {
+  header?: string | null;
+  subheader?: string | null;
+  documentationText?: string | null;
+  documentationHref?: string | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_3_Block".
+ */
+export interface FAQ_3_Block {
+  header?: string | null;
+  subheader?: string | null;
+  supportLinkText?: string | null;
+  supportLinkHref?: string | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_4_Block".
+ */
+export interface FAQ_4_Block {
+  header?: string | null;
+  supportText?: string | null;
+  supportLinkLabel?: string | null;
+  supportLinkHref?: string | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_5_Block".
+ */
+export interface FAQ_5_Block {
+  header?: string | null;
+  subheader?: string | null;
+  documentationLinkText?: string | null;
+  documentationLinkHref?: string | null;
+  faqs?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  defaultExpandedKeys?:
+    | {
+        key: number;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "Pricing_1_Block".
  */
 export interface Pricing_1_Block {
@@ -3171,6 +3261,10 @@ export interface PagesSelect<T extends boolean = true> {
         testimonials_4?: T | Testimonials_4_BlockSelect<T>;
         testimonials_5?: T | Testimonials_5_BlockSelect<T>;
         faq_1?: T | FAQ_1_BlockSelect<T>;
+        faq_2?: T | FAQ_2_BlockSelect<T>;
+        faq_3?: T | FAQ_3_BlockSelect<T>;
+        faq_4?: T | FAQ_4_BlockSelect<T>;
+        faq_5?: T | FAQ_5_BlockSelect<T>;
         pricing_1?: T | Pricing_1_BlockSelect<T>;
         pricing_2?: T | Pricing_2_BlockSelect<T>;
         pricing_3?: T | Pricing_3_BlockSelect<T>;
@@ -3845,6 +3939,88 @@ export interface FAQ_1_BlockSelect<T extends boolean = true> {
     | {
         question?: T;
         answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_2_Block_select".
+ */
+export interface FAQ_2_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  documentationText?: T;
+  documentationHref?: T;
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_3_Block_select".
+ */
+export interface FAQ_3_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  supportLinkText?: T;
+  supportLinkHref?: T;
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_4_Block_select".
+ */
+export interface FAQ_4_BlockSelect<T extends boolean = true> {
+  header?: T;
+  supportText?: T;
+  supportLinkLabel?: T;
+  supportLinkHref?: T;
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_5_Block_select".
+ */
+export interface FAQ_5_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  documentationLinkText?: T;
+  documentationLinkHref?: T;
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  defaultExpandedKeys?:
+    | T
+    | {
+        key?: T;
         id?: T;
       };
   id?: T;

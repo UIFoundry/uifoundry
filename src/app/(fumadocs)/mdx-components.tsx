@@ -10,6 +10,11 @@ import type {
   CTA_1_Block as CTA_1_BlockType,
   CTA_2_Block as CTA_2_BlockType,
   CTA_3_Block as CTA_3_BlockType,
+  FAQ_1_Block as FAQ_1_BlockType,
+  FAQ_2_Block as FAQ_2_BlockType,
+  FAQ_3_Block as FAQ_3_BlockType,
+  FAQ_4_Block as FAQ_4_BlockType,
+  FAQ_5_Block as FAQ_5_BlockType,
   Features_1_Block as Features_1_BlockType,
   Features_2_Block as Features_2_BlockType,
   Features_3_Block as Features_3_BlockType,
@@ -46,6 +51,16 @@ import CTA_2 from "~/payload/blocks/CTA/CTA_2";
 import { CTA_2_Block } from "~/payload/blocks/CTA/CTA_2/config";
 import CTA_3 from "~/payload/blocks/CTA/CTA_3";
 import { CTA_3_Block } from "~/payload/blocks/CTA/CTA_3/config";
+import FAQ_1 from "~/payload/blocks/FAQ/FAQ_1";
+import { FAQ_1_Block } from "~/payload/blocks/FAQ/FAQ_1/config";
+import FAQ_2 from "~/payload/blocks/FAQ/FAQ_2";
+import { FAQ_2_Block } from "~/payload/blocks/FAQ/FAQ_2/config";
+import FAQ_3 from "~/payload/blocks/FAQ/FAQ_3";
+import { FAQ_3_Block } from "~/payload/blocks/FAQ/FAQ_3/config";
+import FAQ_4 from "~/payload/blocks/FAQ/FAQ_4";
+import { FAQ_4_Block } from "~/payload/blocks/FAQ/FAQ_4/config";
+import FAQ_5 from "~/payload/blocks/FAQ/FAQ_5";
+import { FAQ_5_Block } from "~/payload/blocks/FAQ/FAQ_5/config";
 import Features_1 from "~/payload/blocks/Features/Features_1";
 import { Features_1_Block } from "~/payload/blocks/Features/Features_1/config";
 import Features_2 from "~/payload/blocks/Features/Features_2";
@@ -158,6 +173,51 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
       } as CTA_3_BlockType;
       const { id, ...otherProps } = combinedProps;
       return <CTA_3 id={id ?? undefined} {...otherProps} />;
+    },
+    FAQ_1: (props: Partial<FAQ_1_BlockType> = {}) => {
+      const faq1Defaults = extractBlockDefaults(FAQ_1_Block);
+      const combinedProps = {
+        ...faq1Defaults,
+        ...props,
+      } as FAQ_1_BlockType;
+      const { id, ...otherProps } = combinedProps;
+      return <FAQ_1 id={id ?? undefined} {...otherProps} />;
+    },
+    FAQ_2: (props: Partial<FAQ_2_BlockType> = {}) => {
+      const faq2Defaults = extractBlockDefaults(FAQ_2_Block);
+      const combinedProps = {
+        ...faq2Defaults,
+        ...props,
+      } as FAQ_2_BlockType;
+      const { id, ...otherProps } = combinedProps;
+      return <FAQ_2 id={id ?? undefined} {...otherProps} />;
+    },
+    FAQ_3: (props: Partial<FAQ_3_BlockType> = {}) => {
+      const faq3Defaults = extractBlockDefaults(FAQ_3_Block);
+      const combinedProps = {
+        ...faq3Defaults,
+        ...props,
+      } as FAQ_3_BlockType;
+      const { id, ...otherProps } = combinedProps;
+      return <FAQ_3 id={id ?? undefined} {...otherProps} />;
+    },
+    FAQ_4: (props: Partial<FAQ_4_BlockType> = {}) => {
+      const faq4Defaults = extractBlockDefaults(FAQ_4_Block);
+      const combinedProps = {
+        ...faq4Defaults,
+        ...props,
+      } as FAQ_4_BlockType;
+      const { id, ...otherProps } = combinedProps;
+      return <FAQ_4 id={id ?? undefined} {...otherProps} />;
+    },
+    FAQ_5: (props: Partial<FAQ_5_BlockType> = {}) => {
+      const faq5Defaults = extractBlockDefaults(FAQ_5_Block);
+      const combinedProps = {
+        ...faq5Defaults,
+        ...props,
+      } as FAQ_5_BlockType;
+      const { id, ...otherProps } = combinedProps;
+      return <FAQ_5 id={id ?? undefined} {...otherProps} />;
     },
     Features_1: (props: Partial<Features_1_BlockType> = {}) => {
       const features1Defaults = extractBlockDefaults(Features_1_Block);

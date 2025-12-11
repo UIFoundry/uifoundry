@@ -123,6 +123,7 @@
 
 ### Registry Dependencies
 
+- `accordion` → "Collapsible accordion component built on Radix UI with animated expand/collapse"
 - `button` → "Customizable button component with variants"
 - `card` → "Card component with header, content, footer, title, description, and action slots"
 - `command` → "Command menu component for searchable selection"
@@ -142,6 +143,9 @@
 - `@uifoundry/call-to-action-pair-field` → "PayloadCMS array field for pairs of call-to-action buttons"
 - `@uifoundry/avatar-intentui` → "Avatar component with support for images, initials, and various sizes"
 - `@uifoundry/container` → "Container component for consistent page width and padding"
+- `@uifoundry/disclosure-group` → "Accordion/disclosure component with expandable panels built on react-aria-components"
+- `@uifoundry/link` → "Accessible link component built on react-aria-components"
+- `@uifoundry/primitive` → "Utility function for composing Tailwind classes with react-aria-components"
 - `@uifoundry/testimonials-5` → "Centered single testimonial with large quote, avatar, and author details"
 
 ### NPM Dependencies
@@ -151,3 +155,8 @@
 - `lucide-react` → "Beautiful & consistent icon toolkit"
 - `payload@^3.49.1` → "Headless CMS and application framework"
 - `motion` → "Production-ready motion library for React"
+- `tailwind-merge` → "Utility for merging Tailwind CSS classes"
+- `react-aria-components` → "Adobe's accessible React component primitives"
+- `@radix-ui/react-accordion` → "Radix UI accordion primitives for accessible collapsible panels"
+- `@radix-ui/react-slot` → "Radix UI slot primitive for composing components"
+- `class-variance-authority` → "Type-safe utility for creating variant-based component styles"

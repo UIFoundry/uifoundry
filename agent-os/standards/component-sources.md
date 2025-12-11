@@ -164,7 +164,35 @@
 
 ## FAQ Blocks
 
-- No entries yet.
+### FAQ_1
+- **Source**: Custom design (original to this project)
+- **License**: N/A
+- **Date Added**: Before tracking system
+- **Notes**: FAQ with accordion-style disclosure groups using shadcn accordion component
+
+### FAQ_2
+- **Source**: [@irsyad/faq-02 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: FAQ with disclosure groups using react-aria-components. Features animated expand/collapse with custom disclosure indicator (+ icon animation). Centered layout with documentation link in header. Uses custom disclosure-group component with CSS variable theming.
+
+### FAQ_3
+- **Source**: [@irsyad/faq-03 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: FAQ with disclosure groups using react-aria-components. Features emerald color scheme with animated expand/collapse and custom disclosure indicator. Centered layout (max-w-3xl) with decorative background gradient blur. Supports multiple expanded items simultaneously. Uses custom disclosure styling with emerald theme colors and rounded-xl borders.
+
+### FAQ_4
+- **Source**: [@irsyad/faq-04 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: FAQ with disclosure groups using react-aria-components. Features animated expand/collapse with custom disclosure indicator (+ icon animation). Centered layout (max-w-3xl) with support link in header. Uses custom disclosure styling with transparent collapsed state and muted expanded state. Default expands first item.
+
+### FAQ_5
+- **Source**: [@irsyad/faq-05 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: FAQ with disclosure groups using react-aria-components. Features animated expand/collapse with custom +/- indicator animation. Centered layout (max-w-3xl) with documentation link in header. Uses transparent background styling with muted/foreground color transitions. Supports multiple expanded items with configurable default expanded keys. Clean minimal design with no borders or backgrounds.
 
 ---
 
@@ -183,6 +211,10 @@
   - @irsyad/testimonials-03 (used in Testimonials_3)
   - @irsyad/testimonials-04 (used in Testimonials_4)
   - @irsyad/testimonials-05 (used in Testimonials_5)
+  - @irsyad/faq-02 (used in FAQ_2)
+  - @irsyad/faq-03 (used in FAQ_3)
+  - @irsyad/faq-04 (used in FAQ_4)
+  - @irsyad/faq-05 (used in FAQ_5)
 - **Tailark** (<https://tailark.com>) - Free tier components
   - Hero Section 1 (used in Hero_3)
   - Hero Section 4 (used in Hero_2, Header_5)

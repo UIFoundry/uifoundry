@@ -1434,6 +1434,28 @@
 		},
 		{
 			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Accordion",
+			"name": "accordion",
+			"type": "registry:ui",
+			"description": "Collapsible accordion component built on Radix UI with animated expand/collapse",
+			"dependencies": [
+				"react",
+				"@radix-ui/react-accordion",
+				"lucide-react"
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/ui/accordion.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/accordion.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
 			"title": "Avatar IntentUI",
 			"name": "avatar-intentui",
 			"type": "registry:ui",
@@ -1652,6 +1674,274 @@
 					"path": "registry/payload/blocks/testimonials/testimonials-5/config.ts",
 					"type": "registry:component",
 					"target": "src/payload/blocks/Testimonials/Testimonials_5/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Primitive Utility",
+			"name": "primitive",
+			"type": "registry:lib",
+			"description": "Utility function for composing Tailwind classes with react-aria-components",
+			"dependencies": [
+				"react-aria-components",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/lib/primitive.ts",
+					"type": "registry:lib",
+					"target": "src/lib/primitive.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Disclosure Group",
+			"name": "disclosure-group",
+			"type": "registry:ui",
+			"description": "Accordion/disclosure component with expandable panels",
+			"dependencies": [
+				"react",
+				"react-aria-components",
+				"tailwind-merge"
+			],
+			"registryDependencies": [
+				"@uifoundry/primitive"
+			],
+			"files": [
+				{
+					"path": "registry/ui/disclosure-group.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/disclosure-group.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Link",
+			"name": "link",
+			"type": "registry:ui",
+			"description": "Accessible link component built on react-aria-components",
+			"dependencies": [
+				"react",
+				"react-aria-components"
+			],
+			"registryDependencies": [
+				"@uifoundry/primitive"
+			],
+			"files": [
+				{
+					"path": "registry/ui/link.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/link.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "FAQ 1",
+			"name": "faq-1",
+			"type": "registry:block",
+			"description": "FAQ section with collapsible accordion, styled panels, and support link",
+			"registryDependencies": [
+				"accordion",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/faq/faq-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/faq/faq-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "FAQ 2",
+			"name": "faq-2",
+			"type": "registry:block",
+			"description": "FAQ section with collapsible questions and answers, documentation link support",
+			"registryDependencies": [
+				"@uifoundry/disclosure-group",
+				"@uifoundry/link",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/faq/faq-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/faq/faq-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_2/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "FAQ 3",
+			"name": "faq-3",
+			"type": "registry:block",
+			"description": "FAQ section with accordion-style disclosure panels, custom styling, and support link",
+			"registryDependencies": [
+				"@uifoundry/disclosure-group",
+				"@uifoundry/link",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"payload",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/faq/faq-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/faq/faq-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "FAQ 4",
+			"name": "faq-4",
+			"type": "registry:block",
+			"description": "FAQ section with accordion-style disclosure panels and support link",
+			"registryDependencies": [
+				"@uifoundry/disclosure-group",
+				"@uifoundry/link",
+				"@uifoundry/header-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/faq/faq-4/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_4/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/faq/faq-4/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_4/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "FAQ 5",
+			"name": "faq-5",
+			"type": "registry:block",
+			"description": "FAQ section with expandable disclosure panels, documentation link, and customizable default expanded items",
+			"registryDependencies": [
+				"@uifoundry/disclosure-group",
+				"@uifoundry/link",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/faq/faq-5/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_5/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/faq/faq-5/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_5/config.ts"
+				}
+			]
+		}
+,
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Accordion",
+			"name": "accordion",
+			"type": "registry:ui",
+			"description": "Accordion component with collapsible panels built on Radix UI",
+			"dependencies": [
+				"react",
+				"@radix-ui/react-accordion",
+				"lucide-react"
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/ui/accordion.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/accordion.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "FAQ 1",
+			"name": "faq-1",
+			"type": "registry:block",
+			"description": "FAQ section with accordion-style collapsible questions, rounded card design, and support link",
+			"registryDependencies": [
+				"accordion",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/faq/faq-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/faq/faq-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_1/config.ts"
 				}
 			]
 		}

@@ -1892,58 +1892,5 @@
 				}
 			]
 		}
-,
-		{
-			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
-			"title": "Accordion",
-			"name": "accordion",
-			"type": "registry:ui",
-			"description": "Accordion component with collapsible panels built on Radix UI",
-			"dependencies": [
-				"react",
-				"@radix-ui/react-accordion",
-				"lucide-react"
-			],
-			"registryDependencies": [
-				"@uifoundry/style-utils"
-			],
-			"files": [
-				{
-					"path": "registry/ui/accordion.tsx",
-					"type": "registry:ui",
-					"target": "src/ui/accordion.tsx"
-				}
-			]
-		},
-		{
-			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
-			"title": "FAQ 1",
-			"name": "faq-1",
-			"type": "registry:block",
-			"description": "FAQ section with accordion-style collapsible questions, rounded card design, and support link",
-			"registryDependencies": [
-				"accordion",
-				"@uifoundry/header-field",
-				"@uifoundry/subheader-field",
-				"@uifoundry/block-constants"
-			],
-			"dependencies": [
-				"react",
-				"next",
-				"payload"
-			],
-			"files": [
-				{
-					"path": "registry/payload/blocks/faq/faq-1/index.tsx",
-					"type": "registry:component",
-					"target": "src/payload/blocks/FAQ/FAQ_1/index.tsx"
-				},
-				{
-					"path": "registry/payload/blocks/faq/faq-1/config.ts",
-					"type": "registry:component",
-					"target": "src/payload/blocks/FAQ/FAQ_1/config.ts"
-				}
-			]
-		}
 	]
 }

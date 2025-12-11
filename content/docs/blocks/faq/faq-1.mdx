@@ -1,0 +1,96 @@
+---
+title: "FAQ 1"
+description: "FAQ section with collapsible accordion, styled panels, and support link"
+category: "blocks"
+---
+
+## Preview
+
+<FAQ_1 />
+
+## Props
+
+The FAQ_1 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    header: {
+      description: "Main section heading displayed above FAQ items",
+      type: "string",
+      required: false,
+      default: "Frequently Asked Questions",
+    },
+    subheader: {
+      description: "Supporting description text displayed below the header",
+      type: "string",
+      required: false,
+      default: "Everything you need to know about UIFoundry's developer templates and hosted solutions",
+    },
+    supportLink: {
+      description: "URL link for customer support page (shown in footer text)",
+      type: "string",
+      default: "/contact",
+    },
+    faq: {
+      description: "Array of FAQ items with questions and answers",
+      type: "array",
+      default: "6 default FAQ items about UIFoundry's features and pricing",
+    },
+    "faq[].question": {
+      description: "The FAQ question text",
+      type: "string",
+      required: true,
+      default: "What's included in the developer template?",
+    },
+    "faq[].answer": {
+      description: "The answer text for the FAQ question",
+      type: "string",
+      required: true,
+      default: "You get the complete PayloadCMS template...",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/faq-1
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Accordion](/docs/ui/accordion) - Radix UI accordion component with collapsible panels
+- [Header Field](/docs/fields/header-field) - PayloadCMS text field for headers
+- [Subheader Field](/docs/fields/subheader-field) - PayloadCMS text field for subheaders
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+
+## Design Notes
+
+This FAQ block features:
+
+- **Styled accordion interface**: Built with Radix UI accordion primitives for robust state management
+- **Single expansion mode**: Only one FAQ item can be expanded at a time using `type="single"` and `collapsible`
+- **Muted background container**: FAQ items contained in `bg-muted` rounded panel with subtle dark mode variant
+- **Card-based item styling**: Individual items with `data-[state=open]:bg-card` for visual distinction
+- **Hover interactions**: Accordion triggers include `hover:no-underline` for clean interaction states
+- **Dashed separators**: Horizontal rules between items that fade out (`opacity-0`) when item is expanded
+- **Shadow on expansion**: Opened items receive subtle `shadow-sm` for depth perception
+- **Support link integration**: Footer includes contextual "Can't find what you're looking for?" text with linked support team reference
+- **Constrained width layout**: Content centered with `max-w-5xl` outer container and `max-w-xl` for FAQ accordion
+- **Generous padding**: Balanced `py-16 md:py-24` for section spacing and `px-7 py-1` for item padding
+- **Text balance utility**: Header uses `text-balance` for improved typography
+- **Dark mode support**: Automatic theme adaptation with `dark:bg-muted/50` and `dark:data-[state=open]:bg-muted`
+
+Perfect for product pages, documentation sites, landing pages, or help centers requiring a polished FAQ section. The Radix UI foundation ensures excellent accessibility with keyboard navigation and screen reader support, while the visual design provides clear visual hierarchy and intuitive interactions.

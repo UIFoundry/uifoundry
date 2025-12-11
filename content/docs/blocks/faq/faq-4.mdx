@@ -1,0 +1,103 @@
+---
+title: "FAQ 4"
+description: "FAQ section with accordion-style disclosure panels and support link"
+category: "blocks"
+---
+
+## Preview
+
+<FAQ_4 />
+
+## Props
+
+The FAQ_4 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    header: {
+      description: "Main heading text displayed at the top of the FAQ section",
+      type: "string",
+      required: false,
+      default: "Frequently Asked Questions",
+    },
+    supportText: {
+      description: "Text displayed above the support link at the top of the section",
+      type: "string",
+      required: false,
+      default: "Still have questions?",
+    },
+    supportLinkLabel: {
+      description: "Text label for the support documentation link",
+      type: "string",
+      required: false,
+      default: "Check out our documentation",
+    },
+    supportLinkHref: {
+      description: "URL for the support documentation link",
+      type: "string",
+      required: false,
+      default: "",
+    },
+    faq: {
+      description: "Array of frequently asked questions with answers. Supports 0 or more FAQ items.",
+      type: "array",
+      required: false,
+      default: "10 default FAQs",
+    },
+    "faq[].question": {
+      description: "The question text displayed in the disclosure trigger",
+      type: "string",
+      required: true,
+      default: "Can I host frontend and backend apps together?",
+    },
+    "faq[].answer": {
+      description: "The answer text displayed in the disclosure panel when expanded",
+      type: "textarea",
+      required: true,
+      default: "Yes, the platform supports full-stack applications out of the box...",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/faq-4
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Disclosure Group](/docs/ui/disclosure-group) - Accordion/disclosure component with expandable panels
+- [Link](/docs/ui/link) - Accessible link component built on react-aria-components
+- [Header Field](/docs/fields/header-field) - PayloadCMS text field for headers
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+- [tailwind-merge](https://github.com/dcastil/tailwind-merge) - Utility for merging Tailwind CSS classes
+
+## Design Notes
+
+This FAQ block features:
+
+- **Centered layout**: Maximum width of 3xl with centered content for focused reading experience
+- **Accordion-style disclosure panels**: Clean expandable panels with custom color variables for collapsed and expanded states
+- **Support link integration**: Dedicated support text with clickable documentation link at the top
+- **Custom styling**: Uses CSS custom properties for theme flexibility with transparent collapsed background and muted expanded background
+- **Multiple expansion support**: Allows multiple FAQ items to be expanded simultaneously for easy comparison
+- **Default expanded state**: First FAQ item (index 1) is expanded by default to guide users
+- **Responsive typography**: Large 4xl heading with clean muted text for support section
+- **Keyboard accessible**: Built on react-aria-components for full keyboard navigation support
+
+Use this component for help centers, product documentation, or any section where you need to provide answers to common customer questions. The centered layout and accordion-style panels make it ideal for standalone FAQ pages or sections within landing pages. The support link provides an escape hatch for users who can't find answers in the FAQ.
+
+Source: @irsyad/faq-04 (IntentUI)
