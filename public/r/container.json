@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "container",
+  "type": "registry:ui",
+  "title": "Container",
+  "description": "Container component for consistent page width and padding",
+  "dependencies": [
+    "react",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/container.tsx",
+      "content": "import { twMerge } from \"tailwind-merge\"\n\nexport interface ContainerProps extends React.ComponentProps<\"div\"> {\n  constrained?: boolean\n}\n\nexport function Container({ className, constrained = false, ref, ...props }: ContainerProps) {\n  return (\n    <div\n      className={twMerge(\n        \"mx-auto w-full max-w-7xl [--container-padding:--spacing(4)] xl:max-w-(--breakpoint-xl) 2xl:max-w-(--breakpoint-2xl)\",\n        constrained ? \"sm:px-(--container-padding)\" : \"px-(--container-padding)\",\n        className,\n      )}\n      {...props}\n      ref={ref}\n    />\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/ui/container.tsx"
+    }
+  ]
+}

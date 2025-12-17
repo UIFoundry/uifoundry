@@ -1,0 +1,142 @@
+import type { Block } from "payload";
+
+import {
+	BLOCK_GROUP_TESTIMONIALS,
+	BLOCK_SLUG_TESTIMONIALS_2,
+} from "~/payload/constants/blocks";
+import headerField from "~/payload/fields/header/config";
+import subHeaderField from "~/payload/fields/subheader/config";
+
+export const Testimonials_2_Block: Block = {
+	slug: BLOCK_SLUG_TESTIMONIALS_2,
+	admin: {
+		group: BLOCK_GROUP_TESTIMONIALS,
+	},
+	fields: [
+		{
+			type: "collapsible",
+			label: "Section Header",
+			admin: {
+				initCollapsed: false,
+			},
+			fields: [
+				headerField({
+					defaultValue: "What our customers say",
+				}),
+				subHeaderField({
+					defaultValue:
+						"Authentic testimonials from thrilled users who've unlocked game-changing results with our platform.",
+				}),
+			],
+		},
+		{
+			type: "collapsible",
+			label: "Testimonials",
+			admin: {
+				initCollapsed: false,
+			},
+			fields: [
+				{
+					name: "testimonials",
+					type: "array",
+					label: "Testimonials List",
+					minRows: 0,
+					maxRows: 20,
+					fields: [
+						{
+							name: "name",
+							type: "text",
+							label: "Name",
+							required: true,
+						},
+						{
+							name: "role",
+							type: "text",
+							label: "Role/Title",
+							required: true,
+						},
+						{
+							name: "avatar",
+							type: "text",
+							label: "Avatar Image URL",
+							required: true,
+						},
+						{
+							name: "quote",
+							type: "textarea",
+							label: "Quote",
+							required: true,
+						},
+					],
+					defaultValue: [
+						{
+							name: "Isabelle Dupont",
+							role: "Product Designer at Formly",
+							avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+							quote:
+								"Using this product has completely transformed our design workflow. It's fast, intuitive, and reliable.",
+						},
+						{
+							name: "Lukas Hoffmann",
+							role: "CTO at NovaCloud",
+							avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+							quote:
+								"We integrated it in less than a day and instantly saw results. Easily one of the best decisions we've made.",
+						},
+						{
+							name: "Sophie Müller",
+							role: "Marketing Lead at Brightbox",
+							avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+							quote:
+								"The support team is top-notch. Quick responses, friendly communication, and always willing to help.",
+						},
+						{
+							name: "Ethan Dubois",
+							role: "CEO at Kapture",
+							avatar: "https://randomuser.me/api/portraits/men/27.jpg",
+							quote:
+								"From performance to UI, everything just works. It's a rare thing to find something this polished.",
+						},
+						{
+							name: "Charlotte Moreau",
+							role: "Engineering Manager at Octave",
+							avatar: "https://randomuser.me/api/portraits/women/71.jpg",
+							quote:
+								"It's so refreshing to use a tool that feels like it was made by people who understand developers.",
+						},
+						{
+							name: "Nico Weber",
+							role: "DevOps Engineer at Stackunit",
+							avatar: "https://randomuser.me/api/portraits/men/41.jpg",
+							quote: "Our deployment time dropped by 60% after switching. I wish we had done this earlier.",
+						},
+						{
+							name: "Mila Schmidt",
+							role: "UI Engineer at Pixelwave",
+							avatar: "https://randomuser.me/api/portraits/women/36.jpg",
+							quote:
+								"The attention to detail in the design system is incredible. It made building interfaces so much easier.",
+						},
+						{
+							name: "Jonas Richter",
+							role: "Founder at Clarity",
+							avatar: "https://randomuser.me/api/portraits/men/54.jpg",
+							quote: "Our entire team swears by it now. It's become a key part of our daily operations.",
+						},
+						{
+							name: "Camille Laurent",
+							role: "Head of Growth at Nimbus",
+							avatar: "https://randomuser.me/api/portraits/women/24.jpg",
+							quote: "Great UX, powerful features, and smooth performance. What more could you ask for?",
+						},
+					],
+				},
+			],
+		},
+	],
+	interfaceName: "Testimonials_2_Block",
+	labels: {
+		plural: "Testimonials 2's",
+		singular: "Testimonials 2",
+	},
+};

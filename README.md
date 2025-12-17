@@ -118,8 +118,8 @@ Goal: Build minimal set of marketing blocks needed to enable AI site generation.
 - [x] Features (3/3) ✅
 - [x] Pricing (3/3) ✅
 - [x] CTA (3/3) ✅
-- [ ] Testimonials (0/3) - optional for MVP
-- [ ] FAQ (0/3) - optional for MVP
+- [x] Testimonials (5/3) ✅ *exceeds target*
+- [x] FAQ (5/3) ✅ *exceeds target*
 - [ ] Contact (0/3) - optional for MVP
 
 **Exit criteria**

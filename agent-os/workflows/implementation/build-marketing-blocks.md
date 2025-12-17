@@ -2,12 +2,23 @@
 
 ## Overview
 
-This workflow enables building marketing blocks at scale (1-5 at a time) using source material from MIT-licensed shadcn resources. The workflow follows a strict 3-phase pipeline to ensure quality and consistency.
+This workflow enables building marketing blocks at scale (1-5 at a time) using source material from premium UI kits and MIT-licensed shadcn resources. The workflow follows a strict 3-phase pipeline to ensure quality and consistency.
 
 **CRITICAL RULE**: NEVER write blocks from scratch. Always source from:
 
-1. [Awesome Shadcn UI](https://github.com/birobirobiro/awesome-shadcn-ui) (primary)
-2. [Tailark Free Tier](https://tailark.com/) (fallback)
+1. **[IntentUI](https://design.intentui.com/blocks) (PRIMARY)** - Premium UI kit with authentication token
+2. [Tailark Free Tier](https://tailark.com/) (fallback for community examples)
+3. [Awesome Shadcn UI](https://github.com/birobirobiro/awesome-shadcn-ui) (additional fallback)
+
+## Helper Documentation
+
+For detailed step-by-step guides on each part of the block creation process:
+
+1. **Installing from IntentUI**: @agent-os/docs/blocks/01-installing-from-intentui.md
+2. **Analyzing Block Source**: @agent-os/docs/blocks/02-analyzing-block-source.md
+3. **Creating Block Configs**: @agent-os/docs/blocks/03-creating-block-configs.md
+4. **Transforming Components**: @agent-os/docs/blocks/04-transforming-block-components.md
+5. **Registering Blocks**: @agent-os/docs/blocks/05-registering-blocks.md
 
 ## Workflow Structure
 
@@ -44,17 +55,50 @@ This workflow enables building marketing blocks at scale (1-5 at a time) using s
 
 ### Step 1: Source Discovery
 
-**Purpose**: Find MIT-licensed component examples from shadcn ecosystem
+**Purpose**: Find high-quality component examples from premium UI kits and shadcn ecosystem
 
 **MANDATORY SEARCH ORDER**:
 
-1. **Primary**: Tailark free tier (ALWAYS search here first)
-2. **Fallback**: Awesome Shadcn UI (if Tailark insufficient)
-3. **Last Resort**: User-provided URLs (if both searches fail)
+1. **PRIMARY**: IntentUI Registry (RECOMMENDED - highest quality, production-ready)
+2. **Fallback**: Tailark free tier (community examples)
+3. **Additional Fallback**: Awesome Shadcn UI (if above insufficient)
+4. **Last Resort**: User-provided URLs (if all searches fail)
 
-#### 1A: Search Tailark Free Tier (REQUIRED FIRST STEP)
+#### 1A: Search IntentUI Registry (RECOMMENDED FIRST STEP)
 
-**Always start here**:
+**For complete guide**: @agent-os/docs/blocks/01-installing-from-intentui.md
+
+**Why IntentUI First**:
+- Professional, production-ready components
+- Consistent design language
+- Well-structured code
+- Proper animations and interactions
+- Authentication token available for access
+
+**How to browse**:
+
+1. Use WebFetch to explore https://design.intentui.com/blocks
+2. Navigate to relevant category (hero-sections, features, pricing, etc.)
+3. Identify components that match the desired block type
+
+**Evaluate Candidates**:
+
+- ✅ Matches block category (Hero, Features, CTA, etc.)
+- ✅ Modern, professional design
+- ✅ Responsive layout
+- ✅ Clean code structure
+- ✅ Proper animations (if needed)
+
+**Select Components**:
+
+Choose 1-5 components for batch processing. Consider variety:
+- Different layouts (centered, split, asymmetric)
+- Different features (with/without images, forms, etc.)
+- Different complexity levels
+
+#### 1B: Search Tailark Free Tier (FALLBACK)
+
+**Use when**: IntentUI doesn't have sufficient variety or specific style needed
 
 **Step 1: Check existing blocks**
 

@@ -1,0 +1,108 @@
+---
+title: "FAQ 3"
+description: "FAQ section with accordion-style disclosure panels, custom emerald styling, and support link"
+category: "blocks"
+---
+
+## Preview
+
+<FAQ_3 />
+
+## Props
+
+The FAQ_3 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    header: {
+      description: "Main section heading displayed above FAQ items",
+      type: "string",
+      required: false,
+      default: "Frequently Asked Questions",
+    },
+    subheader: {
+      description: "Support section text displayed below FAQ items (within Support Link collapsible)",
+      type: "string",
+      required: false,
+      default: "Still have questions?",
+    },
+    supportLinkText: {
+      description: "Text for the documentation/support link (within Support Link collapsible)",
+      type: "string",
+      required: false,
+      default: "Check out our documentation",
+    },
+    supportLinkHref: {
+      description: "URL for the support/documentation link (within Support Link collapsible)",
+      type: "string",
+      required: false,
+      default: "",
+    },
+    faq: {
+      description: "Array of FAQ question and answer pairs (0-20 items)",
+      type: "array",
+      default: "10 default FAQ items with deployment-related questions",
+    },
+    "faq[].question": {
+      description: "The FAQ question text",
+      type: "string",
+      required: true,
+      default: "Can I host frontend and backend apps together?",
+    },
+    "faq[].answer": {
+      description: "The FAQ answer text",
+      type: "textarea",
+      required: true,
+      default: "Yes, the platform supports full-stack applications out of the box...",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/faq-3
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Disclosure Group](/docs/ui/disclosure-group) - Accordion/disclosure component with expandable panels
+- [Link](/docs/ui/link) - Accessible link component built on react-aria-components
+- [Header Field](/docs/fields/header-field) - PayloadCMS text field for headers
+- [Subheader Field](/docs/fields/subheader-field) - PayloadCMS text field for subheaders
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+- [tailwind-merge](https://github.com/dcastil/tailwind-merge) - Utility for merging Tailwind CSS classes
+
+## Design Notes
+
+This FAQ block features:
+
+- **Custom emerald theme**: Beautiful emerald color scheme with light/dark mode variants using CSS custom properties
+- **Gradient background**: Decorative gradient blur effect positioned at the top (visible in dark mode)
+- **Accordion-style disclosure**: Built with react-aria-components for accessible, keyboard-navigable FAQ panels
+- **Multiple expansion**: Allows multiple FAQ items to be expanded simultaneously
+- **Rounded panels**: Extra-large border radius on FAQ panels for modern aesthetic
+- **Collapsible support section**: Support link fields are organized in a collapsible admin panel
+- **Dynamic theming**: Custom CSS properties for collapsed and expanded states:
+  - Collapsed: Emerald-50/950 background with emerald-700/200 text
+  - Expanded: Emerald-200/600 background with emerald-800/300 text
+  - Borders: Emerald-600 with 20-30% opacity
+- **Centered layout**: Max-width of 3xl for optimal reading width
+- **Flexible FAQ count**: Supports 0-20 FAQ items with 10 comprehensive defaults
+- **Inline support link**: Support link appears inline with subheader text
+- **Responsive spacing**: Consistent padding and margins throughout
+
+Perfect for FAQ sections, help centers, knowledge bases, or support pages. The emerald theming makes this variant stand out while maintaining excellent readability and accessibility through react-aria-components.
+
+Source: [@irsyad/faq-03](https://intentui.dev/components/irsyad/faq-03) (IntentUI)

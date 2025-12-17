@@ -1,0 +1,81 @@
+---
+title: "Testimonials 5"
+description: "Centered single testimonial with large quote, avatar, and author details"
+category: "blocks"
+---
+
+## Preview
+
+<Testimonials_5 />
+
+## Props
+
+The Testimonials_5 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    quote: {
+      description: "The testimonial quote text displayed prominently in the center",
+      type: "textarea",
+      required: true,
+      default: "We cut dev time in half and actually enjoyed the process. Everything feels designed for speed and clarity — it just makes sense.",
+    },
+    authorName: {
+      description: "Full name of the testimonial author",
+      type: "string",
+      required: true,
+      default: "Lena Fischer",
+    },
+    authorRole: {
+      description: "Job title or role of the testimonial author",
+      type: "string",
+      required: true,
+      default: "Lead Frontend Engineer at Skyloft",
+    },
+    authorImage: {
+      description: "URL of the author's profile image or avatar",
+      type: "string",
+      required: true,
+      default: "https://randomuser.me/api/portraits/women/52.jpg",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/testimonials-5
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Card](/docs/ui/card) - Card component with header, content, footer, title, description, and action slots
+- [Avatar IntentUI](/docs/ui/avatar-intentui) - Avatar component with support for images, initials, and various sizes
+- [Container](/docs/ui/container) - Container component for consistent page width and padding
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+
+## Design Notes
+
+This testimonial block features:
+
+- **Single centered focus**: Displays one powerful testimonial at a time for maximum impact
+- **Large quote typography**: Prominent 2xl font size with italic styling and relaxed leading
+- **Professional avatar display**: 2xl avatar with primary-colored ring and offset for visual depth
+- **Clean author attribution**: Centered card header with name and role clearly separated
+- **Responsive padding**: Scales from py-6 on mobile to py-16 on larger screens
+- **Maximum width constraint**: Content limited to xl (36rem) for optimal readability
+- **Accessible semantics**: Includes screen-reader-only "Testimonials" heading
+
+Use this component for featuring high-value testimonials from key customers, executives, or industry leaders. Perfect for landing pages, about pages, or case studies where you want to highlight a single powerful endorsement.

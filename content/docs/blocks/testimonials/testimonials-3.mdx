@@ -1,0 +1,102 @@
+---
+title: "Testimonials 3"
+description: "Testimonials section with rounded card grid, horizontal avatar layout, and customer quotes"
+category: "blocks"
+---
+
+## Preview
+
+<Testimonials_3 />
+
+## Props
+
+The Testimonials_3 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    header: {
+      description: "Main section heading displayed above testimonials",
+      type: "string",
+      required: false,
+      default: "What our customers say",
+    },
+    subheader: {
+      description: "Supporting description text displayed below the header",
+      type: "string",
+      required: false,
+      default: "Authentic testimonials from thrilled users who've unlocked game-changing results with our platform.",
+    },
+    testimonials: {
+      description: "Array of customer testimonials with name, role, avatar, and quote (0-12 items)",
+      type: "array",
+      default: "9 default testimonials with sample data",
+    },
+    "testimonials[].name": {
+      description: "Name of the person providing the testimonial",
+      type: "string",
+      required: true,
+      default: "Isabelle Dupont",
+    },
+    "testimonials[].role": {
+      description: "Job title or role of the testimonial author",
+      type: "string",
+      required: true,
+      default: "Product Designer at Formly",
+    },
+    "testimonials[].avatar": {
+      description: "URL to the avatar image (optional)",
+      type: "string",
+      required: false,
+      default: "https://randomuser.me/api/portraits/women/44.jpg",
+    },
+    "testimonials[].quote": {
+      description: "The testimonial quote text",
+      type: "textarea",
+      required: true,
+      default: "Using this product has completely transformed our design workflow. It's fast, intuitive, and reliable.",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/testimonials-3
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Card](/docs/ui/card) - Card component with header, content, footer, title, description, and action slots
+- [Avatar (IntentUI)](/docs/ui/avatar-intentui) - Avatar component with support for images, initials, and various sizes
+- [Container](/docs/ui/container) - Container component for consistent page width and padding
+- [Header Field](/docs/fields/header-field) - PayloadCMS text field for headers
+- [Subheader Field](/docs/fields/subheader-field) - PayloadCMS text field for subheaders
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+
+## Design Notes
+
+This testimonials block features:
+
+- **Rounded card design**: Testimonials displayed in modern rounded-3xl cards with border styling
+- **Horizontal avatar layout**: Avatar and name/role displayed side-by-side for a clean look
+- **Responsive grid**: Adapts from 1 column on mobile to 2 on tablet to 3 on desktop
+- **Flexible testimonial count**: Supports 0-12 testimonials with sensible defaults (9 included)
+- **Secondary background**: Cards use subtle secondary/20 background with dark mode support
+- **Large avatar size**: Prominent lg-sized avatars for better visual hierarchy
+- **Centered header section**: Section header and subheader are center-aligned above the grid
+- **Italic quotes**: Blockquote text styled in italic with muted foreground color
+- **Consistent spacing**: Balanced padding and gaps throughout the component
+
+Perfect for social proof sections, customer testimonials, case studies, or user reviews. The horizontal avatar layout is ideal when you want to maintain a professional look while showing multiple testimonials in a compact grid format.

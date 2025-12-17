@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq-1",
+  "type": "registry:block",
+  "title": "FAQ 1",
+  "description": "FAQ section with accordion-style collapsible questions, rounded card design, and support link",
+  "dependencies": [
+    "react",
+    "next",
+    "payload"
+  ],
+  "registryDependencies": [
+    "accordion",
+    "@uifoundry/header-field",
+    "@uifoundry/subheader-field",
+    "@uifoundry/block-constants"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/faq/faq-1/index.tsx",
+      "content": "import Link from \"next/link\";\n\nimport type { FAQ_1_Block } from \"~/payload-types\";\n\nimport {\n\tAccordion,\n\tAccordionContent,\n\tAccordionItem,\n\tAccordionTrigger,\n} from \"@/registry/ui/accordion\";\n\nexport * from \"./config\";\n\nexport default function FAQsFour(props: NonNullable<FAQ_1_Block>) {\n\treturn (\n\t\t<section className=\"py-16 md:py-24\">\n\t\t\t<div className=\"mx-auto max-w-5xl px-4 md:px-6\">\n\t\t\t\t<div className=\"mx-auto max-w-xl text-center\">\n\t\t\t\t\t<h2 className=\"text-3xl font-bold text-balance md:text-4xl lg:text-5xl\">\n\t\t\t\t\t\tFrequently Asked Questions\n\t\t\t\t\t</h2>\n\t\t\t\t\t<p className=\"text-muted-foreground mt-4 text-balance\">\n\t\t\t\t\t\tDiscover quick and comprehensive answers to common questions about\n\t\t\t\t\t\tour platform, services, and features.\n\t\t\t\t\t</p>\n\t\t\t\t</div>\n\n\t\t\t\t<div className=\"mx-auto mt-12 max-w-xl\">\n\t\t\t\t\t<Accordion\n\t\t\t\t\t\tclassName=\"bg-muted dark:bg-muted/50 w-full rounded-2xl p-1\"\n\t\t\t\t\t\tcollapsible\n\t\t\t\t\t\ttype=\"single\"\n\t\t\t\t\t>\n\t\t\t\t\t\t{(props.faq ?? []).map((faq, index) => (\n\t\t\t\t\t\t\t<div className=\"group\" key={`FAQ_!_Block-questions-${index}`}>\n\t\t\t\t\t\t\t\t<AccordionItem\n\t\t\t\t\t\t\t\t\tclassName=\"data-[state=open]:bg-card dark:data-[state=open]:bg-muted peer rounded-xl border-none px-7 py-1 data-[state=open]:border-none data-[state=open]:shadow-sm\"\n\t\t\t\t\t\t\t\t\tvalue={`${index}`}\n\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t<AccordionTrigger className=\"cursor-pointer text-base hover:no-underline\">\n\t\t\t\t\t\t\t\t\t\t{faq.question}\n\t\t\t\t\t\t\t\t\t</AccordionTrigger>\n\t\t\t\t\t\t\t\t\t<AccordionContent>\n\t\t\t\t\t\t\t\t\t\t<p className=\"text-base\">{faq.answer}</p>\n\t\t\t\t\t\t\t\t\t</AccordionContent>\n\t\t\t\t\t\t\t\t</AccordionItem>\n\t\t\t\t\t\t\t\t<hr className=\"mx-7 border-dashed group-last:hidden peer-data-[state=open]:opacity-0\" />\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t))}\n\t\t\t\t\t</Accordion>\n\n\t\t\t\t\t{props.supportLink && (\n\t\t\t\t\t\t<p className=\"text-muted-foreground mt-6 px-8\">\n\t\t\t\t\t\t\t{`Can't find what you're looking for? Contact our `}\n\t\t\t\t\t\t\t<Link\n\t\t\t\t\t\t\t\tclassName=\"text-primary font-medium hover:underline\"\n\t\t\t\t\t\t\t\thref={props.supportLink}\n\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\tcustomer support team\n\t\t\t\t\t\t\t</Link>\n\t\t\t\t\t\t</p>\n\t\t\t\t\t)}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</section>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/FAQ/FAQ_1/index.tsx"
+    },
+    {
+      "path": "registry/payload/blocks/faq/faq-1/config.ts",
+      "content": "import type { Block } from \"payload\";\n\nimport { BLOCK_GROUP_FAQ, BLOCK_SLUG_FAQ_1 } from \"@/registry/default/lib/constants/blocks\";\nimport headerField from \"@/registry/default/lib/fields/header/config\";\nimport subheaderField from \"@/registry/default/lib/fields/subheader/config\";\n\nexport const FAQ_1_Block: Block = {\n\tslug: BLOCK_SLUG_FAQ_1,\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_FAQ,\n\t},\n\tfields: [\n\t\theaderField({\n\t\t\tdefaultValue: \"Frequently Asked Questions\",\n\t\t\trequired: false,\n\t\t}),\n\t\tsubheaderField({\n\t\t\tdefaultValue:\n\t\t\t\t\"Everything you need to know about UIFoundry's developer templates and hosted solutions\",\n\t\t}),\n\t\t{\n\t\t\tname: \"supportLink\",\n\t\t\ttype: \"text\",\n\t\t\tdefaultValue: \"/contact\",\n\t\t\tlabel: \"Support Link\",\n\t\t},\n\t\t{\n\t\t\tname: \"faq\",\n\t\t\ttype: \"array\",\n\t\t\tdefaultValue: [\n\t\t\t\t{\n\t\t\t\t\tanswer:\n\t\t\t\t\t\t\"You get the complete PayloadCMS template with 50+ premium components, full TypeScript source code, deployment guides for AWS/Vercel, and comprehensive documentation. Perfect for agencies and freelancers who want to ship faster.\",\n\t\t\t\t\tquestion: \"What's included in the developer template?\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tanswer:\n\t\t\t\t\t\t\"While other libraries only provide components, UIFoundry includes a complete PayloadCMS backend, no-code content management, and optional managed hosting. It's a full-stack solution, not just UI components.\",\n\t\t\t\t\tquestion:\n\t\t\t\t\t\t\"How is UIFoundry different from component libraries like Tailark?\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tanswer:\n\t\t\t\t\t\t\"Yes! The hosted plan includes full access to PayloadCMS admin panel for content editing, custom domains, and theme customization. For code-level changes, you can always upgrade to the developer template.\",\n\t\t\t\t\tquestion: \"Can I customize the hosted solution?\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tanswer:\n\t\t\t\t\t\t\"You can export your content and upgrade to the developer template at any time. We provide migration guides and support to help you transition to self-hosting when you're ready to scale.\",\n\t\t\t\t\tquestion: \"What if I outgrow the hosted plan?\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tanswer:\n\t\t\t\t\t\t\"Developer template includes documentation and community support. Hosted plans include email support with 24-48 hour response times. We also offer paid consultation for custom implementations.\",\n\t\t\t\t\tquestion: \"Do you provide technical support?\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tanswer:\n\t\t\t\t\t\t\"We offer a 30-day money-back guarantee on the developer template. Hosted plans can be cancelled anytime with no long-term commitments required.\",\n\t\t\t\t\tquestion: \"What's your refund policy?\",\n\t\t\t\t},\n\t\t\t],\n\t\t\tfields: [\n\t\t\t\t{\n\t\t\t\t\tname: \"question\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\trequired: true,\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: \"answer\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\trequired: true,\n\t\t\t\t},\n\t\t\t],\n\t\t},\n\t],\n\tinterfaceName: \"FAQ_1_Block\",\n\tlabels: {\n\t\tplural: \"FAQ 1's\",\n\t\tsingular: \"FAQ 1\",\n\t},\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/FAQ/FAQ_1/config.ts"
+    }
+  ]
+}

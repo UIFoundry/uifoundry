@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "link",
+  "type": "registry:ui",
+  "title": "Link",
+  "description": "Accessible link component built on react-aria-components",
+  "dependencies": [
+    "react",
+    "react-aria-components"
+  ],
+  "registryDependencies": [
+    "@uifoundry/primitive"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/link.tsx",
+      "content": "\"use client\"\n\nimport { Link as LinkPrimitive, type LinkProps as LinkPrimitiveProps } from \"react-aria-components\"\nimport { cx } from \"~/payload/primitive\"\n\nexport interface LinkProps extends LinkPrimitiveProps {\n  ref?: React.RefObject<HTMLAnchorElement>\n}\n\nexport function Link({ className, ref, ...props }: LinkProps) {\n  return (\n    <LinkPrimitive\n      ref={ref}\n      className={cx(\n        [\n          \"font-medium text-(--text)\",\n          \"outline-0 outline-offset-2 transition-[color,_opacity] focus-visible:outline-2 focus-visible:outline-ring forced-colors:outline-[Highlight]\",\n          \"disabled:cursor-default disabled:text-muted-fg forced-colors:disabled:text-[GrayText]\",\n          \"href\" in props && \"cursor-pointer\",\n        ],\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "src/ui/link.tsx"
+    }
+  ]
+}
