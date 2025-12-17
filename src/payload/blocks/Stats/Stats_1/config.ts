@@ -15,7 +15,6 @@ export const Stats_1_Block: Block = {
 	fields: [
 		{
 			type: "collapsible",
-			label: "Content",
 			admin: {
 				initCollapsed: false,
 			},
@@ -28,10 +27,10 @@ export const Stats_1_Block: Block = {
 						"Real metrics that reflect adoption, speed, satisfaction, and shipping cadence.",
 				}),
 			],
+			label: "Content",
 		},
 		{
 			type: "collapsible",
-			label: "Statistics",
 			admin: {
 				initCollapsed: false,
 			},
@@ -39,10 +38,12 @@ export const Stats_1_Block: Block = {
 				{
 					name: "stats",
 					type: "array",
-					label: "Statistics",
-					required: true,
-					minRows: 1,
-					maxRows: 8,
+					defaultValue: [
+						{ name: "Active subscriptions", value: "18,200" },
+						{ name: "Average response time", value: "120ms" },
+						{ name: "Net promoter score", value: "72" },
+						{ name: "Monthly deployments", value: "3.2k" },
+					],
 					fields: [
 						{
 							name: "name",
@@ -57,14 +58,13 @@ export const Stats_1_Block: Block = {
 							required: true,
 						},
 					],
-					defaultValue: [
-						{ name: "Active subscriptions", value: "18,200" },
-						{ name: "Average response time", value: "120ms" },
-						{ name: "Net promoter score", value: "72" },
-						{ name: "Monthly deployments", value: "3.2k" },
-					],
+					label: "Statistics",
+					maxRows: 8,
+					minRows: 1,
+					required: true,
 				},
 			],
+			label: "Statistics",
 		},
 	],
 	interfaceName: "Stats_1_Block",

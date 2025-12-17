@@ -5,16 +5,17 @@ import {
 	BLOCK_SLUG_TESTIMONIALS_4,
 	BLOCK_SLUG_TESTIMONIALS_5,
 } from "~/payload/constants/blocks";
-import { Testimonials_1_Block } from "./Testimonials_1/config";
-import { Testimonials_2_Block } from "./Testimonials_2/config";
-import { Testimonials_3_Block } from "./Testimonials_3/config";
-import { Testimonials_4_Block } from "./Testimonials_4/config";
-import { Testimonials_5_Block } from "./Testimonials_5/config";
+
 import Testimonials1 from "./Testimonials_1";
+import { Testimonials_1_Block } from "./Testimonials_1/config";
 import Testimonials2 from "./Testimonials_2";
+import { Testimonials_2_Block } from "./Testimonials_2/config";
 import Testimonials3 from "./Testimonials_3";
+import { Testimonials_3_Block } from "./Testimonials_3/config";
 import Testimonials4 from "./Testimonials_4";
+import { Testimonials_4_Block } from "./Testimonials_4/config";
 import Testimonials5 from "./Testimonials_5";
+import { Testimonials_5_Block } from "./Testimonials_5/config";
 
 export { Testimonials_1_Block } from "./Testimonials_1/config";
 export { Testimonials_2_Block } from "./Testimonials_2/config";

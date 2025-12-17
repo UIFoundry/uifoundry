@@ -1,5 +1,6 @@
-import { Container } from "~/ui/container";
 import type { Stats_2_Block } from "~/payload-types";
+
+import { Container } from "~/ui/container";
 
 export default function Stats2(props: Stats_2_Block) {
 	return (

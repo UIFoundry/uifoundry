@@ -13,7 +13,6 @@ export const Stats_3_Block: Block = {
 	fields: [
 		{
 			type: "collapsible",
-			label: "Content",
 			admin: {
 				initCollapsed: false,
 			},
@@ -21,32 +20,32 @@ export const Stats_3_Block: Block = {
 				{
 					name: "value",
 					type: "number",
+					defaultValue: 77421,
 					label: "Statistic Value",
 					required: true,
-					defaultValue: 77421,
 				},
 				{
 					name: "description",
 					type: "textarea",
-					label: "Description",
-					required: true,
 					defaultValue:
 						"Real time telemetry tracking active installations across live environments.",
+					label: "Description",
+					required: true,
 				},
 				{
 					name: "highlightedText",
 					type: "text",
-					label: "Highlighted Text",
 					admin: {
 						description: "Text to highlight/bold in the description",
 					},
 					defaultValue: "active installations",
+					label: "Highlighted Text",
 				},
 			],
+			label: "Content",
 		},
 		{
 			type: "collapsible",
-			label: "Animation Settings",
 			admin: {
 				initCollapsed: true,
 			},
@@ -54,23 +53,24 @@ export const Stats_3_Block: Block = {
 				{
 					name: "enableAnimation",
 					type: "checkbox",
-					label: "Enable Auto-Increment Animation",
-					defaultValue: true,
 					admin: {
 						description: "Automatically increment the number over time",
 					},
+					defaultValue: true,
+					label: "Enable Auto-Increment Animation",
 				},
 				{
 					name: "animationInterval",
 					type: "number",
-					label: "Animation Interval (ms)",
-					defaultValue: 3000,
 					admin: {
-						description: "How often to increment (in milliseconds)",
 						condition: (data) => data.enableAnimation === true,
+						description: "How often to increment (in milliseconds)",
 					},
+					defaultValue: 3000,
+					label: "Animation Interval (ms)",
 				},
 			],
+			label: "Animation Settings",
 		},
 	],
 	interfaceName: "Stats_3_Block",

@@ -15,7 +15,6 @@ export const Stats_2_Block: Block = {
 	fields: [
 		{
 			type: "collapsible",
-			label: "Content",
 			admin: {
 				initCollapsed: false,
 			},
@@ -23,11 +22,11 @@ export const Stats_2_Block: Block = {
 				{
 					name: "eyebrow",
 					type: "text",
-					label: "Eyebrow Text",
 					admin: {
 						description: "Small label above the main heading (optional)",
 					},
 					defaultValue: "Results",
+					label: "Eyebrow Text",
 				},
 				headerField({
 					defaultValue: "Built for scale, proven in production",
@@ -37,10 +36,10 @@ export const Stats_2_Block: Block = {
 						"Faster onboarding, higher reliability, and happier teams backed by real usage and measurable outcomes.",
 				}),
 			],
+			label: "Content",
 		},
 		{
 			type: "collapsible",
-			label: "Statistics",
 			admin: {
 				initCollapsed: false,
 			},
@@ -48,58 +47,59 @@ export const Stats_2_Block: Block = {
 				{
 					name: "stats",
 					type: "array",
-					label: "Statistics",
-					required: true,
-					minRows: 1,
-					maxRows: 6,
+					defaultValue: [
+						{
+							description: "switched from spreadsheets to automated workflows.",
+							emphasis: "Teams onboarded",
+							stat: "14K+",
+						},
+						{
+							description: "served across five global regions.",
+							emphasis: "Monthly API calls",
+							stat: "180M+",
+						},
+						{
+							description: "with multi region failover in production.",
+							emphasis: "Uptime this year",
+							stat: "99.95%",
+						},
+					],
 					fields: [
 						{
 							name: "stat",
 							type: "text",
-							label: "Statistic Value",
-							required: true,
 							admin: {
 								description: "Large numeric value (e.g., '14K+', '99.95%')",
 							},
+							label: "Statistic Value",
+							required: true,
 						},
 						{
 							name: "emphasis",
 							type: "text",
-							label: "Emphasized Text",
-							required: true,
 							admin: {
 								description: "Bold descriptive text",
 							},
+							label: "Emphasized Text",
+							required: true,
 						},
 						{
 							name: "description",
 							type: "text",
-							label: "Description",
-							required: true,
 							admin: {
 								description: "Additional context text",
 							},
+							label: "Description",
+							required: true,
 						},
 					],
-					defaultValue: [
-						{
-							stat: "14K+",
-							emphasis: "Teams onboarded",
-							description: "switched from spreadsheets to automated workflows.",
-						},
-						{
-							stat: "180M+",
-							emphasis: "Monthly API calls",
-							description: "served across five global regions.",
-						},
-						{
-							stat: "99.95%",
-							emphasis: "Uptime this year",
-							description: "with multi region failover in production.",
-						},
-					],
+					label: "Statistics",
+					maxRows: 6,
+					minRows: 1,
+					required: true,
 				},
 			],
+			label: "Statistics",
 		},
 	],
 	interfaceName: "Stats_2_Block",
