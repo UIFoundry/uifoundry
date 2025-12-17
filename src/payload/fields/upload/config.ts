@@ -1,5 +1,6 @@
-import type { PickRequired } from "~/types";
 import type { UploadField } from "~/payload/fields";
+import type { PickRequired } from "~/types";
+
 import { COLLECTION_SLUG_MEDIA } from "~/payload/constants/collections";
 
 type RequiredFields = PickRequired<UploadField, "name">;

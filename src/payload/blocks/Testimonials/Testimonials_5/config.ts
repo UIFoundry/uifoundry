@@ -13,7 +13,6 @@ export const Testimonials_5_Block: Block = {
 	fields: [
 		{
 			type: "collapsible",
-			label: "Testimonial Content",
 			admin: {
 				initCollapsed: false,
 			},
@@ -21,16 +20,16 @@ export const Testimonials_5_Block: Block = {
 				{
 					name: "quote",
 					type: "textarea",
-					label: "Quote",
-					required: true,
 					defaultValue:
 						"We cut dev time in half and actually enjoyed the process. Everything feels designed for speed and clarity — it just makes sense.",
+					label: "Quote",
+					required: true,
 				},
 			],
+			label: "Testimonial Content",
 		},
 		{
 			type: "collapsible",
-			label: "Author Information",
 			admin: {
 				initCollapsed: false,
 			},
@@ -38,25 +37,26 @@ export const Testimonials_5_Block: Block = {
 				{
 					name: "authorName",
 					type: "text",
+					defaultValue: "Lena Fischer",
 					label: "Author Name",
 					required: true,
-					defaultValue: "Lena Fischer",
 				},
 				{
 					name: "authorRole",
 					type: "text",
+					defaultValue: "Lead Frontend Engineer at Skyloft",
 					label: "Author Role/Title",
 					required: true,
-					defaultValue: "Lead Frontend Engineer at Skyloft",
 				},
 				{
 					name: "authorImage",
 					type: "text",
+					defaultValue: "https://randomuser.me/api/portraits/women/52.jpg",
 					label: "Author Image URL",
 					required: true,
-					defaultValue: "https://randomuser.me/api/portraits/women/52.jpg",
 				},
 			],
+			label: "Author Information",
 		},
 	],
 	interfaceName: "Testimonials_5_Block",

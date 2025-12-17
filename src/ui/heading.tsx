@@ -1,12 +1,12 @@
 import { twMerge } from "tailwind-merge"
 
-type HeadingType = { level?: 1 | 2 | 3 | 4 } & React.ComponentPropsWithoutRef<
-  "h1" | "h2" | "h3" | "h4"
->
-
 interface HeadingProps extends HeadingType {
   className?: string | undefined
 }
+
+type HeadingType = React.ComponentPropsWithoutRef<
+  "h1" | "h2" | "h3" | "h4"
+> & { level?: 1 | 2 | 3 | 4 }
 
 const Heading = ({ className, level = 1, ...props }: HeadingProps) => {
   const Element: `h${typeof level}` = `h${level}`

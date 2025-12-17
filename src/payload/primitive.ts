@@ -3,11 +3,11 @@
 import { composeRenderProps } from "react-aria-components"
 import { type ClassNameValue, twMerge } from "tailwind-merge"
 
-type Render<T> = string | ((v: T) => string) | undefined
-
 type CxArgs<T> = [...ClassNameValue[], Render<T>] | [[...ClassNameValue[], Render<T>]]
 
-export function cx<T = unknown>(...args: CxArgs<T>): string | ((v: T) => string) {
+type Render<T> = ((v: T) => string) | string | undefined
+
+export function cx<T = unknown>(...args: CxArgs<T>): ((v: T) => string) | string {
   let resolvedArgs = args
   if (args.length === 1 && Array.isArray(args[0])) {
     resolvedArgs = args[0] as [...ClassNameValue[], Render<T>]

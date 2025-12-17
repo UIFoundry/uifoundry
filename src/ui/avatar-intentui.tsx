@@ -1,34 +1,35 @@
+import Image from "next/image"
 import { twMerge } from "tailwind-merge"
 
 export interface AvatarProps {
-  src?: string | null
-  initials?: string
   alt?: string
   className?: string
+  initials?: string
   isSquare?: boolean
   size?:
-    | "xs"
-    | "sm"
-    | "md"
-    | "lg"
-    | "xl"
-    | "2xl"
-    | "3xl"
-    | "4xl"
-    | "5xl"
-    | "6xl"
-    | "7xl"
-    | "8xl"
-    | "9xl"
+  | "2xl"
+  | "3xl"
+  | "4xl"
+  | "5xl"
+  | "6xl"
+  | "7xl"
+  | "8xl"
+  | "9xl"
+  | "lg"
+  | "md"
+  | "sm"
+  | "xl"
+  | "xs"
+  src?: null | string
 }
 
 export function Avatar({
-  src = null,
-  isSquare = false,
-  size = "md",
-  initials,
   alt = "",
   className,
+  initials,
+  isSquare = false,
+  size = "md",
+  src = null,
   ...props
 }: AvatarProps & React.ComponentPropsWithoutRef<"span">) {
   return (
@@ -58,24 +59,24 @@ export function Avatar({
     >
       {initials && (
         <svg
+          aria-hidden={alt ? undefined : "true"}
           className="size-full select-none fill-current p-[5%] font-md text-[48px] uppercase"
           viewBox="0 0 100 100"
-          aria-hidden={alt ? undefined : "true"}
         >
           {alt && <title>{alt}</title>}
           <text
-            x="50%"
-            y="50%"
             alignmentBaseline="middle"
             dominantBaseline="middle"
-            textAnchor="middle"
             dy=".125em"
+            textAnchor="middle"
+            x="50%"
+            y="50%"
           >
             {initials}
           </text>
         </svg>
       )}
-      {src && <img className="size-full object-cover object-center" src={src} alt={alt} />}
+      {src && <Image alt={alt} className="size-full object-cover object-center" src={src} />}
     </span>
   )
 }

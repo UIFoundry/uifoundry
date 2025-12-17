@@ -1,6 +1,7 @@
 "use client"
 
 import { Link as LinkPrimitive, type LinkProps as LinkPrimitiveProps } from "react-aria-components"
+
 import { cx } from "~/payload/primitive"
 
 export interface LinkProps extends LinkPrimitiveProps {
@@ -10,7 +11,6 @@ export interface LinkProps extends LinkPrimitiveProps {
 export function Link({ className, ref, ...props }: LinkProps) {
   return (
     <LinkPrimitive
-      ref={ref}
       className={cx(
         [
           "font-medium text-(--text)",
@@ -20,6 +20,7 @@ export function Link({ className, ref, ...props }: LinkProps) {
         ],
         className,
       )}
+      ref={ref}
       {...props}
     />
   )

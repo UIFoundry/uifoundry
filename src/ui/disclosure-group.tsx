@@ -1,12 +1,13 @@
 "use client"
 
-import { use } from "react"
 import type {
   ButtonProps,
   DisclosureGroupProps,
   DisclosurePanelProps,
   DisclosureProps,
 } from "react-aria-components"
+
+import { use } from "react"
 import {
   Button,
   composeRenderProps,
@@ -17,6 +18,7 @@ import {
   DisclosurePanel as PrimitiveDisclosurePanel,
 } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"
+
 import { cx } from "~/payload/primitive"
 
 const DisclosureGroup = ({ className, ...props }: DisclosureGroupProps) => {
@@ -62,14 +64,12 @@ interface DisclosureTriggerProps extends ButtonProps {
   ref?: React.Ref<HTMLButtonElement>
 }
 
-const DisclosureTrigger = ({ ref, className, ...props }: DisclosureTriggerProps) => {
+const DisclosureTrigger = ({ className, ref, ...props }: DisclosureTriggerProps) => {
   const state = use(DisclosureStateContext)!
   return (
     <Heading>
       <Button
         {...props}
-        ref={ref}
-        slot="trigger"
         className={cx(
           [
             "outline-hidden [--width:--spacing(2.5)]",
@@ -82,13 +82,15 @@ const DisclosureTrigger = ({ ref, className, ...props }: DisclosureTriggerProps)
           ],
           className,
         )}
+        ref={ref}
+        slot="trigger"
       >
         {(values) => (
           <>
             {typeof props.children === "function" ? props.children(values) : props.children}
             <span
-              data-slot="disclosure-indicator"
               className="-mr-[calc(var(--disclosure-gutter-x,--spacing(0))-(--spacing(2)))] pointer-events-none relative ml-(--disclosure-gutter-x,--spacing(0)) flex size-6 items-center justify-center"
+              data-slot="disclosure-indicator"
             >
               <span
                 className={twJoin([
@@ -108,15 +110,15 @@ const DisclosureTrigger = ({ ref, className, ...props }: DisclosureTriggerProps)
 const DisclosurePanel = ({ className, ...props }: DisclosurePanelProps) => {
   return (
     <PrimitiveDisclosurePanel
-      data-slot="disclosure-panel"
       className={cx(
         "h-(--disclosure-panel-height) overflow-clip text-sm/6 transition-[height] duration-200",
         className,
       )}
+      data-slot="disclosure-panel"
     >
       <div
-        data-slot="disclosure-panel-content"
         className="justify-start self-stretch text-pretty px-(--disclosure-gutter-x,--spacing(0)) pt-2 pb-(--disclosure-gutter-x,--spacing(0)) text-(--disclosure-collapsed-fg)"
+        data-slot="disclosure-panel-content"
       >
         {props.children}
       </div>
@@ -124,4 +126,4 @@ const DisclosurePanel = ({ className, ...props }: DisclosurePanelProps) => {
   )
 }
 
-export { DisclosureGroup, Disclosure, DisclosureTrigger, DisclosurePanel }
+export { Disclosure, DisclosureGroup, DisclosurePanel, DisclosureTrigger }
