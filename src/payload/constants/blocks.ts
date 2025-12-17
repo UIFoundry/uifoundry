@@ -46,10 +46,18 @@ export const BLOCK_SLUG_CTA_3 = "cta_3" as const;
 // Testimonials
 export const BLOCK_GROUP_TESTIMONIALS = "Testimonials" as const;
 export const BLOCK_SLUG_TESTIMONIALS_1 = "testimonials_1" as const;
+export const BLOCK_SLUG_TESTIMONIALS_2 = "testimonials_2" as const;
+export const BLOCK_SLUG_TESTIMONIALS_3 = "testimonials_3" as const;
+export const BLOCK_SLUG_TESTIMONIALS_4 = "testimonials_4" as const;
+export const BLOCK_SLUG_TESTIMONIALS_5 = "testimonials_5" as const;
 
 // FAQ
 export const BLOCK_GROUP_FAQ = "FAQ" as const;
 export const BLOCK_SLUG_FAQ_1 = "faq_1" as const;
+export const BLOCK_SLUG_FAQ_2 = "faq_2" as const;
+export const BLOCK_SLUG_FAQ_3 = "faq_3" as const;
+export const BLOCK_SLUG_FAQ_4 = "faq_4" as const;
+export const BLOCK_SLUG_FAQ_5 = "faq_5" as const;
 
 // Pricing
 export const BLOCK_GROUP_PRICING = "Pricing" as const;
@@ -72,6 +80,8 @@ export const BLOCK_SLUG_NEWSLETTER_1 = "newsletter_1" as const;
 // Stats
 export const BLOCK_GROUP_STATS = "Stats" as const;
 export const BLOCK_SLUG_STATS_1 = "stats_1" as const;
+export const BLOCK_SLUG_STATS_2 = "stats_2" as const;
+export const BLOCK_SLUG_STATS_3 = "stats_3" as const;
 
 // Gallery
 export const BLOCK_GROUP_GALLERY = "Gallery" as const;

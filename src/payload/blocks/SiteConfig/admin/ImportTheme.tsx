@@ -13,9 +13,13 @@ import { Textarea } from "~/ui/textarea";
 import { parseCssInput } from "./parse-css-input";
 
 export default function ImportThemePopover({ path }: { path: string }) {
-	const trpc = useTRPC()
+	const { queryClient, trpc } = useTRPC()
 	const { setValue } = useField<string>({ path });
-	const createThemeMutator = useMutation(trpc.themes.create.mutationOptions());
+	const createThemeMutator = useMutation(trpc.themes.create.mutationOptions({
+		onSuccess: async () => {
+			await queryClient.invalidateQueries(trpc.themes.pathFilter())
+		}
+	}));
 
 	const form = useForm({
 		defaultValues: {

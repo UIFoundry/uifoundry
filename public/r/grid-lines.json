@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "grid-lines",
+  "type": "registry:ui",
+  "title": "Grid Lines",
+  "description": "SVG grid lines component with configurable mask patterns for background decoration",
+  "dependencies": [
+    "react",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/grid-lines.tsx",
+      "content": "import { twMerge } from \"tailwind-merge\"\n\ninterface GridLinesProps extends Omit<React.ComponentProps<\"svg\">, \"width\" | \"height\"> {\n  width?: number\n  height?: number\n  mask?:\n    | \"top\"\n    | \"top_right\"\n    | \"right\"\n    | \"bottom_right\"\n    | \"bottom\"\n    | \"bottom_left\"\n    | \"left\"\n    | \"top_left\"\n    | \"none\"\n}\n\nconst maskMap: Record<Exclude<GridLinesProps[\"mask\"], undefined>, string> = {\n  top: \"[mask-image:radial-gradient(100%_100%_at_top,white,transparent)]\",\n  top_right: \"[mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]\",\n  right: \"[mask-image:radial-gradient(100%_100%_at_right,white,transparent)]\",\n  bottom_right: \"[mask-image:radial-gradient(100%_100%_at_bottom_right,white,transparent)]\",\n  bottom: \"[mask-image:radial-gradient(100%_100%_at_bottom,white,transparent)]\",\n  bottom_left: \"[mask-image:radial-gradient(100%_100%_at_bottom_left,white,transparent)]\",\n  left: \"[mask-image:radial-gradient(100%_100%_at_left,white,transparent)]\",\n  top_left: \"[mask-image:radial-gradient(100%_100%_at_top_left,white,transparent)]\",\n  none: \"\",\n}\n\nconst GridLines = ({\n  className,\n  width = 100,\n  height = 100,\n  mask = \"top_right\",\n  ...props\n}: GridLinesProps) => {\n  return (\n    <svg\n      className={twMerge(\n        \"-z-10 absolute inset-0 h-full w-full stroke-fg/10\",\n        maskMap[mask],\n        className,\n      )}\n      aria-hidden=\"true\"\n      {...props}\n    >\n      <defs>\n        <pattern\n          id=\"0787a7c5-978c-4f66-83c7-11c213f99cb7\"\n          width={width}\n          height={height}\n          x=\"50%\"\n          y={-1}\n          patternUnits=\"userSpaceOnUse\"\n        >\n          <path d=\"M.5 200V.5H200\" fill=\"none\" />\n        </pattern>\n      </defs>\n      <rect\n        width=\"100%\"\n        height=\"100%\"\n        strokeWidth={0}\n        fill=\"url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)\"\n      />\n    </svg>\n  )\n}\n\nexport { GridLines }\n",
+      "type": "registry:ui",
+      "target": "src/ui/grid-lines.tsx"
+    }
+  ]
+}

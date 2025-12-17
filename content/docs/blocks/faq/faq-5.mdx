@@ -1,0 +1,122 @@
+---
+title: "FAQ 5"
+description: "FAQ section with expandable disclosure panels, documentation link, and customizable default expanded items"
+category: "blocks"
+---
+
+## Preview
+
+<FAQ_5 />
+
+## Props
+
+The FAQ_5 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    header: {
+      description: "Main heading text displayed at the top of the FAQ section",
+      type: "string",
+      required: false,
+      default: "Frequently Asked Questions",
+    },
+    subheader: {
+      description: "Supporting text displayed below the header",
+      type: "string",
+      required: false,
+      default: "Still have questions?",
+    },
+    documentationLinkText: {
+      description: "Link text displayed after the subheader to direct users to documentation",
+      type: "string",
+      required: false,
+      default: "Check out our documentation",
+    },
+    documentationLinkHref: {
+      description: "URL for the documentation link",
+      type: "string",
+      required: false,
+      default: "",
+    },
+    faqs: {
+      description: "Array of frequently asked questions with expandable answers. Supports 0-20 FAQ items.",
+      type: "array",
+      required: false,
+      default: "10 default FAQ items",
+    },
+    "faqs[].question": {
+      description: "The question text displayed in the collapsible trigger",
+      type: "string",
+      required: true,
+      default: "Can I host frontend and backend apps together?",
+    },
+    "faqs[].answer": {
+      description: "The detailed answer text displayed when expanded",
+      type: "textarea",
+      required: true,
+      default: "Yes, the platform supports full-stack applications out of the box...",
+    },
+    defaultExpandedKeys: {
+      description: "Array of FAQ item indices that should be expanded by default. Indices start at 1. Supports 0-10 items.",
+      type: "array",
+      required: false,
+      default: "[1, 2]",
+    },
+    "defaultExpandedKeys[].key": {
+      description: "The 1-based index of the FAQ item to expand by default",
+      type: "number",
+      required: true,
+      default: "1",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/faq-5
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Disclosure Group](/docs/ui/disclosure-group) - Accordion/disclosure component with expandable panels
+- [Link](/docs/ui/link) - Accessible link component built on react-aria-components
+- [Header Field](/docs/fields/header-field) - PayloadCMS text field for headers
+- [Subheader Field](/docs/fields/subheader-field) - PayloadCMS text field for subheaders
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+- [tailwind-merge](https://github.com/dcastil/tailwind-merge) - Utility for merging Tailwind CSS classes
+
+## Design Notes
+
+This FAQ block features:
+
+- **Expandable disclosure panels**: Clean accordion-style interface built with react-aria-components for accessibility
+- **Multiple expanded support**: Allows multiple FAQ items to be open simultaneously
+- **Default expanded items**: Configure which FAQ items are expanded on page load using 1-based indices
+- **Documentation link integration**: Inline documentation link within the subheader text for seamless navigation
+- **Centered layout**: Focused 3xl max-width container for optimal reading experience
+- **Minimal styling**: Transparent backgrounds with subtle color transitions on expand/collapse
+- **Custom CSS properties**: Uses CSS custom properties for fine-grained color control
+- **Flexible FAQ count**: Supports 0-20 FAQ items with consistent spacing
+
+The component uses custom CSS properties for theming:
+- `--disclosure-expanded-fg`: Text color when expanded (default: fg color)
+- `--disclosure-collapsed-fg`: Text color when collapsed (default: muted-fg)
+- `--disclosure-expanded-bg`: Background when expanded (transparent)
+- `--disclosure-collapsed-bg`: Background when collapsed (transparent)
+
+Use this component for comprehensive FAQ sections on landing pages, help centers, or product documentation. The centered layout and minimal styling make it ideal for focus-driven content where readability is paramount. The ability to pre-expand specific questions makes it perfect for highlighting important information.
+
+Source: @irsyad/faq-05 (IntentUI)

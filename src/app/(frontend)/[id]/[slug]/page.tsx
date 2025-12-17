@@ -16,7 +16,6 @@ import { blockComponents } from "~/payload/blocks";
 import TailwindConfig from "~/payload/collections/Sites/TailwindConfig";
 import RefreshRouteOnSave from "~/payload/components/RefreshRouteOnSave";
 import {
-	COLLECTION_SLUG_PAGES,
 	COLLECTION_SLUG_SITES,
 } from "~/payload/constants";
 import Footer from "~/payload/globals/Footer";
@@ -31,24 +30,6 @@ interface PageParams {
 		slug?: string;
 	}>;
 	searchParams: Promise<Record<string, string | string[]>>;
-}
-
-export async function generateStaticParams() {
-	const payload = await getPayload();
-	const pageRes = await payload.find({
-		collection: COLLECTION_SLUG_PAGES,
-		draft: false,
-		limit: 100,
-	});
-
-	const pages: Page[] = pageRes?.docs;
-
-	return pages.map(({ slug, _status }) => {
-		if (_status !== "published" || slug === "home") {
-			return {};
-		}
-		return { slug };
-	});
 }
 
 export default async function Page({ params: paramsPromise }: PageParams) {
@@ -66,7 +47,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 		depth: 1,
 	});
 
-	const sitePages = site.pages!.docs;
+	const sitePages = site.pages;
 	if (!sitePages) {
 		const { api, queryClient, trpc } = await createTRPCServer();
 		const hello = await api.post.hello({ text: "from tRPC" });
@@ -84,7 +65,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 		);
 	}
 
-	const page = (sitePages as PageType[])?.find((p) => {
+	const page = sitePages.find((p) => {
 		if (!slug || slug.length < 1) {
 			return p.slug === "/" || p.slug === "home";
 		}
@@ -105,7 +86,7 @@ export default async function Page({ params: paramsPromise }: PageParams) {
 				/>
 			)}
 			<HeaderSpacing showHeader={page.showHeader}>
-				<RenderBlocks blockComponents={blockComponents} blocks={page.blocks} />
+				<RenderBlocks blockComponents={blockComponents} blocks={(page.content as unknown as PageType[]) ?? []} />
 			</HeaderSpacing>
 			{site.footer && (
 				<Footer

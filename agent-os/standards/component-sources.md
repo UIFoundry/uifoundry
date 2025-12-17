@@ -108,7 +108,35 @@
 
 ## Testimonial Blocks
 
-- No entries yet.
+### Testimonials_1
+- **Source**: [@irsyad/testimonials-01 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: Grid layout testimonials with avatars, quotes, names, and roles. Uses Avatar component (2xl size) with centered text layout. Responsive 1/2/3 column grid.
+
+### Testimonials_2
+- **Source**: [@irsyad/testimonials-02 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: Grid layout (1/2/3 columns) with rounded cards (rounded-3xl) on secondary/40 background. Features decorative quotation mark, italic quote text, avatar (lg size) with name/role. Includes section header with title and description. Clean card-based design with visual hierarchy.
+
+### Testimonials_3
+- **Source**: [@irsyad/testimonials-03 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: Grid layout (3 columns) with rounded cards (rounded-3xl). Avatar on left (lg size) with name/role inline. Quote text below in italics with muted color. Features section header with title and description. Responsive 1/2/3 column layout.
+
+### Testimonials_4
+- **Source**: [@irsyad/testimonials-04 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: Masonry/columns layout (1/2/3 responsive columns) with break-inside-avoid for testimonial cards. Cards have rounded-2xl border, muted background, hover shadow effect. Features large decorative quotation mark (font-serif, text-9xl), avatar (lg size) with name/role, and italic quote text. Optimized for variable-length testimonials with elegant waterfall layout.
+
+### Testimonials_5
+- **Source**: [@irsyad/testimonials-05 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: Single centered testimonial with large quote (italic, light font, 2xl text), author avatar (2xl with ring), name, and role. Clean centered layout optimized for impactful single testimonial display.
 
 ---
 
@@ -136,7 +164,35 @@
 
 ## FAQ Blocks
 
-- No entries yet.
+### FAQ_1
+- **Source**: Custom design (original to this project)
+- **License**: N/A
+- **Date Added**: Before tracking system
+- **Notes**: FAQ with accordion-style disclosure groups using shadcn accordion component
+
+### FAQ_2
+- **Source**: [@irsyad/faq-02 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: FAQ with disclosure groups using react-aria-components. Features animated expand/collapse with custom disclosure indicator (+ icon animation). Centered layout with documentation link in header. Uses custom disclosure-group component with CSS variable theming.
+
+### FAQ_3
+- **Source**: [@irsyad/faq-03 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: FAQ with disclosure groups using react-aria-components. Features emerald color scheme with animated expand/collapse and custom disclosure indicator. Centered layout (max-w-3xl) with decorative background gradient blur. Supports multiple expanded items simultaneously. Uses custom disclosure styling with emerald theme colors and rounded-xl borders.
+
+### FAQ_4
+- **Source**: [@irsyad/faq-04 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: FAQ with disclosure groups using react-aria-components. Features animated expand/collapse with custom disclosure indicator (+ icon animation). Centered layout (max-w-3xl) with support link in header. Uses custom disclosure styling with transparent collapsed state and muted expanded state. Default expands first item.
+
+### FAQ_5
+- **Source**: [@irsyad/faq-05 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-10
+- **Notes**: FAQ with disclosure groups using react-aria-components. Features animated expand/collapse with custom +/- indicator animation. Centered layout (max-w-3xl) with documentation link in header. Uses transparent background styling with muted/foreground color transitions. Supports multiple expanded items with configurable default expanded keys. Clean minimal design with no borders or backgrounds.
 
 ---
 
@@ -146,9 +202,44 @@
 
 ---
 
+## Stats Blocks
+
+### Stats_1
+- **Source**: [@irsyad/stats-01 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-11
+- **Notes**: Grid layout statistics block with responsive columns (1/2/4). Features centered section header with title and description. Stats display in cards with rounded borders, muted background, and divided layout. Shows statistic name (muted) and value (large text) with flexible array field supporting 1-8 stats. Clean, modern design with optimal information density.
+
+### Stats_2
+- **Source**: [@irsyad/stats-02 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-12
+- **Notes**: Grid layout (1/3 columns responsive) with ring-offset cards. Features eyebrow text, main heading, and description. Each stat card displays large numeric value, emphasized bold text, and additional description. Cards have rounded borders with ring effects (ring-offset-4). Optimized for detailed metrics with context. Supports 1-6 stats.
+
+### Stats_3
+- **Source**: [@irsyad/stats-03 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-12
+- **Notes**: Single large animated number display with descriptive text. Features AnimatedNumber component (64px font size) with configurable auto-increment animation. Decorative gradient backgrounds (left/right radial gradients) and GridLines overlay. Full-width section with border-y, muted background. Supports highlighted text within description. Ideal for showcasing single key metric with real-time updates.
+
+---
+
 ## Sources Used
 
 **External Component Libraries**:
+- **IntentUI** (<https://design.intentui.com/blocks>) - Pro subscription components
+  - @irsyad/testimonials-01 (used in Testimonials_1)
+  - @irsyad/testimonials-02 (used in Testimonials_2)
+  - @irsyad/testimonials-03 (used in Testimonials_3)
+  - @irsyad/testimonials-04 (used in Testimonials_4)
+  - @irsyad/testimonials-05 (used in Testimonials_5)
+  - @irsyad/faq-02 (used in FAQ_2)
+  - @irsyad/faq-03 (used in FAQ_3)
+  - @irsyad/faq-04 (used in FAQ_4)
+  - @irsyad/faq-05 (used in FAQ_5)
+  - @irsyad/stats-01 (used in Stats_1)
+  - @irsyad/stats-02 (used in Stats_2)
+  - @irsyad/stats-03 (used in Stats_3)
 - **Tailark** (<https://tailark.com>) - Free tier components
   - Hero Section 1 (used in Hero_3)
   - Hero Section 4 (used in Hero_2, Header_5)

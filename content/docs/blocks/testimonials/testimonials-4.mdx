@@ -1,0 +1,98 @@
+---
+title: "Testimonials 4"
+description: "Testimonials section with masonry layout, large decorative quotes, and customer testimonials"
+category: "blocks"
+---
+
+## Preview
+
+<Testimonials_4 />
+
+## Props
+
+The Testimonials_4 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    header: {
+      description: "Main section headline displayed at the top",
+      type: "string",
+      required: false,
+      default: "What our customers are saying",
+    },
+    subheader: {
+      description: "Supporting description text displayed below the header",
+      type: "string",
+      required: false,
+      default: "Real stories from teams who build faster, launch smoother, and never look back.",
+    },
+    testimonials: {
+      description: "Array of customer testimonials (0-20 items)",
+      type: "array",
+      default: "6 default testimonials",
+    },
+    "testimonials[].name": {
+      description: "Name of the person giving the testimonial",
+      type: "string",
+      required: true,
+    },
+    "testimonials[].role": {
+      description: "Job title and company of the testimonial author",
+      type: "string",
+      required: true,
+    },
+    "testimonials[].avatar": {
+      description: "Optional avatar image for the testimonial author",
+      type: "Media",
+      required: false,
+    },
+    "testimonials[].quote": {
+      description: "The testimonial content or customer quote",
+      type: "textarea",
+      required: true,
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/testimonials-4
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Avatar IntentUI](/docs/ui/avatar-intentui) - Avatar component with support for images, initials, and various sizes
+- [Container](/docs/ui/container) - Container component for consistent page width and padding
+- [Header Field](/docs/fields/header-field) - PayloadCMS text field for headers
+- [Subheader Field](/docs/fields/subheader-field) - PayloadCMS text field for subheaders
+- [Upload Field](/docs/fields/upload-field) - PayloadCMS media upload field configuration
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+
+## Design Notes
+
+This testimonial block features:
+
+- **Masonry layout**: CSS columns create a dynamic, Pinterest-style layout that adapts to content height
+- **Responsive columns**: 1 column on mobile, 2 on tablet, 3 on desktop for optimal readability
+- **Large decorative quotes**: Giant serif quotation marks add visual interest and emphasize authenticity
+- **Avatar support**: Displays customer avatars or auto-generated initials for a personal touch
+- **Hover effects**: Subtle shadow animation on hover enhances interactivity
+- **Break-inside-avoid**: Prevents testimonial cards from splitting across columns
+- **Consistent spacing**: Automatic gap and vertical spacing between testimonial cards
+
+Source: @irsyad/testimonials-04 (IntentUI) - Modified for PayloadCMS integration with dynamic content and media upload support.
+
+Use this component when you want to display multiple customer testimonials in an engaging, space-efficient layout. The masonry design naturally accommodates varying quote lengths while maintaining visual balance. Perfect for social proof sections on landing pages, product pages, or dedicated testimonials pages.

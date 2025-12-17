@@ -1,0 +1,81 @@
+---
+title: "Testimonials 2"
+description: "Card-based testimonials grid with decorative quote marks and customer testimonials"
+category: "blocks"
+---
+
+## Preview
+
+<Testimonials_2 />
+
+## Props
+
+The Testimonials_2 block accepts the following props from PayloadCMS:
+
+<TypeTable
+  type={{
+    header: {
+      description: "Main section heading",
+      type: "string",
+      default: "What our customers say",
+      required: true,
+    },
+    subheader: {
+      description: "Section description text",
+      type: "string",
+      default: "Authentic testimonials from thrilled users who've unlocked game-changing results with our platform.",
+      required: true,
+    },
+    testimonials: {
+      description: "Array of testimonial objects with customer details",
+      type: "array",
+      default: "9 pre-configured testimonials",
+    },
+    "testimonials[].name": {
+      description: "Customer name",
+      type: "string",
+      required: true,
+    },
+    "testimonials[].role": {
+      description: "Customer role or title",
+      type: "string",
+      required: true,
+    },
+    "testimonials[].avatar": {
+      description: "Avatar image URL",
+      type: "string",
+      required: true,
+    },
+    "testimonials[].quote": {
+      description: "Customer testimonial quote",
+      type: "textarea",
+      required: true,
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/testimonials-2
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Avatar (IntentUI)](/docs/ui/avatar-intentui) - Avatar component with size variants and image support
+- [Container](/docs/ui/container) - Responsive container component for consistent page width
+- [Header Field](/docs/fields/header-field) - PayloadCMS text field for headers
+- [Subheader Field](/docs/fields/subheader-field) - PayloadCMS text field for subheaders
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [Payload](https://github.com/payloadcms/payload) - Headless CMS and application framework

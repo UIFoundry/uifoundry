@@ -61,6 +61,21 @@ export const Sites: CollectionConfig = {
 		useAsTitle: "title",
 	},
 	fields: [
+		{
+			type: "group",
+			fields: [
+				{
+					name: "domainUrl",
+					type: "text",
+					defaultValue: "",
+					label: "Url",
+					required: true,
+					unique: true
+				}
+			],
+			label: "Domain",
+			required: true
+		},
 		titleField(),
 		userRelationship({
 			name: "owner",
@@ -560,10 +575,38 @@ export const Sites: CollectionConfig = {
 		},
 		{
 			name: "pages",
-			type: "join",
-			collection: COLLECTION_SLUG_PAGES,
-			on: "site",
-		},
+			type: "array",
+			fields: [
+				{
+					name: "slug",
+					type: "text",
+					required: true,
+				},
+				{
+					name: "title",
+					type: "text",
+					defaultValue: "New Page",
+					required: true,
+				},
+				{
+					name: "showHeader",
+					type: "checkbox",
+					defaultValue: false,
+					required: true
+				},
+				{
+					name: "showFooter",
+					type: "checkbox",
+					defaultValue: false,
+					required: true
+				},
+				{
+					name: "content",
+					type: "relationship",
+					relationTo: COLLECTION_SLUG_PAGES
+				},
+			]
+		}
 	],
 	hooks: {
 		beforeChange: [beforeChange],

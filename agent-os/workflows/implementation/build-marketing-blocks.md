@@ -2,12 +2,24 @@
 
 ## Overview
 
-This workflow enables building marketing blocks at scale (1-5 at a time) using source material from MIT-licensed shadcn resources. The workflow follows a strict 3-phase pipeline to ensure quality and consistency.
+This workflow enables building marketing blocks at scale (1-5 at a time) using source material from premium UI kits and MIT-licensed shadcn resources. The workflow follows a strict 3-phase pipeline to ensure quality and consistency.
 
 **CRITICAL RULE**: NEVER write blocks from scratch. Always source from:
 
-1. [Awesome Shadcn UI](https://github.com/birobirobiro/awesome-shadcn-ui) (primary)
-2. [Tailark Free Tier](https://tailark.com/) (fallback)
+1. **[IntentUI](https://design.intentui.com/blocks) (EXCLUSIVE)** - Premium UI kit distributed via shadcn CLI
+   - Uses `npx shadcn@latest add @irsyad/[component-name]` installation pattern
+   - All components use @irsyad namespace
+   - Professional, production-ready components with consistent design
+
+## Helper Documentation
+
+For detailed step-by-step guides on each part of the block creation process:
+
+1. **Installing from IntentUI**: @agent-os/docs/blocks/01-installing-from-intentui.md
+2. **Analyzing Block Source**: @agent-os/docs/blocks/02-analyzing-block-source.md
+3. **Creating Block Configs**: @agent-os/docs/blocks/03-creating-block-configs.md
+4. **Transforming Components**: @agent-os/docs/blocks/04-transforming-block-components.md
+5. **Registering Blocks**: @agent-os/docs/blocks/05-registering-blocks.md
 
 ## Workflow Structure
 
@@ -44,274 +56,105 @@ This workflow enables building marketing blocks at scale (1-5 at a time) using s
 
 ### Step 1: Source Discovery
 
-**Purpose**: Find MIT-licensed component examples from shadcn ecosystem
+**Purpose**: Install components from IntentUI using shadcn CLI
 
-**MANDATORY SEARCH ORDER**:
+**EXCLUSIVE SOURCE**: IntentUI Registry
 
-1. **Primary**: Tailark free tier (ALWAYS search here first)
-2. **Fallback**: Awesome Shadcn UI (if Tailark insufficient)
-3. **Last Resort**: User-provided URLs (if both searches fail)
+All marketing blocks MUST be sourced from IntentUI using the shadcn CLI installation pattern:
+- Component naming: `@irsyad/[block-type]-[number]` (e.g., `@irsyad/stats-01`, `@irsyad/hero-02`)
+- Installation: `npx shadcn@latest add @irsyad/[component-name] --yes --overwrite`
+- No other UI libraries or fallback sources are used
 
-#### 1A: Search Tailark Free Tier (REQUIRED FIRST STEP)
+#### IntentUI Installation Process
 
-**Always start here**:
+**For complete guide**: @agent-os/docs/blocks/01-installing-from-intentui.md
 
-**Step 1: Check existing blocks**
+**Why IntentUI**:
+- Professional, production-ready components
+- Consistent design language across all blocks
+- Well-structured code with proper animations
+- Easy installation via shadcn CLI
+- All components use standardized naming (@irsyad namespace)
 
-```bash
-# Read README.md for current progress
-grep "[BlockType]" README.md
-# Example: - [ ] Hero (2/5)
+**User Specification Format**:
 
-# Check source directory
-ls src/payload/blocks/[BlockType]/
-# Example: Hero_1/, Hero_2/
-```
+When the user specifies components to build, they will use the IntentUI CLI naming pattern:
+- Example: "stats-01, stats-02, stats-03" refers to `@irsyad/stats-01`, `@irsyad/stats-02`, `@irsyad/stats-03`
+- Example: "hero-04" refers to `@irsyad/hero-04`
+- The CLI install command is: `npx shadcn@latest add @irsyad/[component-name] --yes --overwrite`
 
-**Step 2: Search Tailark**
+**Installation Pattern**:
 
-1. Use WebFetch to browse https://tailark.com/
-2. Navigate to relevant category (hero-sections, features, pricing, etc.)
-3. Look for FREE tier components only
+For each component the user specifies:
+1. Install using: `npx shadcn@latest add @irsyad/[block-type]-[number] --yes --overwrite`
+2. Extract installed component to understand structure
+3. Create PayloadCMS config.ts for the block
+4. Create index.tsx React component
+5. Register in block constants and exports
 
-**Step 3: Filter OUT already-built numbers**
-
-**CRITICAL ASSUMPTION**: Tailark components are numbered sequentially (Hero 1, Hero 2, Hero 3, etc.). If you already have Hero_1 and Hero_2, you used Tailark's first two hero designs.
-
-**Filtering logic**:
-
-- If Hero_1 exists → Skip "Tailark Hero 1"
-- If Hero_2 exists → Skip "Tailark Hero 2"
-- Only show Hero 3, 4, 5, etc. (not yet built)
-
-**Why**: Prevents duplicating already-built components. Assumes numbered Tailark components were used for existing blocks.
-
-**Step 4: Evaluate remaining candidates**
-
-- **Clean design**: Modern, professional aesthetics
-- **Responsive**: Mobile-first approach
-- **Simple**: Easy to copy-paste and adapt
-
-**Evaluate Candidates**:
-
-- ✅ Free tier (REQUIRED)
-- ✅ Tailwind CSS based
-- ✅ Clean, modern design
-- ✅ Responsive layout
-- ✅ Copy-paste ready
-- ✅ Live preview available
-
-**Present Filtered Options to User**:
-
-```markdown
-🔍 Searched Tailark FREE tier for Hero blocks:
-
-**Current progress**: Hero (2/5) - Hero_1 and Hero_2 already exist
-
-**Available components (excluding already built)**: 3. Tailark Hero 3 - Animated with subtle fade-in
-
-- Preview: https://tailark.com/preview/hero-3
-- License: Free ✅
-- Tech: Tailwind CSS
-
-4. Tailark Hero 4 - Split screen with image
-   - Preview: https://tailark.com/preview/hero-4
-   - License: Free ✅
-   - Tech: Tailwind CSS
-
-5. Tailark Hero 5 - Video background hero
-   - Preview: https://tailark.com/preview/hero-5
-   - License: Free ✅
-   - Tech: Tailwind CSS
-
-... (show up to Hero 10-12)
-
-⚠️ **Note**: Not showing Hero 1 and Hero 2 (already built as Hero_1 and Hero_2)
-
-Select components by number (e.g., "3, 5, 7") or type 'shadcn' to check Awesome Shadcn UI.
-```
-
-#### 1B: Fallback to Awesome Shadcn UI (If Needed)
-
-**Only proceed here if**:
-
-- Tailark has <5 suitable options
-- User types 'shadcn'
-- User explicitly requests Awesome Shadcn UI
-
-**Process**:
-
-1. Use WebFetch to browse https://github.com/birobirobiro/awesome-shadcn-ui
-2. Look for MIT-licensed repositories with target block type
-3. Filter by quality indicators:
-   - Stars, recent updates, TypeScript
-4. Verify license allows usage
-
-**Present Awesome Shadcn UI Options**:
-
-```markdown
-⚠️ Tailark search returned limited results.
-
-Checking Awesome Shadcn UI for additional [BlockType] options:
-
-**High Quality** (⭐️ 2k+):
-
-1. magicui/hero-section - Animated hero with spotlight (⭐️ 2.5k)
-   - Preview: https://magicui.design/docs/components/hero
-   - License: MIT ✅
-   - Tech: Framer Motion, Tailwind, shadcn/ui
-2. origin-ui/hero - Modern hero components (⭐️ 2.1k)
-   - Preview: https://originui.com/hero
-   - License: MIT ✅
-   - Tech: Tailwind, shadcn/ui
-
-Combined options available:
-
-- Tailark free: [X] components
-- Awesome Shadcn UI: [Y] components
-
-Select from both lists by number.
-```
-
-#### 1C: User-Provided URLs (Last Resort)
-
-**Only accept if**:
-
-- Both Awesome Shadcn UI and Tailark searches failed
-- User explicitly provides URLs
-- User has a specific component in mind
-
-**Verification Required**:
-
-```markdown
-Please provide component URL(s):
-
-For each URL, I will verify:
-
-- ✅ Accessible and downloadable
-- ✅ MIT license or free tier usage
-- ✅ React/TypeScript component
-- ✅ Tailwind CSS based
-```
-
-**User Provides URL** → Verify → Proceed
-
-**Priority Order Summary**:
-
-```
-1. Tailark Free Tier (ALWAYS CHECK FIRST)
-   ↓ (if insufficient)
-2. Awesome Shadcn UI (FALLBACK)
-   ↓ (if both fail)
-3. User URLs (LAST RESORT)
-```
+**NO FALLBACK SOURCES**: All components come exclusively from IntentUI. If a user requests a component that doesn't exist in IntentUI, inform them and ask for an alternative component name.
 
 ### Step 2: Dependency Installation & Source Integration
 
 **For EACH selected component**:
 
-#### 2A: Analyze Source Dependencies
+#### 2A: Analyze IntentUI Component Dependencies
 
-1. **Fetch component source code**:
-   - Clone or download the source repository
-   - Identify the specific component files
-   - Read package.json for dependencies
+After installing the IntentUI component via `npx shadcn@latest add @irsyad/[component-name]`, analyze what was installed:
 
-2. **Identify Required Dependencies**:
+1. **Check installed files**:
+   - IntentUI installs components to `src/ui/` or `src/components/`
+   - Review the component structure and imports
+   - Identify any new dependencies added
 
-   **Common Categories**:
-   - **Animation libraries**: framer-motion, @motionone/react, etc.
-   - **Icons**: lucide-react, @radix-ui/react-icons, heroicons
-   - **UI primitives**: @radix-ui/react-\*, vaul, cmdk
-   - **Utilities**: clsx, tailwind-merge, class-variance-authority
-   - **Form libraries**: react-hook-form, zod (if forms present)
+2. **Common IntentUI Dependencies**:
+   - **Animation libraries**: framer-motion (commonly used)
+   - **UI components**: Container, Heading, GridLines, AnimatedNumber
+   - **Utilities**: tailwind-merge, cn utility
+   - **Payload fields**: Header, Subheader, Media fields
 
 3. **Check Existing Dependencies**:
    ```bash
    # Read package.json to see what's already installed
    cat package.json | grep "dependency-name"
-````
+   ```
 
-#### 2B: Install Missing Dependencies
+#### 2B: Install Missing Dependencies (if any)
 
-**IMPORTANT**: Always install ALL dependencies BEFORE building the component.
+**IMPORTANT**: IntentUI components usually come with dependencies pre-configured. Most dependencies will already be installed.
 
-**Dependency Categories**:
-
-1. **NPM Packages** (animations, icons, utilities)
-2. **Shadcn UI Components** (if source uses shadcn components)
-
-**NPM Dependencies**:
+**If Additional Dependencies Needed**:
 
 ```bash
-# Install missing npm packages
-pnpm add [dependency-name] [dependency-name] ...
+# Install missing npm packages (rare for IntentUI components)
+pnpm add [dependency-name]
 
-# Example for a hero with framer-motion and heroicons:
-pnpm add framer-motion @heroicons/react
-```
-
-**Shadcn UI Components** (CRITICAL - Don't forget these):
-
-If the source component uses shadcn UI components like Button, Card, Dialog, etc., you MUST install them:
-
-```bash
-# Check what shadcn components are used in the source
-# Common ones: button, card, dialog, dropdown-menu, input, label, etc.
-
-# Install each required shadcn component
-npx shadcn@latest add button
-npx shadcn@latest add card
-npx shadcn@latest add dialog
-# etc.
-
-# Or install multiple at once
-npx shadcn@latest add button card dialog
-```
-
-**How to identify shadcn components in source**:
-
-```typescript
-// Source code imports like these indicate shadcn components:
-import { Button } from "@/components/ui/button"; // ← needs: npx shadcn add button
-import { Card } from "@/components/ui/card"; // ← needs: npx shadcn add card
-import { Dialog } from "@/components/ui/dialog"; // ← needs: npx shadcn add dialog
-import { Input } from "@/components/ui/input"; // ← needs: npx shadcn add input
-```
-
-**Document ALL installations**:
-
-```
-Installing dependencies for Hero_3:
-
-NPM Packages:
-✅ framer-motion@^11.0.0 (animations)
-✅ @heroicons/react@^2.1.0 (icons)
-⏭️  lucide-react (already installed)
-
-Shadcn Components:
-✅ button (npx shadcn add button)
-✅ card (npx shadcn add card)
-⏭️  dialog (already installed)
+# Example: If framer-motion is missing
+pnpm add framer-motion
 ```
 
 **Document installations**:
 
 ```
-Installing dependencies for Hero_3:
-✅ framer-motion@^11.0.0 (animations)
-✅ @heroicons/react@^2.1.0 (icons)
-⏭️  lucide-react (already installed)
+Installing dependencies for Stats_3:
+✅ framer-motion@^12.23.26 (animations for AnimatedNumber)
+⏭️  tailwind-merge (already installed)
+⏭️  Container component (already installed)
 ```
 
-#### 2C: Copy Source Code
+#### 2C: Extract and Analyze IntentUI Component
 
-1. **Copy component files** into temporary workspace
+After IntentUI installation, the component is already in your codebase:
+
+1. **Locate installed files**:
+   - Check `src/ui/` for UI components (Container, Heading, etc.)
+   - Check `src/components/` for complex components (AnimatedNumber, GridLines, etc.)
+
 2. **Analyze component structure**:
-   - Main component file
-   - Sub-components or utilities
-   - Type definitions
-   - Style dependencies
+   - Review the main component code
+   - Identify props and configuration options
+   - Note any sub-components or utilities used
+   - Understand the default values and behavior
 
 ### Step 3: PayloadCMS Block Configuration
 

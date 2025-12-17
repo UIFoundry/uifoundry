@@ -1,0 +1,1896 @@
+{
+	"$schema": "https://ui.shadcn.com/schema/registry.json",
+	"name": "uifoundry",
+	"homepage": "https://uifoundry.dev",
+	"items": [
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Tailwind Style Utils",
+			"name": "style-utils",
+			"description": "Tailwind lib/utils file with cn function definition",
+			"type": "registry:lib",
+			"dependencies": [
+				"clsx",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/ui/utils.ts",
+					"type": "registry:lib",
+					"target": "src/styles/utils.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Animated Group",
+			"name": "animated-group",
+			"type": "registry:ui",
+			"description": "Animated Group UI Component, animates in the react components passed as children to this component",
+			"dependencies": [
+				"react",
+				"motion"
+			],
+			"files": [
+				{
+					"path": "registry/ui/motion-primitives/animated-group.tsx",
+					"type": "registry:ui",
+					"target": "ui/motion-primitives/animated-group.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Text Effect",
+			"name": "text-effect",
+			"type": "registry:ui",
+			"description": "Text Effect UI Component, animates in the react components passed as children. This is for text animation",
+			"dependencies": [
+				"react",
+				"motion"
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/ui/motion-primitives/text-effect.tsx",
+					"type": "registry:ui",
+					"target": "ui/motion-primitives/text-effect.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Flickering Grid",
+			"name": "flickering-grid",
+			"type": "registry:ui",
+			"description": "Animated flickering grid background component with canvas rendering",
+			"dependencies": [
+				"react"
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/ui/motion-primitives/flickering-grid.tsx",
+					"type": "registry:ui",
+					"target": "ui/motion-primitives/flickering-grid.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "User Avatar",
+			"name": "user-avatar",
+			"type": "registry:component",
+			"files": [
+				{
+					"path": "registry/components/UserAvatar.tsx",
+					"type": "registry:component",
+					"target": "src/components/UserAvatar.tsx"
+				}
+			],
+			"registryDependencies": [
+				"avatar"
+			],
+			"dependencies": [
+				"react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Payload Field Types",
+			"name": "field-types",
+			"type": "registry:lib",
+			"dependencies": [
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/index.ts",
+					"type": "registry:lib",
+					"target": "src/payload/fields/index.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Upload Field",
+			"name": "upload-field",
+			"description": "Payload Upload Field for media collection-related fields",
+			"type": "registry:component",
+			"registryDependencies": [
+				"@uifoundry/field-types"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/upload/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/upload/config"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header Field",
+			"name": "header-field",
+			"type": "registry:component",
+			"description": "Text Field for Header elements",
+			"dependencies": [
+				"react",
+				"next"
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/header/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/header/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "SubHeader Field",
+			"name": "subheader-field",
+			"type": "registry:component",
+			"description": "Text Field for SubHeader elements",
+			"dependencies": [
+				"react",
+				"next"
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/subheader/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/subheader/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Upload Field",
+			"name": "upload-field",
+			"type": "registry:component",
+			"description": "PayloadCMS singular Media Field",
+			"dependencies": [
+				"react",
+				"next"
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/upload/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/upload/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Media Field",
+			"name": "media-field",
+			"type": "registry:block",
+			"description": "PayloadCMS double upload field (supports light & dark image variants)",
+			"dependencies": [
+				"react",
+				"next"
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types",
+				"@uifoundry/upload-field"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/media/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/fields/media/index.tsx"
+				},
+				{
+					"path": "registry/payload/fields/media/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/media/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"name": "color-field",
+			"title": "Color Field",
+			"type": "registry:block",
+			"description": "PayloadCMS custom admin panel color input with a color picker component. Returns the color as a string",
+			"files": [
+				{
+					"path": "registry/payload/fields/color/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/color/config.ts"
+				},
+				{
+					"path": "registry/payload/fields/color/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/fields/color/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"button",
+				"popover",
+				"@uifoundry/field-types"
+			],
+			"dependencies": [
+				"payload",
+				"@uiw/react-color-sketch",
+				"react",
+				"@payloadcms/ui"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Hero 1",
+			"name": "hero-1",
+			"type": "registry:block",
+			"description": "Hero Block Variant 1",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/animated-group",
+				"@uifoundry/text-effect",
+				"@uifoundry/media-field",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/style-utils"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/hero/hero-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/hero/hero-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Hero 2",
+			"name": "hero-2",
+			"type": "registry:block",
+			"description": "Hero section with two-column layout, primary and secondary CTAs, and background image",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/media-field",
+				"@uifoundry/style-utils"
+			],
+			"dependencies": [
+				"react",
+				"next"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/hero/hero-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/hero/hero-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_2/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Hero 3 (Video Background)",
+			"name": "hero-3",
+			"type": "registry:block",
+			"description": "Hero section with video background (supports media upload or URL fallback), centered layout, and two CTA buttons. Based on Tailark Hero Section Five.",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react",
+				"next-themes"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/hero/hero-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/hero/hero-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Hero 4",
+			"name": "hero-4",
+			"type": "registry:block",
+			"description": "Hero section with badge, email signup form, feature list, and background image",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/hero/hero-4/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_4/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/hero/hero-4/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_4/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Hero 5",
+			"name": "hero-5",
+			"type": "registry:block",
+			"description": "Hero section with animated FlickeringGrid background, alert banner, and dual CTAs",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/animated-group",
+				"@uifoundry/text-effect",
+				"@uifoundry/flickering-grid",
+				"@uifoundry/media-field",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/style-utils",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/hero/hero-5/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_5/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/hero/hero-5/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Hero/Hero_5/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header 1",
+			"name": "header-1",
+			"type": "registry:block",
+			"description": "Header 1 Block with adaptive scroll-based styling",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/header-1/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/Header_1/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header/header-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/Header_1/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants",
+				"button"
+			],
+			"dependencies": [
+				"payload",
+				"react",
+				"next",
+				"lucide-react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header 2",
+			"name": "header-2",
+			"type": "registry:block",
+			"description": "Header 2 Block",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/header-2/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/Header_2/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header/header-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/Header_2/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants",
+				"button"
+			],
+			"dependencies": [
+				"payload",
+				"next",
+				"react",
+				"lucide-react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header 3",
+			"name": "header-3",
+			"type": "registry:block",
+			"description": "Header 3 Block with scroll-based backdrop blur animation",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/header-3/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/Header_3/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header/header-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/Header_3/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants",
+				"button"
+			],
+			"dependencies": [
+				"payload",
+				"next",
+				"react",
+				"lucide-react",
+				"motion"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header 4",
+			"name": "header-4",
+			"type": "registry:block",
+			"description": "Header 4 Block with dashed border and light background",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/header-4/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/Header_4/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header/header-4/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/Header_4/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants",
+				"button"
+			],
+			"dependencies": [
+				"payload",
+				"next",
+				"react",
+				"lucide-react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header 5",
+			"name": "header-5",
+			"type": "registry:block",
+			"description": "Header 5 Block with fixed backdrop blur and border bottom",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/header-5/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/Header_5/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header/header-5/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/Header_5/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/block-constants",
+				"button"
+			],
+			"dependencies": [
+				"payload",
+				"next",
+				"react",
+				"lucide-react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header Blocks",
+			"name": "header-blocks",
+			"type": "registry:block",
+			"description": "PayloadCMS Header Blocks",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header/index.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Header/index.ts"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/header-1",
+				"@uifoundry/header-2",
+				"@uifoundry/header-3",
+				"@uifoundry/header-4",
+				"@uifoundry/header-5"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Render Blocks",
+			"name": "renderblocks",
+			"type": "registry:component",
+			"description": "Custom component to render PayloadCMS Blocks",
+			"files": [
+				{
+					"path": "registry/components/RenderBlocks/index.tsx",
+					"type": "registry:component",
+					"target": "src/components/RenderBlocks/index.tsx"
+				}
+			],
+			"dependencies": [
+				"payload",
+				"react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header Brand Logo",
+			"name": "header-brand-logo",
+			"type": "registry:block",
+			"description": "Customizable brand logo component for headers",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header-brand-logo/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/BrandLogo/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header-brand-logo/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/BrandLogo/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/select-enum-field",
+				"@uifoundry/media-field"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header Menu Button",
+			"name": "header-menu-button",
+			"type": "registry:block",
+			"description": "Customizable button component for headers with authentication and navigation support",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header-menu-button/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/MenuButton/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header-menu-button/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/MenuButton/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/select-enum-field",
+				"@uifoundry/user-avatar"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header Menu Items",
+			"name": "header-menu-items",
+			"type": "registry:block",
+			"description": "Customizable navigation menu items component for headers",
+			"files": [
+				{
+					"path": "registry/payload/blocks/header-menu-items/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/MenuItems/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/header-menu-items/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/MenuItems/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/select-enum-field"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Custom Header",
+			"name": "custom-header",
+			"type": "registry:block",
+			"description": "Fully customizable header component with nested blocks for brand logo, menu items, and buttons",
+			"files": [
+				{
+					"path": "registry/payload/blocks/custom-header/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/custom-header/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/custom-header/blocks.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Header/CustomHeader/blocks.ts"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/renderblocks",
+				"@uifoundry/header-brand-logo",
+				"@uifoundry/header-menu-button",
+				"@uifoundry/header-menu-items"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Select Enum Field",
+			"name": "select-enum-field",
+			"type": "registry:component",
+			"description": "PayloadCMS select field that generates options from TypeScript enums",
+			"files": [
+				{
+					"path": "registry/payload/fields/selectEnum/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/selectEnum/config.ts"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types"
+			],
+			"dependencies": [
+				"payload"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Social Icons",
+			"name": "social-icons",
+			"type": "registry:file",
+			"files": [
+				{
+					"path": "registry/ui/icons/social-icons.ts",
+					"type": "registry:file",
+					"target": "src/ui/icons/social-icons.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Social Links Field",
+			"name": "social-links-field",
+			"type": "registry:block",
+			"files": [
+				{
+					"path": "registry/payload/fields/socialLinks/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/fields/socialLinks/config.ts"
+				},
+				{
+					"path": "registry/payload/fields/socialLinks/admin/SocialLinksField.tsx",
+					"type": "registry:component",
+					"target": "src/payload/fields/socialLinks/admin/SocialLinksField.tsx"
+				},
+				{
+					"path": "registry/payload/fields/socialLinks/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/fields/socialLinks/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/social-icons",
+				"@uifoundry/style-utils"
+			],
+			"dependencies": [
+				"react",
+				"payload"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Header Global",
+			"name": "header-global",
+			"type": "registry:block",
+			"description": "PayloadCMS Global Header",
+			"files": [
+				{
+					"path": "registry/payload/globals/header/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/globals/Header/config.ts"
+				},
+				{
+					"path": "registry/payload/globals/header/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/globals/Header/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/header-blocks",
+				"@uifoundry/renderblocks"
+			],
+			"dependencies": [
+				"react"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Block Constants",
+			"name": "block-constants",
+			"type": "registry:file",
+			"files": [
+				{
+					"path": "registry/payload/constants/blocks.ts",
+					"type": "registry:file",
+					"target": "src/payload/constants/blocks.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Coming Soon 1",
+			"name": "coming-soon-1",
+			"type": "registry:block",
+			"description": "Coming Soon Block with countdown timer, email signup, and social links",
+			"registryDependencies": [
+				"button",
+				"input",
+				"@uifoundry/animated-group",
+				"@uifoundry/text-effect",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/style-utils",
+				"@uifoundry/social-links-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/coming-soon/coming-soon-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/ComingSoon/ComingSoon_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/coming-soon/coming-soon-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/ComingSoon/ComingSoon_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Footer 1",
+			"name": "footer-1",
+			"type": "registry:block",
+			"description": "Footer 1 Block with centered layout, brand logo, navigation links, social icons, and copyright",
+			"files": [
+				{
+					"path": "registry/payload/blocks/footer/footer-1/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Footer/Footer_1/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/footer/footer-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Footer/Footer_1/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/media-field",
+				"@uifoundry/social-links-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"payload",
+				"react",
+				"next"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Footer 2",
+			"name": "footer-2",
+			"type": "registry:block",
+			"description": "Footer 2 Block with grid layout, brand logo, grouped navigation links, social icons, and copyright",
+			"files": [
+				{
+					"path": "registry/payload/blocks/footer/footer-2/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Footer/Footer_2/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/footer/footer-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Footer/Footer_2/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/social-links-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"payload",
+				"react",
+				"next"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Footer 3",
+			"name": "footer-3",
+			"type": "registry:block",
+			"description": "Footer 3 Block with horizontal layout, brand logo at top with social icons, grouped navigation links below, and copyright",
+			"files": [
+				{
+					"path": "registry/payload/blocks/footer/footer-3/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Footer/Footer_3/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/footer/footer-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Footer/Footer_3/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/social-links-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"payload",
+				"react",
+				"next"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Footer 4",
+			"name": "footer-4",
+			"type": "registry:block",
+			"description": "Footer 4 Block with minimal layout, copyright text, and inline navigation links",
+			"files": [
+				{
+					"path": "registry/payload/blocks/footer/footer-4/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Footer/Footer_4/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/footer/footer-4/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Footer/Footer_4/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"payload",
+				"react",
+				"next"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Footer 5",
+			"name": "footer-5",
+			"type": "registry:block",
+			"description": "Footer 5 Block with flexible grid layout, brand logo with social icons header, grouped navigation links, and rounded copyright section with action links",
+			"files": [
+				{
+					"path": "registry/payload/blocks/footer/footer-5/config.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Footer/Footer_5/config.ts"
+				},
+				{
+					"path": "registry/payload/blocks/footer/footer-5/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Footer/Footer_5/index.tsx"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils",
+				"@uifoundry/media-field",
+				"@uifoundry/social-links-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"payload",
+				"react",
+				"next"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Footer Blocks",
+			"name": "footer-blocks",
+			"type": "registry:block",
+			"description": "PayloadCMS Footer Blocks",
+			"files": [
+				{
+					"path": "registry/payload/blocks/footer/index.ts",
+					"type": "registry:file",
+					"target": "src/payload/blocks/Footer/index.ts"
+				}
+			],
+			"registryDependencies": [
+				"@uifoundry/footer-1",
+				"@uifoundry/footer-2",
+				"@uifoundry/footer-3",
+				"@uifoundry/footer-4",
+				"@uifoundry/footer-5"
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Icon Component",
+			"name": "icon",
+			"type": "registry:ui",
+			"description": "Icon component for rendering Lucide React icons dynamically by name",
+			"dependencies": [
+				"react",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/ui/icon.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/icon.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Icon Field",
+			"name": "icon-field",
+			"type": "registry:block",
+			"description": "PayloadCMS icon selection field with searchable dropdown for Lucide React icons",
+			"dependencies": [
+				"react",
+				"payload",
+				"@payloadcms/ui",
+				"lucide-react"
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types",
+				"@uifoundry/select-enum-field",
+				"command",
+				"popover",
+				"button",
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/icon/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/icon/config.ts"
+				},
+				{
+					"path": "registry/payload/fields/icon/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/fields/icon/index.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Features 1",
+			"name": "features-1",
+			"type": "registry:block",
+			"description": "Features Block with grid layout, icon decorators, and feature cards",
+			"registryDependencies": [
+				"card",
+				"@uifoundry/icon",
+				"@uifoundry/icon-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/features/features-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/features/features-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Description Field",
+			"name": "description-field",
+			"type": "registry:component",
+			"description": "Text Field for Description elements",
+			"dependencies": [
+				"react",
+				"next"
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/description/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/description/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Features 2",
+			"name": "features-2",
+			"type": "registry:block",
+			"description": "Features block with grid layout and icon-based feature cards",
+			"registryDependencies": [
+				"@uifoundry/icon",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/icon-field",
+				"@uifoundry/description-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/features/features-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/features/features-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_2/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Card",
+			"name": "card",
+			"type": "registry:ui",
+			"description": "Card component with header, content, footer, title, description, and action slots",
+			"dependencies": [
+				"react"
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/ui/card.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/card.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Features 3",
+			"name": "features-3",
+			"type": "registry:block",
+			"description": "Features block with card decorator grid background, icons, and three-column layout",
+			"registryDependencies": [
+				"card",
+				"@uifoundry/icon",
+				"@uifoundry/icon-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/features/features-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/features/features-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Features/Features_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Pricing 1",
+			"name": "pricing-1",
+			"type": "registry:block",
+			"description": "Pricing table with two-column card layout, featured plan badge, and pricing options",
+			"registryDependencies": [
+				"button",
+				"card",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/description-field",
+				"@uifoundry/style-utils",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/pricing/pricing-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/pricing/pricing-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Pricing 2",
+			"name": "pricing-2",
+			"type": "registry:block",
+			"description": "Pricing table with three-column layout, popular badge, and feature lists",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/description-field",
+				"@uifoundry/style-utils",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/pricing/pricing-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/pricing/pricing-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_2/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Pricing 3",
+			"name": "pricing-3",
+			"type": "registry:block",
+			"description": "Pricing table with card-based design, configurable popular tier, and dynamic pricing periods",
+			"registryDependencies": [
+				"button",
+				"card",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/description-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"lucide-react"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/pricing/pricing-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/pricing/pricing-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Pricing/Pricing_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Call To Action Pair Field",
+			"name": "call-to-action-pair-field",
+			"type": "registry:component",
+			"description": "PayloadCMS array field for pairs of call-to-action buttons with label and href",
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"registryDependencies": [
+				"@uifoundry/field-types"
+			],
+			"files": [
+				{
+					"path": "registry/payload/fields/callToActionPair/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/fields/callToActionPair/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "CTA 1",
+			"name": "cta-1",
+			"type": "registry:block",
+			"description": "Centered CTA with header, subheader, and configurable action buttons",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/call-to-action-pair-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/cta/cta-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/cta/cta-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "CTA 2",
+			"name": "cta-2",
+			"type": "registry:block",
+			"description": "Dark background CTA with responsive horizontal layout, header, and dual action buttons",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/call-to-action-pair-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/cta/cta-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/cta/cta-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_2/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Button",
+			"name": "button",
+			"type": "registry:ui",
+			"description": "Button component with multiple variants and sizes",
+			"dependencies": [
+				"react",
+				"@radix-ui/react-slot",
+				"class-variance-authority"
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/ui/button.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/button.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Accordion",
+			"name": "accordion",
+			"type": "registry:ui",
+			"description": "Collapsible accordion component built on Radix UI with animated expand/collapse",
+			"dependencies": [
+				"react",
+				"@radix-ui/react-accordion",
+				"lucide-react"
+			],
+			"registryDependencies": [
+				"@uifoundry/style-utils"
+			],
+			"files": [
+				{
+					"path": "registry/ui/accordion.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/accordion.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Avatar IntentUI",
+			"name": "avatar-intentui",
+			"type": "registry:ui",
+			"description": "Avatar component with support for images, initials, and various sizes",
+			"dependencies": [
+				"react",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/ui/avatar-intentui.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/avatar-intentui.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Container",
+			"name": "container",
+			"type": "registry:ui",
+			"description": "Container component for consistent page width and padding",
+			"dependencies": [
+				"react",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/ui/container.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/container.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "CTA 3",
+			"name": "cta-3",
+			"type": "registry:block",
+			"description": "Vibrant gradient background CTA with centered layout and two CTA buttons",
+			"registryDependencies": [
+				"button",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/call-to-action-pair-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/cta/cta-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/cta/cta-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/CTA/CTA_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Testimonials 3",
+			"name": "testimonials-3",
+			"type": "registry:block",
+			"description": "Testimonials section with grid layout, avatar cards, and customer quotes",
+			"registryDependencies": [
+				"card",
+				"@uifoundry/avatar-intentui",
+				"@uifoundry/container",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Testimonials 4",
+			"name": "testimonials-4",
+			"type": "registry:block",
+			"description": "Testimonials section with masonry layout, avatar cards, and customer quotes",
+			"registryDependencies": [
+				"@uifoundry/avatar-intentui",
+				"@uifoundry/container",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/upload-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-4/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_4/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-4/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_4/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Testimonials 1",
+			"name": "testimonials-1",
+			"type": "registry:block",
+			"description": "Testimonials section with centered layout, avatar images, and customer quotes",
+			"registryDependencies": [
+				"@uifoundry/avatar-intentui",
+				"@uifoundry/container",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Testimonials 2",
+			"name": "testimonials-2",
+			"type": "registry:block",
+			"description": "Testimonials section with three-column grid layout, decorative quote marks, and customer testimonials",
+			"registryDependencies": [
+				"@uifoundry/avatar-intentui",
+				"@uifoundry/container",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_2/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Testimonials 5",
+			"name": "testimonials-5",
+			"type": "registry:block",
+			"description": "Centered single testimonial with large quote, avatar, and author details",
+			"registryDependencies": [
+				"card",
+				"@uifoundry/avatar-intentui",
+				"@uifoundry/container",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-5/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_5/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/testimonials/testimonials-5/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Testimonials/Testimonials_5/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Primitive Utility",
+			"name": "primitive",
+			"type": "registry:lib",
+			"description": "Utility function for composing Tailwind classes with react-aria-components",
+			"dependencies": [
+				"react-aria-components",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/lib/primitive.ts",
+					"type": "registry:lib",
+					"target": "src/lib/primitive.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Disclosure Group",
+			"name": "disclosure-group",
+			"type": "registry:ui",
+			"description": "Accordion/disclosure component with expandable panels",
+			"dependencies": [
+				"react",
+				"react-aria-components",
+				"tailwind-merge"
+			],
+			"registryDependencies": [
+				"@uifoundry/primitive"
+			],
+			"files": [
+				{
+					"path": "registry/ui/disclosure-group.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/disclosure-group.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Link",
+			"name": "link",
+			"type": "registry:ui",
+			"description": "Accessible link component built on react-aria-components",
+			"dependencies": [
+				"react",
+				"react-aria-components"
+			],
+			"registryDependencies": [
+				"@uifoundry/primitive"
+			],
+			"files": [
+				{
+					"path": "registry/ui/link.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/link.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "FAQ 1",
+			"name": "faq-1",
+			"type": "registry:block",
+			"description": "FAQ section with collapsible accordion, styled panels, and support link",
+			"registryDependencies": [
+				"accordion",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/faq/faq-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/faq/faq-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "FAQ 2",
+			"name": "faq-2",
+			"type": "registry:block",
+			"description": "FAQ section with collapsible questions and answers, documentation link support",
+			"registryDependencies": [
+				"@uifoundry/disclosure-group",
+				"@uifoundry/link",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/faq/faq-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/faq/faq-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_2/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "FAQ 3",
+			"name": "faq-3",
+			"type": "registry:block",
+			"description": "FAQ section with accordion-style disclosure panels, custom styling, and support link",
+			"registryDependencies": [
+				"@uifoundry/disclosure-group",
+				"@uifoundry/link",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"payload",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/faq/faq-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/faq/faq-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_3/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "FAQ 4",
+			"name": "faq-4",
+			"type": "registry:block",
+			"description": "FAQ section with accordion-style disclosure panels and support link",
+			"registryDependencies": [
+				"@uifoundry/disclosure-group",
+				"@uifoundry/link",
+				"@uifoundry/header-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/faq/faq-4/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_4/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/faq/faq-4/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_4/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "FAQ 5",
+			"name": "faq-5",
+			"type": "registry:block",
+			"description": "FAQ section with expandable disclosure panels, documentation link, and customizable default expanded items",
+			"registryDependencies": [
+				"@uifoundry/disclosure-group",
+				"@uifoundry/link",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/faq/faq-5/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_5/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/faq/faq-5/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/FAQ/FAQ_5/config.ts"
+				}
+			]
+		}
+	]
+}

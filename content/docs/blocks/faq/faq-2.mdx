@@ -1,0 +1,100 @@
+---
+title: "FAQ 2"
+description: "FAQ section with collapsible questions and answers, documentation link support"
+category: "blocks"
+---
+
+## Preview
+
+<FAQ_2 />
+
+## Props
+
+The FAQ_2 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    header: {
+      description: "Main section heading displayed above FAQ items",
+      type: "string",
+      required: false,
+      default: "Frequently Asked Questions",
+    },
+    subheader: {
+      description: "Supporting description text displayed below the header",
+      type: "string",
+      required: false,
+      default: "Still have questions? Check out our documentation",
+    },
+    documentationText: {
+      description: "Link text for the documentation reference (displayed inline with subheader)",
+      type: "string",
+      default: "Check out our documentation",
+    },
+    documentationHref: {
+      description: "URL link for the documentation reference",
+      type: "string",
+      default: "",
+    },
+    faq: {
+      description: "Array of FAQ items with questions and answers",
+      type: "array",
+      default: "10 default FAQ items with platform-related questions",
+    },
+    "faq[].question": {
+      description: "The FAQ question text",
+      type: "string",
+      required: true,
+      default: "Can I host frontend and backend apps together?",
+    },
+    "faq[].answer": {
+      description: "The answer text for the FAQ question",
+      type: "string",
+      required: true,
+      default: "Yes, the platform supports full-stack applications...",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/faq-2
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Disclosure Group](/docs/ui/disclosure-group) - Accordion/disclosure component with expandable panels
+- [Link](/docs/ui/link) - Accessible link component built on react-aria-components
+- [Header Field](/docs/fields/header-field) - PayloadCMS text field for headers
+- [Subheader Field](/docs/fields/subheader-field) - PayloadCMS text field for subheaders
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+
+## Design Notes
+
+This FAQ block features:
+
+- **Collapsible disclosure panels**: Built with react-aria-components for accessibility and keyboard navigation
+- **Multiple expansion support**: Users can expand multiple FAQ items simultaneously using `allowsMultipleExpanded`
+- **Inline documentation link**: Documentation reference seamlessly integrated within subheader text
+- **Clean centered layout**: Content constrained to 3xl width for optimal readability
+- **Generous spacing**: 12-unit margin below header section and 16-unit vertical padding
+- **Rounded disclosure styling**: Custom `--disclosure-radius` set to `xl` for modern appearance
+- **Muted foreground color**: Subheader and link text use muted-fg for visual hierarchy
+- **Hover states**: Documentation link includes hover:underline interaction
+- **Dark mode support**: Uses CSS custom properties for theme-aware teal accent color
+- **Flexible FAQ count**: Supports any number of FAQ items with sensible defaults (10 included)
+- **Semantic HTML**: Proper heading hierarchy and accessible markup
+
+Perfect for help centers, product documentation, landing pages, or any section requiring an organized Q&A format. The react-aria-components foundation ensures excellent keyboard navigation and screen reader support, making it ideal for accessible web applications.

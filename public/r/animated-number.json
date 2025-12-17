@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "animated-number",
+  "type": "registry:component",
+  "title": "Animated Number",
+  "description": "Animated number counter with smooth digit transitions using Framer Motion",
+  "dependencies": [
+    "react",
+    "tailwind-merge",
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "registry/components/animated-number.tsx",
+      "content": "\"use client\"\n\nimport { type MotionValue, motion, useSpring, useTransform } from \"framer-motion\"\nimport { Fragment, useEffect } from \"react\"\nimport { twMerge } from \"tailwind-merge\"\n\ninterface DigitProps {\n  place: number\n  value: number\n  height: number\n}\nfunction Digit({ place, value, height }: DigitProps) {\n  const valueRoundedToPlace = Math.floor(value / place)\n  const animatedValue = useSpring(valueRoundedToPlace)\n\n  useEffect(() => {\n    animatedValue.set(valueRoundedToPlace)\n  }, [animatedValue, valueRoundedToPlace])\n\n  return (\n    <div style={{ height }} className=\"relative w-[1ch]\">\n      {[...Array(10).keys()].map((i) => (\n        <NumberInternal key={i} mv={animatedValue} number={i} height={height} />\n      ))}\n    </div>\n  )\n}\n\ninterface NumberInternalProps extends Pick<DigitProps, \"height\"> {\n  mv: MotionValue\n  number: number\n}\nfunction NumberInternal({ mv, number, height }: NumberInternalProps) {\n  const y = useTransform(mv, (latest) => {\n    const placeValue = latest % 10\n    const offset = (10 + number - placeValue) % 10\n    let memo = offset * height\n    if (offset > 5) {\n      memo -= 10 * height\n    }\n    return memo\n  })\n\n  return (\n    <motion.span style={{ y }} className=\"absolute inset-0 flex items-center justify-center\">\n      {number}\n    </motion.span>\n  )\n}\n\ninterface AnimatedNumberProps {\n  value: number\n  fontSize?: number\n  padding?: number\n  className?: string\n}\n\nfunction AnimatedNumber({ value, fontSize = 30, padding = 15, className }: AnimatedNumberProps) {\n  const height = fontSize + padding\n  const maxPlace = 10 ** (String(Math.abs(value)).length - 1)\n  const places: number[] = []\n  for (let p = maxPlace; p >= 1; p = p / 10) places.push(p)\n\n  return (\n    <div\n      style={{ fontSize }}\n      className={twMerge(\"flex items-end gap-x-1 overflow-hidden text-fg leading-none\", className)}\n    >\n      {places.map((p, i) => (\n        <Fragment key={p}>\n          <Digit place={p} value={value} height={height} />\n          {i !== places.length - 1 && (places.length - i - 1) % 3 === 0 && <span>,</span>}\n        </Fragment>\n      ))}\n    </div>\n  )\n}\n\nexport { AnimatedNumber }\n",
+      "type": "registry:component",
+      "target": "src/components/animated-number.tsx"
+    }
+  ]
+}

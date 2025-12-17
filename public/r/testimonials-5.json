@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "testimonials-5",
+  "type": "registry:block",
+  "title": "Testimonials 5",
+  "description": "Centered single testimonial with large quote, avatar, and author details",
+  "dependencies": [
+    "react",
+    "next",
+    "payload"
+  ],
+  "registryDependencies": [
+    "card",
+    "@uifoundry/avatar-intentui",
+    "@uifoundry/container",
+    "@uifoundry/block-constants"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/testimonials/testimonials-5/index.tsx",
+      "content": "/**\n * Testimonials 5 Component\n *\n * Source: @irsyad/testimonials-05 (IntentUI)\n * License: Pro Subscription\n *\n * Modifications:\n * - Integrated with PayloadCMS block system\n * - Replaced hardcoded content with dynamic props\n * - Converted from page component to reusable block component\n */\n\nimport { Avatar } from \"@/registry/ui/avatar-intentui\";\nimport { CardDescription, CardHeader, CardTitle } from \"@/registry/ui/card\";\nimport { Container } from \"@/registry/ui/container\";\nimport type { Testimonials_5_Block } from \"~/payload-types\";\n\nexport default function Testimonials5Section(props: Testimonials_5_Block) {\n\treturn (\n\t\t<Container className=\"py-6 sm:py-16\">\n\t\t\t<h1 className=\"sr-only\">Testimonials</h1>\n\t\t\t<div className=\"mx-auto max-w-xl text-center\">\n\t\t\t\t<blockquote className=\"font-light text-2xl text-muted-fg italic leading-relaxed\">\n\t\t\t\t\t\"{props.quote}\"\n\t\t\t\t</blockquote>\n\t\t\t\t<div className=\"mt-8 flex flex-col items-center gap-4\">\n\t\t\t\t\t<Avatar\n\t\t\t\t\t\tsrc={props.authorImage}\n\t\t\t\t\t\talt={props.authorName}\n\t\t\t\t\t\tsize=\"2xl\"\n\t\t\t\t\t\tclassName=\"ring-2 ring-primary/50 ring-offset-2\"\n\t\t\t\t\t/>\n\t\t\t\t\t<CardHeader>\n\t\t\t\t\t\t<CardTitle>{props.authorName}</CardTitle>\n\t\t\t\t\t\t<CardDescription>{props.authorRole}</CardDescription>\n\t\t\t\t\t</CardHeader>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</Container>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Testimonials/Testimonials_5/index.tsx"
+    },
+    {
+      "path": "registry/payload/blocks/testimonials/testimonials-5/config.ts",
+      "content": "import type { Block } from \"payload\";\n\nimport {\n\tBLOCK_GROUP_TESTIMONIALS,\n\tBLOCK_SLUG_TESTIMONIALS_5,\n} from \"@/registry/default/lib/constants/blocks\";\n\nexport const Testimonials_5_Block: Block = {\n\tslug: BLOCK_SLUG_TESTIMONIALS_5,\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_TESTIMONIALS,\n\t},\n\tfields: [\n\t\t{\n\t\t\ttype: \"collapsible\",\n\t\t\tlabel: \"Testimonial Content\",\n\t\t\tadmin: {\n\t\t\t\tinitCollapsed: false,\n\t\t\t},\n\t\t\tfields: [\n\t\t\t\t{\n\t\t\t\t\tname: \"quote\",\n\t\t\t\t\ttype: \"textarea\",\n\t\t\t\t\tlabel: \"Quote\",\n\t\t\t\t\trequired: true,\n\t\t\t\t\tdefaultValue:\n\t\t\t\t\t\t\"We cut dev time in half and actually enjoyed the process. Everything feels designed for speed and clarity — it just makes sense.\",\n\t\t\t\t},\n\t\t\t],\n\t\t},\n\t\t{\n\t\t\ttype: \"collapsible\",\n\t\t\tlabel: \"Author Information\",\n\t\t\tadmin: {\n\t\t\t\tinitCollapsed: false,\n\t\t\t},\n\t\t\tfields: [\n\t\t\t\t{\n\t\t\t\t\tname: \"authorName\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\tlabel: \"Author Name\",\n\t\t\t\t\trequired: true,\n\t\t\t\t\tdefaultValue: \"Lena Fischer\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: \"authorRole\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\tlabel: \"Author Role/Title\",\n\t\t\t\t\trequired: true,\n\t\t\t\t\tdefaultValue: \"Lead Frontend Engineer at Skyloft\",\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tname: \"authorImage\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\tlabel: \"Author Image URL\",\n\t\t\t\t\trequired: true,\n\t\t\t\t\tdefaultValue: \"https://randomuser.me/api/portraits/women/52.jpg\",\n\t\t\t\t},\n\t\t\t],\n\t\t},\n\t],\n\tinterfaceName: \"Testimonials_5_Block\",\n\tlabels: {\n\t\tplural: \"Testimonials 5's\",\n\t\tsingular: \"Testimonials 5\",\n\t},\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Testimonials/Testimonials_5/config.ts"
+    }
+  ]
+}

@@ -2,7 +2,6 @@
 
 import {
 	useMutation,
-	useQueryClient,
 	useSuspenseQuery,
 } from "@tanstack/react-query";
 import { CheckCircle2 } from "lucide-react";
@@ -43,8 +42,7 @@ const PricingCard = ({
 	price,
 	priceId,
 }: PricingCardProps) => {
-	const trpc = useTRPC();
-	const queryClient = useQueryClient();
+	const { queryClient, trpc } = useTRPC();
 
 	const openSeats =
 		lifetimeUserCount > minSeats && lifetimeUserCount - minSeats < maxSeats;
@@ -154,7 +152,7 @@ const PricingHeader = ({
 );
 
 export default function SubscriptionsPage() {
-	const trpc = useTRPC();
+	const { trpc } = useTRPC();
 	const subscriptionStatus = useSuspenseQuery(
 		trpc.stripe.getSubscriptionStatus.queryOptions(),
 	);

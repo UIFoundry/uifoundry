@@ -1700,11 +1700,7 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {
-    sites: {
-      pages: 'pages';
-    };
-  };
+  collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     sessions: SessionsSelect<false> | SessionsSelect<true>;
@@ -1829,12 +1825,7 @@ export interface Verification {
  */
 export interface Page {
   id: string;
-  site: string | Site;
-  slug: string;
-  title: string;
-  owner: string | User;
-  showHeader: boolean;
-  showFooter: boolean;
+  name: string;
   blocks: (
     | Teams_1_Block
     | Features_1_Block
@@ -1859,118 +1850,239 @@ export interface Page {
     | CTA_1_Block
     | CTA_2_Block
     | CTA_3_Block
+    | Testimonials_1_Block
+    | Testimonials_2_Block
+    | Testimonials_3_Block
+    | Testimonials_4_Block
+    | Testimonials_5_Block
     | FAQ_1_Block
+    | FAQ_2_Block
+    | FAQ_3_Block
+    | FAQ_4_Block
+    | FAQ_5_Block
     | Pricing_1_Block
     | Pricing_2_Block
     | Pricing_3_Block
+    | Stats_1_Block
+    | Stats_2_Block
+    | Stats_3_Block
     | ComingSoon_1_Block
   )[];
+  owner: string | User;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sites".
+ * via the `definition` "Teams_1_Block".
  */
-export interface Site {
-  id: string;
-  title: string;
-  owner: string | User;
-  header?: (string | null) | Header;
-  footer?: (string | null) | Footer;
-  activeTheme: string | Theme;
-  light?: {
-    background?: string | null;
-    foreground?: string | null;
-    card?: string | null;
-    'card-foreground'?: string | null;
-    popover?: string | null;
-    'popover-foreground'?: string | null;
-    primary?: string | null;
-    'primary-foreground'?: string | null;
-    secondary?: string | null;
-    'secondary-foreground'?: string | null;
-    muted?: string | null;
-    'muted-foreground'?: string | null;
-    accent?: string | null;
-    'accent-foreground'?: string | null;
-    destructive?: string | null;
-    'destructive-foreground'?: string | null;
-    border?: string | null;
-    input?: string | null;
-    ring?: string | null;
-    'chart-1'?: string | null;
-    'chart-2'?: string | null;
-    'chart-3'?: string | null;
-    'chart-4'?: string | null;
-    'chart-5'?: string | null;
-    sidebar?: string | null;
-    'sidebar-foreground'?: string | null;
-    'sidebar-primary'?: string | null;
-    'sidebar-primary-foreground'?: string | null;
-    'sidebar-accent'?: string | null;
-    'sidebar-accent-foreground'?: string | null;
-    'sidebar-border'?: string | null;
-    'sidebar-ring'?: string | null;
-    'shadow-color'?: string | null;
-  };
-  dark?: {
-    background?: string | null;
-    foreground?: string | null;
-    card?: string | null;
-    'card-foreground'?: string | null;
-    popover?: string | null;
-    'popover-foreground'?: string | null;
-    primary?: string | null;
-    'primary-foreground'?: string | null;
-    secondary?: string | null;
-    'secondary-foreground'?: string | null;
-    muted?: string | null;
-    'muted-foreground'?: string | null;
-    accent?: string | null;
-    'accent-foreground'?: string | null;
-    destructive?: string | null;
-    'destructive-foreground'?: string | null;
-    border?: string | null;
-    input?: string | null;
-    ring?: string | null;
-    'chart-1'?: string | null;
-    'chart-2'?: string | null;
-    'chart-3'?: string | null;
-    'chart-4'?: string | null;
-    'chart-5'?: string | null;
-    sidebar?: string | null;
-    'sidebar-foreground'?: string | null;
-    'sidebar-primary'?: string | null;
-    'sidebar-primary-foreground'?: string | null;
-    'sidebar-accent'?: string | null;
-    'sidebar-accent-foreground'?: string | null;
-    'sidebar-border'?: string | null;
-    'sidebar-ring'?: string | null;
-    'shadow-color'?: string | null;
-  };
-  pages?: {
-    docs?: (string | Page)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
+export interface Teams_1_Block {
+  blocks: (Teams_1_Heading_Block | Teams_1_Members_Block)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_1';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "headers".
+ * via the `definition` "Teams_1_Heading_Block".
  */
-export interface Header {
+export interface Teams_1_Heading_Block {
+  text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_1_heading';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Teams_1_Members_Block".
+ */
+export interface Teams_1_Members_Block {
+  members: {
+    name: string;
+    role: string;
+    avatar?: (string | null) | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teams_1_members';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
   id: string;
-  global?: boolean | null;
-  title: string;
+  alt: string;
   owner: string | User;
-  header: (Header_1_Block | Header_2_Block | Header_3_Block | Header_4_Block | Header_5_Block | CustomHeaderBlock)[];
   updatedAt: string;
   createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_1_Block".
+ */
+export interface Features_1_Block {
+  header: string;
+  subheader: string;
+  features: {
+    title: string;
+    description: string;
+    icon?: IconField;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_2_Block".
+ */
+export interface Features_2_Block {
+  header?: string | null;
+  subheader?: string | null;
+  features?:
+    | {
+        icon: IconField;
+        header: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Features_3_Block".
+ */
+export interface Features_3_Block {
+  header: string;
+  subheader: string;
+  features: {
+    title: string;
+    description: string;
+    icon?: IconField;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'features_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_1_Block".
+ */
+export interface Hero_1_Block {
+  alertLabel?: string | null;
+  alertLink?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: MediaField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaField".
+ */
+export interface MediaField {
+  light?: (string | null) | Media;
+  dark?: (string | null) | Media;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_2_Block".
+ */
+export interface Hero_2_Block {
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: MediaField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_3_Block".
+ */
+export interface Hero_3_Block {
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: MediaField;
+  /**
+   * Fallback video URL if media upload not provided (MP4 format recommended)
+   */
+  videoUrl?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_4_Block".
+ */
+export interface Hero_4_Block {
+  badgeLabel?: string | null;
+  badgeText?: string | null;
+  badgeHref?: string | null;
+  header: string;
+  subheader?: string | null;
+  emailPlaceholder: string;
+  emailButtonText: string;
+  features?:
+    | {
+        feature: string;
+        id?: string | null;
+      }[]
+    | null;
+  media?: MediaField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Hero_5_Block".
+ */
+export interface Hero_5_Block {
+  alertLabel?: string | null;
+  alertLink?: string | null;
+  header: string;
+  subheader?: string | null;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  media?: MediaField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero_5';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1995,34 +2107,6 @@ export interface Header_1_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'header_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaField".
- */
-export interface MediaField {
-  light?: (string | null) | Media;
-  dark?: (string | null) | Media;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  alt: string;
-  owner: string | User;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2205,19 +2289,6 @@ export interface HeaderBrandLogoBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'header_brand_logo';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footers".
- */
-export interface Footer {
-  id: string;
-  global?: boolean | null;
-  title: string;
-  owner: string | User;
-  footer: (Footer_1_Block | Footer_2_Block | Footer_3_Block | Footer_4_Block | Footer_5_Block)[];
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2461,211 +2532,6 @@ export interface Footer_5_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "themes".
- */
-export interface Theme {
-  id: string;
-  name: string;
-  type?: ('template' | 'user') | null;
-  owner: string | User;
-  styles:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  private: boolean;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Teams_1_Block".
- */
-export interface Teams_1_Block {
-  blocks: (Teams_1_Heading_Block | Teams_1_Members_Block)[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'teams_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Teams_1_Heading_Block".
- */
-export interface Teams_1_Heading_Block {
-  text: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'teams_1_heading';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Teams_1_Members_Block".
- */
-export interface Teams_1_Members_Block {
-  members: {
-    name: string;
-    role: string;
-    avatar?: (string | null) | Media;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'teams_1_members';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Features_1_Block".
- */
-export interface Features_1_Block {
-  header: string;
-  subheader: string;
-  features: {
-    title: string;
-    description: string;
-    icon?: IconField;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'features_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Features_2_Block".
- */
-export interface Features_2_Block {
-  header?: string | null;
-  subheader?: string | null;
-  features?:
-    | {
-        icon: IconField;
-        header: string;
-        description: string;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'features_2';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Features_3_Block".
- */
-export interface Features_3_Block {
-  header: string;
-  subheader: string;
-  features: {
-    title: string;
-    description: string;
-    icon?: IconField;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'features_3';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_1_Block".
- */
-export interface Hero_1_Block {
-  alertLabel?: string | null;
-  alertLink?: string | null;
-  header: string;
-  subheader?: string | null;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  secondaryCtaLabel: string;
-  secondaryCtaHref: string;
-  media?: MediaField;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero_1';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_2_Block".
- */
-export interface Hero_2_Block {
-  header: string;
-  subheader?: string | null;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  secondaryCtaLabel: string;
-  secondaryCtaHref: string;
-  media?: MediaField;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero_2';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_3_Block".
- */
-export interface Hero_3_Block {
-  header: string;
-  subheader?: string | null;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  secondaryCtaLabel: string;
-  secondaryCtaHref: string;
-  media?: MediaField;
-  /**
-   * Fallback video URL if media upload not provided (MP4 format recommended)
-   */
-  videoUrl?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero_3';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_4_Block".
- */
-export interface Hero_4_Block {
-  badgeLabel?: string | null;
-  badgeText?: string | null;
-  badgeHref?: string | null;
-  header: string;
-  subheader?: string | null;
-  emailPlaceholder: string;
-  emailButtonText: string;
-  features?:
-    | {
-        feature: string;
-        id?: string | null;
-      }[]
-    | null;
-  media?: MediaField;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero_4';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_5_Block".
- */
-export interface Hero_5_Block {
-  alertLabel?: string | null;
-  alertLink?: string | null;
-  header: string;
-  subheader?: string | null;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  secondaryCtaLabel: string;
-  secondaryCtaHref: string;
-  media?: MediaField;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'hero_5';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "CTA_1_Block".
  */
 export interface CTA_1_Block {
@@ -2719,6 +2585,102 @@ export interface CTA_3_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_1_Block".
+ */
+export interface Testimonials_1_Block {
+  header: string;
+  subheader?: string | null;
+  testimonials?:
+    | {
+        name: string;
+        role: string;
+        avatar?: string | null;
+        quote: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_2_Block".
+ */
+export interface Testimonials_2_Block {
+  header: string;
+  subheader?: string | null;
+  testimonials?:
+    | {
+        name: string;
+        role: string;
+        avatar: string;
+        quote: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_3_Block".
+ */
+export interface Testimonials_3_Block {
+  header: string;
+  subheader?: string | null;
+  testimonials?:
+    | {
+        name: string;
+        role: string;
+        /**
+         * URL to the avatar image
+         */
+        avatar?: string | null;
+        quote: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_4_Block".
+ */
+export interface Testimonials_4_Block {
+  header: string;
+  subheader?: string | null;
+  testimonials?:
+    | {
+        name: string;
+        role: string;
+        avatar?: (string | null) | Media;
+        quote: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_5_Block".
+ */
+export interface Testimonials_5_Block {
+  quote: string;
+  authorName: string;
+  authorRole: string;
+  authorImage: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials_5';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FAQ_1_Block".
  */
 export interface FAQ_1_Block {
@@ -2735,6 +2697,92 @@ export interface FAQ_1_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'faq_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_2_Block".
+ */
+export interface FAQ_2_Block {
+  header?: string | null;
+  subheader?: string | null;
+  documentationText?: string | null;
+  documentationHref?: string | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_3_Block".
+ */
+export interface FAQ_3_Block {
+  header?: string | null;
+  subheader?: string | null;
+  supportLinkText?: string | null;
+  supportLinkHref?: string | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_4_Block".
+ */
+export interface FAQ_4_Block {
+  header?: string | null;
+  supportText?: string | null;
+  supportLinkLabel?: string | null;
+  supportLinkHref?: string | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq_4';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_5_Block".
+ */
+export interface FAQ_5_Block {
+  header?: string | null;
+  subheader?: string | null;
+  documentationLinkText?: string | null;
+  documentationLinkHref?: string | null;
+  faqs?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  defaultExpandedKeys?:
+    | {
+        key: number;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq_5';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2838,6 +2886,75 @@ export interface Pricing_3_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_1_Block".
+ */
+export interface Stats_1_Block {
+  header: string;
+  subheader?: string | null;
+  stats: {
+    name: string;
+    value: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_2_Block".
+ */
+export interface Stats_2_Block {
+  /**
+   * Small label above the main heading (optional)
+   */
+  eyebrow?: string | null;
+  header: string;
+  subheader?: string | null;
+  stats: {
+    /**
+     * Large numeric value (e.g., '14K+', '99.95%')
+     */
+    stat: string;
+    /**
+     * Bold descriptive text
+     */
+    emphasis: string;
+    /**
+     * Additional context text
+     */
+    description: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_3_Block".
+ */
+export interface Stats_3_Block {
+  value: number;
+  description: string;
+  /**
+   * Text to highlight/bold in the description
+   */
+  highlightedText?: string | null;
+  /**
+   * Automatically increment the number over time
+   */
+  enableAnimation?: boolean | null;
+  /**
+   * How often to increment (in milliseconds)
+   */
+  animationInterval?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ComingSoon_1_Block".
  */
 export interface ComingSoon_1_Block {
@@ -2885,6 +3002,150 @@ export interface ComingSoon_1_Block {
   id?: string | null;
   blockName?: string | null;
   blockType: 'coming_soon_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "themes".
+ */
+export interface Theme {
+  id: string;
+  name: string;
+  type?: ('template' | 'user') | null;
+  owner: string | User;
+  styles:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  private: boolean;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sites".
+ */
+export interface Site {
+  id: string;
+  domainUrl: string;
+  title: string;
+  owner: string | User;
+  header?: (string | null) | Header;
+  footer?: (string | null) | Footer;
+  activeTheme: string | Theme;
+  light?: {
+    background?: string | null;
+    foreground?: string | null;
+    card?: string | null;
+    'card-foreground'?: string | null;
+    popover?: string | null;
+    'popover-foreground'?: string | null;
+    primary?: string | null;
+    'primary-foreground'?: string | null;
+    secondary?: string | null;
+    'secondary-foreground'?: string | null;
+    muted?: string | null;
+    'muted-foreground'?: string | null;
+    accent?: string | null;
+    'accent-foreground'?: string | null;
+    destructive?: string | null;
+    'destructive-foreground'?: string | null;
+    border?: string | null;
+    input?: string | null;
+    ring?: string | null;
+    'chart-1'?: string | null;
+    'chart-2'?: string | null;
+    'chart-3'?: string | null;
+    'chart-4'?: string | null;
+    'chart-5'?: string | null;
+    sidebar?: string | null;
+    'sidebar-foreground'?: string | null;
+    'sidebar-primary'?: string | null;
+    'sidebar-primary-foreground'?: string | null;
+    'sidebar-accent'?: string | null;
+    'sidebar-accent-foreground'?: string | null;
+    'sidebar-border'?: string | null;
+    'sidebar-ring'?: string | null;
+    'shadow-color'?: string | null;
+  };
+  dark?: {
+    background?: string | null;
+    foreground?: string | null;
+    card?: string | null;
+    'card-foreground'?: string | null;
+    popover?: string | null;
+    'popover-foreground'?: string | null;
+    primary?: string | null;
+    'primary-foreground'?: string | null;
+    secondary?: string | null;
+    'secondary-foreground'?: string | null;
+    muted?: string | null;
+    'muted-foreground'?: string | null;
+    accent?: string | null;
+    'accent-foreground'?: string | null;
+    destructive?: string | null;
+    'destructive-foreground'?: string | null;
+    border?: string | null;
+    input?: string | null;
+    ring?: string | null;
+    'chart-1'?: string | null;
+    'chart-2'?: string | null;
+    'chart-3'?: string | null;
+    'chart-4'?: string | null;
+    'chart-5'?: string | null;
+    sidebar?: string | null;
+    'sidebar-foreground'?: string | null;
+    'sidebar-primary'?: string | null;
+    'sidebar-primary-foreground'?: string | null;
+    'sidebar-accent'?: string | null;
+    'sidebar-accent-foreground'?: string | null;
+    'sidebar-border'?: string | null;
+    'sidebar-ring'?: string | null;
+    'shadow-color'?: string | null;
+  };
+  pages?:
+    | {
+        slug: string;
+        title: string;
+        showHeader: boolean;
+        showFooter: boolean;
+        content?: (string | null) | Page;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "headers".
+ */
+export interface Header {
+  id: string;
+  global?: boolean | null;
+  title: string;
+  owner: string | User;
+  header: (Header_1_Block | Header_2_Block | Header_3_Block | Header_4_Block | Header_5_Block | CustomHeaderBlock)[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footers".
+ */
+export interface Footer {
+  id: string;
+  global?: boolean | null;
+  title: string;
+  owner: string | User;
+  footer: (Footer_1_Block | Footer_2_Block | Footer_3_Block | Footer_4_Block | Footer_5_Block)[];
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3039,12 +3300,7 @@ export interface VerificationsSelect<T extends boolean = true> {
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
-  site?: T;
-  slug?: T;
-  title?: T;
-  owner?: T;
-  showHeader?: T;
-  showFooter?: T;
+  name?: T;
   blocks?:
     | T
     | {
@@ -3071,12 +3327,25 @@ export interface PagesSelect<T extends boolean = true> {
         cta_1?: T | CTA_1_BlockSelect<T>;
         cta_2?: T | CTA_2_BlockSelect<T>;
         cta_3?: T | CTA_3_BlockSelect<T>;
+        testimonials_1?: T | Testimonials_1_BlockSelect<T>;
+        testimonials_2?: T | Testimonials_2_BlockSelect<T>;
+        testimonials_3?: T | Testimonials_3_BlockSelect<T>;
+        testimonials_4?: T | Testimonials_4_BlockSelect<T>;
+        testimonials_5?: T | Testimonials_5_BlockSelect<T>;
         faq_1?: T | FAQ_1_BlockSelect<T>;
+        faq_2?: T | FAQ_2_BlockSelect<T>;
+        faq_3?: T | FAQ_3_BlockSelect<T>;
+        faq_4?: T | FAQ_4_BlockSelect<T>;
+        faq_5?: T | FAQ_5_BlockSelect<T>;
         pricing_1?: T | Pricing_1_BlockSelect<T>;
         pricing_2?: T | Pricing_2_BlockSelect<T>;
         pricing_3?: T | Pricing_3_BlockSelect<T>;
+        stats_1?: T | Stats_1_BlockSelect<T>;
+        stats_2?: T | Stats_2_BlockSelect<T>;
+        stats_3?: T | Stats_3_BlockSelect<T>;
         coming_soon_1?: T | ComingSoon_1_BlockSelect<T>;
       };
+  owner?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -3646,6 +3915,94 @@ export interface CTA_3_BlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_1_Block_select".
+ */
+export interface Testimonials_1_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        avatar?: T;
+        quote?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_2_Block_select".
+ */
+export interface Testimonials_2_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        avatar?: T;
+        quote?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_3_Block_select".
+ */
+export interface Testimonials_3_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        avatar?: T;
+        quote?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_4_Block_select".
+ */
+export interface Testimonials_4_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        avatar?: T;
+        quote?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Testimonials_5_Block_select".
+ */
+export interface Testimonials_5_BlockSelect<T extends boolean = true> {
+  quote?: T;
+  authorName?: T;
+  authorRole?: T;
+  authorImage?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FAQ_1_Block_select".
  */
 export interface FAQ_1_BlockSelect<T extends boolean = true> {
@@ -3657,6 +4014,88 @@ export interface FAQ_1_BlockSelect<T extends boolean = true> {
     | {
         question?: T;
         answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_2_Block_select".
+ */
+export interface FAQ_2_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  documentationText?: T;
+  documentationHref?: T;
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_3_Block_select".
+ */
+export interface FAQ_3_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  supportLinkText?: T;
+  supportLinkHref?: T;
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_4_Block_select".
+ */
+export interface FAQ_4_BlockSelect<T extends boolean = true> {
+  header?: T;
+  supportText?: T;
+  supportLinkLabel?: T;
+  supportLinkHref?: T;
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQ_5_Block_select".
+ */
+export interface FAQ_5_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  documentationLinkText?: T;
+  documentationLinkHref?: T;
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  defaultExpandedKeys?:
+    | T
+    | {
+        key?: T;
         id?: T;
       };
   id?: T;
@@ -3764,6 +4203,55 @@ export interface Pricing_3_BlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_1_Block_select".
+ */
+export interface Stats_1_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  stats?:
+    | T
+    | {
+        name?: T;
+        value?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_2_Block_select".
+ */
+export interface Stats_2_BlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  header?: T;
+  subheader?: T;
+  stats?:
+    | T
+    | {
+        stat?: T;
+        emphasis?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_3_Block_select".
+ */
+export interface Stats_3_BlockSelect<T extends boolean = true> {
+  value?: T;
+  description?: T;
+  highlightedText?: T;
+  enableAnimation?: T;
+  animationInterval?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ComingSoon_1_Block_select".
  */
 export interface ComingSoon_1_BlockSelect<T extends boolean = true> {
@@ -3821,6 +4309,7 @@ export interface ThemesSelect<T extends boolean = true> {
  * via the `definition` "sites_select".
  */
 export interface SitesSelect<T extends boolean = true> {
+  domainUrl?: T;
   title?: T;
   owner?: T;
   header?: T;
@@ -3900,7 +4389,16 @@ export interface SitesSelect<T extends boolean = true> {
         'sidebar-ring'?: T;
         'shadow-color'?: T;
       };
-  pages?: T;
+  pages?:
+    | T
+    | {
+        slug?: T;
+        title?: T;
+        showHeader?: T;
+        showFooter?: T;
+        content?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
