@@ -3,9 +3,9 @@ import type { Block } from "payload";
 import {
 	BLOCK_GROUP_STATS,
 	BLOCK_SLUG_STATS_1,
-} from "~/payload/constants/blocks";
-import headerField from "~/payload/fields/header/config";
-import subHeaderField from "~/payload/fields/subheader/config";
+} from "@/registry/default/lib/constants/blocks";
+import headerField from "@/registry/default/lib/fields/header/config";
+import subHeaderField from "@/registry/default/lib/fields/subheader/config";
 
 export const Stats_1_Block: Block = {
 	slug: BLOCK_SLUG_STATS_1,

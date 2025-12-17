@@ -1,5 +1,8 @@
-import { Container } from "~/ui/container";
-import { Heading } from "~/ui/heading";
+// Source: IntentUI - https://design.intentui.com/blocks (stats-01)
+// Installed via: npx shadcn@latest add @irsyad/stats-01
+
+import { Container } from "@/registry/ui/container";
+import { Heading } from "@/registry/ui/heading";
 import type { Stats_1_Block } from "~/payload-types";
 
 export default function Stats1(props: Stats_1_Block) {

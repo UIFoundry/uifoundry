@@ -147,6 +147,12 @@
 - `@uifoundry/link` → "Accessible link component built on react-aria-components"
 - `@uifoundry/primitive` → "Utility function for composing Tailwind classes with react-aria-components"
 - `@uifoundry/testimonials-5` → "Centered single testimonial with large quote, avatar, and author details"
+- `@uifoundry/heading` → "Heading component with multiple levels and consistent typography styling"
+- `@uifoundry/stats-1` → "Statistics block with grid layout displaying key metrics in a card-based design"
+- `@uifoundry/stats-2` → "Statistics section with grid layout, bordered cards with ring accents, and emphasis text highlighting"
+- `@uifoundry/stats-3` → "Animated statistics block with auto-incrementing number counter, grid background, and gradient decorations"
+- `@uifoundry/grid-lines` → "SVG grid lines component with configurable mask patterns for background decoration"
+- `@uifoundry/animated-number` → "Animated number counter with smooth digit transitions using Framer Motion"
 
 ### NPM Dependencies
 

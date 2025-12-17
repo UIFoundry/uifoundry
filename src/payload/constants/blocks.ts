@@ -80,6 +80,8 @@ export const BLOCK_SLUG_NEWSLETTER_1 = "newsletter_1" as const;
 // Stats
 export const BLOCK_GROUP_STATS = "Stats" as const;
 export const BLOCK_SLUG_STATS_1 = "stats_1" as const;
+export const BLOCK_SLUG_STATS_2 = "stats_2" as const;
+export const BLOCK_SLUG_STATS_3 = "stats_3" as const;
 
 // Gallery
 export const BLOCK_GROUP_GALLERY = "Gallery" as const;

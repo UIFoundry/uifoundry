@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-1",
+  "type": "registry:block",
+  "title": "Stats 1",
+  "description": "Statistics block with grid layout displaying key metrics in a card-based design",
+  "dependencies": [
+    "react",
+    "payload"
+  ],
+  "registryDependencies": [
+    "@uifoundry/container",
+    "@uifoundry/heading",
+    "@uifoundry/header-field",
+    "@uifoundry/subheader-field",
+    "@uifoundry/block-constants"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/stats/stats-1/index.tsx",
+      "content": "// Source: IntentUI - https://design.intentui.com/blocks (stats-01)\n// Installed via: npx shadcn@latest add @irsyad/stats-01\n\nimport { Container } from \"@/registry/ui/container\";\nimport { Heading } from \"@/registry/ui/heading\";\nimport type { Stats_1_Block } from \"~/payload-types\";\n\nexport default function Stats1(props: Stats_1_Block) {\n\treturn (\n\t\t<Container className=\"py-6 sm:py-16\">\n\t\t\t<div className=\"mx-auto max-w-2xl lg:max-w-none\">\n\t\t\t\t<div className=\"text-center\">\n\t\t\t\t\t<Heading level={2} className=\"font-normal sm:text-3xl\">\n\t\t\t\t\t\t{props.header}\n\t\t\t\t\t</Heading>\n\t\t\t\t\t<p className=\"mx-auto mt-1 max-w-lg text-lg/8 text-muted-fg\">\n\t\t\t\t\t\t{props.subheader}\n\t\t\t\t\t</p>\n\t\t\t\t</div>\n\n\t\t\t\t<dl className=\"mt-8 grid grid-cols-1 divide-y overflow-hidden rounded-2xl border bg-muted/50 text-center sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4\">\n\t\t\t\t\t{props.stats?.map((stat, index) => (\n\t\t\t\t\t\t<div key={index} className=\"flex flex-col p-8 text-sm/6\">\n\t\t\t\t\t\t\t<dt className=\"text-muted-fg\">{stat.name}</dt>\n\t\t\t\t\t\t\t<dd className=\"order-first text-3xl tracking-tight\">{stat.value}</dd>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t))}\n\t\t\t\t</dl>\n\t\t\t</div>\n\t\t</Container>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Stats/Stats_1/index.tsx"
+    },
+    {
+      "path": "registry/payload/blocks/stats/stats-1/config.ts",
+      "content": "import type { Block } from \"payload\";\n\nimport {\n\tBLOCK_GROUP_STATS,\n\tBLOCK_SLUG_STATS_1,\n} from \"@/registry/default/lib/constants/blocks\";\nimport headerField from \"@/registry/default/lib/fields/header/config\";\nimport subHeaderField from \"@/registry/default/lib/fields/subheader/config\";\n\nexport const Stats_1_Block: Block = {\n\tslug: BLOCK_SLUG_STATS_1,\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_STATS,\n\t},\n\tfields: [\n\t\t{\n\t\t\ttype: \"collapsible\",\n\t\t\tlabel: \"Content\",\n\t\t\tadmin: {\n\t\t\t\tinitCollapsed: false,\n\t\t\t},\n\t\t\tfields: [\n\t\t\t\theaderField({\n\t\t\t\t\tdefaultValue: \"Performance by the numbers\",\n\t\t\t\t}),\n\t\t\t\tsubHeaderField({\n\t\t\t\t\tdefaultValue:\n\t\t\t\t\t\t\"Real metrics that reflect adoption, speed, satisfaction, and shipping cadence.\",\n\t\t\t\t}),\n\t\t\t],\n\t\t},\n\t\t{\n\t\t\ttype: \"collapsible\",\n\t\t\tlabel: \"Statistics\",\n\t\t\tadmin: {\n\t\t\t\tinitCollapsed: false,\n\t\t\t},\n\t\t\tfields: [\n\t\t\t\t{\n\t\t\t\t\tname: \"stats\",\n\t\t\t\t\ttype: \"array\",\n\t\t\t\t\tlabel: \"Statistics\",\n\t\t\t\t\trequired: true,\n\t\t\t\t\tminRows: 1,\n\t\t\t\t\tmaxRows: 8,\n\t\t\t\t\tfields: [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tname: \"name\",\n\t\t\t\t\t\t\ttype: \"text\",\n\t\t\t\t\t\t\tlabel: \"Statistic Name\",\n\t\t\t\t\t\t\trequired: true,\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tname: \"value\",\n\t\t\t\t\t\t\ttype: \"text\",\n\t\t\t\t\t\t\tlabel: \"Statistic Value\",\n\t\t\t\t\t\t\trequired: true,\n\t\t\t\t\t\t},\n\t\t\t\t\t],\n\t\t\t\t\tdefaultValue: [\n\t\t\t\t\t\t{ name: \"Active subscriptions\", value: \"18,200\" },\n\t\t\t\t\t\t{ name: \"Average response time\", value: \"120ms\" },\n\t\t\t\t\t\t{ name: \"Net promoter score\", value: \"72\" },\n\t\t\t\t\t\t{ name: \"Monthly deployments\", value: \"3.2k\" },\n\t\t\t\t\t],\n\t\t\t\t},\n\t\t\t],\n\t\t},\n\t],\n\tinterfaceName: \"Stats_1_Block\",\n\tlabels: {\n\t\tplural: \"Stats 1's\",\n\t\tsingular: \"Stats 1\",\n\t},\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Stats/Stats_1/config.ts"
+    }
+  ]
+}

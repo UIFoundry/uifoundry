@@ -1,0 +1,103 @@
+---
+title: "Stats 2"
+description: "Statistics section with grid layout, bordered cards with ring accents, and emphasis text highlighting"
+category: "blocks"
+---
+
+## Preview
+
+<Stats_2 />
+
+## Props
+
+The Stats_2 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    eyebrow: {
+      description: "Small label above the main heading (optional)",
+      type: "string",
+      required: false,
+      default: "Results",
+    },
+    header: {
+      description: "Main section heading displayed above statistics",
+      type: "string",
+      required: false,
+      default: "Built for scale, proven in production",
+    },
+    subheader: {
+      description: "Supporting description text displayed below the header",
+      type: "string",
+      required: false,
+      default: "Faster onboarding, higher reliability, and happier teams backed by real usage and measurable outcomes.",
+    },
+    stats: {
+      description: "Array of statistics items with values, emphasis, and descriptions",
+      type: "array",
+      required: true,
+      default: "3 default statistics items",
+    },
+    "stats[].stat": {
+      description: "Large numeric statistic value (e.g., '14K+', '99.95%')",
+      type: "string",
+      required: true,
+      default: "14K+",
+    },
+    "stats[].emphasis": {
+      description: "Bold descriptive text highlighting the metric",
+      type: "string",
+      required: true,
+      default: "Teams onboarded",
+    },
+    "stats[].description": {
+      description: "Additional context text explaining the statistic",
+      type: "string",
+      required: true,
+      default: "switched from spreadsheets to automated workflows.",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/stats-2
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Header Field](/docs/fields/header-field) - PayloadCMS text field for headers
+- [Subheader Field](/docs/fields/subheader-field) - PayloadCMS text field for subheaders
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+- [Container](/docs/ui/container) - Container component for consistent page width and padding
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [Next.js](https://github.com/vercel/next.js) - React framework for production
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+
+## Design Notes
+
+This statistics block features:
+
+- **Optional eyebrow text**: Small label above the header for additional context
+- **Bordered card design**: Statistics cards with subtle border and ring accents for visual depth
+- **Ring offset styling**: Cards feature `ring ring-muted-fg/30 ring-offset-4 ring-offset-muted` for layered visual effect
+- **Emphasis text pattern**: Each statistic combines large numeric value with bold emphasis text and supporting description
+- **Responsive grid layout**: `grid-cols-1 sm:grid-cols-3` adapts from single column to three columns
+- **Text hierarchy**: Large statistic (`text-3xl`), medium emphasis, and descriptive text create clear visual priority
+- **Consistent spacing**: `gap-x-6 gap-y-6` between cards and `mt-12` separating content from statistics
+- **Container integration**: Uses Container component for consistent page width and responsive padding
+- **Max width constraint**: Content section limited to `max-w-3xl` for optimal readability
+- **Flexible stat count**: Supports 1-6 statistics with `minRows: 1, maxRows: 6` validation
+- **Color contrast**: Uses `text-primary-subtle-fg` for eyebrow, `text-fg` for main text, and `text-muted-fg` for descriptions
+
+Perfect for landing pages, product pages, or marketing sites that need to showcase key metrics and achievements. The bordered card design with ring accents provides a modern, polished look while maintaining excellent readability and visual hierarchy. The emphasis text pattern makes it easy to scan important information quickly.

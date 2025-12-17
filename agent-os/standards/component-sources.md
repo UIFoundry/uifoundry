@@ -202,6 +202,28 @@
 
 ---
 
+## Stats Blocks
+
+### Stats_1
+- **Source**: [@irsyad/stats-01 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-11
+- **Notes**: Grid layout statistics block with responsive columns (1/2/4). Features centered section header with title and description. Stats display in cards with rounded borders, muted background, and divided layout. Shows statistic name (muted) and value (large text) with flexible array field supporting 1-8 stats. Clean, modern design with optimal information density.
+
+### Stats_2
+- **Source**: [@irsyad/stats-02 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-12
+- **Notes**: Grid layout (1/3 columns responsive) with ring-offset cards. Features eyebrow text, main heading, and description. Each stat card displays large numeric value, emphasized bold text, and additional description. Cards have rounded borders with ring effects (ring-offset-4). Optimized for detailed metrics with context. Supports 1-6 stats.
+
+### Stats_3
+- **Source**: [@irsyad/stats-03 (IntentUI Registry)](https://design.intentui.com/blocks)
+- **License**: Pro Subscription
+- **Date Added**: 2025-12-12
+- **Notes**: Single large animated number display with descriptive text. Features AnimatedNumber component (64px font size) with configurable auto-increment animation. Decorative gradient backgrounds (left/right radial gradients) and GridLines overlay. Full-width section with border-y, muted background. Supports highlighted text within description. Ideal for showcasing single key metric with real-time updates.
+
+---
+
 ## Sources Used
 
 **External Component Libraries**:
@@ -215,6 +237,9 @@
   - @irsyad/faq-03 (used in FAQ_3)
   - @irsyad/faq-04 (used in FAQ_4)
   - @irsyad/faq-05 (used in FAQ_5)
+  - @irsyad/stats-01 (used in Stats_1)
+  - @irsyad/stats-02 (used in Stats_2)
+  - @irsyad/stats-03 (used in Stats_3)
 - **Tailark** (<https://tailark.com>) - Free tier components
   - Hero Section 1 (used in Hero_3)
   - Hero Section 4 (used in Hero_2, Header_5)
