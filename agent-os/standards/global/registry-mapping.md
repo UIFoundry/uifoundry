@@ -79,6 +79,12 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/faq-3` → `/docs/blocks/faq/faq-3`
 - `@uifoundry/faq-4` → `/docs/blocks/faq/faq-4`
 - `@uifoundry/faq-5` → `/docs/blocks/faq/faq-5`
+- `@uifoundry/heading` → `/docs/ui/heading`
+- `@uifoundry/grid-lines` → `/docs/ui/grid-lines`
+- `@uifoundry/animated-number` → `/docs/ui/animated-number`
+- `@uifoundry/stats-1` → `/docs/blocks/stats/stats-1`
+- `@uifoundry/stats-2` → `/docs/blocks/stats/stats-2`
+- `@uifoundry/stats-3` → `/docs/blocks/stats/stats-3`
 
 ### ShadCN Components (no @uifoundry prefix)
 
@@ -175,6 +181,12 @@ When adding new registry components, you MUST update this file with:
 - `@uifoundry/faq-3`: FAQ section with accordion-style disclosure panels, custom styling, and support link
 - `@uifoundry/faq-4`: FAQ section with accordion-style disclosure panels and support link
 - `@uifoundry/faq-5`: FAQ section with expandable disclosure panels, documentation link, and customizable default expanded items
+- `@uifoundry/heading`: Heading component with multiple levels and consistent typography styling
+- `@uifoundry/grid-lines`: SVG grid lines component with configurable mask patterns for background decoration
+- `@uifoundry/animated-number`: Animated number counter with smooth digit transitions using Framer Motion
+- `@uifoundry/stats-1`: Statistics block with grid layout displaying key metrics in a card-based design
+- `@uifoundry/stats-2`: Statistics section with grid layout, bordered cards with ring accents, and emphasis text highlighting
+- `@uifoundry/stats-3`: Animated statistics block with auto-incrementing number counter, grid background, and gradient decorations
 
 ### ShadCN Components
 

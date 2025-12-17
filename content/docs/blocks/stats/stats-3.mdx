@@ -1,0 +1,91 @@
+---
+title: "Stats 3"
+description: "Animated statistics block with auto-incrementing number counter, grid background, and gradient decorations"
+category: "blocks"
+---
+
+## Preview
+
+<Stats_3 />
+
+## Props
+
+The Stats_3 block accepts the following configuration from PayloadCMS:
+
+<TypeTable
+  type={{
+    value: {
+      description: "The starting numeric value to display",
+      type: "number",
+      required: true,
+      default: "77421",
+    },
+    description: {
+      description: "Supporting description text displayed below the animated number",
+      type: "string",
+      required: true,
+      default: "Real time telemetry tracking active installations across live environments.",
+    },
+    highlightedText: {
+      description: "Specific text within the description to highlight/bold for emphasis",
+      type: "string",
+      required: false,
+      default: "active installations",
+    },
+    enableAnimation: {
+      description: "Enable automatic number increment animation",
+      type: "boolean",
+      default: "true",
+    },
+    animationInterval: {
+      description: "Time interval between number increments (in milliseconds)",
+      type: "number",
+      default: "3000",
+    },
+  }}
+/>
+
+## Installation
+
+```bash
+npx shadcn@latest add @uifoundry/stats-3
+```
+
+If you encounter issues, check the [registry setup guide](/docs/registry-setup) for configuration help.
+
+## Registry Dependencies
+
+This component uses the following registry components:
+
+- [Container](/docs/ui/container) - Container component for consistent page width and padding
+- [Grid Lines](/docs/ui/grid-lines) - SVG grid lines component with configurable mask patterns for background decoration
+- [Animated Number](/docs/ui/animated-number) - Animated number counter with smooth digit transitions using Framer Motion
+- [Block Constants](/docs/lib/block-constants) - Block slug and group constants for PayloadCMS blocks
+
+## Dependencies
+
+This component requires the following NPM packages:
+
+- [React](https://github.com/facebook/react) - JavaScript library for building user interfaces
+- [PayloadCMS](https://github.com/payloadcms/payload) - Headless CMS and application framework
+
+## Design Notes
+
+This statistics block features:
+
+- **Animated number counter**: Uses the AnimatedNumber component for smooth digit transitions with customizable font size (64px)
+- **Auto-increment functionality**: Optional continuous counting animation with configurable interval (default 3000ms)
+- **Grid background pattern**: GridLines component creates subtle grid overlay with 2x2 cell dimensions
+- **Gradient decorations**: Dual radial gradient overlays on left and right sides (hidden on mobile, visible on lg+ screens)
+- **Text highlighting**: Parses description to bold specified text using `highlightedText` prop for emphasis
+- **Bordered container**: Border top and bottom with muted foreground color (30% opacity) for subtle framing
+- **Muted background**: Light background with `bg-muted` for soft contrast against page background
+- **Centered layout**: All content centered using Container component with max-width constraints
+- **Screen reader support**: Includes sr-only heading "Our stats" for accessibility
+- **Isolation context**: Uses `isolate` class on gradients to control z-index stacking
+- **Contain-strict**: Gradient containers use `contain-strict` for performance optimization
+- **Responsive spacing**: Padding adjusts from `py-6` on mobile to `py-16` on larger screens with `py-16` inner container
+- **Complex gradient calculations**: Multiple radial gradients with precise positioning, rotation, and HSLA color stops for depth
+- **Typography hierarchy**: Large semi-bold number with tracking-tighter, centered max-width description with muted foreground
+
+Perfect for landing pages, dashboards, or product pages requiring prominent statistics display with eye-catching animations. The auto-increment feature creates a dynamic, real-time feel ideal for showcasing metrics like active users, installations, or transactions.

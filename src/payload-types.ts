@@ -1863,6 +1863,9 @@ export interface Page {
     | Pricing_1_Block
     | Pricing_2_Block
     | Pricing_3_Block
+    | Stats_1_Block
+    | Stats_2_Block
+    | Stats_3_Block
     | ComingSoon_1_Block
   )[];
   owner: string | User;
@@ -2883,6 +2886,75 @@ export interface Pricing_3_Block {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_1_Block".
+ */
+export interface Stats_1_Block {
+  header: string;
+  subheader?: string | null;
+  stats: {
+    name: string;
+    value: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_1';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_2_Block".
+ */
+export interface Stats_2_Block {
+  /**
+   * Small label above the main heading (optional)
+   */
+  eyebrow?: string | null;
+  header: string;
+  subheader?: string | null;
+  stats: {
+    /**
+     * Large numeric value (e.g., '14K+', '99.95%')
+     */
+    stat: string;
+    /**
+     * Bold descriptive text
+     */
+    emphasis: string;
+    /**
+     * Additional context text
+     */
+    description: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_2';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_3_Block".
+ */
+export interface Stats_3_Block {
+  value: number;
+  description: string;
+  /**
+   * Text to highlight/bold in the description
+   */
+  highlightedText?: string | null;
+  /**
+   * Automatically increment the number over time
+   */
+  enableAnimation?: boolean | null;
+  /**
+   * How often to increment (in milliseconds)
+   */
+  animationInterval?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats_3';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ComingSoon_1_Block".
  */
 export interface ComingSoon_1_Block {
@@ -3268,6 +3340,9 @@ export interface PagesSelect<T extends boolean = true> {
         pricing_1?: T | Pricing_1_BlockSelect<T>;
         pricing_2?: T | Pricing_2_BlockSelect<T>;
         pricing_3?: T | Pricing_3_BlockSelect<T>;
+        stats_1?: T | Stats_1_BlockSelect<T>;
+        stats_2?: T | Stats_2_BlockSelect<T>;
+        stats_3?: T | Stats_3_BlockSelect<T>;
         coming_soon_1?: T | ComingSoon_1_BlockSelect<T>;
       };
   owner?: T;
@@ -4123,6 +4198,55 @@ export interface Pricing_3_BlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_1_Block_select".
+ */
+export interface Stats_1_BlockSelect<T extends boolean = true> {
+  header?: T;
+  subheader?: T;
+  stats?:
+    | T
+    | {
+        name?: T;
+        value?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_2_Block_select".
+ */
+export interface Stats_2_BlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  header?: T;
+  subheader?: T;
+  stats?:
+    | T
+    | {
+        stat?: T;
+        emphasis?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Stats_3_Block_select".
+ */
+export interface Stats_3_BlockSelect<T extends boolean = true> {
+  value?: T;
+  description?: T;
+  highlightedText?: T;
+  enableAnimation?: T;
+  animationInterval?: T;
   id?: T;
   blockName?: T;
 }

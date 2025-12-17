@@ -83,6 +83,7 @@
 		"culori": "^4.0.2",
 		"embla-carousel-autoplay": "^8.6.0",
 		"embla-carousel-react": "^8.6.0",
+		"framer-motion": "^12.23.26",
 		"fumadocs-core": "^15.7.10",
 		"fumadocs-mdx": "^11.9.0",
 		"fumadocs-typescript": "^4.0.8",

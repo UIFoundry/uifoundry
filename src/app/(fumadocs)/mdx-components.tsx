@@ -36,6 +36,9 @@ import type {
   Pricing_1_Block as Pricing_1_BlockType,
   Pricing_2_Block as Pricing_2_BlockType,
   Pricing_3_Block as Pricing_3_BlockType,
+  Stats_1_Block as Stats_1_BlockType,
+  Stats_2_Block as Stats_2_BlockType,
+  Stats_3_Block as Stats_3_BlockType,
   Testimonials_1_Block as Testimonials_1_BlockType,
   Testimonials_2_Block as Testimonials_2_BlockType,
   Testimonials_3_Block as Testimonials_3_BlockType,
@@ -104,6 +107,12 @@ import Pricing_2 from "~/payload/blocks/Pricing/Pricing_2";
 import { Pricing_2_Block } from "~/payload/blocks/Pricing/Pricing_2/config";
 import Pricing_3 from "~/payload/blocks/Pricing/Pricing_3";
 import { Pricing_3_Block } from "~/payload/blocks/Pricing/Pricing_3/config";
+import Stats_1 from "~/payload/blocks/Stats/Stats_1";
+import { Stats_1_Block } from "~/payload/blocks/Stats/Stats_1/config";
+import Stats_2 from "~/payload/blocks/Stats/Stats_2";
+import { Stats_2_Block } from "~/payload/blocks/Stats/Stats_2/config";
+import Stats_3 from "~/payload/blocks/Stats/Stats_3";
+import { Stats_3_Block } from "~/payload/blocks/Stats/Stats_3/config";
 import Testimonials_1 from "~/payload/blocks/Testimonials/Testimonials_1";
 import { Testimonials_1_Block } from "~/payload/blocks/Testimonials/Testimonials_1/config";
 import Testimonials_2 from "~/payload/blocks/Testimonials/Testimonials_2";
@@ -398,6 +407,33 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
       } as Pricing_3_BlockType;
       const { id, ...otherProps } = combinedProps;
       return <Pricing_3 id={id ?? undefined} {...otherProps} />;
+    },
+    Stats_1: (props: Partial<Stats_1_BlockType> = {}) => {
+      const stats1Defaults = extractBlockDefaults(Stats_1_Block);
+      const combinedProps = {
+        ...stats1Defaults,
+        ...props,
+      } as Stats_1_BlockType;
+      const { id, ...otherProps } = combinedProps;
+      return <Stats_1 id={id ?? undefined} {...otherProps} />;
+    },
+    Stats_2: (props: Partial<Stats_2_BlockType> = {}) => {
+      const stats2Defaults = extractBlockDefaults(Stats_2_Block);
+      const combinedProps = {
+        ...stats2Defaults,
+        ...props,
+      } as Stats_2_BlockType;
+      const { id, ...otherProps } = combinedProps;
+      return <Stats_2 id={id ?? undefined} {...otherProps} />;
+    },
+    Stats_3: (props: Partial<Stats_3_BlockType> = {}) => {
+      const stats3Defaults = extractBlockDefaults(Stats_3_Block);
+      const combinedProps = {
+        ...stats3Defaults,
+        ...props,
+      } as Stats_3_BlockType;
+      const { id, ...otherProps } = combinedProps;
+      return <Stats_3 id={id ?? undefined} {...otherProps} />;
     },
     Testimonials_1: (props: Partial<Testimonials_1_BlockType> = {}) => {
       const testimonials1Defaults = extractBlockDefaults(Testimonials_1_Block);

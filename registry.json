@@ -1492,6 +1492,61 @@
 		},
 		{
 			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Grid Lines",
+			"name": "grid-lines",
+			"type": "registry:ui",
+			"description": "SVG grid lines component with configurable mask patterns for background decoration",
+			"dependencies": [
+				"react",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/ui/grid-lines.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/grid-lines.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Animated Number",
+			"name": "animated-number",
+			"type": "registry:component",
+			"description": "Animated number counter with smooth digit transitions using Framer Motion",
+			"dependencies": [
+				"react",
+				"tailwind-merge",
+				"framer-motion"
+			],
+			"files": [
+				{
+					"path": "registry/components/animated-number.tsx",
+					"type": "registry:component",
+					"target": "src/components/animated-number.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Heading",
+			"name": "heading",
+			"type": "registry:ui",
+			"description": "Heading component with multiple levels and consistent typography styling",
+			"dependencies": [
+				"react",
+				"tailwind-merge"
+			],
+			"files": [
+				{
+					"path": "registry/ui/heading.tsx",
+					"type": "registry:ui",
+					"target": "src/ui/heading.tsx"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
 			"title": "CTA 3",
 			"name": "cta-3",
 			"type": "registry:block",
@@ -1891,6 +1946,36 @@
 					"target": "src/payload/blocks/FAQ/FAQ_5/config.ts"
 				}
 			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Stats 1",
+			"name": "stats-1",
+			"type": "registry:block",
+			"description": "Statistics block with grid layout displaying key metrics in a card-based design",
+			"registryDependencies": [
+				"@uifoundry/container",
+				"@uifoundry/heading",
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/stats/stats-1/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Stats/Stats_1/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/stats/stats-1/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Stats/Stats_1/config.ts"
+				}
+			]
 		}
 ,
 		{
@@ -1942,6 +2027,65 @@
 					"path": "registry/payload/blocks/faq/faq-1/config.ts",
 					"type": "registry:component",
 					"target": "src/payload/blocks/FAQ/FAQ_1/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Stats 2",
+			"name": "stats-2",
+			"type": "registry:block",
+			"description": "Statistics section with grid layout, bordered cards with ring accents, and emphasis text highlighting",
+			"registryDependencies": [
+				"@uifoundry/header-field",
+				"@uifoundry/subheader-field",
+				"@uifoundry/block-constants",
+				"@uifoundry/container"
+			],
+			"dependencies": [
+				"react",
+				"next",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/stats/stats-2/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Stats/Stats_2/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/stats/stats-2/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Stats/Stats_2/config.ts"
+				}
+			]
+		},
+		{
+			"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+			"title": "Stats 3",
+			"name": "stats-3",
+			"type": "registry:block",
+			"description": "Animated statistics block with auto-incrementing number counter, grid background, and gradient decorations",
+			"registryDependencies": [
+				"@uifoundry/container",
+				"@uifoundry/grid-lines",
+				"@uifoundry/animated-number",
+				"@uifoundry/block-constants"
+			],
+			"dependencies": [
+				"react",
+				"payload"
+			],
+			"files": [
+				{
+					"path": "registry/payload/blocks/stats/stats-3/index.tsx",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Stats/Stats_3/index.tsx"
+				},
+				{
+					"path": "registry/payload/blocks/stats/stats-3/config.ts",
+					"type": "registry:component",
+					"target": "src/payload/blocks/Stats/Stats_3/config.ts"
 				}
 			]
 		}

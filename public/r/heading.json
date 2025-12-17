@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "heading",
+  "type": "registry:ui",
+  "title": "Heading",
+  "description": "Heading component with multiple levels and consistent typography styling",
+  "dependencies": [
+    "react",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/ui/heading.tsx",
+      "content": "import { twMerge } from \"tailwind-merge\"\n\ntype HeadingType = { level?: 1 | 2 | 3 | 4 } & React.ComponentPropsWithoutRef<\n  \"h1\" | \"h2\" | \"h3\" | \"h4\"\n>\n\ninterface HeadingProps extends HeadingType {\n  className?: string | undefined\n}\n\nconst Heading = ({ className, level = 1, ...props }: HeadingProps) => {\n  const Element: `h${typeof level}` = `h${level}`\n  return (\n    <Element\n      className={twMerge(\n        \"font-sans text-fg tracking-tight\",\n        level === 1 && \"font-semibold text-xl/8 sm:text-2xl/8\",\n        level === 2 && \"font-semibold text-lg/6 sm:text-xl/8\",\n        level === 3 && \"font-semibold text-base/6 sm:text-lg/6\",\n        level === 4 && \"font-semibold text-base/6\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nexport type { HeadingProps }\nexport { Heading }\n",
+      "type": "registry:ui",
+      "target": "src/ui/heading.tsx"
+    }
+  ]
+}

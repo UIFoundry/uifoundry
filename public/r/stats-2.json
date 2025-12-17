@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stats-2",
+  "type": "registry:block",
+  "title": "Stats 2",
+  "description": "Statistics section with grid layout, bordered cards with ring accents, and emphasis text highlighting",
+  "dependencies": [
+    "react",
+    "next",
+    "payload"
+  ],
+  "registryDependencies": [
+    "@uifoundry/header-field",
+    "@uifoundry/subheader-field",
+    "@uifoundry/block-constants",
+    "@uifoundry/container"
+  ],
+  "files": [
+    {
+      "path": "registry/payload/blocks/stats/stats-2/index.tsx",
+      "content": "// Source: IntentUI - https://design.intentui.com/blocks (stats-02)\n// Installed via: npx shadcn@latest add @irsyad/stats-02\n\nimport { Container } from \"@/registry/ui/container\";\nimport type { Stats_2_Block } from \"~/payload-types\";\n\nexport default function Stats2(props: Stats_2_Block) {\n\treturn (\n\t\t<div className=\"py-6 sm:py-12\">\n\t\t\t<Container>\n\t\t\t\t<div className=\"xl:grid xl:grid-flow-col-dense xl:gap-x-8\">\n\t\t\t\t\t<div className=\"relative\">\n\t\t\t\t\t\t<div className=\"max-w-3xl\">\n\t\t\t\t\t\t\t{props.eyebrow && (\n\t\t\t\t\t\t\t\t<h2 className=\"font-semibold text-base text-primary-subtle-fg\">\n\t\t\t\t\t\t\t\t\t{props.eyebrow}\n\t\t\t\t\t\t\t\t</h2>\n\t\t\t\t\t\t\t)}\n\t\t\t\t\t\t\t<p className=\"mt-2 text-pretty font-bold text-3xl text-fg tracking-tight\">\n\t\t\t\t\t\t\t\t{props.header}\n\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t<p className=\"mt-2 text-lg text-muted-fg\">{props.subheader}</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div className=\"mt-12 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-3\">\n\t\t\t\t\t\t\t{props.stats?.map((item, index) => (\n\t\t\t\t\t\t\t\t<div\n\t\t\t\t\t\t\t\t\tclassName=\"rounded-lg border border-muted-fg/20 p-6 ring ring-muted-fg/30 ring-offset-4 ring-offset-muted\"\n\t\t\t\t\t\t\t\t\tkey={index}\n\t\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t\t<span className=\"block font-semibold text-3xl text-fg\">{item.stat}</span>\n\t\t\t\t\t\t\t\t\t<span className=\"mt-2 block text-base/6 text-muted-fg\">\n\t\t\t\t\t\t\t\t\t\t<strong className=\"font-medium text-fg\">{item.emphasis}</strong>{\" \"}\n\t\t\t\t\t\t\t\t\t\t{item.description}\n\t\t\t\t\t\t\t\t\t</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t))}\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</Container>\n\t\t</div>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Stats/Stats_2/index.tsx"
+    },
+    {
+      "path": "registry/payload/blocks/stats/stats-2/config.ts",
+      "content": "import type { Block } from \"payload\";\n\nimport {\n\tBLOCK_GROUP_STATS,\n\tBLOCK_SLUG_STATS_2,\n} from \"@/registry/default/lib/constants/blocks\";\nimport headerField from \"@/registry/default/lib/fields/header/config\";\nimport subHeaderField from \"@/registry/default/lib/fields/subheader/config\";\n\nexport const Stats_2_Block: Block = {\n\tslug: BLOCK_SLUG_STATS_2,\n\tadmin: {\n\t\tgroup: BLOCK_GROUP_STATS,\n\t},\n\tfields: [\n\t\t{\n\t\t\ttype: \"collapsible\",\n\t\t\tlabel: \"Content\",\n\t\t\tadmin: {\n\t\t\t\tinitCollapsed: false,\n\t\t\t},\n\t\t\tfields: [\n\t\t\t\t{\n\t\t\t\t\tname: \"eyebrow\",\n\t\t\t\t\ttype: \"text\",\n\t\t\t\t\tlabel: \"Eyebrow Text\",\n\t\t\t\t\tadmin: {\n\t\t\t\t\t\tdescription: \"Small label above the main heading (optional)\",\n\t\t\t\t\t},\n\t\t\t\t\tdefaultValue: \"Results\",\n\t\t\t\t},\n\t\t\t\theaderField({\n\t\t\t\t\tdefaultValue: \"Built for scale, proven in production\",\n\t\t\t\t}),\n\t\t\t\tsubHeaderField({\n\t\t\t\t\tdefaultValue:\n\t\t\t\t\t\t\"Faster onboarding, higher reliability, and happier teams backed by real usage and measurable outcomes.\",\n\t\t\t\t}),\n\t\t\t],\n\t\t},\n\t\t{\n\t\t\ttype: \"collapsible\",\n\t\t\tlabel: \"Statistics\",\n\t\t\tadmin: {\n\t\t\t\tinitCollapsed: false,\n\t\t\t},\n\t\t\tfields: [\n\t\t\t\t{\n\t\t\t\t\tname: \"stats\",\n\t\t\t\t\ttype: \"array\",\n\t\t\t\t\tlabel: \"Statistics\",\n\t\t\t\t\trequired: true,\n\t\t\t\t\tminRows: 1,\n\t\t\t\t\tmaxRows: 6,\n\t\t\t\t\tfields: [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tname: \"stat\",\n\t\t\t\t\t\t\ttype: \"text\",\n\t\t\t\t\t\t\tlabel: \"Statistic Value\",\n\t\t\t\t\t\t\trequired: true,\n\t\t\t\t\t\t\tadmin: {\n\t\t\t\t\t\t\t\tdescription: \"Large numeric value (e.g., '14K+', '99.95%')\",\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tname: \"emphasis\",\n\t\t\t\t\t\t\ttype: \"text\",\n\t\t\t\t\t\t\tlabel: \"Emphasized Text\",\n\t\t\t\t\t\t\trequired: true,\n\t\t\t\t\t\t\tadmin: {\n\t\t\t\t\t\t\t\tdescription: \"Bold descriptive text\",\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tname: \"description\",\n\t\t\t\t\t\t\ttype: \"text\",\n\t\t\t\t\t\t\tlabel: \"Description\",\n\t\t\t\t\t\t\trequired: true,\n\t\t\t\t\t\t\tadmin: {\n\t\t\t\t\t\t\t\tdescription: \"Additional context text\",\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t},\n\t\t\t\t\t],\n\t\t\t\t\tdefaultValue: [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tstat: \"14K+\",\n\t\t\t\t\t\t\temphasis: \"Teams onboarded\",\n\t\t\t\t\t\t\tdescription: \"switched from spreadsheets to automated workflows.\",\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tstat: \"180M+\",\n\t\t\t\t\t\t\temphasis: \"Monthly API calls\",\n\t\t\t\t\t\t\tdescription: \"served across five global regions.\",\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tstat: \"99.95%\",\n\t\t\t\t\t\t\temphasis: \"Uptime this year\",\n\t\t\t\t\t\t\tdescription: \"with multi region failover in production.\",\n\t\t\t\t\t\t},\n\t\t\t\t\t],\n\t\t\t\t},\n\t\t\t],\n\t\t},\n\t],\n\tinterfaceName: \"Stats_2_Block\",\n\tlabels: {\n\t\tplural: \"Stats 2's\",\n\t\tsingular: \"Stats 2\",\n\t},\n};\n",
+      "type": "registry:component",
+      "target": "src/payload/blocks/Stats/Stats_2/config.ts"
+    }
+  ]
+}
